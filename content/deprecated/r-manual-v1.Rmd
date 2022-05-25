@@ -1,0 +1,1701 @@
+---
+title: "A Guide to R in Ecology and Evolutionary Biology"
+author: "Leila Krichel and Shelby Riskin"
+subtitle: EEB University of Toronto
+output:
+  html_notebook:
+    df_print: paged
+    highlight: tango
+    number_sections: yes
+    theme: flatly
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '4'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '4'
+  word_document:
+    toc: yes
+    toc_depth: '4'
+---
+
+# Introduction #
+
+Are there characteristics that make a population more resilient to environmental disturbances? How does variability among individuals influence evolutionary trajectories? Which mechanisms promote species coexistence in a community?
+
+Among many others, these are common questions in ecology and evolutionary biology. EEB is becoming increasingly quantitative, so learning to address these questions in a quantitative framework is both practical and essential. To begin addressing these questions under this modern framework, skills such as preparing and cleaning datasets, building statistical and mathematical models, and graphically interpreting and displaying results will surely come into play.
+
+The R programming language is one of the most commonly used tools for EEB researchers exploring and analyzing quantitative data. R's versatility is particularly useful for data exploration and visualization, which makes it a powerful tool for understanding the nuances, characteristics, and limitations of your data. In other words, it is excellent for generating insights and hypotheses about data, including data relevant to ecology and evolutionary biology. 
+
+The goal of this guide is to familiarize R users with the tools needed for data analysis and exploration in R. These tools include foundations in R basics, R packages, graphics, and statistical models. While anyone can make use of this guide, it is especially meant for the novice: those who are coming in to R, and to programming more generally, with a blank slate. 
+
+## What is a Programming Language? #
+
+You can think of a programming language as what mediates the relationship between humans and computers. It’s what allows us to communicate with computers and computers to communicate with us in a language we both understand. Just like human languages, programming languages, such as R and Python, can vary in notation and syntax and in how we express ideas and actions. Even within a programming language, there can be a variety of ways to communicate particular commands and actions!
+
+For example, let’s say you have a set of numbers from 1 to 10. You want to provide the computer with these numbers and tell it to print the word “below” for each number below 7 and the word “above” for each number above 7. You can translate this command into the R language like this:
+```{r}
+for(i in 1:10) {
+  if(i < 7) {
+    print("below")} 
+  else{
+    print("above")}
+  }
+```
+
+But it could also look something like this:
+```{r}
+ifelse(c(1:10) < 7, "below", "above")
+```
+
+In addition to syntax and language differences, some of the differences between programming languages can be large and more fundamental. For instance, how does a program make use of a computer’s resources (e.g. memory, processing power)? How does a program handle graphics? How much does it cost to use a given program? In all, differences between languages are a set of tradeoffs, so that some languages are better optimized for certain problems and projects than others.
+
+## What is R? ##
+
+The R programming language is an **open-source software** used for statistical and mathematical computing. This means that anyone can work with R without paying a fee or obtaining a license. Since it is free, there is a huge online community willing to help and support you through your R trials and tribulations. It also means that anyone can contribute to the development of R, either by debugging or customizing existing R programs or developing entirely new R programs.
+
+These R programs are what we call **packages**, and essentially, they are shareable and downloadable extensions to the basic R language. You can think of packages as bundles of code and data, which typically solve or address a specific problem or goal. For example, many ecologists use a package called `vegan`, which is useful because it bundles together common ecological tests, including those used for quantifying species diversity. As of 2020, [R houses more than 16000 packages](https://cran.r-project.org/web/packages/)--if you have a specific problem in mind, there is a pretty good chance that someone has already solved it by developing a freely available package! However, it should be noted that because R is an open-source software, packages like `vegan` and many others are maintained and developed by anyone. Consequently, they're not always peer-reviewed or verified, unlike paid software like SAS that employ statisticians to write their programs. 
+
+R is also an **object-oriented programming language**. Working in R often entails working with datasets, which can be stored in an **object**. You can think of an object like a box which holds information about your data. You can manipulate, modify, remove, and explore the contents of your data box by typing something in the **command-line**, all while speaking in the R language. An advantage to speaking in R is that it's a **vectorized** language. This means that many commands in R are designed to work on entire data objects at once. For example, rather than working on a single value in a dataset, vectorized functions are capable of applying a command on the entire dataset in one fell swoop. This renders R commands more computationally efficient and concise than non-vectorized languages. If you'd like an example of how vectorized and non-vectorized functions work in R, see section 2.7.1.  
+
+Through the use of the language, you and your computer can begin to make sense out of your data. 
+
+## How do you Download R? ##
+
+Before making sense of our data, we will need to download **R** *AND* **RStudio**. 
+
+R is available for free download at [The Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/), where a team of developers maintain the language. By following the appropriate link, R is available for download for the Linux, Windows, and Mac operating systems. For detailed instructions, check out this [link](https://rstudio-education.github.io/hopr/starting.html#starting). 
+
+RStudio is also available for free--you can find it by following this [link](https://rstudio.com/products/rstudio/). There are two versions of RStudio you can download; for our purposes, we will be using RStudio Desktop with an open-source license. 
+
+That being said, what’s the difference between R and Rstudio?
+
+* R on its own is just a language. It’s how we talk to our computers, and how our computers interpret us. More specifically, it’s how we tell our computer to do something to an R data-object. 
+* RStudio is an application that helps us write in R. It takes R and places it in a **graphical user interface** (GUI), which transforms the R experience so that it's more user-friendly.
+* R can be used without RStudio, but RStudio cannot be used without R. As such, R needs to remain installed on your computer, even though you might never open the application itself.
+    
+The rest of this guide will work with RStudio. 
+
+## The RStudio Interface ##
+
+To access the RStudio interface, look for a circular light blue icon with an "R" printed in the middle. Clicking on this icon will open the RStudio interface. Next, follow **File > New File > R Notebook**. This will open a fourth pane, where we will be writing code in the form of an **R Notebook** (Figure 1.1). You can organize these panes as you’d like by following **View > Panes > Pane Layout**. While we will briefly go over each pane's function, they will be highlighted in more detail as they become important throughout the course of the guide. 
+
+
+
+<centre>
+
+![**Figure 1.1.** These four panes should pop up when you open RStudio and open an R Notebook file. (a) This is the Source, which is where you can write code as a script. It's not evaluated until it's sent to the console. (b) The Console is the workhorse of R and is where code is evaluated. Code can either be evaluated by typing something into the command-line, or by evaluating code that has been sent from the source. (c) Environment/Files/Packages/Help are a variety of panes that interact with the source and the console. (d) The History/Plots panes show you past code that has been evaluated by the console and displays graphs, respectively. ](/Users/FOOKRI/Desktop/PhD/R Manual/figure1.1-Rmanual.png)
+
+</center>
+
+### The Source ###
+
+The **Source** is like a notepad for your code (Figure 1.1 (a)). It's where you create and edit R **scripts**. A script is a set of instructions that tells your computer how to do something in a language it can understand. In this way, the source is where you type commands, the phrases for the computer, that will tell the computer what to do. The computer won't do anything, however, until you execute the command. Once executed, the commands from the source are sent to the **console** where it is read and interpreted (Figure 1.1 (b)). We will touch on this more in the R Notebook section.
+
+### The Console ###
+
+The **Console** is the heart of R--it's where code is evaluated by your computer (Figure 1.1 (b)). The console's command-line is on the right-hand side of the `>`. When you type code in the command-line and press enter, the output of your command will appear just below. Note that this is unlike a script, which needs to be sent TO the console before it can be evaluated by your computer. 
+
+Though typing code directly into the console can be used to perform analyses, its preferable that you write code as a script. Scripts can be saved and easily modified, while command-line code cannot. If you’re using the console and make a mistake, for example, you may need to re-type your entire analysis. In this way, because it isn’t possible to save and go back to previous work, it’s best to keep direct coding in the console limited to debugging code or quick analyses.
+
+### The Environment/Files/Packages/Help ###
+
+The pane in Figure 1.1 (c) displays four different R "tasks": **Environment**, **Files**, **Packages**, and **Help**. You can toggle between these tasks by clicking on the corresponding tab in the pane.  
+
+You can think of the **Environment** as a workspace where all your data is stored. Any variable that you define in a script will be saved into the Environment. As a result, the Environment is a collection of R objects that can be accessed as you code. Here, you can see some basic information about each object, such as its name, the data-type it contains, and its file size. There are also some clickable actions in the Environment, including options to manually import datasets (e.g. from Excel), to clear the environment, or to save the collections of data in the environment.
+
+The **Files** pane will show you the file directories on your computer hard drive. Here, you can manually navigate to the various folders and locations on your computer. When you reach a desired location, you can either read in or import desired files, or set the location as your **working directory**. The working directory is a specified location on your computer (e.g. your desktop)--it is R's go-to location when it comes to importing data into R or saving files out of R. 
+
+The **Packages** pane is a list of R packages that are installed in R's library/your computer's hard drive, and shows you which packages are loaded in your current R session. Packages with checked boxes can be used in the current session, while those that are unchecked (but installed) are not yet loaded into R. We will go over packages in more detail further along in the guide.
+
+The **Help** pane is essentially a database with documentation for R functions installed on your hard drive. You can type in the name of a function in the search bar to get an idea of what a particular function does and the arguments that it takes. You can also achieve this result by searching the function by name in the console. For instance, if you want details on the `mean()` function in R, simply code `?mean` and the documentation for this function will appear in the Help pane. 
+
+### History/Plots  ###
+
+Figure 1.1 (d) displays the **History** and **Plots** panes, which can be toggled with the appropriate tab. The **History** pane shows you a history of all the code evaluated through the console in the current R session. This includes any evaluated code from the source and the console. The **Plots** tab displays your R plots! It's really as simple as that. There are also clickable actions for exporting plots as files (e.g. jpeg, png) to save on your computer.
+
+## R Notebook ##
+
+**R Notebooks** are one way that the source pane can show up in RStudio. Notebooks use the same formatting syntax as **R Markdown** files, which makes them useful for authoring HTML, PDF, and MS Word documents. Rather than writing complex code in HTML or LaTex, you can format files in **plain-text** (Figure 1.2). Plain-text files are documents that contain only readable text. While it supports standard characters, numbers, and spaces, plain-text files don't support text-formatting like fonts, italics, and bold-face text. As the name suggests, it's plain! It may not seem like much, but because R Notebooks are fundamentally plain-text files, they are ideal for working with **version control** systems like GitHub (see Side Note 1).  
+
+<center>
+
+![**Figure 1.2.** On the left-hand side is an R Markdown file written in plain-text that formats the resulting output on the right-hand side. This image is retrieved from [here](https://rmarkdown.rstudio.com/authoring_quick_tour.html). ](/Users/FOOKRI/Desktop/PhD/R Manual/figure1.2-Rmanual.png)
+
+</center>
+
+Within Notebooks, rather than writing code directly into the console, you will write code as a mixture of chunks of script and text notes (Figure 1.3). The difference between a script of code and command-line code is that a script can be saved as a file. Like a Word document, the script in your file can be modified, altered, and shared. R scripts are often stored as **R script files (.R)**, but in R Notebook the file is saved as an **R Markdown file (.Rmd)**.
+
+<div class="well">
+ <strong>Side Note 1: Version Control </strong>
+ 
+If you've ever used something like Word Document, you've likely run into the issue of saving a million drafts of the same file. You start with a file titled EEB.doc. Then someone revises your file and titles it EEB-1.doc. Then you revise that same file and title it EEB-2.doc, and so on. And you can imagine that this only gets messier when more people are working on a file all at once!
+  
+This gets to *why* version control systems like GitHub become important. In general, version control is a method for controlling the source code of a program and is especially important for collaborative work. It keeps a history of versions of a program and tracks changes made to it over time. Typically, this history is kept in a seperate location from local changes that you or anyone else makes on their personal computer. 
+
+For now, all you really need to know about version control is the above and that R Notebooks can be useful for working with version control software.
+  
+</div>
+
+The script portion of the Notebook is written in grey boxes called **code chunks**. A code chunk makes up a small piece of script that is usually within a larger script (i.e. the rest of the R Notebook). Anything in a chunk will be executed (or run) by your computer. Each time you run a code chunk, it is sent to the console to be evaluated. Once evaluated, the output of that chunk will appear right below the grey box. Anything outside the grey boxes is not interpreted by your computer as code. This is where narration of your script happens, and is both extremely useful and imperative for organization and reproducibility of your code.
+
+<center>
+
+![**Figure 1.3.** This is what a typical R Notebook file looks like. It's a series of code chunks that make up the entirety of your script. When these code chunks are run, they are sent to the console to be evaluated. The white spaces are reserved for documentation and narration--this is not interpreted by your computer as code. ](/Users/FOOKRI/Desktop/PhD/R Manual/figure1.3-Rmanual.png)
+
+</center>
+
+There are many good things about working in R Notebook; to highlight a few: 
+
+* Script, analyses, plots, and notes can be saved in the *same* document. Everything can be done in one place so that nothing gets lost or forgotten.
+* R Notebooks are plain-text files, meaning that they work well with *version control* systems like GitHub. 
+* R Notebook promotes *transparency* in data science, as it increases the reproducibility and shareability of your work. With everything in one place, it contains the script needed for researchers to reproduce your analysis and notes about your script needed to understand your workflow. In fact, this guide was written in R Notebook!  If you would like to take a look at the code involved to produce this guide, scroll up to the top of this file, click on **Code** at the top-right corner of the screen, then click on **Download Rmd**.
+
+## R Notebook vs. R Script vs. Excel ##
+
+R Script (.R) files were briefly mentioned earlier. The major difference between R Script and R Notebook files is the ease of documentation. Unlike R Notebook, R Script does not contain the narration feature that allows you to write detailed descriptions about your code as you go along. While you can write non-executable notes about your code in R Script by commenting them out using the `#` operator, this can get a bit awkward with large amounts of text (Figure 1.3). 
+
+In the absence of these notes, R Script is just a list of saveable code written in R. In terms of the actual code being executed, however,  R Notebook, R Script, and the console will all produce the same output. The R Script output will appear in the console, while the output in R Notebook will appear in the Notebook document itself as well as the console. So while there are differences in how the code is executed and where it ends up, the content of your output is equivalent, regardless of the program you use. 
+
+ That being said, when should we use R Script over R Notebook? Conversely, when should we use R Notebook over R Script? The answer is largely dependent on your workflow and/or the task at hand. Below is a table highlighting some unique differences:
+
+```{r include=FALSE}
+table1_sec1_6 <- data.frame(
+  Activity = c(
+    "Documenting/narrating your code",
+    "Organization of code outputs (e.g. plots, tables)",
+    "Creating reproducible reports",
+    "Working on remote computer servers",
+    "Creating customized software"),
+  
+  Notebook = c(
+    "Code chunks help keep your analysis and workflow organized, facilitating documentation as you code along. This makes Notebooks comparable to a modern day `lab notebook`.",
+    
+    "Organization is made easy, as your code, outputs, and documentation are all kept in a single file.",
+    
+    "You can publish your project results as an html/pdf/docx file. Since the document is made up of code which you can opt to see, it's easy to see your worflow and reproduce your analysis.",
+    
+    "R Studio, and therefore R Notebook, are not compatible with your computer terminal. As a result, working on remote servers with Notebooks is not possible.",
+    
+    "Can be used for creating software, but not maximized to do so, especially when working on remote servers."),
+  
+  Script = c(
+    "While documentation can be added in the form of a comment (`#`) or a README file, Scripts are not maximized for building a narrative around your code.",
+    
+    "Code outputs are individually saved onto your computer. Creating a report that brings all outputs together, and which organizes and details your steps and results, is a separate task.",
+    
+    "Since the report is not explicitly tied to code, it's not reproducible. A reproducible result will require a separate .R Script that contains the code that makes up your results.",
+    
+    "Scripts are terminal friendly, so you can locally work on/run your scripts on a remote computer. This is especially useful if you're working with data that takes up a lot of memory on your local computer.",
+    
+    "Excellent for writing custom software like packages or applications. They are easy to share, debug, and improve."
+    
+    )) 
+```
+
+```{r echo=FALSE}
+library(kableExtra)
+
+table1_sec1_6 %>% 
+  kbl() %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), fixed_thead = T, position = "center") %>% 
+  column_spec(1:3, extra_css = "border-right:2px solid lightgrey;") %>% 
+  column_spec(1:3, extra_css = "border-left:2px solid lightgrey;") %>% 
+  row_spec(1, extra_css = "border-top:2px solid lightgrey;") %>% 
+  row_spec(5, extra_css = "border-bottom:2px solid lightgrey;")
+
+#, background = "#F5F5F5"
+# caption = "Table 1. Notebooks and Scripts are both great tools. The choice of one over the other will depend your project goals.", extra_css = "caption:2px black;"
+```
+
+
+ Overall, the line that distinguishes R Script and R Notebook might look something like this: if you're working creating customizable software or working on remote servers, stick to Scripts; if you're working on data science and project reports, stick to Notebooks. But, this isn't always a hard-and-fast rule, as preference and comfort are also important! 
+
+<center>
+
+![**Figure 1.4.** This is what an R Script file looks like. It's essentially a notepad where you can write your script. Script is only evaluated once it is sent to the console, situated in the bottom pane. In this figure, you can see that the code on lines 12 and 15 have already been sent to the console. Everything in the notepad will be evaluated unless it is commented out by adding a `#` operator in front of a line of code or text. ](/Users/FOOKRI/Desktop/PhD/R Manual/figure1.4-Rmanual.png)
+
+</center>
+
+Excel is a program that many of you have likely encountered before. It’s typically used for organizing data in spreadsheets, which can be explored using built-in functions and features. For simple and quick-and-dirty analyses, Excel is a perfectly good tool. But, in many ways, what Excel can do, R can do better. And R can also do many things that Excel cannot.  
+
+For example:
+
+* R can handle large datasets more easily than Excel, which can be extremely slow and unstable as you introduce more rows and columns to your dataset. 
+* Calculations and automation of code happens more quickly and efficiently in R. This is especially true when working with large datasets. 
+* Errors in your analysis are much easier to diagnose in R than in Excel. 
+* Reproducibility of your analyses is achieved more easily in R because you can cleanly narrate and document your code for others to understand.
+* R provides more flexibility in graphically representing your data than Excel.  
+
+That being said, Excel is often used in tandem with R. In terms of organizing/cleaning datasets and inputting data, Excel can be more user friendly than R. Once data is organized in the way that you want, Excel datasets can be imported into R for analyses. Typically, this is done by saving Excel datasets as comma-separated values (.csv) files. Comma-separated values files store data like a spreadsheet, without all the added bulk that comes with saving spreadsheets as Excel files (.xlsx). Excel files contain bulk that is derived from formatting--fonts, font-size, annotations, cell width etc... On the other hand, comma-separated values files contain just the *raw* data stored into rows and columns. 
+
+
+## Saving your R Notebook ##
+
+Saving an R Notebook file is just like saving any other file. By default, the file will be saved in your current working directory. You can find your working directory by typing `getwd` into the console (Figure 1.1 (d)). The output is the file path to a location on your computer. 
+
+Here are some different ways to save a file on your computer:
+
+* Follow **File > Save**. 
+* Click on the **blue floppy disc** in the upper-left-hand corner of the RStudio interface. 
+* Use the keyboard shortcuts `Cmd`+`S` for Mac or `Ctrl` + `S` for Windows.
+    
+Once you've saved your work, two files will be created. The first is the raw R Notebook file, `.Rmd`, and the second is an `nb.html` file (Figure 1.2). Where the `.Rmd` file is the source code, the `nb.html` file contains the source and all the chunk outputs. The `nb.html` file is essentially an HTML file that contains a copy of the `.Rmd` Notebook itself and a copy of the Notebook with chunk outputs. As you code along using this guide, you will be coding in the `.Rmd` version of the document. 
+
+# Getting to Know Base R #
+
+ Base-R is the basic software that is downloaded when you install the R programming language on your computer. If you choose not to use RStudio or to download additional packages, base-R is what you would be using. With this software comes the basic R language and basic programming support. These days, R extends much farther than the bare-bones that base-R is able to offer. Still, it does provide you with the flexibility to do a variety of R related things! 
+
+## Coding in Style ##
+
+This section will provide you with best-practice tips on how to format your code so that it is organized and clear. It's not essential, so if you want to jump ahead to some actual coding, skip to section 2.2. 
+
+Before we get into the nuts and bolts of R, we'll start with some programming "style tips". Style is subjective, and for this reason, there is no hard-and-fast rule for what you *should* and *shouldn't* do. However, there are some guidelines that can ultimately help you become a better programmer. Until you get to some of the later portions of this guide, some tips in this section may remain a black-box, so be sure to check back here throughout the course of this guide! Finally, if you find yourself wanting more information about coding in style, check out the [The Tidyverse Style Guide](https://style.tidyverse.org/index.html).
+
+### Object-Names ###
+
+ Recall that R is an object-oriented programming language (section 1.2). Objects are data structures that you can explore and manipulate while "speaking" in the R language. 
+
+A seemingly trivial thing to learn in R is how and what to name your objects. A "good" object-name should be concise and meaningful--it should communicate and summarize what an object contains. For example, if you have a dataset that contains the disease prevalence of *Batrachochytrium dendrobatidis* (a.k.a *Bd*) amongst subpopulations of frogs in South America, you could call the object `Bd_prevalence`. This name communicates that the object called `Bd_prevalence` contains data about the prevalence patterns of *Bd*. 
+
+```{r eval=FALSE, include=TRUE}
+# Good
+Bd_prevalence
+
+# Way too long!
+Batrachochytrium_dendrobatidis_prevalence_frogs_SouthAmerica
+
+# Also too long!
+Bd_prevalence_frogs_SouthAmerica
+```
+
+This begs the question, prevalence patterns where and amongst what? And what's *Bd* anyway? Well, the thing is, we can't include every single detail about what an object holds. Instead, a good name will provide a general idea about the contents of an object. To some extent, it's going to have to be vague. But that's not necessarily a bad thing. If you do feel that more information needs to be communicated about an object, R Notebook is perfectly suited for this! Writing a description of an object above (and outside of) a code chunk allows you to document your code without sacrificing your script's readibility. 
+
+We should also avoid using names that are reserved for R functions and variables. For instance, since there is a function called `c()` in R, we should not assign data to an object with the name `c`. In the same vein, `T` is reserved for `TRUE` and should not be overwritten for an object-name. To make matters worse, the example below has assigned `FALSE` to the object `T`; this is extremely counterintuitive! 
+
+```{r eval=FALSE, include=TRUE}
+# Don't use reserved names 
+T <- FALSE
+c <- 10 
+```
+
+Overall, both these instances can cause confusion for others reading your code who are used to `c()` and `T` meaning something entirely different. 
+
+### Spacing ###
+
+Infix operators are those that we commonly see in math, like `+`, `-`, and `=`. When programming, we should always place spaces around these operators. This improves the readability of your code, as the numbers, variables, and operators aren't scrunched together.
+
+```{r eval=FALSE, include=TRUE}
+# Notice the spaces
+10 * 10 - 15 - 2 / 12
+
+# Needs spaces
+10*10-15-2/12
+```
+
+If a function is being called, however, we shouldn't add a space between the function name and the round brackets. 
+```{r eval=FALSE, include=TRUE}
+# Good
+mean(10, 9, 3, 4)
+
+# Bad
+mean (10, 9, 3, 4)
+mean( 10, 9, 3, 4 )
+```
+
+On the other hand, if you're working with control structures like `if` and `for` (see section 2.6), we should place a space between the function name and the bracket. Notice that there should also be a space between the round bracket and the curly bracket, `{}`. 
+
+```{r eval=FALSE, include=TRUE}
+# Notice the space before and after the ()
+for (x in 1:10) {
+  do something
+}
+
+# Needs spaces
+for(x in 1:10){
+  do something
+}
+```
+
+When coding with square brackets, `[]`, it's best *not* to add spaces. Additionally, a comma in the square brackets should be followed by a space, but never before.  
+
+```{r eval=FALSE, include=TRUE}
+# Good
+x[1]
+Bd_prevalence[3, 1] # space AFTER comma
+Bd_prevalence[, 1]
+
+# No need for spaces
+x [1]
+Bd_prevalence [3 , 1] 
+Bd_prevalence[ ,1] 
+Bd_prevalence[ , 1] 
+```
+
+A small shortcut for improving spacing in your code is `Shift` + `Cmd` + `A` in Mac or `Ctrl` + `Shift` + `A` in Windows. You can try this shortcut on the above "bad" examples to automatically reformat your selection with appropriate spacing. 
+
+### Comments ###
+
+As was mentioned in section 1.6, non-executable code should be "commented out" using `#`. To do so, each new line of code should start with `#` followed by a space. A keyboard short for commenting a large selection of code all at once is `Shift` + `Cmd` + `C` in Mac or `Ctrl` + `Shift` + `C` in Windows. To uncomment a selection of code, you can apply the same shortcut. 
+
+Comments are there to explain *why* you've coded something. In other words, they are there to help explain your code, not describe it. For example, let's say you have observations of leaf surface area that you've assigned to an object called `leaf_sa`. To convert these observations from mm^2^ to cm^2^, we will need to multiply our observations by 0.1. How might you comment on this?
+
+The comment in the code chunk below is redundant and not a good use of space. Why? Because our code *is* already communicating to us what we've commented. 
+```{r eval=FALSE, include=TRUE}
+# Multiply leaf surface area by 0.1
+leaf_sa * 0.1
+```
+
+A much more useful and informative approach would be to comment *why* we're multiplying `leaf_sa` by 0.1. This could look something like this:
+
+```{r eval=FALSE, include=TRUE}
+# Convert leaf_sa from mm^2 to cm^2
+leaf_sa * 0.1
+```
+
+We could also make use of descriptive object names to reduce the need for comments. Here, we will introduce a new variable that contains the mm^2^ to cm^2^ conversion. Notice that we've still included a comment that describes what `cm_conversion` is. This is because it's obvious that we are assigning 0.1 to the object `cm_conversion`, but it's not obvious what `cm_conversion` actually is. 
+```{r eval=FALSE, include=TRUE}
+cm_conversion <- 0.1 # mm^2 to cm^2
+leaf_sa * cm_conversion
+```
+
+The above example emphasizes the importance of choosing descriptive and meaningful object names. When we do so, the script becomes in and of itself **self-commenting** and **expressive**, and reduces the need for an abundance of comments. Of course, self-commenting code doesn't imply that we *absolutely should never use comments*; but it does suggest that comments should be sparse and provide *added value* when they are present. 
+
+So, when should we use comments?
+
+* Because you have to--these are known as **legal comments**, which emphasize what is minimally necessary for understanding your script. 
+* To explain the intention behind your code and your analytical decisions (i.e. the *why*). This is useful for others to refer to if they're editing or reading your code. This is also useful for yourself to make reference to, as you'll undoubtedly forget what half your script means within days!
+* To emphasize a particular part of your script or to heed a warning (e.g. "Don't forget to run this line because xyz!!!").  
+* To document important findings and results. 
+
+These "rules" should be loosely applied, and their application will definitely depend on whether you're using R Notebook or R Script. The second and last point, for example, arguably don't *need* to be applied to R Notebooks. Part of the allure behind R Notebook is that you can document your code in great detail without sacrificing readibility. In other words, there is no need to comment within code-chunks if you can say what you need to say outside of a code chunk. 
+
+In summary, the best rule of thumb is your judgement! Style is subjective, and what might work for one person, field, or program might not for another. 
+
+## Data-Types ##
+
+Working with R boils down to handling objects which contain your data. Therefore, it's essential to familiarize yourself with the different forms of data in R.
+
+R has 5 data-types, some of which are more common than others:
+
+* **logical**: `TRUE`/`FALSE`
+* **integer**: non-decimal numbers marked by an L suffix (more below, e.g. 1L, 2L...)
+* **numeric**: real numbers or decimals (e.g. 1.0, 5/10, 3)
+* **complex**: numbers with real and imaginary parts (e.g. 1 + 0i)
+* **character**: text as a sequence of letters, numbers, or symbols (e.g. "hello")
+
+R has many useful functions for checking the data-types of your objects. Let's check, for example, whether your data is an integer. To do this, you might use the function `is.integer()`, which tests whether the data-type is an integer (i.e. `TRUE`) or not an integer (i.e. `FALSE`). 
+
+<div class="well">
+ <strong>Side Note 2: Coding in Chunks</strong>
+  
+To manually open a code chunk, follow **Code > Insert Chunk**. Mac users can use the keyboard shortcut `Ctrl` + `option` + `i`, while Windows users can use `Ctrl` + `Alt` + `i`. Once this is completed, a grey box will appear, and this is where you can type some code! 
+  
+```{r}
+# this is a code chunk! 
+```
+  
+To run the code chunk, press the green triangle at the top-right corner of the chunk. Alternatively, Mac users can use the keyboard short `Cmd`+`Shift`+`Enter`, while Windows users can use `Ctrl`+`Shift`+`Enter`.
+  
+Finally, notice that `this is a code chunk!` is commented out using the `#` operator. Remember that code chunks are fragments of a larger script, and these fragments are separated by plain-text. Since each of these fragments behave like an R script, they are always interepreted by your computer as executable code. As a result, if there is a comment you would like to make about something *within* a chunk without executing it, make sure that it is commented out using the `#` operator. This tells R to ignore that comment while it's executing the chunk.  
+
+</div>
+
+Let's test whether `1` and `1L` are integers. Type `is.integer()` in the code chunk. Within the brackets, type `1` and `1L`, respectively. 
+
+```{r}
+is.integer(1)
+is.integer(1L)
+```
+
+The first result, `FALSE`, states that `1` is NOT an integer. Why? Because numbers are generally treated as numeric in R. This means that even if you see a number like "1", which looks like an integer, it is likely represented as numeric under the hood (something like 1.00). 
+
+However, when you add the "L" suffix, this coerces the "1" to be an integer. For this reason, the output of `is.integer` for "1L" is `TRUE`.
+
+One other formatting note--notice that a `[1]` is printed in front of both outputs. This indicates that the output beside `[1]` is the first element in an R object. We will talk about this in more detail when we get into indexing objects. 
+
+## Object-Types ##
+
+Everything in R is an object. Here, we will go over some of the more common types of objects you'll encounter as you begin programming. 
+
+### Vectors ###
+
+**Vectors** are the most common object in R. They are sequences of data elements of the *same* data-type. 
+ 
+To assign values to a vector, use the `c()` function. c stands for concatenate, which tells R to combine a set of values into a vector. So, by specifying a set of values within `c()`, this connects the values into a single string. In the  example below, we will build a vector with numeric data and another vector with character data. 
+```{r}
+# vector made up of numbers
+c(1, 2, 3, 4, 5, 6)
+
+# vector made up of characters
+# make sure to add quotations to each character value 
+c("Daphnia", "Drosophila", "Medicago")
+```
+
+
+
+
+
+These strings, however, are not entirely useful. For instance, if we wanted to call the vector `c(1, 2, 3, 4, 5, 6)`, this would need to be manually typed out as `c(1, 2, 3, 4, 5, 6)`. This is especially cumbersome when vectors (or object-types in general) are large. 
+
+What we need to do is formally assign the data to an object. To assign a string of values to an object, we will need to make use of the arrow operator, `<-`, which stores data into a named object. This can either be manually typed out or coded using a keyboard shortcut (Mac: `Option`+`-` ; Windows: `Alt`+`-`). You will end up with something that looks like this:
+
+```{r}
+# save string as vector object with a unique name
+string_of_numbers <- c(1, 2, 3, 4, 5, 6)
+model_organisms <- c("Daphnia", "Drosophila", "Medicago")
+```
+
+On the right-hand side of the `<-` operator, the data is concatenated into a vector. On the left-hand side is the name of the object. Typically, you should choose a name for your object that is unique, that way you can tell objects apart. Another reason to choose a unique name is so you don't overwite already saved data-objects. 
+
+In all, what we've done is assign the vector `c(1, 2, 3, 4, 5, 6)` into an object called `string_of_numbers`, such that the object `string_of_numbers` contains the vector `c(1, 2, 3, 4, 5, 6)`. The same process is applied to creating a vector of characters, where we assigned `c("Daphnia", "Drosophila", "Medicago")` to the object `model_organisms`. An object is assigned by running the code chunk, and it will subsequently show up as a saved object in the Environment (Figure 1.1 (b)). As you save more objects, they will appear in a list in the Environment. 
+
+You can check the contents of your object either by typing the name of the object into the command-line, or, by typing the name of the object into a code chunk and then executing the chunk. Both will achieve the same result. 
+```{r}
+model_organisms
+```
+
+To access a particular part of a given vector, we can subset the vector using square brackets, `[]`. This is called **indexing** and is a way of numerically extracting a component of an R object. 
+
+This is where the `[1]` that appears before every output becomes important. For instance, in the output for `model_organisms`, it should be interpreted like this: `Daphnia` is the first element coded by `[1]`, `Drosophila` the second coded by `[2]`, and `Medicago` is the third coded by `[3]`. That is the order that values in `model_organisms` show up. This is because we coded it to be that way in the first place. 
+
+So, for example, if we wanted the 6th value in the object `string_of_numbers`, we would type the object name into a code chunk followed by square brackets holding the number 6. Alternatively, if we wanted the 3rd value of the object `model_organisms`, we would type a 3 in the square brackets. 
+
+```{r}
+string_of_numbers[6] # extract value at position 6 of vector 
+model_organisms[3] # extract value at position 3 of vector 
+```
+
+### Lists ###
+
+**Lists** are similar to vectors--but unlike vectors, rather than holding a sequence of values of one data-type, lists hold a sequence of R objects. 
+
+In this example, we will take the vectors we made in the previous section and combine them into a list. To do this, call the `list()` function to start. Then, add the vector-objects into the list by coding them within round brackets, `()`.  Finally, just as before, assign the list to an object, which we will call `list_of_vectors`.
+
+```{r}
+# the list function tells R to make a list 
+# here we have entered two objects in the list by coding the vectors
+# made in the previous section by their object name 
+list_of_vectors <- list(string_of_numbers, model_organisms)
+```
+
+To view the contents of the list, simply type in the name of the list-object in a code chunk and execute. Notice that the two vectors that we previously coded are now nested into the same object. The first element of the list is the vector of numbers, while the second element is the vector of characters. 
+
+```{r}
+list_of_vectors
+```
+
+To index the list, use double square brackets, `[[]]`. Let's extract the second element of `list_of_vectors`, which is the character vector. This is done by coding a 2 in the double square brackets.
+
+```{r}
+list_of_vectors[[2]] # subset second object in list 
+
+# compare the output to the vector `model_organisms` from the previous section...
+```
+
+The output is simply the character vector `model_organisms`, as expected. Now, what if we wanted to subset the vector `model_organisms` while it is already nested within `list_of_vectors`? 
+
+Well, we know that `list_of_vectors[[2]]` is equivalent to the vector `model_organisms`. Our task, then, is to index `list_of_vectors[[2]]` as if it were any other vector. And how do we index a vector? With single square brackets!
+```{r}
+# first, subset the second object in the list 
+# if we wanted to subset "Daphnia", we would code a [1] 
+list_of_vectors[[2]][1]
+```
+
+
+### Matrices ###
+
+Matrices are R objects that are arranged by a fixed number of rows and columns. Below is an example of an R matrix-object. Notice that this matrix has 2 rows and 3 columns, and each position in the matrix (e.g. row 1, column 1) contains a specific value. 
+
+```{r echo=FALSE}
+# figure [?]
+# only output will be shown here
+# this is the matrix that is being described above
+matrix(string_of_numbers, 
+      nrow = 2, ncol = 3, byrow = TRUE)
+
+```
+
+Let's try and replicate the above matrix. A matrix is coded by opening with the function `matrix()`. To make a matrix, we will need to review some of its arguments. You can check what arguments `matrix()` takes on by coding `?matrix` like below. The output will appear in RStudio's help pane.
+```{r}
+?matrix
+```
+
+The first argument is the data that will make up the body of the matrix. The input should be in the form of a vector. In this case, the body of the matrix that we want to replicate contains the numbers 1 through 6. As a result, the code might look something like this: 
+
+```{r eval=FALSE, include=TRUE}
+# coding "data =" is optional 
+# use the c() to denote a vector--this will make up the body of the matrix
+matrix(data = c(1, 2, 3, 4, 5, 6))
+
+# alternatively, since we already have a vector with numbers from 1 to 6, you can also specify that existing vector as the body of the matrix 
+matrix(data = string_of_numbers)
+```
+
+Next, specify the number of rows and columns in the matrix. This is done by using the `nrow` and `ncol` arguments in the matrix function. Based on the matrix we are trying to replicate, we should code `nrow = 2` and `ncol = 3`. 
+```{r}
+matrix(data = c(1, 2, 3, 4, 5, 6),
+       nrow = 2, ncol = 3)
+```
+
+At first glance, it looks like we're done! But when this matrix is compared with the model matrix, it seems that the numbers are not in the same order... We can take care of that with the `byrow` argument. R will automatically fill a matrix with data column by column. To ensure that R feeds data into the matrix row by row, set the `byrow` argument to `TRUE`. 
+
+```{r}
+matrix(data = c(1, 2, 3, 4, 5, 6),
+       nrow = 2, ncol = 3,
+       byrow = TRUE) # feed data into matrix row by row
+```
+
+And done! Let's save the matrix into an object so that we can continue working with it. 
+
+```{r}
+this_is_a_matrix <- matrix(data = c(1, 2, 3, 4, 5, 6),
+                           nrow = 2, ncol = 3,
+                           byrow = TRUE)
+```
+
+Matrices are R objects with two dimensions. This is because matrices deal with columns and rows at the same time. The rows and columns of a matrix tell us something about the width and height of a matrix-object. The matrix we built has 2 rows and 3 columns, so its dimension is 2x3 ("2 by 3"). We can determine the dimensions of a matrix with the function `dim()`.
+
+```{r}
+dim(this_is_a_matrix)
+```
+
+To index a particular part of the matrix, we will once again use single square brackets, `[]`. Since a matrix has dimensions, we need to index by rows and columns. We can do this by entering this indexing formula next to the name of the matrix-object: [row #, column #]. 
+
+To index a whole row, the formula would look like this [row #, ]. If you wanted the second row, you might code something like this:
+```{r}
+# extract second row only
+this_is_a_matrix[2, ]
+```
+
+The same thing goes for columns--code the column number in the column argument while leaving the row argument empty. If we wanted column 3, you would code this:
+```{r}
+# extract third column only
+this_is_a_matrix[, 3]
+```
+
+Finally, if you want a specific element in the matrix, code the row and column number that corresponds to that element in the [row #, column #] formula. 
+```{r}
+# specific position in the matrix
+this_is_a_matrix[2, 2]
+```
+
+### Data frames ###
+
+Data frames are a common way of storing data in R that makes data analysis easier. Like Excel spreadsheets, data frames can store data in rows and columns, making them similar to matrices. You can also think about data frames as lists that store vectors of equal-length.
+
+The table below is what a typical R data frame looks like. This one in particular is a subset of the built-in R data set called `iris`. You can access this dataset by coding `iris` in a code chunk. Each column is a vector that is specified by a name (e.g. `Petal.Length`) and contains data values of a single data type. Here, the column `Petal.Length` will contain petal measurements for each observed petal, and all those observations are numeric. On the other hand, the column `Species` contains information about the species of a given observation, and all observations in this column are characters. 
+
+```{r echo=FALSE}
+iris
+```
+
+We'll leave it at that for now, as we will talk about data frames in much more detail in Section 3. 
+
+## Exploring the Contents of an Object ##
+
+R has many useful functions for checking the contents of R objects. Some of these functions include `class()`, `str()`, `length()`, and `dim()`. We've already seen how `dim()` works in section 2.2.2, so we will focus on the former three. 
+
+When an R object is used as an argument in `class()`, this will return the data-type that object belongs to. 
+```{r}
+class(model_organisms) # character vector
+```
+
+Note that you can also index objects to evaluate the class of a subset of an object.  
+```{r}
+class(list_of_vectors[[2]]) # second element of list
+class(this_is_a_matrix[,1]) # first column of matrix
+```
+
+`length()`, as the name of the function suggests, returns the length of an R object. 
+```{r}
+# length of a vector is the number of elements in the vector
+length(string_of_numbers)
+# length of a list is the number of objects in the list
+length(list_of_vectors)
+# length of a matrix is the product of the numbers of rows and columns
+length(this_is_a_matrix)
+```
+
+Finally, `str()` provides information about the structure of an object. We'll walk through the output that specifies the structure of each object-type. 
+
+When the vector `model_organisms` is used as an argument, the output of `str()` tells us a few things: (1) the object is made up of character data, (2) the object is a vector, and (3) provides a preview of the contents of the object. Based on the output, we know that this is a vector because [1:3] (or more generally [1:n], where n is the vector length) denotes a single dimension (its length). 
+
+```{r}
+str(model_organisms)
+```
+
+The output for the structure of a list is quite similar to the output for the structure of a vector. This time, since a list is a collection of objects, it will (1) tell you how many objects are in the list, and (2) preview the contents of each object.
+```{r}
+str(list_of_vectors)
+```
+
+The output for the structure of a matrix is also similar to what we saw for a vector. Only this time, the notation in the square brackets tells us that this R object has 2 dimensions. Here, `1:2` tells us there are two rows, and `1:3` tells us there are three columns. 
+```{r}
+str(this_is_a_matrix)
+```
+
+## Logical Operators ## 
+
+Logical operators are used to evaluate R objects against test conditions. For now, here is a table with some useful R operators. We will use some of these operators as we go along in the guide.
+
+| Operator| Description | 
+|:-:|:-:|
+|`<`|less than|
+|`>`|greater than|
+|`<=`|less than or equal to|
+|`>=`|greater than or equal to|
+|`==`|equal to|
+|`!=`|not equal to|
+|`!x`|not x|
+|`x | y`|x or y|
+|`x & y`|x and y|
+
+
+## Subsetting and Indexing ## 
+
+Subsetting and indexing is useful for when you want to extract a component of an R object. Usually, this is done using numeric and **Boolean** indexing (more on booleans later). As we've seen, `[[]]` and `[]` are typically used for indexing objects, along with the `$` operator, which we haven't covered just yet. 
+
+### Indexing with Numbers and Names ###
+
+Here is the vector we will be working with. 
+```{r}
+another_vector <- c(4, 1, 7, 8, 120, 2)
+another_vector
+```
+
+Let's say we only want the middle two values, 7 and 8. To do this, find the positions that correspond to 7 and 8 in the vector `another_vector`. Just by looking at the string of values in `another_vector`, we can see that 7 and 8 correspond to positions 3 and 4. Here are a couple of different ways you can extract positions 3 and 4 of `another_vector` using numeric indices:  
+```{r}
+# use c() within the square brackets and code 3, 4
+# another_vector[c(3, 4)]
+
+# `:` tells R to generate a sequence of integers from some number to another
+# since we want values at the third and fourth positions, use `:` to specify that we want to extract consecutive positions
+another_vector[3:4]
+```
+
+Both of these methods should achieve the same result. 
+
+We can also index by the order that we want values to appear. This time, let's extract the last three values in `another_vector`.
+```{r}
+another_vector[4:6] # in order
+another_vector[6:4] # descending order
+another_vector[c(5, 6, 4)] # custom order
+```
+
+Indexing a data frame is similar to indexing a matrix. This is because both are 2 dimensional objects. However, since data frames have column names, we can also index columns by name. In this example, we'll work with the built-in `iris` data frame. 
+```{r}
+iris # name of the data frame-object 
+```
+
+Let's say we want to extract the last column, `Species`. There are multiple ways to do this. We can do it numerically, by checking the column number that `Species` occupies in `iris`. We can also subset by name, using either [square] brackets or the `$` operator. The output for each of the examples in the below are the same--the first two examples are commented out (using `#`) for the sake of brevity.
+```{r}
+# we can numerically extract the Species column by coding a 5 in the column argument
+# iris[, 5]
+
+# we can extract the Species column by name by coding "Species" in quotations in the column argument
+# iris[, "Species"]
+
+# finally we can extract a column by name by using the `$` operator
+iris$Species
+```
+
+The output is quite long because the `iris` data frame has 150 rows. Since each row corresponds to a single observation within a column, the `Species` column, when extracted, has 150 character values. Also note that the output is in the form of a vector. It's just a string of character values. In this way, columns within data frames are really just vectors of some length.
+
+<div class="well">
+  <strong>Side Note 3: A Small Comment on Comments</strong> 
+
+A couple of code chunks in this section contain lines of code *and* text that are ignored by R. For example, in the above chunk, the only piece of code that is interpreted by R is `iris$Species`. To run the alternative, but equivalent, examples, delete the `#` operator in front of the line of code you would like to run. 
+
+In a previous section of the guide, we talked about how R Notebook's are useful because they allow you to narrate your code along side your code. As a result, this reduces the need for large amounts of commented text, and generally makes your code easier to follow. In this section, there were a couple of code chunks that contained a lot of commented text anyway. Where you see this, we've chosen to present it in this way to emphasize that the given examples are equivalent. But at the end of the day, it's a stylistic choice. 
+ 
+</div>
+
+What if we want columns 3 through 5? 
+```{r}
+# index numerically
+# iris[, 3:5] 
+
+# index by name using c() to call a character vector
+iris[, c("Petal.Length", "Petal.Width", "Species")] 
+```
+
+This time, let's index rows and columns. Say we want columns 3 through 5 and rows 10 through 20. 
+```{r}
+# by number
+# iris[10:20, 3:5] 
+
+# by number and by name
+iris[10:20, c("Petal.Length", "Petal.Width", "Species")] 
+```
+
+### Indexing with Logical Operators ###
+
+Indexing with **logicals** entails evaluating an R object against some **test condition**. If elements in the object meet the condition, then the test is evaluated to be `TRUE`. If not, it's evaluated to be `FALSE`. Let's see what that means by testing which values are below 5 in `another_vector`.
+```{r}
+another_vector # this is the vector
+another_vector < 5 # this is the test condition
+```
+
+The output of the test condition is a vector that specifies which values are below 5 (i.e. `TRUE`) and which are above 5 (i.e. `FALSE`). As a result, `another_vector` is expressed as a **Boolean vector**, because each value in `another_vector` is expressed as `TRUE` or `FALSE` depending on the test condition. 
+
+We can use test conditions to index a vector by embedding the test between `[]` brackets. The result should return values in `another_vector` that are smaller than 5. 
+```{r}
+# extract values smaller than 5
+another_vector[another_vector < 5]
+```
+
+We can also use Booleans to index data frames. Here, we are extracting rows in the data frame `iris` where measurements in `Petal.Length` are greater than 3. Note that the test condition is in the row argument. 
+```{r}
+iris[iris$Petal.Length > 3, ]
+```
+
+### Negative Indexing ###
+
+Finally, indexing can also work by telling R which values we *DON'T* want. This can be done in a few ways. Using the vector `another_vector`, let's drop the first 3 values. 
+```{r}
+another_vector # here is the vector
+another_vector[-c(1:3)] # add a `-` in front of the c()--tells R to exclude indexed values 
+another_vector[-c(1, 2, 3)] # same idea as above, just more explicit
+another_vector[-1:-3] # add a `-` in front of 1 and 3
+```
+
+## Control Flow ## 
+
+**Control structures** in R allow you to control the order that your code is evaluated. Instead of executing a block of code all at once, control structures implement logic into your code, so that it is executed in a way that depends on features of your data.
+
+We will go over two types of **control flow** in R: **choices** and **loops**. With choices, the way a block of code is expressed will depend on the input. With loops, a block of code is repeated multiple times.  
+
+### Choices ###
+
+#### if...else ####
+
+The structure of an `if...else` statement goes something like this: if **some condition** is true, perform this batch of code; otherwise, perform this other batch of code. In this way, `if...else` statements are all about evaluating a test condition using logical operators, so that different batches of code are expressed depending on whether the result of the test is `TRUE` or `FALSE`.  
+
+Here is an example. First, we have to have an object to evaluate. In this example, we will evaluate the R object `v`. We want to know whether this particular object is below or above 100. 
+```{r}
+v <- 10 # object to evaluate 
+
+if (v < 100) { 
+  # `if` opens the if...else statement 
+  # the test condition goes between the () brackets 
+  # we want to know whether it is TRUE that v is less than 100
+  
+  print("below 100") 
+  # if the expression is TRUE, we want R to print "below 100"
+  
+} else {
+  # otherwise, if the expression is FALSE, we want R to do something `else`
+  
+  print("above 100")
+  # that something else is to print "above 100" 
+}
+```
+
+Since the object that we evaluated, `v`, is less than 100, the output of the `if...else` corresponds to evaluating the `if` part of the statement. 
+  
+#### ifelse #### 
+  
+The drawback to using `if...else` statements is that you are only able to evaluate a vector of length 1, i.e. a vector with a single element. In the previous example, this wasn't really a problem since the vector `v` only contained the element 10 and nothing more.
+  
+In this example, we'll evaluate the vector `v2`. Notice that this vector is of length 3.
+```{r}
+v2 <- c(10, 50, 101) # object to evaluate 
+length(v2) # check the length of v2
+```
+  
+When we try to evaluate `v2` using an `if...else` statement, the output appears as a warning/error message. This is saying that the test condition, `v2 < 100`, has a length that is greater than 1; as a result, R will still evaluate the statement, but it will only do so for the FIRST element in the vector `v2`. 
+  
+```{r}
+if(v2 < 100) { 
+  print("below 100") 
+} else {
+  print("above 100")
+}
+```
+  
+There are a few ways to get around this. One **vectorized** alternative is the `ifelse()` function. Vectorized functions like `ifelse()` work on the entire function at once. This means that a function like `ifelse()` only needs to be applied once, opposed to repeatedly applied to each element in a vector. Because it is vectorized, `ifelse()` is able to get around the above error/warning that `if...else` statements induces. 
+
+Let's start our example by creating a vector that we want to evaluate. We will use a function called `seq()`, which creates a sequence of numbers. You can check this function's arguments by running `?seq` in a code chunk or in the console. 
+
+```{r}
+# The first argument of seq is `from`, which is the first number of the sequence 
+# The second argument is `to`, which is the last number of the sequence 
+# The argument `by` specifies how we want to increment the sequence 
+
+counting_by_threes <- seq(from = 1, to = 100, by = 3)
+
+# Notice that the output is every third number from 1 to 100 
+counting_by_threes
+```
+
+Now that we have our vector, let's take a look at the arguments in `ifelse()`.
+
+The `test` argument is where the test condition goes. In this case, `counting_by_threes <= 55` is the test expression. Recall that the logical operator `<=` is read `less than or equal to`. If the expression is `TRUE`, then R will evaluate the expression using the code after the `yes` argument. However, if the expression is `FALSE`, then R evaluates the code after the `no` argument in the `ifelse()` function. 
+
+```{r}
+ifelse(test = counting_by_threes <= 55, # test condition (less than or equal to 55) 
+       yes = "less than 55", # if TRUE, print "less than 55"
+       no = "larger than 55") # if FALSE, print "larger than 55"
+```
+
+The output is a vector of the same length as `counting_by_threes`. This is because the ifelse function evaluates every element in `counting_by_threes`. 
+
+### Loops ###
+
+`for()` loops are used to iterate the same block of code multiple times. The basic structure of a loop can be found in the code chunk below. A `for()` loop, as the name suggests, opens with the function `for()`. Within the round brackets, we are telling the `for()` function how many times to iterate. The body of the loop, between the curly brackets, `{}`, is the code that is being repeated. 
+
+```{r eval=FALSE, include=TRUE}
+for (element in vector) { # for each element in some vector
+  
+  do something # perform this code multiple times
+  
+}
+```
+
+#### Single Loops ####
+
+We will use the vector `counting_by_threes`. For this example, it will be useful to know how many elements are in this vector.
+```{r}
+length(counting_by_threes)
+```
+
+Now, let's say we want to execute the same batch of code for each element in `counting_by_threes`, which, as we've just checked, has 34 elements. Since we want to execute the same batch of code multiple times, we'll want to use a `for()` loop. To open a loop, code `for()`. Within the round brackets, specify the number of times to repeat a block of code. The below can be read as "For each element `i` in the sequence from 1 to 34...". 
+```{r eval=FALSE, include=TRUE}
+for (i in 1:34) 
+```
+
+Next, add the body of the `for()` loop. The body will go between `{}` brackets and specifies the batch of code that will be performed 34 times, i.e. for each element in the vector `counting_by_threes`. 
+
+In this example, we are going to tell the loop to print the ith element in `counting_by_threes`. The ith element is determined by "where" the loop is in the iterative process. For example, if the loop is in its 10th round, then the 10th element in `counting_by_threes` is printed. How does this happen? By indexing! 
+```{r}
+for (i in 1:34) {
+  
+  # operation being performed:
+  # when i = 1, print(counting_by_threes[1]) = print(1)
+  # when i = 2, print(counting_by_threes[2]) = print(4) ...
+  print(counting_by_threes[i])
+  
+}
+```
+
+One thing to note about the above example is that we didn't store the output into an object, such that it's  not stored in the R Environment. Storing loop objects typically happens WITHIN the loop itself. As always, let's jump in with an example. 
+
+To assign objects withn loops, we have to first **initialize** an empty object to store data in. We will create an empty vector-object called `x` to iteratively store data as the loop moves forward. This example will work with a vector, but data from loops can also be stored in any other R object (e.g. matrices, lists) by using appropriate indexing. Below are a few options for creating empty vector-objects. In the first two cases, because we haven't specified its length, data is appended to the vector for every iteration of the loop. In the last case, we've specified that the vector `x` is a numeric vector with 100 elements. 
+```{r}
+# x <- c() 
+# x <- vector()
+x <- vector(mode = "numeric", length = 100)
+```
+  
+To store loop data into an empty vector we will need to make use of indexing. Remember that indexing allows us to access a particular element in an object based on its position in that object. For example, `x[1]` will access the first element in the vector x. In the same way, we can store data into a particular position in a vector by indexing. 
+  
+In this example, `i` takes on a dual role. In one way, `i` acts as a tracking variable that accesses a particular position in the vector `x` based on where the loop is in the iterative process. In other words, `i` is acting as an index that shifts the position in `x` for every iteration of the loop. In another way, `i` acts as a variable in the calculation, so that the value of `i` depends on where the loop is in the iterative process. If the loop is in its 99th round, then `i` = 99. 
+```{r}
+for (i in 1:100) { # i from 1 to 100
+  
+  # the operation being performed: 
+  # when i = 1, x[1] = 1 * 2
+  # when i = 2, x[2] = 2 * 2 ...
+  
+  x[i] <- i * 2 # repeat this calculation 100 times and store in vector x
+  
+}
+
+x # data from loop
+```
+
+Note that indexing within the loop is important for saving all the data produced by the loop. Had we written `x <- i * 2`, the output from the previous loop would be overwritten by the output from the current loop.  
+```{r}
+for (i in 1:100) { # i from 1 to 100
+  
+  # the operation being performed: 
+  # when i = 1, x[1] = 1 * 2
+  # when i = 2, x[2] = 2 * 2 ...
+  
+  x <- i * 2 # don't do this if you want the whole loop output 
+  # x[i] <- i * 2
+  
+}
+
+x # data from loop
+```
+
+#### Nested Loops ####
+
+Let's try an example with a matrix. This will be slightly more complicated, but the same basic procedure will apply. First, create an empty matrix-object. To do so, set `data = NA`. `NA` stands for "not available" and is an indicator for missing values in R. Unlike a vector-object, you will need to specify how many rows and columns the matrix has. 
+
+```{r}
+y <- matrix(data = NA, # no data 
+            nrow = 10, # 10 rows
+            ncol = 5) # 5 columns
+y
+```
+
+Remember that matrices have dimensions--we now have to pay attention to how rows and columns are being filled. If we want to assign values to each position in the matrix, we will need to access a given row and column. To simultaneously access rows and columns, we will need to take advantage of the **nested `for()` loop**. Nested loops work by having a `for()` loop working within another `for()` loop. 
+  
+The code chunk below displays the basic structure of a nested loop in the context of our matrix example. The outer loop keeps track of the matrix rows, while the inner loop keeps track of the matrix columns. Notice that (1) the inner loop is within the `{}` brackets of the outer loop and (2) the operation that is being iteratively performed is within the `{}` brackets of the inner loop. 
+  
+```{r eval=FALSE, include=TRUE}
+for (each row i) { # for each row i in the matrix y
+  for (each column j){ # for each column j in the matrix y
+    
+    do something # the operation being repeated
+    
+  }
+  } 
+```
+  
+In this loop, we need to specify that the matrix `y` has 10 rows and 5 columns that we want to keep track of. This is specified in the `()` brackets of the `for()` function as a sequence from 1 to the number of respective rows and columns in the matrix `y`. 
+  
+```{r eval=FALSE, include=TRUE}
+for (i in 1:10) { # for each row i in the matrix y
+  for (j in 1:5){ # for each column j in the matrix y
+    
+    do something # the operation being repeated
+    
+  }
+}
+```
+
+<div class="well">
+  <strong> Side Note 4: Wait so...how many iterations? </strong> 
+  
+For large objects, it's better to automate the specification of the number of iterations in a loop. For example, instead of coding `for (i in 1:10)`, we could code `for (i in 1:nrow(y))`. The function `nrow()` returns the number of rows in an R object. So, when we specify `1:nrow(y)`, what we're really saying is `1:to the number of rows in the matrix y`, which is just `1:10`. And the same line of thinking goes for columns. 
+```{r eval=FALSE, include=TRUE}
+# Alternative
+
+for (i in 1:nrow(y)) { # for each row i in the matrix y
+  for (j in 1:ncol(y)){ # for each column j in the matrix y
+    
+    do something # the operation being repeated
+    
+  }
+}
+```
+
+The reason for doing this? Well, if you change the matrix `y` so that it has 200 rows, for example, you won't have to go back and make that same corresponding change in the loop function (i.e. `for(i in 1:200)`). This is because it happens automatically in the `nrow(y)` portion of the code. This is especially imperative when you're handling many objects and a lot of script at a time. It can get really easy to forget about small changes that need to be made, and forgetting while coding only leads to errors down the line. 
+  
+</div>
+
+Now that we've defined what the inner and outer loops are tracking, we need to define the expression that will be repeated in the nested loop. In this example, the operation we want to repeat is `exp(i + j)`. The function `exp()` takes the exponent of the operation in brackets. Finally, to iteratively store the results from the loop into the matrix `y`, we will need to take advantage of indexing. For matrices, the indexing structure looks like this: [# rows, # columns]. In the loop, it will look like this: `y[i, j]`. 
+
+```{r}
+for (i in 1:10) { # for each row i in the matrix y
+  for (j in 1:5){ # for each column j in the matrix y
+  
+  # the operation being performed: 
+  # when i = 1 and j = 1, y[1, 1] = exp(1 + 1)
+  # when i = 1 and j = 2, y[1, 2] = exp(1 + 2)
+  # ...
+  # when i = 10 and j = 5, y[10, 5] = exp(10 + 5)
+    
+  y[i, j] <- exp(i + j) # exponent of sum of ith and jth values
+  
+  }}
+
+y
+```
+  
+### Functions ###
+
+`exp()`, `nrow()`, `ifelse()` are all examples of **functions** that are already built into R. These functions all have underlying code that define an operation to be performed given a set of arguments. But, since R is a programming language, we can very easily write our own customized functions!
+
+There are three components that make a function a function: 
+
+* **Arguments**: What are the inputs of your function?
+* **Body**: What does the function do with the inputs?
+* **Output**: What does the function return? 
+
+The following is the basic structure of an R function, which is opened by the word `function()`.   
+```{r eval=FALSE, include=TRUE}
+function (Arguments) {
+  
+  Body
+  
+  return(Output)
+}
+```
+  
+In the following example, we will build a custom function called my_mean that calculates and returns the mean of an object. Remember that the mean is calculated by taking the sum of the observations over the number of observations. In other words, the sum of all the elements in some object x (i.e. sum(x)) over the number of elements in x (i.e. length(x)). Once the function is coded, don’t forget to assign it to an object called `my_mean`.
+
+```{r}
+my_mean <- function(x) { # the input is x
+  
+  output <- sum(x) / length(x) # find the sum of x and divide by the number of elements in x
+  
+  return(output) # return the output 
+  
+}
+```
+
+Next, let's provide the function `my_mean()` with some data. We will use the vector `counting_by_threes` as the input. 
+```{r}
+my_mean(counting_by_threes)
+```
+
+So the mean of the vector `counting_by_threes` is 50.5. Let's check this against the built-in `mean()` function in R.
+```{r}
+mean(counting_by_threes)
+```
+
+Same result! 
+
+Here is another example, only this time, the function will have multiple inputs. 
+```{r}
+multiple_inputs <- function(g, h) {
+  
+  out <- g * 2 + h * 5
+  
+  return(out)
+}
+```
+
+And the result... 
+```{r}
+multiple_inputs(g = 1:10, # vector for the argument g
+                h = c(4, 5)) # vector for the argument h
+```
+
+<div class="well">
+ <strong>Side Note 4: Organizing your Customized Functions </strong>
+  
+ Say you have several custom functions that you frequently use for a project in R. How should you organize them? And how do you read them into separate R sessions? 
+
+It's good practice to create a *separate* R Script file (.R) that holds a set of related functions. These functions can be called into your R session using the `source()` function. In brackets, you would simply type in the name of your .R file (e.g. `source(my_functions2020.R)`). As always, you'll want to choose a descriptive name for your file, ideally one that encapsulates the type of functions in your file. All of this analogous to reading a package into your session, as R will load your custom functions into its memory for use. 
+
+Why is sourcing functions good practice? Here are a few reasons:
+
+1. It improves the **readibility** of your code. Coding lots of functions *within* your current script can make it clunky, dense, and ultimately harder to read.  
+
+2. It allows you to easily **reuse** your functions across several scripts. Rather than having to repeatedly copy-paste several lines of code to introduce your custom functions into each new analysis, reading in your functions is as painless as a single line of code using the `source()` function.
+
+3. **Maintaining** your functions is easy! If there is a bug in your function, squashing it is just a matter of going into your source file. This means you won't have to go across *all* your scripts to fix the same issue over and over and over...
+
+4. It's **shareable**. If you have a set of functions you'd like to send off, simply send your source file! 
+
+All these steps can ultimately lead you to even writing your own package! While writing packages is beyond the scope of *this* guide, if you are interested, click [here](https://r-pkgs.org).
+
+</div>
+
+# Data Wrangling #
+
+In this section, you will learn about **data wrangling**, which is all about transforming your data into a format amenable to data analysis and visualization.
+
+## Installing and Loading Packages ##
+
+Now that we've covered some of the basics in R, let's get into some data exploration! We will first need to install some **packages**. Remember that packages are extensions to base R and usually contain ready-made functions and datasets that are useful for a number of things.
+
+For data wrangling, one very useful package is the `tidyverse` package. `tidyverse` is a collection of packages such as `ggplot2`, `dplyr`, and `maggritr`. We will go over these in more detail as they become important. To install the `tidyverse` package, call the `install.packages()` function in R. In brackets, code `tidyverse` between quotations.
+
+```{r eval=FALSE, include=TRUE}
+install.packages("tidyverse") # make sure the package name is within quotations
+```
+
+How exactly does installing packages work? To answer that, we need to know where packages are actually located. Like locations on your computer, **repositories** are online locations that are typically available and accessible to everyone. The official repository for R is the **CRAN**, which is where we downloaded R in the first place. Normally, packages will be available here, though they can sometimes be found in other repositories such as **GitHub**. When the function `install.packages()` is called, R will find its online location and download it to your local computer.
+
+To access `tidyverse` packages and functions in your current R session, we will need to load it in from the **library**. The library refers to the directory on your computer where packages are downloaded/stored. To load the `tidyverse` package, simply call the `tidyverse` into the `library()` function.
+
+```{r}
+library(tidyverse) # no need for quotations
+```
+
+## An Ecological Detour... ##
+
+Let's take a break from R and think about some ecology!
+
+### Trophic Interactions ###
+
+Some of the most important interactions in ecosystems are also some of the simplest: who eats who. In ecology, these interactions are known as **trophic interactions**. Wolves eat deer and deer eat grass, for example. We can think about the relationships between groups of organisms that eat one another in an ecosystem as pyramids, with predators (wolves) on the top trophic level and primary producers (usually plants, organisms that make their own food, typically through photosynthesis) on the bottom trophic level. 
+
+We think of these relationships as pyramids because as you increase trophic level both energy and biomass of organisms decrease. When there is a large disruption to the population of organisms at one level of a trophic pyramid, the population of organisms at the subsequent levels above or below can be impacted. In our simple food chain described above, if there is a sudden decrease in the population of wolves, we might expect the population of deer to increase followed by a decrease in the grass population. We call this domino-like impact on ecosystems a **trophic cascade**.
+
+Trophic cascades can be defined as indirect interactions among trophic levels that influence the function and structure of an ecosystem. They usually involve predators limiting population densities of their prey, which consequently enhaces survival at the next lower trophic level. When predation pressure, sometimes called **top-down control**, by predators is removed, this can fundamentally alter the characteristics of an ecosystem such as productivity, nutrient cycling, and community composition.
+
+<center>
+
+![**Figure 3.1.** An example of trophic interactions from [Callan et al., (2013)](https://besjournals.onlinelibrary.wiley.com/doi/epdf/10.1111/1365-2745.12095). Minus signs indicate a *negative* effect of one trophic level on another, while plus signs indicate a *positive* effect. Solid arrows represent direct effects and dashed arrows represent indirect effects. Wolves, at the top trophic level, can indirectly affect grass and shrub populations at the bottom trophic level. This response is mediated by deer, which occur at the second trophic level. This indirect interaction is called a trophic cascade.](/Users/FOOKRI/Desktop/PhD/R Manual/figure3.1-Rmanual.png)
+
+</center>
+
+A classic example involves the interaction between sea otters, sea urchins, and kelp forests in the North Pacific ([Estes & Palmisano, 1974](https://science.sciencemag.org/content/185/4156/1058)). In the food chain of this ecosystem, sea otters feed on sea urchins and sea urchins feed on kelp. The predation of sea otters on sea urchins controls the sea urchin population, allowing kelp to grow. The expansion of kelp forests support fish, invertebrates, and algal communities, while also providing ecosystem services like wave attenuation and carbon storage. In the early 20th century, sea otter populations were nearly hunted to extinction. This impacted not only the population of sea otters, but also the population of sea urchins and thus kelp, leading to a trophic cascade. Sea urchins, freed from the clutches of sea otters, increased in number such that they were able to eat their way through the kelp forests, leading to barren underwater ecosystems and lowering overall biodiversity along Northern Pacific coasts.
+
+### Trophic Interactions, Climate Change, and the Tundra ###
+
+The dataset we will be working with comes from an experiment published by [Koltz, Classen, & Wright (2018)](https://www.pnas.org/content/pnas/115/32/E7541.full.pdf). Here, the researchers were interested in understanding how trophic interactions in the tundra can be altered by climate warming, and how that can affect parameters related to ecosystem functioning.
+
+In tundra ecosystems, **wolf spiders** are extremely abundant at the soil surface. They are generalists and can impose high predation intensity on belowground prey such as **detritivores**. Detritivores, like *Collembola*, soil-dwelling arthropods, are organisms that feed on dead organic materials, breaking them down into their smaller component parts (e.g. C, N, P). The decomposition of organic materials is fundamental to ecosystem productivity, as it supplies soil nutrients that can be taken up by plants and soil microbes. Detritivores themselves can also prey on other decomposers, such as **fungi** and **bacteria**, which make up part of the belowground microbial community. 
+
+Overall, the regulation of detritivores by wolf spiders can *indirectly* affect decomposition rates and nutrient cycling in tundra ecosystems. Warming due to climate change can potentially alter this interaction, either by strenghthening or weakening current relationships or by reshaping them altogether. For example, wolf spiders may be positively influenced by warming via increased fecundity. This response can induce a trophic cascade. Higher wolf spider fecundity leads to higher abundances. This could allow wolf spiders to exert stronger predation pressure on belowground prey communities, with consequences for decomposition rates and nutrient cycling. In this way, the thought is that predators may indirectly mediate ecosystem functioning and productivity in the tundra.  
+
+<center>
+
+![**Figure 3.2.** Modified from Koltz, Classen, & Wright (2018). This figure illustrates how warming might alter top-down effects from predators to prey to abiotic materials. Plus signs indicate a positive effect and minus signs indicate a negative effect. Solid arrows are direct effects and dashed arros are indirect effects. Here, warming could have a positive effect on wolf spiders at the top trophic level, thus putting more predation pressure on the detritivore *Collembola*. This could potentially release fungi and other soil microbes from predation by detritovores, thus increasing litter decomposition rates. As a result, the indirect effect that predators have on litter decomposition may be strengthened by warming.](/Users/FOOKRI/Desktop/PhD/R Manual/figure3.2-Rmanual.png)
+
+</center>
+
+That being said, the authors sought to explore the role of wolf spiders in mediating the response of belowground communities to climate warming. Given the assumption that *Collembola* are important prey to wolf spiders, the authors outline three hypotheses:
+
+(1) High wolf spider densities should have a negative effect on *Collembola* density. 
+(2) Litter decomposition rates should increase due to decreased predation on microbial communities by *Collembola*. 
+(3) The overall effect that wolf spiders have on the structure and function of detrital communities should be strengthened by warming.  
+
+<center>
+
+![**Figure 3.3.** An example of the experimental design. White boxes represent blocks, while red and blue boxes represent plots. Each experimental block contained 6 plots. Each plot was randomly assigned either an ambient (blue) or warming (red) temperature treatment. Each plot was also assigned a spider treatment, that reflected low, control, or high wolf spider densities. This allowed the researchers to assess the interactive effects of predation intensity and warming on trophic interactions.](/Users/FOOKRI/Desktop/PhD/R Manual/figure3.3-Rmanual.png)
+
+</center>
+
+To test these hypotheses, they ran a **full factorial experimental design** (Figure 3.3). This experiment has two factors being considered: temperature and predator density. The factors, which represent the treatment effects we're interested in, are randomly assigned to a plot within each block. Blocks are used to control for sources of variability that we are *not* interested in and which can therefore introduce error into our measurements. Overall, factors and blocks reduce experimental noise and enhance the experiment's ability to detect the *real* treatment effects. 
+
+The following measurements were taken within each plot:
+
+(1) Detritivore density (*Collembola*, oribatid mites)
+(2) Microbial density (fungi, bacteria)
+(3) Density of predators that *aren't* wolf spiders
+(4) Decomposition and Nitrogen loss from litter 
+(5) Soil nutrient availability 
+
+These measurements will be reflected in the dataset which you will upload in the next section. 
+
+## Reading Files into R ##
+
+To import the data into R, we will use the `read_csv()` function. The `()` brackets should contain the path that leads to the location of your data file. An example of this is in the code chunk below, although this path will certainly differ on your personal computer! In this particular example, R is being led to a folder on the Desktop called "spiders" which contains a file called `trophic_df.csv`. The data file `trophic_df.csv` can be downloaded from ____ and saved to a location on your computer. When you use `read_csv()`, the path contained in the brackets should lead R to the location where the data file is saved.  
+
+When you execute `read_csv()`, this will import the dataset into the current R session. This is fine, but typically, you will want to assign the imported dataset to an R object. Below, `trophic_df` is what we will call the object that contains `trophic_df.csv`. When the code chunk is executed, the output will be a preview of the column names (left-hand side of the =) and will show you the datatypes within those columns. 
+
+```{r}
+trophic_df <- read_csv("/Users/FOOKRI/Desktop/spiders/trophic_df.csv")
+```
+
+The collection of those columns forms a **data frame**, which is a two-dimensional data table. When you run the code chunk below, you will see what the data look like as an R data frame. Notice that there are 26 columns and 180 rows. The rows represent a set of related observations from each column.
+
+```{r}
+trophic_df
+```
+
+Clearly, there are a lot of variables to work with in this dataset. We won't go through all of them at once, but for the next few examples, here is a small summary of what some of the columns mean in the context of the experiment:
+
+* **block**: experimental block
+* **plot**: experimental plot WITHIN a block
+* **year**: year the data was sampled
+* **spidertmt**: Wolf spider density treatment (low, control, high)
+* **temptmt**: temperature treatment (ambient, warm)
+* **location**: location sampled in the soil
+* **CollType**: order of *Collembola*
+* **Colldensity**: density of *Collembola* (individuals per cubic cm)
+* **AvSoilMoisture** : Average soil moisture in experimental plot during 2012 summer season
+
+See figure 3.3 to see how the columns of the data frame relate to the experimental design. 
+
+## Exploring the Contents of Your Data ##
+
+Datasets can often be quite large and unwieldy to deal with all at once. Fortunately, R has many helpful functions that summarize or give us a preview of the details of our data.
+
+For example, if we wanted to know the dimension of the data frame `trophic_df`, we could use the `dim()` function. Remember that the dimension of a data frame is simply the number of rows and columns in the dataset. In this way, when a data frame like `trophic_df` is used as an argument in the function `dim()`, the output returns the number of rows and columns. 
+
+```{r}
+dim(trophic_df)
+```
+
+Another useful for exploring your dataset is `head()`, which returns the first 6 rows of the data frame.
+```{r}
+head(trophic_df)
+
+# if you wanted the first 10 rows, you would write this:
+# head(trophic_df, 10)
+```
+
+While `tail()` will return the last 6 rows of the data frame.
+```{r}
+tail(trophic_df)
+
+# if you wanted the last 3 rows, you would write this:
+# tail(trophic_df, 3)
+```
+
+If, instead, we wanted summary statistics of each column, use the `summary()` function. Beware, the output will be quite long since this particular dataset has many columns to summarize! 
+```{r}
+summary(trophic_df)
+```
+
+Next, we can check the internal structure of `trophic_df` using the `str()` function. `str()` will return some basic information about an R object. 
+
+For the sake of brevity, we will only check the structure of the first three columns of `trophic_df`. You can subset the first three columns by using matrix indexing (i.e. [row #, column #]) and coding `1:3` in the columns argument. 
+
+```{r}
+str(trophic_df[, 1:3])
+```
+
+Let's take a closer look at the output from `str()`:
+
+* Information about the class of `trophic_df` is provided in the first line. 
+  * `tbl_df` and `tbl` (pronounced *tibble*) are subclasses of `data.frame`. While they *are* data frames, they have features that slightly differentiate them from a classic data frame, but we won't touch on that here.  
+* The second line tells you that there are 180 observations of 3 variables. This information is akin to using the `dim()` function, which told us about the dimension of `trophic_df`. 
+* Next is a summary of each column. Each unique column is preceded by `$` followed by the name of the column. After the colon you will see information about the column's class (in this case numeric or character) as well as a glimpse of what each column contains. 
+
+## Subsetting Data Frames ##
+
+You can also isolate rows or columns using the indexing techniques from earlier in the guide. As an example, we will subset the column `Colldensity`. One way to do this is using the `$` operator, which extracts a column by name. An alternative to this is using list-indexing with `[[]]`, where the name of the column that you want to extract is coded between the square brackets. Finally, we can also use list-indexing to extract by position by coding the corresponding column number in the `[[]]`.
+
+The output of any of these methods will be the column in the form of a vector. Why? Because each column in a data frame is just a vector. In this way, data frames are like lists that contain named vectors of equal length. In our example, the vector column we want to extract is called `Colldensity` which contains 180 observations (check using `length()`). 
+
+```{r}
+trophic_df$Colldensity # index by name
+
+# alternative, by name:
+# trophic_df[["Colldensity"]]
+
+# alternative, by position:
+# trophic_df[[9]]
+
+# length(trophic_df$Colldensity) # check length of column
+```
+
+Data frames can also be indexed like a matrix. This is done by using the [row #, column #] syntax and coding the column number *or* column name in the column argument. Alternatively, coding the column name in quotations and between `[]` brackets will achieve the same result.
+```{r}
+trophic_df[, 9] # by number
+
+# alternative, by name:
+# trophic_df[, "Colldensity"]
+
+# alternative, by name but not in matrix form:
+# trophic_df["Colldensity"]
+```
+
+Before, the extracted column was in the form of a vector. This time, it's still in a data frame. The reason goes back to the idea that data frames share properties related to lists *and* matrices (section 2.2.3). The code above treats `trophic_df` as a 2D matrix object, so the result is a subset of the original data frame. In contrast, using `[[]]` or `$` treats `trophic_df` as a list of vectors, so that the result of subsetting is in vector form. 
+
+Either indexing method is perfectly fine, and your choice of method is likely going to depend on a combindation of preference and practicality. In the latter case, it may depend on what you're trying to achieve as you code. For example, imagine you want to subset a single column so that you can do some data frame-related things to it. Here, it would make most sense to use matrix-indexing so that the output is in the form of a data frame. Using list-indexing would return a vector, and would therefore add the extra step of re-converting the output into a data frame.  
+
+## Tidy Data ##
+
+A lot of time doing data analysis can be spent on preparing and cleaning your data. The idea behind "tidying" your data is structuring datasets in a way that facilitates analysis. In the tidy universe, data has three properties (
+3):
+
+1. Each column is a variable.
+2. Each row is an observation.
+3. Each value has its own cell.
+
+<center>
+
+![**Figure 3.4.** Three rules in tidyverse. Image pulled from [R for Data Science.](https://r4ds.had.co.nz/tidy-data.html#fig:tidy-structure)](/Users/FOOKRI/Desktop/PhD/R Manual/figure3.4-Rmanual.png)
+
+</center>
+
+With that being said, what are some advantages to tidy data?
+
+* It clearly defines the **variables** in your dataset and their properties. For instance, which data are categorical? Which are continuous? Which are dependent and which are independent? These are immensely important distinctions that are related to experimental design and statistical analyses.
+* It ensures **consistency** across datasets. With tidy data, you're formatting your dataset in a way that makes downstream analysis easier. Additionally, because it is consistent, this also gives way to **reproducibility** of your analysis.
+* Once your data is tidy, this opens up a whole world of **compatible** tools that can be used on your data (we will visit many of these tools in the rest of the guide).
+* Tidy data works really well with **vectorized** programming languages like R. Vectorized programs allow functions to be applied to all elements of a vector at once, rather than re-applying the same function to each individual element. Because it is vectorized, tidy data is computationally efficent and concise. 
+
+In this section, we will explore three `tidyverse` packages:
+
+* `maggritr` : Introduces the **forward pipe operator** for better code readability.
+* `dplyr` : A series of vectorized functions that can be used on tidy data.
+* `tidyr` : Alters the layout of your dataset while maintaining existing relationships in your data.
+
+These packages (along with other `tidyverse` packages) were automatically called in when we read `tidyverse` in from the library (see section 3.1).
+
+### maggritr ###
+
+`maggritr` offers the forward pipe operator, `%>%`, that helps you write your code in a way that's clear and readable (Mac: `Cmd`+`Shift`+`m`; Windows: `Ctrl` + `Shift` + `m`). Pipes take the information in a data-object and automatically passes it on to the first argument of the next line of code. In the code below, for example, `data %>% do_something()` is passing the data-object called `data` to the function `do_something()`. 
+
+```{r eval=FALSE, include=TRUE}
+# using pipes
+
+data %>% 
+  do_something() %>% 
+  do_something_else()
+
+# nesting functions
+
+do_something_else(do_something(data))
+
+```
+
+The nice thing about pipes is that it allows you to write your code as if you're writing instructions in English. In the above example, we can easily read the program as "Take this data, do something to it, then do something else to it". This is made easy by the fact that piping data allows you to read your code from left-to-right, as you would in English. This is in contrast to the nested example, where you're reading the code from the inside-out. 
+
+**Table 3.1**: This example comes from the `maggritr` reader found [here](https://magrittr.tidyverse.org).
+
+| Nested| Piped |
+|:-:|:-:|
+|`f(x)`|`x %>% f`|
+|`f(x, y)`|`x %>% f(y)`|
+|`h(g(f(x)))`|`x %>% f %>% g %>% h`|
+
+<!-- Let's look at an example using the `tail()` function. Remember that `tail()` subsets the last 6 rows of a data frame.  -->
+<!-- ```{r} -->
+<!-- trophic_df %>% -->
+<!--   tail() -->
+
+<!-- # alternative, nested: -->
+<!-- # tail(trophic_df) -->
+<!-- ``` -->
+
+<!-- What just happened here? `tail()`, as a function, takes a data frame as its first argument. By coding `%>%` between `trophic1` and `tail()`, we are passing the data frame directly into `tail()`. The result is practically the same as what you would see had `trophic_df` been nested in `tail()`. -->
+
+We'll work through some of `%>%` advantages as we continue to work with `dplyr` functions in the guide.
+
+### dplyr ###
+
+`dplyr` is a data manipulation package. When working with data, you'll likely find that your dataset is not in the "form" that you might need it to be for analysis. In this way, `dplyr` offers a set of functions used for transforming and tidying your data.
+
+In this section, we will go over some key data manipulation functions in the `dplyr` package:
+
+* `filter`
+* `select`
+* `group_by`
+* `summarize`
+* `mutate`
+* `tally`
+* `arrange`
+
+These functions all work similarly:
+
+1. The first argument is a data frame
+2. The second argument describes what you want to do with the data frame
+3. The result is a new data frame
+
+#### filter and select ####
+
+The `filter()` function subsets a data frame based on a test condition and returns rows where the condition is `TRUE`. Look back to section 2.4 for a reminder on how to write tests using logical operators.
+
+Since the first argument of `filter()` is a data frame, we can pipe it directly into the function. The second argument of `filter()` defines the test condition used to subset the data. Let's say we want to subset rows where the average soil moisture (i.e. `AvSoilMoisture`) in a given plot is greater than 50.
+```{r echo=TRUE}
+trophic_df %>%
+  filter(AvSoilMoisture > 50)
+
+# alternative, nested:
+# filter(trophic_df, AvSoilMoisture > 55)
+```
+
+Notice that the number of rows in our data frame has been reduced from 180 to 42. Less than a quarter of observations in the original `trophic_df` data frame had an average soil moisture of 50.
+
+`select()` is the counterpart to `filter()`. Where `filter()` subsets by row, `select()` subsets by column. Let's select the columns called `spidertmt` and `AvSoilMoisture` from the filtered data frame in the previous code chunk. To do so, we will make use of another pipe that passes the filtered data to `select()`. When we do this, notice that writing the code is like writing instructions in English: "Take the data frame `trophic_df`, then filter the rows where average soil moisture is greater than 50, then select the columns called `spidertmt`, `temptmt`, and `AvSoilMoisture`".
+```{r}
+trophic_df %>%
+  filter(AvSoilMoisture > 50) %>% # pass the filtered data frame with a pipe
+  select(spidertmt, temptmt, AvSoilMoisture)
+```
+
+The output is the three columns that we wanted with 42 observations each. 
+
+Next is the same example only this time, the function is applied in nested fashion. Since `filter(trophic_df, AvSoilMoisture > 50)` is just another data frame, it will go into the first argument of `select()`. The output will be the exact same as above. 
+
+```{r}
+select(filter(trophic_df, AvSoilMoisture > 50), spidertmt, temptmt, AvSoilMoisture)
+```
+
+The difference between the last two code chunks is a matter of expression and readibility. If you're nesting functions it's not exactly clear where you should start reading the code and which direction to read the code. With pipes, all you have to do is read from left-to-right. This is especially an advantage if you're applying a sequential string of functions to an object. 
+
+#### group_by ####
+
+`group_by()` takes your data and aggregates it by category. We will continue with the code we left off with above. 
+
+```{r}
+trophic_df %>%
+  filter(AvSoilMoisture > 50) %>%
+  select(spidertmt, temptmt, AvSoilMoisture) %>%
+  group_by()
+```
+
+The resulting data frame is exactly what we had to begin with. Why? Because `group_by()` doesn't actually change how your data looks; it affects how your data interacts with other downstream `dplyr` functions. We'll see some examples of this in the next couple of sections.
+
+#### summarize ####
+
+`summarize()` reduces a data frame to a single row that "summarizes" the observations in your data. Let's say we want to find the mean of the column `AvSoilMoisture`. To do this, you could code something like `mean_soil_moisture = mean(AvSoilMoisture)` within the `summarize()` function.
+
+```{r}
+trophic_df %>%
+  filter(AvSoilMoisture > 50) %>%
+  select(spidertmt, temptmt, AvSoilMoisture) %>%
+  summarize(mean_soil_moisture = mean(AvSoilMoisture))
+```
+
+The output is a new column which has completely replaced the original data frame. The new column is called `mean_soil_moisture`, because that's what we specified in the `summarize()` function. We can also specify multiple summary statistics within `summarize()` by separating them with a comma. Let's find the maximum and minimum values in the column `AvSoilMoisture`.
+```{r}
+trophic_df %>%
+  filter(AvSoilMoisture > 50) %>%
+  select(spidertmt, temptmt, AvSoilMoisture) %>%
+  summarize(mean_soil_moisture = mean(AvSoilMoisture), # mean soil moisture
+            max_soil_moisture = max(AvSoilMoisture), # max soil moisture
+            min_soil_moisture = min(AvSoilMoisture)) # min soil moisture
+```
+
+Now, what happens if we want to categorize these summary statistics based on some categorical variable (e.g. by `spidertmt`)? This is where `group_by()` comes in handy. In the line before `summarize()`, code the name of the categorical grouping variable in `group_by()`. 
+```{r}
+trophic_df %>%
+  filter(AvSoilMoisture > 50) %>%
+  select(spidertmt, temptmt, AvSoilMoisture) %>%
+  group_by(spidertmt) %>% # code group_by BEFORE summarize
+  summarize(mean_soil_moisture = mean(AvSoilMoisture),
+            max_soil_moisture = max(AvSoilMoisture),
+            min_soil_moisture = min(AvSoilMoisture))
+```
+
+The output has three rows, each of which represent a unique categorical group in `spidertmt`, and four columns, three of which represent the summary statistics we've specified in `summarize()`. Since this dataset includes a second categorical variable called `temptmt`, let's include that in `group_by()` and see what happens.
+```{r}
+trophic_df %>%
+  filter(AvSoilMoisture > 50) %>%
+  select(spidertmt, temptmt, AvSoilMoisture) %>%
+  group_by(spidertmt, temptmt) %>% # code group_by before summarize
+  summarize(mean_soil_moisture = mean(AvSoilMoisture),
+            max_soil_moisture = max(AvSoilMoisture), # max soil moisture
+            min_soil_moisture = min(AvSoilMoisture))
+```
+
+The output now produces different combinations of `spidertmt` and `temptmt` with their corresponding summary statistics.
+
+#### mutate ####
+
+`mutate()` adds new columns to a data frame that are functions of existing columns.
+
+We will take a closer look at what that means, but before that, let's define some of the other variables that show up in the `trophic_df` dataset:
+
+* **oribatidMites**: Density of oribatid mites (total individuals per cubic cm)
+* **BacterialBiomass** : Bacterial biomass (mg per gram of soil)
+* **FungalBiomass** : Fungal biomass (mg per gram of soil)
+
+<!-- * **IntSoilPreds** : Total density of all other intermediate soil-dwelling predators (total individuals per cubic cm) -->
+<!-- * **locationSurfPreds** : Surface-active intermediate predators (the only group sampled using live pitfall traps at soil surface) -->
+<!-- * **IntSurfPreds** : Total average abundance of intermediate surface-active predators (other than wolf spiders) from several bouts of live pitfall-trapping over the 2012 summer -->
+
+Using `mutate()`, let's create a new column in `trophic_df` which expresses the total biomass of bacteria and fungi. The total biomass, which we will call, `Total_Biomass`, can be coded in `mutate()` as the sum of the columns `BacterialBiomass` and `FungalBiomass`. 
+```{r}
+trophic_df %>%
+  mutate(Total_Biomass = BacterialBiomass + FungalBiomass)
+```
+
+If you scroll to the last column of the data frame, you will see the newly added column, `Total_Biomass`. Some values in `Total_Biomass` show up as `NA` because of unavailable or missing values in either `BacterialBiomass` or `FungalBiomass`.
+
+This is also a good example of vectorization in R. Rather than having to manually repeat the addition of bacterial and fungal biomass for each observation in a column, R automates this process by performing the function on all observations in each vector/column at once. 
+
+#### tally ####
+
+Data analysis often entails counting up the number of observations in a categorical group. `tally()`, combined with `group_by()`, is perfect for this job. Using the dataset `trophic_df`, let's count how many observations there are in each unique order of *Collembola*. Data on the order of *Collembola* is in the column `CollType`.
+```{r}
+trophic_df %>%
+  group_by(CollType) %>%
+  tally()
+```
+
+Notice that our original data frame was replaced with a new one. The first column specifies the unique orders in `CollType` and the second column, called `n`, displays the number of observations in each group.
+
+Similarly, we can do this across more than one categorical variable. Let's add temperature treatment, `temptmt`, to the mix.
+
+```{r}
+trophic_df %>%
+  group_by(CollType, temptmt) %>%
+  tally()
+```
+
+#### arrange ####
+
+As the name suggests, `arrange()` is used to order the rows of a data frame by one or more variables/columns. Using the data frame `trophic_df`, let's arrange the rows by `FungalBiomass`. With respect to the column `FungalBiomass`, this will automatically arrange all rows in ascending order.
+
+```{r}
+trophic_df %>%
+  arrange(FungalBiomass)
+```
+
+You can check that rows are arranged by `FungalBioass` by scrolling to the column `FungalBiomass`. 
+
+If, instead, we want `FungalBiomass` in descending order, code the name of the column between `desc()` and within `arrange()`.
+```{r}
+trophic_df %>%
+  arrange(desc(FungalBiomass))
+```
+
+Next, let's arrange observations in `spidertmt` alphabetically.
+```{r}
+trophic_df %>%
+  arrange(spidertmt)
+```
+
+And we can order rows in descending alphabetical order as well.
+```{r}
+trophic_df %>%
+  arrange(desc(spidertmt))
+```
+
+### tidyr ###
+
+The `tidyr` package contains functions that reshape or alter the layout of your data frame while maintaining the relationships between variables contained in your data. 
+
+Two of the most important functions are `gather()` and `spread()`. Both these functions rely on the idea of **key-value pairs**. Pairs contain two parts: 
+
+(1) a **key**, which describes the data and 
+(2) a **value**, which is the data itself. 
+
+In this section, we will see how datasets form natural key-value pairs and use that relationship to transform our data frame into **long** or **wide** formats.
+
+<center>
+
+![**Figure 3.5.** On the left-hand side, the data is represented in long format, and on the right-hand side, it's in wide format. Tidy data is typically represented in long format, but it's sometimes useful to represent data in wide format. Image was retrieved from [here.](https://datacarpentry.org/R-ecology-lesson/03-dplyr.html#Mutate)](/Users/FOOKRI/Desktop/PhD/R Manual/figure3.5-Rmanual.png)
+
+</center>
+
+Figure 3.5 illustrates the idea of key-value pairs. In wide format, the key is represented by the genus, each getting its own unique column. The value would be the data within each of those columns. Notice that they form a natural pair that is mediated by the column `plot_id`. We can take advantage of this natural pairing to transform the data into long format. In the example above, the columns that correspond to unique genuses can be *gathered* into a single column called `genus`. The corresponding observations, the values, are input into a new column called `mean_weight`. Even though the data look a little different, the relationships between variables in the dataset are maintained. 
+
+#### spread ####
+
+The datasets we have worked with so far have been in long format. It's the basis of tidy data as each unique observation is represented by a row. Usually, this is the ideal way to represent data in R. But it's sometimes more advantageous to represent data in a wide format. For example, in figure 3.5, the wide data allows you to more readily compare observations for each genus in each plot. 
+
+In this example, we will transform data frame `trophic_df` from long to wide. We will do this by using the function `spread()` to expand the key column, `spidertmt`, into multiple columns. For the sake of clarity, we will subset the columns `block`, `plot`, `spidertmt`, and `oribatidMites` from `trophic_df`, and save the output into a new object called `trophic_spread`.
+
+```{r echo=TRUE}
+trophic_spread <- trophic_df %>%
+  select(block, plot, spidertmt, oribatidMites)
+
+trophic_spread
+```
+
+Okay, so that's subsetted data frame we will work with. Since we're *spreading* the column `spidertmt`, it might be useful to check its contents. This will tell us what data is being spread and the number of new columns we should expect. You can check by subsetting the column `spidertmt` and finding the unique elements in this column. `unique()`, from base R, will delete duplicate observations in `spidertmt`. 
+
+```{r}
+trophic_spread$spidertmt %>% 
+  unique()
+```
+
+`spidertmt` has three unique elements. In wide format, these three elements will represent new variables/columns in `trophic_spread`. 
+
+Next comes `spread()`, which takes three arguments:
+
+1. The data frame
+2. The **key** column, which identifies the column we would like to spread 
+3. The **values** column, which contains data associated with the key 
+
+This is likely still a bit of a black box, but hopefully what all this means becomes clear in the next two code chunks. In our example, we will treat the column `spidertmt` as the key, the column to spread. The values that will go into the spread columns will come from `oribatidMites`.
+```{r error = TRUE}
+trophic_spread %>%
+  spread(key = spidertmt,
+         value = oribatidMites)
+```
+
+Alright, so that didn't work. This error is telling us that some rows of `trophic_spread` are duplicates, which is an issue for pairing keys and values. If you look back at the contents of the data frame `trophic_spread`, you'll notice that this is indeed the case. For example, the first 6 rows all contain the exact same data (and the error message tells you as much). R doesn't know how to deal with this because the basis of key-value pairs is that each pair is *unique*. 
+
+Fixing the issue is easy. All you have to do is remove rows that represent the same data. You can do this by applying the function `unique()` to `trophic_spread`. When you do this, notice that the number of rows in `trophic_spread` is reduced from 180 to 30. 
+
+```{r}
+trophic_spread %>%
+  unique() # duplicate rows deleted
+```
+
+Now that duplicate observations have been dealt with, `spread()` can be applied to transform the data from long to wide format. 
+
+```{r}
+trophic_spread %>%
+  unique() %>% # duplicate rows deleted
+  spread(key = spidertmt,
+         value = oribatidMites)
+```
+
+Great! So what just happened?
+
+* Each unique observation in `spidertmt`, which we have defined as the key, now makes up a unique column. In other words, `spidertmt` was spread across the data frame. 
+* The values that form the body of the new columns come from the column `oribatidMites`, which we defined as the value. Here, you can easily compare how each spider treatment affects the density of Oribatid mites in a given plot within a block. 
+* Not all combinations of `block` and `plot` have a corresponding observation of Otibatid mites. This is why the key columns are full of `NAs`. `NA` indicates that there is no data available for a given observation. 
+
+Circling back to the error, the reason it happened goes back to the creation of the data frame `trophic_spread`. Here, we took a subset of columns from the original data frame called `trophic_df`. When we did this, we discarded columns that made each row of `trophic_df` unique. You can check that each row of `trophic_df` is unique by coding `unique(trophic_df)`, which returns the same data frame. Because  unique column combinations were removed, unique key-value pairs in `trophic_df` were rendered as duplicates in `trophic_spread`. 
+
+#### gather ####
+
+`gather()` is the counterpart to `spread()`. Just like `spread()`, `gather()` maintains the relationships between variables in the original dataset. Before we look into an example, let's save the data frame we spread into a new object called `trophic_gather`.
+
+```{r}
+trophic_gather <- trophic_spread %>%
+  unique() %>%
+  spread(key = spidertmt,
+         value = oribatidMites)
+```
+
+Now, let's work to revert the spread data frame using `gather()`. The arguments here are:
+
+1. The data frame
+2. The name of the key column, in quotations
+3. The name of the value column, in quotations
+4. The specific columns to collapse (optional, otherwise all are collapsed between the key and value column) 
+
+The columns we want to collapse are columns 3, 4, and 5. These columns will be *gathered* into the key column, which we will call `spidertmt`.  
+
+```{r}
+trophic_gather %>%
+  gather(key = "spidertmt",
+         value = "oribatidMites",
+         3:5) # columns to collapse
+```
+
+The output creates a new column called `spidertmt`, which contains the names of the collapsed columns, and one called `oribatidMites`, which contains the values that were in the collapsed columns. For specific combinations of `block`, `plot`, and `spidertmt`, observations in `oribatidMites` are labelled as `NA` as there were no mite observations. 
+
+<!-- # 4 Data Visualization # -->
+
+<!-- In this section, we will learn to graphically visualize tidy data using the `ggplot2` package from `tidyverse`. -->
+
+<!-- ## 4.1 Framing your Plot ## -->
+
+<!-- The dataset we will be working with comes from the same study by Koltz, Classen, & Wright (2018). Let's continue defining the columns in the dataset `trophic_df`: -->
+
+<!-- * **TotalN** : Total soil available N from 2 consecutive 3-week incubations of ion exchange membranes -->
+<!-- * **TotalNH4** : Total soil available ammonium (NH4) -->
+<!-- * **TotalNO3** : Total soil available nitrate (NO3) -->
+<!-- * **TotalP** : Total soil available phosphorus (P) -->
+<!-- * **TotalK** : Total soil available Potassium (K) -->
+
+<!-- So, along with information about biological elements present in each block and plot, this data frame also contains information about soil nutrients and how they vary by treatment. Remember that the availability of different soil nutrients is going to depend on the *interaction* between temperature treatment *and* spider treatment (Figure 3.1). As we plot the data, keep this in mind. -->
+
+<!-- As a first pass, let's ask ourselves, "How does the total amount of Nitrogen vary with the total amount of ammonium (NH4)?" Is the relationship positive or negative? Is it linear or nonlinear? Will we find a trend at all? -->
+
+<!-- To begin, pipe `trophic_df` into the function `ggplot()`. `ggplot()` initializes a ggplot object. Its arguments include a data frame object (which we have piped below) and a list of **aesthetic mappings**, which we will get to in a moment. The code chunk below will return an empty grey box since we haven't speficied anything about how we want the data to be plotted. -->
+<!-- ```{r} -->
+<!-- trophic_df %>% -->
+<!--   ggplot() -->
+<!-- ``` -->
+
+<!-- Next, we want to plot the datapoints. This is where **geoms** come in. Geoms, a.k.a geometric objects, tell R how you want observations to be visually displayed. If you code `geom_` into a code chunk, a long list of options will appear, including, `geom_line()`, `geom_boxplot()`, and `geom_bar()`. For our purposes, we will use `geom_point()`, which produces a scatterplot. To do this, layer on `geom_point()` using the `+` operator. -->
+
+<!-- To actually plot the datapoints, we will need to call aesthetics. Aesthetics describe how variables in your data are visually mapped onto a plot. It has many layers and you can get creative with how you want your plot to look. To define aesthetics, open `aes()` within `geom_point()`. For now, we will start simple: defining the x and y axes. Since we want to know how N varies with NH4, we'll plot NH4 on the x and N on the y. The output will display axis titles that match the variable names from `trophic_df` along with axis ticks that correspond to the values in the column `TotalNH4` and `TotalN`. -->
+<!-- ```{r} -->
+<!-- trophic_df %>% -->
+<!--   ggplot() + -->
+<!--   geom_point(aes(x = TotalNH4, y = TotalN)) -->
+<!-- ``` -->
+
+<!-- Okay, so far so good. Clearly, there is positive relationship between `TotalN` and `TotalNH4`.  -->
+
+<!-- In general, the formula for ploting a ggplot is: -->
+<!-- ```{r eval=FALSE, include=FALSE} -->
+<!-- <your_data> %>% -->
+<!--   ggplot() + # or ggplot(data = <your_data>) -->
+<!--   <geom_function>(aes(<mappings>)) -->
+<!-- ``` -->
+
+
+<!-- ## 4.2 Make it pretty! More on Aesthetics ## -->
+
+<!-- Aesthetics are a visual property of your plot. As such, it covers properties like colour, transparancy, size, and shape which convey information about the properties of your data.  -->
+
+<!-- To add some colour to your  -->
+
+<!-- ```{r} -->
+<!-- trophic_df %>% -->
+<!--   ggplot() + -->
+<!--   geom_point(aes(x = TotalNH4, y = TotalN, colour = temptmt)) -->
+<!-- ``` -->
+
+# Extra Resources and Upcoming Sections
+
+A couple more sections will be added to this manual later on. These sections will cover plotting data using `ggplot2` and statistical models in R. 
+
+In the meantime, here a some resources you can check out if you need some extra help: 
+
+* Beginner:
+  * [RStudio Education](https://education.rstudio.com/learn/beginner/)
+  * [YaRrr! The Pirate's Guide to R](https://bookdown.org/ndphillips/YaRrr/)
+  * [Hands-On Programming with R](https://rstudio-education.github.io/hopr/)
+* Advanced:
+  * [R for Data Science](https://r4ds.had.co.nz)
