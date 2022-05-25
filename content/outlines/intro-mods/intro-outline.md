@@ -16,7 +16,7 @@
         1. `.R`
         2. `.Rmd`
         3. `.RProj`
-2. Using R 
+2. Basic R 
     1. Coding Basics
         1. Assignment
         2. R as a Calculator
@@ -81,6 +81,7 @@
         2. Multiple paneled plots
         3. Heatplots
         4. Annotations
+5. 
 5. Statistics
 
 
