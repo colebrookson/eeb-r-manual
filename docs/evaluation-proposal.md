@@ -61,9 +61,7 @@ If the manual is in fact deployed in a web-based fashion, there are any number o
 * download counts - if skeleton scripts are embedded in the page, then it can be determined how many users actually downloaded the file 
 * click counters - if there are "hidden" examples, we can know how many users actually look at the answers of the hidden examples 
 
-And many more metrics.
-
-This method would be more useful in determining how many students *were* using the resource, and out of those students, what parts did they use/not use.
+And many more metrics. This method would be more useful in determining how many students *were* using the resource, and out of those students, what parts did they use/not use.
 
 Some things to consider about web-based assessment: 
 
@@ -74,8 +72,9 @@ Some things to consider about web-based assessment:
 
 #### Qualitative Evaluation
 
+The potentially complimentary method of assessment beyond just quantitatively assessing the success of the manual is a sociological set of interviews with students in the course. This would most certainly require ethics approval. I know relatively little about interview methods, but likely there would be a set of interviews at the end of the term, and possibly at the beginning and throughout at key points as well. The goal would be to ask them targeted questions to assess the success of some pre-determined set of learning outcomes, and then go through and code the interview to get the information we want out. 
 
-
+This is obviously a significant undertaking, and would require commitment through the fall semester and into the winter semester to be even worth considering. However, with specific regard to the usefulness of the manual in addressing the learning outcomes of EEB225 in particular, and perhaps assessing students' preparedness for upper level classes with R requirements, this would likely be the most useful type of assessment, and one that could be translated into a study or at least an internal report to the department. 
 
 #### Some Further Considerations
 
