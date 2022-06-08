@@ -1,21 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<head>
+<title>R Manual Landing Page</title>
 <meta charset="UTF-8">
-<title>Page Title</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/content/drafts/css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 <style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+.rman-bar-block .rman-bar-item {padding:20px}
 </style>
-<script src=""></script>
+</head>
 <body>
 
-<img src="img_la.jpg" alt="LA" style="width:100%">
+<!-- Sidebar (hidden by default) -->
+<nav class="rman-sidebar rman-bar-block rman-card rman-top rman-xlarge rman-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="rman_close()"
+  class="rman-bar-item rman-button">Close Menu</a>
+  <a href="#food" onclick="rman_close()" class="rman-bar-item rman-button">Food</a>
+  <a href="#about" onclick="rman_close()" class="rman-bar-item rman-button">About</a>
+</nav>
 
-<div class="w3-container w3-black">
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
-<p>This is another paragraph.</p>
+<!-- Top menu -->
+<div class="rman-top">
+  <div class="rman-white rman-xlarge" style="max-width:1200px;margin:auto">
+    <div class="rman-button rman-padding-16 rman-left" onclick="rman_open()">☰</div>
+    <div class="rman-right rman-padding-16">Mail</div>
+    <div class="rman-center rman-padding-16">My Food</div>
+  </div>
+</div>
+  
+<!-- !PAGE CONTENT! -->
+<div class="rman-main rman-content rman-padding" style="max-width:1200px;margin-top:100px">
+
+  <!-- First Photo Grid-->
+  <div class="rman-row-padding rman-padding-16 rman-center" id="food">
+    <div class="rman-quarter">
+      <img src="/content/drafts/img/sandwich.jpg" alt="Sandwich" style="width:100%">
+      <h3>The Perfect Sandwich, A Real NYC Classic</h3>
+      <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+    </div>
+    <div class="rman-quarter">
+      <img src="/content/drafts/img/steak.jpg" alt="Steak" style="width:100%">
+      <h3>Let Me Tell You About This Steak</h3>
+      <p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+    </div>
+    <div class="rman-quarter">
+      <img src="/content/drafts/img/cherries.jpg" alt="Cherries" style="width:100%">
+      <h3>Cherries, interrupted</h3>
+      <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+      <p>What else?</p>
+    </div>
+    <div class="rman-quarter">
+      <img src="/content/drafts/img/wine.jpg" alt="Pasta and Wine" style="width:100%">
+      <h3>Once Again, Robust Wine and Vegetable Pasta</h3>
+      <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+    </div>
+  </div>
+  
+  <!-- Second Photo Grid-->
+  <div class="rman-row-padding rman-padding-16 rman-center">
+    <div class="rman-quarter">
+      <img src="/content/drafts/img/popsicle.jpg" alt="Popsicle" style="width:100%">
+      <h3>All I Need Is a Popsicle</h3>
+      <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+    </div>
+    <div class="rman-quarter">
+      <img src="/content/drafts/img/salmon.jpg" alt="Salmon" style="width:100%">
+      <h3>Salmon For Your Skin</h3>
+      <p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+    </div>
+    <div class="rman-quarter">
+      <img src="/content/drafts/img/sandwich.jpg" alt="Sandwich" style="width:100%">
+      <h3>The Perfect Sandwich, A Real Classic</h3>
+      <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+    </div>
+    <div class="rman-quarter">
+      <img src="/content/drafts/img/croissant.jpg" alt="Croissant" style="width:100%">
+      <h3>Le French</h3>
+      <p>Lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="rman-center rman-padding-32">
+    <div class="rman-bar">
+      <a href="#" class="rman-bar-item rman-button rman-hover-black">«</a>
+      <a href="#" class="rman-bar-item rman-black rman-button">1</a>
+      <a href="#" class="rman-bar-item rman-button rman-hover-black">2</a>
+      <a href="#" class="rman-bar-item rman-button rman-hover-black">3</a>
+      <a href="#" class="rman-bar-item rman-button rman-hover-black">4</a>
+      <a href="#" class="rman-bar-item rman-button rman-hover-black">»</a>
+    </div>
+  </div>
+  
+  <hr id="about">
+
+  <!-- About Section -->
+  <div class="rman-container rman-padding-32 rman-center">  
+    <h3>About Me, The Food Man</h3><br>
+    <img src="/content/drafts/img/chef.jpg" alt="Me" class="rman-image" style="display:block;margin:auto" width="800" height="533">
+    <div class="rman-padding-32">
+      <h4><b>I am Who I Am!</b></h4>
+      <h6><i>With Passion For Real, Good Food</i></h6>
+      <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+    </div>
+  </div>
+  <hr>
+  
+  <!-- Footer -->
+  <footer class="rman-row-padding rman-padding-32">
+    <div class="rman-third">
+      <h3>FOOTER</h3>
+      <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <p>Powered by <a href="https://www.rmanschools.com/rmancss/default.asp" target="_blank">rman.css</a></p>
+    </div>
+  
+    <div class="rman-third">
+      <h3>BLOG POSTS</h3>
+      <ul class="rman-ul rman-hoverable">
+        <li class="rman-padding-16">
+          <img src="/content/drafts/img/workshop.jpg" class="rman-left rman-margin-right" style="width:50px">
+          <span class="rman-large">Lorem</span><br>
+          <span>Sed mattis nunc</span>
+        </li>
+        <li class="rman-padding-16">
+          <img src="/content/drafts/img/gondol.jpg" class="rman-left rman-margin-right" style="width:50px">
+          <span class="rman-large">Ipsum</span><br>
+          <span>Praes tinci sed</span>
+        </li> 
+      </ul>
+    </div>
+
+    <div class="rman-third rman-serif">
+      <h3>POPULAR TAGS</h3>
+      <p>
+        <span class="rman-tag rman-black rman-margin-bottom">Travel</span> <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">New York</span> <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Dinner</span>
+        <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Salmon</span> <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">France</span> <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Drinks</span>
+        <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Ideas</span> <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Flavors</span> <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Cuisine</span>
+        <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Chicken</span> <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Dressing</span> <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Fried</span>
+        <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Fish</span> <span class="rman-tag rman-dark-grey rman-small rman-margin-bottom">Duck</span>
+      </p>
+    </div>
+  </footer>
+
+<!-- End page content -->
 </div>
 
+<script>
+// Script to open and close sidebar
+function rman_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function rman_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+
 </body>
-</html> 
+</html>
