@@ -47,3 +47,9 @@ This top right panel is an important one. R will display all the objects you cre
 <img src="./img/env.png">
 
 The beginner may ignore the other tabs in this panel. 
+
+## Getting the most out of RStudio
+
+RStudio is a really rich environment for programming. Once you're familiar with the basics, it can really speed up your work to learn a few shortcuts or tips and tricks. We recommend you become familiar with generally how the software works, then once you're comfortable you can branch out. 
+
+Here is a link to some [tips & tricks to get you started](https://www.dataquest.io/blog/rstudio-tips-tricks-shortcuts/).
