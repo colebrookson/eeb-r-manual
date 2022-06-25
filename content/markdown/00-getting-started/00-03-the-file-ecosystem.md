@@ -39,6 +39,6 @@ To include an R code chunk in a `.rmd` file, we must put the R code inside a spe
 
 ## `.Rproj`
 
-The last important file you'll use once you're more familiar with R is the `.rproj` file. This file formats an R Project, which is a component of ensuring a reproducible analysis. This file acts to store information about your R Project, as well as point to the directory you have stored your analysis in. This file can also be used as a shortcut for opening the project directly from the filesystem. More about this file type can be found in R Projects. 
+The last important file you'll use once you're more familiar with R is the `.rproj` file. This file formats an R Project, which is a component of ensuring a reproducible analysis. This file acts to store information about your R Project #|# LINK TO PROJECTS #|#, as well as point to the directory you have stored your analysis in. This file can also be used as a shortcut for opening the project directly from the filesystem. More about this file type can be found in R Projects. 
 
 
