@@ -1,0 +1,69 @@
+At the most basic level, we can use R as a (very complicated) calculator. We can perform all the most basic operations that we might be interested in:
+
+The classic operations (addition, subtraction, multiplication, division) work much as you would expect
+
+```{r}
+2+2
+```
+```{r}
+3-2
+```
+```{r}
+3 * 2 # multiplication is denoted by an asterisk
+```
+```{r}
+6 / 2 # division is denoted by a forward slash 
+```
+But we can also do slightly more advanced types of computations such as:
+
+*Exponentiation*
+```{r}
+2 ^ 3
+```
+*Modulo Operations* (getting the remainder of a division)
+```{r}
+5 %% 2
+```
+and *Integer Division* (only returns the integer value and not the decimal places).
+```{r}
+5 %/% 2
+```
+Other mathematical calculations we can ask R to perform for us are asking about:
+
+*Relations*
+
+We can ask R if two values are equal (`==`), not equal (`!=`), greater than (`>`), less than (`<`), greater than *or equal to* (`>=`), less than *or equal to* (`<=`). Some examples:
+```{r}
+2 == 2
+```
+```{r}
+2 != 3
+```
+```{r}
+2 > 4
+```
+
+You'll notice that above, the output from R is a value of TRUE or FALSE (termed *Booleans*), which can come in handy. We can also ask R to perform more complicated boolean operations (i.e. true or false questions). 
+
+We could ask R if two things are true at the same time (using the `&` operator), or if one of two statements are true (using the `|` operator):
+```{r}
+2 == 2 & 3 == 3
+```
+```{r}
+2 == 2 & 3 == 4
+```
+```{r}
+2 == 2 | 3 == 4
+```
+```{r}
+2 == 3 | 3 == 4
+```
+We can also chain these operations together, but the order in which we write this out matters. Computers follow order of operations rules just like in math, so we need to think back to BEDMAS (Brackets, Exponents, Division, Multiplcation, Addition, Subtraction) from grade school math class! 
+
+*EXERCISE* see if you can mentally work through what answer (`TRUE` vs `FALSE`) R will give before checking the answer. 
+
+```{r}
+(2 == 2) & (2 == 3 | 3 == 3)
+```
+
+
