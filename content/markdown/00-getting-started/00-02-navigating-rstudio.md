@@ -32,6 +32,10 @@ When RStudio first starts up, you'll notice that it prints out the version of R 
 
 There are two other tabs here "Terminal" and "Jobs" which can be ignored for the beginner. 
 
+To use R in the most basic sense, you can begin typing on the row with the small arrow (>) and press enter. The output will be printed directly below. 
+
+<img src="./img/console-output.png">
+
 ## Files/Plots
 
 This bottom right corner is where you can see any current plots, and the files on your computer that are in your current working directory #|# LINK TO WORKING DIRECTORIES #|#. 

@@ -40,7 +40,7 @@ We can ask R if two values are equal (`==`), not equal (`!=`), greater than (`>`
 2 != 3
 ```
 ```{r}
-2 > 4
+7 > 4 | 6 > 4 | 5 > 4
 ```
 
 You'll notice that above, the output from R is a value of TRUE or FALSE (termed *Booleans*), which can come in handy. We can also ask R to perform more complicated boolean operations (i.e. true or false questions). 
