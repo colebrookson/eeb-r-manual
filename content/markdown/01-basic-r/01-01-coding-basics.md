@@ -90,3 +90,37 @@ Keep in mind that assignment of variables in R is
 > x
 [1] 2
 ```
+
+## Built-in Functions
+
+Most of your initial use of R will be employing built-in functions that R has available for you to employee. For example, we might want to know the sum of a set of numbers. 
+
+```
+> sum(1, 6, 8)
+[1] 15
+```
+
+Functions are discussed in more depth later, but generally, the way they work in R is by calling the word for the function (i.e. `sum`) followed by a set of parentheses, that take the functions *arguments*. Arguments are simply a few items that the function needs to provide the right answer to the question. 
+
+One can always find what arguments are needed in the function by running `?` and then the function in question. For example, 
+
+```
+>?sum
+```
+
+This will not return anything to the console, but in the bottom right panel of RStudio, the help window will open, with the *documentation* on the function. For the `?sum` example, the output is: 
+
+<img src="./img/sum-help.png">
+
+**TIP:** When in doubt about how to use a function, or really anything in R, check the documentation!
+
+## Naming 
+
+A lot of R is assigning values to variables, and each of those variables will need a name. Many programming languages have "style guides" that are a generally agreed-upon set of standards by the community of users that dictate how best to do common tasks in that language. 
+
+There are a handful of suggested style guides in R, but the most common and the one followed in this resource is [Hadley Wickham's style guide](http://adv-r.had.co.nz/Style.html), which is based on that of Google's R style guide. 
+
+With respect to naming: 
+
+*Variable and function names should be lowercase. Use an underscore (_) to separate words within a name. Generally, variable names should be nouns and function names should be verbs. Strive for names that are concise and meaningful (this is not easy!).* 
+
