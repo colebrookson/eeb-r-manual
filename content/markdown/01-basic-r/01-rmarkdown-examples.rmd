@@ -65,5 +65,28 @@ We can also chain these operations together, but the order in which we write thi
 ```{r}
 (2 == 2) & (2 == 3 | 3 == 3)
 ```
+If we have a character object, `x` that we want to know more about, we can use `type()` to determine 
 
+
+```{r}
+sum(1, 6, 8)
+?sum
+```
+
+
+# types
+
+```{r}
+x = "abc"
+typeof(x)
+class(x)
+str(x)
+z = 3.14
+typeof(z)
+x1 <- 2L
+typeof(x1)
+
+x4 <- TRUE
+typeof(x4)
+```
 
