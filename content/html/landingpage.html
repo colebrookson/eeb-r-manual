@@ -28,12 +28,36 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   <div class="w3-navy w3-xlarge" style="max-width:1300px;margin:auto;border:1px w3-gray"
   border:1px>
     <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-    <div class="w3-right w3-padding-16">EEB  .</div>
+    <div class="w3-right w3-padding-16"><a href="https://eeb.utoronto.ca/">EEB</a></div>
     <div class="w3-center w3-padding-16">The R Manual</div>
   </div>
 </div>
   
 <!-- !PAGE CONTENT! -->
+
+<form role="search" id="form">
+  <input type="search" id="query" name="q" placeholder="Search..." aria-label="Search through site content">
+  <button>
+    <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
+  </button>
+</form>
+<script>
+  const f = document.getElementById('form');
+  const q = document.getElementById('query');
+  const google = 'https://www.google.com/search?q=site%3A+';
+  const site = 'pagedart.com';
+
+  function submitted(event) {
+    event.preventDefault();
+    const url = google + site + '+' + q.value;
+    const win = window.open(url, '_blank');
+    win.focus();
+  }
+
+  f.addEventListener('submit', submitted);
+</script>
+
+
 <div class="w3-main w3-content w3-padding" 
 style="max-width:1200px;margin-top:100px">
 
@@ -41,20 +65,20 @@ style="max-width:1200px;margin-top:100px">
   <div class="w3-row-padding w3-padding-16 w3-center" id="food" 
   border: 5px solid gray;>
     <div class="w3-quarter">
-      <img src="img/rstudio.png" alt="rstudio on the desktop" 
+      <img class="image-main" src="img/rstudio.png" alt="rstudio on the desktop" 
       width="250" height="160">
       <h3>Getting Started</h3>
       <p>Installing R/RStudio, understanding the basics of R, using the file 
         ecosystem</p>
     </div>
     <div class="w3-quarter">
-      <img src="img/operators.png" alt="operators" width="250" height="160">
+      <img class="image-main" src="img/operators.png" alt="operators" width="250" height="160">
       <h3>Basic R</h3>
       <p>Some important coding essentials, using objects, installing and using 
         packages, and a daily workflow outline</p>
     </div>
     <div class="w3-quarter">
-      <img src="img/data-structures.png" alt="data structures" 
+      <img class="image-main" src="img/data-structures.png" alt="data structures" 
       width="250" height="160">
       <h3>Working with Data</h3>
       <p>Reading and writing data files with R, and manipulating data for
@@ -62,7 +86,7 @@ style="max-width:1200px;margin-top:100px">
       <p>What else?</p>
     </div>
     <div class="w3-quarter">
-      <img src="img/types-of-plots.jpg" alt="types of plots" 
+      <img class="image-main" src="img/types-of-plots.jpg" alt="types of plots" 
       width="250" height="160">
       <h3>Plotting</h3>
       <p>The grammar of graphics, common and advanced plot types, and plotting 
@@ -73,26 +97,26 @@ style="max-width:1200px;margin-top:100px">
   <!-- Second Photo Grid-->
   <div class="w3-row-padding w3-padding-16 w3-center">
     <div class="w3-quarter">
-      <img src="img/control-flow.png" alt="control flow" 
+      <img class="image-main" src="img/control-flow.png" alt="control flow" 
       width="250" height="160">
       <h3>Programming Concepts</h3>
       <p>Control flow, functions, and analysis flow made simple</p>
     </div>
     <div class="w3-quarter">
-      <img src="img/distributions.png" alt="distributions" 
+      <img class="image-main" src="img/distributions.png" alt="distributions" 
       width="250" height="160">
       <h3>Introduction to Statistics</h3>
       <p>A gentle intro to performing common tests and regression analyses</p>
     </div>
     <div class="w3-quarter">
-      <img src="img/place-holder.png" alt="simulations" 
+      <img class="image-main" src="img/place-holder.png" alt="simulations" 
       width="250" height="160">
       <h3>Simulations</h3>
       <p>Biological experiments on the computer - simulating natural 
         processes</p>
     </div>
     <div class="w3-quarter">
-      <img src="img/non-linear.jpg" alt="advanced statistics" 
+      <img class="image-main" src="img/non-linear.jpg" alt="advanced statistics" 
       width="250" height="160">
       <h3>Advanced Statistics</h3>
       <p>Further regression analysis, non-linear regression, mixed-effects, 
@@ -159,10 +183,10 @@ style="max-width:1200px;margin-top:100px">
     <div class="w3-third w3-serif">
       <h3>POPULAR TAGS</h3>
       <p>
-        <span class="w3-tag w3-black w3-margin-bottom">Data-Filtering</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Non-linear Regression</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dinner</span>
-        <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Assignment</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Plotting</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Drinks</span>
-        <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Line Plot</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Reproducibility</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Cuisine</span>
-        <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Regression</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">RMarkdown</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Fried</span>
+        <span class="w3-tag w3-black w3-margin-bottom">Data-Filtering</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Non-linear Regression</span>
+        <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Assignment</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Plotting</span>
+        <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Line Plot</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Reproducibility</span>
+        <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Regression</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">RMarkdown</span>
         <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dataframes</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">HTMl</span>
       </p>
     </div>
