@@ -87,4 +87,3 @@ Logical types are simply TRUE or FALSE.
 > typeof(x3)
 [1] "logical"
 ```
-
