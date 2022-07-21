@@ -30,10 +30,11 @@ h1{font-size:36px}h2{font-size:30px}h3{font-size:24px}h4{font-size:20px}h5{font-
 h1,h2,h3,h4,h5,h6{font-family:"Segoe UI",Arial,sans-serif;font-weight:400;margin:10px 0}.w3-wide{letter-spacing:4px}
 hr{border:0;border-top:1px solid #eee;margin:20px 0}
 pre code {
-    background-color: #eee;
-    border: 1px solid #999;
+    border-radius: 25px;
+    background-color: rgba(238, 238, 238, 0.502);
+    border: 1px solid rgba(153, 153, 153, 0.476);
     display: block;
-    padding: 20px;
+    padding: 2px;
   }
 a {
   color:#334ee8
@@ -121,7 +122,7 @@ a {
 .w3-container,.w3-panel{padding:0.01em 16px}.w3-panel{margin-top:16px;margin-bottom:16px}
 .w3-code,.w3-codespan{font-family:Consolas,"courier new";font-size:16px}
 .w3-code{width:auto;background-color:#fff;padding:8px 12px;border-left:4px solid #4CAF50;word-wrap:break-word}
-.w3-codespan{color:rgb(0, 0, 0);background-color:#f1f1f1;padding-left:4px;padding-right:4px;font-size:100%}
+.w3-codespan{color:rgb(0, 0, 0);background-color:#f1f1f175;padding-left:4px;padding-right:4px;font-size:100%}
 .w3-card,.w3-card-2{box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)}
 .w3-card-4,.w3-hover-shadow:hover{box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)}
 .w3-spin{animation:w3-spin 2s infinite linear}@keyframes w3-spin{0%{transform:rotate(0deg)}100%{transform:rotate(359deg)}}
