@@ -4,7 +4,7 @@
 
 ## Objects and OOP
 
-R is an Object-Oriented Programming language (OOP language) which means it functions best by storing things as "objects". An object is a data structure that has some attributes and a set of methods that act on those attributes. 
+R is an Object-Oriented Programming (OOP) language which means it functions best by storing things as "objects". An object is a data structure that has some attributes and a set of methods that act on those attributes. 
 
 Object-oriented languages (often called "high-level" languages) are typically more intuitive, as whenever you want to assign some value(s) to a variable and save those values for later, you can make the variable to an object which will be saved by R in the environment for future use. 
 
@@ -87,4 +87,3 @@ Logical types are simply TRUE or FALSE.
 > typeof(x3)
 [1] "logical"
 ```
-
