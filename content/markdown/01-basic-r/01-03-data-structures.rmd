@@ -41,11 +41,12 @@ TRUE
 
 **Note:** One thing to understand is that previously when we assigned a variable a single data object (i.e. `x = 10`), what we were actually doing is making a vector! This is just a special case vector of length 1. 
 
-We can determine what is and what is NOT an atomic vector with the following basic command `is.atomic()`. Recall that lists are *also* vectors, but not the kind we're working with now. 
+We can determine what is and what is NOT an atomic vector with the following basic command `is.atomic()`. Recall that lists are *also* vectors, but not the kind we're working with now, so this checks if a vector is an atomic vector or not. 
 
-**EXERCISE**
+Vectors, especially string vectors, can change depending on how they're created. For example, here we have two vectors that spell out the same sentence, but are not equivalent:
 ```
 x  <- c("The quick brown fox jumped over the lazy dog")
+y <- c("The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog")
 ```
 
 
