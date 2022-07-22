@@ -90,3 +90,18 @@ x4 <- TRUE
 typeof(x4)
 ```
 
+## Vectors
+
+```{r}
+x = c(1:4)
+class(x)
+typeof(x)
+str(x)
+length(x)
+
+x = c("the quick brown fox jumped over the lazy dog")
+is.atomic(x)
+y = "the quick brown fox jumped over the lazy dog"
+is.atomic(y)
+```
+
