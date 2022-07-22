@@ -196,3 +196,54 @@ a summary of the dataframe,
 summary(d2)
 ```
 For the integer columns, we get a very helpful summary of the values in the column. 
+
+#### Factors
+
+We will briefly discuss factors here as their most common use is as columns in dataframes. 
+
+Factors are variables which can only take on a certain number of values (aka "levels"). They are often referred to as the "categorical" variables of R. They are of special importance in statistical modelling since categorical variables enter into statistical models in a different way than continuous variables may do. 
+
+Similar to other datatypes, they can be created with their own function:
+```{r}
+fac <- factor(c("one", "two", "three", "four", "one", "two", "three", "four"))
+fac
+```
+The output here shows the values we passed (those within the `c()` function), but the levels aren't maybe what we'd expect. We passed what we know to be numbers, but R can't actually tell that, it just knows they are string values, so has sorted them alphabetically. We can control the *order* of factors with an additional argument to the function `factor()`:
+
+```{r}
+fac1 <- factor(c("one", "two", "three", "four", "one", "two", "three", "four"),
+               levels = c("one", "two", "three", "four"))
+fac1
+```
+Now the levels are in a more logical order. 
+
+Factors are most commonly used in dataframes, so let's change one of our `chr` variables in a dataframe we've already made to a `factor`. 
+```{r}
+d
+```
+Currently `d2` has `c2` column of type `chr`, but let's make it a factor. We could do this by changing the way we define `c2` originally like this:
+```{r}
+c1 <- c(1:4)
+c2 <- factor(c("item1", "item2", "item3", "item4"))
+c3 <- c(11:14)
+
+# we can combine these values as columns into a dataframe
+d <- data.frame(c1, c2, c3)
+d
+```
+But often we want to perform "in-place" operations to dataframes already created, so let's create the dataframe as before then once created, only re-create that one column:
+```{r}
+c1 <- c(1:4)
+c2 <- c("item1", "item2", "item3", "item4")
+c3 <- c(11:14)
+
+# we can combine these values as columns into a dataframe
+d <- data.frame(c1, c2, c3)
+d
+```
+So currently it's a `chr`, but we can *index* our column of interest by name, using the `$` operator, and perform the change this way. To change the column to a factor we again can use the `factor()` column: 
+```{r}
+d$c2 <- factor(d$c2) 
+str(d)
+```
+Now we can see the output has `c2` as a column. More on indexing next!
