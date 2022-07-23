@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # The File Ecosystem
 **Author:** Cole Brookson
 **Date:** 25 June 2022
@@ -34,8 +39,7 @@ In short, we can write both normal text (such as methods or results), *and* incl
 
 To include an R code chunk in a `.rmd` file, we must put the R code inside a special set of characters that looks like this: 
 
-
-<img src="./img/rmarkdown-chunk.png"/>
+![](./img/rmarkdown-chunk.png)
 
 ## `.Rproj`
 

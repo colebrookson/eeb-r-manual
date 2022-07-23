@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Data Types
 **Author:** Cole Brookson
 **Date:** 22 June 2022

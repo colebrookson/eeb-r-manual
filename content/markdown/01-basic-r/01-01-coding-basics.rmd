@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Coding Basics
 **Author:** Cole Brookson
 **Date:** 13 June 2022
