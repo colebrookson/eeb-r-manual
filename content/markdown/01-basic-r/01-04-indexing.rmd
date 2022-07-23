@@ -147,4 +147,85 @@ which tells us all about Dr. Barrett. We could also ask whether or not the fourt
 ```{r}
 prof_df$accepting[4]
 ```
+### Arrays
+
+Since these are three dimensional objects, we must include all indices to get to a specific element. Let's used the named array we had in the data structures section as our example here: 
+```{r}
+# pre-define the vectors
+vec1 <- c(1, 2, 3)
+vec2 <- c(4, 5, 6)
+vec3 <- c(7, 8, 9)
+
+# define the rownames 
+row_names <- c("row1", "row2", "row3")
+col_names <- c("col1", "col2", "col3")
+mat_names <- c("mat1", "mat2")
+
+# now remake the array with the names
+ar_named = array(c(vec1, vec2, vec3), dim = c(3, 3, 2), 
+                 dimnames = list(row_names, col_names, mat_names))
+ar_named
+```
+To access each of these elements, we need to recall that the indexing will go `[row, column, matrix]`. So to see just the second row but all the columns and rows we might write: 
+```{r}
+ar_named[,,2]
+```
+but to see each of the second columns in both matrices and all rows, we can write: 
+```{r}
+ar_named[, 2, ]
+```
+Further, if we want only the first row and the third column elements for all matrices, we can write: 
+```{r}
+ar_named[1, 3, ]
+```
+but the value for the third row, first column, only in matrix 2 would be found by: 
+```{r}
+ar_named[3, 1, 2]
+```
+
+
+
+A common use case is that we may want, rather than to index a position, tell our object to return to us some part of that object containing a particular value. This is called data *filtering* and will be discussed elsewhere. 
+
+```{r, echo=FALSE, eval=FALSE}
+# #### NOT USED ######################
+# Let's continue on our professor example, but now we will have three matrices in the y-dimension, one each for the professors at the downtown campus, the Scarborough campus,
+# 
+# ![Scarborough Profs](./img/profs-utsc.png)
+# and the Mississauga campus.
+# ![Mississauga Profs](./img/profs-utm.png)
+# 
+# Similarly, we'll make the appropriate elements, then combine them into an array. However, let's short form it and combine some commands.
+# 
+# ```{r}
+# # here we can combine the actions of making the vectors and moving them into a dataframe
+# miss_df <- data.frame(
+#   names = c("Dr. Cassidy D'Aloia", "Dr. Marcus Dillon", "Dr. Darryl T. Gwynne", "Dr. Marc Johnson"),
+#   phd = c("Boston College", "New Hampshire", "Colorado State", "Toronto"),
+#   accepting = c(FALSE, FALSE, FALSE, FALSE)
+# )
+# 
+# scar_df <- data.frame(
+#   names = c("Dr. Maydianne C.B. Andrade", "Dr. Ina Anreiter", "Dr. George Arhonditsis", "Dr. Marc Cadotte"),
+#   phd = c("Simon Fraser", "Toronto", "Aegean", "Tennessee"),
+#   accepting = c(FALSE, TRUE, FALSE, FALSE)
+# )
+# ```
+# 
+# Now let's make a named array of the three dataframes: 
+# ```{r}
+# prof_ar = array(
+#   c(prof_df, miss_df, scar_df),
+#   dim = c(4, 3, 3),
+#   dimnames = list(NULL, colnames = c("names", "phd_locations", "accepting_students"),
+#                   campusnames = c("st_george", "mississauga", "scarborough"))
+# )
+# ```
+# Note here that we pass `NULL` as our first argument in the list of `dimnames`. This is because since we are dealing with these dataframes, rownames are not necessarily useful to us, so we don't need to name the rows explicitly. 
+# 
+# ```{r}
+# print(prof_ar[,,1])
+# ```
+
+```
 
