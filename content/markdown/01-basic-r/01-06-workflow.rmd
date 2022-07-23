@@ -9,7 +9,7 @@ output:
 
 This section will take you through a set of best practices for optimizing your daily workflow in R. **NOTE:** This will progress from beginner topics to more advanced usage, so please only operationalize from this section what is relevant to you. 
 
-For this section, we assume you're familiar with R scripts and `.Rmd` files, packages, and some basic programming. 
+For this section, we assume you're familiar with R scripts and `.Rmd` files, packages, and some basic programming, including reading in data to R. 
 
 ## Workflow for ALL Users
 
@@ -94,5 +94,28 @@ We will want to be able to access that file reliably. In fact, at some point we 
 
 In our new file, 
 
-Whoever you may want to send your project to may not use the same operating system as you (i.e. Mac OS vs. Windows vs. Linux), and they may keep their files in a different place than you. If we used an *absolute* path in our code to read in this data file (something like, "C:/Users/Student1/Documents/r-work/eeb225"), then no one else would be 
+Whoever you may want to send your project to may not use the same operating system as you (i.e. Mac OS vs. Windows vs. Linux), and they may keep their files in a different place than you. If we used an *absolute* path in our code to read in this data file (something like, "C:/Users/Student1/Documents/r-work/eeb225"), then no one else would be able to use this code, since no one else will have the same absolute path as we do. 
+
+A good solution to this is the `here` package. This package helps us ignore absolute paths, in that the package itself will identify the relevant absolute path for your individual machine, so you only have to specify the *relative path*, that is, the path from the directory to whatever file you refer to. 
+
+If we used an *absolute* path to read in this file, using the tidyverse, our `00-lab-01.Rmd` file may look like this: 
+
+![](./img/absolute-path.png)
+But this wouldn't work for another user! So, we use the `here` package. 
+
+##### `here` Package
+First we need to install the package: 
+```{r}
+install.packages("here")
+```
+Now we can edit our file to read in the data using the `here()` function. To see how it works, run just `here()` in your console, and you'll notice that it prints the absolute path to the root of your directory! This is the magic of this package! When used along with an RProject, it provides a near-perfect reproducibility across computers and operating systems! 
+
+So our edited file would look something like this: 
+
+![](./img/here-path.png)
+And this works perfectly! Notice what happens if we run just the `here::here()` function: 
+
+![](./img/here.png)
+And we see it prints out the absolute path pointing to our current working directory! So when we use the `here()` function, we put in quotation marks, first "./" which signifies everything printed above that the package is taking care of for us, and then the relative path to the file we want, so in our case, "data/lab-1-data.csv"
+
 
