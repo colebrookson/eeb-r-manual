@@ -68,5 +68,9 @@ When you begin using a package, you may have questions about how it works. All p
 
 As an example, we can search for the `dplyr` package on the [CRAN website](https://cran.r-project.org/web/packages/available_packages_by_name.html), and navigate to it's CRAN homepage: 
 
+![](./img/dplyr-home.png)
+And we see there is a whole section for vignettes at the bottom. Since `dplyr` is a `Tidyverse` package, the documentation is extensive, significantly more than most other packages. 
 
+If we click on the *Introduction to dplyr* page, we'll find out lots about how to use `dplyr` in a convenient format: 
 
+![](./img/dplyr-vignette.png)
