@@ -60,5 +60,91 @@ We could now reassign this value to 5.
 l[[4]][3] <- 5
 l
 ```
+If we recall, we can also have named lists, which can be indexed by their names. 
+```{r}
+agrawal <- list("name" = "Dr. Aneil Agrawal",
+                  "positions" = c("Distinguished Professor of Evolutionary Genetics",
+                                  "Associate Chair, Graduate Studies"),
+                  "concentrations" = c("Genetics, Genomics & Molecular Evolution",
+                                        "Theoretical & Computational Biology"))
+names(agrawal)
+```
+By calling `names()` we can see the names of the different list components. We can index by any of these. 
+```{r}
+agrawal["concentrations"]
+```
+Here, we have the choice to use the square bracket notation as before, or we can use a new kind, the `$` notation. 
 
+```{r}
+agrawal$concentrations
+```
+This provides the same output. Now let's say we wanted to access the second element in this "concentrations" element. Perhaps we want to rearrange the wording to say "Computational & Theoretical Biology" instead. We could do that with either the `[[]][]` notation we used before, or perhaps the easier to read option of combining both the `$` and `[]`:
+```{r}
+agrawal$concentrations[2]
+```
+Now let's reassign it:
+```{r}
+agrawal$concentrations[2] <- "Computational & Theoretical Biology"
+```
+To check if it worked print the `agrawal` list to our console: 
+```{r}
+agrawal
+```
+And we see it worked. 
+
+### Matrices
+
+Indexing matrices is simple as it is a 2-dimensional extension of indexing atomic vectors. 
+
+```{r}
+m <- matrix(c(100, 200, 300, 400), nrow = 2, ncol = 2)
+m
+```
+To access the value 300, we will need to specify that we want the value in the first row, and second column. **Indexing in R is always done row then column**. 
+
+```{r}
+m[1,2]
+```
+We can get the entirety of the first row
+```{r}
+m[1, ]
+```
+or the first column
+```{r}
+m[ ,1]
+```
+by writing leaving the row/column argument empty, which tells R that for either condition, to include all values of that dimension. 
+
+### Dataframes
+
+Dataframes are lists (a special kind wherein all the elements are of the same length), so their indexing is actually very similar. Let's create an extension of the example we had above using some professors from the EEB department at the University of Toronto. We'll make a dataframe combining the information for a number of categories.
+
+This is just for fun, so let's use the EEB website to get information on each of the professors' names, the school they got their PhD at, and whether or not they're accepting applicants for graduate work.
+
+![Professors](./img/profs.png)
+However, note that differently from above, we cannot have the "positions" nor the "concentrations" categories be of different lengths as that would violate the rules of a dataframe, so instead each category will be it's own vector:
+```{r}
+# first make a list for each professor
+names <- c("Dr. Aneil Agrawal", "Dr. Celina Baines", "Dr. Spencer C.H. Barrett",
+           "Dr. Megan Bontrager")
+phd <- c("Indiana", "Toronto", "Reading", "UBC")
+accepting <- c(FALSE, TRUE, FALSE, TRUE)
+
+
+# now make a dataframe out of these lists
+prof_df = data.frame(names, phd, accepting)
+prof_df
+```
+If want to access any of the columns of this dataframe, we can do so by their *names*, the commonality with lists: 
+```{r}
+prof_df$phd
+```
+We could also look at a single row: 
+```{r}
+prof_df[3, ]
+```
+which tells us all about Dr. Barrett. We could also ask whether or not the fourth row professor, Dr. Bontrager, is accepting students: 
+```{r}
+prof_df$accepting[4]
+```
 

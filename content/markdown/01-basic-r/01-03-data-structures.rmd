@@ -91,6 +91,19 @@ l
 ```
 Here we see a number of square brackets denoting the indexing of the list object `l`. This looks confusing but will be discussed in the *Indexing* section. 
 
+Instead of these numbers, we could name the list components. This is often handy for keeping data of variable lengths/types that can be related together. For example:
+```{r}
+eeb_prof <- list("name" = "Dr. Agrawal",
+                  "positions" = c("Distinguished Professor of Evolutionary Genetics",
+                                  "Associate Chair, Graduate Studies"),
+                  "concentrations" = c("Genetics, Genomics & Molecular Evolution",
+                                        "Theoretical & Computational Biology"))
+
+eeb_prof
+```
+We now see we have three named list components, each of which gives a different piece of information about the professor at hand. 
+
+
 We will not work much with lists here as their primary utility does not become apparent until more advanced types of computations are required. 
 
 ### Matrices
