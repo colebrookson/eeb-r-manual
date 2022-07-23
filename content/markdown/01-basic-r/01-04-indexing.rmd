@@ -4,4 +4,61 @@
 
 ## Indexing & Querying Objects
 
-Once an object is created, we need to be able to access components of it. 
+Once an object is created, we need to be able to access components of it. Different data types each have multiple ways of indexing them, so it's best to go through the indexing options by type. Note that R is a programming language that starts indexing at 1 (i.e. the first element is 1) unlike other common programming languages such as Python which begin indexing at 0.
+
+**A simple rule of thumb when indexing is that most objects can be indexed using the `[ ]`, containing the appropriate number of dimensions for the object at hand.**
+
+### Vectors
+
+Vectors are indexed via the `[]` notation. In a one-dimensional vector, the simplest and most common way to index is to pass the index or element number we want to those square brackets.
+
+```{r}
+x <- c(1, 3, 9, 10, 76, 89)
+```
+If we want to index the 9 in this vector, that's in the third position, or index 3. 
+```{r}
+x[3]
+```
+Similarly with a character vector
+```{r}
+y <- c("The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog")
+```
+If we want to access the element "fox", the fourth element, we will write: 
+```{r}
+y[4]
+```
+```{r}
+y[-1]
+```
+
+While indexing vectors, we can also return all the elements of a vector NOT in a certain position via the `-` sign:
+```{r}
+y[-1]
+```
+This returns all the elements of the vector *except* the first one. 
+
+We can also index based on multiple positions:
+```{r}
+y[c(1, 4, 9)]
+```
+This returns the first, fourth, and ninth elements. 
+
+### Lists
+
+Since lists are also vectors, they're also indexed with notation, but recall that each element of a list can hold other objects of multiple dimensions, we can use one set of square brackets to index the list item, and then another to index elements within that list item. To access the element of the list, we actually use double square brackets, `[[]]`.
+
+```{r}
+l <- list(1, 2, "R is fun", c(1, 2, 3), TRUE)
+l[[4]]
+```
+Here we see `l[[4]]` produces the fourth element, an atomic vector of length 3. What if we want to access the third element of that atomic vector to, say, reassign it to the value 5. We can do so like this: 
+```{r}
+l[[4]][3]
+```
+We could now reassign this value to 5. 
+```{r}
+l[[4]][3] <- 5
+l
+```
+
+
