@@ -246,4 +246,32 @@ So currently it's a `chr`, but we can *index* our column of interest by name, us
 d$c2 <- factor(d$c2) 
 str(d)
 ```
-Now we can see the output has `c2` as a column. More on indexing next!
+Now we can see the output has `c2` as a column. More on indexing later.
+
+### Arrays
+
+Last we'll go over some arrays. Arrays are very useful but can be difficult to visualize since they can store data in >2 dimensions, but let's just focus on 3-dimensional arrays for now. Again, we can create an array with the `array()` function, combining multiple vectors. 
+
+```{r}
+vec1 <- c(1, 2, 3)
+vec2 <- c(4, 5, 6)
+vec3 <- c(7, 8, 9)
+ar1 <- array(c(vec1, vec2, vec3), dim = c(3, 3, 2))
+ar1
+```
+We can read the `dims` argument just as we would order mathematical dimensions, always starting with `x` the first dimension, `y`, the second, and then `z` the third one. So we can think of this as having three rows (the `x` coordinate), and three columns (the `y` coordinate), which make up a single matrix in each of the two `z` dimensions. It's helpful to visualize this: 
+
+![Arrays](./img/arrays.png)
+
+It's often helpful to name each of our columns, rows, and matrices. To do this for the above array we might do the following: 
+```{r}
+row_names <- c("row1", "row2", "row3")
+col_names <- c("col1", "col2", "col3")
+mat_names <- c("mat1", "mat2")
+
+# now remake the array with the names
+ar_named = array(c(vec1, vec2, vec3), dim = c(3, 3, 2), 
+                 dimnames = list(row_names, col_names, mat_names))
+ar_named
+```
+With the rows, columns, and matrices now named it's easier to refer to them. 
