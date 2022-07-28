@@ -72,7 +72,11 @@ This above option assumes that the file it tab-delimited.
 data <- readr::read_tsv("/path/to/file/file-name.csv")
 ```
 
+## Writing Files
 
+Writing files is nearly identical to reading files. 
+
+### Comma Separated Values 
 
 
 
