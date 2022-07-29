@@ -32,7 +32,7 @@ This is the recommended file type for reading data into R as it is flexible and 
 We can read in the file by assinging it directly to an object.
 
 **Base R**
-```{r}
+```{r, eval=FALSE}
 data <- read.csv("/path/to/file/file-name.csv", header = TRUE)
 ```
 
@@ -40,7 +40,7 @@ Here the first argument in the `read.csv()` function is the path pointing to the
 
 **Tidyverse**
 
-```{r}
+```{r, eval=FALSE}
 data <- readr::read_csv("/path/to/file/file-name.csv")
 ```
 
@@ -48,7 +48,7 @@ data <- readr::read_csv("/path/to/file/file-name.csv")
 
 The best way to read in an excel sheet into R with with the `readxl` package. Almost identical to above: 
 
-```{r}
+```{r, eval=FALSE}
 data <- readxl::read_xls("/path/to/file/file-name.csv", sheet = "SHEETNAME")
 ```
 
@@ -60,7 +60,7 @@ Reading a text file is similar to the approaches to a csv file:
 
 **Base R**
 
-```{r}
+```{r, eval=FALSE}
 data <- read.delim("/path/to/file/file-name.csv")
 ```
 
@@ -68,7 +68,7 @@ This above option assumes that the file it tab-delimited.
 
 **Tidyverse**
 
-```{r}
+```{r, eval=FALSE}
 data <- readr::read_tsv("/path/to/file/file-name.csv")
 ```
 
@@ -76,11 +76,72 @@ data <- readr::read_tsv("/path/to/file/file-name.csv")
 
 Writing files is nearly identical to reading files. 
 
-### Comma Separated Values 
+### Comma-Separated Value `.csv` Files 
+
+**core R**
+
+```{r, eval=FALSE}
+write.csv(data_object, "/path/to/new/file/file-name.csv")
+```
+
+**Tidyverse**
+```{r, eval=FALSE}
+readr::write_csv(data_object, "/path/to/new/file/file-name.csv")
+```
+
+### Excel Sheets `.xls(x)`
+
+Writing a file to an excel sheet is slightly unusual and wouldn't be recommended (`.csv` files are always better), but if you need to, there exists a number of packages to assist, the easiest of which being `writexl`.
 
 
+```{r, eval=FALSE}
+library(writexl)
+writexl::write_xlsx(data_object, "/path/to/new/file/file-name.xlsx")
+```
 
+### Plain Text `.txt`
 
+**core R** 
 
+```{r, eval=FALSE}
+write.table(data_object, "/path/to/new/file/file-name.txt")
+```
 
+**Tidyverse**
 
+```{r, eval=FALSE}
+readr::write_delim(data_object, "/path/to/new/file/file-name.txt")
+```
+
+## Writing Figures
+
+It is common to create a figure in R and want to save it to the local machine. If you are plotting in `ggplot2`, then there are specific functions for those objects, but if you are plotting in base R, you will use built-in functions to save as whatever file type you want. 
+
+Using the example built-in dataset `airquality`, we can make an example plot to save. 
+
+### Saving an image created in base R 
+
+```{r}
+plot(x = airquality$Day, y = airquality$Temp, col = "red")
+```
+If this is the plot we wish to save, we can save it as any common figure file type (e.g. `.png`, `.jpg`, `.tif`, `.pdf` etc.)
+
+```{r, eval=FALSE}
+# first use the command for the file type 
+png(file="/path/to/plot/saving_plot.png")
+# then we create the plot
+hist(Temperature, col="darkgreen")
+# this command saves the file and closes the connection to the file
+dev.off()
+```
+
+### Saving a `ggplot2` object
+
+It is best to use the let of functions from `ggplot2` to save these plots. 
+
+```{r, eval=FALSE}
+ggplot2::ggsave("/path/to/plot/saving_plot.png",
+                plot_object)
+```
+
+Note here that we can change the type of file that gets saved by simply changing the extension on the file name. 
