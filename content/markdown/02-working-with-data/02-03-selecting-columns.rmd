@@ -3,11 +3,15 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Selecting & Re-assigning Data 
+# Selecting Columns in a DataFrame 
 **Author:** Cole Brookson
 **Date:** 20 July 2022
 
-Often it is useful to be able to select only a select number of columns in a dataframe, in conjunction or separately from filtering the rows of a dataframe. We can do this to simply re-size the dataframe to only what we need for a particular future analysis, or we can sometimes want to re-assign some subset section of a dataframe. 
+```{r, echo=FALSE}
+options(tidyverse.quiet = TRUE)
+```
+
+Often it is useful to be able to select only a select number of columns in a dataframe, in conjunction or separately from filtering the rows of a dataframe. We can do this to simply re-size the dataframe to only what we need for a particular future analysis, or to isolate the part of a dataframe we need to perform other operations on. 
 
 ## Selecting Columns
 
@@ -60,18 +64,3 @@ names(filtered_ice)
 hist(filtered_ice$ice_duration)
 ```
 We can see this worked as expected!
-
-## Selecting With Reassignment
-
-
-
-
-
-
-
-
-
-
-
-
-
