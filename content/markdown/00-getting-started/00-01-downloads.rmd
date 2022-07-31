@@ -5,7 +5,9 @@ output:
 ---
 
 # Software Downloads
+
 **Author:** Cole Brookson
+
 **Date:** 25 June 2022
 
 To use the programming language R, you need to have both the R software downloaded, as well as a way to interact with that software. We will use the integrated development environment (IDE) RStudio for this task. To install the required softwares on your computer, please follow the instructors according to your operating system. 
