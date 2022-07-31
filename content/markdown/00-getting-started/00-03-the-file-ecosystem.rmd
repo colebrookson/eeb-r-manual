@@ -4,7 +4,9 @@ output:
   html_document: default
 ---
 # The File Ecosystem
+
 **Author:** Cole Brookson
+
 **Date:** 25 June 2022
 
 There are a core set of files that R uses the you'll likely run into and want to know the meaning of. 
