@@ -4,7 +4,9 @@ output:
   html_document: default
 ---
 # Navigating RStudio
+
 **Author:** Cole Brookson
+
 **Date:** 25 June 2022
 
 To actually write R code, you will need to use RStudio. When you open the application, you will see something like this: 
