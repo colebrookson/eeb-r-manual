@@ -78,7 +78,7 @@ levels(df$group)
 ```
 We can see here that the order is not in numerically logical order. Does that matter? Well if we plot those data, we can see it looks like this: 
 
-```{r, echo = FALSE}
+```{r}
 library(ggthemes)
 ggplot(data = df) +
   geom_violin(aes(x = group, y = vals, fill = group)) +
@@ -102,7 +102,7 @@ levels(df$group)
 ```
 
 And we can see that the order is what we want. So that if we were to make the same plot again...
-```{r, echo = FALSE}
+```{r}
 ggplot(data = df) +
   geom_violin(aes(x = group, y = vals, fill = group)) +
   theme_base() +
