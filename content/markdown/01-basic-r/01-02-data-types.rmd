@@ -18,7 +18,7 @@ Object-oriented languages (often called "high-level" languages) are typically mo
 There are six main types in R, but we will discuss only the first four. 
 
 1. **Characters**
-2. **Numerics (real or decial)**
+2. **Numerics (real or decimal)**
 3. **Integers**
 4. **Logicals**
 5. Complex
