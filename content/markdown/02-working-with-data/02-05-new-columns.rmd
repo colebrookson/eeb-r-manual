@@ -20,6 +20,7 @@ In Tidy R, we will almost always use `dplyr::mutate()` for this task.
 The simplest use of `mutate()` is to make a new column that is made up of either a pre-existing object or a single value. For examples here, let's turn to a long-term dataset - sugar maple seedlings at Hubbard Brook Experimental Forest. 
 
 ```{r}
+library(tidyverse)
 library(lterdatasampler)
 df = lterdatasampler::hbr_maples
 head(df)

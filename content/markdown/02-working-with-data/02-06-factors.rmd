@@ -33,6 +33,8 @@ We can make each of these into factors. **Note** that when working with factors 
 We'll mutate each of these columns into factors:
 
 ```{r}
+library(tidyverse)
+
 df_fac = df %>% 
   dplyr::mutate(
     num_ex = as.factor(num_ex),
