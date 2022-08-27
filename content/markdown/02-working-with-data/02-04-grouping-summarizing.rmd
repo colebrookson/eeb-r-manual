@@ -67,7 +67,3 @@ month_sex_weight
 ```
 
 In our little observational look here, we can see that for both sexes, the average weights dropped between October (month 10) and November (month 11). 
-
-
-
-

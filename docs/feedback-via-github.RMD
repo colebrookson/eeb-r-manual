@@ -2,7 +2,9 @@
 title: "Providing Feedback Via Github"
 author: "Cole Brookson"
 date: '2022-08-04'
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 The easiest way to incorporate edits to code-based content (i.e. `html` or `markdown` based content) is via the source code, which for this project is being hosted on GitHub. 
@@ -18,9 +20,11 @@ Once you sign in, you may be prompted to set up your profile, which you can do i
 When you first sign into GitHub, the home page of the website will look like this: 
 
 ![home-page-github](./img/home-page-pr.png)
+
 Here, the header **Pull Requests** is circuled in pink. This is the tab that you can go to, to see what pull requests Cole may have made, to ask for feedback. Click on that header, and it will take you to a second page. Click on *Review Requested* to see the pull requests that Cole has asked for your review on. For the rest of this small tutorial, I have made a real pull request, but used a second GitHub account of mine to go through the process of reviewing the Pull Request from your point of view. Anytime you see the username/account **cbteaching** that would be you in this scenario. So you will see something like this:
 
 ![review-requested](./img/review-requested.png)
+
 There is just one open pull request here. You can click on it, and that will take you to the repository home page. It will look like this: 
 
 ![home-page](./img/home-page.png)  
@@ -32,6 +36,7 @@ You'll notice the tab called *Pull Requests* Click on that tab. You'll now see t
 And you'll notice the name of the pull request that you had a notification to review. Click on the pull request. The head of the pull request will look like this: 
 
 ![start-pr-review](./img/start-pr-review.png)
+
 You'll see uptop *"`colebrookson` requested your review on this pull request"* and a place you can click called **Add your review**. Click on that button to begin reviewing. 
 
 ## Reviewing Files
@@ -39,11 +44,13 @@ You'll see uptop *"`colebrookson` requested your review on this pull request"* a
 Now we're in the thick of it. This is what you'll see when you click on **Add your review**:
 
 ![pr-review-beginning](./img/pr-review-start.png) 
+
 This looks confusing but there's only a few things you'll need to actually worry about. First, on the left, you'll see that there are a number of files that have changed, and a progress bar that says `0/15 files viewed`. Now you can start the actual review. Since a pdf is easier to view and that's where you can actually see the photos that I might include (i.e. screenshots of RStudio or the like), I recommend viewing the `.pdf` file, but making comments on the `.rmd` file. 
 
 To view the `.pdf`, I recommend opening it in another tab/window. If you click on the three dots on the far right of the header of the pdf file (in this example, we're looking at `content/markdown/00-getting-started/00-01-downloads.pdf`), you'll see a dropdown box open up: 
 
 ![open-pdf](./img/open-pdf.png)
+
 You'll see the option to *View file*. Right click this and open it in a new tab. In this example, if we open this `.pdf` in a new tab/window, we'll see this: 
 
 ![pdf](./img/pdf.png)
@@ -87,6 +94,7 @@ You'll notice in the above screenshot there is a button in the top right corner 
 Click on that button and you'll see a drop-down menu: 
 
 ![finish-dropdown](./img/finish-dropdown.png)
+
 You'll notice you have three options here. It is actually helpful for me if you pick the one of the three that best corresponds to your impression of the work. As the descriptions say, you can simply *Comment* to provide feedback that isn't explicitly approving it - this might be good if there are large things that can be improved in the future, but nothing that is explicitly *wrong* with the current version (e.g. examples are definitely needed etc). *Approve* is best when you may have a few small edits but nothing major needs to change. The *Request Changes* is best for when there are more serious problems that you've caught in the content that need to be changed before thiss content reaches the students. 
 
 Also, importantly, this *Leave a comment* section is the best place to provide overall feedback that might not fit as a line comment. Something like "More examples needed throughout" or something like that can go here, and that's really helpful to me!
@@ -94,21 +102,3 @@ Also, importantly, this *Leave a comment* section is the best place to provide o
 Then (finally!) you are done the review! and you can press **Submit review**. This will notify me that your review is ready for me to look at and incorporate. 
 
 You have now finished the review of this section!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
