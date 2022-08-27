@@ -1,0 +1,28 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Making New Columns
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+```{r, echo=FALSE}
+options(tidyverse.quiet = TRUE)
+```
+
+While summarizing columns is useful if we want to pare down our dataframe and get a summary, it's often the case we actually just want to add a new column to our dataframe, perhaps based on some set of other columns already in our dataframe. 
+
+In Tidy R, we will almost always use `dplyr::mutate()` for this task. 
+
+## Mutating Columns with Single Values
+
+The simplest use of `mutate()` is to make a new column that is made up of either a pre-existing object or a single value. For examples here, let's turn to a long-term dataset - sugar maple seedlings at Hubbard Brook Experimental Forest. 
+
+```{r}
+library(lterdatasampler)
+df = lterdatasampler::hbr_maples
+head(df)
+```
+
+We could for example, want a column in this dataset that tells us what forest these data are from. That would be an easy use of the `mutate()` function as the inclusion of the 

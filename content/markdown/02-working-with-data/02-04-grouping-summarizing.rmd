@@ -21,6 +21,7 @@ library(tidyverse)
 bison <- lterdatasampler::knz_bison 
 head(bison)
 ```
+
 It might be useful to understand how the weights of these animals differs by sex. Let's first check the `animal_sex` column to see what values it takes and what type of data the column is: 
 
 ```{r}
