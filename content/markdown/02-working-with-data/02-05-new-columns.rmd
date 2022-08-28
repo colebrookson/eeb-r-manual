@@ -1,0 +1,151 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Making New Columns
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+```{r, echo=FALSE}
+options(tidyverse.quiet = TRUE)
+```
+
+While summarizing columns is useful if we want to pare down our dataframe and get a summary, it's often the case we actually just want to add a new column to our dataframe, perhaps based on some set of other columns already in our dataframe. 
+
+In Tidy R, we will almost always use `dplyr::mutate()` for this task. 
+
+## Mutating Columns with Single Values
+
+The simplest use of `mutate()` is to make a new column that is made up of either a pre-existing object or a single value. For examples here, let's turn to a long-term dataset - sugar maple seedlings at Hubbard Brook Experimental Forest. 
+
+```{r}
+library(tidyverse)
+library(lterdatasampler)
+df = lterdatasampler::hbr_maples
+head(df)
+```
+For this example, we only will work with some of the variables, so let's first select the columns we want (LINK TO SECTION ON SELECTION). 
+
+```{r}
+df = df %>% 
+  dplyr::select(year, watershed, elevation, leaf1area, 
+                leaf2area, corrected_leaf_area)
+df
+```
+
+
+We could for example, want a column in this dataset that tells us what forest these data are from. That would be an easy use of the `mutate()` function as there's only one value. We could do this like so:
+
+```{r}
+df = df %>% 
+  dplyr::mutate(forest = "HBEF")
+df
+```
+
+And we see that our new column has been added onto the far right of the dataframe. 
+
+## Mutating Columns as a Function of Existing Columns
+
+A more common use case is if we want to make a new column from existing columns. Two typical uses here would be:
+
+1. Making a new column that is made via a function operating on another column(s)
+
+2. Making a factor column that binds together values from other columns 
+
+### 1 - New Column Via Numeric Function or Logical Test
+
+#### Rowwise Function
+
+In these data, there are two measures of leaf area: `leaf1area` and `leaf2area`. While they're both very similar, it might still be useful to have a mean estimate for each observation in the data between the two leaf area measurements. 
+
+Say we wanted to calculate for row, the mean value of the two measures of leaf area. **To make this operation on a row-wise basis, we can use `dplyr::rowwise()`** which will ensure each calculation is done on a single row. Combining this with `mutate()` will produce our desired result. 
+
+```{r}
+df = df %>% 
+  dplyr::rowwise() %>%  # ensures calculation done for each row
+  dplyr::mutate(
+    mean_area = mean(c(leaf1area, leaf2area), na.rm = TRUE)
+  )
+df
+```
+
+Now, again, we have our new column tacked on at the end of our dataframe just as we wanted. 
+
+Since we have now a mean estimate of leaf area, we might want to compare that to our measure of `corrected_leaf_area`. We might want, for instance, to see if the `corrected_leaf_area` is a consistent proportion larger than the mean of the two leaf area measurements.
+
+To go about this, we might want to get a ratio of the `mean_area` and the `corected_leaf_area` for each row. To do so, we can create an operation very similarly to above: 
+
+```{r}
+df = df %>% 
+  dplyr::rowwise() %>%  # we still need this to get a value for each row
+  dplyr::mutate(
+    corrected_mean_ratio = mean_area / corrected_leaf_area
+  )
+df
+```
+
+#### ifelse()
+
+A handy component of `mutate()` is that we can create a new column based on a conditional statement like an `ifelse()` statement (LINK TO PROGRAMMING CONCEPT OF IFELSE). In the `corrected_leaf_area` column, we may want to know if a particular value falls above or below the mean value for all of our observations. We could create a simple categorical variable based on this for each row with an `ifelse()` statement. 
+
+```{r}
+# overall mean 
+mean_val = mean(df$corrected_leaf_area, na.rm = TRUE)
+
+# make new column
+df = df %>% 
+  # still need to rowwise the calculation
+  dplyr::rowwise() %>% 
+  dplyr::mutate(
+    # we specify we want this as a factor 
+    corrected_above_below = as.factor(ifelse(
+      # this is the logical test
+      corrected_leaf_area > mean_val,
+      # value if test is TRUE
+      "Above", 
+      # value if test is FALSE
+      "Below"
+    ))
+  )
+df
+```
+
+
+### 2 - Binding Columns
+
+While this is a less common use case, it is often handy to make a new column grouping variable that is informative and can be made for each row. For example, say we wanted to have some way to group our observations by three components: the year the data were collected (2003 vs. 2004), the watershed (reference vs. w1), and elevation (low or mid). In this toy example, we'll do this by pasting those elements together in a new row-wise column. 
+
+First, let's take a look at the summaries of each of these columns: 
+```{r}
+summary(df$year)
+```
+```{r}
+summary(df$watershed)
+```
+```{r}
+summary(df$elevation)
+```
+
+Importantly, it looks like there are some NA's in the elevation column. For our purposes, we'll want to keep those around as there are many observations that have NA's and we don't want to throw those all away. 
+
+Now, let's perform our calculation: 
+
+```{r}
+df = df %>% 
+  dplyr::rowwise() %>% 
+  dplyr::mutate(
+    # we can use paste() from base R to paste the characters together
+    group = as.factor(paste(year, 
+                   watershed, 
+                   elevation, 
+                  sep = "_")) # we want each component separated by a "_"
+  )
+df
+```
+Now we can see how many unique combinations of these three variables there are: 
+```{r}
+table(df$group)
+```
+
+We see that the observations are spread almost perfectly across the six different groups. 
