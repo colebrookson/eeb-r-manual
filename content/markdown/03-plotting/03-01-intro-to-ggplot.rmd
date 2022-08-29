@@ -3,7 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Basics of Plotting
+# Introduction to `ggplot2`
 **Author:** Cole Brookson
 **Date:** 20 July 2022
 

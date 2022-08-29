@@ -1,0 +1,153 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Introduction to `ggplot2`
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+```{r, echo=FALSE}
+options(tidyverse.quiet = TRUE)
+```
+
+When making a plot, typically the best way to go about it is to iteratively make a version of the plot, observe the outcome, and then make changes in an iterative fashion. This prevents us from making mistakes in a long set of code that we then can't diagnose the problem with, and further, helps us catch mistakes (typos, colour problems, etc) as we only have to take in a few new components each time, and not a whole pile. 
+
+For our example, let's use the example from the (LINK) Intro to `ggplot2` section, looking at salamanders and trout: 
+
+```{r}
+library(tidyverse)
+library(lterdatasampler)
+
+df = lterdatasampler::and_vertebrates
+
+names(df)
+```
+
+## Building a Basic Plot
+
+Let's again plot a scatter plot of `length_1_mm` vs. `weight_g`. We'll start out with the absolute minimum number of arguments: 
+
+1. The call to `ggplot()`
+2. The aesthetics (i.e. what variables we want on the x- and y-axis)
+3. The `geom_` function denoting what *type* of plot we're going for
+
+```{r}
+ggplot() +
+  geom_point(data = df, aes(x = length_1_mm, y = weight_g))
+```
+
+Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are *must-haves* to have a legible, complete plot. First step is the axis labels. So to iteratively work up our plot, we'll add that one component on, by using the new function `labs()`:
+
+```{r}
+ggplot() +
+  geom_point(data = df, aes(x = length_1_mm, y = weight_g)) +
+  labs(x = "Length (mm)", y = "Weight (g)") 
+```
+
+OK good. Now, this is more aesthetic than anything, but we might want to change the appearance of this plot away from this ugly grey background and grid lines. This is a more personal decision regarding what exactly you want your plot to look like. However, there are lots of `themes` available in the `ggplot2` package to choose from. For example, we could use the `theme_classic()` like so: 
+
+```{r}
+ggplot() +
+  geom_point(data = df, aes(x = length_1_mm, y = weight_g)) +
+  labs(x = "Length (mm)", y = "Weight (g)") +
+  theme_classic()
+```
+
+But I *personally* prefer a different theme that comes in the `ggthemes` package, which we can install now:
+
+```{r}
+install.packages("ggthemes")
+library(ggthemes)
+```
+
+Now, let's use the `theme_base()` option, which will give us a very classic look and feel to the plot: 
+
+```{r}
+ggplot() +
+  geom_point(data = df, aes(x = length_1_mm, y = weight_g)) +
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base()
+```
+
+Perfect! You'll also notice the text sizes are now larger which is preferable for reading on a screen or in a report. 
+
+## Adding Colour & Shape
+
+Let's now add a colour to our points and change the shape we're using as well. 
+
+**Note:** Arguments like this go in the `aes()` section, but there is a difference between simply assigning a colour and using colour to group points. To start, we'll just make the colour *red*, change the shape to my personal favourite, and up the size just a smidge: 
+
+```{r}
+ggplot() +
+  geom_point(data = df, aes(x = length_1_mm, y = weight_g),
+             # here's where we'll add our colour etc
+             colour = "red", shape = 21, size = 2) +
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base()
+```
+
+So this is interesting! We see that somehow we've made our points hollow on the inside. Well, that has to do with the shape we picked. There are lots of options for shapes we *could* use, and we can see all our options in this handy graphic here: 
+
+![shapes](./img/r-symbols.png)
+
+So notice we specified point # 21. This point has a dark outer circle and a fill colour in the middle. **When using a point option with an outter boundary and an inner fill, the argument `colour` refers to the outter boundary line, and the argument `fill` refers to the colour filling inside**. Let's see how this works by changing `colour = "black"` and `fill = "red"`: 
+
+```{r}
+ggplot() +
+  geom_point(data = df, aes(x = length_1_mm, y = weight_g),
+             # here's where we'll add our colour etc
+             colour = "black", fill = "red", shape = 21, size = 2) +
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base()
+```
+
+Okay, so this looks like maybe more along the lines of what we were expecting! One more thing though is that some spots on the plot have a high density of points. To better identify those high density areas, let's make our points slightly transparent, with the `alpha` commmand: 
+
+```{r}
+ggplot() +
+  geom_point(data = df, aes(x = length_1_mm, y = weight_g),
+             # here's where we'll add our colour etc
+             colour = "black", fill = "red", shape = 21, alpha = 0.2, size = 2)+
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base()
+```
+
+
+And now we can see where there really are many points. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
