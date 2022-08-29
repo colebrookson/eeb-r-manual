@@ -156,6 +156,34 @@ levels(df$group)
 
 The order is now correct. 
 
+### Releveling according to a position
+
+From here, we can imagine a scenario where we want to put a specific level in a particular position in the list. For example, let's say we have a new variable, `group2`, with values as follows:
+
+```{r}
+df$group2 <- factor(sample(c("first", "second", "last"), size = 500, 
+                    replace = TRUE))
+
+# show the levels
+levels(df$group2)
+```
+We may want the "last" level to be last in the order. We can do that with `fct_relevel` and the `after =` argument as follows:
+
+```{r}
+df <- df %>% 
+  dplyr::mutate(
+    # specifying which factor level we want ("last") and the position 
+    # (`after = `) will determine where the factor gets put. `after = Inf` puts
+    # that level at the end
+    group2 = forcats::fct_relevel(group2, "last", after = Inf)
+  )
+
+# double check
+levels(df$group2)
+```
+
+And this gives us the expected result. 
+
 ### Re-leveling According to a Function
 
 **Content Comimg Soon**
