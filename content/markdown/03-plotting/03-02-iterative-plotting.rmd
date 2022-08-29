@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # Introduction to `ggplot2`
 **Author:** Cole Brookson
@@ -57,7 +57,7 @@ ggplot() +
 But I *personally* prefer a different theme that comes in the `ggthemes` package, which we can install now:
 
 ```{r}
-install.packages("ggthemes")
+#install.packages("ggthemes")
 library(ggthemes)
 ```
 
@@ -175,6 +175,8 @@ ggplot() +
 
 This looks better. Now perhaps one way we could make the Cascade salamander points stand out is by making them significantly larger in size. We can do that my scaling our size manually according to the levels of our grouping variable. **Note, that scaling, whether manually or otherwise, can be done for all grouping aesthetics such as fill, colour, alpha, etc. Further documentation on this topic can be found on the [ggplot2 website](https://ggplot2.tidyverse.org/reference/scale_manual.html)**
 
+Since we see that the Cascade Torrent Salmander is first in our list of the legend, that means we will need to make the larger size first up in our `values` argument:
+
 ```{r}
 ggplot() +
   geom_point(data = df_filtered, # using the new dataframe
@@ -188,27 +190,65 @@ ggplot() +
   
 ```
 
-Hmm. We can vaguely see in the bottom corner the points we want, but they're hard to see. Why is this? Well, the problem here can be identified as likely related to a problem of the data type. I suspect that `species` is not yet a factor, and that the order of the species will need to be changed. 
+Hmm. We can vaguely see in the bottom corner the points we want, but they're hard to see. Why is this? Well, the problem here is that `ggplot()` will automatically plot data in the order they are passed. we can see by a quick `head()` call ...
 
 ```{r}
-class(df_filtered$species)
+head(df_filtered)
 ```
 
-It is in fact a character. Let's change it to a factor:
+That the first species in the list is Cutthroat trout, and with a quick `tail()` call (`tail()` returns the last six rows instead of the first six) ...
 
 ```{r}
-df_filtered$species <- as.factor(df_filtered$species)
-class(df_filtered$species)
+tail(df_filtered)
 ```
-So now that it's a factor, let's look at the levels of the factor: 
+
+...we can see that the Coastal salamander is the last. That means that the Coastal salamander will be plotted after (i.e "on top of") our focal larger points. Luckily this is an easy fix by simply rearranging the dataframe such that the focal species is the *last* one to be plotted. This can be accomplished with `dplyr::arrange()`. We'll pass first the dataframe we're working with, then the column we want to sort by. To check that this will work, let's print the calll to `tail()` from the `arrange()` version of our dataframe. 
+
 ```{r}
-levels(df_filtered$species)
+tail(dplyr::arrange(df_filtered, species))
 ```
-And we'll try the plot again: 
+
+That doesn't work! That's because `arrange()` will automatically default to sortin alphabetically. Luckily we can convert this column into factor to change the order in a custom way. Lets do so like this (and again check with `tail()`): 
+
+```{r}
+# wrap our pipe arrange() with tail
+tail(
+  df_filtered %>% 
+  dplyr::arrange(factor(species, 
+                        levels = c("Cutthroat trout", 
+                                   "Coastal giant salamander", 
+                                   "Cascade torrent salamander")))
+)
+
+```
+
+And we see our friend the Cascade salamander is at the end. Now we don't necessarily want to reassign our dataframe to take this rearranged form, so we can simply wrap our call to the dataframe `df_filtered` in our `arrange()` function and see if that works: 
 
 ```{r}
 ggplot() +
-  geom_point(data = df_filtered, # using the new dataframe
+  geom_point(data = df_filtered %>% 
+               dplyr::arrange(factor(species, 
+                        levels = c("Cutthroat trout", 
+                                   "Coastal giant salamander", 
+                                   "Cascade torrent salamander"))),
+             aes(x = length_1_mm, y = weight_g, fill = species, size = species),
+             # here's where we'll add our colour etc
+             colour = "black", shape = 21, alpha = 0.4)+
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base() +
+  scale_size_manual(values = c(1, 1, 4))
+```
+
+Hmm, now our sizes are wonky. No worries, we see here that in the legend, the Cascade salamander is first. So we'll change our larger point to be the first argument in the `values` of `scale_size_manual()`: 
+
+```{r}
+ggplot() +
+  geom_point(data = df_filtered %>% 
+               dplyr::arrange(factor(species, 
+                        levels = c("Cutthroat trout", 
+                                   "Coastal giant salamander", 
+                                   "Cascade torrent salamander"))),
              aes(x = length_1_mm, y = weight_g, fill = species, size = species),
              # here's where we'll add our colour etc
              colour = "black", shape = 21, alpha = 0.4)+
@@ -217,6 +257,55 @@ ggplot() +
   ggthemes::theme_base() +
   scale_size_manual(values = c(4, 1, 1))
 ```
+
+We can now see our Cascade salamander data points! While we could stop here, there are a few other things we can do. We can capitalize the legend easily enough, by simply adding it as the first argument in the `scale_size_manual()` function. We put it here since the `size` parameter is what's being displayed in our plot: 
+
+```{r}
+ggplot() +
+  geom_point(data = df_filtered %>% 
+               dplyr::arrange(factor(species, 
+                        levels = c("Cutthroat trout", 
+                                   "Coastal giant salamander", 
+                                   "Cascade torrent salamander"))),
+             aes(x = length_1_mm, y = weight_g, fill = species, size = species),
+             # here's where we'll add our colour etc
+             colour = "black", shape = 21, alpha = 0.4)+
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base() +
+  scale_size_manual("Species", values = c(4, 1, 1))
+```
+
+Ahh! Now we've run into a new problem. We have two legends! This is annoying. However, we can fix this, but first, let's choose different colours, these are not my favourite. We can do that (in this case) with `scale_fill_manual()`. We use the `fill` because the colour for all the ponts is *black* since it refers to the outer border of the points. 
+
+**SIDE NOTE: Note that when making figures, when possible, choose colours that if printed in black and white are still differentiable, and that also are distinguishable for colour blind people.**
+
+Also, note that often the easiest way to add in specific colours (if you're only using a handful of specific ones like we are here) is to pass the RGB code for that colour. If you have never heard of RGB colours, essentially it's a code of alphanumeric characters that form a specific colour on the colourwheel. Learn more on [RGB colours here](https://en.wikipedia.org/wiki/RGB_color_model). Interestingly, 
+
+```{r}
+ggplot() +
+  geom_point(data = df_filtered %>% 
+               dplyr::arrange(factor(species, 
+                        levels = c("Cutthroat trout", 
+                                   "Coastal giant salamander", 
+                                   "Cascade torrent salamander"))),
+             aes(x = length_1_mm, y = weight_g, fill = species, size = species),
+             # here's where we'll add our colour etc
+             colour = "black", shape = 21, alpha = 0.8)+
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base() +
+  scale_size_manual("Species", values = c(4, 1, 1)) +
+  scale_fill_manual("Species", values = c("#42d4f4", "#f032e6", "#ffe119"))
+```
+
+While these colours are harsh, they're easy to see. We could choose others if we want to be more aesthetic :) Also, we notice that our legend problem is gone! Why? Well, what created the problem before was having *technically* two different legends being asked for from our `aes()` arguments - size & fill. However, by manually providing values for both and then giving them the *same* legend title, we fixed up the problem. *On your own, try adding a different title for one of them and see what happens!*. 
+
+For this plot, we are pretty much done! This looks good to go. 
+
+
+
+
 
 
 
