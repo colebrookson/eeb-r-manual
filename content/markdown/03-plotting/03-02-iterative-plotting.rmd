@@ -1,9 +1,9 @@
 ---
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
-# Introduction to `ggplot2`
+# Iterative Plotting for Easy and Aesthetic Figures
 **Author:** Cole Brookson
 **Date:** 20 July 2022
 
@@ -186,7 +186,7 @@ ggplot() +
   labs(x = "Length (mm)", y = "Weight (g)") +
    # note here we use `ggthemes::` to indicate which package we're using
   ggthemes::theme_base() +
-  scale_size_manual(values = c(4, 1, 1))
+  scale_size_manual(values = c(4, 2, 2))
   
 ```
 
@@ -237,26 +237,9 @@ ggplot() +
   labs(x = "Length (mm)", y = "Weight (g)") +
    # note here we use `ggthemes::` to indicate which package we're using
   ggthemes::theme_base() +
-  scale_size_manual(values = c(1, 1, 4))
+  scale_size_manual(values = c(4, 2, 2))
 ```
 
-Hmm, now our sizes are wonky. No worries, we see here that in the legend, the Cascade salamander is first. So we'll change our larger point to be the first argument in the `values` of `scale_size_manual()`: 
-
-```{r}
-ggplot() +
-  geom_point(data = df_filtered %>% 
-               dplyr::arrange(factor(species, 
-                        levels = c("Cutthroat trout", 
-                                   "Coastal giant salamander", 
-                                   "Cascade torrent salamander"))),
-             aes(x = length_1_mm, y = weight_g, fill = species, size = species),
-             # here's where we'll add our colour etc
-             colour = "black", shape = 21, alpha = 0.4)+
-  labs(x = "Length (mm)", y = "Weight (g)") +
-   # note here we use `ggthemes::` to indicate which package we're using
-  ggthemes::theme_base() +
-  scale_size_manual(values = c(4, 1, 1))
-```
 
 We can now see our Cascade salamander data points! While we could stop here, there are a few other things we can do. We can capitalize the legend easily enough, by simply adding it as the first argument in the `scale_size_manual()` function. We put it here since the `size` parameter is what's being displayed in our plot: 
 
@@ -273,7 +256,7 @@ ggplot() +
   labs(x = "Length (mm)", y = "Weight (g)") +
    # note here we use `ggthemes::` to indicate which package we're using
   ggthemes::theme_base() +
-  scale_size_manual("Species", values = c(4, 1, 1))
+  scale_size_manual("Species", values = c(4, 2, 2))
 ```
 
 Ahh! Now we've run into a new problem. We have two legends! This is annoying. However, we can fix this, but first, let's choose different colours, these are not my favourite. We can do that (in this case) with `scale_fill_manual()`. We use the `fill` because the colour for all the ponts is *black* since it refers to the outer border of the points. 
@@ -295,39 +278,10 @@ ggplot() +
   labs(x = "Length (mm)", y = "Weight (g)") +
    # note here we use `ggthemes::` to indicate which package we're using
   ggthemes::theme_base() +
-  scale_size_manual("Species", values = c(4, 1, 1)) +
+  scale_size_manual("Species", values = c(4, 2, 2)) +
   scale_fill_manual("Species", values = c("#42d4f4", "#f032e6", "#ffe119"))
 ```
 
 While these colours are harsh, they're easy to see. We could choose others if we want to be more aesthetic :) Also, we notice that our legend problem is gone! Why? Well, what created the problem before was having *technically* two different legends being asked for from our `aes()` arguments - size & fill. However, by manually providing values for both and then giving them the *same* legend title, we fixed up the problem. *On your own, try adding a different title for one of them and see what happens!*. 
 
-For this plot, we are pretty much done! This looks good to go. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+For this plot, we are pretty much done! This looks good to go. This section has hopefully showed you how to iteratively add components to your plot to troubleshoot throughout and end up with a nice plot quickly. At this point, we can save our plot if we want to (and if it has been assigned to a variable). (LINK TO SAVING SECTION OF GGSAVE). 
