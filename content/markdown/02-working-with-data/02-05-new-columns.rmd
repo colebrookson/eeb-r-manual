@@ -28,7 +28,7 @@ head(df)
 For this example, we only will work with some of the variables, so let's first select the columns we want (LINK TO SECTION ON SELECTION). 
 
 ```{r}
-df = df %>% 
+df <- df %>% 
   dplyr::select(year, watershed, elevation, leaf1area, 
                 leaf2area, corrected_leaf_area)
 df
@@ -38,7 +38,7 @@ df
 We could for example, want a column in this dataset that tells us what forest these data are from. That would be an easy use of the `mutate()` function as there's only one value. We could do this like so:
 
 ```{r}
-df = df %>% 
+df <- df %>% 
   dplyr::mutate(forest = "HBEF")
 df
 ```
@@ -62,7 +62,7 @@ In these data, there are two measures of leaf area: `leaf1area` and `leaf2area`.
 Say we wanted to calculate for row, the mean value of the two measures of leaf area. **To make this operation on a row-wise basis, we can use `dplyr::rowwise()`** which will ensure each calculation is done on a single row. Combining this with `mutate()` will produce our desired result. 
 
 ```{r}
-df = df %>% 
+df <- df %>% 
   dplyr::rowwise() %>%  # ensures calculation done for each row
   dplyr::mutate(
     mean_area = mean(c(leaf1area, leaf2area), na.rm = TRUE)
@@ -77,7 +77,7 @@ Since we have now a mean estimate of leaf area, we might want to compare that to
 To go about this, we might want to get a ratio of the `mean_area` and the `corected_leaf_area` for each row. To do so, we can create an operation very similarly to above: 
 
 ```{r}
-df = df %>% 
+df <- df %>% 
   dplyr::rowwise() %>%  # we still need this to get a value for each row
   dplyr::mutate(
     corrected_mean_ratio = mean_area / corrected_leaf_area
@@ -91,10 +91,10 @@ A handy component of `mutate()` is that we can create a new column based on a co
 
 ```{r}
 # overall mean 
-mean_val = mean(df$corrected_leaf_area, na.rm = TRUE)
+mean_val <- mean(df$corrected_leaf_area, na.rm = TRUE)
 
 # make new column
-df = df %>% 
+df <- df %>% 
   # still need to rowwise the calculation
   dplyr::rowwise() %>% 
   dplyr::mutate(
@@ -132,7 +132,7 @@ Importantly, it looks like there are some NA's in the elevation column. For our 
 Now, let's perform our calculation: 
 
 ```{r}
-df = df %>% 
+df <- df %>% 
   dplyr::rowwise() %>% 
   dplyr::mutate(
     # we can use paste() from base R to paste the characters together

@@ -20,7 +20,7 @@ They are most commonly used to group numerical variables, and therefore commonly
 
 We can make factors easily from any other type of variable. Take the following example dataset with three variables, one each of numeric, logical, and character types. 
 ```{r}
-df = data.frame(
+df <- data.frame(
   num_ex = sample(c(1,2,3,4), replace = TRUE, 50),
   log_ex = sample(c(TRUE, FALSE), replace = TRUE, 50),
   chr_ex = sample(c("hehe", "haha"), replace = TRUE, 50)
@@ -35,7 +35,7 @@ We'll mutate each of these columns into factors:
 ```{r}
 library(tidyverse)
 
-df_fac = df %>% 
+df_fac <- df %>% 
   dplyr::mutate(
     num_ex = as.factor(num_ex),
     log_ex = as.factor(log_ex),
@@ -47,7 +47,7 @@ str(df_fac)
 We can now see we only have columns that have the type `factor`. If we wanted to keep a version of the column that holds its original type, we could make new columns, as such: 
 
 ```{r}
-df_both = df %>% 
+df_both <- df %>% 
   dplyr::mutate(
     num_ex_fac = as.factor(num_ex),
     log_ex_fac = as.factor(log_ex),
@@ -69,9 +69,9 @@ If we have a variable that takes the form of a factor, we can change the order o
 Say we have a dataframe: 
 
 ```{r}
-group = sample(c("First", "Second", "Third", "Fourth"), 500, replace = TRUE)
-vals = rnorm(500, mean = 10, sd = 2)
-df = data.frame(group = as.factor(group), vals)
+group <- sample(c("First", "Second", "Third", "Fourth"), 500, replace = TRUE)
+vals <- rnorm(500, mean = 10, sd = 2)
+df <- data.frame(group = as.factor(group), vals)
 ```
 
 We can look at the levels of our factor (the `group` variable) with the function `levels()` from base R:
@@ -94,7 +94,7 @@ Now this is a nice plot, but it doesn't really make sense that on the x-axis, th
 
 ```{r}
 library(forcats)
-df$group = forcats::fct_relevel(
+df$group <- forcats::fct_relevel(
   df$group, levels = c("First", "Second", "Third", "Fourth")
   )
 # now we can use the base R function `levels()` to check if the order is what
@@ -120,9 +120,9 @@ The x-axis and the legend are now in a logical numeric order.
 Another common operation is deciding that we actually don't want a level of our factor to read the same way anymore, that is we want to replace it with something else. We may have a dataframe, with a factor column called `group`:
 
 ```{r}
-group = factor(sample(c("4", "5", "Six", "7"), size = 500, replace = TRUE))
-vals = rnorm(500, mean = 2, sd = 2.5)
-df = data.frame(group, vals)
+group <- factor(sample(c("4", "5", "Six", "7"), size = 500, replace = TRUE))
+vals <- rnorm(500, mean = 2, sd = 2.5)
+df <- data.frame(group, vals)
 # let's look at the levels of our `group` column
 levels(df$group)
 ```
@@ -131,7 +131,7 @@ We can see that for some reason here we have the "6" replaced by the written out
 To repalce this value in our column, we can use the `recode()` function from dplyr. It is most consistent to do this within a `mutate()`. 
 
 ```{r}
-df = df %>% 
+df <- df %>% 
   dplyr::mutate(
     group = recode(
       # first argument is the data object
@@ -147,7 +147,7 @@ levels(df$group)
 So this worked! However the order is still off because these are characters, so R can't tell that they're numbers that can be ordered. We could reorder the factor with our approach we took above:
 
 ```{r}
-df = df %>% 
+df <- df %>% 
   dplyr::mutate(
     group = forcats::fct_relevel(group, c("4", "5", "6", "7"))
   )
@@ -155,6 +155,34 @@ levels(df$group)
 ```
 
 The order is now correct. 
+
+### Releveling according to a position
+
+From here, we can imagine a scenario where we want to put a specific level in a particular position in the list. For example, let's say we have a new variable, `group2`, with values as follows:
+
+```{r}
+df$group2 <- factor(sample(c("first", "second", "last"), size = 500, 
+                    replace = TRUE))
+
+# show the levels
+levels(df$group2)
+```
+We may want the "last" level to be last in the order. We can do that with `fct_relevel` and the `after =` argument as follows:
+
+```{r}
+df <- df %>% 
+  dplyr::mutate(
+    # specifying which factor level we want ("last") and the position 
+    # (`after = `) will determine where the factor gets put. `after = Inf` puts
+    # that level at the end
+    group2 = forcats::fct_relevel(group2, "last", after = Inf)
+  )
+
+# double check
+levels(df$group2)
+```
+
+And this gives us the expected result. 
 
 ### Re-leveling According to a Function
 

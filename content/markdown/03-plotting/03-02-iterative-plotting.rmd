@@ -19,7 +19,7 @@ For our example, let's use the example from the (LINK) Intro to `ggplot2` sectio
 library(tidyverse)
 library(lterdatasampler)
 
-df = lterdatasampler::and_vertebrates
+df <- lterdatasampler::and_vertebrates
 
 names(df)
 ```
@@ -120,12 +120,103 @@ ggplot() +
 
 And now we can see where there really are many points. 
 
+## Variables by Group
 
+One of the most useful things to be able to do is group our points by either shape, fill, colour, or even size to show some difference betwen them. For example, in these data, we can see two very clearly different trends. 
 
+```{r}
+ggplot() +
+  geom_point(data = df, aes(x = length_1_mm, y = weight_g, fill = species),
+             # here's where we'll add our colour etc
+             colour = "black", shape = 21, alpha = 0.2, size = 2)+
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base()
+```
 
+So we can see our two main point colours plotted out nicely here. Although, there should be four colours and we can't really see them. Let's change our `alpha` to fix that: 
 
+```{r}
+ggplot() +
+  geom_point(data = df, aes(x = length_1_mm, y = weight_g, fill = species),
+             # here's where we'll add our colour etc
+             colour = "black", shape = 21, alpha = 0.4, size = 2)+
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base()
+```
 
+That's better. Looking at this plot, this brings up a few common tasks we might want to do from here. First of all, it's clear from this plot that the vast majority of these points are only from two species. We can see how the samples in our dataframe fall out with the simple `table()` function: 
 
+```{r}
+table(df$species)
+```
+
+So there are only 15 of the Cascade salamanders, and we know from our plot, at least a few NA's. Now the following decisions depend HIGHLY on what message one is trying to communicate with the plot, but we could imagine a scenario wherein perhaps it's actually important to have the Cascade salamander points be visible. But, it's clear from our plot, we may first want to get rid of NA's at least fo this plot. So let's do that via a `filter()` (LINK TO FILTERING AND SUBSETTING)
+
+```{r}
+df_filtered <- df %>% 
+  dplyr::filter(!is.na(species))
+head(df_filtered)
+```
+
+Okay, let's go ahead and make our plot again: 
+
+```{r}
+ggplot() +
+  geom_point(data = df_filtered, # using the new dataframe
+             aes(x = length_1_mm, y = weight_g, fill = species),
+             # here's where we'll add our colour etc
+             colour = "black", shape = 21, alpha = 0.4, size = 2)+
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base()
+```
+
+This looks better. Now perhaps one way we could make the Cascade salamander points stand out is by making them significantly larger in size. We can do that my scaling our size manually according to the levels of our grouping variable. **Note, that scaling, whether manually or otherwise, can be done for all grouping aesthetics such as fill, colour, alpha, etc. Further documentation on this topic can be found on the [ggplot2 website](https://ggplot2.tidyverse.org/reference/scale_manual.html)**
+
+```{r}
+ggplot() +
+  geom_point(data = df_filtered, # using the new dataframe
+             aes(x = length_1_mm, y = weight_g, fill = species, size = species),
+             # here's where we'll add our colour etc
+             colour = "black", shape = 21, alpha = 0.4)+
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base() +
+  scale_size_manual(values = c(4, 1, 1))
+  
+```
+
+Hmm. We can vaguely see in the bottom corner the points we want, but they're hard to see. Why is this? Well, the problem here can be identified as likely related to a problem of the data type. I suspect that `species` is not yet a factor, and that the order of the species will need to be changed. 
+
+```{r}
+class(df_filtered$species)
+```
+
+It is in fact a character. Let's change it to a factor:
+
+```{r}
+df_filtered$species <- as.factor(df_filtered$species)
+class(df_filtered$species)
+```
+So now that it's a factor, let's look at the levels of the factor: 
+```{r}
+levels(df_filtered$species)
+```
+And we'll try the plot again: 
+
+```{r}
+ggplot() +
+  geom_point(data = df_filtered, # using the new dataframe
+             aes(x = length_1_mm, y = weight_g, fill = species, size = species),
+             # here's where we'll add our colour etc
+             colour = "black", shape = 21, alpha = 0.4)+
+  labs(x = "Length (mm)", y = "Weight (g)") +
+   # note here we use `ggthemes::` to indicate which package we're using
+  ggthemes::theme_base() +
+  scale_size_manual(values = c(4, 1, 1))
+```
 
 
 

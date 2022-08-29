@@ -45,7 +45,7 @@ Summarize will make a new column or set of columns, that we can create with base
 So to group our dataframe and then use `summarize()` to get our mean and standard deviation for our measures of animal weight, we can pipe these commands together.  
 
 ```{r}
-mass_by_sex = bison %>% 
+mass_by_sex <- bison %>% 
   dplyr::group_by(animal_sex) %>% 
   dplyr::summarize(mean_mass = mean(animal_weight, na.rm = TRUE), 
                    std_dev = sd(animal_weight, na.rm = TRUE))
@@ -60,7 +60,7 @@ In theory, we can use `summarize()` grouped by as many variables as we want. To 
 So we will again use `group_by()` and `summarize()` to perform this task, but now grouping by both `animal_sex` and `rec_month`:
 
 ```{r}
-month_sex_weight = bison %>% 
+month_sex_weight <- bison %>% 
   dplyr::group_by(animal_sex, rec_month) %>% 
   dplyr::summarize(mean_mass = mean(animal_weight, na.rm = TRUE), 
                    std_dev = sd(animal_weight, na.rm = TRUE))

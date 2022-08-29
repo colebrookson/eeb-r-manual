@@ -35,7 +35,7 @@ By way of a quick example, we'll make a super quick and dirty scatterplot of som
 library(tidyverse)
 library(lterdatasampler)
 
-df = lterdatasampler::and_vertebrates
+df <- lterdatasampler::and_vertebrates
 
 names(df)
 ```

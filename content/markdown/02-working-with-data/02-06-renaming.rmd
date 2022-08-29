@@ -31,7 +31,7 @@ names(bison)
 
 The TidyR method of renaming is through the `rename()` function from the `dplyr` package. Let's remove the prefix "animal" from "animal_code". In this syntax, the new name comes first, the old name second. 
 ```{r}
-bison = bison %>% 
+bison <- bison %>% 
   dplyr::rename(code = animal_code)
 ```
 We double check with: 
@@ -44,7 +44,7 @@ And we see it worked.
 
 We can rename as many columns as we want. 
 ```{r}
-bison = bison %>% 
+bison <- bison %>% 
   dplyr::rename(
     sex = animal_sex,
     weight = animal_weight,
