@@ -34,14 +34,14 @@ Let's again plot a scatter plot of `length_1_mm` vs. `weight_g`. We'll start out
 
 ```{r}
 ggplot() +
-  geom_point(data = df, aes(x = length_1_mm, y = weight_g))
+  geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g))
 ```
 
 Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are *must-haves* to have a legible, complete plot. First step is the axis labels. So to iteratively work up our plot, we'll add that one component on, by using the new function `labs()`:
 
 ```{r}
 ggplot() +
-  geom_point(data = df, aes(x = length_1_mm, y = weight_g)) +
+  geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
   labs(x = "Length (mm)", y = "Weight (g)") 
 ```
 
@@ -49,7 +49,7 @@ OK good. Now, this is more aesthetic than anything, but we might want to change 
 
 ```{r}
 ggplot() +
-  geom_point(data = df, aes(x = length_1_mm, y = weight_g)) +
+  geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
   labs(x = "Length (mm)", y = "Weight (g)") +
   theme_classic()
 ```
@@ -65,7 +65,7 @@ Now, let's use the `theme_base()` option, which will give us a very classic look
 
 ```{r}
 ggplot() +
-  geom_point(data = df, aes(x = length_1_mm, y = weight_g)) +
+  geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
   labs(x = "Length (mm)", y = "Weight (g)") +
    # note here we use `ggthemes::` to indicate which package we're using
   ggthemes::theme_base()
@@ -81,7 +81,7 @@ Let's now add a colour to our points and change the shape we're using as well.
 
 ```{r}
 ggplot() +
-  geom_point(data = df, aes(x = length_1_mm, y = weight_g),
+  geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g),
              # here's where we'll add our colour etc
              colour = "red", shape = 21, size = 2) +
   labs(x = "Length (mm)", y = "Weight (g)") +
@@ -97,7 +97,7 @@ So notice we specified point # 21. This point has a dark outer circle and a fill
 
 ```{r}
 ggplot() +
-  geom_point(data = df, aes(x = length_1_mm, y = weight_g),
+  geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g),
              # here's where we'll add our colour etc
              colour = "black", fill = "red", shape = 21, size = 2) +
   labs(x = "Length (mm)", y = "Weight (g)") +
@@ -109,7 +109,8 @@ Okay, so this looks like maybe more along the lines of what we were expecting! O
 
 ```{r}
 ggplot() +
-  geom_point(data = df, aes(x = length_1_mm, y = weight_g),
+  geom_point(data = df, mapping = aes(x = length_1_mm, 
+                                      y = weight_g),
              # here's where we'll add our colour etc
              colour = "black", fill = "red", shape = 21, alpha = 0.2, size = 2)+
   labs(x = "Length (mm)", y = "Weight (g)") +
@@ -126,7 +127,8 @@ One of the most useful things to be able to do is group our points by either sha
 
 ```{r}
 ggplot() +
-  geom_point(data = df, aes(x = length_1_mm, y = weight_g, fill = species),
+  geom_point(data = df, mapping = aes(x = length_1_mm, 
+                                      y = weight_g, fill = species),
              # here's where we'll add our colour etc
              colour = "black", shape = 21, alpha = 0.2, size = 2)+
   labs(x = "Length (mm)", y = "Weight (g)") +
@@ -138,7 +140,8 @@ So we can see our two main point colours plotted out nicely here. Although, ther
 
 ```{r}
 ggplot() +
-  geom_point(data = df, aes(x = length_1_mm, y = weight_g, fill = species),
+  geom_point(data = df, mapping = aes(x = length_1_mm, 
+                                      y = weight_g, fill = species),
              # here's where we'll add our colour etc
              colour = "black", shape = 21, alpha = 0.4, size = 2)+
   labs(x = "Length (mm)", y = "Weight (g)") +
@@ -165,7 +168,7 @@ Okay, let's go ahead and make our plot again:
 ```{r}
 ggplot() +
   geom_point(data = df_filtered, # using the new dataframe
-             aes(x = length_1_mm, y = weight_g, fill = species),
+             mapping = aes(x = length_1_mm, y = weight_g, fill = species),
              # here's where we'll add our colour etc
              colour = "black", shape = 21, alpha = 0.4, size = 2)+
   labs(x = "Length (mm)", y = "Weight (g)") +
@@ -180,7 +183,8 @@ Since we see that the Cascade Torrent Salmander is first in our list of the lege
 ```{r}
 ggplot() +
   geom_point(data = df_filtered, # using the new dataframe
-             aes(x = length_1_mm, y = weight_g, fill = species, size = species),
+             mapping = aes(x = length_1_mm, y = weight_g, 
+                           fill = species, size = species),
              # here's where we'll add our colour etc
              colour = "black", shape = 21, alpha = 0.4)+
   labs(x = "Length (mm)", y = "Weight (g)") +
@@ -231,7 +235,8 @@ ggplot() +
                         levels = c("Cutthroat trout", 
                                    "Coastal giant salamander", 
                                    "Cascade torrent salamander"))),
-             aes(x = length_1_mm, y = weight_g, fill = species, size = species),
+             mapping = aes(x = length_1_mm, y = weight_g, 
+                           fill = species, size = species),
              # here's where we'll add our colour etc
              colour = "black", shape = 21, alpha = 0.4)+
   labs(x = "Length (mm)", y = "Weight (g)") +
@@ -250,7 +255,8 @@ ggplot() +
                         levels = c("Cutthroat trout", 
                                    "Coastal giant salamander", 
                                    "Cascade torrent salamander"))),
-             aes(x = length_1_mm, y = weight_g, fill = species, size = species),
+             mapping = aes(x = length_1_mm, y = weight_g, 
+                           fill = species, size = species),
              # here's where we'll add our colour etc
              colour = "black", shape = 21, alpha = 0.4)+
   labs(x = "Length (mm)", y = "Weight (g)") +
@@ -272,7 +278,8 @@ ggplot() +
                         levels = c("Cutthroat trout", 
                                    "Coastal giant salamander", 
                                    "Cascade torrent salamander"))),
-             aes(x = length_1_mm, y = weight_g, fill = species, size = species),
+             mapping = aes(x = length_1_mm, y = weight_g, 
+                           fill = species, size = species),
              # here's where we'll add our colour etc
              colour = "black", shape = 21, alpha = 0.8)+
   labs(x = "Length (mm)", y = "Weight (g)") +
