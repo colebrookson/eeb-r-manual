@@ -10,183 +10,65 @@ output:
 
 When choosing to plot anything to do with time, the time is almost always displayed on the x-axis. This makes sense as we typically read plots as we read English language text - left to right. Thus, we will always plot time as increasing from left to right on our plots. By FAR the most common way to plot change through time is to plot it as a line plot, optionally with points added in. Less common in EEB-type data (but still useful) are box plots and bar plots.
 
-Let's use an example of a change in temperature and precipitation from Toolik, Alaska, from 1998 to present day to illustrate how to make these plots. 
-
-```{r}
-library(tidyverse)
-library(lterdatasampler)
-
-df = lterdatasampler::arc_weather
-```
-
 ## Timeseries Plots (Line Plots)
 
 Line plots, also referred to as timeseries plots colloquially, are plots that have the focal variable of interest on the y-axis, and some time variable on the x-axis. To follow our (LINK TO ITERATIVE PLOTTING) iterative plotting method, we'll start one of these plots and build up.
 
-To start with just the most basic elements (data call, aesthetic mappings, and geom function), we can plot mean air temperature through time: 
+For this, we'll use our example with data on temperature in Alaska from 1988 to present. See the full tutorial here (LINK TO PLOTTING WITH MULTIPLE DATAFRAMES):
+
+### Just the Code: 
 
 ```{r}
-ggplot() + 
-  geom_line(data = df, 
-            mapping = aes(x = date, y = mean_airtemp))
-```
-
-Okay! Very ugly. Perhaps we can extract some more useful information out of this. But first, let's take care of the easy part and add in the mandatory components (labels, a theme) and then work on getting it more useful. 
-
-```{r}
-# load the library that has theme_base() in it
+library(tidyverse)
+library(lterdatasampler)
+library(lubridate)
 library(ggthemes)
 
-ggplot() + 
-  geom_line(data = df, 
-            mapping = aes(x = date, y = mean_airtemp)) +
-  # add in the theme
-  ggthemes::theme_base() +
-  # add labels +
-  labs(x = "Date", y = "Mean Air Temp (C)")
-```
+df = lterdatasampler::arc_weather
 
-So we can see there's a consistent oscilating pattern (which definitely makes sense), but it's still hard to pull out any interesting patterns. What if we plotted instead of just these raw values, the monthly mean for each month in our dataframe. This brings up some handy data manipulation tasks as well. 
-
-## Prepping the Data
-
-So to do this, there are a number of approaches we could take. I will choose to perform this task by making a new, separate dataframe with the monthly mean information as this will make life much easier. 
-
-The first step is to extract the month and year as separate columns (LINK TO DATES PIECE):
-
-```{r}
+# make sub-groups for the dates
 df = df %>% 
   dplyr::rowwise() %>% 
   dplyr::mutate(
     month = lubridate::month(date),
     year = lubridate::year(date)
   )
-df
-```
-
-Now we need to create a new dataframe that has only the `mean_airtemp`, the `month`, and `year`:
-
-```{r}
+# make separate dataframe for monthly measurements
 df_monthly = df %>% 
-  dplyr::select(year, month, mean_airtemp)
-```
-
-Now, we'll use our `group_by()` and `summarize()` pair to get mean average monthly air temperatures:
-
-```{r}
-df_monthly = df_monthly %>% 
+  dplyr::select(year, month, mean_airtemp) %>% 
   dplyr::group_by(year, month) %>% 
   dplyr::summarize(
     month_airtemp = mean(mean_airtemp, na.rm = TRUE)
-  )
-df_monthly
-```
-
-Great, this is exactly what we wanted. Now, to make our plotting easier, it would be best if we were asking `ggplot` to put the same data type on the x-axis, that is, two `date` values. So, what we'll do here, is inpute a day of the month, and convert our month and year columns into a date. 
-
-Since we are working with monthly means, let's say for simplicity sake we actually just want each faux "day" to be the 15th since that's around the middle of each month: 
-
-```{r}
-df_monthly = df_monthly %>% 
+  ) %>% 
+  # assume all days are the 15th of the month
   dplyr::mutate(
     day = 15
-  )
-df_monthly
-```
-
-Great! And now we convert into a single date column: 
-
-```{r}
-df_monthly = df_monthly %>% 
-  dplyr::rowwise() %>% 
+  ) %>% 
+  # make single date
   dplyr::mutate(
     date = lubridate::make_date(year, month, day)
   )
-df_monthly
-```
 
-Perfect. Now back to plotting. 
-
-## Plotting with Two Dataframes
-
-The easiest way to go about this, since we're plotting a variable called `date` from two dataframes is to use two separate calls to geom_line, one for each dataframe, and that will allow us to show both the ones we're interested in (the monthly and daily values):
-
-```{r}
-ggplot() + 
-  # first geom_line() for the monthly values
-  geom_line(data = df_monthly, mapping = aes(x = date, y = month_airtemp)) +
-  ggthemes::theme_base() +
-  labs(x = "Date", y = "Monthly Air Temperature (C)")
-```
-
-Okay, let's add our second `geom_line()` call. We'll make our monthly values red and our daily values can be black:
-
-```{r}
-ggplot() + 
-  # first geom_line() for the monthly values
-  geom_line(data = df_monthly, mapping = aes(x = date, y = month_airtemp),
-            colour = "red") +
-  # second geom_line() for the daily values
-  geom_line(data = df, mapping = aes(x = date, y = mean_airtemp)) +
-  ggthemes::theme_base() +
-  labs(x = "Date", y = "Monthly Air Temperature (C)")
-```
-
-Well that's weird, we can't see anything! How come? Well, likely because the black lines of the daily temperatures are significantly more data-rich, and in our plotting, we placed our monthly `geom_line()` first, which means it will be plotted first, and then the thick black line will go on top. Let's reverse them and see if that helps: 
-
-```{r}
 ggplot() + 
   # switched order - daily first 
-  geom_line(data = df, mapping = aes(x = date, y = mean_airtemp)) +
+  geom_point(data = df, mapping = aes(x = date, y = mean_airtemp,
+                                      colour = "lightblue"), shape = 16,  
+                                      alpha = 0.5) +
   # monthly second
-  geom_line(data = df_monthly, mapping = aes(x = date, y = month_airtemp),
-            colour = "red") +
+  geom_line(data = df_monthly, mapping = aes(x = date, y = month_airtemp,
+                                             colour = "black")) +
   ggthemes::theme_base() +
-  labs(x = "Date", y = "Monthly Air Temperature (C)")
-
+  labs(x = "Date", y = "Monthly Air Temperature (C)") +
+  guides(
+    colour = guide_legend()
+  ) +
+  # add in colour scale
+  scale_colour_identity(guide = "legend",
+                        name = "Measurement", # the title of the legend
+                        breaks = c("black", "lightblue"), # the colours
+                        labels = c("Monthly Mean", "Daily Mean") # legend labels
+                        )
 ```
-That's better! Still not super cute though. **NOTE: It is often hard to make two sets of timeseries following the same pattern look good. My recommendation here would be turn one (likely the daily measurements) into points, and keep the trend line. So let's try that, we'll make the points somewhat transparent, and keep them relatively small:
-
-```{r}
-ggplot() + 
-  # switched order - daily first 
-  geom_point(data = df, mapping = aes(x = date, y = mean_airtemp),
-             shape = 16, colour = "lightblue", alpha = 0.3) +
-  # monthly second
-  geom_line(data = df_monthly, mapping = aes(x = date, y = month_airtemp),
-            colour = "red") +
-  ggthemes::theme_base() +
-  labs(x = "Date", y = "Monthly Air Temperature (C)")
-```
-
-That's somewhat better. The transparency might be a bit too much, so we can change that, also let's change the main line colour to black: 
-
-```{r}
-ggplot() + 
-  # switched order - daily first 
-  geom_point(data = df, mapping = aes(x = date, y = mean_airtemp),
-             shape = 16, colour = "lightblue", alpha = 0.5) +
-  # monthly second
-  geom_line(data = df_monthly, mapping = aes(x = date, y = month_airtemp),
-            colour = "black") +
-  ggthemes::theme_base() +
-  labs(x = "Date", y = "Monthly Air Temperature (C)")
-```
-
-I think that's much more legible. And there we have it! A complete timeseries plot. Something is missing though ... a legend. Why wasn't one generated for us? Well, we used two separate dataframes here, and at no point did we make any differentiation between size/colour/shape etc, within the `aes()` calls. Only if we do that (e.g. we plotted two different lines from the same df and coloured them via some grouping variable) would R know we wanted a legend. Now we could just explain what the difference between the line and the points are either verbally during presentation or in text in a figure caption, but it is always true that having a legend is the easiest way to show people reading what they are looking at. 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
