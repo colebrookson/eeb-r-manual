@@ -20,6 +20,8 @@ For this, we'll use our example with data on temperature in Alaska from 1988 to 
 
 ```{r}
 library(tidyverse)
+# add in an option to keep dplyr quiet
+options(dplyr.summarise.inform = FALSE)
 library(lterdatasampler)
 library(lubridate)
 library(ggthemes)
@@ -69,6 +71,8 @@ ggplot() +
                         labels = c("Monthly Mean", "Daily Mean") # legend labels
                         )
 ```
+
+## Box Plot
 
 
 

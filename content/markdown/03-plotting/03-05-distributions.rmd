@@ -1,0 +1,16 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Plotting Distributions of Data
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+## Bar Plot
+
+## Histogram
+
+## Violin Plot
+
+
