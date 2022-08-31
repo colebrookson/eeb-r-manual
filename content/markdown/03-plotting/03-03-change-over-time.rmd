@@ -74,5 +74,50 @@ ggplot() +
 
 ## Box Plot
 
+Box plots are a helpful form of plot to show how data might change through time by summarizing the distribution of said data in some binned form. To use the above example regarding data on temperature, we could use a box plot to compare how the distribution of the daily temperature measurements change through the months. 
+
+As a reminder, here's how to interpret the various components of a boxplot:
+
+![box plot interpretation. credit: Michael Galarnyk](./img/boxplot.jpg)
+
+For this, we'll use our example with data on stream chemistry over time. See the full tutorial here (LINK TO PLOTTING WITH FACETING):
+
+### Just the Code
+
+```{r}
+library(tidyverse)
+library(lterdatasampler)
+library(lubridate)
+
+df <- lterdatasampler::luq_streamchem %>% 
+   # remove columns we don't need
+  dplyr::select(sample_date, na, k) %>% 
+  tidyr::pivot_longer(
+    # specify which columns to join together
+    cols = c(na, k),
+    # specify what the new name of the grouping variable will be
+    names_to = "element"
+  ) %>% 
+  dplyr::mutate(
+    year = lubridate::year(sample_date),
+    month = lubridate::month(sample_date)
+  )
+
+ggplot() + 
+  geom_boxplot(data = df, mapping = aes(x = year, y = value,
+                                             fill = element)) + 
+  labs(x = "Year", y = "Amount of Element (mg/L)") +
+  ggthemes::theme_base() +
+  facet_wrap(~element,
+             # I want this to be one column with two rows
+             ncol = 1,
+             scales = "free",
+             labeller = as_labeller(c(`k` = "Potassium (K)",
+                                 `na` = "Sodium (Na)"))) +
+    scale_fill_manual("Element", 
+                      values = c("#90ee90", "#F8E473"),
+                      labels = c("Potassium (K)", "Sodium (Na)"))
+```
+
 
 
