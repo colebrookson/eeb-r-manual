@@ -3,12 +3,11 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Plotting Relationships Between Variables
+# Plotting A Comparison of A Part to the Whole
 **Author:** Cole Brookson
 **Date:** 20 July 2022
 
-## Scatterplot
+## Stacked Bar Plot
 
-## Heatmap
-
+## Stacked Area Plot
 

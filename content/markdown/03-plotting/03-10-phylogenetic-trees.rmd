@@ -1,0 +1,14 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Plotting Phylogenetic Trees
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+## Phylogenetic Trees
+
+## Phylo Trees Combined With Another Plot
+
+## Circular Phylo Trees
