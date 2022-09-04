@@ -1,0 +1,11 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Introduction to Basic Statistics
+**Author:** Cole Brookson
+**Date:** 29 August 2022
+
+The goal of this section is to provide students with a central resource to refer to with their programming/statistics questions as far as they relate to their undergraduate courses in the EEB department at UofT. To this end, this section is meant to help students become more familiar and comfortable with simple statistical tests and also with more complex statistical models. Hopefully this set of resources acts to help students develop an *intuitive understanding* of the material, and not just simply memorize the content. 
+
