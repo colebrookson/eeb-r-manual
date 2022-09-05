@@ -11,7 +11,9 @@ Sampling refers to the drawing of a subset of data points from some larger set (
 
 ## Common Distributions
 
-Before we go any further, let's remind ourselves of the shapes and names of some of the common distributions that we'll want to have fresh in our minds for this section. 
+Before we go any further, let's remind ourselves of the shapes and names of some of the common distributions that we'll want to have fresh in our minds for this section. As another reminder, we need to be concious as to whether we're dealing with a *continuous* distribution or a *discrete* distribution. Here's a visual to remind us of this: 
+
+![distributions. credit: Ashkay Sharma](img/distributions.png)
 
 ## Random vs. Pseudorandom
 
@@ -62,4 +64,92 @@ We see these are completely different sets of numbers!
 
 There are many situations where we might need to be able to re-run a set of random numbers and have them be the same values (e.g. debugging code, simulation studies, etc.). Well, if we recall that we actually are doing is using a *pseudorandom* number generator (PRNG), then we can use the concepts of **seeds** to help us. Whenever using a PRNG we need to "set a seed" which initializes the PRNG. The details of this aren't important here, but know that if we have a seed, we can predict what the PRNG will draw as pseudorandom numbers. Let's make an example. 
 
-Say we want to draw 100 samples from a 
+Say we want to draw 100 samples from a uniform (discrete) distribution. As a reminder, a uniform distribution with bounds at 0 and 10 looks like this: 
+
+```{r, echo = FALSE}
+hist(runif(10000000, min = 0, max = 10),
+     ylab = "", xlab = "",
+     main = "")
+```
+
+We'll explore the use of seeds by drawing 100 random samples from a uniform distribution with bounds at 0 and 10. We start by setting a seed and drawing our samples:
+
+```{r}
+# start by setting a seed
+set.seed(1)
+x <- runif(n = 100, min = 0, max = 10)
+```
+
+Now let's draw a new set of values: 
+
+```{r}
+y <- runif(n = 100, min = 0, max = 10)
+```
+
+We can see if these values are the same by using a boolean comparison: 
+
+```{r}
+all(x == y)
+```
+
+So the values drawn are NOT the same. But what happens if we re-employ the seed that we set previously? 
+
+```{r}
+set.seed(1)
+z <- runif(n = 100, min = 0, max = 10)
+```
+
+Let's check if they're equivalent: 
+
+```{r}
+all(x == z)
+```
+
+So now we get a true! This is good to know! This means we can draw random samples in a *reproducible* manner, which can be incredibly useful. 
+
+## Sampling Distributions
+
+A sampling distribution refers to the probability distribution of a particular statisitc that we might get from a random sample. To think about this we'll employ an example. 
+
+### Sampling Distribution of Anolis Lizard Size
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
