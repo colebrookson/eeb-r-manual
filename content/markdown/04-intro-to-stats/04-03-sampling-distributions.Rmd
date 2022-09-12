@@ -109,10 +109,18 @@ So now we get a true! This is good to know! This means we can draw random sample
 
 ## Sampling Distributions
 
-A sampling distribution refers to the probability distribution of a particular statisitc that we might get from a random sample. To think about this we'll employ an example. 
+A sampling distribution refers to the probability distribution of a particular statistic that we might get from a random sample. To think about this we'll employ an example. 
 
 ### Sampling Distribution of Anolis Lizard Size
 
+Anolis lizards (a genus of anoles) are a specious type of lizard that are widespread in the warmer parts of the Americas. They have a relatively wide size range, and we'll think about sampling distributions by *pretending* that we know the size of every single Anolis lizard in the worldwide population. Imagine the shape of that distribution looks like this: 
+
+```{r}
+x <- rnbinom(10000, 60, 0.8)
+hist(x)
+```
+
+So the distribution is 
 
 
 
