@@ -6,3 +6,76 @@ output:
 # Probability 
 **Author:** Cole Brookson
 **Date:** 29 August 2022
+
+## An Introduction (And Disclaimer...)
+
+There are many excellent texts on probability and probability theory. There are numerous courses in several departments at the University of Toronto, and indeed pretty much any university, that can offer you the student a truly grounded view of what probability is and how to think about it. Indeed, probability itself can be interpreted in multiple ways, and multiple theories about foundational probability and how to interpret it exist. Most of the concepts in this section are unabashedly stolen from the **excellent** (and free!) text on probability by Blitzstein and Hwang which you can find [here](http://probabilitybook.net/). This, however, is a short website page, within which we attempt to discuss some foundational components of probability that we think are important for students in EEB to know. 
+
+There's many reasons why we should study probability, but perhaps most simply, the biological world around us is full of randomness, and even in the processes we think we understand the best, uncertainty is abound. Without an understanding of probability, we don't have a framework with which to confront of understanding or lack thereof, and actually enable a robust discussion about *how much* randomness we actually understand, and how *certain* we are about things we think. 
+
+In this section we'll offer some definitions that will be useful to you in more formally discussing probability. 
+
+
+**Key Terms:**
+
+1. Random Trials/Experiment
+2. Events
+3. Outcomes
+4. Probability (Naive)
+5. Sample Space
+
+## Sample Spaces, Events, and Naive Probability
+
+Probability is based on the mathematical concept of sets, from which we'll steal some jargon. Let's imagine an example to ground this. 
+
+Say there are 1000 spiders in a bag. One of those spiders happens to have a red dot on their thorax. You pull a single spider out of that bag, without looking. You could have either pulled A) a spider with no red dot, or B) the spider with the red dot. What is the *probability* that you have selected the spider with the red dot? 
+
+Above we've actually used all the key terms above in description. First, we've actually defined the *sample space* (the set of all possible outcomes of an experiment/trial) as being finite - the number of spiders in the bag. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and *all* the applications we'll consider, have finite sample spaces. That is to say, we can construct a *set* containing every single *outcome* of an *experiment or random trial*. In this example, each spider represents an *outcome*, and an *event* is some set of spiders. **Side note:** sets can have one or even *no* items in them. The *events* are what we would mathematically consider *subsets* of the *sample space*. So here we have two *events* of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
+
+Here, we have a naive version of a probability, wherein we can actually just define the probability of choosing the spider with the red dot as a simple proportion. To state this clearly, the probability of performing the experiment, and the B) being the outcome can be defined as: 
+
+$$P(\text{B}) = \frac{\text{number of outcomes favourable to B}}{\text{Total number of outcomes in the sample space }\textit{S}}$$
+which specifically means: 
+
+$$P(\text{B}) = \frac{\text{number of spiders with red dots}}{\text{total number of spiders in }\textit{S}}$$
+
+Or
+
+$$P(\text{B}) = \frac{1}{1000}$$
+$$P(\text{B}) = 0.001$$
+
+Now, to add more conditions, we're assuming here that when we put our hand into the bag to select a spider, there are absolutely **no** defining features that make one spider more or less likely to be chosen. However, there is a case where some spiders are bigger, or perhaps less afraid of the hand coming into the bag, and these traits may make some spiders more or less likely to be chosen. 
+
+This is easy enough to replicate in R, as it's simply a division calculation: 
+
+```{r}
+size_b = 1
+size_sample_space = 1000
+prob_b = size_b / size_sample_space
+
+# show the result
+prob_b
+```
+
+### Two Events
+
+For now, let's just consider that there are only two events we're interested in, *A* and *B*. The outcome of *A* is selecting a spider with no red dot, and the outcome of *B* is selecting a spider with a red dot. To make things more interesting, now let's assume there are 234 spiders with red dots (and therefore 766 without red dots). 
+
+**SIDE BOX:** Quickly, let's define two (only two!) operations from set theory to help us out. We'll define the sample space *S* as a set, and our two events as subsets *A* and *B* of *S*. We can think of the part of *S* encapsulated by both subset *A* and subset *B* as being the *intersection* of *A* and *B*, and we can separately think about the part of the sample space *S* that is encapsulated by either *A* or *B* as the *union* of *A* and *B*. We write the intersection of *A* and *B* as $A \cap B$ and the union of *A* and *B* as $A \cup B$. Refer to this image for a visual idea of this: 
+
+![](img/sets.png)
+
+What we have defined here are two *mutually exclusive* events. With only one experiment, the outcome cannot satisfy both events. Formally, we say that the probability of both *A* and *B* is zero: 
+
+$$P(\text{A })
+
+### Naive Vs. Standard Probability
+
+The reason to differentiate between these two definitions is one of caution. We defined above the naive probability, which has two incredibly important assumptions: 
+
+1. The sample space is finite
+
+2. Each outcome is equally likely
+
+This clearly serves us well for our current example, and in fact from here on we will refer to the naive probability simply as *probability*, but it's useful to recognize that as soon as we care to make more interesting conditions surrounding our sample space, we must adjust our definition of probability (we won't cover that here).
+
