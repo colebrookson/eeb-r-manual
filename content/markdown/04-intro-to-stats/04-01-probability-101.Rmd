@@ -56,18 +56,29 @@ prob_b = size_b / size_sample_space
 # show the result
 prob_b
 ```
-
-### Two Events
-
-For now, let's just consider that there are only two events we're interested in, *A* and *B*. The outcome of *A* is selecting a spider with no red dot, and the outcome of *B* is selecting a spider with a red dot. To make things more interesting, now let's assume there are 234 spiders with red dots (and therefore 766 without red dots). 
-
 **SIDE BOX:** Quickly, let's define two (only two!) operations from set theory to help us out. We'll define the sample space *S* as a set, and our two events as subsets *A* and *B* of *S*. We can think of the part of *S* encapsulated by both subset *A* and subset *B* as being the *intersection* of *A* and *B*, and we can separately think about the part of the sample space *S* that is encapsulated by either *A* or *B* as the *union* of *A* and *B*. We write the intersection of *A* and *B* as $A \cap B$ and the union of *A* and *B* as $A \cup B$. Refer to this image for a visual idea of this: 
 
 ![](img/sets.png)
 
+
+### Two Events
+
+For now, let's just consider that there are only two events we're interested in, *A* and *B*. The outcome of *A* is selecting a spider with no red dot, and the outcome of *B* is selecting a spider with a red dot. To make things more interesting, now let's assume there are 234 spiders with red dots (and therefore 766 without red dots). We can visualize this by imagining peeking inside our bag of spiders and seeing something like the following: 
+
+![](img/spiders.png)
+If we imagine all the spiders present as the set *S* defining the sample space, it's possible to coarsely replicate the Venn diagram above to make an estimate of what the probabilities of both the union and the intersection might be: 
+
+![spiders](img/spiders-union.png)
+
+We can now see clearly that *all* of the spiders (i.e. all of *S*) is contained within the two event subsets *A* and *B*. Further, there are actually no spiders that fall within both subsets. 
+
 What we have defined here are two *mutually exclusive* events. With only one experiment, the outcome cannot satisfy both events. Formally, we say that the probability of both *A* and *B* is zero: 
 
-$$P(\text{A })
+$$P(\text{A} \cap \text{B}) = 0$$
+
+But also, since there are are no spiders that fall outside of *A* or *B*, the probability of either one event OR the other occurring with one experiment is actually 1:
+
+$$P(\text{A} \cup \text{B}) = 0$$
 
 ### Naive Vs. Standard Probability
 
@@ -78,4 +89,106 @@ The reason to differentiate between these two definitions is one of caution. We 
 2. Each outcome is equally likely
 
 This clearly serves us well for our current example, and in fact from here on we will refer to the naive probability simply as *probability*, but it's useful to recognize that as soon as we care to make more interesting conditions surrounding our sample space, we must adjust our definition of probability (we won't cover that here).
+
+## Probability Distributions
+
+Our above example was primarily focused on an example where two possible events covered the entire sample space. A commonly used example in the same vein would be flipping a coin - there are only two possibly outcomes: heads or tails. However, this is usually not the case. While it's possible we may only be interested in a handful of the events possible, it's rare that those encompass the entire sample space.
+
+To think about the probability of a variety of events occurring, we can differentiate between *discrete* probabilities and *continuous* probabilities. 
+
+### Discrete Probability Distributions
+
+As the name implies, discrete probability distributions are distributions that describe the probabilities of each possible event in the sample space. For example, let's consider the basic building blocks of DNA, the nucleotide bases adenine (A), cytosine (C), guanine (G) and thymine (T). Imagine we were able to "zoom in" on some random part of our own DNA, we would see something like this: 
+
+![](img/nucleotide.jpg)
+
+If we zoom in on a single base, we can only "see" one of A, C, G, or T. So, our sample space *S* is made up of the four *mutually exclusive* events, which is seeing either A, C, G, or T. If we assume that bases are distributed with even frequency, we can imagine that the probability of each would be the same: 
+
+$$P(\text{A}) = 0.25$$
+$$P(\text{C}) = 0.25$$
+$$P(\text{G}) = 0.25$$
+$$P(\text{T}) = 0.25$$
+which would result in a probability distribution that may look like this: 
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+
+df <- data.frame(
+  base = c("A", "C", "G", "T"),
+  prob = 0.25
+)
+
+ggplot(data = df) + 
+  geom_col(aes(x = base, y = prob, fill = base)) +
+  ggthemes::theme_base() + 
+  labs(x = "Nucleotide Base", y = "Probability") + 
+  ylim(c(0,1))
+```
+
+This is intuitive. However, research has shown (i.e. [Louie et al. 2003](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC403801/)) that nucleotide frequency is *not* uniform across human genes. So given some particular gene, it may be the case that we see a non-uniform probability distribution, but one that looks like this: 
+
+```{r}
+df <- data.frame(
+  base = c("A", "C", "G", "T"),
+  prob = c(0.1, 0.2, 0.45, 0.25)
+)
+
+ggplot(data = df) + 
+  geom_col(aes(x = base, y = prob, fill = base)) +
+  ggthemes::theme_base() + 
+  labs(x = "Nucleotide Base", y = "Probability") + 
+  ylim(c(0,1))
+```
+
+### Sampling Discrete Probability Distributions
+
+As a fun little game, let's build a gene. There approximately 1000 nucleotide pairs of coding sequence per gene according to google, and let's imagine that the gene we're building has a probability distribution of nucleotides that is given above, where the probabilities of each base appearing given a random sample are: 0.1, 0.2, 0.45, and 0.25 respectively for A, C, G, and T. 
+
+Using R's functionality, let's sample a variable number times from our weighted set, and see if the distribution we get from our sample matches the theoretical probabilities. We'll sample 20, 100, 1000, and 10,000 times. The Law of Large Numbers (LINK TO WHEREVER I END UP PUTTING THIS) indicates that the more samples we take, the closer we'll get to our theoretical probabilities. Let's try!
+
+To do this, we'll use R's `sample()` function from the base package, and alter only the `size` argument which says how many times to sample.
+
+```{r}
+set.seed(1234)
+sample_20 <- sample(c("A", "C", "G", "T"), 
+                    size = 20,
+                    replace = TRUE,
+                    prob = c(0.1, 0.2, 0.45, 0.25))
+sample_100 <- sample(c("A", "C", "G", "T"), 
+                    size = 100,
+                    replace = TRUE,
+                    prob = c(0.1, 0.2, 0.45, 0.25))
+sample_1000 <- sample(c("A", "C", "G", "T"), 
+                    size = 1000,
+                    replace = TRUE,
+                    prob = c(0.1, 0.2, 0.45, 0.25))
+sample_10000 <- sample(c("A", "C", "G", "T"), 
+                    size = 10000,
+                    replace = TRUE,
+                    prob = c(0.1, 0.2, 0.45, 0.25))
+```
+
+Now let's take these vectors and turn them into dataframes so we can plot them: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
