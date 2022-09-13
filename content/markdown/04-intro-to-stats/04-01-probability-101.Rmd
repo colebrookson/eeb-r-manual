@@ -174,7 +174,7 @@ Now let's take these vectors and turn them into dataframes so we can plot them. 
 ```{r}
 library(dplyr)
 
-df_20 = data.frame(
+df_20 <- data.frame(
   # use table()
   table(sample_20)
   ) %>% 
@@ -191,9 +191,7 @@ df_20 = data.frame(
     prob = prob/20
   )
   
-
-
-df_100 = data.frame(
+df_100 <- data.frame(
   # use table()
   table(sample_100)
   ) %>% 
@@ -210,7 +208,7 @@ df_100 = data.frame(
     prob = prob/100
   )
 
-df_1000 = data.frame(
+df_1000 <- data.frame(
   # use table()
   table(sample_1000)
   ) %>% 
@@ -227,7 +225,7 @@ df_1000 = data.frame(
     prob = prob/1000
   )
 
-df_10000 = data.frame(
+df_10000 <- data.frame(
   # use table()
   table(sample_10000)
   ) %>% 
@@ -245,21 +243,40 @@ df_10000 = data.frame(
   )
 ```
 
-Now we'll combine all these data frames into one, and plot the result with a grouped bar chart: 
+Now we'll combine all these data frames into one, add a reference of the real values, and plot the result with a grouped bar chart: 
 
 ```{r}
+library(ggpattern)
+
 # join samples up 
-df_all_samples = rbind(
+df_all_samples <- rbind(
   df_20,
   df_100,
   df_1000,
   df_10000
+) %>% 
+  # add in a column to denote these are sampled not theoretical
+  dplyr::mutate(
+    type = "sampled"
+  )
+
+df_real <- data.frame(
+  base = c("A", "C", "G", "T"),
+  prob = c(0.1, 0.2, 0.45, 0.25),
+  sample = Inf,
+  type = "theoretical"
+)
+
+# join the dataframes again
+df_all <- rbind(
+  df_all_samples,
+  df_real
 )
 
 # plot the result 
 ggplot() + 
-  geom_bar(data = df_all_samples, 
-           mapping = aes(x = base, y = prob, fill = sample),
+  geom_bar_pattern(data = df_all_samples, 
+           mapping = aes(x = base, y = prob, fill = sample, pattern = type),
            position = "dodge", stat = "identity")
 ```
 
