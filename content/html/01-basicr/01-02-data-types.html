@@ -1,6 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
 <title>The R File Ecosystem</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -85,16 +147,20 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
         <p>
             When we assign variables, it is important to know what type we are using. We can check what the <code>type</code> of an object, and get other useful information about it, with a number of useful commands: 
         </p>
-        <!--begin.rcode 
-          x <- "abc"
-          typeof(x)
-          end.rcode-->
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;abc&quot;</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(x)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;character&quot;
+</pre></div>
+</div></div>
         <p>
             If we want a more detailed answer we can ask what the structure (<code>str()</code>) of an object is
         </p>
-        <!--begin.rcode 
-          str(x)
-          end.rcode-->
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">str</span><span class="hl std">(x)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  chr &quot;abc&quot;
+</pre></div>
+</div></div>
         <p>
             We see the output is slightly different here, with the function telling us the type of the object (<code>chr</code>) and also the content of the object (<code>"abc"</code>). 
         </p>
@@ -103,22 +169,29 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             <p>
                 A character is any alphanumeric string that begins with a letter. 
             </p>
-            <!--begin.rcode 
-              x <- "abc"
-              y <- "abc123"
-              typeof(x)
-              typeof(y) 
-              end.rcode-->
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;abc&quot;</span>
+  <span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;abc123&quot;</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(x)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;character&quot;
+</pre></div>
+<div class="source"><pre class="knitr r">  <span class="hl kwd">typeof</span><span class="hl std">(y)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;character&quot;
+</pre></div>
+</div></div>
         </section>
         <section id="data-types--numerics">
             <h3>Numerics</h3>
             <p>
                 A numeric type is any non-integer number.  
             </p>
-            <!--begin.rcode 
-              z <- 3.14
-              typeof(z)
-              end.rcode-->
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">z</span> <span class="hl kwb">&lt;-</span> <span class="hl num">3.14</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(z)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;double&quot;
+</pre></div>
+</div></div>
             <p>
                 The output <code>"double"</code>" here refers to the fact that R automatically stores numeric data types with "double" precision.   
             </p>
@@ -128,27 +201,33 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             <p>
                 An integer is a non-decimal whole number. <strong>Note:</strong> In R, the default is to store values as numeric unless explicitly told otherwise. We can see that if we make a new variable with only an integer value R will store it as a numeric type. 
             </p>
-            <!--begin.rcode 
-              x1 <- 2
-              typeof(x1)
-              end.rcode-->
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x1</span> <span class="hl kwb">&lt;-</span> <span class="hl num">2</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(x1)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;double&quot;
+</pre></div>
+</div></div>
             <p>
                 To force R to store it as an integer we can simply add an <code>L</code> after the value.  
             </p>
-            <!--begin.rcode 
-              x2 <- 2L
-              typeof(x2)
-              end.rcode-->
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x2</span> <span class="hl kwb">&lt;-</span> <span class="hl num">2L</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(x2)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;integer&quot;
+</pre></div>
+</div></div>
         </section>
         <section id="data-types--logicals">
             <h3>Logicals</h3>
             <p>
                 Logical types are simply TRUE or FALSE. 
             </p>
-            <!--begin.rcode 
-              x3 <- TRUE
-              typeof(x3)
-              end.rcode-->
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x3</span> <span class="hl kwb">&lt;-</span> <span class="hl num">TRUE</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(x3)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;logical&quot;
+</pre></div>
+</div></div>
         </section>
       </section>
     </div>
@@ -166,7 +245,8 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
     When using this resource, <bold>always</bold> default to instructions and 
     guidance provided by your instructor. 
     <br>
-    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+    This content is reviewed regularly for errors and to make improvements, but 
+    no assurances can be made that any material presented here is 100% accurate.
 </p>
 </div>
 

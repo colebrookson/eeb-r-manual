@@ -42,9 +42,6 @@ We can ask R to make comparisons between values and give us a boolean (true or f
 
 We can ask R if two values are equal `==`, inequal `!=`, greater than `>`, less than `<`, greater than *or equal to* `>=`, or less than *or equal to* `<=`. Some examples:
 
-```
-
-```
 ```{r}
 2 == 2
 2 != 3
@@ -62,7 +59,7 @@ We can also ask R if two things are true at the same time using the ampersand `&
 We can also chain these operations together, but the order in which we write this out matters. Computers follow order of operations rules just like in math, so we need to think back to BEDMAS (Brackets, Exponents, Division, Multiplication, Addition, Subtraction) from grade school math class! 
 
 **Exercise** Mentally work through what answer (`TRUE` or `FALSE`) R will output when you run this code, then check the answer to see if you were right!
-```{r}
+```{r, echo=FALSE}
 (2 == 2) & (2 == 3 | 3 == 3)
 ```
 

@@ -69,10 +69,10 @@
 <link rel="stylesheet" href="../css/stylesheet.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 <link rel="stylesheet"
-      href="highlight/styles/default.min.css">
-<script src="highlight/highlight.js"></script>
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
 <script>hljs.highlightAll();</script>
- <script src="../functions.js"></script> 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
@@ -80,7 +80,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </head>
 <body class="w3-round-large">
 
-<main>
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
 <!-- Sidebar (hidden by default) -->
 <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
 style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
@@ -91,66 +102,126 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   class="w3-bar-item w3-button">Contact</a>
 </nav>
 
-<!-- Top menu -->
-<div class="w3-top">
-    <div class="w3-navy w3-xlarge" 
-    style="max-width:1300px;margin:auto;border:1px w3-gray"
-    border:1px>
-      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-      <div class="w3-right w3-padding-16">EEB  .</div>
-      <div class="w3-center w3-padding-16">The R Manual</div>
-    </div>
-</div>
-
-<!-- TOC -->
-<nav class="section-nav" style="max-width:800px;margin-top:100px">
-    <ol>
-        <a href="#introduction"><code>.R</code></a>
-        <li><a href="#request-response">Request &amp; Response</a>
-        <li><a href="#authentication">Authentication</a></li>
-    …
-        <li class=""><a href="#filters">Filters</a></li>
-    </ol>
-</nav>
-
-Fundamentally, our goal in using R is to ask our computer to help us answer the biological domain questions we have. In order for R to be useful to us in this sense, we have to know *how* to ask our computer to do these things. It is easiest to think of R as simply a interface between us and our computers. However, we must remember that *computers are not intelligent, they will only do EXACTLY what we tell them to do*. Therefore, we need to be specific about how we ask our computer to do things in service of answering our biological questions. This section covers some important concepts that will govern how we ask R to do things for us. 
-
-<section id=".R">
-    <h2><code>.R</code></h2>
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#calculator">R as a Calculator</a>
+            <ul>
+              <li class=""><a href="#calculator--modulo">Modulo Operations</a></li>
+              <li class=""><a href="#calculator--integer">Integer Division</a></li>
+            </ul>
+          </li>
+          <li><a href="#boolean">Boolean Operations</a></li>
+        </ol>
+      </nav>
+    <div>
+        <p>
+            Fundamentally, our goal in using R is to ask our computer to help us answer the biological domain questions we have. In order for R to be useful to us in this sense, we have to know *how* to ask our computer to do these things. It is easiest to think of R as simply a interface between us and our computers. However, we must remember that *computers are not intelligent, they will only do EXACTLY what we tell them to do*. Therefore, we need to be specific about how we ask our computer to do things in service of answering our biological questions. This section covers some important concepts that will govern how we ask R to do things for us. 
+        </p>
+<section id="calculator">
+    <h2>R as a Calculator</h2>
     <p>
-        The base of the programming language, the <code>.R</code> file is the 
-        simplest and most commonly used file for writing a program in R. A set of 
-        commands in the file, executed in order by the computer, provides the user 
-        with a reproducible way of repeating an analysis. 
+        At the most basic level, we can use R as a (very complicated) calculator. We can perform all the most basic operations that we might be interested in. 
+    <br><br>
+    The classic operations (addition, subtraction, multiplication, division) work much as you might expect 
+    </p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">+</span> <span class="hl num">2</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 4
+</pre></div>
+<div class="source"><pre class="knitr r">    <span class="hl num">3</span> <span class="hl opt">-</span> <span class="hl num">2</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 1
+</pre></div>
+<div class="source"><pre class="knitr r">    <span class="hl num">3</span> <span class="hl opt">*</span> <span class="hl num">2</span> <span class="hl com"># multiplication is denoted by an asterisk</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 6
+</pre></div>
+<div class="source"><pre class="knitr r">    <span class="hl num">6</span> <span class="hl opt">/</span> <span class="hl num">2</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 3
+</pre></div>
+<div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">^</span> <span class="hl num">3</span> <span class="hl com"># exponentiation is denoted by this carrot</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 8
+</pre></div>
+</div></div>
+    <p>
+        You can also ask R to help with more complicated operations such as:
+    </p>
+    <section id="calculator--modulo">
+        <h4>Modulo Operations</h4>
+        <p>
+            Getting the remainder of division:
+        </p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl num">5</span> <span class="hl opt">%%</span> <span class="hl num">2</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 1
+</pre></div>
+</div></div>
+    </section>
+    <section id="calculator--integer">
+        <h4>Integer Division</h4>
+        <p>
+            Only returns the integer value and not the decimal places:
+        </p>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl num">5</span> <span class="hl opt">%/%</span> <span class="hl num">2</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 2
+</pre></div>
+</div></div>
+    </section>
+</section>
+<section id="boolean">
+    <h2>Boolean Operations</h2>
+    <p>
+        We can ask R to make comparisons between values and give us a boolean (true or false) response for a wide variety of operations. 
     </p>
     <p>
-        In <code>.R</code> files, all written text is assumed to be written in the 
-        syntax and language of R, such as this: 
+        We can ask R if two values are equal <code>==</code>, inequal <code>!=</code>, greater than <code>></code>, less than <code>&lt;</code>, greater than <em>or equal to</em> <code>>=</code>, or less than <em>or equal to</em> <code>&lt;=</code> . Some examples:
     </p>
-    <pre>
-        <code class="w3-codespan language-R">
-            x <- 2 + 2
-            print("x is ", x)
-        </code>
-    </pre>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">==</span> <span class="hl num">2</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] TRUE
+</pre></div>
+<div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">!=</span> <span class="hl num">3</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] TRUE
+</pre></div>
+<div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">&gt;</span> <span class="hl num">4</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] FALSE
+</pre></div>
+</div></div>
     <p>
-        To write comments or notes to yourself or other future users of the file, 
-        use the pound symbol or "hashtag" (#) to tell R to ignore that part of the 
-        text. 
-        <br><br>
-        <em>Example:</em>
-    
-        If we wanted to leave ourselves a comment telling us what our code will do we 
-        could write 
-        
+        We can also ask R if two things are true at the same time using the ampersand <code>&amp;</code> operator, or if <em>at least</em> one statement is true using the vertical bar <code>|</code> operator:
     </p>
-    <pre>
-        <code class="w3-codespan language-R">
-            x <- 2 + 2
-            # print the value of x to the console
-            print(x) 
-        </code>
-    </pre>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">==</span> <span class="hl num">2</span> <span class="hl opt">&amp;</span> <span class="hl num">3</span> <span class="hl opt">==</span> <span class="hl num">3</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] TRUE
+</pre></div>
+<div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">==</span> <span class="hl num">2</span> <span class="hl opt">&amp;</span> <span class="hl num">3</span> <span class="hl opt">==</span> <span class="hl num">4</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] FALSE
+</pre></div>
+<div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">==</span> <span class="hl num">2</span> <span class="hl opt">|</span> <span class="hl num">3</span> <span class="hl opt">==</span> <span class="hl num">4</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] TRUE
+</pre></div>
+<div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">==</span> <span class="hl num">3</span> <span class="hl opt">|</span> <span class="hl num">3</span> <span class="hl opt">==</span> <span class="hl num">4</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] FALSE
+</pre></div>
+</div></div>
+    <p>
+        We can also chain these operations together, but the order in which we write this out matters. Computers follow order of operations rules just like in math, so we need to think back to BEDMAS (Brackets, Exponents, Division, Multiplication, Addition, Subtraction) from grade school math class! 
+    </p>
+    <p>
+        <strong>Exercise:</strong> Mentally work through what answer (<code>TRUE</code> or <code>FALSE</code>) R will output when you run this code, then check the answer to see if you were right!
+    </p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl std">(</span><span class="hl num">2</span> <span class="hl opt">==</span> <span class="hl num">2</span><span class="hl std">)</span> <span class="hl opt">&amp;</span> <span class="hl std">(</span><span class="hl num">2</span> <span class="hl opt">==</span> <span class="hl num">3</span> <span class="hl opt">|</span> <span class="hl num">3</span> <span class="hl opt">==</span> <span class="hl num">3</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
 </section>
 
 
@@ -167,8 +238,7 @@ Fundamentally, our goal in using R is to ask our computer to help us answer the 
     When using this resource, <bold>always</bold> default to instructions and 
     guidance provided by your instructor. 
     <br>
-    This content is reviewed regularly for errors and to make improvements, but 
-    no assurances can be made that any material presented here is 100% accurate.
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
 </p>
 </div>
 
@@ -186,5 +256,4 @@ function w3_close() {
 
 </body>
 </html>
-
 
