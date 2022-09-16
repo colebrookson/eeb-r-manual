@@ -1,0 +1,49 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Grouping & Summarizing DataFrames
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+
+
+## Grouping with One Variable
+
+Let's try to get the mean and standard deviation for each sex. We could do this by making two different dataframes and then calculating those values, but it might be easier to make this into one separate object that has all the information we need. 
+
+To do this we can use the <code>group_by()</code> function from the <code>dplyr</code> package to help us. We will need to group the dataset by the variable we're interested in, and then we can use the <code>summarize()</code> function also from <code>dplyr</code> to get our values of interest. 
+
+To understand how the summarize function works, we can run <code>?summarize</code> in the console. We see that we will get a new dataframe, with one row for each combination of grouping variables. Here we are only using one grouping variable, and there are two levels to the variable, so we should only have two rows left. 
+
+Summarize will make a new column or set of columns, that we can create with base summary functions like <code>summarize(mean = mean())</code>. 
+
+<strong>Note</strong> that when using <code>summarize()</code>, all columns <em>not</em> involved in the grouping will be removed from the resulting dataframe. So, in our case, we will only have one column (<code>animal_weight</code>) left from our original dataframe. 
+
+So to group our dataframe and then use <code>summarize()</code> to get our mean and standard deviation for our measures of animal weight, we can pipe these commands together.  
+
+<!--begin.rcode
+mass_by_sex <- bison %>% 
+  dplyr::group_by(animal_sex) %>% 
+  dplyr::summarize(mean_mass = mean(animal_weight, na.rm = TRUE), 
+                   std_dev = sd(animal_weight, na.rm = TRUE))
+mass_by_sex
+end.rcode-->
+Note here that we've used <code>na.rm = TRUE</code> to ensure that when <code>mean()</code> and <code>sd()</code> calculate their values, if there are any <code>NA</code> values in the data, they are ignored. 
+
+## Grouping with Multiple Variables
+
+In theory, we can use <code>summarize()</code> grouped by as many variables as we want. To demonstrate this, we can repeat our measurement above, but now also grouping my the month the weight was measured in. We may assume that the animals' weights will fluctuate throughout the year, and it could be useful to understand how this differs by sex (if at all). 
+
+So we will again use <code>group_by()</code> and <code>summarize()</code> to perform this task, but now grouping by both <code>animal_sex</code> and <code>rec_month</code>:
+
+<!--begin.rcode
+month_sex_weight <- bison %>% 
+  dplyr::group_by(animal_sex, rec_month) %>% 
+  dplyr::summarize(mean_mass = mean(animal_weight, na.rm = TRUE), 
+                   std_dev = sd(animal_weight, na.rm = TRUE))
+month_sex_weight
+end.rcode-->
+
+In our little observational look here, we can see that for both sexes, the average weights dropped between October (month 10) and November (month 11). 

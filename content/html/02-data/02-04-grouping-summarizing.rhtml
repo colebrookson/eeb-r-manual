@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#one">One Variable</a></li>
+          <li><a href="#mult">Multiple Variables</a></li>
+        </ol>
+      </nav>
+    <div>
+    <section>
+        <h2>Grouping &amp; Summarizing</h2>
+        <p>
+            <!--begin.rcode, echo=FALSE
+            options(tidyverse.quiet = TRUE)
+            end.rcode-->
+
+            To obtain a useful summary of a dataframe is useful when trying to get summary statistics or the like from a dataframe. Let's use an example dataframe that describes the masses of Bison. 
+            <br>
+            <!--begin.rcode
+            # load libraries
+            library(lterdatasampler)
+            library(tidyverse)
+
+            bison <- lterdatasampler::knz_bison 
+            head(bison)
+            end.rcode-->
+            <br>
+            It might be useful to understand how the weights of these animals differs by sex. Let's first check the `animal_sex` column to see what values it takes and what type of data the column is: 
+            <br>
+            <!--begin.rcode
+            str(bison$animal_sex)
+            unique(bison$animal_sex)
+            end.rcode-->
+            <br>
+            So there are two values, and the column is a character type. 
+        </p>
+    </section>
+    <section id="one">
+        <h3>Grouping With One Variable</h3>
+        <p>
+            Let's try to get the mean and standard deviation for each sex. We could do this by making two different dataframes and then calculating those values, but it might be easier to make this into one separate object that has all the information we need. 
+            <br>
+            <br>
+            To do this we can use the <code>group_by()</code> function from the <code>dplyr</code> package to help us. We will need to group the dataset by the variable we're interested in, and then we can use the <code>summarize()</code> function also from <code>dplyr</code> to get our values of interest. 
+            <br>
+            <br>
+            To understand how the summarize function works, we can run <code>?summarize</code> in the console. We see that we will get a new dataframe, with one row for each combination of grouping variables. Here we are only using one grouping variable, and there are two levels to the variable, so we should only have two rows left. 
+            <br>
+            <br>
+            Summarize will make a new column or set of columns, that we can create with base summary functions like <code>summarize(mean = mean())</code>. 
+            <br>
+            <br>
+            <strong>Note</strong> that when using <code>summarize()</code>, all columns <em>not</em> involved in the grouping will be removed from the resulting dataframe. So, in our case, we will only have one column (<code>animal_weight</code>) left from our original dataframe. 
+            <br>
+            <br>
+            So to group our dataframe and then use <code>summarize()</code> to get our mean and standard deviation for our measures of animal weight, we can pipe these commands together.  
+            <br>
+            <br>
+            <!--begin.rcode
+            mass_by_sex <- bison %>% 
+            dplyr::group_by(animal_sex) %>% 
+            dplyr::summarize(mean_mass = mean(animal_weight, na.rm = TRUE), 
+                            std_dev = sd(animal_weight, na.rm = TRUE))
+            mass_by_sex
+            end.rcode-->
+            <br>
+            <br>
+            Note here that we've used <code>na.rm = TRUE</code> to ensure that when <code>mean()</code> and <code>sd()</code> calculate their values, if there are any <code>NA</code> values in the data, they are ignored. 
+        </p>
+    </section>
+    <section id="mult">
+        <h3>Grouping With Multiple Variables</h3>
+        <p>
+            In theory, we can use <code>summarize()</code> grouped by as many variables as we want. To demonstrate this, we can repeat our measurement above, but now also grouping my the month the weight was measured in. We may assume that the animals' weights will fluctuate throughout the year, and it could be useful to understand how this differs by sex (if at all). 
+            <br>
+            <br>
+            So we will again use <code>group_by()</code> and <code>summarize()</code> to perform this task, but now grouping by both <code>animal_sex</code> and <code>rec_month</code>:
+            <br>
+            <br>
+            <!--begin.rcode
+            month_sex_weight <- bison %>% 
+            dplyr::group_by(animal_sex, rec_month) %>% 
+            dplyr::summarize(mean_mass = mean(animal_weight, na.rm = TRUE), 
+                            std_dev = sd(animal_weight, na.rm = TRUE))
+            month_sex_weight
+            end.rcode-->
+            <br>
+            <br>
+            In our little observational look here, we can see that for both sexes, the average weights dropped between October (month 10) and November (month 11). 
+        </p>
+    </section>
+
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>
