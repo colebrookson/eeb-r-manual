@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Navigating RStudio</title>
+<title>The R File Ecosystem</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/stylesheet.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
 </style>
 </head>
 <body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
 
 <!-- Sidebar (hidden by default) -->
 <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
@@ -23,141 +40,131 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   class="w3-bar-item w3-button">Contact</a>
 </nav>
 
-<!-- Top menu -->
-<div class="w3-top">
-    <div class="w3-navy w3-xlarge" 
-    style="max-width:auto;margin:auto;border:1px w3-gray"
-    border:1px>
-      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-      <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
-      <div class="w3-center w3-padding-16">The R Manual</div>
-    </div>
-</div>
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#nav">Navigating RStudio</a>
+            <ul>
+                <li class=""><a href="#nav-scripts">Scripts</a></li>
+                <li class=""><a href="#nav--console">Console</a></li>
+                <li class=""><a href="#nav--files">Files/Plots</a></li>
+                <li class=""><a href="#nav--env">Environment</a></li>
+              </ul>
+          </li>
+          <li><a href="#most">Getting the most out of RStudio</a></li>
+        </ol>
+      </nav>
+    <div>
+<section id="nav">
+    <h1>Navigating RStudio</h1>
+    <p>
+        To actually write R code, you will need to use RStudio. When you open the
+        application, you will see something like this:
+    </p>
+    <img class="image-full-page" src="../img/00-img/rstudio.png" 
+    style="display:block;margin:auto"/>
+    <p>
+        You'll need to create a new file to begin writing your code. You can do that 
+        with <a href="file-ecosystem.html">either a <code>.R</code> or <code>.Rmd
 
-<!-- Bottom menu
-<div class="w3-bottom">
-    <div class="w3-navy w3-large" 
-    style="max-width:1300px; margin:auto; border:1px w3-gray"
-    border:1px>
-    <div class="w3-padding-16 w3-left" href="./landingpage">Home</div>
-    <div class="w3-right w3-padding-16">Problems?</div>
-    <div class="w3-center w3-padding-16">Contact</div>
-  </div>
-</div>
- -->
+        </code> file</a> like so:
+    </p>
+    <img class="image-full-page" style="display:block;margin:auto" 
+    src="../img/00-img/new-file.png">
+    <p>
+        You'll now see there are four distinctive areas of the RStudio window. 
+        You can control where each of these panels exists, but this is the default layout:
+    </p>
+    <img class="image-full-page" style="display:block;margin:auto" 
+    src="../img/00-img/four-panels.png">
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content w3-padding" 
-style="max-width:800px;margin-top:100px">
+    <section id="nav--scripts">
+        <h3>
+            Scripts Panel
+        </h3>
+        <p>
+            The top left panel is where you'll spend most of your time. This is where 
+            your script files (i.e. <code>.R</code> or <code>.Rmd</code> files) 
+            will be displayed, and where you'll write code.
+        </p>
+        <img class="image-full-page" style="display:block;margin:auto"
+        src="../img/00-img/scripts.png">
+        <p>
+            You can have multiple scripts/files open at once and toggle between them.
+        </p>        
+    </section>
+    <section id="nav--console">
+        <h3>Console</h3>
+        <p>
+            The console is your direct connection to R. You can type out code onto the 
+            line with the carrot <code>></code> and press enter, to execute that line 
+            of code. <b>However, note that here unlike code written in a script, that 
+                code will not be saved for you to run again.</b>
+        </p>
+        <img class="image-full-page" style="display:block;margin:auto"
+        src="../img/00-img/console.png">
+        <p>
+            When RStudio first starts up, you'll notice that it prints out the version 
+            of R that it is currently running. 
+        </p>
+        <p>
+            There are two other tabs here "Terminal" and "Jobs" which can be ignored for the beginner. 
+        </p>
+        <p>
+            To use R in the most basic sense, you can begin typing on the row with the 
+            small arrow (<code>></code>) and press enter. The output will be printed 
+            directly below. 
+        </p>
+        <img class="image-full-page" style="display:block;margin:auto"
+        src="../img//00-img/console-output.png">
+    </section>
+    <section id="nav--files">
+        <h3>Files/Plots</h3>
+        <p>
+            This bottom right corner is where you can see any current plots, and the 
+            files on your computer that are in your current working directory.
+        </p>
+        <img class="image-full-page" style="display:block;margin:auto"
+        src="../img//00-img/files-plots.png">
+        <p>
+            You'll notice that there is no plot displayed right now, but should we 
+            generate a plot and display it from a script, it would pop up here for us 
+            to view. If we navigate to the "Files" tab, we would see the files that are 
+            in the current directory that RStudio is working in. 
+        </p>
+    </section>
+    <section id="nav--env">
+        <h3>Environment</h3>
+        <p>
+            This top right panel is an important one. R will display all the objects 
+            you create through the course of your programming here. That is, any 
+            variables or functions you create, with the name and a brief description 
+            will be here. To view these objects when they exist, you may click on them 
+            directly from the environment panel. 
+        </p>
+        <img class="image-full-page" style="display:block;margin:auto"
+        src="../img//00-img/env.png">
+        <p>
+            The beginner may ignore the other tabs in this panel. 
+        </p>
+    </section>
+    <section id="most">
+        <h2>Getting the most out of RStudio</h2>
+        <p>
+            RStudio is a really rich environment for programming. Once you're familiar 
+            with the basics, it can really speed up your work to learn a few shortcuts 
+            or tips and tricks. We recommend you become familiar with generally how the 
+            software works, then once you're comfortable you can branch out. 
+        </p>
+        <p>
+            Here is a link to some <a 
+            href="https://www.dataquest.io/blog/rstudio-tips-tricks-shortcuts/">tips 
+            & tricks to get you started</a>
+        
+        </p>
+    </section>
+</section>
 
-<h1>Navigating RStudio</h1>
-<p>
-    To actually write R code, you will need to use RStudio. When you open the
-     application, you will see something like this:
-</p>
-<img class="image-full-page" src="../img/00-img/rstudio.png" 
-style="display:block;margin:auto"/>
-<p>
-    You'll need to create a new file to begin writing your code. You can do that 
-    with <a href="file-ecosystem.html">either a <code>.R</code> or <code>.Rmd
-
-    </code> file</a> like so:
-</p>
-<img class="image-full-page" style="display:block;margin:auto" 
-src="../img/00-img/new-file.png">
-<p>
-    You'll now see there are four distinctive areas of the RStudio window. 
-    You can control where each of these panels exists, but this is the default layout:
-</p>
-<img class="image-full-page" style="display:block;margin:auto" 
-src="../img/00-img/four-panels.png">
-
-<hr style="height:2px;border-width:0;color:gray;background-color:gray">
-
-<h3>
-    Scripts Panel
-</h3>
-<p>
-    The top left panel is where you'll spend most of your time. This is where 
-    your script files (i.e. <code>.R</code> or <code>.Rmd</code> files) 
-    will be displayed, and where you'll write code.
-</p>
-<img class="image-full-page" style="display:block;margin:auto"
-src="../img/00-img/scripts.png">
-<p>
-    You can have multiple scripts/files open at once and toggle between them.
-</p>
-
-<hr style="height:2px;border-width:0;color:gray;background-color:gray">
-
-<h3>Console</h3>
-<p>
-    The console is your direct connection to R. You can type out code onto the 
-    line with the carrot <code>></code> and press enter, to execute that line 
-    of code. <b>However, note that here unlike code written in a script, that 
-        code will not be saved for you to run again.</b>
-</p>
-<img class="image-full-page" style="display:block;margin:auto"
-src="../img/00-img/console.png">
-<p>
-    When RStudio first starts up, you'll notice that it prints out the version 
-    of R that it is currently running. 
-</p>
-<p>
-    There are two other tabs here "Terminal" and "Jobs" which can be ignored for the beginner. 
-</p>
-<p>
-    To use R in the most basic sense, you can begin typing on the row with the 
-    small arrow (<code>></code>) and press enter. The output will be printed 
-    directly below. 
-</p>
-<img class="image-full-page" style="display:block;margin:auto"
-src="../img//00-img/console-output.png">
-
-<hr style="height:2px;border-width:0;color:gray;background-color:gray">
-
-<h3>Files/Plots</h3>
-<p>
-    This bottom right corner is where you can see any current plots, and the 
-    files on your computer that are in your current working directory.
-</p>
-<img class="image-full-page" style="display:block;margin:auto"
-src="../img//00-img/files-plots.png">
-<p>
-    You'll notice that there is no plot displayed right now, but should we 
-    generate a plot and display it from a script, it would pop up here for us 
-    to view. If we navigate to the "Files" tab, we would see the files that are 
-    in the current directory that RStudio is working in. 
-</p>
-
-<hr style="height:2px;border-width:0;color:gray;background-color:gray">
-
-<h3>Environment</h3>
-<p>
-    This top right panel is an important one. R will display all the objects 
-    you create through the course of your programming here. That is, any 
-    variables or functions you create, with the name and a brief description 
-    will be here. To view these objects when they exist, you may click on them 
-    directly from the environment panel. 
-</p>
-<img class="image-full-page" style="display:block;margin:auto"
-src="../img//00-img/env.png">
-<p>
-    The beginner may ignore the other tabs in this panel. 
-</p>
-<h2>Getting the most out of RStudio</h2>
-<p>
-    RStudio is a really rich environment for programming. Once you're familiar 
-    with the basics, it can really speed up your work to learn a few shortcuts 
-    or tips and tricks. We recommend you become familiar with generally how the 
-    software works, then once you're comfortable you can branch out. 
-</p>
-<p>
-    Here is a link to some <a 
-    href="https://www.dataquest.io/blog/rstudio-tips-tricks-shortcuts/">tips 
-    & tricks to get you started</a>
-
-</p>
 
 <!-- End page content -->
 <hr>
@@ -172,8 +179,7 @@ src="../img//00-img/env.png">
     When using this resource, <bold>always</bold> default to instructions and 
     guidance provided by your instructor. 
     <br>
-    This content is reviewed regularly for errors and to make improvements, but 
-    no assurances can be made that any material presented here is 100% accurate.
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
 </p>
 </div>
 
@@ -187,6 +193,7 @@ function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
 }
 </script>
+</main>
 
 </body>
 </html>
