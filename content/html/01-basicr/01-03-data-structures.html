@@ -2,8 +2,67 @@
 <html>
 <head>
 <style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
 </style>
-<title>The R File Ecosystem</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/stylesheet.css">
@@ -43,76 +102,118 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
 </nav>
 
 <main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#str">Data Structures</a>
+            <ul>
+              <li class=""><a href="#str--vec">Vectors</a>
+                <ul>
+                  <li class=""><a href="#str--vec--atomic">Atomic Vectors</a></li>
+                </ul></li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
     <div>
-      <h1>Data Types</h1>
-      <p>
-        We will be using a variety of objects to operationalize our use of R. Here we'll discuss briefly the important types of objects and how they should be used. 
-      </p>
-
-      <section id="objects">
-        <h2>Objects and OOP</h2>
+      <section id="str">
+        <h2>Data Structures</h2>
         <p>
-            R is an Object-Oriented Programming (OOP) language which means it functions best by storing things as "objects". An object is a data structure that has some attributes and a set of methods that act on those attributes. 
-        </p>
-        <p>
-            Object-oriented languages (often called "high-level" languages) are typically more intuitive, as whenever you want to assign some value(s) to a variable and save those values for later, you can make the variable to an object which will be saved by R in the environment for future use. 
-        </p>
-      </section>
-      <section id="data-types">
-        <h2>Data Types</h2>
-        <p>
-            There are six main types in R, but we will discuss only the first four. 
+          To make use of these individual pieces of data we combine them together into data <em>structures</em>. There are 4 main data structures that we work with consistently:
         </p>
         <ol type="I">
-            <li><strong>Characters</strong></li>
-            <li><strong>Numerics (real or decimal)</strong></li>
-            <li><strong>Integers</strong></li>
-            <li><strong>Logicals</strong></li>
-            <li>Complex</li>
-            <li>Raw</li>
+            <li><strong>Vectors</strong></li>
+            <li><strong>Matrices</strong></li>
+            <li><strong>DataFrames</strong></li>
+            <li><strong>Arrays</strong></li>
         </ol>
         <p>
-            When we assign variables, it is important to know what type we are using. We can check what the <code>type</code> of an object, and get other useful information about it, with a number of useful commands: 
+          This helpful graphic may help you cement these types in your memory
         </p>
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;abc&quot;</span>
-  <span class="hl kwd">typeof</span><span class="hl std">(x)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;character&quot;
+        <img class="image-full-page" style="display:block;margin:auto"
+        src="../img/01-img/data-structures.png">
+        <section id="str--vec">
+          <h3>Vectors</h3>
+          <p>
+            Vectors are subset into atomic vectors (collections of data of the same type) and lists (collections of different data types). Vectors are the workshorses of R and mosts other OOP languages use vectors or a very similar structure to hold data. From this point forward, we’ll use "vector" to refer to atomic vectors and call lists by name. We make vectors the same way we make variables, with an assignment statement.
+          </p>
+        </section>
+        <section id="str--vec--atom">
+          <h4>Atomic Vectors</h4>
+          <p>
+            Often we start by making an empty vector that we may decide to fill with values later. To do this, we use the <code>vector()</code> function.
+          </p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl str">&quot;character&quot;</span><span class="hl std">,</span> <span class="hl kwc">length</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
-        <p>
-            If we want a more detailed answer we can ask what the structure (<code>str()</code>) of an object is
-        </p>
-        <pre>
-            <code class="w3-codespan language-R">
-    str(x)
-            </code>
-        </pre>
-        <p>
-            We see the output is slightly different here, with the function telling us the type of the object (<code>chr</code>) and also the content of the object (<code>"abc"</code>). 
+          <p>
+            Here, the function <code>vector()</code> takes two required arguments. the first argument asks for the data <em>type</em> we would like to use, and the second is the number of elements (the <em>length</em>) that we want the vector to be. 
+          </p>
+          <p>
+            When we already know the content we want included, we can use a simpler <code>c()</code> function (<code>c</code> is short for <em>combine</em>). 
+          </p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">3</span><span class="hl std">,</span> <span class="hl num">4</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+          <p>
+            Here, R automatically understands what type of data we're using and since we passed four values, the length is automatically four. We could actually shorten this using R's <code>:</code> notation:
+          </p>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">4</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+          <p>
+            And we can check this works as expected:
+          </p>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span> <span class="hl opt">==</span> <span class="hl std">y</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] TRUE TRUE TRUE TRUE
+</pre></div>
+</div></div>
+          <p>
+            <strong>Note:</strong> One thing to understand is that previously when we assigned a variable a single data object (i.e. ), what we were actually doing is making a vector! This is just a special case vector of length 1. 
+          </p>
+          <p>
+            We can determine what is and what is NOT an atomic vector with the following basic command <code>is.atomic()</code>. Recall that lists are <em>also</em> vectors, but not the kind we're working with now, so this checks if a vector is an atomic vector or not. 
+          </p>
+          <p>
+            Vectors, especially string vectors, can change depending on how they're created. For example, here we have two vectors that spell out the same sentence, but are not equivalent:
+          </p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span>  <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;The quick brown fox jumped over the lazy dog&quot;</span><span class="hl std">)</span>
+  <span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;The&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;quick&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;brown&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;fox&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;jumped&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;over&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;the&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;lazy&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;dog&quot;</span><span class="hl std">)</span>
+  <span class="hl std">x</span> <span class="hl opt">==</span> <span class="hl std">y</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+</pre></div>
+</div></div>
+        </section>
+        </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
 
-        </p>
-    </div>
-    <nav class="section-nav">
-      <ol>
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#request-response">Request &amp; Response</a></li>
-        <li><a href="#authentication">Authentication</a></li>
-        <li><a href="#endpoints">Endpoints</a>
-          <ul>
-            <li class=""><a href="#endpoints--root">Root</a></li>
-            <li class=""><a href="#endpoints--cities-overview">Cities Overview</a></li>
-            <li class=""><a href="#endpoints--city-detail">City Detail</a></li>
-            <li class=""><a href="#endpoints--city-config">City Config</a></li>
-            <li class=""><a href="#endpoints--city-spots-overview">City Spots Overview</a></li>
-            <li class=""><a href="#endpoints--city-spot-detail">City Spot Detail</a></li>
-            <li class=""><a href="#endpoints--city-icons-overview">City Icons Overview</a></li>
-            <li class=""><a href="#endpoints--city-icon-detail">City Icon Detail</a></li>
-          </ul>
-        </li>
-        <li class=""><a href="#links">Links</a></li>
-        <li class=""><a href="#expanders">Expanders</a></li>
-        <li class=""><a href="#filters">Filters</a></li>
-      </ol>
-    </nav>
-  </main>
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>
