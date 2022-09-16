@@ -1,68 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-.inline {
-  background-color: #f7f7f7;
-  border:solid 1px #B0B0B0;
-}
-.error {
-	font-weight: bold;
-	color: #FF0000;
-}
-.warning {
-	font-weight: bold;
-}
-.message {
-	font-style: italic;
-}
-.source, .output, .warning, .error, .message {
-	padding: 0 1em;
-  border:solid 1px #F7F7F7;
-}
-.source {
-  background-color: #f5f5f5;
-}
-.left {
-  text-align: left;
-}
-.right {
-  text-align: right;
-}
-.center {
-  text-align: center;
-}
-.hl.num {
-  color: #AF0F91;
-}
-.hl.str {
-  color: #317ECC;
-}
-.hl.com {
-  color: #AD95AF;
-  font-style: italic;
-}
-.hl.opt {
-  color: #000000;
-}
-.hl.std {
-  color: #585858;
-}
-.hl.kwa {
-  color: #295F94;
-  font-weight: bold;
-}
-.hl.kwb {
-  color: #B05A65;
-}
-.hl.kwc {
-  color: #55aa55;
-}
-.hl.kwd {
-  color: #BC5A65;
-  font-weight: bold;
-}
-</style>
 <title>The R File Ecosystem</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -103,6 +41,19 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
 </nav>
 
 <main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#objects">Objects and OOP</a></li>
+          <li><a href="#data-types">Data Types</a>
+            <ul>
+              <li class=""><a href="#data-types--characters">Characters</a></li>
+              <li class=""><a href="#data-types--numerics">Numerics</a></li>
+              <li class=""><a href="#data-types--integers">Integers</a></li>
+              <li class=""><a href="#data-types--Logicals">Logicals</a></li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
     <div>
       <h1>Data Types</h1>
       <p>
@@ -134,45 +85,71 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
         <p>
             When we assign variables, it is important to know what type we are using. We can check what the <code>type</code> of an object, and get other useful information about it, with a number of useful commands: 
         </p>
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;abc&quot;</span>
-  <span class="hl kwd">typeof</span><span class="hl std">(x)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;character&quot;
-</pre></div>
-</div></div>
+        <!--begin.rcode 
+          x <- "abc"
+          typeof(x)
+          end.rcode-->
         <p>
             If we want a more detailed answer we can ask what the structure (<code>str()</code>) of an object is
         </p>
-        <pre>
-            <code class="w3-codespan language-R">
-    str(x)
-            </code>
-        </pre>
+        <!--begin.rcode 
+          str(x)
+          end.rcode-->
         <p>
             We see the output is slightly different here, with the function telling us the type of the object (<code>chr</code>) and also the content of the object (<code>"abc"</code>). 
-
         </p>
+        <section id="data-types--characters">
+            <h3>Characters</h3>
+            <p>
+                A character is any alphanumeric string that begins with a letter. 
+            </p>
+            <!--begin.rcode 
+              x <- "abc"
+              y <- "abc123"
+              typeof(x)
+              typeof(y) 
+              end.rcode-->
+        </section>
+        <section id="data-types--numerics">
+            <h3>Numerics</h3>
+            <p>
+                A numeric type is any non-integer number.  
+            </p>
+            <!--begin.rcode 
+              z <- 3.14
+              typeof(z)
+              end.rcode-->
+            <p>
+                The output <code>"double"</code>" here refers to the fact that R automatically stores numeric data types with "double" precision.   
+            </p>
+        </section>
+        <section id="data-types--integers">
+            <h3>Integers</h3>
+            <p>
+                An integer is a non-decimal whole number. <strong>Note:</strong> In R, the default is to store values as numeric unless explicitly told otherwise. We can see that if we make a new variable with only an integer value R will store it as a numeric type. 
+            </p>
+            <!--begin.rcode 
+              x1 <- 2
+              typeof(x1)
+              end.rcode-->
+            <p>
+                To force R to store it as an integer we can simply add an <code>L</code> after the value.  
+            </p>
+            <!--begin.rcode 
+              x2 <- 2L
+              typeof(x2)
+              end.rcode-->
+        </section>
+        <section id="data-types--logicals">
+            <h3>Logicals</h3>
+            <p>
+                Logical types are simply TRUE or FALSE. 
+            </p>
+            <!--begin.rcode 
+              x3 <- TRUE
+              typeof(x3)
+              end.rcode-->
+        </section>
+      </section>
     </div>
-    <nav class="section-nav">
-      <ol>
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#request-response">Request &amp; Response</a></li>
-        <li><a href="#authentication">Authentication</a></li>
-        <li><a href="#endpoints">Endpoints</a>
-          <ul>
-            <li class=""><a href="#endpoints--root">Root</a></li>
-            <li class=""><a href="#endpoints--cities-overview">Cities Overview</a></li>
-            <li class=""><a href="#endpoints--city-detail">City Detail</a></li>
-            <li class=""><a href="#endpoints--city-config">City Config</a></li>
-            <li class=""><a href="#endpoints--city-spots-overview">City Spots Overview</a></li>
-            <li class=""><a href="#endpoints--city-spot-detail">City Spot Detail</a></li>
-            <li class=""><a href="#endpoints--city-icons-overview">City Icons Overview</a></li>
-            <li class=""><a href="#endpoints--city-icon-detail">City Icon Detail</a></li>
-          </ul>
-        </li>
-        <li class=""><a href="#links">Links</a></li>
-        <li class=""><a href="#expanders">Expanders</a></li>
-        <li class=""><a href="#filters">Filters</a></li>
-      </ol>
-    </nav>
   </main>

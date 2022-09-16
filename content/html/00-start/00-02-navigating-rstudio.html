@@ -4,7 +4,7 @@
 <title>Navigating RStudio</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="./css/stylesheet.css">
+<link rel="stylesheet" href="../css/stylesheet.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
@@ -55,7 +55,7 @@ style="max-width:800px;margin-top:100px">
     To actually write R code, you will need to use RStudio. When you open the
      application, you will see something like this:
 </p>
-<img class="image-full-page" src="img/00-img/rstudio.png" 
+<img class="image-full-page" src="../img/00-img/rstudio.png" 
 style="display:block;margin:auto"/>
 <p>
     You'll need to create a new file to begin writing your code. You can do that 
@@ -64,13 +64,13 @@ style="display:block;margin:auto"/>
     </code> file</a> like so:
 </p>
 <img class="image-full-page" style="display:block;margin:auto" 
-src="img/00-img/new-file.png">
+src="../img/00-img/new-file.png">
 <p>
     You'll now see there are four distinctive areas of the RStudio window. 
     You can control where each of these panels exists, but this is the default layout:
 </p>
 <img class="image-full-page" style="display:block;margin:auto" 
-src="img/00-img/four-panels.png">
+src="../img/00-img/four-panels.png">
 
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
@@ -83,7 +83,7 @@ src="img/00-img/four-panels.png">
     will be displayed, and where you'll write code.
 </p>
 <img class="image-full-page" style="display:block;margin:auto"
-src="img/00-img/scripts.png">
+src="../img/00-img/scripts.png">
 <p>
     You can have multiple scripts/files open at once and toggle between them.
 </p>
@@ -98,7 +98,7 @@ src="img/00-img/scripts.png">
         code will not be saved for you to run again.</b>
 </p>
 <img class="image-full-page" style="display:block;margin:auto"
-src="img/00-img/console.png">
+src="../img/00-img/console.png">
 <p>
     When RStudio first starts up, you'll notice that it prints out the version 
     of R that it is currently running. 
@@ -112,7 +112,7 @@ src="img/00-img/console.png">
     directly below. 
 </p>
 <img class="image-full-page" style="display:block;margin:auto"
-src="img//00-img/console-output.png">
+src="../img//00-img/console-output.png">
 
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
@@ -122,7 +122,7 @@ src="img//00-img/console-output.png">
     files on your computer that are in your current working directory.
 </p>
 <img class="image-full-page" style="display:block;margin:auto"
-src="img//00-img/files-plots.png">
+src="../img//00-img/files-plots.png">
 <p>
     You'll notice that there is no plot displayed right now, but should we 
     generate a plot and display it from a script, it would pop up here for us 
@@ -141,7 +141,7 @@ src="img//00-img/files-plots.png">
     directly from the environment panel. 
 </p>
 <img class="image-full-page" style="display:block;margin:auto"
-src="img//00-img/env.png">
+src="../img//00-img/env.png">
 <p>
     The beginner may ignore the other tabs in this panel. 
 </p>
@@ -158,6 +158,8 @@ src="img//00-img/env.png">
     & tricks to get you started</a>
 
 </p>
+
+<!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">
     <br>
@@ -173,4 +175,18 @@ src="img//00-img/env.png">
     This content is reviewed regularly for errors and to make improvements, but 
     no assurances can be made that any material presented here is 100% accurate.
 </p>
+</div>
 
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+
+</body>
+</html>
