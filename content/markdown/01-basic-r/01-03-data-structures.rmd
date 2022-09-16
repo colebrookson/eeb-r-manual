@@ -259,7 +259,7 @@ c3 <- c(11:14)
 d <- data.frame(c1, c2, c3)
 d
 ```
-So currently it's a <code>chr`, but we can <em>index<em> our column of interest by name, using the `$</code> operator, and perform the change this way. To change the column to a factor we again can use the <code>factor()</code> column: 
+So currently it's a <code>chr</code>, but we can <em>index<em> our column of interest by name, using the <code>$</code> operator, and perform the change this way. To change the column to a factor we again can use the <code>factor()</code> column: 
 ```{r}
 d$c2 <- factor(d$c2) 
 str(d)

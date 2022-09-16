@@ -84,8 +84,8 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             Often we start by making an empty vector that we may decide to fill with values later. To do this, we use the <code>vector()</code> function.
           </p>
           <!--begin.rcode 
-            x <- vector("character", length = 5)
-            end.rcode-->
+          x <- vector("character", length = 5)
+          end.rcode-->
           <p>
             Here, the function <code>vector()</code> takes two required arguments. the first argument asks for the data <em>type</em> we would like to use, and the second is the number of elements (the <em>length</em>) that we want the vector to be. 
           </p>
@@ -362,7 +362,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                 d
                 end.rcode-->
               <p>
-                So currently it's a <code>chr</code>, but we can <em>index<em> our column of interest by name, using the <code>$</code> operator, and perform the change this way. To change the column to a factor we again can use the <code>factor()</code> column: 
+                So currently it's a <code>chr</code>, but we can <em>index</em> our column of interest by name, using the <code>$</code> operator, and perform the change this way. To change the column to a factor we again can use the <code>factor()</code> column: 
               </p>
               <!--begin.rcode 
                 d$c2 <- factor(d$c2) 

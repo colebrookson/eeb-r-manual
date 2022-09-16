@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#index">Indexing</a>
+            <ul>
+              <li class=""><a href="#index--vecs">Vectors</a></li>
+              <li class=""><a href="#index--lists">Lists</a></li>
+              <li class=""><a href="#index--mat">Matrices</a></li>
+              <li class=""><a href="#index--df">DataFrames</a></li>
+              <li class=""><a href="#index--arrays">Arrays</a></li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
+    <div>
+      <section id="index">
+        <h2>Indexing &amp; Querying Objects</h2>
+        <p>
+            Once an object is created, we need to be able to access components of it. Different data types each have multiple ways of indexing them, so it's best to go through the indexing options by type. Note that R is a programming language that starts indexing at 1 (i.e. the first element is 1) unlike other common programming languages such as Python which begin indexing at 0.
+        </p>
+        <p>
+            <strong>
+                A simple rule of thumb when indexing is that most objects can be indexed using the `[ ]`, containing the appropriate number of dimensions for the object at hand.
+            </strong>
+        </p>
+        <section id="index--vecs">
+            <h3>Vectors</h3>
+            <p>
+                Vectors are indexed via the <code>[]</code> notation. In a one-dimensional vector, the simplest and most common way to index is to pass the index or element number we want to those square brackets.
+            </p>
+            <!--begin.rcode
+            x <- c(1, 3, 9, 10, 76, 89)
+            end.rcode-->
+            If we want to index the 9 in this vector, that's in the third position, or index 3. 
+            <!--begin.rcode
+            x[3]
+            end.rcode-->
+            Similarly with a character vector
+            <!--begin.rcode
+            y <- c("The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog")
+            end.rcode-->
+            If we want to access the element "fox", the fourth element, we will write: 
+            <!--begin.rcode
+            y[4]
+            end.rcode-->
+            <!--begin.rcode
+            y[-1]
+            end.rcode-->
+            While indexing vectors, we can also return all the elements of a vector NOT in a certain position via the `-` sign:
+            <!--begin.rcode
+            y[-1]
+            end.rcode-->
+            This returns all the elements of the vector *except* the first one. 
+
+            We can also index based on multiple positions:
+            <!--begin.rcode
+            y[c(1, 4, 9)]
+            end.rcode-->
+            This returns the first, fourth, and ninth elements. 
+        </section>
+        <section id="index--lists">
+            <h3>Lists</h3>
+            <p>
+                Since lists are also vectors, they're also indexed with notation, but recall that each element of a list can hold other objects of multiple dimensions, we can use one set of square brackets to index the list item, and then another to index elements within that list item. To access the element of the list, we actually use double square brackets, <code>[[]]</code>.
+            </p>
+            <p>
+                <!--begin.rcode
+                l <- list(1, 2, "R is fun", c(1, 2, 3), TRUE)
+                l[[4]]
+                end.rcode-->
+                Here we see `l[[4]]` produces the fourth element, an atomic vector of length 3. What if we want to access the third element of that atomic vector to, say, reassign it to the value 5. We can do so like this: 
+                <!--begin.rcode
+                l[[4]][3]
+                end.rcode-->
+                We could now reassign this value to 5. 
+                <!--begin.rcode
+                l[[4]][3] <- 5
+                l
+                end.rcode-->
+                If we recall, we can also have named lists, which can be indexed by their names. 
+                <!--begin.rcode
+                agrawal <- list("name" = "Dr. Aneil Agrawal",
+                                "positions" = c("Distinguished Professor of Evolutionary Genetics",
+                                                "Associate Chair, Graduate Studies"),
+                                "concentrations" = c("Genetics, Genomics & Molecular Evolution",
+                                                        "Theoretical & Computational Biology"))
+                names(agrawal)
+                end.rcode-->
+                <br>
+                By calling `names()` we can see the names of the different list components. We can index by any of these. 
+                <br>
+                <!--begin.rcode
+                agrawal["concentrations"]
+                end.rcode-->
+                <br>
+                Here, we have the choice to use the square bracket notation as before, or we can use a new kind, the `$` notation. 
+                <br>
+                <!--begin.rcode
+                agrawal$concentrations
+                end.rcode-->
+                <br>
+                This provides the same output. Now let's say we wanted to access the second element in this "concentrations" element. Perhaps we want to rearrange the wording to say "Computational & Theoretical Biology" instead. We could do that with either the `[[]][]` notation we used before, or perhaps the easier to read option of combining both the `$` and `[]`:
+                <br>
+                <!--begin.rcode
+                agrawal$concentrations[2]
+                end.rcode-->
+                <br>
+                Now let's reassign it:
+                <br>
+                <!--begin.rcode
+                agrawal$concentrations[2] <- "Computational & Theoretical Biology"
+                end.rcode-->
+                <br>
+                To check if it worked print the `agrawal` list to our console: 
+                <br>
+                <!--begin.rcode
+                agrawal
+                end.rcode-->
+                <br>
+                And we see it worked. 
+            </p>
+        </section>
+        <section id="index--mat">
+            <h3>Matrices</h3>
+            <p>
+                Indexing matrices is simple as it is a 2-dimensional extension of indexing atomic vectors. 
+                <br>
+                <!--begin.rcode
+                m <- matrix(c(100, 200, 300, 400), nrow = 2, ncol = 2)
+                m
+                end.rcode-->
+                <br>
+                To access the value 300, we will need to specify that we want the value in the first row, and second column. <strong>Indexing in R is always done row then column.</strong> 
+                <br>
+                <!--begin.rcode
+                m[1,2]
+                end.rcode-->
+                <br>
+                We can get the entirety of the first row
+                <br>
+                <!--begin.rcode
+                m[1, ]
+                end.rcode-->
+                <br>
+                or the first column
+                <br>
+                <!--begin.rcode
+                m[ ,1]
+                end.rcode-->
+                <br>
+                by writing leaving the row/column argument empty, which tells R that for either condition, to include all values of that dimension. 
+            </p>
+        </section>
+        <section id="index--df">
+            <h3>DataFrames</h3>
+            <p>
+                Dataframes are lists (a special kind wherein all the elements are of the same length), so their indexing is actually very similar. Let's create an extension of the example we had above using some professors from the EEB department at the University of Toronto. We'll make a dataframe combining the information for a number of categories.
+            </p>
+            <p>
+                This is just for fun, so let's use the EEB website to get information on each of the professors' names, the school they got their PhD at, and whether or not they're accepting applicants for graduate work.
+            </p>
+            <img class="image-full-page" style="display:block;margin:auto"
+            src="../img/01-img/profs.png">
+            <p>
+                However, note that differently from above, we cannot have the "positions" nor the "concentrations" categories be of different lengths as that would violate the rules of a dataframe, so instead each category will be it's own vector:
+                <br>
+                <!--begin.rcode
+                # first make a list for each professor
+                names <- c("Dr. Aneil Agrawal", "Dr. Celina Baines", "Dr. Spencer C.H. Barrett",
+                        "Dr. Megan Bontrager")
+                phd <- c("Indiana", "Toronto", "Reading", "UBC")
+                accepting <- c(FALSE, TRUE, FALSE, TRUE)
+
+
+                # now make a dataframe out of these lists
+                prof_df = data.frame(names, phd, accepting)
+                prof_df
+                end.rcode-->
+                <br>
+                If want to access any of the columns of this dataframe, we can do so by their <em>names</em>, the commonality with lists: 
+                <br>
+                <!--begin.rcode
+                prof_df$phd
+                end.rcode-->
+                <br>
+                We could also look at a single row: 
+                <br>
+                <!--begin.rcode
+                prof_df[3, ]
+                end.rcode-->
+                <br>
+                which tells us all about Dr. Barrett. We could also ask whether or not the fourth row professor, Dr. Bontrager, is accepting students: 
+                <br>
+                <!--begin.rcode
+                prof_df$accepting[4]
+                end.rcode-->
+            </p>
+        </section>
+        <section id="index--arrays">
+            <h3>Arrays</h3>
+            <p>
+              Since these are three dimensional objects, we must include all indices to get to a specific element. Let's used the named array we had in the data structures section as our example here: 
+              <br>
+              <!--begin.rcode
+              # pre-define the vectors
+              vec1 <- c(1, 2, 3)
+              vec2 <- c(4, 5, 6)
+              vec3 <- c(7, 8, 9)
+
+              # define the rownames 
+              row_names <- c("row1", "row2", "row3")
+              col_names <- c("col1", "col2", "col3")
+              mat_names <- c("mat1", "mat2")
+
+              # now remake the array with the names
+              ar_named = array(c(vec1, vec2, vec3), dim = c(3, 3, 2), 
+                              dimnames = list(row_names, col_names, mat_names))
+              ar_named
+              end.rcode-->
+              <br>
+              To access each of these elements, we need to recall that the indexing will go `[row, column, matrix]`. So to see just the second row but all the columns and rows we might write: 
+              <br>
+              <!--begin.rcode
+              ar_named[,,2]
+              end.rcode-->
+              <br>
+              but to see each of the second columns in both matrices and all rows, we can write: 
+              <br>
+              <!--begin.rcode
+              ar_named[, 2, ]
+              end.rcode-->
+              <br>
+              Further, if we want only the first row and the third column elements for all matrices, we can write: 
+              <br>
+              <!--begin.rcode
+              ar_named[1, 3, ]
+              end.rcode-->
+              <br>
+              but the value for the third row, first column, only in matrix 2 would be found by: 
+              <br>
+              <!--begin.rcode
+              ar_named[3, 1, 2]
+              end.rcode-->
+              <br>
+              <br>    
+              A common use case is that we may want, rather than to index a position, tell our object to return to us some part of that object containing a particular value. This is called <a href="../02-data/02-02-filtering-subsetting.html">data filtering and is discussed here.</a>
+            </p>
+        </section>
+        </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>
