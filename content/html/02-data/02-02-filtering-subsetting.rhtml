@@ -50,6 +50,10 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                     <li class=""><a href="#filter--single--tidy">Tidyverse</a></li>
                 </ul>
             </li>
+            <li class=""><a href="#filter--in"><code>%in%</code> Operator</a>
+            </li>
+            <li class=""><a href="#filter--multiple">Multiple Values</a>
+            </li>
             </ul>
           </li>
         </ol>
@@ -133,6 +137,91 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             </p>
         </section>
       </section>
+        <hr>
+      <section id="filter--in">
+        <h3>Filter Based on <code>%in%</code> Operator</h3>
+            <p>
+                There are many permutations of this single value option with Boolean operators. For example, using either approach, we could filter asking R to select rows where <code>site == "VCR" | site == "BC"</code> which would select rows where the site was either "VCR" or "BC". 
+
+                In the case where we had a separate vector dictating the focal sites we were interested in, we could use that vector in combination with the <code>%in%</code> operator to deal with this: 
+            </p>
+            <h5><strong>Core R</strong></h5>
+            <!--begin.rcode
+            focal_sites <- c("ZI", "RC", "VCR", "DB", "JC")
+
+            focal_crabs <- crabs[which(crabs$site %in% focal_sites),]
+            end.rcode-->
+            <h5><strong>Tidyverse</strong></h5>
+            <!--begin.rcode
+            focal_sites <- c("ZI", "RC", "VCR", "DB", "JC")
+
+            focal_crabs <- crabs %>% 
+            dplyr::filter(site %in% focal_sites)
+            end.rcode-->
+      </section>
+      <section id="filter--multiple">
+        <p>
+            This filtering can be extended to use multiple columns relatively simply. There is a variable in this dataset called size. 
+            <!--begin.rcode
+            hist(crabs$size)
+            end.rcode-->
+            We may want to filter crabs only in our focal sites, but also those above some size (e.g. 15).
+        </p>
+        <h5><strong>Core R</strong></h5>
+        <!--begin.rcode
+        site_size <- crabs[which(crabs$site %in% focal_sites & 
+                                crabs$size > 15), ]
+        end.rcode-->
+        <h5><strong>Tidyverse</strong></h5>
+        <!--begin.rcode
+        site_size <- crabs %>% 
+        dplyr::filter(site %in% focal_sites & size > 15)
+        end.rcode-->
+        <hr>
+        <p>
+            Here we just use another logical operator, <code>&amp;</code> to link our two conditions together. We can double check:
+            <br>
+            <!--begin.rcode
+            hist(site_size$size)
+            unique(site_size$site)
+            end.rcode-->
+            <br>
+            So we can see it worked well. 
+        </p>
+      </section>
+    </section>
+    <section id="na">
+        <h3>Filtering out <em>NA</em>'s</h3>
+        <p>
+            For this example, we will use a different dataset.
+            <!--begin.rcode
+            ice <- lterdatasampler::ntl_icecover
+            head(ice)
+            end.rcode-->
+            We can see already that there will be some values of <code>ice_duration</code> that will have values of <em>NA</em>. To filter those out of the dataset, we can use the <code>is.na()</code> function:
+        </p>
+        <h5><strong>Core R</strong></h5>
+        <!--begin.rcode
+        trimmed_ice <- ice[which(!is.na(ice$ice_duration)),]
+        end.rcode-->
+        <p>
+            Again, we want to keep all the columns present.
+        </p>
+        <h5><strong>Tidyverse</strong></h5>
+        <!--begin.rcode
+        trimmed_ice <- ice %>% 
+        dplyr::filter(!is.na(ice_duration))
+        end.rcode-->
+        <hr>
+        <p>
+            Here we use the combination of the <code>!</code> and <code>is.na()</code> to first find the positions where the value is equal to <em>NA</em>, and then to remove them with the <code>!</code>. 
+        </p>
+        <p>
+            Any conceivable set of criteria can be strung together (carefully!) to filter a dataset with as many conditions as necessary. It is always a good idea however when you are just beginning to use these functions, to work piece by piece, adding conditions one at a time and testing each one to make sure it's doing what you want. Then you can string multiple conditions together without worrying that an error is not being caught. 
+        </p>
+
+
+    </section>
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">

@@ -67,9 +67,9 @@ The `%>%` operator to pass the original data object `crabs` to our function, `fi
 
 ----------------
 
-There are many permutations of this single value option with Boolean operators. For example, using either approach, we could filter asking R to select rows where `site == "VCR" | site == "BC"` which would select rows where the site was either "VCR" or "BC". 
+There are many permutations of this single value option with Boolean operators. For example, using either approach, we could filter asking R to select rows where <code>site == "VCR" | site == "BC"</code> which would select rows where the site was either "VCR" or "BC". 
 
-In the case where we had a separate vector dictating the focal sites we were interested in, we could use that vector in combination with the `%in%` operator to deal with this: 
+In the case where we had a separate vector dictating the focal sites we were interested in, we could use that vector in combination with the <code>%in%</code> operator to deal with this: 
 
 ### Core R
 <!--begin.rcode
@@ -123,7 +123,7 @@ For this example, we will use a different dataset.
 ice <- lterdatasampler::ntl_icecover
 head(ice)
 end.rcode-->
-We can see already that there will be some values of `ice_duration` that will have values of *NA*. To filter those out of the dataset, we can use the `is.na()` function:
+We can see already that there will be some values of <code>ice_duration</code> that will have values of <em>NA</em>. To filter those out of the dataset, we can use the <code>is.na()</code> function:
 
 ### Core R
 
@@ -141,7 +141,7 @@ end.rcode-->
 
 --------
 
-Here we use the combination of the `!` and `is.na()` to first find the positions where the value is equal to *NA*, and then to remove them with the `!`. 
+Here we use the combination of the <code>!</code> and <code>is.na()</code> to first find the positions where the value is equal to <em>NA</em>, and then to remove them with the <code>!</code>. 
 
 
 
