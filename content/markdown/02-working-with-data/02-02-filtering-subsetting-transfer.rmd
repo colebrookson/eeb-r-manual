@@ -1,0 +1,148 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Filtering & Subsetting Data 
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+To filter or subset data is to take a dataframe or some other object, and select only part of that object based on some criteria. Most commonly we want to make a new dataframe from an existing dataframe, by filtering the rows of the dataframe based on one or more column. 
+
+As with all things data, we provide an option to perform the task using <strong>core R</strong> functions, as well as in the <strong>Tidyverse</strong>. 
+
+## Filter Based on Single Value
+
+We will use an example dataset here: 
+
+<!--begin.rcode, message=FALSE
+# remotes package is needed to get the most recent version of the package
+install.packages("remotes")
+# install package
+remotes::install_github("lter/lterdatasampler")
+
+library(lterdatasampler)
+library(tidyverse)
+end.rcode-->
+
+If we want to filter a dataset based on a single value in a column, we can make use of Boolean operators.
+
+<!--begin.rcode
+# first call the dataset from the lterdatasampler package
+crabs <- lterdatasampler::pie_crab
+end.rcode-->
+
+Let's look at the columns
+<!--begin.rcode
+# this will show us the first six rows
+head(crabs)
+end.rcode-->
+
+We see there is a column called `site`. We can get the unique values of that column:
+<!--begin.rcode
+unique(crabs$site)
+end.rcode-->
+So we might want to filter our data such that we have a new dataframe, where <code>site</code> is <strong>only</strong> equal to "VCR". 
+
+### Core R
+
+Filtering in core R makes use of the square bracket indexing discussed elsewhere. Recall that the index goes <em>[row,column]</em>. In the <em>row</em> position, we use the <code>which()</code> function, which simply returns where some indices are TRUE. Since we want to keep all the columns in our dataset, we leave the <code>column</code> position empty, indicating that all columns should be retained. In our example that looks like this: 
+<!--begin.rcode
+vcr_crabs <- crabs[which(crabs$site == "VCR"),]
+end.rcode-->
+We can check it worked by calling <code>unique()</code> on the new dataframe as above:
+<!--begin.rcode
+unique(vcr_crabs$site)
+end.rcode-->
+And we can see it worked as expected. 
+
+### Tidyverse
+
+Filtering in the Tidyverse uses mostly the `dplyr` package, which is EXTREMELY useful for most data management exercises. Here we use the aptly named `filter()` function to perform the operation. 
+<!--begin.rcode
+vc_crabs <- crabs %>% 
+  dplyr::filter(site == "VCR")
+end.rcode-->
+The `%>%` operator to pass the original data object `crabs` to our function, `filter()`, and the Boolean operator `==` is the only argument needed for this function. 
+
+----------------
+
+There are many permutations of this single value option with Boolean operators. For example, using either approach, we could filter asking R to select rows where `site == "VCR" | site == "BC"` which would select rows where the site was either "VCR" or "BC". 
+
+In the case where we had a separate vector dictating the focal sites we were interested in, we could use that vector in combination with the `%in%` operator to deal with this: 
+
+### Core R
+<!--begin.rcode
+focal_sites <- c("ZI", "RC", "VCR", "DB", "JC")
+
+focal_crabs <- crabs[which(crabs$site %in% focal_sites),]
+end.rcode-->
+
+### Tidyverse
+<!--begin.rcode
+focal_sites <- c("ZI", "RC", "VCR", "DB", "JC")
+
+focal_crabs <- crabs %>% 
+  dplyr::filter(site %in% focal_sites)
+end.rcode-->
+
+## Filter Based on Multiple Values
+
+This filtering can be extended to use multiple columns relatively simply. There is a variable in this dataset called size. 
+<!--begin.rcode
+hist(crabs$size)
+end.rcode-->
+We may want to filter crabs only in our focal sites, but also those above some size (e.g. 15).
+
+### Core R
+<!--begin.rcode
+site_size <- crabs[which(crabs$site %in% focal_sites & 
+                           crabs$size > 15), ]
+end.rcode-->
+
+### Tidyverse
+
+<!--begin.rcode
+site_size <- crabs %>% 
+  dplyr::filter(site %in% focal_sites & size > 15)
+end.rcode-->
+
+-------
+
+Here we just use another logical operator, `&` to link our two conditions together. We can double check:
+<!--begin.rcode
+hist(site_size$size)
+unique(site_size$site)
+end.rcode-->
+So we can see it worked well. 
+
+## Filtering Out NA's 
+
+For this example, we will use a different dataset.
+<!--begin.rcode
+ice <- lterdatasampler::ntl_icecover
+head(ice)
+end.rcode-->
+We can see already that there will be some values of `ice_duration` that will have values of *NA*. To filter those out of the dataset, we can use the `is.na()` function:
+
+### Core R
+
+<!--begin.rcode
+trimmed_ice <- ice[which(!is.na(ice$ice_duration)),]
+end.rcode-->
+Again, we want to keep all the columns present. 
+
+### Tidyverse
+
+<!--begin.rcode
+trimmed_ice <- ice %>% 
+  dplyr::filter(!is.na(ice_duration))
+end.rcode-->
+
+--------
+
+Here we use the combination of the `!` and `is.na()` to first find the positions where the value is equal to *NA*, and then to remove them with the `!`. 
+
+
+
+Any conceivable set of criteria can be strung together (carefully!) to filter a dataset with as many conditions as necessary. It is always a good idea however when you are just beginning to use these functions, to work piece by piece, adding conditions one at a time and testing each one to make sure it's doing what you want. Then you can string multiple conditions together without worrying that an error is not being caught. 
