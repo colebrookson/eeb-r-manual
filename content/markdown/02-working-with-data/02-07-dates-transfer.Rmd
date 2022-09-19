@@ -7,9 +7,9 @@ output:
 **Author:** Cole Brookson
 **Date:** 20 July 2022
 
-```{r, echo=FALSE}
+<!--begin.rcode, echo=FALSE}
 options(tidyverse.quiet = TRUE)
-```
+end.rcode-->
 
 Along with factors, dates are one of the other datatypes that can be a nuisance to work with. EEB-type samples are often taken at inconsistent sampling intervals, and we don't always keep this information in concise formats. 
 
@@ -23,34 +23,34 @@ We'll focus here on a few key activities to do with dates:
 
 Let's use an example of a timeseries with data collected through time on precipitation and temperature in Alaska:
 
-```{r}
+<!--begin.rcode
 library(tidyverse)
 library(lterdatasampler)
 
 df <- lterdatasampler::arc_weather
-```
+end.rcode-->
 
 We can see what we're dealiang with here: 
 
-```{r}
+<!--begin.rcode
 head(df)
-```
+end.rcode-->
 
-So we already have a date column of the special data type `date`. This in fact makes our life easy, as it's always easier to extract information from a pre-formatted date column. 
+So we already have a date column of the special data type <code>date</code>. This in fact makes our life easy, as it's always easier to extract information from a pre-formatted date column. 
 
-The best tool in our toolbox for this type of task is the `lubridate` package. This package has a ton of great functions that let us work with dates more easily. Let's test it out. Say we want to make a vector that has just all the years extracted from our date column. We could do that very easily like this with the `lubridate::year()` function:
+The best tool in our toolbox for this type of task is the <code>lubridate</code> package. This package has a ton of great functions that let us work with dates more easily. Let's test it out. Say we want to make a vector that has just all the years extracted from our date column. We could do that very easily like this with the <code>lubridate::year()</code> function:
 
-```{r}
+<!--begin.rcode
 library(lubridate)
 year <- lubridate::year(df$date) 
 
 # print the first ten entries
 year[1:10]
-```
+end.rcode-->
 
-And we see that this worked! So the way we probably use this the most often is to make new columns in a dataframe. Let's go ahead and make a new column each for year, month, week, and day in our `df` dataframe:
+And we see that this worked! So the way we probably use this the most often is to make new columns in a dataframe. Let's go ahead and make a new column each for year, month, week, and day in our <code>df</code> dataframe:
 
-```{r}
+<!--begin.rcode
 df %>%
   # since we want lubridate to work with each row individually, use rowwise()
   dplyr::rowwise() %>% 
@@ -61,7 +61,7 @@ df %>%
     week = lubridate::week(date), 
     day = lubridate::day(date)
   )
-```
+end.rcode-->
 
 And here we can see the new columns have been made for us! 
 
@@ -69,39 +69,39 @@ And here we can see the new columns have been made for us!
 
 To start thinking about forming dates, we'll use some fake data to make our lives easier. We can imagine the opposite scenario to above, we have some entries for, let's say, year and month, but no full date. 
 
-This brings about a somewhat more challenging problem as there's a decision point that needs to be executed -- what day should we default to? This is a question that deserves careful consideration for each problem that arises and there is no one-size-fits-all solution. However, assuming you have decided that there is a simple assumption you can make (e.g. you will assume the data were collected on the first of the month), we can use this to make a new `date` column from our existing data. 
+This brings about a somewhat more challenging problem as there's a decision point that needs to be executed -- what day should we default to? This is a question that deserves careful consideration for each problem that arises and there is no one-size-fits-all solution. However, assuming you have decided that there is a simple assumption you can make (e.g. you will assume the data were collected on the first of the month), we can use this to make a new <code>date</code> column from our existing data. 
 
 Let's generate some fake data to work with: 
 
-```{r}
+<!--begin.rcode
 df = data.frame(
   year = sample(c(2010:2020), replace = TRUE, 200),
   month = sample(c(1:12), replace = TRUE, 200),
   # we'll make a set of fake sampled data here
   observation = sample(c(12.5:16.6), replace = TRUE, 200)
 )
-```
+end.rcode-->
 
 The first thing to do is inpute our decided day values of the first day of each month. That's easy enough: 
 
-```{r}
+<!--begin.rcode
 df = df %>% 
   dplyr::mutate(
     day = 1
   )
 df
-```
+end.rcode-->
 
-Great, we have the info we need. Now, we can go ahead and make a `date` column by combining our three other variables together using thye `lubrdiate::make_date()` function:
+Great, we have the info we need. Now, we can go ahead and make a <code>date</code> column by combining our three other variables together using thye <code>lubridate::make_date()</code> function:
 
-```{r}
+<!--begin.rcode
 df = df %>% 
   dplyr::rowwise() %>% 
   dplyr::mutate(
     date = lubridate::make_date(year, month, day)
   )
 df
-```
+end.rcode-->
 
 Great, we can visually check this by looking across the first few rows and we see our function worked as it should.
 
