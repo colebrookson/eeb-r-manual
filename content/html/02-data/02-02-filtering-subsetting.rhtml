@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#filter">Filtering</a>
+            <ul>
+              <li class=""><a href="#filter--single">One Value</a>
+                <ul>
+                    <li class=""><a href="#filter--single--core">Core R</a></li>
+                    <li class=""><a href="#filter--single--tidy">Tidyverse</a></li>
+                </ul>
+            </li>
+            <li class=""><a href="#filter--in"><code>%in%</code> Operator</a>
+            </li>
+            <li class=""><a href="#filter--multiple">Multiple Values</a>
+            </li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
+    <div>
+      <section id="filter">
+        <h2>Filtering &amp; Subsetting Data</h2>
+        <p>
+            To filter or subset data is to take a dataframe or some other object, and select only part of that object based on some criteria. Most commonly we want to make a new dataframe from an existing dataframe, by filtering the rows of the dataframe based on one or more column. 
+        </p>
+        <p>
+            As with all things data, we provide an option to perform the task using <strong>core R</strong> functions, as well as in the <strong>Tidyverse</strong>. 
+        </p>
+      </section>
+      <section id="filter--single">
+        <h3>Filter Based on Single Value</h3>
+        <p>
+            We will use an example dataset here: 
+            <br>
+            <!--begin.rcode, message=FALSE
+            # remotes package is needed to get the most recent version of the package
+            install.packages("remotes")
+            # install package
+            remotes::install_github("lter/lterdatasampler")
+
+            library(lterdatasampler)
+            library(tidyverse)
+            end.rcode-->
+            <br>
+            If we want to filter a dataset based on a single value in a column, we can make use of Boolean operators.
+            <br>
+            <!--begin.rcode
+            # first call the dataset from the lterdatasampler package
+            crabs <- lterdatasampler::pie_crab
+            end.rcode-->
+            <br>
+            Let's look at the columns
+            <br>
+            <!--begin.rcode
+            # this will show us the first six rows
+            head(crabs)
+            end.rcode-->
+            <br>
+            We see there is a column called <code>site</code>. We can get the unique values of that column:
+            <br>
+            <!--begin.rcode
+            unique(crabs$site)
+            end.rcode-->
+            <br>
+            So we might want to filter our data such that we have a new dataframe, where <code>site</code> is <strong>only</strong> equal to "VCR". 
+        </p>
+        <section id="filter--single--core">
+            <h5><strong>Core R</strong></h5>
+            <p>
+                Filtering in core R makes use of the square bracket indexing discussed elsewhere. Recall that the index goes <em>[row,column]</em>. In the <em>row</em> position, we use the <code>which()</code> function, which simply returns where some indices are TRUE. Since we want to keep all the columns in our dataset, we leave the <code>column</code> position empty, indicating that all columns should be retained. In our example that looks like this: 
+                <br>
+                <!--begin.rcode
+                vcr_crabs <- crabs[which(crabs$site == "VCR"),]
+                end.rcode-->
+                <br>
+                We can check it worked by calling <code>unique()</code> on the new dataframe as above:
+                <br>
+                <!--begin.rcode
+                unique(vcr_crabs$site)
+                end.rcode-->
+                <br>
+                And we can see it worked as expected.
+            </p>
+        </section>
+        <section id="filter--single--tidy">
+            <h5><strong>Tidyverse</strong></h5>
+            <p>
+                Filtering in the Tidyverse uses mostly the <code>dplyr</code> package, which is EXTREMELY useful for most data management exercises. Here we use the aptly named <code>filter()</code> function to perform the operation. 
+                <br>
+                <!--begin.rcode
+                vc_crabs <- crabs %>% 
+                dplyr::filter(site == "VCR")
+                end.rcode-->
+                <br>
+                The <code>%>%</code> operator to pass the original data object <code>crabs</code> to our function, <code>filter()</code>, and the Boolean operator <code>==</code> is the only argument needed for this function. 
+            </p>
+        </section>
+      </section>
+        <hr>
+      <section id="filter--in">
+        <h3>Filter Based on <code>%in%</code> Operator</h3>
+            <p>
+                There are many permutations of this single value option with Boolean operators. For example, using either approach, we could filter asking R to select rows where <code>site == "VCR" | site == "BC"</code> which would select rows where the site was either "VCR" or "BC". 
+
+                In the case where we had a separate vector dictating the focal sites we were interested in, we could use that vector in combination with the <code>%in%</code> operator to deal with this: 
+            </p>
+            <h5><strong>Core R</strong></h5>
+            <!--begin.rcode
+            focal_sites <- c("ZI", "RC", "VCR", "DB", "JC")
+
+            focal_crabs <- crabs[which(crabs$site %in% focal_sites),]
+            end.rcode-->
+            <h5><strong>Tidyverse</strong></h5>
+            <!--begin.rcode
+            focal_sites <- c("ZI", "RC", "VCR", "DB", "JC")
+
+            focal_crabs <- crabs %>% 
+            dplyr::filter(site %in% focal_sites)
+            end.rcode-->
+      </section>
+      <section id="filter--multiple">
+        <p>
+            This filtering can be extended to use multiple columns relatively simply. There is a variable in this dataset called size. 
+            <!--begin.rcode
+            hist(crabs$size)
+            end.rcode-->
+            We may want to filter crabs only in our focal sites, but also those above some size (e.g. 15).
+        </p>
+        <h5><strong>Core R</strong></h5>
+        <!--begin.rcode
+        site_size <- crabs[which(crabs$site %in% focal_sites & 
+                                crabs$size > 15), ]
+        end.rcode-->
+        <h5><strong>Tidyverse</strong></h5>
+        <!--begin.rcode
+        site_size <- crabs %>% 
+        dplyr::filter(site %in% focal_sites & size > 15)
+        end.rcode-->
+        <hr>
+        <p>
+            Here we just use another logical operator, <code>&amp;</code> to link our two conditions together. We can double check:
+            <br>
+            <!--begin.rcode
+            hist(site_size$size)
+            unique(site_size$site)
+            end.rcode-->
+            <br>
+            So we can see it worked well. 
+        </p>
+      </section>
+    </section>
+    <section id="na">
+        <h3>Filtering out <em>NA</em>'s</h3>
+        <p>
+            For this example, we will use a different dataset.
+            <!--begin.rcode
+            ice <- lterdatasampler::ntl_icecover
+            head(ice)
+            end.rcode-->
+            We can see already that there will be some values of <code>ice_duration</code> that will have values of <em>NA</em>. To filter those out of the dataset, we can use the <code>is.na()</code> function:
+        </p>
+        <h5><strong>Core R</strong></h5>
+        <!--begin.rcode
+        trimmed_ice <- ice[which(!is.na(ice$ice_duration)),]
+        end.rcode-->
+        <p>
+            Again, we want to keep all the columns present.
+        </p>
+        <h5><strong>Tidyverse</strong></h5>
+        <!--begin.rcode
+        trimmed_ice <- ice %>% 
+        dplyr::filter(!is.na(ice_duration))
+        end.rcode-->
+        <hr>
+        <p>
+            Here we use the combination of the <code>!</code> and <code>is.na()</code> to first find the positions where the value is equal to <em>NA</em>, and then to remove them with the <code>!</code>. 
+        </p>
+        <p>
+            Any conceivable set of criteria can be strung together (carefully!) to filter a dataset with as many conditions as necessary. It is always a good idea however when you are just beginning to use these functions, to work piece by piece, adding conditions one at a time and testing each one to make sure it's doing what you want. Then you can string multiple conditions together without worrying that an error is not being caught. 
+        </p>
+
+
+    </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>
+

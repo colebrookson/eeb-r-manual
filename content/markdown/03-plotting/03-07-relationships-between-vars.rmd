@@ -1,0 +1,14 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Plotting Relationships Between Variables
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+## Scatterplot
+
+## Heatmap
+
+

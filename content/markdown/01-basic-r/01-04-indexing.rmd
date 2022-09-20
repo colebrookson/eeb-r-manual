@@ -1,0 +1,236 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Data Types
+**Author:** Cole Brookson
+**Date:** 22 June 2022
+
+## Indexing & Querying Objects
+
+Once an object is created, we need to be able to access components of it. Different data types each have multiple ways of indexing them, so it's best to go through the indexing options by type. Note that R is a programming language that starts indexing at 1 (i.e. the first element is 1) unlike other common programming languages such as Python which begin indexing at 0.
+
+**A simple rule of thumb when indexing is that most objects can be indexed using the `[ ]`, containing the appropriate number of dimensions for the object at hand.**
+
+### Vectors
+
+Vectors are indexed via the `[]` notation. In a one-dimensional vector, the simplest and most common way to index is to pass the index or element number we want to those square brackets.
+
+```{r}
+x <- c(1, 3, 9, 10, 76, 89)
+```
+If we want to index the 9 in this vector, that's in the third position, or index 3. 
+```{r}
+x[3]
+```
+Similarly with a character vector
+```{r}
+y <- c("The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog")
+```
+If we want to access the element "fox", the fourth element, we will write: 
+```{r}
+y[4]
+```
+```{r}
+y[-1]
+```
+
+While indexing vectors, we can also return all the elements of a vector NOT in a certain position via the `-` sign:
+```{r}
+y[-1]
+```
+This returns all the elements of the vector *except* the first one. 
+
+We can also index based on multiple positions:
+```{r}
+y[c(1, 4, 9)]
+```
+This returns the first, fourth, and ninth elements. 
+
+### Lists
+
+Since lists are also vectors, they're also indexed with notation, but recall that each element of a list can hold other objects of multiple dimensions, we can use one set of square brackets to index the list item, and then another to index elements within that list item. To access the element of the list, we actually use double square brackets, `[[]]`.
+
+```{r}
+l <- list(1, 2, "R is fun", c(1, 2, 3), TRUE)
+l[[4]]
+```
+Here we see `l[[4]]` produces the fourth element, an atomic vector of length 3. What if we want to access the third element of that atomic vector to, say, reassign it to the value 5. We can do so like this: 
+```{r}
+l[[4]][3]
+```
+We could now reassign this value to 5. 
+```{r}
+l[[4]][3] <- 5
+l
+```
+If we recall, we can also have named lists, which can be indexed by their names. 
+```{r}
+agrawal <- list("name" = "Dr. Aneil Agrawal",
+                  "positions" = c("Distinguished Professor of Evolutionary Genetics",
+                                  "Associate Chair, Graduate Studies"),
+                  "concentrations" = c("Genetics, Genomics & Molecular Evolution",
+                                        "Theoretical & Computational Biology"))
+names(agrawal)
+```
+By calling `names()` we can see the names of the different list components. We can index by any of these. 
+```{r}
+agrawal["concentrations"]
+```
+Here, we have the choice to use the square bracket notation as before, or we can use a new kind, the `$` notation. 
+
+```{r}
+agrawal$concentrations
+```
+This provides the same output. Now let's say we wanted to access the second element in this "concentrations" element. Perhaps we want to rearrange the wording to say "Computational & Theoretical Biology" instead. We could do that with either the `[[]][]` notation we used before, or perhaps the easier to read option of combining both the `$` and `[]`:
+```{r}
+agrawal$concentrations[2]
+```
+Now let's reassign it:
+```{r}
+agrawal$concentrations[2] <- "Computational & Theoretical Biology"
+```
+To check if it worked print the `agrawal` list to our console: 
+```{r}
+agrawal
+```
+And we see it worked. 
+
+### Matrices
+
+Indexing matrices is simple as it is a 2-dimensional extension of indexing atomic vectors. 
+
+```{r}
+m <- matrix(c(100, 200, 300, 400), nrow = 2, ncol = 2)
+m
+```
+To access the value 300, we will need to specify that we want the value in the first row, and second column. **Indexing in R is always done row then column**. 
+
+```{r}
+m[1,2]
+```
+We can get the entirety of the first row
+```{r}
+m[1, ]
+```
+or the first column
+```{r}
+m[ ,1]
+```
+by writing leaving the row/column argument empty, which tells R that for either condition, to include all values of that dimension. 
+
+### Dataframes
+
+Dataframes are lists (a special kind wherein all the elements are of the same length), so their indexing is actually very similar. Let's create an extension of the example we had above using some professors from the EEB department at the University of Toronto. We'll make a dataframe combining the information for a number of categories.
+
+This is just for fun, so let's use the EEB website to get information on each of the professors' names, the school they got their PhD at, and whether or not they're accepting applicants for graduate work.
+
+![Professors](./img/profs.png)
+However, note that differently from above, we cannot have the "positions" nor the "concentrations" categories be of different lengths as that would violate the rules of a dataframe, so instead each category will be it's own vector:
+```{r}
+# first make a list for each professor
+names <- c("Dr. Aneil Agrawal", "Dr. Celina Baines", "Dr. Spencer C.H. Barrett",
+           "Dr. Megan Bontrager")
+phd <- c("Indiana", "Toronto", "Reading", "UBC")
+accepting <- c(FALSE, TRUE, FALSE, TRUE)
+
+
+# now make a dataframe out of these lists
+prof_df = data.frame(names, phd, accepting)
+prof_df
+```
+If want to access any of the columns of this dataframe, we can do so by their *names*, the commonality with lists: 
+```{r}
+prof_df$phd
+```
+We could also look at a single row: 
+```{r}
+prof_df[3, ]
+```
+which tells us all about Dr. Barrett. We could also ask whether or not the fourth row professor, Dr. Bontrager, is accepting students: 
+```{r}
+prof_df$accepting[4]
+```
+### Arrays
+
+Since these are three dimensional objects, we must include all indices to get to a specific element. Let's used the named array we had in the data structures section as our example here: 
+```{r}
+# pre-define the vectors
+vec1 <- c(1, 2, 3)
+vec2 <- c(4, 5, 6)
+vec3 <- c(7, 8, 9)
+
+# define the rownames 
+row_names <- c("row1", "row2", "row3")
+col_names <- c("col1", "col2", "col3")
+mat_names <- c("mat1", "mat2")
+
+# now remake the array with the names
+ar_named = array(c(vec1, vec2, vec3), dim = c(3, 3, 2), 
+                 dimnames = list(row_names, col_names, mat_names))
+ar_named
+```
+To access each of these elements, we need to recall that the indexing will go `[row, column, matrix]`. So to see just the second row but all the columns and rows we might write: 
+```{r}
+ar_named[,,2]
+```
+but to see each of the second columns in both matrices and all rows, we can write: 
+```{r}
+ar_named[, 2, ]
+```
+Further, if we want only the first row and the third column elements for all matrices, we can write: 
+```{r}
+ar_named[1, 3, ]
+```
+but the value for the third row, first column, only in matrix 2 would be found by: 
+```{r}
+ar_named[3, 1, 2]
+```
+
+
+
+A common use case is that we may want, rather than to index a position, tell our object to return to us some part of that object containing a particular value. This is called data *filtering* and will be discussed elsewhere. 
+
+```{r, echo=FALSE, eval=FALSE}
+# #### NOT USED ######################
+# Let's continue on our professor example, but now we will have three matrices in the y-dimension, one each for the professors at the downtown campus, the Scarborough campus,
+# 
+# ![Scarborough Profs](./img/profs-utsc.png)
+# and the Mississauga campus.
+# ![Mississauga Profs](./img/profs-utm.png)
+# 
+# Similarly, we'll make the appropriate elements, then combine them into an array. However, let's short form it and combine some commands.
+# 
+# ```{r}
+# # here we can combine the actions of making the vectors and moving them into a dataframe
+# miss_df <- data.frame(
+#   names = c("Dr. Cassidy D'Aloia", "Dr. Marcus Dillon", "Dr. Darryl T. Gwynne", "Dr. Marc Johnson"),
+#   phd = c("Boston College", "New Hampshire", "Colorado State", "Toronto"),
+#   accepting = c(FALSE, FALSE, FALSE, FALSE)
+# )
+# 
+# scar_df <- data.frame(
+#   names = c("Dr. Maydianne C.B. Andrade", "Dr. Ina Anreiter", "Dr. George Arhonditsis", "Dr. Marc Cadotte"),
+#   phd = c("Simon Fraser", "Toronto", "Aegean", "Tennessee"),
+#   accepting = c(FALSE, TRUE, FALSE, FALSE)
+# )
+# ```
+# 
+# Now let's make a named array of the three dataframes: 
+# ```{r}
+# prof_ar = array(
+#   c(prof_df, miss_df, scar_df),
+#   dim = c(4, 3, 3),
+#   dimnames = list(NULL, colnames = c("names", "phd_locations", "accepting_students"),
+#                   campusnames = c("st_george", "mississauga", "scarborough"))
+# )
+# ```
+# Note here that we pass `NULL` as our first argument in the list of `dimnames`. This is because since we are dealing with these dataframes, rownames are not necessarily useful to us, so we don't need to name the rows explicitly. 
+# 
+# ```{r}
+# print(prof_ar[,,1])
+# ```
+
+```
+

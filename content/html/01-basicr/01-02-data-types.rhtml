@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The R File Ecosystem</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#objects">Objects and OOP</a></li>
+          <li><a href="#data-types">Data Types</a>
+            <ul>
+              <li class=""><a href="#data-types--characters">Characters</a></li>
+              <li class=""><a href="#data-types--numerics">Numerics</a></li>
+              <li class=""><a href="#data-types--integers">Integers</a></li>
+              <li class=""><a href="#data-types--Logicals">Logicals</a></li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
+    <div>
+      <h1>Data Types</h1>
+      <p>
+        We will be using a variety of objects to operationalize our use of R. Here we'll discuss briefly the important types of objects and how they should be used. 
+      </p>
+
+      <section id="objects">
+        <h2>Objects and OOP</h2>
+        <p>
+            R is an Object-Oriented Programming (OOP) language which means it functions best by storing things as "objects". An object is a data structure that has some attributes and a set of methods that act on those attributes. 
+        </p>
+        <p>
+            Object-oriented languages (often called "high-level" languages) are typically more intuitive, as whenever you want to assign some value(s) to a variable and save those values for later, you can make the variable to an object which will be saved by R in the environment for future use. 
+        </p>
+      </section>
+      <section id="data-types">
+        <h2>Data Types</h2>
+        <p>
+            There are six main types in R, but we will discuss only the first four. 
+        </p>
+        <ol type="I">
+            <li><strong>Characters</strong></li>
+            <li><strong>Numerics (real or decimal)</strong></li>
+            <li><strong>Integers</strong></li>
+            <li><strong>Logicals</strong></li>
+            <li>Complex</li>
+            <li>Raw</li>
+        </ol>
+        <p>
+            When we assign variables, it is important to know what type we are using. We can check what the <code>type</code> of an object, and get other useful information about it, with a number of useful commands: 
+        </p>
+        <!--begin.rcode 
+          x <- "abc"
+          typeof(x)
+          end.rcode-->
+        <p>
+            If we want a more detailed answer we can ask what the structure (<code>str()</code>) of an object is
+        </p>
+        <!--begin.rcode 
+          str(x)
+          end.rcode-->
+        <p>
+            We see the output is slightly different here, with the function telling us the type of the object (<code>chr</code>) and also the content of the object (<code>"abc"</code>). 
+        </p>
+        <section id="data-types--characters">
+            <h3>Characters</h3>
+            <p>
+                A character is any alphanumeric string that begins with a letter. 
+            </p>
+            <!--begin.rcode 
+              x <- "abc"
+              y <- "abc123"
+              typeof(x)
+              typeof(y) 
+              end.rcode-->
+        </section>
+        <section id="data-types--numerics">
+            <h3>Numerics</h3>
+            <p>
+                A numeric type is any non-integer number.  
+            </p>
+            <!--begin.rcode 
+              z <- 3.14
+              typeof(z)
+              end.rcode-->
+            <p>
+                The output <code>"double"</code>" here refers to the fact that R automatically stores numeric data types with "double" precision.   
+            </p>
+        </section>
+        <section id="data-types--integers">
+            <h3>Integers</h3>
+            <p>
+                An integer is a non-decimal whole number. <strong>Note:</strong> In R, the default is to store values as numeric unless explicitly told otherwise. We can see that if we make a new variable with only an integer value R will store it as a numeric type. 
+            </p>
+            <!--begin.rcode 
+              x1 <- 2
+              typeof(x1)
+              end.rcode-->
+            <p>
+                To force R to store it as an integer we can simply add an <code>L</code> after the value.  
+            </p>
+            <!--begin.rcode 
+              x2 <- 2L
+              typeof(x2)
+              end.rcode-->
+        </section>
+        <section id="data-types--logicals">
+            <h3>Logicals</h3>
+            <p>
+                Logical types are simply TRUE or FALSE. 
+            </p>
+            <!--begin.rcode 
+              x3 <- TRUE
+              typeof(x3)
+              end.rcode-->
+        </section>
+      </section>
+    </div>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>
+

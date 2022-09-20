@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The R File Ecosystem</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#software">Software</a></li>
+          <li><a href="#windows">Windows</a></li>
+          <li><a href="#macOS">macOS</a></li>
+          <li><a href="#linux">Linux</a></li>
+        </ol>
+      </nav>
+    <div>
+        <section id="software">
+            <h2>Software</h2>
+            <p>
+                To use the programming language R, you need to have both the R software 
+                downloaded, and a way to interact with that software. We will use the 
+                integrated development environment (IDE) RStudio for this task. 
+                To install the required software on your computer, please follow the
+                 instructions according to your operating system. 
+            </p>
+        </section>
+        <section id="windows">
+            <h2>Windows</h2>
+            <p>
+                You will need to download R and RStudio separately.
+            </p>
+            <h3>R</h3>
+            <p>
+                <ul>    
+                    <li>First, follow the instructions to download R from the 
+                    <a href="https://cran.r-project.org/bin/windows/base/"">
+                        CRAN website</a> for the most recent version. <b>For Fall 2022, 
+                            we will expect you to be using R-4.2.1</b></li>
+                    <li>
+                        Run the <code class="w3-codespan">.exe</code> file that was just 
+                        downloaded and follow the instructions on screen to install the d
+                        ownloaded software locally on your computer. 
+                    </li>
+            </ul>
+            </p>
+            <h3>RStudio</h3>
+            <p>
+                <ul>
+                    <li>
+                        Go to the <a 
+                        href="https://www.rstudio.com/products/rstudio/download/#download">
+                        RStudio download page</a> and identify the version for your
+                        operating system
+                    </li>
+                    <li>
+                        Under Installers select RStudio Desktop 2022.02.3+492 
+                        (<b>Expected version for Fall 2022</b>) - Windows Vista/7/8/10 
+                    </li>
+                    <li>
+                        Follow the on-screen instructions to download the software and 
+                        install it on your local machine
+                    </li>
+                    <li>
+                        Once it’s installed, open RStudio to make sure it works and that 
+                        you don’t get any error messages.
+                    </li>
+                </ul>
+            </p>
+        </section>
+        <section id="macOS">
+            <h2><b>macOS</b></h2>
+            <p>
+                You will need to download R & RStudio separtely. 
+            </p>
+            <h3>R</h3>
+                <ul>
+                    <li>
+                        Download R from the <a
+                         href="http://cran.r-project.org/bin/macosx/">CRAN website</a>
+                    </li>
+                    <li>
+                        Select the <code class="w3-codespan">.pkg</code> file for the 
+                        latest R version
+                    </li>
+                    <li>
+                        Double click on the downloaded file to install R
+                    </li>
+                    <li>
+                        It is also a good idea to install 
+                        <a href="https://www.xquartz.org/">XQuartz</a> 
+                        (needed by some packages)
+                    </li>
+                </ul>
+            <h3>RStudio</h3>
+                <ul>
+                    <li>
+                        Go to the <a 
+                        href="https://www.rstudio.com/products/rstudio/download/#download">
+                        RStudio download page</a>
+                    </li>
+                    <li>
+                        Under Installers select RStudio Desktop 2022.02.3+492 (<b>Expected 
+                            version for Fall 2022</b>) - Mac OS X 10.6+ (64-bit)         
+                    </li>
+                    <li>
+                        Double click the file to install RStudio
+                    </li>
+                    <li>
+                        Once it’s installed, open RStudio to make sure it works, and you 
+                        don’t get any error messages
+                    </li>
+                </ul>
+        </section>
+        <section id="linux">
+            <h2><b>Linux</b></h2> 
+            <ul>
+                <li>
+                    Follow the instructions for your distribution from 
+                    <a href="https://cloud.r-project.org/bin/linux">CRAN</a> they 
+                    provide information to get the most recent version of R for common 
+                    distributions. For most distributions, you could use your package 
+                    manager (e.g., for Debian/Ubuntu run <code class="w3-codespan">sudo 
+                        apt-get install r-base</code> and for Fedora <code 
+                        class="w3-codespan">yum install R</code>, but we don’t recommend 
+                        this approach as the versions provided by this are usually out 
+                        of date. In any case, make sure you have at least R 4.1.1.
+                </li>
+                <li>
+                    Go to the <a 
+                    href="https://www.rstudio.com/products/rstudio/download/#download">
+                    RStudio download page</a>
+                </li>
+            </ul>
+        </section>
+    </div>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>The R File Ecosystem</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#objects">Objects and OOP</a></li>
+          <li><a href="#data-types">Data Types</a>
+            <ul>
+              <li class=""><a href="#data-types--characters">Characters</a></li>
+              <li class=""><a href="#data-types--numerics">Numerics</a></li>
+              <li class=""><a href="#data-types--integers">Integers</a></li>
+              <li class=""><a href="#data-types--Logicals">Logicals</a></li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
+    <div>
+      <h1>Data Types</h1>
+      <p>
+        We will be using a variety of objects to operationalize our use of R. Here we'll discuss briefly the important types of objects and how they should be used. 
+      </p>
+
+      <section id="objects">
+        <h2>Objects and OOP</h2>
+        <p>
+            R is an Object-Oriented Programming (OOP) language which means it functions best by storing things as "objects". An object is a data structure that has some attributes and a set of methods that act on those attributes. 
+        </p>
+        <p>
+            Object-oriented languages (often called "high-level" languages) are typically more intuitive, as whenever you want to assign some value(s) to a variable and save those values for later, you can make the variable to an object which will be saved by R in the environment for future use. 
+        </p>
+      </section>
+      <section id="data-types">
+        <h2>Data Types</h2>
+        <p>
+            There are six main types in R, but we will discuss only the first four. 
+        </p>
+        <ol type="I">
+            <li><strong>Characters</strong></li>
+            <li><strong>Numerics (real or decimal)</strong></li>
+            <li><strong>Integers</strong></li>
+            <li><strong>Logicals</strong></li>
+            <li>Complex</li>
+            <li>Raw</li>
+        </ol>
+        <p>
+            When we assign variables, it is important to know what type we are using. We can check what the <code>type</code> of an object, and get other useful information about it, with a number of useful commands: 
+        </p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;abc&quot;</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(x)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;character&quot;
+</pre></div>
+</div></div>
+        <p>
+            If we want a more detailed answer we can ask what the structure (<code>str()</code>) of an object is
+        </p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">str</span><span class="hl std">(x)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  chr &quot;abc&quot;
+</pre></div>
+</div></div>
+        <p>
+            We see the output is slightly different here, with the function telling us the type of the object (<code>chr</code>) and also the content of the object (<code>"abc"</code>). 
+        </p>
+        <section id="data-types--characters">
+            <h3>Characters</h3>
+            <p>
+                A character is any alphanumeric string that begins with a letter. 
+            </p>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;abc&quot;</span>
+  <span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;abc123&quot;</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(x)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;character&quot;
+</pre></div>
+<div class="source"><pre class="knitr r">  <span class="hl kwd">typeof</span><span class="hl std">(y)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;character&quot;
+</pre></div>
+</div></div>
+        </section>
+        <section id="data-types--numerics">
+            <h3>Numerics</h3>
+            <p>
+                A numeric type is any non-integer number.  
+            </p>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">z</span> <span class="hl kwb">&lt;-</span> <span class="hl num">3.14</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(z)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;double&quot;
+</pre></div>
+</div></div>
+            <p>
+                The output <code>"double"</code>" here refers to the fact that R automatically stores numeric data types with "double" precision.   
+            </p>
+        </section>
+        <section id="data-types--integers">
+            <h3>Integers</h3>
+            <p>
+                An integer is a non-decimal whole number. <strong>Note:</strong> In R, the default is to store values as numeric unless explicitly told otherwise. We can see that if we make a new variable with only an integer value R will store it as a numeric type. 
+            </p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x1</span> <span class="hl kwb">&lt;-</span> <span class="hl num">2</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(x1)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;double&quot;
+</pre></div>
+</div></div>
+            <p>
+                To force R to store it as an integer we can simply add an <code>L</code> after the value.  
+            </p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x2</span> <span class="hl kwb">&lt;-</span> <span class="hl num">2L</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(x2)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;integer&quot;
+</pre></div>
+</div></div>
+        </section>
+        <section id="data-types--logicals">
+            <h3>Logicals</h3>
+            <p>
+                Logical types are simply TRUE or FALSE. 
+            </p>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x3</span> <span class="hl kwb">&lt;-</span> <span class="hl num">TRUE</span>
+  <span class="hl kwd">typeof</span><span class="hl std">(x3)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;logical&quot;
+</pre></div>
+</div></div>
+        </section>
+      </section>
+    </div>
+  </main>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, but 
+    no assurances can be made that any material presented here is 100% accurate.
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>

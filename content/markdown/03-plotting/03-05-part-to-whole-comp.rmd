@@ -1,0 +1,13 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Plotting A Comparison of A Part to the Whole
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+## Stacked Bar Plot
+
+## Stacked Area Plot
+

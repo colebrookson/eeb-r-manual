@@ -1,0 +1,55 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Renaming
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+<!--begin.rcode, echo=FALSE}
+options(tidyverse.quiet = TRUE)
+end.rcode-->
+
+It's often the case we want to rename columns in our dataframe. This is achieved very easily. Using an example of a dataset on bison mass, 
+
+<!--begin.rcode
+# load libraries
+library(lterdatasampler)
+library(tidyverse)
+
+bison <- lterdatasampler::knz_bison 
+head(bison)
+end.rcode-->
+
+To see what the existing names are, we can call the <code>names()</code> function:
+<!--begin.rcode
+names(bison)
+end.rcode-->
+
+## Rename A Single Column
+
+The Tidy method of renaming is through the <code>rename()</code> function from the <code>dplyr</code> package. Let's remove the prefix "animal" from "animal_code". In this syntax, the new name comes first, the old name second. 
+<!--begin.rcode
+bison <- bison %>% 
+  dplyr::rename(code = animal_code)
+end.rcode-->
+We double check with: 
+<!--begin.rcode
+names(bison)
+end.rcode-->
+And we see it worked. 
+
+## Rename Multiple Columns
+
+We can rename as many columns as we want. 
+<!--begin.rcode
+bison <- bison %>% 
+  dplyr::rename(
+    sex = animal_sex,
+    weight = animal_weight,
+    yob = animal_yob
+  )
+names(bison)
+end.rcode-->
+

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#reading">Reading Files</a>
+            <ul>
+              <li class=""><a href="#reading--csv"><code>.csv</code></a></li>
+              <li class=""><a href="#reading--xls"><code>.xls(x)</code></a></li>
+              <li class=""><a href="#reading--txt"><code>.txt</code></a></li>
+            </ul>
+          </li>
+          <li><a href="#writing">Writing Files</a>
+            <ul>
+              <li class=""><a href="#writing--csv"><code>.csv</code></a></li>
+              <li class=""><a href="#writing--xls"><code>.xls(x)</code></a></li>
+              <li class=""><a href="#writing--txt"><code>.txt</code></a></li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
+    <div>
+      <section>
+        <h2>Reading and Writing Files in R</h2>
+        <p>
+            Quickly after beginning to use R, as a biologist it is likely you will want to analyze some data. These data will be often stored as external files in your computer, with the most common data file types being Excel Spreadsheet files (<code>.xls(x)</code>), Comma Separated Value files (<code>.csv</code>), or Plain Text (<code>.txt</code>) files.
+        </p>
+        <p>
+            Since it is best practice to <strong>never</strong> directly edit your raw data files (because what if you need to go back to the original version!?), a common workflow is to:
+        </p>
+        <p>
+            <strong>1. Read your data into R</strong>
+        </p>
+        <p>
+            2. Perform some kind of analysis, creating new data objects, figures, or outputs, then 
+        </p>
+        <p>
+            <strong>3. Write out those data objects/figures/outputs to your computer for later use</strong>
+        </p>
+        <p>
+            Steps 1 &amp; 3 will be covered here. 
+        </p>
+        <p>
+            There are, as there are with all things programming, multiple ways to perform these tasks in both base R and via packages. 
+        </p>
+        </section>
+        <section id="reading">
+            <h2>Reading Files</h2>
+            <p>
+                When reading in a new file, after manually checking it and ensuring it is formatted in a readable way, note the path in your computer where the file is present. <strong>NOTE</strong> see section on workflow and the <code>here</code> package.
+            </p>
+            <section id="reading--csv">
+                <h4>Comma-Separated Value <code>.csv</code> Files</h4>
+                <p>
+                    This is the recommended file type for reading data into R as it is flexible and easily transferred directly into a dataframe. <br><br>We can read in the file by assinging it directly to an object.
+                </p>
+                <h5><strong>Base R</strong></h5>
+                <p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.csv</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.csv&quot;</span><span class="hl std">,</span> <span class="hl kwc">header</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+
+                    Here the first argument in the <code>read.csv()</code> function is the path pointing to the file in your computer. The second argument specifies <code>header = TRUE</code>> which tells R that the first row of the <code>.csv</code>file will be the column names, not part of the data themselves. 
+                </p>
+                <h5><strong>Tidyverse</strong></h5>
+                <p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">read_csv</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.csv&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+                </p>
+            </section>
+            <section id="reading--xls">
+                <h4>Excel sheets <code>.xls(x)</code></h4>
+                <p>
+                    The best way to read in an excel sheet into R with with the <code>readxl</code> package. Almost identical to above: 
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readxl</span><span class="hl opt">::</span><span class="hl kwd">read_xls</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.csv&quot;</span><span class="hl std">,</span> <span class="hl kwc">sheet</span> <span class="hl std">=</span> <span class="hl str">&quot;SHEETNAME&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+                </p>
+            </section>
+            <section id="reading--txt">
+                <h4>Plain Text <code>.txt</code></h4>
+                <p>
+                    Reading a text file is similar to the approaches to a csv file: 
+                </p>
+                <h5><strong>Base R</strong></h5>
+                <p>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.delim</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.csv&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+
+                    This above option assumes that the file it tab-delimited. 
+                </p>
+                <h5><strong>Tidyverse</strong></h5>
+                <p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">read_tsv</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.csv&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+                </p>
+            </section>
+        </section>
+        <section id="writing">
+            <h2>Writing Files</h2>
+            <p>
+                Writing files is nearly identical to reading files.
+            </p>
+            <section id="writing--csv">
+                <h4>Comma-Separated Value <code>.csv</code> Files</h4>
+                <h5><strong>Base R</strong></h5>
+                <p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">write.csv</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.csv&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+                </p>
+                <h5><strong>Tidyverse</strong></h5>
+                <p>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">write_csv</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.csv&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+                </p>
+            </section>
+            <section id="writing--xls">
+                <h4>Excel sheets <code>.xls(x)</code></h4>
+                <p>
+                    Writing a file to an excel sheet is slightly unusual and wouldn't be recommended (<code>.csv</code> files are always better), but if you need to, there exists a number of packages to assist, the easiest of which being <code>writexl</code>.
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(writexl)</span>
+<span class="hl std">writexl</span><span class="hl opt">::</span><span class="hl kwd">write_xlsx</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.xlsx&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+                </p>
+            </section>
+            <section id="writing--txt">
+                <h4>Plain Text <code>.txt</code></h4>
+                <h5><strong>Base R</strong></h5>
+                <p>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">write.table</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.txt&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+                </p>
+                <h5><strong>Tidyverse</strong></h5>
+                <p>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">write_delim</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.txt&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+                </p>
+            </section>
+        </section>
+        <section id="figures">
+            <h2>Writing Figures</h2>
+            <p>
+                It is common to create a figure in R and want to save it to the local machine. If you are plotting in <code>ggplot2</code>, then there are specific functions for those objects, but if you are plotting in base R, you will use built-in functions to save as whatever file type you want. <br><br>
+
+                Using the example built-in dataset <code>airquality</code>, we can make an example plot to save. 
+            </p>
+            <section id="figures-base">
+                <h4>Saving an image created in base R</h4>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= airquality</span><span class="hl opt">$</span><span class="hl std">Day,</span> <span class="hl kwc">y</span> <span class="hl std">= airquality</span><span class="hl opt">$</span><span class="hl std">Temp,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+                <p>
+                    If this is the plot we wish to save, we can save it as any common figure file type (e.g. <code>.png</code>, <code>.jpg</code>, <code>.tif</code>, <code>.pdf</code> etc.)
+                </p>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first use the command for the file type </span>
+<span class="hl kwd">png</span><span class="hl std">(</span><span class="hl kwc">file</span><span class="hl std">=</span><span class="hl str">&quot;/path/to/plot/saving_plot.png&quot;</span><span class="hl std">)</span>
+<span class="hl com"># then we create the plot</span>
+<span class="hl kwd">hist</span><span class="hl std">(Temperature,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;darkgreen&quot;</span><span class="hl std">)</span>
+<span class="hl com"># this command saves the file and closes the connection to the file</span>
+<span class="hl kwd">dev.off</span><span class="hl std">()</span>
+</pre></div>
+</div></div>
+            </section>
+            <section id="figures-base">
+                <h4>Saving a <code>ggplot2</code> object</h4>
+                <p>
+                    It is best to use the let of functions from <code>ggplot2</code> to save these plots. 
+                    <br>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ggplot2</span><span class="hl opt">::</span><span class="hl kwd">ggsave</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/plot/saving_plot.png&quot;</span><span class="hl std">,</span>
+                <span class="hl std">plot_object)</span>
+</pre></div>
+</div></div>
+                    <br>
+                    Note here that we can change the type of file that gets saved by simply changing the extension on the file name. 
+                </p>
+            </section>
+        </section>
+
+
+
+
+
+
+
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>
+

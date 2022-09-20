@@ -1,0 +1,36 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Basics of Plotting
+**Author:** Cole Brookson
+**Date:** 20 July 2022
+
+```{r, echo=FALSE}
+options(tidyverse.quiet = TRUE)
+```
+
+Plotting or visualizing data is a key skill and often one of the more time-consuming parts of performing an analysis. Whether for a presentation or report/paper, figures are often what readers will look at first, and so it's highly important that they communicate information clearly & concisely. While figure captions are important, think of accompanying text and description being the place for <em>adding context</em>. The figure on it's own should be able to communicate the vast majority of what the take home of the analysis is. 
+
+**Visualizing data is not just a science, but an art!** (No really it is! Check this out: [Generative & Data Art](https://variable.io/generative-and-data-art/))
+
+As a side note, often "plots" are just one type of visualization that would go into a report/presentation. They may be accompanied by flow charts, simplified diagrams of organisms/processes, and many other types. Here, we only consider the visualization of data we have likely already been performing analysis on. That is, we will concentrate on plotting data that will form the main *results* figures in a paper/presentation. 
+
+A quick web search will bring up any number of listicles on best data viz principles, and you are encouraged to take a look at a few of those if you like, but take them with a grain (or 10) of salt. Here we will outline some things to keep in mind, and direct you to other resources when appropriate. 
+
+**Try not to lie with your data ...**
+
+![xkcd-yaxis](img/y_axis.png)
+
+This may sound ridiculous to even say, but often when people end up using visualizations to "lie" or misrepresent the data, they do so accidentally. Rafael Irizarry has an excellent section in his book *Introduction to Data Science* on [Data Visualization Principles](https://rafalab.github.io/dsbook/data-visualization-principles.html) which is highly recommended. In short, to avoid misrepresenting your data it is important to:
+
+1. Accurately represent quantities
+2. Know your audience
+3. Include *all* important data
+
+Think carefully about how you will represent your data before you begin plotting it, and ensure that you take your time in considering how the audience will interpret what you are presenting for them. 
+
+Happy plotting!
+
+
