@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#factors">Intro to Factors</a></li>
+          <li><a href="#relevel">Re-leveling & Re-ordering</a></li>
+          <li><a href="#recode">Re-coding</a></li>
+          <li><a href="#relevel-pos">Re-leveling by Position</a></li>
+          <li><a href="#relevel-func">Re-leveling by Function</a></li>
+        </ol>
+      </nav>
+    <div>
+    <section id="factors">
+        <h2>Introduction to Factors</h2>
+
+        <p>
+            Factors are an important but frustrating special data type in R. They can be thought of as "categorical" variables, in the sense that they can only take on a limited number of values. R uses a vector of integer values to store a factor, with a corresponding set of character values that are displayed while using the factor.
+            <br><br>
+            They are most commonly used to group numerical variables, and therefore commonly come into play when working with regression-related topics that require either categorical fixed effects or a random effect. An example might be the site at which some data were collected. In a study where there are only six sites, it might be the case that we need to use a <em>random effect</em> to control for variation between sites. In that scenario, it would be helpful to treat the variable <strong>Site</strong> as a factor in R. 
+            <br><br>
+            We can make factors easily from any other type of variable. Take the following example dataset with three variables, one each of numeric, logical, and character types. 
+            <br><br>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+<span class="hl kwc">num_ex</span> <span class="hl std">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl num">4</span><span class="hl std">),</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl num">50</span><span class="hl std">),</span>
+<span class="hl kwc">log_ex</span> <span class="hl std">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl num">FALSE</span><span class="hl std">),</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl num">50</span><span class="hl std">),</span>
+<span class="hl kwc">chr_ex</span> <span class="hl std">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;hehe&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;haha&quot;</span><span class="hl std">),</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl num">50</span><span class="hl std">)</span>
+<span class="hl std">)</span>
+<span class="hl kwd">str</span><span class="hl std">(df)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 'data.frame':	50 obs. of  3 variables:
+##  $ num_ex: num  3 2 1 4 1 2 3 3 1 1 ...
+##  $ log_ex: logi  TRUE FALSE TRUE TRUE TRUE TRUE ...
+##  $ chr_ex: chr  &quot;haha&quot; &quot;hehe&quot; &quot;hehe&quot; &quot;hehe&quot; ...
+</pre></div>
+</div></div>
+            <br><br>
+            We can make each of these into factors. <strong>Note</strong> that when working with factors in the context of columns in a dataframe (via the Tidyverse), it is most effective to make new columns replacing the old column with the <code>mutate()</code> function <a href="./02-05-new-columns.html">See section on making new columns</a>. 
+            <br><br>
+            We'll mutate each of these columns into factors:
+            <br><br>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
+
+<span class="hl std">df_fac</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">num_ex</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(num_ex),</span>
+    <span class="hl kwc">log_ex</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(log_ex),</span>
+    <span class="hl kwc">chr_ex</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(chr_ex)</span>
+<span class="hl std">)</span>
+<span class="hl kwd">str</span><span class="hl std">(df_fac)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 'data.frame':	50 obs. of  3 variables:
+##  $ num_ex: Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 3 2 1 4 1 2 3 3 1 1 ...
+##  $ log_ex: Factor w/ 2 levels &quot;FALSE&quot;,&quot;TRUE&quot;: 2 1 2 2 2 2 2 2 1 2 ...
+##  $ chr_ex: Factor w/ 2 levels &quot;haha&quot;,&quot;hehe&quot;: 1 2 2 2 1 1 1 1 2 2 ...
+</pre></div>
+</div></div>
+            <br><br>
+            We can now see we only have columns that have the type <code>factor</code>. If we wanted to keep a version of the column that holds its original type, we could make new columns, as such: 
+            <br><br>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df_both</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">num_ex_fac</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(num_ex),</span>
+    <span class="hl kwc">log_ex_fac</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(log_ex),</span>
+    <span class="hl kwc">chr_ex_fac</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(chr_ex)</span>
+<span class="hl std">)</span>
+<span class="hl kwd">str</span><span class="hl std">(df_both)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 'data.frame':	50 obs. of  6 variables:
+##  $ num_ex    : num  3 2 1 4 1 2 3 3 1 1 ...
+##  $ log_ex    : logi  TRUE FALSE TRUE TRUE TRUE TRUE ...
+##  $ chr_ex    : chr  &quot;haha&quot; &quot;hehe&quot; &quot;hehe&quot; &quot;hehe&quot; ...
+##  $ num_ex_fac: Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 3 2 1 4 1 2 3 3 1 1 ...
+##  $ log_ex_fac: Factor w/ 2 levels &quot;FALSE&quot;,&quot;TRUE&quot;: 2 1 2 2 2 2 2 2 1 2 ...
+##  $ chr_ex_fac: Factor w/ 2 levels &quot;haha&quot;,&quot;hehe&quot;: 1 2 2 2 1 1 1 1 2 2 ...
+</pre></div>
+</div></div>
+            <br><br>
+            There are now 6 columns in our dataframe as we wished. 
+        </p>
+    </section>
+    <section id="relevel">
+        <h3>Re-ordering/Re-leveling Factors</h3>
+        <p>
+            When working with factors, we often find ourselves needing to "re-level" these variables. Since the order of factors matters, and there are often specific reasons we may want to re-name each occurence of one or more level in the factor, re-leveling is common. 
+            <br><br>
+            If we have a variable that takes the form of a factor, we can change the order of that variable relatively easily. This is useful if we are, for example, plotting the factor and want the x-axis of our plot to appear in alphabetical order. Here is an example:
+            <br><br>
+            Say we have a dataframe: 
+            <br>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">group</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;First&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Second&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Third&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Fourth&quot;</span><span class="hl std">),</span> <span class="hl num">500</span><span class="hl std">,</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+<span class="hl std">vals</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">500</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span>
+<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">group</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(group), vals)</span>
+</pre></div>
+</div></div>
+            <br>
+            We can look at the levels of our factor (the <code>group</code> variable) with the function <code>levels()</code> from base R:
+            <br>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">levels</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;First&quot;  &quot;Fourth&quot; &quot;Second&quot; &quot;Third&quot;
+</pre></div>
+</div></div>
+            <br>
+            We can see here that the order is not in numerically logical order. Does that matter? Well if we plot those data, we can see it looks like this: 
+            <br>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
+<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df)</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_violin</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= group,</span> <span class="hl kwc">y</span> <span class="hl std">= vals,</span> <span class="hl kwc">fill</span> <span class="hl std">= group))</span> <span class="hl opt">+</span>
+<span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Order of Sample&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Data Values&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl str">&quot;Group&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#332288&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#88CCEE&quot;</span><span class="hl std">,</span>
+                                        <span class="hl str">&quot;#44AA99&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#117733&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+            <br>
+            Now this is a nice plot, but it doesn't really make sense that on the x-axis, the order doesn't correspond to a logical numeric order. This is easily remedied with the <code>forcats</code> package from the Tidyverse. We can <em>re-order</em>, or in R-speak <em>re-level</em> the factor, and then R will know what order we want when we use it for any further plotting or other activities. 
+            <br>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(forcats)</span>
+<span class="hl std">df</span><span class="hl opt">$</span><span class="hl std">group</span> <span class="hl kwb">&lt;-</span> <span class="hl std">forcats</span><span class="hl opt">::</span><span class="hl kwd">fct_relevel</span><span class="hl std">(</span>
+<span class="hl std">df</span><span class="hl opt">$</span><span class="hl std">group,</span> <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;First&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Second&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Third&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Fourth&quot;</span><span class="hl std">)</span>
+<span class="hl std">)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: Outer names are only allowed for unnamed scalar atomic inputs
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># now we can use the base R function `levels()` to check if the order is what</span>
+<span class="hl com"># we want it to be</span>
+<span class="hl kwd">levels</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;First&quot;  &quot;Second&quot; &quot;Third&quot;  &quot;Fourth&quot;
+</pre></div>
+</div></div>
+            <br>
+            And we can see that the order is what we want. So that if we were to make the same plot again...
+            <br>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df)</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_violin</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= group,</span> <span class="hl kwc">y</span> <span class="hl std">= vals,</span> <span class="hl kwc">fill</span> <span class="hl std">= group))</span> <span class="hl opt">+</span>
+<span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Order of Sample&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Data Values&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl str">&quot;Group&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#332288&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#88CCEE&quot;</span><span class="hl std">,</span>
+                                        <span class="hl str">&quot;#44AA99&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#117733&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+            <br>
+            The x-axis and the legend are now in a logical numeric order. 
+        </p>
+    </section>
+    <section id="recode">
+        <p>
+            Another common operation is deciding that we actually don't want a level of our factor to read the same way anymore, that is we want to replace it with something else. We may have a dataframe, with a factor column called <code>group</code>:
+            <br>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">group</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">factor</span><span class="hl std">(</span><span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;4&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;5&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Six&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;7&quot;</span><span class="hl std">),</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">500</span><span class="hl std">,</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
+<span class="hl std">vals</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">500</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">2.5</span><span class="hl std">)</span>
+<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(group, vals)</span>
+<span class="hl com"># let's look at the levels of our `group` column</span>
+<span class="hl kwd">levels</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;4&quot;   &quot;5&quot;   &quot;7&quot;   &quot;Six&quot;
+</pre></div>
+</div></div>
+            We can see that for some reason here we have the "6" replaced by the written out version of the word. This will make the order not logical, and may cause problems if for some reason we wanted this variable to be numeric at some point (<strong>Remember, you can make a character value into a numeric value</strong>). 
+            <br><br>
+            To repalce this value in our column, we can use the <code>recode()</code> function from <code>dplyr</code>. It is most consistent to do this within a <code>mutate()</code>. 
+            <br>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">group</span> <span class="hl std">=</span> <span class="hl kwd">recode</span><span class="hl std">(</span>
+    <span class="hl com"># first argument is the data object</span>
+    <span class="hl std">group,</span>
+    <span class="hl com"># next argument is the level we want to replace</span>
+    <span class="hl str">&quot;Six&quot;</span> <span class="hl std">=</span> <span class="hl str">&quot;6&quot;</span><span class="hl std">)</span>
+<span class="hl std">)</span>
+</pre></div>
+</div></div>
+            <br>
+            We can check if it worked with:
+            <br>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">levels</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;4&quot; &quot;5&quot; &quot;7&quot; &quot;6&quot;
+</pre></div>
+</div></div>
+            <br>
+            So this worked! However the order is still off because these are characters, so R can't tell that they're numbers that can be ordered. We could reorder the factor with our approach we took above:
+            <br>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">group</span> <span class="hl std">= forcats</span><span class="hl opt">::</span><span class="hl kwd">fct_relevel</span><span class="hl std">(group,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;4&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;5&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;6&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;7&quot;</span><span class="hl std">))</span>
+<span class="hl std">)</span>
+<span class="hl kwd">levels</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;4&quot; &quot;5&quot; &quot;6&quot; &quot;7&quot;
+</pre></div>
+</div></div>
+            <br>
+            The order is now correct. 
+        </p>
+    </section>
+    <section id="relevel-pos">
+        <h3>Re-leveling According to a Position</h3>
+        <p>
+            From here, we can imagine a scenario where we want to put a specific level in a particular position in the list. For example, let's say we have a new variable, <code>group2</code>, with values as follows:
+            <br>
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span><span class="hl opt">$</span><span class="hl std">group2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">factor</span><span class="hl std">(</span><span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;first&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;second&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;last&quot;</span><span class="hl std">),</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">500</span><span class="hl std">,</span>
+                    <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
+
+<span class="hl com"># show the levels</span>
+<span class="hl kwd">levels</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group2)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;first&quot;  &quot;last&quot;   &quot;second&quot;
+</pre></div>
+</div></div>
+            <br>
+            We may want the "last" level to be last in the order. We can do that with <code>fct_relevel</code> and the <code>after =</code> argument as follows:
+            <br>
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl com"># specifying which factor level we want (&quot;last&quot;) and the position </span>
+    <span class="hl com"># (`after = `) will determine where the factor gets put. `after = Inf` puts</span>
+    <span class="hl com"># that level at the end</span>
+    <span class="hl kwc">group2</span> <span class="hl std">= forcats</span><span class="hl opt">::</span><span class="hl kwd">fct_relevel</span><span class="hl std">(group2,</span> <span class="hl str">&quot;last&quot;</span><span class="hl std">,</span> <span class="hl kwc">after</span> <span class="hl std">=</span> <span class="hl num">Inf</span><span class="hl std">)</span>
+<span class="hl std">)</span>
+
+<span class="hl com"># double check</span>
+<span class="hl kwd">levels</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group2)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;first&quot;  &quot;second&quot; &quot;last&quot;
+</pre></div>
+</div></div>
+            <br>
+            And this gives us the expected result. 
+        </p>
+    </section>
+    <section id="relevel-func">
+        <h3>Re-leveling According to a Function</h3>
+        <p style="text-align: center; font-size:150%; color:crimson">
+            Content coming soon!!
+        </p>
+    </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>

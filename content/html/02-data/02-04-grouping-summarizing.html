@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#one">One Variable</a></li>
+          <li><a href="#mult">Multiple Variables</a></li>
+        </ol>
+      </nav>
+    <div>
+    <section>
+        <h2>Grouping &amp; Summarizing</h2>
+        <p>
+
+
+            To obtain a useful summary of a dataframe is useful when trying to get summary statistics or the like from a dataframe. Let's use an example dataframe that describes the masses of Bison. 
+            <br>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># load libraries</span>
+<span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
+<span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
+
+<span class="hl std">bison</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">knz_bison</span>
+<span class="hl kwd">head</span><span class="hl std">(bison)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 6 × 8
+##   data_code rec_year rec_month rec_day animal_code animal_sex animal_weight
+##   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;              &lt;dbl&gt;
+## 1 CBH01         1994        11       8 813         F                    890
+## 2 CBH01         1994        11       8 834         F                   1074
+## 3 CBH01         1994        11       8 B-301       F                   1060
+## 4 CBH01         1994        11       8 B-402       F                    989
+## 5 CBH01         1994        11       8 B-403       F                   1062
+## 6 CBH01         1994        11       8 B-502       F                    978
+## # … with 1 more variable: animal_yob &lt;dbl&gt;
+</pre></div>
+</div></div>
+            <br>
+            It might be useful to understand how the weights of these animals differs by sex. Let's first check the `animal_sex` column to see what values it takes and what type of data the column is: 
+            <br>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">str</span><span class="hl std">(bison</span><span class="hl opt">$</span><span class="hl std">animal_sex)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  chr [1:8325] &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(bison</span><span class="hl opt">$</span><span class="hl std">animal_sex)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;F&quot; &quot;M&quot;
+</pre></div>
+</div></div>
+            <br>
+            So there are two values, and the column is a character type. 
+        </p>
+    </section>
+    <section id="one">
+        <h3>Grouping With One Variable</h3>
+        <p>
+            Let's try to get the mean and standard deviation for each sex. We could do this by making two different dataframes and then calculating those values, but it might be easier to make this into one separate object that has all the information we need. 
+            <br>
+            <br>
+            To do this we can use the <code>group_by()</code> function from the <code>dplyr</code> package to help us. We will need to group the dataset by the variable we're interested in, and then we can use the <code>summarize()</code> function also from <code>dplyr</code> to get our values of interest. 
+            <br>
+            <br>
+            To understand how the summarize function works, we can run <code>?summarize</code> in the console. We see that we will get a new dataframe, with one row for each combination of grouping variables. Here we are only using one grouping variable, and there are two levels to the variable, so we should only have two rows left. 
+            <br>
+            <br>
+            Summarize will make a new column or set of columns, that we can create with base summary functions like <code>summarize(mean = mean())</code>. 
+            <br>
+            <br>
+            <strong>Note</strong> that when using <code>summarize()</code>, all columns <em>not</em> involved in the grouping will be removed from the resulting dataframe. So, in our case, we will only have one column (<code>animal_weight</code>) left from our original dataframe. 
+            <br>
+            <br>
+            So to group our dataframe and then use <code>summarize()</code> to get our mean and standard deviation for our measures of animal weight, we can pipe these commands together.  
+            <br>
+            <br>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mass_by_sex</span> <span class="hl kwb">&lt;-</span> <span class="hl std">bison</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">group_by</span><span class="hl std">(animal_sex)</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarize</span><span class="hl std">(</span><span class="hl kwc">mean_mass</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(animal_weight,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">),</span>
+                <span class="hl kwc">std_dev</span> <span class="hl std">=</span> <span class="hl kwd">sd</span><span class="hl std">(animal_weight,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
+<span class="hl std">mass_by_sex</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 2 × 3
+##   animal_sex mean_mass std_dev
+##   &lt;chr&gt;          &lt;dbl&gt;   &lt;dbl&gt;
+## 1 F               762.    282.
+## 2 M               728.    420.
+</pre></div>
+</div></div>
+            <br>
+            <br>
+            Note here that we've used <code>na.rm = TRUE</code> to ensure that when <code>mean()</code> and <code>sd()</code> calculate their values, if there are any <code>NA</code> values in the data, they are ignored. 
+        </p>
+    </section>
+    <section id="mult">
+        <h3>Grouping With Multiple Variables</h3>
+        <p>
+            In theory, we can use <code>summarize()</code> grouped by as many variables as we want. To demonstrate this, we can repeat our measurement above, but now also grouping my the month the weight was measured in. We may assume that the animals' weights will fluctuate throughout the year, and it could be useful to understand how this differs by sex (if at all). 
+            <br>
+            <br>
+            So we will again use <code>group_by()</code> and <code>summarize()</code> to perform this task, but now grouping by both <code>animal_sex</code> and <code>rec_month</code>:
+            <br>
+            <br>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">month_sex_weight</span> <span class="hl kwb">&lt;-</span> <span class="hl std">bison</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">group_by</span><span class="hl std">(animal_sex, rec_month)</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarize</span><span class="hl std">(</span><span class="hl kwc">mean_mass</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(animal_weight,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">),</span>
+                <span class="hl kwc">std_dev</span> <span class="hl std">=</span> <span class="hl kwd">sd</span><span class="hl std">(animal_weight,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## `summarise()` has grouped output by 'animal_sex'. You can override using the
+## `.groups` argument.
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">month_sex_weight</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 4 × 4
+## # Groups:   animal_sex [2]
+##   animal_sex rec_month mean_mass std_dev
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 F                 10      771.    281.
+## 2 F                 11      751.    283.
+## 3 M                 10      756.    436.
+## 4 M                 11      701.    402.
+</pre></div>
+</div></div>
+            <br>
+            <br>
+            In our little observational look here, we can see that for both sexes, the average weights dropped between October (month 10) and November (month 11). 
+        </p>
+    </section>
+
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>

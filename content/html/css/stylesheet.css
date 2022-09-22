@@ -39,6 +39,13 @@ pre code {
 a {
   color:#334ee8
 }
+p {
+  font-size: 1.5em;
+}
+h {
+  font-weight: bold;
+  font-size: 2em;
+}
 .image-main{border: 2px solid rgb(165, 161, 161)}
 .image-full-page{max-width:700px;height:auto}img{vertical-align: middle;}
 .w3-image{max-width:100%;height:auto}img{vertical-align:middle}a{color:inherit}
