@@ -3,55 +3,55 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Introduction to `ggplot2`
+# Introduction to <code>ggplot2</code>
 **Author:** Cole Brookson
 **Date:** 20 July 2022
 
-```{r, echo=FALSE}
+<!--begin.rcode, echo=FALSE
 options(tidyverse.quiet = TRUE)
-```
+end.rcode-->
 
-One way to plot in R, is to use the `ggplot2` package in the Tidyverse. "gg" stands for the "Grammar of Graphics" and the package makes for a convenient and consistent way to make almost any plot you want. Typically it's easiest to plot data in `ggplot2` using a dataframe, which means we usually don't need to make too major of changes to our data if we decide we want to change how we're plotting something in particular. 
+One way to plot in R, is to use the <code>ggplot2</code> package in the Tidyverse. "gg" stands for the "Grammar of Graphics" and the package makes for a convenient and consistent way to make almost any plot you want. Typically it's easiest to plot data in <code>ggplot2</code> using a dataframe, which means we usually don't need to make too major of changes to our data if we decide we want to change how we're plotting something in particular. 
 
-## Components of a `ggplot`
+## Components of a <code>ggplot</code>
 
-The function used to make a plot is `ggplot()`. There is a consistent template that we'll need to use to get our plots to work:
+The function used to make a plot is <code>ggplot()</code>. There is a consistent template that we'll need to use to get our plots to work:
 
-```
+<code>
 ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
   <GEOM_FUNCTION>()
-```
+</code>
 
 Here we have three main components:
 
-* *the data call* - this will almost always refer to a dataframe 
-* *the aesthetic mappings* - these are the variables we're plotting, and the specifications of how we want them to be displayed
-* *the geom function* - each type of plot has it's own geom function (i.e. `geom_point()` for a scatterplot, `geom_line()` to plot timeseries, etc.)
+* <em>the data call</em> - this will almost always refer to a dataframe 
+* <em>the aesthetic mappings</em> - these are the variables we're plotting, and the specifications of how we want them to be displayed
+* <em>the geom function</em> - each type of plot has it's own geom function (i.e. <code>geom_point()</code> for a scatterplot, <code>geom_line()</code> to plot timeseries, etc.)
 
-A small point, note here that unlike other Tidyverse packages, we do not use the pipe ` %>% ` to link different functions, we use an addition operator `+`. 
+A small point, note here that unlike other Tidyverse packages, we do not use the pipe <code>%>%</code> to link different functions, we use an addition operator <code>+</code>. 
 
 By way of a quick example, we'll make a super quick and dirty scatterplot of some long-term ecological data on salamanders and trout. 
-```{r}
+<!--begin.rcode
 library(tidyverse)
 library(lterdatasampler)
 
 df <- lterdatasampler::and_vertebrates
 
 names(df)
-```
+end.rcode-->
 
 The most basic version of the plot we may want to make is a scatter plot of two continuous variables, let's say length and weight: 
-```{r}
+<!--begin.rcode
 ggplot(data = df, mapping = aes(x = length_1_mm, y = weight_g)) + 
   geom_point()
-```
+end.rcode-->
 
-While this is completely correct, it is recommended to place the aesthetics arguments (`mapping = aes()`) in each `geom` argument individually. This will allow us to plot using multiple dataframes or variables. 
+While this is completely correct, it is recommended to place the aesthetics arguments (<code>mapping = aes()</code>) in each <code>geom</code> argument individually. This will allow us to plot using multiple dataframes or variables. 
 
 So a better version may look like this:
-```{r}
+<!--begin.rcode
 ggplot() +
   geom_point(data = df, aes(x = length_1_mm, y = weight_g))
-```
+end.rcode-->
 
-In the (LINK TO ITERATIVE PLOTTING) Iterative Plotting section we'll go over how to add components to go from an ugly plot like this to a publication-ready graphic. 
+In the <a href="./03-02-iterative-plotting.html">Iterative Plotting</a> section we'll go over how to add components to go from an ugly plot like this to a publication-ready graphic. 

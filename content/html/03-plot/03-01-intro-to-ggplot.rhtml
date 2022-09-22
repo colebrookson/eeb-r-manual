@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#intro">Intro to <code>ggplot2</code></a>
+            <ul>
+              <li class=""><a href="#intro--components">Plot Components</a></li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
+    <div>
+      <section id="intro">
+        <h2>Introduction to the <code>ggplot2</code> Package</h2>
+        <p>
+            <!--begin.rcode, echo=FALSE
+            options(tidyverse.quiet = TRUE)
+            end.rcode-->
+
+            One way to plot in R, is to use the <code>ggplot2</code> package in the Tidyverse. "gg" stands for the "Grammar of Graphics" and the package makes for a convenient and consistent way to make almost any plot you want. Typically it's easiest to plot data in <code>ggplot2</code> using a dataframe, which means we usually don't need to make too major of changes to our data if we decide we want to change how we're plotting something in particular. 
+        </p>
+        </section>
+        <section id="intro--components">
+            <p>
+                The function used to make a plot is <code>ggplot()</code>. There is a consistent template that we'll need to use to get our plots to work:
+                <br><br>
+                <code>
+                ggplot(data = &lt;DATA>, <br>&emsp;
+                    mapping = aes(&ltMAPPINGS>)) +<br>&emsp;
+                    &ltGEOM_FUNCTION>()
+                </code>
+
+                <br><br>
+                Here we have three main components:
+                <br><br>
+                * <em>the data call</em> - this will almost always refer to a dataframe 
+                <br><br>
+                * <em>the aesthetic mappings</em> - these are the variables we're plotting, and the specifications of how we want them to be displayed
+                <br><br>
+                * <em>the geom function</em> - each type of plot has it's own geom function (i.e. <code>geom_point()</code> for a scatterplot, <code>geom_line()</code> to plot timeseries, etc.)
+                <br><br>
+                A small point, note here that unlike other Tidyverse packages, we do not use the pipe <code>%>%</code> to link different functions, we use an addition operator <code>+</code>. 
+                <br><br>
+                By way of a quick example, we'll make a super quick and dirty scatterplot of some long-term ecological data on salamanders and trout. 
+                <br><br>
+                <!--begin.rcode
+                library(tidyverse)
+                library(lterdatasampler)
+
+                df <- lterdatasampler::and_vertebrates
+
+                names(df)
+                end.rcode-->
+                <br><br>
+                The most basic version of the plot we may want to make is a scatter plot of two continuous variables, let's say length and weight: 
+                <br><br>
+                <!--begin.rcode
+                ggplot(data = df, mapping = aes(x = length_1_mm, y = weight_g)) + 
+                geom_point()
+                end.rcode-->
+                <br><br>
+                While this is completely correct, it is recommended to place the aesthetics arguments (<code>mapping = aes()</code>) in each <code>geom</code> argument individually. This will allow us to plot using multiple dataframes or variables. 
+                <br><br>
+                So a better version may look like this:
+                <br><br>
+                <!--begin.rcode
+                ggplot() +
+                geom_point(data = df, aes(x = length_1_mm, y = weight_g))
+                end.rcode-->
+                <br><br>
+                In the <a href="./03-02-iterative-plotting.html">Iterative Plotting</a> section we'll go over how to add components to go from an ugly plot like this to a publication-ready graphic. 
+            </p>
+        </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>

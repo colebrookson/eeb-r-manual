@@ -1,6 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/stylesheet.css">
@@ -42,71 +104,17 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
 <main style = margin-top:100px>
     <nav class="section-nav">
         <ol>
-          <li><a href="#rename-sing">Rename Single Column</a></li>
-          <li><a href="#rename-mult">Rename Multiple Columns</a></li>
+          <li><a href="#data-types">Packages</a>
+          </li>
         </ol>
       </nav>
     <div>
-    <section id=>
-        <h2>Renaming Columns</h2>
-        <p>
-            <!--begin.rcode, echo=FALSE
-            options(tidyverse.quiet = TRUE)
-            end.rcode-->
+      <section id="pkg">
+        <h2>Packages</h2>
+        <img class="image-full-page" style="display:block;margin:auto"
+        src="../img/01-img/construction.jpg">
 
-            It's often the case we want to rename columns in our dataframe. This is achieved very easily. Using an example of a dataset on bison mass, 
-            <br>
-            <!--begin.rcode
-            # load libraries
-            library(lterdatasampler)
-            library(tidyverse)
-
-            bison <- lterdatasampler::knz_bison 
-            head(bison)
-            end.rcode-->
-            <br>
-            To see what the existing names are, we can call the <code>names()</code> function:
-            <br>
-            <!--begin.rcode
-            names(bison)
-            end.rcode-->
-        </p>
-    </section>
-    <section id="rename-sing">
-        <h3>Rename A Single Column</h3>
-        <p>
-            The Tidy method of renaming is through the <code>rename()</code> function from the <code>dplyr</code> package. Let's remove the prefix "animal" from "animal_code". In this syntax, the new name comes first, the old name second. 
-            <br>
-            <!--begin.rcode
-            bison <- bison %>% 
-            dplyr::rename(code = animal_code)
-            end.rcode-->
-            <br>
-            We double check with: 
-            <br>
-            <!--begin.rcode
-            names(bison)
-            end.rcode-->
-            <br>
-            And we see it worked. 
-        </p>
-    </section>
-    <section id="rename-mult">
-        <h3>Rename Multiple Columns</h3>
-        <p>
-            We can rename as many columns as we want. 
-            <br>
-            <!--begin.rcode
-            bison <- bison %>% 
-            dplyr::rename(
-                sex = animal_sex,
-                weight = animal_weight,
-                yob = animal_yob
-            )
-            names(bison)
-            end.rcode-->
-        </p>
-    </section>
+        </section>
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">
@@ -138,3 +146,4 @@ function w3_close() {
 
 </body>
 </html>
+
