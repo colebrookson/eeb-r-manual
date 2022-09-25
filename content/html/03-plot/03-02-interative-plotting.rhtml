@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+    <div class="w3-navy w3-xlarge" 
+    style="max-width:1300px;margin:auto;border:1px w3-gray"
+    border:1px>
+      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
+      style="margin-left:2em">☰</div>
+      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
+      <div class="w3-center w3-padding-16">The R Manual</div>
+    </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#basic">Build Basic Plots</a></li>
+          <li><a href="#colour-shape">Adding Colour &amp; Shape</a></li>
+        </ol>
+      </nav>
+    <div>
+      <section id="data-types">
+        <h2>Iterative Plotting for Easy and Aesthetic Figures</h2>
+        <p>
+            <!--begin.rcode, echo=FALSE
+            options(tidyverse.quiet = TRUE)
+            end.rcode-->
+
+            When making a plot, typically the best way to go about it is to iteratively make a version of the plot, observe the outcome, and then make changes in an iterative fashion. This prevents us from making mistakes in a long set of code that we then can't diagnose the problem with, and further, helps us catch mistakes (typos, colour problems, etc) as we only have to take in a few new components each time, and not a whole pile. 
+            <br><br>
+            For our example, let's use the example from the <a href="./03-01-intro-to-ggplot.html">Intro to <code>ggplot2</code></a> section, looking at salamanders and trout: 
+            <br><br>
+            <!--begin.rcode
+            library(tidyverse)
+            library(lterdatasampler)
+
+            df <- lterdatasampler::and_vertebrates
+
+            names(df)
+            end.rcode-->
+
+        </p>
+        </section>
+        <section id="basic">
+            <h3>Building a Basic Plot</h3>
+            <p>
+                Let's again plot a scatter plot of <code>length_1_mm</code> vs. <code>weight_g</code>. We'll start out with the absolute minimum number of arguments: 
+                <br><br>
+                1. The call to <code>ggplot()</code>
+                2. The aesthetics (i.e. what variables we want on the x- and y-axis)
+                3. The <code>geom_</code> function denoting what <em>type</em> of plot we're going for
+                <br><br>
+                <!--begin.rcode
+                ggplot() +
+                geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g))
+                end.rcode-->
+                <br><br>
+                Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <em>must-haves</em> to have a legible, complete plot. First step is the axis labels. So to iteratively work up our plot, we'll add that one component on, by using the new function `labs()`:
+                <br><br>
+                <!--begin.rcode
+                ggplot() +
+                geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
+                labs(x = "Length (mm)", y = "Weight (g)") 
+                end.rcode-->
+                <br><br>
+                OK good. Now, this is more aesthetic than anything, but we might want to change the appearance of this plot away from this ugly grey background and grid lines. This is a more personal decision regarding what exactly you want your plot to look like. However, there are lots of <code>themes</code> available in the <code>ggplot2</code> package to choose from. For example, we could use the <code>theme_classic()</code> like so: 
+                <br><br>
+                <!--begin.rcode
+                ggplot() +
+                geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                theme_classic()
+                end.rcode-->
+                <br><br>
+                But I <em>personally</em> prefer a different theme that comes in the <code>ggthemes</code> package, which we can install now:
+                <br><br>
+                <!--begin.rcode
+                #install.packages("ggthemes")
+                library(ggthemes)
+                end.rcode-->
+                <br><br>
+                Now, let's use the <code>theme_base()</code> option, which will give us a very classic look and feel to the plot: 
+                <br><br>
+                <!--begin.rcode
+                ggplot() +
+                geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base()
+                end.rcode-->
+                <br><br>
+                Perfect! You'll also notice the text sizes are now larger which is preferable for reading on a screen or in a report. 
+            </p>
+        </section>
+        <section id="colour-shape">
+            <p>
+                Let's now add a colour to our points and change the shape we're using as well. 
+                <br><br>
+                <strong>Note:</strong> Arguments like this go in the <code>aes()</code> section, but there is a difference between simply assigning a colour and using colour to group points. To start, we'll just make the colour <em>red</em>, change the shape to my personal favourite, and up the size just a smidge: 
+                <br><br>
+                <!--begin.rcode
+                ggplot() +
+                geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g),
+                            # here's where we'll add our colour etc
+                            colour = "red", shape = 21, size = 2) +
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base()
+                end.rcode-->
+                <br><br>
+                So this is interesting! We see that somehow we've made our points hollow on the inside. Well, that has to do with the shape we picked. There are lots of options for shapes we <em>could</em> use, and we can see all our options in this handy graphic here: 
+
+                <img class="image-full-page" style="display:block;margin:auto"
+                        src="../img/03-img/r-symbols.png">
+
+                So notice we specified point # 21. This point has a dark outer circle and a fill colour in the middle. <strong>When using a point option with an outter boundary and an inner fill, the argument <code>colour</code> refers to the outter boundary line, and the argument <code>fill</code> refers to the colour filling inside**. Let's see how this works by changing <code>colour = "black"</code> and <code>fill = "red"</code>: 
+                <br><br>
+                <!--begin.rcode
+                ggplot() +
+                geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g),
+                            # here's where we'll add our colour etc
+                            colour = "black", fill = "red", shape = 21, size = 2) +
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base()
+                end.rcode-->
+                <br><br>
+                Okay, so this looks like maybe more along the lines of what we were expecting! One more thing though is that some spots on the plot have a high density of points. To better identify those high density areas, let's make our points slightly transparent, with the <code>alpha</code> commmand: 
+                <br><br>
+                <!--begin.rcode
+                ggplot() +
+                geom_point(data = df, mapping = aes(x = length_1_mm, 
+                                                    y = weight_g),
+                            # here's where we'll add our colour etc
+                            colour = "black", fill = "red", shape = 21, alpha = 0.2, size = 2)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base()
+                end.rcode-->
+                <br><br>
+                And now we can see where there really are many points. 
+            </p>
+        </section>
+        <section id="var">
+        </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <strong>always</strong> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>
