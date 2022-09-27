@@ -1,30 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>R Manual Landing Page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="./css/stylesheet.css">
+<link rel="stylesheet" href="../css/stylesheet.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
-p {
-    font-size:18px
-}
-h1 {
-  font-size: 40px;
-}
-
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 30px;
-}
 </style>
 </head>
-<body>
+<body class="w3-round-large">
 
 <!-- Sidebar (hidden by default) -->
 <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
@@ -47,6 +38,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   </div>
 </div>
 
+<main style = margin-top:100px>
 <div class="w3-main w3-content w3-padding" 
 style="max-width:1200px;margin-top:100px">
 
@@ -249,6 +241,6 @@ function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
 }
 </script>
-
+</main>
 </body>
 </html>
