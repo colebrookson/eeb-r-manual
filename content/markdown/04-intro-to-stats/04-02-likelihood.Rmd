@@ -9,3 +9,5 @@ output:
 
 Likelihood can be a somewhat un-intuitive concept to begin to wrap one's head around, but it forms the basis for almost all common statistical methods. The goal of this section is to break down the concept without actually performing any tests or doing any coding, in the hopes that the reader will develop a more concrete understanding of likelihood before they need to attempt to *use* likelihood. 
 
+
+
