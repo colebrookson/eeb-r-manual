@@ -113,7 +113,28 @@ A sampling distribution refers to the probability distribution of a particular s
 
 ### Discrete Sampling Distributions
 
-### Sampling Discrete Probability Distributions
+Let us think back to our example in <a href="./04-01-probability-101.html">Probability 101</a> of a discrete sampling distribution - gene freqeuncy. 
+
+Imagine we were able to "zoom in" on some random part of our own DNA, we would see something like this: 
+
+<img src="../img/04-img/nucleotide.jpg">
+
+We could imagine that the frequency of each gene may be equivalent, However, research has shown (i.e. [Louie et al. 2003](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC403801/)) that nucleotide frequency is *not* uniform across human genes. So given some particular gene, it may be the case that we see a non-uniform probability distribution, but one that looks like this: 
+
+```{r}
+df <- data.frame(
+  base = c("A", "C", "G", "T"),
+  prob = c(0.1, 0.2, 0.45, 0.25)
+)
+
+ggplot(data = df) + 
+  geom_col(aes(x = base, y = prob, fill = base)) +
+  ggthemes::theme_base() + 
+  labs(x = "Nucleotide Base", y = "Probability") + 
+  ylim(c(0,1))
+```
+
+![](img/nucleotide.jpg)
 
 As a fun little game, let's build a gene. There approximately 1000 nucleotide pairs of coding sequence per gene according to google, and let's imagine that the gene we're building has a probability distribution of nucleotides that is given above, where the probabilities of each base appearing given a random sample are: 0.1, 0.2, 0.45, and 0.25 respectively for A, C, G, and T. 
 
@@ -235,24 +256,35 @@ df_all_samples <- rbind(
 df_real <- data.frame(
   base = c("A", "C", "G", "T"),
   prob = c(0.1, 0.2, 0.45, 0.25),
-  sample = Inf,
+  sample = "Real values",
   type = "theoretical"
 )
 
 # join the dataframes again
 df_all <- rbind(
-  df_all_samples,
+  df_all_samples %>% 
+    dplyr::mutate(
+      sample = as.character(sample)
+    ),
   df_real
 )
 
 # plot the result 
 ggplot() + 
-  geom_bar_pattern(data = df_all_samples, 
-           mapping = aes(x = base, y = prob, fill = sample, pattern = type),
-           position = "dodge", stat = "identity")
+  geom_bar(data = df_all, 
+           mapping = aes(x = base, y = prob, alpha = type,
+                         fill = sample, colour = type),
+           position = "dodge", stat = "identity") +
+  ggthemes::theme_base() +
+  scale_fill_manual(
+    "Sample Size",
+    values = wesanderson::wes_palette("Rushmore1", n = 5)) +
+  scale_alpha_manual("Theoretical or Sampled", values = c(0.5, 1)) +
+  scale_colour_manual("Theoretical or Sampled", values = c("white", "black"))
+  
 ```
 
-
+Here we have shown intuitively the law of large samples!!!!
 
 
 ### Continuous Sampling Distributions

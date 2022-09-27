@@ -100,8 +100,6 @@ To think about the probability of a variety of events occurring, we can differen
 
 As the name implies, discrete probability distributions are distributions that describe the probabilities of each possible event in the sample space. 
 
-
-
 For example, let's consider the basic building blocks of DNA, the nucleotide bases adenine (A), cytosine (C), guanine (G) and thymine (T). Imagine we were able to "zoom in" on some random part of our own DNA, we would see something like this: 
 
 ![](img/nucleotide.jpg)
@@ -130,22 +128,7 @@ ggplot(data = df) +
   ylim(c(0,1))
 ```
 
-This is intuitive. However, research has shown (i.e. [Louie et al. 2003](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC403801/)) that nucleotide frequency is *not* uniform across human genes. So given some particular gene, it may be the case that we see a non-uniform probability distribution, but one that looks like this: 
-
-```{r}
-df <- data.frame(
-  base = c("A", "C", "G", "T"),
-  prob = c(0.1, 0.2, 0.45, 0.25)
-)
-
-ggplot(data = df) + 
-  geom_col(aes(x = base, y = prob, fill = base)) +
-  ggthemes::theme_base() + 
-  labs(x = "Nucleotide Base", y = "Probability") + 
-  ylim(c(0,1))
-```
-
-Any way that the distribution is partitioned, the sum of probabilities of each event <strong>must</strong> sum to 1.0 without exception.
+This is intuitive. Any way that the distribution is partitioned, the sum of probabilities of each event <strong>must</strong> sum to 1.0 without exception.
 
 The most common discrete probability distributions are the Poisson and Bernoulli distributions. 
 
