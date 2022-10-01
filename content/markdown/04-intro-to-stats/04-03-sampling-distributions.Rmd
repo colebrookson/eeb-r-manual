@@ -284,7 +284,7 @@ ggplot() +
   
 ```
 
-Here we have shown intuitively the law of large samples!!!!
+Here we have shown intuitively the Law of Large Numbers!!!!
 
 
 ### Continuous Sampling Distributions
@@ -405,7 +405,13 @@ The Central Limit Theorem is an incredibly important theorem that states the fol
 We have just demonstrated this above with our cutthroat trout example. This is a surprisingly important stated theorem, because it provides us a path forward to work with statistical tests that <strong>assume normal distributions</strong>. As you will learn as you move further through your statistical training, normality of data makes our lives infinitely easier.  
 I strongly recommend that if you care to learn more about statistics, to think deeply about the central limit theorem, and try to come up your own intuitive understanding of why it is true. There are many excellent descriptions of proofs of the central limit theorem. For the advanced and interested student, there's an excellent <a href="https://www.youtube.com/watch?v=Tx7zzD4aeiA">recorded lecture by John Tsitsiklis at MIT</a> that goes into detail on this theorem and why it is central not only to inferential statistics but how it links statistics to calculus. 
 
+## Law of Large Numbers
 
+In the example we gave on discrete sampling distributions, we have already discovered what this "law" purports. Essentially, it states that if you repeat an experiment some number, <code>n</code>, of times and average the result, as <code>n</code> gets larger, the averaged result will get closer and closer to the expected value.
+
+We saw this in our example, as the sampling option with 10,000 samples was the closest one to the expected value. We could deduce a short proof for this, but that's beyond the scope of this short piece.
+
+What <em>is</em> an important takeaway is that this law says something valuable to us about what we need to keep in mind when we deal with <strong>small</strong> numbers. That is, the smaller the sample size at hand, the further we are from actually getting a representative sample of the population. While this may seem intuitive, it's helpful to understand that there <em>is</em> a provable way to understand this concept (We can also think about this as it relates to statistical power LINK TO WHEREVER THAT GOES)
 
 
 
