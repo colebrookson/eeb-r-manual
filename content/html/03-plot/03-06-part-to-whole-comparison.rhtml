@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+  <div class="w3-navy w3-xlarge" 
+  style="max-width:auto;margin:auto;border:1px w3-gray"
+  border:1px>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
+    <div class="w3-center w3-padding-16">The R Manual</div>
+  </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#ts">Timeseries Plots</a>
+            <ul>
+              <li class=""><a href="#ts--code">Just the Code</a></li>
+            </ul>
+          </li>
+          <li><a href="#box">Box Plots</a>
+            <ul>
+              <li class=""><a href="#box--code">Just the Code</a></li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
+    <div>
+      <section id="">
+        <h2>Plotting Change Through Time</h2>
+        <p>
+            When choosing to plot anything to do with time, the time is almost always displayed on the x-axis. This makes sense as we typically read plots as we read English language text - left to right. Thus, we will always plot time as increasing from left to right on our plots. By FAR the most common way to plot change through time is to plot it as a line plot, optionally with points added in. Less common in EEB-type data (but still useful) are box plots and bar plots.
+
+        </p>
+      </section>
+      <section id="ts">
+        <h2>Timseries Plots (Line Plots)</h2>
+        <p>
+            Line plots, also referred to as timeseries plots colloquially, are plots that have the focal variable of interest on the y-axis, and some time variable on the x-axis. To follow our <a href="./03-02-interative-plotting.html">iterative plotting method</a>, we'll start one of these plots and build up.
+        </p>
+        <p>
+            For this, we'll use our example with data on temperature in Alaska from 1988 to present. See the full tutorial <a href="./03-04-plotting-multiple-dataframes.html">here</a>:
+        </p>
+      </section>
+      <section id="ts--code">
+
+            <!--begin.rcode, message=FALSE,warning=FALSE
+            library(tidyverse)
+            # add in an option to keep dplyr quiet
+            options(dplyr.summarise.inform = FALSE)
+            library(lterdatasampler)
+            library(lubridate)
+            library(ggthemes)
+
+            df = lterdatasampler::arc_weather
+
+            # make sub-groups for the dates
+            df = df %>% 
+            dplyr::rowwise() %>% 
+            dplyr::mutate(
+                month = lubridate::month(date),
+                year = lubridate::year(date)
+            )
+            # make separate dataframe for monthly measurements
+            df_monthly = df %>% 
+            dplyr::select(year, month, mean_airtemp) %>% 
+            dplyr::group_by(year, month) %>% 
+            dplyr::summarize(
+                month_airtemp = mean(mean_airtemp, na.rm = TRUE)
+            ) %>% 
+            # assume all days are the 15th of the month
+            dplyr::mutate(
+                day = 15
+            ) %>% 
+            # make single date
+            dplyr::mutate(
+                date = lubridate::make_date(year, month, day)
+            )
+
+            ggplot() + 
+            # switched order - daily first 
+            geom_point(data = df, mapping = aes(x = date, y = mean_airtemp,
+                                                colour = "lightblue"), shape = 16,  
+                                                alpha = 0.5) +
+            # monthly second
+            geom_line(data = df_monthly, mapping = aes(x = date, y = month_airtemp,
+                                                        colour = "black")) +
+            ggthemes::theme_base() +
+            labs(x = "Date", y = "Monthly Air Temperature (C)") +
+            guides(
+                colour = guide_legend()
+            ) +
+            # add in colour scale
+            scale_colour_identity(guide = "legend",
+                                    name = "Measurement", # the title of the legend
+                                    breaks = c("black", "lightblue"), # the colours
+                                    labels = c("Monthly Mean", "Daily Mean") # legend labels
+                                    )
+            end.rcode-->
+      </section>
+      <section id="box">
+        <p>
+            Box plots are a helpful form of plot to show how data might change through time by summarizing the distribution of said data in some binned form. To use the above example regarding data on temperature, we could use a box plot to compare how the distribution of the daily temperature measurements change through the months. 
+        </p>
+        <p>
+            As a reminder, here's how to interpret the various components of a boxplot:
+        </p>
+        <img alt="box plot interpretation. credit: Michael Galarnyk", src="../img/03-img/boxplot.jpg">
+        <p>
+            For this, we'll use our example with data on stream chemistry over time. See the full tutorial <a href="./03-03-facetting.html">here</a>
+        </p>
+      </section>
+      <section id="box-code">
+            <!--begin.rcode
+            library(tidyverse)
+            library(lterdatasampler)
+            library(lubridate)
+
+            df <- lterdatasampler::luq_streamchem %>% 
+            # remove columns we don't need
+            dplyr::select(sample_date, na, k) %>% 
+            tidyr::pivot_longer(
+                # specify which columns to join together
+                cols = c(na, k),
+                # specify what the new name of the grouping variable will be
+                names_to = "element"
+            ) %>% 
+            dplyr::mutate(
+                year = lubridate::year(sample_date),
+                month = lubridate::month(sample_date)
+            )
+
+            ggplot() + 
+            geom_boxplot(data = df, mapping = aes(x = year, y = value,
+                                                        fill = element)) + 
+            labs(x = "Year", y = "Amount of Element (mg/L)") +
+            ggthemes::theme_base() +
+            facet_wrap(~element,
+                        # I want this to be one column with two rows
+                        ncol = 1,
+                        scales = "free",
+                        labeller = as_labeller(c(`k` = "Potassium (K)",
+                                            `na` = "Sodium (Na)"))) +
+                scale_fill_manual("Element", 
+                                values = c("#90ee90", "#F8E473"),
+                                labels = c("Potassium (K)", "Sodium (Na)"))
+            end.rcode-->
+      </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>
