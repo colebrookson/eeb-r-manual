@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+  <div class="w3-navy w3-xlarge" 
+  style="max-width:auto;margin:auto;border:1px w3-gray"
+  border:1px>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
+    <div class="w3-center w3-padding-16">The R Manual</div>
+  </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#data-prep">Data Preparation</a></li>
+          <li><a href="#options">Options for Faceting</a></li>
+        </ol>
+      </nav>
+    <div>
+      <section id="">
+        <h2>Facetting Plots</h2>
+        <p>
+            Displaying all the relevant information on a single plot panel is ideal as it minimizes the amount of space consumed, but it sometimes impossible to use only one single plot panel and maintain a readable plot that isn't crowded or trying to do so much. In this case, a handy approach is to <em>facet</em> the plot which essentially breaks up the plot into multiple panes so that they can be viewed together. 
+        </p>
+        <p>
+            Often, this is the case when one or both axis are the same, and a separate variable or group of that variable is being shown on each plotting pane. For example here, let's refer to data on stream chemisty: 
+        </p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
+<span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
+
+<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">luq_streamchem</span>
+<span class="hl std">df</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 317 × 22
+##    sample_id sample_date gage_ht  temp   p_h  cond    cl no3_n so4_s    na     k
+##    &lt;chr&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 QS        1987-01-05     2.82    20  7.22  48.2   7.3    97  0.52  4.75  0.18
+##  2 QS        1987-01-13     2.66    20  7.34  49.8   7.5   114  0.73  4.81  0.19
+##  3 QS        1987-01-20     2.61    20  7.12  50.3   7.5   115 NA     5.19  0.2 
+##  4 QS        1987-01-27     2.58    20  7.19  50.4   7.3   117 NA     5.08  0.18
+##  5 QS        1987-02-03     2.8     20  7.36  49.6   7.3   103  0.85  4.86  0.17
+##  6 QS        1987-02-10     2.63    20  7.19  53.3   7.2   110 NA     5.11  0.18
+##  7 QS        1987-02-17     2.84    20 NA     43.7   7      94 NA     4.8   0.17
+##  8 QS        1987-02-24     2.68    19  6.93  48.4   7.3    90 NA     5.08  0.18
+##  9 QS        1987-03-03     2.76    20  7.02  48.4   7.6    86 NA     4.9   0.2 
+## 10 QS        1987-03-10     2.64    20  7.17  49.9   7.3    97 NA     4.89  0.2 
+## # … with 307 more rows, and 11 more variables: mg &lt;dbl&gt;, ca &lt;dbl&gt;, nh4_n &lt;dbl&gt;,
+## #   po4_p &lt;dbl&gt;, doc &lt;dbl&gt;, dic &lt;dbl&gt;, tdn &lt;dbl&gt;, tdp &lt;dbl&gt;, si_o2 &lt;dbl&gt;,
+## #   don &lt;dbl&gt;, tss &lt;dbl&gt;
+</pre></div>
+</div></div>
+        <p>
+            There are two variables we might want to compare - Sodium (Na) and Potassium (K). One option could be plotting them through time with two y-axes, but these plots are often confusing. An easier to interpret way would be to have two separate plot panels. This will require some data prep first. 
+        </p>
+        </section>
+        <section id="data-prep">
+            <p>
+                One (not the only) way to go about this, is to get both of our variables of interest into one column, with a separate grouping column that denotes what the values refer to. The easiest way to do this is by <em>re-shaping</em> the data (LINK TO RESHAPING HERE) Let's do that here: 
+                </p>
+                
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df_long</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl com"># remove columns we don't need</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">select</span><span class="hl std">(sample_date, na, k)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">tidyr</span><span class="hl opt">::</span><span class="hl kwd">pivot_longer</span><span class="hl std">(</span>
+    <span class="hl com"># specify which columns to join together</span>
+    <span class="hl kwc">cols</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(na, k),</span>
+    <span class="hl com"># specify what the new name of the grouping variable will be</span>
+    <span class="hl kwc">names_to</span> <span class="hl std">=</span> <span class="hl str">&quot;element&quot;</span>
+  <span class="hl std">)</span>
+<span class="hl std">df_long</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 634 × 3
+##    sample_date element value
+##    &lt;date&gt;      &lt;chr&gt;   &lt;dbl&gt;
+##  1 1987-01-05  na       4.75
+##  2 1987-01-05  k        0.18
+##  3 1987-01-13  na       4.81
+##  4 1987-01-13  k        0.19
+##  5 1987-01-20  na       5.19
+##  6 1987-01-20  k        0.2 
+##  7 1987-01-27  na       5.08
+##  8 1987-01-27  k        0.18
+##  9 1987-02-03  na       4.86
+## 10 1987-02-03  k        0.17
+## # … with 624 more rows
+</pre></div>
+</div></div>
+                <p>
+                Perfect! We will also want to pull out the month and year values as columns since it will be month we'll use to group by in our plots.
+                </p>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(lubridate)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'lubridate'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">df_long</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df_long</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">year</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">year</span><span class="hl std">(sample_date),</span>
+    <span class="hl kwc">month</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">month</span><span class="hl std">(sample_date)</span>
+  <span class="hl std">)</span>
+<span class="hl std">df_long</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 634 × 5
+##    sample_date element value  year month
+##    &lt;date&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 1987-01-05  na       4.75  1987     1
+##  2 1987-01-05  k        0.18  1987     1
+##  3 1987-01-13  na       4.81  1987     1
+##  4 1987-01-13  k        0.19  1987     1
+##  5 1987-01-20  na       5.19  1987     1
+##  6 1987-01-20  k        0.2   1987     1
+##  7 1987-01-27  na       5.08  1987     1
+##  8 1987-01-27  k        0.18  1987     1
+##  9 1987-02-03  na       4.86  1987     2
+## 10 1987-02-03  k        0.17  1987     2
+## # … with 624 more rows
+</pre></div>
+</div></div>
+                
+                <p>
+                Now we can do about plotting this <a href="./03-02-interative-plotting.html">iteratively</a>. In this example, we'll use a box plot (see description <a href="./03-05-change-over-time.html">here</a>) since it's one way to show a change through time. As a quick refresher, here's how we can interpret a boxplot:
+                </p>
+                <img alt="box plot interpretation. credit: Michael Galarnyk", src="../img/03-img/boxplot.jpg">
+        </section>
+        <section id="options">
+            <h2>Plotting with and without Facets</h2>
+            <p>
+                Let's begin by plotting only the bare necessities: 
+                </p>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+                <p>
+                Well that didn't quite work out. We will need to make <code>year</code> a factor here:
+                </p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df_long</span> <span class="hl kwb">=</span> <span class="hl std">df_long</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">year</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(year)</span>
+  <span class="hl std">)</span>
+</pre></div>
+</div></div>
+                <p>
+                Now we'll try again: 
+                </p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
+                <p>
+                That looks better. <strong>Now here's why we might want to facet:</strong> right now our plot is displaying <strong>both</strong> sodium and potassium in the same <code>value</code> which doesn't makes sense since they're completely different scales of measurement. We could try to address this by separating them out by some aesthetic (e.g. colour), so let's try that: 
+                </p>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
+                                             <span class="hl kwc">colour</span> <span class="hl std">= element))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+                <p>
+                Ok so now we have grouped box plots. I suppose in theory we could leave it like this, but I am not personally a fan. Let's add in the necessary components and then think about faceting: 
+                </p>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
+                                             <span class="hl kwc">colour</span> <span class="hl std">= element))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Year&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Amount of Element (mg/L)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+                <p>
+                Nope, still heinous! Time to facet! We'll make this on two panels by faceting using <code>facet_wrap()</code> and operating on the <code>element</code> variable. I also want the plot to display as two plots stacked <em>on top</em> of one another, so I can refer to the number of columns as 1 to force the <code>facet_wrap()</code> to do this. 
+                </p>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
+                                             <span class="hl kwc">colour</span> <span class="hl std">= element))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Year&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Amount of Element (mg/L)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">facet_wrap</span><span class="hl std">(</span><span class="hl opt">~</span><span class="hl std">element,</span>
+             <span class="hl com"># I want this to be one column with two rows</span>
+             <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+                <p>
+                Ok, we're getting there! However, the scales for both are not helping. Let's fix it so the sodium can vary within it's max & min, and the potassium can vary within it's (different) max & min. We can do this with the <code>scales</code> argument in the facet_wrap.
+                </p>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
+                                             <span class="hl kwc">colour</span> <span class="hl std">= element))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Year&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Amount of Element (mg/L)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">facet_wrap</span><span class="hl std">(</span><span class="hl opt">~</span><span class="hl std">element,</span>
+             <span class="hl com"># I want this to be one column with two rows</span>
+             <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+             <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+                <p>
+                Okay, this is looking better! Now it feels like we can actually see the spread of the data. We can still make some aesthetic changes however. Let's change to a <code>fill</code> not a <code>colour</code> on our box plot: 
+                </p>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
+                                             <span class="hl kwc">fill</span> <span class="hl std">= element))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Year&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Amount of Element (mg/L)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">facet_wrap</span><span class="hl std">(</span><span class="hl opt">~</span><span class="hl std">element,</span>
+             <span class="hl com"># I want this to be one column with two rows</span>
+             <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+             <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+                <p>
+                Good, and now we'll change the actual colours we're using with <code>scale_fill_manual()</code>:
+                </p>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
+                                             <span class="hl kwc">fill</span> <span class="hl std">= element))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Year&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Amount of Element (mg/L)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">facet_wrap</span><span class="hl std">(</span><span class="hl opt">~</span><span class="hl std">element,</span>
+             <span class="hl com"># I want this to be one column with two rows</span>
+             <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+             <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#90ee90&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#F8E473&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+                <p>
+                I would also like to change the legend to have the full names of the elements. Recall we can <em>also</em> use the <code>scale_fill_manual()</code> to perform this:
+                </p>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
+                                             <span class="hl kwc">fill</span> <span class="hl std">= element))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Year&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Amount of Element (mg/L)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">facet_wrap</span><span class="hl std">(</span><span class="hl opt">~</span><span class="hl std">element,</span>
+             <span class="hl com"># I want this to be one column with two rows</span>
+             <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+             <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+    <span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl str">&quot;Element&quot;</span><span class="hl std">,</span>
+                      <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#90ee90&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#F8E473&quot;</span><span class="hl std">),</span>
+                      <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Potassium (K)&quot;</span><span class="hl std">,</span>
+                                 <span class="hl str">&quot;Sodium (Na)&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+                <p>
+                Looks good! But one last thing. Somewhere along the way, there have developed some ugly labels on the top of each of the plots. We could expand them so they have the same thing as the legend. This is done via the <code>labeller</code> argument inside the call to <code>facet_grid()</code>. We pass a vector of matching values to the <code>as_labeller()</code> function and that goes as the argument to <code>labeller</code>. Yes, it's all annoyingly complicated ...
+                </p
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
+                                             <span class="hl kwc">fill</span> <span class="hl std">= element))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Year&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Amount of Element (mg/L)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">facet_wrap</span><span class="hl std">(</span><span class="hl opt">~</span><span class="hl std">element,</span>
+             <span class="hl com"># I want this to be one column with two rows*</span>
+             <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+             <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">,</span>
+             <span class="hl kwc">labeller</span> <span class="hl std">=</span> <span class="hl kwd">as_labeller</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl kwc">`k`</span> <span class="hl std">=</span> <span class="hl str">&quot;Potassium (K)&quot;</span><span class="hl std">,</span>
+                                 <span class="hl kwc">`na`</span> <span class="hl std">=</span> <span class="hl str">&quot;Sodium (Na)&quot;</span><span class="hl std">)))</span> <span class="hl opt">+</span>
+    <span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl str">&quot;Element&quot;</span><span class="hl std">,</span>
+                      <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#90ee90&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#F8E473&quot;</span><span class="hl std">),</span>
+                      <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Potassium (K)&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Sodium (Na)&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
+                <p>
+                Okay, well there we have it!! I would personally argue that you could likely leave off either the legend <em>or</em> the title as you really only need one of the two, but for the sake of practice, we can leave it as is. 
+                </p>
+        </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>

@@ -42,8 +42,8 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
     <nav class="section-nav">
         <ol>
           <li><a href="#ts">Timeseries Plots</a></li>
-          <li><a href="#data-prep">Prepping the Data</a></li>
-          <li><a href="#two-df">Plotting with 2 DataFrames</a></li>
+          <li><a href="#data-prep">Prepping Data</a></li>
+          <li><a href="#two-df">Two DataFrames</a></li>
         </ol>
       </nav>
     <div>
@@ -52,7 +52,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
         <p>
             It is sometimes the case that the easiest way to achieve our goal is, rather than forcing all our data into one large, unwieldy dataframe, we can simply make multiple dataframes and use those multiple dataframes in multiple `geom_`s to make our plot look exactly like we want it. There are myriad reasons why this may be the case, but an easy example is when you have data that span an equivalent time series or range, but have different temporal resolution or coverage. To illustrate this, we'll use an example on temperature data in Alaska.
             </p>
-            <!--begin.rcode, warning=FALSE
+            <!--begin.rcode, warning=FALSE, message=FALSE
             library(tidyverse)
             library(lterdatasampler)
             
@@ -154,6 +154,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                 </p>
         </section>
         <section id="two-df">
+          <h2>Plotting With Two DataFrames</h2>
             <p>
                 The easiest way to go about this, since we're plotting a variable called <code>date</code> from two dataframes is to use two separate calls to geom_line, one for each dataframe, and that will allow us to show both the ones we're interested in (the monthly and daily values):
                 </p>
