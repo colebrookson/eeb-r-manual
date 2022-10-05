@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+  <div class="w3-navy w3-xlarge" 
+  style="max-width:auto;margin:auto;border:1px w3-gray"
+  border:1px>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
+    <div class="w3-center w3-padding-16">The R Manual</div>
+  </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#data-prep">Data Preparation</a></li>
+          <li><a href="#options">Options for Faceting</a></li>
+        </ol>
+      </nav>
+    <div>
+      <section id="">
+        <h2>Facetting Plots</h2>
+        <p>
+            Displaying all the relevant information on a single plot panel is ideal as it minimizes the amount of space consumed, but it sometimes impossible to use only one single plot panel and maintain a readable plot that isn't crowded or trying to do so much. In this case, a handy approach is to <em>facet</em> the plot which essentially breaks up the plot into multiple panes so that they can be viewed together. 
+        </p>
+        <p>
+            Often, this is the case when one or both axis are the same, and a separate variable or group of that variable is being shown on each plotting pane. For example here, let's refer to data on stream chemisty: 
+        </p>
+            <!--begin.rcode, warning=FALSE
+            library(tidyverse)
+            library(lterdatasampler)
+
+            df <- lterdatasampler::luq_streamchem
+            df
+            end.rcode-->
+        <p>
+            There are two variables we might want to compare - Sodium (Na) and Potassium (K). One option could be plotting them through time with two y-axes, but these plots are often confusing. An easier to interpret way would be to have two separate plot panels. This will require some data prep first. 
+        </p>
+        </section>
+        <section id="data-prep">
+            <p>
+                One (not the only) way to go about this, is to get both of our variables of interest into one column, with a separate grouping column that denotes what the values refer to. The easiest way to do this is by <em>re-shaping</em> the data (LINK TO RESHAPING HERE) Let's do that here: 
+                </p>
+                
+                <!--begin.rcode, warning=FALSE
+                df_long <- df %>% 
+                  # remove columns we don't need
+                  dplyr::select(sample_date, na, k) %>% 
+                  tidyr::pivot_longer(
+                    # specify which columns to join together
+                    cols = c(na, k),
+                    # specify what the new name of the grouping variable will be
+                    names_to = "element"
+                  )
+                df_long
+                end.rcode-->
+                <p>
+                Perfect! We will also want to pull out the month and year values as columns since it will be month we'll use to group by in our plots.
+                </p>
+                <!--begin.rcode, warning=FALSE
+                library(lubridate)
+                
+                df_long <- df_long %>% 
+                  dplyr::mutate(
+                    year = lubridate::year(sample_date),
+                    month = lubridate::month(sample_date)
+                  )
+                df_long
+                end.rcode-->
+                
+                <p>
+                Now we can do about plotting this <a href="./03-02-interative-plotting.html">iteratively</a>. In this example, we'll use a box plot (see description <a href="./03-05-change-over-time.html">here</a>) since it's one way to show a change through time. As a quick refresher, here's how we can interpret a boxplot:
+                </p>
+                <img alt="box plot interpretation. credit: Michael Galarnyk", src="../img/03-img/boxplot.jpg">
+        </section>
+        <section id="options">
+            <h2>Plotting with and without Facets</h2>
+            <p>
+                Let's begin by plotting only the bare necessities: 
+                </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() + 
+                  geom_boxplot(data = df_long, mapping = aes(x = year, y = value))
+                end.rcode-->
+                <p>
+                Well that didn't quite work out. We will need to make <code>year</code> a factor here:
+                </p>
+                <!--begin.rcode, warning=FALSE
+                df_long = df_long %>% 
+                  dplyr::mutate(
+                    year = as.factor(year)
+                  )
+                end.rcode-->
+                <p>
+                Now we'll try again: 
+                </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() + 
+                  geom_boxplot(data = df_long, mapping = aes(x = year, y = value))
+                end.rcode-->
+                <p>
+                That looks better. <strong>Now here's why we might want to facet:</strong> right now our plot is displaying <strong>both</strong> sodium and potassium in the same <code>value</code> which doesn't makes sense since they're completely different scales of measurement. We could try to address this by separating them out by some aesthetic (e.g. colour), so let's try that: 
+                </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() + 
+                  geom_boxplot(data = df_long, mapping = aes(x = year, y = value,
+                                                             colour = element))
+                end.rcode-->
+                <p>
+                Ok so now we have grouped box plots. I suppose in theory we could leave it like this, but I am not personally a fan. Let's add in the necessary components and then think about faceting: 
+                </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() + 
+                  geom_boxplot(data = df_long, mapping = aes(x = year, y = value,
+                                                             colour = element)) + 
+                  labs(x = "Year", y = "Amount of Element (mg/L)") +
+                  ggthemes::theme_base()
+                end.rcode-->
+                <p>
+                Nope, still heinous! Time to facet! We'll make this on two panels by faceting using <code>facet_wrap()</code> and operating on the <code>element</code> variable. I also want the plot to display as two plots stacked <em>on top</em> of one another, so I can refer to the number of columns as 1 to force the <code>facet_wrap()</code> to do this. 
+                </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() + 
+                  geom_boxplot(data = df_long, mapping = aes(x = year, y = value,
+                                                             colour = element)) + 
+                  labs(x = "Year", y = "Amount of Element (mg/L)") +
+                  ggthemes::theme_base() +
+                  facet_wrap(~element,
+                             # I want this to be one column with two rows
+                             ncol = 1)
+                end.rcode-->
+                <p>
+                Ok, we're getting there! However, the scales for both are not helping. Let's fix it so the sodium can vary within it's max & min, and the potassium can vary within it's (different) max & min. We can do this with the <code>scales</code> argument in the facet_wrap.
+                </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() + 
+                  geom_boxplot(data = df_long, mapping = aes(x = year, y = value,
+                                                             colour = element)) + 
+                  labs(x = "Year", y = "Amount of Element (mg/L)") +
+                  ggthemes::theme_base() +
+                  facet_wrap(~element,
+                             # I want this to be one column with two rows
+                             ncol = 1,
+                             scales = "free")
+                end.rcode-->
+                <p>
+                Okay, this is looking better! Now it feels like we can actually see the spread of the data. We can still make some aesthetic changes however. Let's change to a <code>fill</code> not a <code>colour</code> on our box plot: 
+                </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() + 
+                  geom_boxplot(data = df_long, mapping = aes(x = year, y = value,
+                                                             fill = element)) + 
+                  labs(x = "Year", y = "Amount of Element (mg/L)") +
+                  ggthemes::theme_base() +
+                  facet_wrap(~element,
+                             # I want this to be one column with two rows
+                             ncol = 1,
+                             scales = "free")
+                end.rcode-->
+                <p>
+                Good, and now we'll change the actual colours we're using with <code>scale_fill_manual()</code>:
+                </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() + 
+                  geom_boxplot(data = df_long, mapping = aes(x = year, y = value,
+                                                             fill = element)) + 
+                  labs(x = "Year", y = "Amount of Element (mg/L)") +
+                  ggthemes::theme_base() +
+                  facet_wrap(~element,
+                             # I want this to be one column with two rows
+                             ncol = 1,
+                             scales = "free") +
+                  scale_fill_manual(values = c("#90ee90", "#F8E473"))
+                end.rcode-->
+                <p>
+                I would also like to change the legend to have the full names of the elements. Recall we can <em>also</em> use the <code>scale_fill_manual()</code> to perform this:
+                </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() + 
+                  geom_boxplot(data = df_long, mapping = aes(x = year, y = value,
+                                                             fill = element)) + 
+                  labs(x = "Year", y = "Amount of Element (mg/L)") +
+                  ggthemes::theme_base() +
+                  facet_wrap(~element,
+                             # I want this to be one column with two rows
+                             ncol = 1,
+                             scales = "free") +
+                    scale_fill_manual("Element", 
+                                      values = c("#90ee90", "#F8E473"),
+                                      labels = c("Potassium (K)",
+                                                 "Sodium (Na)"))
+                end.rcode-->
+                <p>
+                Looks good! But one last thing. Somewhere along the way, there have developed some ugly labels on the top of each of the plots. We could expand them so they have the same thing as the legend. This is done via the <code>labeller</code> argument inside the call to <code>facet_grid()</code>. We pass a vector of matching values to the <code>as_labeller()</code> function and that goes as the argument to <code>labeller</code>. Yes, it's all annoyingly complicated ...
+                </p
+                <!--begin.rcode, warning=FALSE
+                ggplot() + 
+                  geom_boxplot(data = df_long, mapping = aes(x = year, y = value,
+                                                             fill = element)) + 
+                  labs(x = "Year", y = "Amount of Element (mg/L)") +
+                  ggthemes::theme_base() +
+                  facet_wrap(~element,
+                             # I want this to be one column with two rows*
+                             ncol = 1,
+                             scales = "free",
+                             labeller = as_labeller(c(`k` = "Potassium (K)",
+                                                 `na` = "Sodium (Na)"))) +
+                    scale_fill_manual("Element", 
+                                      values = c("#90ee90", "#F8E473"),
+                                      labels = c("Potassium (K)", "Sodium (Na)"))
+                end.rcode-->
+                <p>
+                Okay, well there we have it!! I would personally argue that you could likely leave off either the legend <em>or</em> the title as you really only need one of the two, but for the sake of practice, we can leave it as is. 
+                </p>
+        </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>
