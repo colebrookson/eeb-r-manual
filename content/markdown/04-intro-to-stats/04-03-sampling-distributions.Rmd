@@ -166,6 +166,8 @@ Now let's take these vectors and turn them into dataframes so we can plot them. 
 
 ```{r}
 library(dplyr)
+library(ggplot2)
+library(ggthemes)
 
 df_20 <- data.frame(
   # use table()
@@ -239,7 +241,6 @@ df_10000 <- data.frame(
 Now we'll combine all these data frames into one, add a reference of the real values, and plot the result with a grouped bar chart: 
 
 ```{r}
-library(ggpattern)
 
 # join samples up 
 df_all_samples <- rbind(
@@ -306,8 +307,6 @@ hist(df$length_1_mm)
 We can see that this distribution isn't quite normal, but is continuous, and right-skewed. It could be approximated by a log-normal distribution: 
 
 ```{r}
-library(ggplot2)
-library(ggthemes)
 
 x <- seq(0, 250)
 y <- dlnorm(x, meanlog = 4.1, sdlog = 0.4)

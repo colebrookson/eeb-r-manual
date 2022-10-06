@@ -19,9 +19,7 @@ While we can think of probability as being <em>area under a curve</em>, the like
 
 One thing to note, is that a likelihood by itself is mostly uninterpretable. Likelihoods are only useful in the context of comparing them to one another. For example, to evaluate multiple competing hypotheses, we can compare the likelihood values for those different hypotheses and then decide which is best. 
 
-## Likelihood Functions 
-
-Differently to a probability distribution function, which has to by definition sum to 1 (the sum of all the possibilities can't be greater or less than 1), a likelihood function does <strong>not</strong> have to sum to 1. The function is in fact scaled such that the best-supported value has a likelihood of 1. 
+Differently to a probability distribution function, which has to by definition sum to 1 (the sum of all the possibilities can't be greater or less than 1), a <strong>likelihood function</strong> does <strong>not</strong> have to sum to 1. The function is in fact scaled such that the best-supported value has a likelihood of 1. 
 
 This function can take different forms depending on the situation at hand, and it's not always a perfect normal distribution like the above image suggests. 
 

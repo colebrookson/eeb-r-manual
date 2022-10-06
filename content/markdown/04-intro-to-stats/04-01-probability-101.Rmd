@@ -23,6 +23,7 @@ In this section we'll offer some definitions that will be useful to you in more 
 3. Outcomes
 4. Probability (Naive)
 5. Sample Space
+6. Population
 
 ## Sample Spaces, Events, and Naive Probability
 
@@ -30,7 +31,7 @@ Probability is based on the mathematical concept of sets, from which we'll steal
 
 Say there are 1000 spiders in a bag. One of those spiders happens to have a red dot on their thorax. You pull a single spider out of that bag, without looking. You could have either pulled A) a spider with no red dot, or B) the spider with the red dot. What is the *probability* that you have selected the spider with the red dot? 
 
-Above we've actually used all the key terms above in description. First, we've actually defined the *sample space* (the set of all possible outcomes of an experiment/trial) as being finite - the number of spiders in the bag. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and *all* the applications we'll consider, have finite sample spaces. That is to say, we can construct a *set* containing every single *outcome* of an *experiment or random trial*. In this example, each spider represents an *outcome*, and an *event* is some set of spiders. **Side note:** sets can have one or even *no* items in them. The *events* are what we would mathematically consider *subsets* of the *sample space*. So here we have two *events* of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
+Above we've actually used all the key terms above in description. First, we've actually defined the *sample space* (the set of all possible outcomes of an experiment/trial) as being finite - the spiders in the bag that we can think of as a mathematical set. The population (related but different to a sample space) is the set of all units that some random process can select. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and *all* the applications we'll consider here, have finite sample spaces. That is to say, we can construct a *set* containing every single *outcome* of an *experiment or random trial*. In this example, each spider represents an *outcome*, and an *event* is some set of spiders. **Side note:** sets can have one or even *no* items in them. The *events* are what we would mathematically consider *subsets* of the *sample space*. So here we have two *events* of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
 
 Here, we have a naive version of a probability, wherein we can actually just define the probability of choosing the spider with the red dot as a simple proportion. To state this clearly, the probability of performing the experiment, and the B) being the outcome can be defined as: 
 
