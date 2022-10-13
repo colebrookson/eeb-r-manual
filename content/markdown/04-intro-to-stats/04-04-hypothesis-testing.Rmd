@@ -30,11 +30,11 @@ The way that we state our hypothesis will determine what type of statistical tes
 
 Let's use an example to discuss this. Say we are interested in the size of fiddler crabs. We could formulate a hypothesis test that falls into each of these categories. For example: 
 
-1) Say we believe that the distribution of sizes is not in fact normal. We could construct a null hypothesis that says we believe our size data to be drawn from a population distribution that is in fact normally distributed, and the alternate hypothesis would say that the data were drawn from a non-normal distribution. <strong>Note here that we have not made any suggestion in our alternate hypothesis as to wha*t specifically that non-normal distribution is</strong>.
+1) Say we believe that the distribution of sizes is not in fact normal. We could construct a null hypothesis that says we believe our size data to be drawn from a population distribution that is in fact normally distributed, and the alternate hypothesis would say that the data were drawn from a non-normal distribution. <strong>Note here that we have not made any suggestion in our alternate hypothesis as to wha*t specifically that non-normal distribution is</strong>. <a href="./04-07-comparing-sample-means.html">See how to do this in R.</a>
 
 2) We could decide we think that size covaries with some other variable, say, latitude. If we wanted to test Bergmann's Rule, we could form a null hypothesis that says that size does not co-vary with latitude, and an alternate hypothesis that says not only do we think size co-varies with lattitude, but that it co-varies <em>positively</em>. 
 
-3) If the crabs are from multiple sites, we could say that, between two sites of interest, we might believe there to be a size difference. Here, we would then state as our null hypothesis that there is no difference in the mean between the group of population at site A) and site B), but our alternate hypothesis would say that there is in fact a statistically significant difference between the group means at site A) and B). 
+3) If the crabs are from multiple sites, we could say that, between two sites of interest, we might believe there to be a size difference. Here, we would then state as our null hypothesis that there is no difference in the mean between the group of population at site A) and site B), but our alternate hypothesis would say that there is in fact a statistically significant difference between the group means at site A) and B).  <a href="./04-07-comparing-sample-means.html">See how to do this in R.</a>
 
 ## Significance Testing
 
@@ -58,8 +58,3 @@ So we've performed our test and we now have a value (<math>p-value</math>) for t
 The many discussions about what is to be done about the arbitrary <math>p-value</math> cut-off could fill libraries. Suffice it to say that there is no easy alternative or it would have been adopted. What the present author would like to stress is not that the <math>p-value</math> is evil or even unuseful. In fact it can be quite useful. The problem comes when the researcher views the threshold value (i.e. <math>0.05</math>) as a distinct line in the sand between effects being "real" or "zero". It is simply not true that a <math>p-value</math> of 0.07 indicates there is no chance that the null hypothesis may be incorrect, and to treat it as such is to misunderstand the purpose of significance testing. <strong>We are never testing if our hypotheses are "right" or "wrong" we are only trying to quantify how certain or uncertain we can be about one hypothesis or another.</strong> This is not simply a semantic difference but a very real difference of interpretation and discretion that I hope all reading this will take into their usage of p-values and statistical significance testing. 
 
 We may now wonder - how do we <em>get</em> this elusive <math>p-value</math> then? Well, this brings us back to our discussion of statistical tests. The way we calculate our p-value depends on the statistical test we use. What statistical test do we use? Well, that depends on how we've formulated our hypotheses (i.e. recall the three ways we asked question about crab size above). 
-
-### 1) A single variable
-
-A null hypothesis 
-

@@ -7,3 +7,141 @@ output:
 **Author:** Cole Brookson
 **Date:** 29 August 2022
 
+It's often the case that we may sample independently from a population, and develop some hypothesis that may indicate that the means for the independent samples are in fact different from one another. Taking the example we noted in the <a href="./04-04-hypothesis-testing.html">hypothesis testing</a> section, perhaps we care about the size of fiddler crabs, and if the crabs are from multiple sites, we could say that, between two sites of interest, we might believe there to be a size difference. Well, let's perform a statistical test to see if this is true. 
+
+## Two Sample Means
+
+Let's first consider the example of comparing only two sample means. The standard test to perform here therefore is the <strong>two-sample t-test</strong>. The test statistic is calculated as: $$t = \frac{(\bar{Y_1} - \bar{Y_2}) - (\mu_1 - \mu_2)_0}{SE_{Y_1 - Y_2}}$$
+
+We'll use data on crab sizes: 
+
+```{r}
+library(lterdatasampler)
+crab_sizes <- lterdatasampler::pie_crab
+```
+
+There are a number of sites in this dataset, so let's compare crabs from two northern sites and two southern sites. Our northern sites will be "Cape Cod" and "Narragansett Bay NERR" and our southern sites will be "Guana Tolomoto Matanzas NERR" and "Sapelo Island NERR". 
+
+It's important to never forget the underlying mathematics of what we're doing, we should never simply rely on our computers exclusively and not understand what we're doing, so let's review the equations underlying the t-test. We'll be calculating the test statistic <math>t</math> here. As we are testing a hypothesis that the sizes <em>are</em> different, we can state this formally as $H_0: \mu_1 = \mu_2$ and $H_1: \mu_1 \neq \mu_2$. 
+
+Since we previously stated we believe $H_0: \mu_1 = \mu_2$.
+
+### Assumptions
+
+Before we proceed we need to take into account assumptions of our chosen test. Our two-sample t-test requires two things: 1) normality, and 2) homoskedasticity. 
+
+#### Normality
+
+To assess the normality of our data, let's first assess it visually and then double-check with a statistical test of normality (the Shapiro-Wilks test). A convenient package for this task is the <code>ggpubr</code> package which allows to to plot density plots and QQ plots. 
+
+Let's use a density plot to check if the data follow the normal/Gaussian curve: 
+
+```{r, warning=FALSE}
+library(ggpubr)
+library(dplyr)
+
+# first, cut our data to just the sites we want
+crab_sizes_n <- crab_sizes %>% 
+  dplyr::filter(site %in% c("GTM", "SI")) 
+crab_sizes_s <- crab_sizes %>% 
+  dplyr::filter(site %in% c("CC", "NB"))
+
+# plot our variable of interest (size)
+ggpubr::ggdensity(crab_sizes_n$size, main = "Northern")
+ggpubr::ggdensity(crab_sizes_s$size, main = "Southern")
+
+```
+
+They both look normal. Let's look at the QQ plots:
+
+```{r}
+ggpubr::ggqqplot(crab_sizes_n$size, main = "GTM")
+ggpubr::ggqqplot(crab_sizes_s$size, main = "PIE")
+```
+
+WWe're looking for the points to follow the black line and for no points to be outside the grey error bars. Both of these look pretty good. Let's use a Shapiro-Wilk's test to take a look at what we see. <strong>Importantly, a Shapiro-Wilk's test is a significance test that has a null hypothesis of normality. If the test is SIGNIFICANT then there is sufficient non-normality to stop our test and re-evaluate</strong>. 
+
+We can do this in R very easily. The function <code>shapiro.test()</code> comes shipped in core R with the <code>stats</code> package. First for the northern sites: 
+```{r}
+stats::shapiro.test(crab_sizes_n$size)
+```
+Okay, and we see that our p-value is > 0.05 so we'll fail to reject the null. For the southern sites: 
+
+```{r}
+stats::shapiro.test(crab_sizes_s$size)
+```
+
+Here we see a large p-value, >> 0.05, so again we'll reject the null. 
+
+<strong> Good, we've satisfied the condition of normality </strong>.
+
+
+#### Homoskedasticity
+
+Our second assumption was that the variances of the two samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedascitiy with the F-test </strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if <math>p < 0.05 </math> then for our purposes we could say that the assumption of homoskedascitiy is violated. 
+
+To do the F-test let's use the <code>stats</code> package function <code>var.test()</code>. We will just pass the two sets of data as arguments. 
+
+```{r}
+stats::var.test(crab_sizes_n$size, crab_sizes_s$size)
+```
+
+Great, p >> 0.05, so we can continue. 
+
+### The test
+
+So now we can actually perform the test. It's quite simple, we'll use the <code>t.test()</code> function: 
+
+```{r}
+t_test_res <- stats::t.test(
+  # sample of group 1
+  crab_sizes_n$size, 
+  # sample of group 2
+  crab_sizes_s$size,
+  # Regulat t-test or Welch's t-test depending on the variance
+  var.equal = TRUE
+)
+t_test_res
+```
+
+We see our result here, and it turns out the p-value is <em>very</em> small, so we can reject the null hypothesis, there is good evidence that $\mu_1 \neq \mu_2$. If we wanted, we could plot this result as a box plot, or perhaps more usefully, a violin plot (For a full walk through of how to iteratively make this plot, see our section on plotting <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>): 
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+
+# first get one dataframe with the four sites we want
+focal_sites <- crab_sizes %>% 
+  dplyr::filter(site %in% c("CC", "NB", "GTM", "SI")) %>% 
+  # make new column to denote our two groupings
+  dplyr::mutate(
+    group = as.factor(ifelse(
+      # if the site is CC or NB, the value of `group` is "north" if not, "south"
+      site %in% c("CC", "NB"), "North", "South"
+    ))
+  ) %>% 
+  # keep only the columns we need
+  dplyr::select(size, group)
+
+# plot the data 
+ggplot(data = focal_sites) + 
+  geom_violin(aes(x = group, y = size, fill = group)) + 
+  stat_summary(aes(x = group, y = size), 
+               fun = "mean", 
+               geom = "crossbar", 
+               width = 0.5,
+               colour = "black") +
+  ggthemes::theme_base() + 
+  labs(y = "Size (mm)", x = "Geographic Region") + 
+  theme(
+    legend.position = "none"
+  ) + 
+  annotate(
+    geom = "text", 
+    x = 2.1,
+    y = 21,
+    label = "p < 0.001",
+    size = 8
+  )
+```
+
