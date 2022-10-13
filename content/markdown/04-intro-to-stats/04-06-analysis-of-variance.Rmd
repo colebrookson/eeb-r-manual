@@ -1,0 +1,10 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Likelihood
+**Author:** Cole Brookson
+**Date:** 29 August 2022
+
+In our discussion of <a href="./04-07-comparing-sample-means.html">comparing sample means</a> we discussed how to use R and a 
