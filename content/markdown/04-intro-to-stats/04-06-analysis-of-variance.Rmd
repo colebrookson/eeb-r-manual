@@ -7,4 +7,6 @@ output:
 **Author:** Cole Brookson
 **Date:** 29 August 2022
 
-In our discussion of <a href="./04-07-comparing-sample-means.html">comparing sample means</a> we discussed how to use R and a 
+In our discussion of <a href="./04-07-comparing-sample-means.html">comparing sample means</a> we discussed how to use R to compare two sample means. This is usually done through a t-test of some form. However, it's not uncommon that we start asking questions wherein we want to compare the sample means across a larger number of groups. For example, say we have four groups 1-4. Thye 
+
+This brings us to a conundrum, as statistical theory has to re-consider what to do to be able to T
