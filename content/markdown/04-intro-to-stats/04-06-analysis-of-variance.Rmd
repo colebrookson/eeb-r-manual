@@ -7,6 +7,9 @@ output:
 **Author:** Cole Brookson
 **Date:** 29 August 2022
 
-In our discussion of <a href="./04-07-comparing-sample-means.html">comparing sample means</a> we discussed how to use R to compare two sample means. This is usually done through a t-test of some form. However, it's not uncommon that we start asking questions wherein we want to compare the sample means across a larger number of groups. For example, say we have four groups 1-4. Thye 
+In our discussion of <a href="./04-07-comparing-sample-means.html">comparing sample means</a> we discussed how to use R to compare two sample means. This is usually done through a t-test of some form. However, it's not uncommon that we start asking questions wherein we want to compare the sample means across a larger number of groups. For example, say we have four groups 1-4. 
 
-This brings us to a conundrum, as statistical theory has to re-consider what to do to be able to formulate our null and alternate hypotheses in such a way that is useful. 
+This brings us to a conundrum, as statistical theory has to re-consider what to do to be able to formulate our null and alternate hypotheses in such a way that is useful. If we want to compare the means of four groups of a single grouping variable, we will use a single-factor ANOVA to do so. Our task here is to figure out how much variance is likely present between the group means due to sampling error, and then what amount of variance <em>on top of that</em> would denote a significantly different mean. 
+
+To be clear, when we are discussing this one-factor ANOVA, we are stating that our null hypothesis is that there is <strong>no</strong> difference between the sample means, so $H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4$. In our alternative hypothesis then, it does <strong>not</strong> have to be true that more than one $\mu$ are significantly different, but only that <em>at least</em> one is. 
+
