@@ -13,3 +13,17 @@ This brings us to a conundrum, as statistical theory has to re-consider what to 
 
 To be clear, when we are discussing this one-factor ANOVA, we are stating that our null hypothesis is that there is <strong>no</strong> difference between the sample means, so $H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4$. In our alternative hypothesis then, it does <strong>not</strong> have to be true that more than one $\mu$ are significantly different, but only that <em>at least</em> one is. 
 
+## F-statistic
+
+Just like when we did t-tests and had the t-statistic, our test-statistic for the one-factor ANOVA is the F-statistic. Since our interest here is variance, the F-statistic is best thought of as a ratio of two variances. We will think the variances in the terms of <em>mean squares</em>. We first have the <em>group mean square</em> which we calculate as the error sum of squares and dividing by the degrees of freedom: $$MSG = \frac{\sum{(y_i - \hat{y_i})^2}}{n-2}$$ and then we have the <em>mean square error</em> which we calculate by summing the error sum of squares and dividing by the associated degrees of freedom: $$MSE = \frac{\sum{(y_i - \hat{y_i})^2}}{n-2}$$. These two quantities can be thought of as representing the variance among group means (MSG) and the variance between subjects in the same group (MSE). Thus, it may be somewhat logical then, that since the F-statistic is the simple ratio $$F = \frac{MSG}{MSE}$$, if the ratio is equal to 1, then the variances are in fact the same, and there is no additional variance between the sample means (represented by MSG) compared to just the error within groups (represented by MSE). 
+
+We then use our p-value as usual to determine the probability of getting our present F-statistic by chance. Then we can reject or fail to reject the null hypothesis. 
+
+
+
+The group mean square is proportional to the observed amount of variation among the group sample means. You can think of this quantity as representing the variation among the sampled subjects that belong to different groups.
+
+
+
+
+
