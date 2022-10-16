@@ -19,11 +19,76 @@ Just like when we did t-tests and had the t-statistic, our test-statistic for th
 
 We then use our p-value as usual to determine the probability of getting our present F-statistic by chance. Then we can reject or fail to reject the null hypothesis. 
 
+## Performing the ANOVA
 
+When performing the ANOVA, similar to all statistical tests there are some processes that need to take place before we actually <em>run</em> the test. We first gather and organize our data as need be. Then we must check that our data meet the assumptions of the test we are planning on carrying out, then we can perform our test and interpret. 
 
-The group mean square is proportional to the observed amount of variation among the group sample means. You can think of this quantity as representing the variation among the sampled subjects that belong to different groups.
+For our example here, let's consider the sizes of Coastal Salamander in Oregon, USA.
 
+```{r}
+library(tidyverse)
+library(lterdatasampler)
 
+df <- lterdatasampler::and_vertebrates
+names(df)
+```
 
+In our example here, we'll actually look at the size of our trout between different types of units in the habitat that the salamanders may be found in. We can first check out what each of our variables mean with <code>?and_vertebrates</code> which will give us a short vignette of the dataset. Let's check how many of the different types of habitats there are:
+
+```{r}
+unique(df$unittype)
+```
+
+So there's 7 types and some NA's. Now we want to make comparisons between groups that have roughly the same number of observations between them, so we can check how many observations are in each group with <code>table()</code>. But a reminder we're only looking at data for Coastal Salamander, so we need to filter to just that species first. Also, let's only use data post-2007, as sampling changed slightly at that point.
+
+```{r}
+# check what the different species are called
+unique(df$species)
+
+df_sala <- df %>% 
+  dplyr::filter(species == "Coastal giant salamander",
+                year >= 2007)
+table(df_sala$unittype)
+```
+
+We can also plot this: 
+
+```{r}
+library(ggthemes)
+
+# make grouping variable a factor
+df_sala$unittype <- as.factor(df_sala$unittype)
+
+ggplot() + 
+  geom_bar(data = df_sala, mapping = aes(x = unittype, fill = unittype), 
+           colour = "black") +
+  ggthemes::theme_base()
+```
+
+Okay so we can see that really only "C", "P", and "SC" have comparable numbers here. So we'll make our comparisons between those three groups. 
+
+### Assumptions
+
+The assumptions of this one-factor ANOVA are: 
+
+1) Observations are independent and random
+2) Data in each level of the groupings are normally distributed
+3) The populations have common variances
+
+So we'll start by assuming independence and random sampling. Next, we need to check if each of the groups have data that are roughly normally distributed. <strong>A note: while plotting our data can be helpful, it can often lead to p-hacking and HARKing. It is technically acceptable to use visual methods to guess at normality, but statistical tests are more quantitative and remove any challenges associated with resisting HARKing or p-hacking.</strong> Here we'll use a Shapiro-Wilks test to check for normality in each of our groups:
+
+```{r}
+ggplot(data = df_sala) + 
+  geom_density(aes(x = log10(length_2_mm), fill = unittype))
+
+focal_c <- df_sala %>% 
+  dplyr::filter(unittype == "C")
+focal_p <- df_sala %>% 
+  dplyr::filter(unittype == "P")
+focal_sc <- df_sala %>% 
+  dplyr::filter(unittype == "SC")
+
+stats::shapiro.test()
+```
 
 
