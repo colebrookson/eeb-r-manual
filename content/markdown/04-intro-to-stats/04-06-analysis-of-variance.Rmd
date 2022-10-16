@@ -23,32 +23,30 @@ We then use our p-value as usual to determine the probability of getting our pre
 
 When performing the ANOVA, similar to all statistical tests there are some processes that need to take place before we actually <em>run</em> the test. We first gather and organize our data as need be. Then we must check that our data meet the assumptions of the test we are planning on carrying out, then we can perform our test and interpret. 
 
-For our example here, let's consider the sizes of Coastal Salamander in Oregon, USA.
+For our example here, let's consider the sizes of penguins bills.
 
 ```{r}
 library(tidyverse)
-library(lterdatasampler)
+library(palmerpenguins)
 
-df <- lterdatasampler::and_vertebrates
+df <- palmerpenguins::penguins
 names(df)
 ```
 
-In our example here, we'll actually look at the size of our trout between different types of units in the habitat that the salamanders may be found in. We can first check out what each of our variables mean with <code>?and_vertebrates</code> which will give us a short vignette of the dataset. Let's check how many of the different types of habitats there are:
+In our example here, we may hypothesize that between the species in our dataset, there may be differences in the mean bill length. Bill length in a penguin looks vaguely like this: 
+
+<img src="./img/culmen_depth.png", alt="Artwork by @allison_horst”>
+
+So first we'll look at the species on hand
 
 ```{r}
-unique(df$unittype)
+unique(df$species)
 ```
 
-So there's 7 types and some NA's. Now we want to make comparisons between groups that have roughly the same number of observations between them, so we can check how many observations are in each group with <code>table()</code>. But a reminder we're only looking at data for Coastal Salamander, so we need to filter to just that species first. Also, let's only use data post-2007, as sampling changed slightly at that point.
+It's probably best to check that each species has ~roughly the same amount of samples per group before we continue. Let's use the <code>table()</code> function for this:
 
 ```{r}
-# check what the different species are called
-unique(df$species)
-
-df_sala <- df %>% 
-  dplyr::filter(species == "Coastal giant salamander",
-                year >= 2007)
-table(df_sala$unittype)
+table(df$species)
 ```
 
 We can also plot this: 
@@ -57,15 +55,15 @@ We can also plot this:
 library(ggthemes)
 
 # make grouping variable a factor
-df_sala$unittype <- as.factor(df_sala$unittype)
+df$species <- as.factor(df$species)
 
 ggplot() + 
-  geom_bar(data = df_sala, mapping = aes(x = unittype, fill = unittype), 
+  geom_bar(data = df, mapping = aes(x = species, fill = species), 
            colour = "black") +
   ggthemes::theme_base()
 ```
 
-Okay so we can see that really only "C", "P", and "SC" have comparable numbers here. So we'll make our comparisons between those three groups. 
+Okay so we can see that while they're not completely equal, they're close enough for our purposes, especially with an ANOVA, as it's one of the less sensitive tests to number of samples per group. 
 
 ### Assumptions
 
@@ -75,20 +73,112 @@ The assumptions of this one-factor ANOVA are:
 2) Data in each level of the groupings are normally distributed
 3) The populations have common variances
 
-So we'll start by assuming independence and random sampling. Next, we need to check if each of the groups have data that are roughly normally distributed. <strong>A note: while plotting our data can be helpful, it can often lead to p-hacking and HARKing. It is technically acceptable to use visual methods to guess at normality, but statistical tests are more quantitative and remove any challenges associated with resisting HARKing or p-hacking.</strong> Here we'll use a Shapiro-Wilks test to check for normality in each of our groups:
+So we'll start by assuming independence and random sampling. Next, we need to check if each of the groups have data that are roughly normally distributed. 
+
+#### Normality
+
+<strong>A note: while plotting our data can be helpful, it can often lead to p-hacking and HARKing. While it is technically acceptable to plot the density plots for each group, that will give us an insight, prior to performing our tests, about what the means of each group might be. Again, this in and of itself is not <em>bad</emb> but we can get the same information without the possible pitfalls by using QQ plots and significance tests, which at the end of the day are often required for publications/reports anyways. </strong> Here we'll use QQ plots and a Shapiro-Wilks test to check for normality in each of our groups:
 
 ```{r}
-ggplot(data = df_sala) + 
-  geom_density(aes(x = log10(length_2_mm), fill = unittype))
+library(ggpubr)
 
-focal_c <- df_sala %>% 
-  dplyr::filter(unittype == "C")
-focal_p <- df_sala %>% 
-  dplyr::filter(unittype == "P")
-focal_sc <- df_sala %>% 
-  dplyr::filter(unittype == "SC")
+# first filter the data
+adelie <- df %>% 
+  dplyr::filter(species == "Adelie")
+chin <- df %>% 
+  dplyr::filter(species == "Chinstrap")
+gentoo <- df %>% 
+  dplyr::filter(species == "Gentoo")
 
-stats::shapiro.test()
+# plot qq-plots for each one
+ggpubr::ggqqplot(adelie$bill_length_mm, main = "Adelie")
+ggpubr::ggqqplot(chin$bill_length_mm, main = "Chinstrap")
+ggpubr::ggqqplot(gentoo$bill_length_mm, main = "Gentoo")
 ```
+
+Visually, all of these look reasonably acceptable, but let's compare with a Shapiro-Wilks test on each: 
+
+```{r}
+stats::shapiro.test(adelie$bill_length_mm)
+stats::shapiro.test(chin$bill_length_mm)
+stats::shapiro.test(gentoo$bill_length_mm)
+```
+
+Well, it's a good thing we checked with our tests!! Our Shapiro-Wilks test for our Gentoo species shows that actually the data are non-normal. We note that the p-value is not <em>especially</em> large, but still <0.05. 
+
+Two things to note here: First, <strong>ANOVAs are actually relatively robust to violations of normality assumptions</strong>. This means that given we can see the data are not <em>that</em> far off of a normal distribution (we can see this via our QQ plot), we could in theory proceed with our test here with relative confidence. Second, <strong>log-transforming our data is completely valid for an ANOVA</strong>. This is helpful for us, as while we could go ahead with the test (after checking our other assumptions), it's still true that there is an easy transformation available to us through the log transformation, that prevents us from having to <em>technically</em> violate the assumptions of our test. 
+
+So let's go ahead and transform our data: 
+
+```{r}
+adelie <- adelie %>% 
+  dplyr::mutate(
+    log_length = log(bill_length_mm)
+  )
+chin <- chin %>% 
+  dplyr::mutate(
+    log_length = log(bill_length_mm)
+  )
+gentoo <- gentoo %>% 
+  dplyr::mutate(
+    log_length = log(bill_length_mm)
+  )
+```
+
+Now we'll go ahead and re-do our QQ plots and our tests:
+
+```{r}
+# plot qq-plots for each one
+ggpubr::ggqqplot(adelie$log_length, main = "Adelie")
+ggpubr::ggqqplot(chin$log_length, main = "Chinstrap")
+ggpubr::ggqqplot(gentoo$log_length, main = "Gentoo")
+```
+
+So these all look pretty good. Time for the tests: 
+
+```{r}
+stats::shapiro.test(adelie$log_length)
+stats::shapiro.test(chin$log_length)
+stats::shapiro.test(gentoo$log_length)
+```
+
+Ok great, so we can now see that each of the three tests has a p-value > 0.05, so we can assume normality for these values. 
+
+#### Homoskedasticity
+
+Next to check our variances. 
+
+Our second assumption was that the variances of all samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedascitiy with the Bartlett's test</strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if <math>p < 0.05 </math> then for our purposes we could say that the assumption of homoskedascitiy is violated. 
+
+To do the Barlett's test let's use the <code>stats</code> package function <code>bartlett.test()</code>. We will now actually re-format our data first so that it's in <em>long</em> form. This will make our lives easier. To do this, we want one column with the actual values, and another with the grouping variable (in this case, our species names). To get the species names, what we'll do is combine a few arguments such that we can do it all in one command. We'll use the <code>rep()</code> function which takes two arguments: a) the value to be repeated, and b) the number of times to repeat it. Because there are different numbers of observations for each species, the second argument in each call to <code>rep()</code> will simply be the length of the vector of the <code>log_length</code> for that species. Also, we want the grouping variable to be a factor. That looks like this: 
+
+```{r}
+bill_data <- data.frame(
+  log_length = c(adelie$log_length, chin$log_length, gentoo$log_length),
+  species = as.factor(c(
+    # first for the adelie species since it's the first in the vector above
+    rep("adelie", length(adelie$log_length)), 
+    rep("chin", length(chin$log_length)),
+    rep("gentoo", length(gentoo$log_length))
+  ))
+)
+
+# let's look at the summary of the df
+summary(bill_data)
+```
+
+Great, now for our bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. Last, tell the function what the dataframe itself is called. 
+
+```{r}
+stats::bartlett.test(log_length ~ species, data = bill_data)
+```
+
+Wonderful, and we see that the p-value is well above 0.05, so our variances are equal enough to continue. 
+
+
+
+
+
+
 
 
