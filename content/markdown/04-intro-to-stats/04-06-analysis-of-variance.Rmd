@@ -148,7 +148,7 @@ Ok great, so we can now see that each of the three tests has a p-value > 0.05, s
 
 Next to check our variances. 
 
-Our second assumption was that the variances of all samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedascitiy with the Bartlett's test</strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if <math>p < 0.05 </math> then for our purposes we could say that the assumption of homoskedascitiy is violated. 
+Our second assumption was that the variances of all samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedascitiy with the Bartlett's test</strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if <math>p < 0.05 </math> then for our purposes we could say that the assumption of homoskedascitiy is violated. As a sidenote, if our assumptions of normality were not quite met, it would be preferable to use the Levene's test which is less sensitive to this problem. 
 
 To do the Barlett's test let's use the <code>stats</code> package function <code>bartlett.test()</code>. We will now actually re-format our data first so that it's in <em>long</em> form. This will make our lives easier. To do this, we want one column with the actual values, and another with the grouping variable (in this case, our species names). To get the species names, what we'll do is combine a few arguments such that we can do it all in one command. We'll use the <code>rep()</code> function which takes two arguments: a) the value to be repeated, and b) the number of times to repeat it. Because there are different numbers of observations for each species, the second argument in each call to <code>rep()</code> will simply be the length of the vector of the <code>log_length</code> for that species. Also, we want the grouping variable to be a factor. That looks like this: 
 
@@ -163,8 +163,8 @@ bill_data <- data.frame(
   ))
 )
 
-# let's look at the summary of the df
-summary(bill_data)
+# let's look at the structure of the df
+str(bill_data)
 ```
 
 Great, now for our bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. Last, tell the function what the dataframe itself is called. 
@@ -175,9 +175,30 @@ stats::bartlett.test(log_length ~ species, data = bill_data)
 
 Wonderful, and we see that the p-value is well above 0.05, so our variances are equal enough to continue. 
 
+### The test
 
+Now to perform the test itself. It is, similarly to the t-test, very easy to compute in R, and looks pretty much identical to our syntax for the Bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. The function itself we use comes from the <code>stats</code> package again. We can now proceed to our test and run it all like this: 
 
+```{r}
+mod <- stats::aov(log_length ~ species, data = bill_data_noNA)
+summary(mod)
+```
 
+So we see our p-value is <em>very</em> small, which indicates we can reject the null hypothesis - there is a difference between the means of the species. 
+
+### Interpretation
+
+There are still a few steps we might want to take. First, we still don't know <em>what</em> the actual means of the groups are, nor which are different than each other. Also, it's almost always advantageous to plot our output so let's do that now. 
+
+#### Tukey Comparison
+
+To actually see what the pairwise comparison of the groups are, we can see which groups are actually different than one another. This is useful as it allows us to identify if it's only one group that is different, (i.e. $\mu_1 = \mu_2$ but $\mu_3 > \mu_2$) or it they're all quite a bit different. We can do this comparison through the Tukey test (Tukey Honest Signfiicant Differences) which again can be done using the <code>stats</code> package: 
+
+```{r}
+stats::TukeyHSD(mod)
+```
+
+So here we get four key outputs: <code>diff</code> which is the difference between the two groups at hand (this is read as the chinstraps are ~0.23 greater than adelies for the first row), the upper and lower bounds of the 95% confidence interval, and the p-value denoting if said difference is significant. 
 
 
 
