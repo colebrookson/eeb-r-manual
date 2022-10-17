@@ -55,10 +55,10 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             end.rcode-->
 
             When making a plot, typically the best way to go about it is to iteratively make a version of the plot, observe the outcome, and then make changes in an iterative fashion. This prevents us from making mistakes in a long set of code that we then can't diagnose the problem with, and further, helps us catch mistakes (typos, colour problems, etc) as we only have to take in a few new components each time, and not a whole pile. 
-
-            For our example, let's use the example from the <a href="03-01-intro-to-ggplot.html">Intro to <code>ggplot2</code> </a>section, looking at salamanders and trout: 
-
-            <!--begin.rcode, warning=FALSE
+            <br><br>
+            For our example, let's use the example from the <a href="./03-01-intro-to-ggplot.html">Intro to <code>ggplot2</code></a> section, looking at salamanders and trout: 
+            <br><br>
+            <!--begin.rcode
             library(tidyverse)
             library(lterdatasampler)
 
@@ -141,6 +141,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                 <br><br>
 
                 <!--begin.rcode, warning=FALSE
+
                 ggplot() +
                 geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g),
                             # here's where we'll add our colour etc
@@ -404,7 +405,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
     association with the R Foundation. It should not be taken as an
      authority on R best practices. 
     <br>
-    When using this resource, <bold>always</bold> default to instructions and 
+    When using this resource, <strong>always</strong> default to instructions and 
     guidance provided by your instructor. 
     <br>
     This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page

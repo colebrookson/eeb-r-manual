@@ -1,0 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Likelihood
+**Author:** Cole Brookson
+**Date:** 29 August 2022
