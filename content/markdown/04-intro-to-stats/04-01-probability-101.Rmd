@@ -257,25 +257,3 @@ legend("topleft", title = "Mean Values",
 ```
 
 This likely looks much as we may have anticiipated. We are simply shifting the plot left or right depending on the mean. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
