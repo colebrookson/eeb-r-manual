@@ -106,7 +106,7 @@ stats::shapiro.test(gentoo$bill_length_mm)
 
 Well, it's a good thing we checked with our tests!! Our Shapiro-Wilks test for our Gentoo species shows that actually the data are non-normal. We note that the p-value is not <em>especially</em> large, but still <0.05. 
 
-Two things to note here: First, <strong>ANOVAs are actually relatively robust to violations of normality assumptions</strong>. This means that given we can see the data are not <em>that</em> far off of a normal distribution (we can see this via our QQ plot), we could in theory proceed with our test here with relative confidence. Second, <strong>log-transforming our data is completely valid for an ANOVA</strong>. This is helpful for us, as while we could go ahead with the test (after checking our other assumptions), it's still true that there is an easy transformation available to us through the log transformation, that prevents us from having to <em>technically</em> violate the assumptions of our test. 
+Two things to note here: First, <strong>ANOVAs are actually relatively robust to violations of normality assumptions</strong>. This means that given we can see the data are not <em>that</em> far off of a normal distribution (we can see this via our QQ plot), we could in theory proceed with our test here with relative confidence. Second, <strong>log-transforming our data is completely valid for an ANOVA</strong>. This is helpful for us, as while we could go ahead with the test (after checking our other assumptions), it's still true that there is an easy transformation available to us through the log transformation, that prevents us from having to <em>technically</em> violate the assumptions of our test. An additional note is that if our assumptions are not met completely, and perhaps a transformation does not help us, it is possible to use a non-parametric alternative such as the Kruskal-Wallis test which we do not cover in this section, but is similarly easy to run. 
 
 So let's go ahead and transform our data: 
 
@@ -180,7 +180,7 @@ Wonderful, and we see that the p-value is well above 0.05, so our variances are 
 Now to perform the test itself. It is, similarly to the t-test, very easy to compute in R, and looks pretty much identical to our syntax for the Bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. The function itself we use comes from the <code>stats</code> package again. We can now proceed to our test and run it all like this: 
 
 ```{r}
-mod <- stats::aov(log_length ~ species, data = bill_data_noNA)
+mod <- stats::aov(log_length ~ species, data = bill_data)
 summary(mod)
 ```
 
@@ -200,6 +200,36 @@ stats::TukeyHSD(mod)
 
 So here we get four key outputs: <code>diff</code> which is the difference between the two groups at hand (this is read as the chinstraps are ~0.23 greater than adelies for the first row), the upper and lower bounds of the 95% confidence interval, and the p-value denoting if said difference is significant. 
 
+#### Plot the result
+
+Now let's plot our results. This can be done in any number of ways, but I am personally keen on plotting the density of the values, in the same way we would if we wanted to use it to check assumptions of normality as it shows all components of the data at hand and doesn't have the chance of hiding anything. I also think it's just a useful plot to have. We'll pair that with denotations of the means of each group as well as annotating the p-value onto the plot like this: 
+
+```{r}
+means <- bill_data %>% 
+  dplyr::group_by(species) %>% 
+  dplyr::summarise(means = mean(log_length, na.rm = TRUE))
+
+ggplot(data = bill_data) +
+  geom_density(aes(x = log_length, fill = species), 
+               alpha = 0.3, colour = "black") + 
+  ggthemes::theme_base() + 
+  labs(x = "Log Bill Length", y = "Density") + 
+  scale_fill_manual("Speices", values = 
+                      c("purple", "goldenrod2", "steelblue2")) + 
+  geom_vline(aes(
+    xintercept = means$means[which(means$species == "adelie")]),
+           linetype = "dashed", colour = "purple") + 
+  geom_vline(aes(
+    xintercept = means$means[which(means$species == "chin")]),
+           linetype = "dashed", colour = "goldenrod2") + 
+  geom_vline(aes(
+    xintercept = means$means[which(means$species == "gentoo")]),
+           linetype = "dashed", colour = "steelblue2") +
+  annotate(geom = "text", 
+           x = 3.55, 
+           y = 5.9,
+           label = "p-value << 0.001")
+```
 
 
 
