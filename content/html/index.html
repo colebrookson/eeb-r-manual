@@ -9,19 +9,6 @@
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
-p {
-    font-size:18px
-}
-h1 {
-  font-size: 40px;
-}
-
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 30px;
-}
 </style>
 </head>
 <body>
@@ -47,9 +34,17 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   </div>
 </div>
 
-<div class="w3-main w3-content w3-padding" 
-style="max-width:1200px;margin-top:100px">
 
+<main>
+  <nav class="section-nav">
+    <ol>
+      <li><a href="#data-types"></a>
+        <ul>
+          <li class=""><a href="#data-types--characters"></a></li>
+        </ul>
+      </li>
+    </ol>
+  </nav>
   <!-- Welcome Section -->
   <div class="w3-container w3-padding-32 w3-center">  
     <h3>Welcome to the R Manual!</h3><br>
@@ -62,9 +57,12 @@ style="max-width:1200px;margin-top:100px">
         touchstone for all R-based learning in the department.
       </p>
       <hr>
-      <h4>How Should You Use This Manual?</h3><br>
-      <img class="image-main" src="img/confused.jpg" alt="confusion" 
+      <h1>How Should You Use This Manual?</h1><br>
+     <!--
+<img class="image-main" src="img/confused.jpg" alt="confusion" 
         width="100" height="150">
+
+     --> 
       <p>
         What a good question. This is <bf>not</bf> supposed to be an exhaustive 
         treatise on all things R. This is supposed to be a launching pad, 
@@ -121,41 +119,50 @@ style="max-width:1200px;margin-top:100px">
       </a>
     </div>
     <div class="w3-quarter">
+      <a href="03-landingpage.html">
       <img class="image-main" src="img/types-of-plots.jpg" alt="types of plots" 
       width="250" height="160">
       <h3>Plotting</h3>
       <p>The grammar of graphics, common and advanced plot types, and plotting 
         with multiple dataframes</p>
+      </a>
     </div>
-  </div>
   
   <!-- Second Photo Grid-->
   <div class="w3-row-padding w3-padding-16 w3-center">
     <div class="w3-quarter">
+      <a href="06-landingpage.html">
       <img class="image-main" src="img/control-flow.png" alt="control flow" 
       width="250" height="160">
       <h3>Programming Concepts</h3>
       <p>Control flow, functions, and analysis flow made simple</p>
+      </a>
     </div>
     <div class="w3-quarter">
+      <a href="04-landingpage.html">
       <img class="image-main" src="img/distributions.png" alt="distributions" 
       width="250" height="160">
       <h3>Introduction to Statistics</h3>
       <p>A gentle intro to performing common tests and regression analyses</p>
+      </a>
     </div>
     <div class="w3-quarter">
-      <img class="image-main" src="img/place-holder.png" alt="simulations" 
+      <a href="05-landingpage.html">
+      <img class="image-main" src="img/sims.png" alt="simulations" 
       width="250" height="160">
       <h3>Simulations</h3>
       <p>Biological experiments on the computer - simulating natural 
         processes</p>
+      </a>
     </div>
     <div class="w3-quarter">
+      <a href="07-landingpage.html">
       <img class="image-main" src="img/non-linear.jpg" alt="advanced statistics" 
       width="250" height="160">
       <h3>Advanced Statistics</h3>
       <p>Further regression analysis, non-linear regression, mixed-effects, 
         and other topics</p>
+      </a>
     </div>
   </div>
 
@@ -176,8 +183,10 @@ style="max-width:1200px;margin-top:100px">
   <!-- About Section -->
   <div class="w3-container w3-padding-32 w3-center">  
     <h3>About the R Manual</h3><br>
+    <!--
     <img src="img/place-holder.png" alt="about the r manual" class="w3-image" 
     style="display:block;margin:auto" width="500" height="160">
+    -->
     <div class="w3-padding-32">
       <h4><b>Learn more about this project</b></h4>
       <p>
@@ -195,21 +204,25 @@ style="max-width:1200px;margin-top:100px">
   <footer class="w3-row-padding w3-padding-32">
     <div class="w3-third">
       <h3>FOOTER</h3>
-      <p>This project is made possible through the University of Toronto XXXXX</p>
+      <p>This project is made possible through the University of Toronto Learning & Education Advancement Fund (LEAF) program</p>
     </div>
   
     <div class="w3-third">
       <h3>Additional Resources</h3>
       <ul class="w3-ul w3-hoverable">
         <li class="w3-padding-16">
-          <img src="img/place-holder.png" class="w3-left w3-margin-right" style="width:50px">
+          <a href="https://uoftcoders.github.io/studyGroup/">
+          <img src="img/coders.png" class="w3-left w3-margin-right" style="width:50px">
           <span class="w3-large">U of T Coders</span><br>
           <span>Student-led UofT support system for learning programming</span>
+          </a>
         </li>
         <li class="w3-padding-16">
-          <img src="img/place-holder.png" class="w3-left w3-margin-right" style="width:50px">
+          <a href="https://carpentries.org/">
+          <img src="img/carpentries.jpg" class="w3-left w3-margin-right" style="width:50px">
           <span class="w3-large">The Carpentries</span><br>
           <span>Software and Data Carpentries resources and workshops</span>
+          </a>
         </li> 
       </ul>
     </div>
@@ -227,6 +240,7 @@ style="max-width:1200px;margin-top:100px">
   </footer>
 
 <!-- End page content -->
+</section>
 </div>
 
 <script>
@@ -239,6 +253,6 @@ function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
 }
 </script>
-
+</main>
 </body>
 </html>

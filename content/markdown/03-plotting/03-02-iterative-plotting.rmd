@@ -7,11 +7,13 @@ output:
 **Author:** Cole Brookson
 **Date:** 20 July 2022
 
+
 <!--begin.rcode, echo=FALSE
 options(tidyverse.quiet = TRUE)
 end.rcode-->
 
 When making a plot, typically the best way to go about it is to iteratively make a version of the plot, observe the outcome, and then make changes in an iterative fashion. This prevents us from making mistakes in a long set of code that we then can't diagnose the problem with, and further, helps us catch mistakes (typos, colour problems, etc) as we only have to take in a few new components each time, and not a whole pile. 
+
 
 For our example, let's use the example from the <a href="./03-01-intro-to-ggplot.html">Intro to <code>ggplot2</code></a> section, looking at salamanders and trout: 
 
@@ -27,15 +29,18 @@ end.rcode-->
 ## Building a Basic Plot
 
 Let's again plot a scatter plot of <code>length_1_mm</code> vs. <code>weight_g</code>. We'll start out with the absolute minimum number of arguments: 
+
 <br><br>
 1. The call to <code>ggplot()</code>
 2. The aesthetics (i.e. what variables we want on the x- and y-axis)
 3. The <code>geom_</code> function denoting what <em>type</em> of plot we're going for
 <br><br>
+
 <!--begin.rcode
 ggplot() +
   geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g))
 end.rcode-->
+
 <br><br>
 Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <em>must-haves</em> to have a legible, complete plot. First step is the axis labels. So to iteratively work up our plot, we'll add that one component on, by using the new function `labs()`:
 <br><br>
@@ -44,18 +49,22 @@ ggplot() +
   geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
   labs(x = "Length (mm)", y = "Weight (g)") 
 end.rcode-->
+
 <br><br>
 OK good. Now, this is more aesthetic than anything, but we might want to change the appearance of this plot away from this ugly grey background and grid lines. This is a more personal decision regarding what exactly you want your plot to look like. However, there are lots of <code>themes</code> available in the <code>ggplot2</code> package to choose from. For example, we could use the <code>theme_classic()</code> like so: 
 <br><br>
+
 <!--begin.rcode
 ggplot() +
   geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
   labs(x = "Length (mm)", y = "Weight (g)") +
   theme_classic()
 end.rcode-->
+
 <br><br>
 But I <em>personally</em> prefer a different theme that comes in the <code>ggthemes</code> package, which we can install now:
 <br><br>
+
 <!--begin.rcode
 #install.packages("ggthemes")
 library(ggthemes)
@@ -63,6 +72,7 @@ end.rcode-->
 <br><br>
 Now, let's use the <code>theme_base()</code> option, which will give us a very classic look and feel to the plot: 
 <br><br>
+
 <!--begin.rcode
 ggplot() +
   geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
@@ -70,7 +80,9 @@ ggplot() +
    # note here we use `ggthemes::` to indicate which package we're using
   ggthemes::theme_base()
 end.rcode-->
+
 <br><br>
+
 Perfect! You'll also notice the text sizes are now larger which is preferable for reading on a screen or in a report. 
 
 ## Adding Colour & Shape
@@ -93,6 +105,7 @@ So this is interesting! We see that somehow we've made our points hollow on the 
 
 <img class="image-full-page" style="display:block;margin:auto"
         src="../img/03-img/r-symbols.png">
+
 
 So notice we specified point # 21. This point has a dark outer circle and a fill colour in the middle. <strong>When using a point option with an outter boundary and an inner fill, the argument <code>colour</code> refers to the outter boundary line, and the argument <code>fill</code> refers to the colour filling inside**. Let's see how this works by changing <code>colour = "black"</code> and <code>fill = "red"</code>: 
 
@@ -156,7 +169,9 @@ That's better. Looking at this plot, this brings up a few common tasks we might 
 table(df$species)
 end.rcode-->
 
+
 So there are only 15 of the Cascade salamanders, and we know from our plot, at least a few NA's. Now the following decisions depend HIGHLY on what message one is trying to communicate with the plot, but we could imagine a scenario wherein perhaps it's actually important to have the Cascade salamander points be visible. But, it's clear from our plot, we may first want to get rid of NA's at least fo this plot. So let's do that via a <code>filter()</code> <a href="../02-data/02-02-filtering-subsetting.html">Remind yourself about this here.</a>
+
 
 <!--begin.rcode
 df_filtered <- df %>% 
@@ -207,13 +222,16 @@ That the first species in the list is Cutthroat trout, and with a quick <code>ta
 tail(df_filtered)
 end.rcode-->
 
+
 ...we can see that the Coastal salamander is the last. That means that the Coastal salamander will be plotted after (i.e "on top of") our focal larger points. Luckily this is an easy fix by simply rearranging the dataframe such that the focal species is the <em>last</em> one to be plotted. This can be accomplished with <code>dplyr::arrange()</code>. We'll pass first the dataframe we're working with, then the column we want to sort by. To check that this will work, let's print the call to <code>tail()</code> from the <code>arrange()</code> version of our dataframe. 
+
 
 <!--begin.rcode
 tail(dplyr::arrange(df_filtered, species))
 end.rcode-->
 
 That doesn't work! That's because <code>arrange()</code> will automatically default to sortin alphabetically. Luckily we can convert this column into factor to change the order in a custom way. Lets do so like this (and again check with <code>tail()</code>): 
+
 
 <!--begin.rcode
 # wrap our pipe arrange() with tail
@@ -227,7 +245,9 @@ tail(
 
 end.rcode-->
 
+
 And we see our friend the Cascade salamander is at the end. Now we don't necessarily want to reassign our dataframe to take this rearranged form, so we can simply wrap our call to the dataframe <code>df_filtered</code> in our <code>arrange()</code> function and see if that works: 
+
 
 <!--begin.rcode
 ggplot() +
@@ -270,7 +290,9 @@ Ahh! Now we've run into a new problem. We have two legends! This is annoying. Ho
 
 <strong>SIDE NOTE: Note that when making figures, when possible, choose colours that if printed in black and white are still differentiable, and that also are distinguishable for colour blind people.</strong>
 
+
 Also, note that often the easiest way to add in specific colours (if you're only using a handful of specific ones like we are here) is to pass the RGB code for that colour. If you have never heard of RGB colours, essentially it's a code of alphanumeric characters that form a specific colour on the colourwheel. Learn more on <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB colours here</a>. Interestingly, 
+
 
 <!--begin.rcode
 ggplot() +
@@ -291,5 +313,6 @@ ggplot() +
 end.rcode-->
 
 While these colours are harsh, they're easy to see. We could choose others if we want to be more aesthetic :) Also, we notice that our legend problem is gone! Why? Well, what created the problem before was having <em>technically</em> two different legends being asked for from our <code>aes()</code> arguments - size & fill. However, by manually providing values for both and then giving them the <em>same</em> legend title, we fixed up the problem. <em>On your own, try adding a different title for one of them and see what happens!</em>. 
+
 
 For this plot, we are pretty much done! This looks good to go. This section has hopefully showed you how to iteratively add components to your plot to troubleshoot throughout and end up with a nice plot quickly. At this point, we can save our plot if we want to (and if it has been assigned to a variable). <a href="../02-data/02-01-reading-writing.html">How to save <code>ggplot</code> objects</a>. 
