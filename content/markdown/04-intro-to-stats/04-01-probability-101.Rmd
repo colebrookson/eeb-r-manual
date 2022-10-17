@@ -9,9 +9,9 @@ output:
 
 ## An Introduction (And Disclaimer...)
 
-There are many excellent texts on probability and probability theory. There are numerous courses in several departments at the University of Toronto, and indeed pretty much any university, that can offer you the student a truly grounded view of what probability is and how to think about it. Indeed, probability itself can be interpreted in multiple ways, and multiple theories about foundational probability and how to interpret it exist. Most of the concepts in this section are unabashedly stolen from the **excellent** (and free!) text on probability by Blitzstein and Hwang which you can find [here](http://probabilitybook.net/). This, however, is a short website page, within which we attempt to discuss some foundational components of probability that we think are important for students in EEB to know. 
+There are many excellent texts on probability and probability theory. There are numerous courses in several departments at the University of Toronto, and indeed pretty much any university, that can offer you the student a truly grounded view of what probability is and how to think about it. Indeed, probability itself can be interpreted in multiple ways, and multiple theories about foundational probability and how to interpret it exist. Most of the concepts in this section are unabashedly stolen from the <strong>excellent</strong> (and free!) text on probability by Blitzstein and Hwang which you can find <a href="http://probabilitybook.net/">here</a>. This, however, is a short website page, within which we attempt to discuss some foundational components of probability that we think are important for students in EEB to know. 
 
-There's many reasons why we should study probability, but perhaps most simply, the biological world around us is full of randomness, and even in the processes we think we understand the best, uncertainty is abound. Without an understanding of probability, we don't have a framework with which to confront of understanding or lack thereof, and actually enable a robust discussion about *how much* randomness we actually understand, and how *certain* we are about things we think. 
+There's many reasons why we should study probability, but perhaps most simply, the biological world around us is full of randomness, and even in the processes we think we understand the best, uncertainty is abound. Without an understanding of probability, we don't have a framework with which to confront of understanding or lack thereof, and actually enable a robust discussion about <strong>how much</strong> randomness we actually understand, and how <strong>certain</strong> we are about things we think. 
 
 In this section we'll offer some definitions that will be useful to you in more formally discussing probability. 
 
@@ -29,9 +29,9 @@ In this section we'll offer some definitions that will be useful to you in more 
 
 Probability is based on the mathematical concept of sets, from which we'll steal some jargon. Let's imagine an example to ground this. 
 
-Say there are 1000 spiders in a bag. One of those spiders happens to have a red dot on their thorax. You pull a single spider out of that bag, without looking. You could have either pulled A) a spider with no red dot, or B) the spider with the red dot. What is the *probability* that you have selected the spider with the red dot? 
+Say there are 1000 spiders in a bag. One of those spiders happens to have a red dot on their thorax. You pull a single spider out of that bag, without looking. You could have either pulled A) a spider with no red dot, or B) the spider with the red dot. What is the <em>probability</em> that you have selected the spider with the red dot? 
 
-Above we've actually used all the key terms above in description. First, we've actually defined the *sample space* (the set of all possible outcomes of an experiment/trial) as being finite - the spiders in the bag that we can think of as a mathematical set. The population (related but different to a sample space) is the set of all units that some random process can select. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and *all* the applications we'll consider here, have finite sample spaces. That is to say, we can construct a *set* containing every single *outcome* of an *experiment or random trial*. In this example, each spider represents an *outcome*, and an *event* is some set of spiders. **Side note:** sets can have one or even *no* items in them. The *events* are what we would mathematically consider *subsets* of the *sample space*. So here we have two *events* of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
+Above we've actually used all the key terms above in description. First, we've actually defined the <em>sample space</em> (the set of all possible outcomes of an experiment/trial) as being finite - the spiders in the bag that we can think of as a mathematical set. The population (related but different to a sample space) is the set of all units that some random process can select. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and <em>all</em> the applications we'll consider here, have finite sample spaces. That is to say, we can construct a <em>set</em> containing every single <em>outcome</em> of an <em>experiment or random trial</em>. In this example, each spider represents an <em>outcome</em>, and an <em>event</em> is some set of spiders. <strong>Side note:</strong> sets can have one or even <em>no</em> items in them. The <em>events</em> are what we would mathematically consider <em>subsets</em> of the <em>sample space</em>. So here we have two <em>events</em> of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
 
 Here, we have a naive version of a probability, wherein we can actually just define the probability of choosing the spider with the red dot as a simple proportion. To state this clearly, the probability of performing the experiment, and the B) being the outcome can be defined as: 
 
@@ -45,18 +45,18 @@ Or
 $$P(\text{B}) = \frac{1}{1000}$$
 $$P(\text{B}) = 0.001$$
 
-Now, to add more conditions, we're assuming here that when we put our hand into the bag to select a spider, there are absolutely **no** defining features that make one spider more or less likely to be chosen. However, there is a case where some spiders are bigger, or perhaps less afraid of the hand coming into the bag, and these traits may make some spiders more or less likely to be chosen. 
+Now, to add more conditions, we're assuming here that when we put our hand into the bag to select a spider, there are absolutely *<em>no</em>* defining features that make one spider more or less likely to be chosen. However, there is a case where some spiders are bigger, or perhaps less afraid of the hand coming into the bag, and these traits may make some spiders more or less likely to be chosen. 
 
 This is easy enough to replicate in R, as it's simply a division calculation: 
 
-```{r}
+end.rcode-->{r}
 size_b = 1
 size_sample_space = 1000
 prob_b = size_b / size_sample_space
 
 # show the result
 prob_b
-```
+end.rcode-->
 **SIDE BOX:** Quickly, let's define two (only two!) operations from set theory to help us out. We'll define the sample space *S* as a set, and our two events as subsets *A* and *B* of *S*. We can think of the part of *S* encapsulated by both subset *A* and subset *B* as being the *intersection* of *A* and *B*, and we can separately think about the part of the sample space *S* that is encapsulated by either *A* or *B* as the *union* of *A* and *B*. We write the intersection of *A* and *B* as $A \cap B$ and the union of *A* and *B* as $A \cup B$. Refer to this image for a visual idea of this: 
 
 ![](img/sets.png)
@@ -71,7 +71,7 @@ If we imagine all the spiders present as the set *S* defining the sample space, 
 
 ![spiders](img/spiders-union.png)
 
-We can now see clearly that *all* of the spiders (i.e. all of *S*) is contained within the two event subsets *A* and *B*. Further, there are actually no spiders that fall within both subsets. 
+We can now see clearly that <em>all</em> of the spiders (i.e. all of *S*) is contained within the two event subsets *A* and *B*. Further, there are actually no spiders that fall within both subsets. 
 
 What we have defined here are two *mutually exclusive* events. With only one experiment, the outcome cannot satisfy both events. Formally, we say that the probability of both *A* and *B* is zero: 
 
@@ -113,7 +113,7 @@ $$P(\text{G}) = 0.25$$
 $$P(\text{T}) = 0.25$$
 which would result in a probability distribution that may look like this: 
 
-```{r}
+end.rcode-->{r}
 library(ggplot2)
 library(ggthemes)
 
@@ -127,7 +127,7 @@ ggplot(data = df) +
   ggthemes::theme_base() + 
   labs(x = "Nucleotide Base", y = "Probability") + 
   ylim(c(0,1))
-```
+end.rcode-->
 
 This is intuitive. Any way that the distribution is partitioned, the sum of probabilities of each event <strong>must</strong> sum to 1.0 without exception.
 
@@ -141,7 +141,7 @@ The probability mass function for the Poisson distribution takes the following f
 
 And as there's only one parameter ($\lambda$), this parameter simply indicates the "shape" of the function, or how many average events happen in a given time interval. Conveniently in R, there are mass functions for most common distributions. Let's take a look at <code>?rpois</code> and we see that we can plot the probability densities with the <code>dpois</code> function. Let's choose three different parameter values and see how that changes our probability density. In addition, it's actually much easier to make plots of discrete distributions in <strong>base R</strong> so we'll do that:
 
-```{r}
+end.rcode-->{r}
 # first make a sequence of values to construct our density across:
 x <- seq(0, 100, 1)
 plot(x, dpois(x, lambda = 1), 
@@ -150,27 +150,27 @@ plot(x, dpois(x, lambda = 1),
      main = "lambda = 1",
      ylab = "Probability Mass", 
      xlab = "X")
-```
+end.rcode-->
 
 Now note here that we've plotted this as these vertical lines, instead of some continuous curve. Why? Well, recall this is a <strong>discrete</strong> probability distribution. There are <strong>no</strong> probabilities in the continuous space between integer values. So to plot this as a curve would actually be incorrect. That's why it's better to be explicit in this fashion and plot them as such here. Other $\lambda$ values:
 
-```{r}
+end.rcode-->{r}
 plot(x, dpois(x, lambda = 5), 
      type = "h",
      lwd = 3,
      main = "lambda = 5",
      ylab = "Probability Mass", 
      xlab = "X")
-```
+end.rcode-->
  
-```{r}
+end.rcode-->{r}
 plot(x, dpois(x, lambda = 25), 
      type = "h",
      lwd = 3,
      main = "lambda = 25",
      ylab = "Probability Mass", 
      xlab = "X")
-```
+end.rcode-->
 
 We can see how the mass function changes given our changing values for the $\lambda$.  
 
@@ -190,7 +190,7 @@ This looks a bit complicated, but in reality, there's only two parameters! The o
 
 Let's first see how changing the $\sigma$ will affect the curves. Again, base plotting actually has an advantage here:
 
-```{r}
+end.rcode-->{r}
 x <- seq(-5, 5, 0.1)
 fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
 
@@ -198,11 +198,11 @@ plot(x = x, y = fx,
      type = "l",
      xlab = "X", 
      ylab = "density")
-```
+end.rcode-->
 
 Now let's add some other standard deviations: 
 
-```{r}
+end.rcode-->{r}
 # make the plot then add on the other lines
 x <- seq(-5, 5, 0.1)
 fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
@@ -227,11 +227,11 @@ legend("topleft", title = "Standard Deviations",
        lwd = 2, lty = 1,
        col = c("black", "red", "blue", "green"))
 
-```
+end.rcode-->
 
 We can also hold the standard deviation constant and plot differnt mean values. Let's try that now: 
 
-```{r}
+end.rcode-->{r}
 # make the plot then add on the other lines
 x <- seq(-5, 5, 0.1)
 fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
@@ -254,6 +254,6 @@ legend("topleft", title = "Mean Values",
        c("mu = 0", "mu = 2", "mu = 1", "mu = -1"),
        lwd = 2, lty = 1,
        col = c("black", "red", "blue", "green"))
-```
+end.rcode-->
 
 This likely looks much as we may have anticipated. We are simply shifting the plot left or right depending on the mean. 

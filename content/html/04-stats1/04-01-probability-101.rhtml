@@ -14,6 +14,9 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 </head>
 <body class="w3-round-large">
 
@@ -41,17 +44,78 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
 <main style = margin-top:100px>
   <nav class="section-nav">
       <ol>
-        <li><a href="#reshape"></a>
-        </li>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#ss-e-np">Sample Spaces & Probability</a></li>
       </ol>
     </nav>
   <div>
     <section id="work">
       <h2>Probability 101</h2>
-      <img class="image-full-page" style="display:block;margin:auto"
-      src="../img/01-img/construction.jpg">
+    </section>
+    <section id="intro">
+      <h2>An Introduction (And Disclaimer...)</h2>
+      <p>
+        There are many excellent texts on probability and probability theory. There are numerous courses in several departments at the University of Toronto, and indeed pretty much any university, that can offer you the student a truly grounded view of what probability is and how to think about it. Indeed, probability itself can be interpreted in multiple ways, and multiple theories about foundational probability and how to interpret it exist. Most of the concepts in this section are unabashedly stolen from the <strong>excellent</strong> (and free!) text on probability by Blitzstein and Hwang which you can find <a href="http://probabilitybook.net/">here</a>. This, however, is a short website page, within which we attempt to discuss some foundational components of probability that we think are important for students in EEB to know. 
+      </p>
+      <p>
+        There's many reasons why we should study probability, but perhaps most simply, the biological world around us is full of randomness, and even in the processes we think we understand the best, uncertainty is abound. Without an understanding of probability, we don't have a framework with which to confront of understanding or lack thereof, and actually enable a robust discussion about <strong>how much</strong> randomness we actually understand, and how <strong>certain</strong> we are about things we think. 
+      </p>
+      <p>
+        In this section we'll offer some definitions that will be useful to you in more formally discussing probability. 
+      </p>
+      <h4><strong>Key Terms</strong></h4>
+      <ol>
+        <li style="color:blue;font-size:20px"> 1. Random Trials/Experiments</li>
+        <li style="color:blue;font-size:20px"> 2. Events</li>
+        <li style="color:blue;font-size:20px"> 3. Outcomes</li>
+        <li style="color:blue;font-size:20px"> 4. Probability (naive)</li>
+        <li style="color:blue;font-size:20px"> 5. Sample Space</li>
+        <li style="color:blue;font-size:20px"> 6. Population</li>
+      </ol>
+    </section>
+    <section id="ss-e-np">
+      <h2>Sample Spaces, Events, and Naive Probability</h2>
+      <p>
+        Probability is based on the mathematical concept of sets, from which we'll steal some jargon. Let's imagine an example to ground this.
+      </p>
+      <p>
+        Say there are 1000 spiders in a bag. One of those spiders happens to have a red dot on their thorax. You pull a single spider out of that bag, without looking. You could have either pulled A) a spider with no red dot, or B) the spider with the red dot. What is the <em>probability</em> that you have selected the spider with the red dot? 
+      </p>
+      <p>
+        Above we've actually used all the key terms above in description. First, we've actually defined the <em>sample space</em> (the set of all possible outcomes of an experiment/trial) as being finite - the spiders in the bag that we can think of as a mathematical set. The population (related but different to a sample space) is the set of all units that some random process can select. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and <em>all</em> the applications we'll consider here, have finite sample spaces. That is to say, we can construct a <em>set</em> containing every single <em>outcome</em> of an <em>experiment or random trial</em>. In this example, each spider represents an <em>outcome</em>, and an <em>event</em> is some set of spiders. <strong>Side note:</strong> sets can have one or even <em>no</em> items in them. The <em>events</em> are what we would mathematically consider <em>subsets</em> of the <em>sample space</em>. So here we have two <em>events</em> of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
+      </p>
+      <p>
+        Here, we have a naive version of a probability, wherein we can actually just define the probability of choosing the spider with the red dot as a simple proportion. To state this clearly, the probability of performing the experiment, and the B) being the outcome can be defined as: 
+      </p>
+      \[P(\text{B}) = \frac{\text{number of outcomes favourable to B}}{\text{Total number of outcomes in the sample space }\textit{S}}\]
+      <p>
+        which specifically means:
+      </p>
+      \[P(\text{B}) = \frac{\text{number of spiders with red dots}}{\text{total number of spiders in }\textit{S}}\]
+      <p>
+        Or
+      </p>
+      \[P(\text{B}) = \frac{1}{1000}\]
+      \[P(\text{B}) = 0.001\]
+      <p>
+        Now, to add more conditions, we're assuming here that when we put our hand into the bag to select a spider, there are absolutely <em>no</em> defining features that make one spider more or less likely to be chosen. However, there is a case where some spiders are bigger, or perhaps less afraid of the hand coming into the bag, and these traits may make some spiders more or less likely to be chosen. 
+      </p>
+      <p>
+        This is easy enough to replicate in R, as it's simply a division calculation: 
+      </p>
+      <!--begin.rcode
+      size_b = 1
+      size_sample_space = 1000
+      prob_b = size_b / size_sample_space
 
-      </section>
+      # show the result
+      prob_b
+      end.rcode-->
+      <p>
+        <strong>Side note:</strong> Quickly, let's define two (only two!) operations from set theory to help us out. We'll define the sample space \(S\) as a set, and our two events as subsets \(A\) and \(B\) of \(S\). We can think of the part of \(S\) encapsulated by both subset \(A\) and subset *B* as being the <em>intersection</em> of \(A\) and \(B\), and we can separately think about the part of the sample space \(S\) that is encapsulated by either *A* or *B* as the *union* of\(A\) and \(B\). We write the intersection of \(A\) and \(B\) as \(A \cap B\) and the union of \(A\) and \(B\) as \(A \cup B\). Refer to this image for a visual idea of this: 
+      </p>
+      <img src="../img/04-img/sets.png" alt="sets">
+    </section>
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">
