@@ -78,7 +78,7 @@ What we have defined here are two *mutually exclusive* events. With only one exp
 $$P(\text{A} \cap \text{B}) = 0$$
 
 But also, since there are are no spiders that fall outside of *A* or *B*, the probability of either one event OR the other occurring with one experiment is actually 1:
-
+ 
 $$P(\text{A} \cup \text{B}) = 0$$
 
 ### Naive Vs. Standard Probability
@@ -133,8 +133,130 @@ This is intuitive. Any way that the distribution is partitioned, the sum of prob
 
 The most common discrete probability distributions are the Poisson and Bernoulli distributions. 
 
+#### Mass Functions
 
+Discrete distributions typically are described by their probability mass functions, which give the probabilities of a discrete random variable being exactly equal to some values. These probabilites must <em>always sum to 1.0</em> and have a general form of $$p_X(x) = P(X = x)$$. It's helpful to know how to plot probability distributions, as it's visually easiest to see when different parameters result in different probability distributions when we can compare parameter values. 
 
+The probability mass function for the Poisson distribution takes the following form: $$p(x;\lambda) = \frac{e^{-\lambda}\lambda^x}{x!}$$
+
+And as there's only one parameter ($\lambda$), this parameter simply indicates the "shape" of the function, or how many average events happen in a given time interval. Conveniently in R, there are mass functions for most common distributions. Let's take a look at <code>?rpois</code> and we see that we can plot the probability densities with the <code>dpois</code> function. Let's choose three different parameter values and see how that changes our probability density. In addition, it's actually much easier to make plots of discrete distributions in <strong>base R</strong> so we'll do that:
+
+```{r}
+# first make a sequence of values to construct our density across:
+x <- seq(0, 100, 1)
+plot(x, dpois(x, lambda = 1), 
+     type = "h",
+     lwd = 3,
+     main = "lambda = 1",
+     ylab = "Probability Mass", 
+     xlab = "X")
+```
+
+Now note here that we've plotted this as these vertical lines, instead of some continuous curve. Why? Well, recall this is a <strong>discrete</strong> probability distribution. There are <strong>no</strong> probabilities in the continuous space between integer values. So to plot this as a curve would actually be incorrect. That's why it's better to be explicit in this fashion and plot them as such here. Other $\lambda$ values:
+
+```{r}
+plot(x, dpois(x, lambda = 5), 
+     type = "h",
+     lwd = 3,
+     main = "lambda = 5",
+     ylab = "Probability Mass", 
+     xlab = "X")
+```
+ 
+```{r}
+plot(x, dpois(x, lambda = 25), 
+     type = "h",
+     lwd = 3,
+     main = "lambda = 25",
+     ylab = "Probability Mass", 
+     xlab = "X")
+```
+
+We can see how the mass function changes given our changing values for the $\lambda$.  
+
+### Continuous Probability Distribution
+
+Again as the name implies, between two variables which are both continuous, an infinite number of other values are possible. To think about these distributions, we often think of probability <strong>densities</strong>. 
+
+It's useful to be able to plot probability densities for a handful of common continuous distributions. We'll plot probability densities for the Gaussian, Exponential, and Gamma distributions. 
+
+#### Density Functions
+
+Conveniently in R, there are density functions for most common distributions. In fact, if we take a look at <code>?rnorm</code>, we see a helpful set of functions to do with the normal distribution. We have functions for the density <code>dnorm</code>, the distribution function <code>pnorm</code>, the quantile function <code>qnorm</code> and a random deviate sample <code>rnorm</code>. This exists for other distributions too (HINT: try <code>?rgamma</code>) 
+
+Let's plot the density of a few normal distributions showing how a difference in parameters gives different probability density curves. As a good reminder, to recall what forms the probability density functions for some given distribution look like, the <a href="https://www.itl.nist.gov/div898/handbook/index.html">NIST/SEMATCH e-handbook of Statistical Methods</a> has a <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda36.htm">great set of descriptions on probability distributions</a>. Let's refresh our minds about the Normal Distribution. The probability density function for the normal distribution is $$f(x) = \frac{e^{-(x-\mu)^2/(2\sigma^2)}}{\sigma \sqrt{2\pi}}$$
+
+This looks a bit complicated, but in reality, there's only two parameters! The one's we're used to for the normal distribtuion, $\mu$ the mean, and $\sigma$ the standard deviation. Similarly to how we did with the Poisson distribution above, let's see how changing these variables will change our probability density curves.
+
+Let's first see how changing the $\sigma$ will affect the curves. Again, base plotting actually has an advantage here:
+
+```{r}
+x <- seq(-5, 5, 0.1)
+fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
+
+plot(x = x, y = fx, 
+     type = "l",
+     xlab = "X", 
+     ylab = "density")
+```
+
+Now let's add some other standard deviations: 
+
+```{r}
+# make the plot then add on the other lines
+x <- seq(-5, 5, 0.1)
+fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
+
+plot(
+  x, 
+  fx,
+  type = "l",
+  xlab = "X", 
+  ylab = "density",
+  ylim = c(0, 0.9)
+)
+
+# add new lines on for each of our new sd's
+lines(x, dnorm(x, mean = 0, sd = 0.75), col="red")
+lines(x, dnorm(x, mean = 0, sd = 0.5), col="blue")
+lines(x, dnorm(x, mean = 0, sd = 1.2), col="green")
+
+# now let's add a legend
+legend("topleft", title = "Standard Deviations", 
+       c("sd = 1", "sd = 0.75", "sd = 0.5", "sd = 1.2"),
+       lwd = 2, lty = 1,
+       col = c("black", "red", "blue", "green"))
+
+```
+
+We can also hold the standard deviation constant and plot differnt mean values. Let's try that now: 
+
+```{r}
+# make the plot then add on the other lines
+x <- seq(-5, 5, 0.1)
+fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
+
+plot(
+  x, 
+  fx,
+  type = "l",
+  xlab = "X", 
+  ylab = "density",
+)
+
+# add new lines on for each of our new sd's
+lines(x, dnorm(x, mean = 2, sd = 1), col="red")
+lines(x, dnorm(x, mean = 1, sd = 1), col="blue")
+lines(x, dnorm(x, mean = -1, sd = 1), col="green")
+
+# now let's add a legend
+legend("topleft", title = "Mean Values", 
+       c("mu = 0", "mu = 2", "mu = 1", "mu = -1"),
+       lwd = 2, lty = 1,
+       col = c("black", "red", "blue", "green"))
+```
+
+This likely looks much as we may have anticiipated. We are simply shifting the plot left or right depending on the mean. 
 
 
 
