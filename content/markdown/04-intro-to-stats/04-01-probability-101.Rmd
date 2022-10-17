@@ -256,4 +256,4 @@ legend("topleft", title = "Mean Values",
        col = c("black", "red", "blue", "green"))
 ```
 
-This likely looks much as we may have anticiipated. We are simply shifting the plot left or right depending on the mean. 
+This likely looks much as we may have anticipated. We are simply shifting the plot left or right depending on the mean. 
