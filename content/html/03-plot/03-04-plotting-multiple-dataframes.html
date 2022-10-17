@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+  <div class="w3-navy w3-xlarge" 
+  style="max-width:auto;margin:auto;border:1px w3-gray"
+  border:1px>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
+    <div class="w3-center w3-padding-16">The R Manual</div>
+  </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#ts">Timeseries Plots</a></li>
+          <li><a href="#data-prep">Prepping Data</a></li>
+          <li><a href="#two-df">Two DataFrames</a></li>
+        </ol>
+      </nav>
+    <div>
+      <section id="">
+        <h2>Plotting with Multiple DataFrames</h2>
+        <p>
+            It is sometimes the case that the easiest way to achieve our goal is, rather than forcing all our data into one large, unwieldy dataframe, we can simply make multiple dataframes and use those multiple dataframes in multiple `geom_`s to make our plot look exactly like we want it. There are myriad reasons why this may be the case, but an easy example is when you have data that span an equivalent time series or range, but have different temporal resolution or coverage. To illustrate this, we'll use an example on temperature data in Alaska.
+            </p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
+<span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
+
+<span class="hl std">df</span> <span class="hl kwb">=</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">arc_weather</span>
+</pre></div>
+</div></div>
+            
+        </section>
+        <section id="ts">
+            <p>
+                Line plots, also referred to as timeseries plots colloquially, are plots that have the focal variable of interest on the y-axis, and some time variable on the x-axis. To follow our <a href="./03-02-interative-plotting.html">iterative plotting method</a>, we'll start one of these plots and build up.
+                </p>
+                <p>
+                To start with just the most basic elements (data call, aesthetic mappings, and geom function), we can plot mean air temperature through time: 
+                </p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span>
+            <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+                <p>
+                Okay! Very ugly. Perhaps we can extract some more useful information out of this. But first, let's take care of the easy part and add in the mandatory components (labels, a theme) and then work on getting it more useful. 
+                </p>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># load the library that has theme_base() in it</span>
+<span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
+
+<span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span>
+            <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp))</span> <span class="hl opt">+</span>
+  <span class="hl com"># add in the theme</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl com"># add labels +</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Mean Air Temp (C)&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+                <p>
+                So we can see there's a consistent oscilating pattern (which definitely makes sense), but it's still hard to pull out any interesting patterns. What if we plotted instead of just these raw values, the monthly mean for each month in our dataframe. This brings up some handy data manipulation tasks as well. 
+                </p>
+        </section>
+        <section id="data-prep">
+            <p>
+                So to do this, there are a number of approaches we could take. I will choose to perform this task by making a new, separate dataframe with the monthly mean information as this will make life much easier. 
+                </p>
+                <p>
+                The first step is to extract the month and year as separate columns (<a href="../02-data/02-08-dates.html">See info on dates here</a>):
+                </p>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">=</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">month</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">month</span><span class="hl std">(date),</span>
+    <span class="hl kwc">year</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">year</span><span class="hl std">(date)</span>
+  <span class="hl std">)</span>
+<span class="hl std">df</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 11,171 × 7
+## # Rowwise: 
+##    date       station       mean_airtemp daily_precip mean_windspeed month  year
+##    &lt;date&gt;     &lt;chr&gt;                &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 1988-06-01 Toolik Field…          8.4          0             NA       6  1988
+##  2 1988-06-02 Toolik Field…          6            0             NA       6  1988
+##  3 1988-06-03 Toolik Field…          5.8          0             NA       6  1988
+##  4 1988-06-04 Toolik Field…          1.8          0             NA       6  1988
+##  5 1988-06-05 Toolik Field…          6.8          2.5           NA       6  1988
+##  6 1988-06-06 Toolik Field…          5.2          0             NA       6  1988
+##  7 1988-06-07 Toolik Field…          2.2          7.6           NA       6  1988
+##  8 1988-06-08 Toolik Field…          9.4          0             NA       6  1988
+##  9 1988-06-09 Toolik Field…         13.1          0             NA       6  1988
+## 10 1988-06-10 Toolik Field…         17.7          0              3.9     6  1988
+## # … with 11,161 more rows
+</pre></div>
+</div></div>
+                <p>
+                Now we need to create a new dataframe that has only the <code>mean_airtemp</code>, the <code>month</code>, and <code>year</code>:
+                </p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df_monthly</span> <span class="hl kwb">=</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">select</span><span class="hl std">(year, month, mean_airtemp)</span>
+</pre></div>
+</div></div>
+                <p>
+                Now, we'll use our <code>group_by()</code> and <code>summarize()</code> pair to get mean average monthly air temperatures:
+                </p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df_monthly</span> <span class="hl kwb">=</span> <span class="hl std">df_monthly</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">group_by</span><span class="hl std">(year, month)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarize</span><span class="hl std">(</span>
+    <span class="hl kwc">month_airtemp</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(mean_airtemp,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+  <span class="hl std">)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## `summarise()` has grouped output by 'year'. You can override using the
+## `.groups` argument.
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">df_monthly</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 367 × 3
+## # Groups:   year [31]
+##     year month month_airtemp
+##    &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;
+##  1  1988     6          9.61
+##  2  1988     7         12.0 
+##  3  1988     8          6.96
+##  4  1988     9         -0.26
+##  5  1988    10        -16.4 
+##  6  1988    11        -29.2 
+##  7  1988    12        -17.1 
+##  8  1989     1        -29.9 
+##  9  1989     2         -8.06
+## 10  1989     3        -19.4 
+## # … with 357 more rows
+</pre></div>
+</div></div>
+                <p>
+                Great, this is exactly what we wanted. Now, to make our plotting easier, it would be best if we were asking <code>ggplot</code> to put the same data type on the x-axis, that is, two <code>date</code> values. So, what we'll do here, is inpute a day of the month, and convert our month and year columns into a date. 
+                </p>
+                <p>
+                Since we are working with monthly means, let's say for simplicity sake we actually just want each faux "day" to be the 15th since that's around the middle of each month: 
+                </p>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df_monthly</span> <span class="hl kwb">=</span> <span class="hl std">df_monthly</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">day</span> <span class="hl std">=</span> <span class="hl num">15</span>
+  <span class="hl std">)</span>
+<span class="hl std">df_monthly</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 367 × 4
+## # Groups:   year [31]
+##     year month month_airtemp   day
+##    &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;
+##  1  1988     6          9.61    15
+##  2  1988     7         12.0     15
+##  3  1988     8          6.96    15
+##  4  1988     9         -0.26    15
+##  5  1988    10        -16.4     15
+##  6  1988    11        -29.2     15
+##  7  1988    12        -17.1     15
+##  8  1989     1        -29.9     15
+##  9  1989     2         -8.06    15
+## 10  1989     3        -19.4     15
+## # … with 357 more rows
+</pre></div>
+</div></div>
+                <p>
+                Great! And now we convert into a single date column: 
+                </p>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df_monthly</span> <span class="hl kwb">=</span> <span class="hl std">df_monthly</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">date</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">make_date</span><span class="hl std">(year, month, day)</span>
+  <span class="hl std">)</span>
+<span class="hl std">df_monthly</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 367 × 5
+## # Rowwise:  year
+##     year month month_airtemp   day date      
+##    &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;    
+##  1  1988     6          9.61    15 1988-06-15
+##  2  1988     7         12.0     15 1988-07-15
+##  3  1988     8          6.96    15 1988-08-15
+##  4  1988     9         -0.26    15 1988-09-15
+##  5  1988    10        -16.4     15 1988-10-15
+##  6  1988    11        -29.2     15 1988-11-15
+##  7  1988    12        -17.1     15 1988-12-15
+##  8  1989     1        -29.9     15 1989-01-15
+##  9  1989     2         -8.06    15 1989-02-15
+## 10  1989     3        -19.4     15 1989-03-15
+## # … with 357 more rows
+</pre></div>
+</div></div>
+                <p>
+                Perfect. Now back to plotting. 
+                </p>
+        </section>
+        <section id="two-df">
+          <h2>Plotting With Two DataFrames</h2>
+            <p>
+                The easiest way to go about this, since we're plotting a variable called <code>date</code> from two dataframes is to use two separate calls to geom_line, one for each dataframe, and that will allow us to show both the ones we're interested in (the monthly and daily values):
+                </p>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl com"># first geom_line() for the monthly values</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_monthly,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= month_airtemp))</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+                <p>
+                Okay, let's add our second <code>geom_line()</code> call. We'll make our monthly values red and our daily values can be black:
+                </p>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl com"># first geom_line() for the monthly values</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_monthly,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= month_airtemp),</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl com"># second geom_line() for the daily values</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp))</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+                <p>
+                Well that's weird, we can't see anything! How come? Well, likely because the black lines of the daily temperatures are significantly more data-rich, and in our plotting, we placed our monthly <code>geom_line()</code> first, which means it will be plotted first, and then the thick black line will go on top. Let's reverse them and see if that helps: 
+                </p>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl com"># switched order - daily first </span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp))</span> <span class="hl opt">+</span>
+  <span class="hl com"># monthly second</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_monthly,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= month_airtemp),</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+                <p>
+                That's better! Still not super cute though. <strong>NOTE: It is often hard to make two sets of timeseries following the same pattern look good. My recommendation here would be turn one (likely the daily measurements) into points, and keep the trend line.</strong> So let's try that, we'll make the points somewhat transparent, and keep them relatively small:
+                </p>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl com"># switched order - daily first </span>
+  <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp),</span>
+             <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;lightblue&quot;</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.3</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl com"># monthly second</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_monthly,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= month_airtemp),</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+                <p>
+                That's somewhat better. The transparency might be a bit too much, so we can change that, also let's change the main line colour to black: 
+                </p>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl com"># switched order - daily first </span>
+  <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp),</span>
+             <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;lightblue&quot;</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.5</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl com"># monthly second</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_monthly,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= month_airtemp),</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+                <p>
+                I think that's much more legible. And there we have it! A complete timeseries plot. Something is missing though ... a legend. Why wasn't one generated for us? Well, we used two separate dataframes here, and at no point did we make any differentiation between size/colour/shape etc, within the <code>aes()</code> calls. Only if we do that (e.g. we plotted two different lines from the same df and coloured them via some grouping variable) would R know we wanted a legend. Now we could just explain what the difference between the line and the points are either verbally during presentation or in text in a figure caption, but it is always true that having a legend is the easiest way to show people reading what they are looking at. Luckily, editing or adding legends is quite easy. We are using two <code>geoms</code> here so we want two legends. <em>We can force a legend by calling our <code>colour</code> argument inside the <code>aes()</code> section:</em>
+                </p>
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl com"># switched order - daily first </span>
+  <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp,</span>
+                                      <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;lightblue&quot;</span><span class="hl std">),</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+                                      <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.5</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl com"># monthly second</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_monthly,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= month_airtemp,</span>
+                                             <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">))</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">guides</span><span class="hl std">(</span>
+    <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl kwd">guide_legend</span><span class="hl std">()</span>
+  <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
+                <p>
+                Ok, so we have a legend but it's not at all what we want colour-wise, and the labels are all wrong. Fear not!!! So first, we will have to turn to our old friend <code>scale_colour_*</code> and for this use case, we want <code>scale_colour_identity()</code> as it will force ggplot to recognize the colour names when they are inside <code>aes()</code>:
+                </p>
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl com"># switched order - daily first </span>
+  <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp,</span>
+                                      <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;lightblue&quot;</span><span class="hl std">),</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+                                      <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.5</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl com"># monthly second</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_monthly,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= month_airtemp,</span>
+                                             <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">))</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">guides</span><span class="hl std">(</span>
+    <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl kwd">guide_legend</span><span class="hl std">()</span>
+  <span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl com"># add in colour scale</span>
+  <span class="hl kwd">scale_colour_identity</span><span class="hl std">(</span><span class="hl kwc">guide</span> <span class="hl std">=</span> <span class="hl str">&quot;legend&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+                <p>
+                Okay, that bit is accomplished. We can now add in components to make the legend look as we want. Remember that all those legend arguments will go in the <code>scale_*</code> that we're working with <em>to make the legend:</em>
+                </p>
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl com"># switched order - daily first </span>
+  <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp,</span>
+                                      <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;lightblue&quot;</span><span class="hl std">),</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+                                      <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.5</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl com"># monthly second</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_monthly,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= month_airtemp,</span>
+                                             <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">))</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">guides</span><span class="hl std">(</span>
+    <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl kwd">guide_legend</span><span class="hl std">()</span>
+  <span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl com"># add in colour scale</span>
+  <span class="hl kwd">scale_colour_identity</span><span class="hl std">(</span><span class="hl kwc">guide</span> <span class="hl std">=</span> <span class="hl str">&quot;legend&quot;</span><span class="hl std">,</span>
+                        <span class="hl kwc">name</span> <span class="hl std">=</span> <span class="hl str">&quot;Measurement&quot;</span><span class="hl std">,</span> <span class="hl com"># the title of the legend</span>
+                        <span class="hl kwc">breaks</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;lightblue&quot;</span><span class="hl std">),</span> <span class="hl com"># the colours</span>
+                        <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Monthly Mean&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Daily Mean&quot;</span><span class="hl std">)</span> <span class="hl com"># legend labels</span>
+                        <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
+                <p>
+                And now our plot is done and ready to display in a project/presentation. 
+                </p>
+        </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>

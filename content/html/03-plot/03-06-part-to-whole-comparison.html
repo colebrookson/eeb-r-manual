@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+  <div class="w3-navy w3-xlarge" 
+  style="max-width:auto;margin:auto;border:1px w3-gray"
+  border:1px>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
+    <div class="w3-center w3-padding-16">The R Manual</div>
+  </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#ts">Timeseries Plots</a>
+            <ul>
+              <li class=""><a href="#ts--code">Just the Code</a></li>
+            </ul>
+          </li>
+          <li><a href="#box">Box Plots</a>
+            <ul>
+              <li class=""><a href="#box--code">Just the Code</a></li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
+    <div>
+      <section id="">
+        <h2>Plotting Change Through Time</h2>
+        <p>
+            When choosing to plot anything to do with time, the time is almost always displayed on the x-axis. This makes sense as we typically read plots as we read English language text - left to right. Thus, we will always plot time as increasing from left to right on our plots. By FAR the most common way to plot change through time is to plot it as a line plot, optionally with points added in. Less common in EEB-type data (but still useful) are box plots and bar plots.
+
+        </p>
+      </section>
+      <section id="ts">
+        <h2>Timseries Plots (Line Plots)</h2>
+        <p>
+            Line plots, also referred to as timeseries plots colloquially, are plots that have the focal variable of interest on the y-axis, and some time variable on the x-axis. To follow our <a href="./03-02-interative-plotting.html">iterative plotting method</a>, we'll start one of these plots and build up.
+        </p>
+        <p>
+            For this, we'll use our example with data on temperature in Alaska from 1988 to present. See the full tutorial <a href="./03-04-plotting-multiple-dataframes.html">here</a>:
+        </p>
+      </section>
+      <section id="ts--code">
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
+<span class="hl com"># add in an option to keep dplyr quiet</span>
+<span class="hl kwd">options</span><span class="hl std">(</span><span class="hl kwc">dplyr.summarise.inform</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
+<span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
+<span class="hl kwd">library</span><span class="hl std">(lubridate)</span>
+<span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
+
+<span class="hl std">df</span> <span class="hl kwb">=</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">arc_weather</span>
+
+<span class="hl com"># make sub-groups for the dates</span>
+<span class="hl std">df</span> <span class="hl kwb">=</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">month</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">month</span><span class="hl std">(date),</span>
+    <span class="hl kwc">year</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">year</span><span class="hl std">(date)</span>
+<span class="hl std">)</span>
+<span class="hl com"># make separate dataframe for monthly measurements</span>
+<span class="hl std">df_monthly</span> <span class="hl kwb">=</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">select</span><span class="hl std">(year, month, mean_airtemp)</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">group_by</span><span class="hl std">(year, month)</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarize</span><span class="hl std">(</span>
+    <span class="hl kwc">month_airtemp</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(mean_airtemp,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+<span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+<span class="hl com"># assume all days are the 15th of the month</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">day</span> <span class="hl std">=</span> <span class="hl num">15</span>
+<span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+<span class="hl com"># make single date</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">date</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">make_date</span><span class="hl std">(year, month, day)</span>
+<span class="hl std">)</span>
+
+<span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl com"># switched order - daily first </span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp,</span>
+                                    <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;lightblue&quot;</span><span class="hl std">),</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">16</span><span class="hl std">,</span>
+                                    <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.5</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># monthly second</span>
+<span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_monthly,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= month_airtemp,</span>
+                                            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">))</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl kwd">guides</span><span class="hl std">(</span>
+    <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl kwd">guide_legend</span><span class="hl std">()</span>
+<span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># add in colour scale</span>
+<span class="hl kwd">scale_colour_identity</span><span class="hl std">(</span><span class="hl kwc">guide</span> <span class="hl std">=</span> <span class="hl str">&quot;legend&quot;</span><span class="hl std">,</span>
+                        <span class="hl kwc">name</span> <span class="hl std">=</span> <span class="hl str">&quot;Measurement&quot;</span><span class="hl std">,</span> <span class="hl com"># the title of the legend</span>
+                        <span class="hl kwc">breaks</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;lightblue&quot;</span><span class="hl std">),</span> <span class="hl com"># the colours</span>
+                        <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Monthly Mean&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Daily Mean&quot;</span><span class="hl std">)</span> <span class="hl com"># legend labels</span>
+                        <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" class="plot" /></div></div>
+      </section>
+      <section id="box">
+        <p>
+            Box plots are a helpful form of plot to show how data might change through time by summarizing the distribution of said data in some binned form. To use the above example regarding data on temperature, we could use a box plot to compare how the distribution of the daily temperature measurements change through the months. 
+        </p>
+        <p>
+            As a reminder, here's how to interpret the various components of a boxplot:
+        </p>
+        <img alt="box plot interpretation. credit: Michael Galarnyk", src="../img/03-img/boxplot.jpg">
+        <p>
+            For this, we'll use our example with data on stream chemistry over time. See the full tutorial <a href="./03-03-facetting.html">here</a>
+        </p>
+      </section>
+      <section id="box-code">
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">luq_streamchem</span> <span class="hl opt">%&gt;%</span>
+<span class="hl com"># remove columns we don't need</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">select</span><span class="hl std">(sample_date, na, k)</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">tidyr</span><span class="hl opt">::</span><span class="hl kwd">pivot_longer</span><span class="hl std">(</span>
+    <span class="hl com"># specify which columns to join together</span>
+    <span class="hl kwc">cols</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(na, k),</span>
+    <span class="hl com"># specify what the new name of the grouping variable will be</span>
+    <span class="hl kwc">names_to</span> <span class="hl std">=</span> <span class="hl str">&quot;element&quot;</span>
+<span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">year</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">year</span><span class="hl std">(sample_date),</span>
+    <span class="hl kwc">month</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">month</span><span class="hl std">(sample_date)</span>
+<span class="hl std">)</span>
+
+<span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
+                                            <span class="hl kwc">fill</span> <span class="hl std">= element))</span> <span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Year&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Amount of Element (mg/L)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">facet_wrap</span><span class="hl std">(</span><span class="hl opt">~</span><span class="hl std">element,</span>
+            <span class="hl com"># I want this to be one column with two rows</span>
+            <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+            <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">,</span>
+            <span class="hl kwc">labeller</span> <span class="hl std">=</span> <span class="hl kwd">as_labeller</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl kwc">`k`</span> <span class="hl std">=</span> <span class="hl str">&quot;Potassium (K)&quot;</span><span class="hl std">,</span>
+                                <span class="hl kwc">`na`</span> <span class="hl std">=</span> <span class="hl str">&quot;Sodium (Na)&quot;</span><span class="hl std">)))</span> <span class="hl opt">+</span>
+    <span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl str">&quot;Element&quot;</span><span class="hl std">,</span>
+                    <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#90ee90&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#F8E473&quot;</span><span class="hl std">),</span>
+                    <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Potassium (K)&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Sodium (Na)&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+      </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>

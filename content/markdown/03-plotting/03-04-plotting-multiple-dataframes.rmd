@@ -7,31 +7,32 @@ output:
 **Author:** Cole Brookson
 **Date:** 20 July 2022
 
-
+<p>
 It is sometimes the case that the easiest way to achieve our goal is, rather than forcing all our data into one large, unwieldy dataframe, we can simply make multiple dataframes and use those multiple dataframes in multiple `geom_`s to make our plot look exactly like we want it. There are myriad reasons why this may be the case, but an easy example is when you have data that span an equivalent time series or range, but have different temporal resolution or coverage. To illustrate this, we'll use an example on temperature data in Alaska.
-
-```{r}
+</p>
+<!--begin.rcode, warning=FALSE
 library(tidyverse)
 library(lterdatasampler)
 
 df = lterdatasampler::arc_weather
-```
+end.rcode-->
 
 ## Timeseries Plots (Line Plots)
-
+<p>
 Line plots, also referred to as timeseries plots colloquially, are plots that have the focal variable of interest on the y-axis, and some time variable on the x-axis. To follow our (LINK TO ITERATIVE PLOTTING) iterative plotting method, we'll start one of these plots and build up.
-
+</p>
+<p>
 To start with just the most basic elements (data call, aesthetic mappings, and geom function), we can plot mean air temperature through time: 
-
-```{r}
+</p>
+<!--begin.rcode, warning=FALSE
 ggplot() + 
   geom_line(data = df, 
             mapping = aes(x = date, y = mean_airtemp))
-```
-
+end.rcode-->
+<p>
 Okay! Very ugly. Perhaps we can extract some more useful information out of this. But first, let's take care of the easy part and add in the mandatory components (labels, a theme) and then work on getting it more useful. 
-
-```{r}
+</p>
+<!--begin.rcode, warning=FALSE
 # load the library that has theme_base() in it
 library(ggthemes)
 
@@ -42,17 +43,18 @@ ggplot() +
   ggthemes::theme_base() +
   # add labels +
   labs(x = "Date", y = "Mean Air Temp (C)")
-```
-
+end.rcode-->
+<p>
 So we can see there's a consistent oscilating pattern (which definitely makes sense), but it's still hard to pull out any interesting patterns. What if we plotted instead of just these raw values, the monthly mean for each month in our dataframe. This brings up some handy data manipulation tasks as well. 
-
+</p>
 ## Prepping the Data
-
+<p>
 So to do this, there are a number of approaches we could take. I will choose to perform this task by making a new, separate dataframe with the monthly mean information as this will make life much easier. 
-
+</p>
+<p>
 The first step is to extract the month and year as separate columns (LINK TO DATES PIECE):
-
-```{r}
+</p>
+<!--begin.rcode, warning=FALSE
 df = df %>% 
   dplyr::rowwise() %>% 
   dplyr::mutate(
@@ -60,66 +62,67 @@ df = df %>%
     year = lubridate::year(date)
   )
 df
-```
-
+end.rcode-->
+<p>
 Now we need to create a new dataframe that has only the `mean_airtemp`, the `month`, and `year`:
-
-```{r}
+</p>
+<!--begin.rcode, warning=FALSE
 df_monthly = df %>% 
   dplyr::select(year, month, mean_airtemp)
-```
-
+end.rcode-->
+<p>
 Now, we'll use our `group_by()` and `summarize()` pair to get mean average monthly air temperatures:
-
-```{r}
+</p>
+<!--begin.rcode, warning=FALSE
 df_monthly = df_monthly %>% 
   dplyr::group_by(year, month) %>% 
   dplyr::summarize(
     month_airtemp = mean(mean_airtemp, na.rm = TRUE)
   )
 df_monthly
-```
-
-Great, this is exactly what we wanted. Now, to make our plotting easier, it would be best if we were asking `ggplot` to put the same data type on the x-axis, that is, two `date` values. So, what we'll do here, is inpute a day of the month, and convert our month and year columns into a date. 
-
+end.rcode-->
+<p>
+Great, this is exactly what we wanted. Now, to make our plotting easier, it would be best if we were asking <code>ggplot</code> to put the same data type on the x-axis, that is, two <code>date</code> values. So, what we'll do here, is inpute a day of the month, and convert our month and year columns into a date. 
+</p>
+<p>
 Since we are working with monthly means, let's say for simplicity sake we actually just want each faux "day" to be the 15th since that's around the middle of each month: 
-
-```{r}
+</p>
+<!--begin.rcode, warning=FALSE
 df_monthly = df_monthly %>% 
   dplyr::mutate(
     day = 15
   )
 df_monthly
-```
-
+end.rcode-->
+<p>
 Great! And now we convert into a single date column: 
-
-```{r}
+</p>
+<!--begin.rcode, warning=FALSE
 df_monthly = df_monthly %>% 
   dplyr::rowwise() %>% 
   dplyr::mutate(
     date = lubridate::make_date(year, month, day)
   )
 df_monthly
-```
-
+end.rcode-->
+<p>
 Perfect. Now back to plotting. 
-
+</p>
 ## Plotting with Two Dataframes
-
-The easiest way to go about this, since we're plotting a variable called `date` from two dataframes is to use two separate calls to geom_line, one for each dataframe, and that will allow us to show both the ones we're interested in (the monthly and daily values):
-
-```{r}
+<p>
+The easiest way to go about this, since we're plotting a variable called <code>date</code> from two dataframes is to use two separate calls to geom_line, one for each dataframe, and that will allow us to show both the ones we're interested in (the monthly and daily values):
+</p>
+<!--begin.rcode, warning=FALSE
 ggplot() + 
   # first geom_line() for the monthly values
   geom_line(data = df_monthly, mapping = aes(x = date, y = month_airtemp)) +
   ggthemes::theme_base() +
   labs(x = "Date", y = "Monthly Air Temperature (C)")
-```
-
-Okay, let's add our second `geom_line()` call. We'll make our monthly values red and our daily values can be black:
-
-```{r}
+end.rcode-->
+<p>
+Okay, let's add our second <code>geom_line()</code> call. We'll make our monthly values red and our daily values can be black:
+</p>
+<!--begin.rcode, warning=FALSE
 ggplot() + 
   # first geom_line() for the monthly values
   geom_line(data = df_monthly, mapping = aes(x = date, y = month_airtemp),
@@ -128,11 +131,11 @@ ggplot() +
   geom_line(data = df, mapping = aes(x = date, y = mean_airtemp)) +
   ggthemes::theme_base() +
   labs(x = "Date", y = "Monthly Air Temperature (C)")
-```
-
-Well that's weird, we can't see anything! How come? Well, likely because the black lines of the daily temperatures are significantly more data-rich, and in our plotting, we placed our monthly `geom_line()` first, which means it will be plotted first, and then the thick black line will go on top. Let's reverse them and see if that helps: 
-
-```{r}
+end.rcode-->
+<p>
+Well that's weird, we can't see anything! How come? Well, likely because the black lines of the daily temperatures are significantly more data-rich, and in our plotting, we placed our monthly <code>geom_line()</code> first, which means it will be plotted first, and then the thick black line will go on top. Let's reverse them and see if that helps: 
+</p>
+<!--begin.rcode, warning=FALSE
 ggplot() + 
   # switched order - daily first 
   geom_line(data = df, mapping = aes(x = date, y = mean_airtemp)) +
@@ -142,10 +145,11 @@ ggplot() +
   ggthemes::theme_base() +
   labs(x = "Date", y = "Monthly Air Temperature (C)")
 
-```
+end.rcode-->
+<p>
 That's better! Still not super cute though. **NOTE: It is often hard to make two sets of timeseries following the same pattern look good. My recommendation here would be turn one (likely the daily measurements) into points, and keep the trend line. So let's try that, we'll make the points somewhat transparent, and keep them relatively small:
-
-```{r}
+</p>
+<!--begin.rcode, warning=FALSE
 ggplot() + 
   # switched order - daily first 
   geom_point(data = df, mapping = aes(x = date, y = mean_airtemp),
@@ -155,11 +159,11 @@ ggplot() +
             colour = "red") +
   ggthemes::theme_base() +
   labs(x = "Date", y = "Monthly Air Temperature (C)")
-```
-
+end.rcode-->
+<p>
 That's somewhat better. The transparency might be a bit too much, so we can change that, also let's change the main line colour to black: 
-
-```{r}
+</p>
+<!--begin.rcode, warning=FALSE
 ggplot() + 
   # switched order - daily first 
   geom_point(data = df, mapping = aes(x = date, y = mean_airtemp),
@@ -169,11 +173,11 @@ ggplot() +
             colour = "black") +
   ggthemes::theme_base() +
   labs(x = "Date", y = "Monthly Air Temperature (C)")
-```
-
-I think that's much more legible. And there we have it! A complete timeseries plot. Something is missing though ... a legend. Why wasn't one generated for us? Well, we used two separate dataframes here, and at no point did we make any differentiation between size/colour/shape etc, within the `aes()` calls. Only if we do that (e.g. we plotted two different lines from the same df and coloured them via some grouping variable) would R know we wanted a legend. Now we could just explain what the difference between the line and the points are either verbally during presentation or in text in a figure caption, but it is always true that having a legend is the easiest way to show people reading what they are looking at. Luckily, editing or adding legends is quite easy. We are using two `geoms` here so we want two legends. *We can force a legend by calling our `colour` argument inside the `aes()` section:*
-
-```{r}
+end.rcode-->
+<p>
+I think that's much more legible. And there we have it! A complete timeseries plot. Something is missing though ... a legend. Why wasn't one generated for us? Well, we used two separate dataframes here, and at no point did we make any differentiation between size/colour/shape etc, within the <code>aes()</code> calls. Only if we do that (e.g. we plotted two different lines from the same df and coloured them via some grouping variable) would R know we wanted a legend. Now we could just explain what the difference between the line and the points are either verbally during presentation or in text in a figure caption, but it is always true that having a legend is the easiest way to show people reading what they are looking at. Luckily, editing or adding legends is quite easy. We are using two <code>geoms</code> here so we want two legends. <em>We can force a legend by calling our <code>colour</code> argument inside the <code>aes()</code> section:</em>
+</p>
+<!--begin.rcode, warning=FALSE
 ggplot() + 
   # switched order - daily first 
   geom_point(data = df, mapping = aes(x = date, y = mean_airtemp,
@@ -187,11 +191,11 @@ ggplot() +
   guides(
     colour = guide_legend()
   )
-```
-
-Ok, so we have a legend but it's not at all what we want colour-wise, and the labels are all wrong. Fear not!!! So first, we will have to turn to our old friend `scale_colour_*` and for this use case, we want `scale_colour_identity()` as it will force ggplot to recognize the colour names when they are inside `aes()`:
-
-```{r}
+end.rcode-->
+<p>
+Ok, so we have a legend but it's not at all what we want colour-wise, and the labels are all wrong. Fear not!!! So first, we will have to turn to our old friend <code>scale_colour_*</code> and for this use case, we want <code>scale_colour_identity()</code> as it will force ggplot to recognize the colour names when they are inside <code>aes()</code>:
+</p>
+<!--begin.rcode, warning=FALSE
 ggplot() + 
   # switched order - daily first 
   geom_point(data = df, mapping = aes(x = date, y = mean_airtemp,
@@ -207,11 +211,11 @@ ggplot() +
   ) +
   # add in colour scale
   scale_colour_identity(guide = "legend")
-```
-
-Okay, that bit is accomplished. We can now add in components to make the legend look as we want. Remember that all those legend arguments will go in the `scale_*` that we're working with *to make the legend:*
-
-```{r}
+end.rcode-->
+<p>
+Okay, that bit is accomplished. We can now add in components to make the legend look as we want. Remember that all those legend arguments will go in the <code>scale_*</code> that we're working with <em>to make the legend:</em>
+</p>
+<!--begin.rcode, warning=FALSE
 ggplot() + 
   # switched order - daily first 
   geom_point(data = df, mapping = aes(x = date, y = mean_airtemp,
@@ -231,10 +235,10 @@ ggplot() +
                         breaks = c("black", "lightblue"), # the colours
                         labels = c("Monthly Mean", "Daily Mean") # legend labels
                         )
-```
-
+end.rcode-->
+<p>
 And now our plot is done and ready to display in a project/presentation. 
-
+</p>
 
 
 

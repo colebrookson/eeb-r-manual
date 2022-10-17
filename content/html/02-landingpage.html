@@ -9,9 +9,6 @@
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
-p {
-    font-size:18px
-}
 </style>
 </head>
 <body>
@@ -37,13 +34,26 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   </div>
 </div>
 
+
+<main>
+  <nav class="section-nav">
+    <ol>
+      <li><a href="#data-types"></a>
+        <ul>
+          <li class=""><a href="#data-types--characters"></a></li>
+        </ul>
+      </li>
+    </ol>
+  </nav>
+  <div>
+
 <div class="w3-main w3-content w3-padding" 
 style="max-width:1200px;margin-top:100px">
 
   <!-- Getting Started -->
   <div class="w3-container w3-padding-32 w3-center">  
     <h1 font-size:40px>Working With Data</h3><br>
-      <p>
+      <p font-size: 1.5em;>
         Managing data (to subsequently do statistics on) is one of the strong 
         points of R as a programming language. Now that you're more comfortable
         with the basics of the language, it's time to become more familiar with 
@@ -171,21 +181,25 @@ style="max-width:1200px;margin-top:100px">
   <footer class="w3-row-padding w3-padding-32">
     <div class="w3-third">
       <h3>FOOTER</h3>
-      <p>This project is made possible through the University of Toronto XXXXX</p>
+      <p>This project is made possible through the University of Toronto Learning & Education Advancement Fund (LEAF) program</p>
     </div>
   
     <div class="w3-third">
       <h3>Additional Resources</h3>
       <ul class="w3-ul w3-hoverable">
         <li class="w3-padding-16">
-          <img src="img/place-holder.png" class="w3-left w3-margin-right" style="width:50px">
+          <a href="https://uoftcoders.github.io/studyGroup/">
+          <img src="img/coders.png" class="w3-left w3-margin-right" style="width:50px">
           <span class="w3-large">U of T Coders</span><br>
           <span>Student-led UofT support system for learning programming</span>
+          </a>
         </li>
         <li class="w3-padding-16">
-          <img src="img/place-holder.png" class="w3-left w3-margin-right" style="width:50px">
+          <a href="https://carpentries.org/">
+          <img src="img/carpentries.jpg" class="w3-left w3-margin-right" style="width:50px">
           <span class="w3-large">The Carpentries</span><br>
           <span>Software and Data Carpentries resources and workshops</span>
+          </a>
         </li> 
       </ul>
     </div>
@@ -204,6 +218,7 @@ style="max-width:1200px;margin-top:100px">
 
 <!-- End page content -->
 </div>
+</main>
 
 <script>
 // Script to open and close sidebar

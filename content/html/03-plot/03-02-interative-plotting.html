@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+  <div class="w3-navy w3-xlarge" 
+  style="max-width:auto;margin:auto;border:1px w3-gray"
+  border:1px>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
+    <div class="w3-center w3-padding-16">The R Manual</div>
+  </div>
+</div>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#contact" onclick="w3_close()" 
+  class="w3-bar-item w3-button">Contact</a>
+</nav>
+
+<main style = margin-top:100px>
+    <nav class="section-nav">
+        <ol>
+          <li><a href="#basic-plot">Basic Plots</a></li>
+          <li><a href="#col-shape">Colour and Shape</a></li>
+          <li><a href="#group">Plot Variables by Group</a></li>
+        </ol>
+      </nav>
+    <div>
+      <section id="">
+        <h2>Iterative Plotting for Easy and Aesthetic Figures</h2>
+        <p>
+
+
+            When making a plot, typically the best way to go about it is to iteratively make a version of the plot, observe the outcome, and then make changes in an iterative fashion. This prevents us from making mistakes in a long set of code that we then can't diagnose the problem with, and further, helps us catch mistakes (typos, colour problems, etc) as we only have to take in a few new components each time, and not a whole pile. 
+
+            For our example, let's use the example from the <a href="03-01-intro-to-ggplot.html">Intro to <code>ggplot2</code> </a>section, looking at salamanders and trout: 
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
+<span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
+
+<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">and_vertebrates</span>
+
+<span class="hl kwd">names</span><span class="hl std">(df)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;       
+##  [6] &quot;unitnum&quot;     &quot;unittype&quot;    &quot;vert_index&quot;  &quot;pitnumber&quot;   &quot;species&quot;    
+## [11] &quot;length_1_mm&quot; &quot;length_2_mm&quot; &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot; 
+## [16] &quot;notes&quot;
+</pre></div>
+</div></div>
+
+        </p>
+        </section>
+        <section id="basic-plot">
+            <h2>Building a Basic Plot</h2>
+            <p>
+                Let's again plot a scatter plot of <code>length_1_mm</code> vs. <code>weight_g</code>. We'll start out with the absolute minimum number of arguments: 
+                <br><br>
+                <ol>
+                    <li>1. The call to <code>ggplot()</code></li>
+                    <li>2. The aesthetics (i.e. what variables we want on the x- and y-axis)</code></li>
+                    <li>3. The `geom_` function denoting what *type* of plot we're going for</code></li>
+                </ol>
+            </p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+            
+            <p>
+                Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <strong>must-haves</strong> to have a legible, complete plot. First step is the axis labels. So to iteratively work up our plot, we'll add that one component on, by using the new function <code>labs()</code>:
+            </p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g))</span> <span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+            <p>
+
+                OK good. Now, this is more aesthetic than anything, but we might want to change the appearance of this plot away from this ugly grey background and grid lines. This is a more personal decision regarding what exactly you want your plot to look like. However, there are lots of <code>themes</code> available in the <code>ggplot2</code> package to choose from. For example, we could use the <code>theme_classic()</code> like so: 
+            </p>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g))</span> <span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl kwd">theme_classic</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+                
+            <p>
+                But I <em>personally</em> prefer a different theme that comes in the <code>ggthemes</code> package, which we can install now:
+            </p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com">#install.packages(&quot;ggthemes&quot;)</span>
+<span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
+</pre></div>
+</div></div>
+            <p>
+
+                Now, let's use the <code>theme_base()</code> option, which will give us a very classic look and feel to the plot: 
+            </p>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g))</span> <span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+            <p>
+
+                Perfect! You'll also notice the text sizes are now larger which is preferable for reading on a screen or in a report. 
+            </p>
+        </section>
+        <section id="col-shape">
+            <h2>Adding Colour & Shape</h2>
+            <p>
+                Let's now add a colour to our points and change the shape we're using as well. 
+                <br><br>
+                <strong>Note:</strong> Arguments like this go in the <code>aes()</code> section, but there is a difference between simply assigning a colour and using colour to group points. To start, we'll just make the colour <em>red</em>, change the shape to my personal favourite, and up the size just a smidge: 
+                <br><br>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g),</span>
+            <span class="hl com"># here's where we'll add our colour etc</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+                <br><br>
+
+                So this is interesting! We see that somehow we've made our points hollow on the inside. Well, that has to do with the shape we picked. There are lots of options for shapes we <em>could</em> use, and we can see all our options in this handy graphic here: 
+                <br><br>
+
+                <img src="../img/03-img/r-symbols.png">
+                <br><br>
+
+                So notice we specified point # 21. This point has a dark outer circle and a fill colour in the middle. <strong>When using a point option with an outter boundary and an inner fill, the argument <code>colour</code> refers to the outter boundary line, and the argument <code>fill</code> refers to the colour filling inside</strong>. Let's see how this works by changing <code>colour = "black"</code> and <code>fill = "red"</code>: 
+                <br><br>
+
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g),</span>
+            <span class="hl com"># here's where we'll add our colour etc</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">fill</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+                <br><br>
+
+                Okay, so this looks like maybe more along the lines of what we were expecting! One more thing though is that some spots on the plot have a high density of points. To better identify those high density areas, let's make our points slightly transparent, with the <code>alpha</code> commmand: 
+                <br><br>
+
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span>
+                                    <span class="hl kwc">y</span> <span class="hl std">= weight_g),</span>
+            <span class="hl com"># here's where we'll add our colour etc</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">fill</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.2</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+                <br><br>
+
+
+                And now we can see where there really are many points. 
+            </p>
+        </section>
+        <section id="group">
+            <h2>Variables by Group</h2>
+            <p>
+                One of the most useful things to be able to do is group our points by either shape, fill, colour, or even size to show some difference betwen them. For example, in these data, we can see two very clearly different trends. 
+            </p>
+
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span>
+                                    <span class="hl kwc">y</span> <span class="hl std">= weight_g,</span> <span class="hl kwc">fill</span> <span class="hl std">= species),</span>
+            <span class="hl com"># here's where we'll add our colour etc</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.2</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+            <p>
+
+                So we can see our two main point colours plotted out nicely here. Although, there should be four colours and we can't really see them. Let's change our <code>alpha</code> to fix that: 
+            </p>
+
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span>
+                                    <span class="hl kwc">y</span> <span class="hl std">= weight_g,</span> <span class="hl kwc">fill</span> <span class="hl std">= species),</span>
+            <span class="hl com"># here's where we'll add our colour etc</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.4</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+            <p>
+
+                That's better. Looking at this plot, this brings up a few common tasks we might want to do from here. First of all, it's clear from this plot that the vast majority of these points are only from two species. We can see how the samples in our dataframe fall out with the simple <code>table()</code> function: 
+            </p>
+
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## Cascade torrent salamander   Coastal giant salamander 
+##                         15                      11758 
+##            Cutthroat trout 
+##                      20433
+</pre></div>
+</div></div>
+            <p>
+
+                So there are only 15 of the Cascade salamanders, and we know from our plot, at least a few NA's. Now the following decisions depend HIGHLY on what message one is trying to communicate with the plot, but we could imagine a scenario wherein perhaps it's actually important to have the Cascade salamander points be visible. But, it's clear from our plot, we may first want to get rid of NA's at least fo this plot. So let's do that via a <code>filter()</code> <a href="../02-data/02-02-filtering-subsetting.html">Learn more on that here</a>
+            </p>
+
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df_filtered</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(</span><span class="hl opt">!</span><span class="hl kwd">is.na</span><span class="hl std">(species))</span>
+<span class="hl kwd">head</span><span class="hl std">(df_filtered)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 6 × 16
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA
+## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA
+## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA
+## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA
+## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA
+## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA
+## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
+## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+</pre></div>
+</div></div>
+            <p>
+
+                Okay, let's go ahead and make our plot again: 
+            </p>
+
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_filtered,</span> <span class="hl com"># using the new dataframe</span>
+            <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g,</span> <span class="hl kwc">fill</span> <span class="hl std">= species),</span>
+            <span class="hl com"># here's where we'll add our colour etc</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.4</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+            <p>
+
+                This looks better. Now perhaps one way we could make the Cascade salamander points stand out is by making them significantly larger in size. We can do that my scaling our size manually according to the levels of our grouping variable. <strong>Note, that scaling, whether manually or otherwise, can be done for all grouping aesthetics such as fill, colour, alpha, etc. Further documentation on this topic can be found on the <a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">ggplot2 website</a></strong>
+                <br><br>
+
+                Since we see that the Cascade Torrent Salmander is first in our list of the legend, that means we will need to make the larger size first up in our <code>values</code> argument:
+            </p>
+
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_filtered,</span> <span class="hl com"># using the new dataframe</span>
+            <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g,</span>
+                        <span class="hl kwc">fill</span> <span class="hl std">= species,</span> <span class="hl kwc">size</span> <span class="hl std">= species),</span>
+            <span class="hl com"># here's where we'll add our colour etc</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.4</span><span class="hl std">)</span><span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">scale_size_manual</span><span class="hl std">(</span><span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
+            <p>
+
+                Hmm. We can vaguely see in the bottom corner the points we want, but they're hard to see. Why is this? Well, the problem here is that <code>ggplot()</code> will automatically plot data in the order they are passed. we can see by a quick <code>head()</code> call ...
+            </p>
+
+<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(df_filtered)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 6 × 16
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA
+## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA
+## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA
+## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA
+## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA
+## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA
+## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
+## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+</pre></div>
+</div></div>
+            <p>
+
+                That the first species in the list is Cutthroat trout, and with a quick <code>tail()</code> call (<code>tail()</code> returns the last six rows instead of the first six) ...
+            </p>
+
+<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">tail</span><span class="hl std">(df_filtered)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 6 × 16
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+## 1  2019 MACKOG-U OG      U         2      16 C                21        NA
+## 2  2019 MACKOG-U OG      U         2      16 C                22        NA
+## 3  2019 MACKOG-U OG      U         2      16 C                23   1043503
+## 4  2019 MACKOG-U OG      U         2      16 C                24   1043547
+## 5  2019 MACKOG-U OG      U         2      16 C                25   1043583
+## 6  2019 MACKOG-U OG      U         2      16 C                26   1043500
+## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
+## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+</pre></div>
+</div></div>
+            <p>
+
+                ...we can see that the Coastal salamander is the last. That means that the Coastal salamander will be plotted after (i.e "on top of") our focal larger points. Luckily this is an easy fix by simply rearranging the dataframe such that the focal species is the <em>last</em> one to be plotted. This can be accomplished with <code>dplyr::arrange()</code>. We'll pass first the dataframe we're working with, then the column we want to sort by. To check that this will work, let's print the calll to <code>tail()</code> from the <code>dplyr::arrange()</code> version of our dataframe. 
+            </p>
+
+<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">tail</span><span class="hl std">(dplyr</span><span class="hl opt">::</span><span class="hl kwd">arrange</span><span class="hl std">(df_filtered, species))</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 6 × 16
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+## 1  2019 MACKOG-U OG      U         2      16 C                 1        NA
+## 2  2019 MACKOG-U OG      U         2      16 C                 2        NA
+## 3  2019 MACKOG-U OG      U         2      16 C                 3        NA
+## 4  2019 MACKOG-U OG      U         2      16 C                 4   1043522
+## 5  2019 MACKOG-U OG      U         2      16 C                 5   1043513
+## 6  2019 MACKOG-U OG      U         2      16 C                 6   1043521
+## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
+## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+</pre></div>
+</div></div>
+            <p>
+
+                That doesn't work! That's because <code>dplyr::arrange()</code> will automatically default to sortin alphabetically. Luckily we can convert this column into factor to change the order in a custom way. Lets do so like this (and again check with <code>tail()</code>): 
+            </p>
+
+<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># wrap our pipe arrange() with tail</span>
+<span class="hl kwd">tail</span><span class="hl std">(</span>
+<span class="hl std">df_filtered</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">arrange</span><span class="hl std">(</span><span class="hl kwd">factor</span><span class="hl std">(species,</span>
+                        <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Cutthroat trout&quot;</span><span class="hl std">,</span>
+                                <span class="hl str">&quot;Coastal giant salamander&quot;</span><span class="hl std">,</span>
+                                <span class="hl str">&quot;Cascade torrent salamander&quot;</span><span class="hl std">)))</span>
+<span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 6 × 16
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+## 1  2012 MACKOG-U OG      U         1      16 SC                2        NA
+## 2  2013 MACKCC-L CC      L         2       2 SC               12        NA
+## 3  2013 MACKOG-U OG      U         1      14 P                 1        NA
+## 4  2017 MACKCC-L CC      L         1       2 SC               29        NA
+## 5  2017 MACKOG-M OG      M         1       8 SC               20        NA
+## 6  2019 MACKOG-M OG      M         1       8 SC               17        NA
+## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
+## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+</pre></div>
+</div></div>
+            <p>
+
+                And we see our friend the Cascade salamander is at the end. Now we don't necessarily want to reassign our dataframe to take this rearranged form, so we can simply wrap our call to the dataframe <code>df_filtered</code> in our <code>dplyr::arrange()</code> function and see if that works: 
+            </p>
+
+<div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_filtered</span> <span class="hl opt">%&gt;%</span>
+            <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">arrange</span><span class="hl std">(</span><span class="hl kwd">factor</span><span class="hl std">(species,</span>
+                        <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Cutthroat trout&quot;</span><span class="hl std">,</span>
+                                <span class="hl str">&quot;Coastal giant salamander&quot;</span><span class="hl std">,</span>
+                                <span class="hl str">&quot;Cascade torrent salamander&quot;</span><span class="hl std">))),</span>
+            <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g,</span>
+                        <span class="hl kwc">fill</span> <span class="hl std">= species,</span> <span class="hl kwc">size</span> <span class="hl std">= species),</span>
+            <span class="hl com"># here's where we'll add our colour etc</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.4</span><span class="hl std">)</span><span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">scale_size_manual</span><span class="hl std">(</span><span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" class="plot" /></div></div>
+            <p>
+
+
+                We can now see our Cascade salamander data points! While we could stop here, there are a few other things we can do. We can capitalize the legend easily enough, by simply adding it as the first argument in the <code>scale_size_manual()</code> function. We put it here since the <code>size</code> parameter is what's being displayed in our plot: 
+            </p>
+
+<div class="chunk" id="unnamed-chunk-22"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_filtered</span> <span class="hl opt">%&gt;%</span>
+            <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">arrange</span><span class="hl std">(</span><span class="hl kwd">factor</span><span class="hl std">(species,</span>
+                        <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Cutthroat trout&quot;</span><span class="hl std">,</span>
+                                <span class="hl str">&quot;Coastal giant salamander&quot;</span><span class="hl std">,</span>
+                                <span class="hl str">&quot;Cascade torrent salamander&quot;</span><span class="hl std">))),</span>
+            <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g,</span>
+                        <span class="hl kwc">fill</span> <span class="hl std">= species,</span> <span class="hl kwc">size</span> <span class="hl std">= species),</span>
+            <span class="hl com"># here's where we'll add our colour etc</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.4</span><span class="hl std">)</span><span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">scale_size_manual</span><span class="hl std">(</span><span class="hl str">&quot;Species&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" class="plot" /></div></div>
+            <p>
+
+                Ahh! Now we've run into a new problem. We have two legends! This is annoying. However, we can fix this, but first, let's choose different colours, these are not my favourite. We can do that (in this case) with <code>scale_fill_manual()</code>. We use the <code>fill</code> because the colour for all the points is <em>black</em> since it refers to the outer border of the points. 
+            </p>
+
+                <strong>SIDE NOTE: Note that when making figures, when possible, choose colours that if printed in black and white are still differentiable, and that also are distinguishable for colour blind people.</strong>
+            <p>
+
+                Also, note that often the easiest way to add in specific colours (if you're only using a handful of specific ones like we are here) is to pass the RGB code for that colour. If you have never heard of RGB colours, essentially it's a code of alphanumeric characters that form a specific colour on the colourwheel. Learn more on <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB colours here</a>().
+            </p>
+
+<div class="chunk" id="unnamed-chunk-23"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_filtered</span> <span class="hl opt">%&gt;%</span>
+            <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">arrange</span><span class="hl std">(</span><span class="hl kwd">factor</span><span class="hl std">(species,</span>
+                        <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Cutthroat trout&quot;</span><span class="hl std">,</span>
+                                <span class="hl str">&quot;Coastal giant salamander&quot;</span><span class="hl std">,</span>
+                                <span class="hl str">&quot;Cascade torrent salamander&quot;</span><span class="hl std">))),</span>
+            <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g,</span>
+                        <span class="hl kwc">fill</span> <span class="hl std">= species,</span> <span class="hl kwc">size</span> <span class="hl std">= species),</span>
+            <span class="hl com"># here's where we'll add our colour etc</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.8</span><span class="hl std">)</span><span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">scale_size_manual</span><span class="hl std">(</span><span class="hl str">&quot;Species&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span> <span class="hl opt">+</span>
+<span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl str">&quot;Species&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#42d4f4&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#f032e6&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#ffe119&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" class="plot" /></div></div>
+            <p>
+
+                While these colours are harsh, they're easy to see. We could choose others if we want to be more aesthetic :) Also, we notice that our legend problem is gone! Why? Well, what created the problem before was having <em>technically</em> two different legends being asked for from our <code>aes()</code> arguments - size & fill. However, by manually providing values for both and then giving them the <em>same</em> legend title, we fixed up the problem. <em>On your own, try adding a different title for one of them and see what happens!</em>. 
+                <br><br>
+
+                For this plot, we are pretty much done! This looks good to go. This section has hopefully showed you how to iteratively add components to your plot to troubleshoot throughout and end up with a nice plot quickly. At this point, we can save our plot if we want to (and if it has been assigned to a variable). <a href="../02-data/02-01-reading-writing.html">See info about saving plots here</a>.
+            </p>
+        </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+</body>
+</html>

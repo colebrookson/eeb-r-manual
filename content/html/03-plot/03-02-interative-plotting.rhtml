@@ -19,14 +19,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <!-- Top menu -->
 <div class="w3-top">
-    <div class="w3-navy w3-xlarge" 
-    style="max-width:1300px;margin:auto;border:1px w3-gray"
-    border:1px>
-      <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()" 
-      style="margin-left:2em">☰</div>
-      <div class="w3-right w3-padding-16" style="margin-right:2em">EEB</div>
-      <div class="w3-center w3-padding-16">The R Manual</div>
-    </div>
+  <div class="w3-navy w3-xlarge" 
+  style="max-width:auto;margin:auto;border:1px w3-gray"
+  border:1px>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
+    <div class="w3-center w3-padding-16">The R Manual</div>
+  </div>
 </div>
 
 <!-- Sidebar (hidden by default) -->
@@ -42,15 +41,16 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
 <main style = margin-top:100px>
     <nav class="section-nav">
         <ol>
-          <li><a href="#basic">Build Basic Plots</a></li>
-          <li><a href="#colour-shape">Adding Colour &amp; Shape</a></li>
+          <li><a href="#basic-plot">Basic Plots</a></li>
+          <li><a href="#col-shape">Colour and Shape</a></li>
+          <li><a href="#group">Plot Variables by Group</a></li>
         </ol>
       </nav>
     <div>
-      <section id="data-types">
+      <section id="">
         <h2>Iterative Plotting for Easy and Aesthetic Figures</h2>
         <p>
-            <!--begin.rcode, echo=FALSE
+            <!--begin.rcode, warning=FALSE, echo=FALSE
             options(tidyverse.quiet = TRUE)
             end.rcode-->
 
@@ -69,64 +69,79 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
 
         </p>
         </section>
-        <section id="basic">
-            <h3>Building a Basic Plot</h3>
+        <section id="basic-plot">
+            <h2>Building a Basic Plot</h2>
             <p>
                 Let's again plot a scatter plot of <code>length_1_mm</code> vs. <code>weight_g</code>. We'll start out with the absolute minimum number of arguments: 
                 <br><br>
-                1. The call to <code>ggplot()</code>
-                2. The aesthetics (i.e. what variables we want on the x- and y-axis)
-                3. The <code>geom_</code> function denoting what <em>type</em> of plot we're going for
-                <br><br>
-                <!--begin.rcode
+                <ol>
+                    <li>1. The call to <code>ggplot()</code></li>
+                    <li>2. The aesthetics (i.e. what variables we want on the x- and y-axis)</code></li>
+                    <li>3. The `geom_` function denoting what *type* of plot we're going for</code></li>
+                </ol>
+            </p>
+
+                <!--begin.rcode, warning=FALSE
                 ggplot() +
                 geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g))
                 end.rcode-->
-                <br><br>
-                Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <em>must-haves</em> to have a legible, complete plot. First step is the axis labels. So to iteratively work up our plot, we'll add that one component on, by using the new function `labs()`:
-                <br><br>
-                <!--begin.rcode
+            
+            <p>
+                Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <strong>must-haves</strong> to have a legible, complete plot. First step is the axis labels. So to iteratively work up our plot, we'll add that one component on, by using the new function <code>labs()</code>:
+            </p>
+
+                <!--begin.rcode, warning=FALSE
                 ggplot() +
                 geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
                 labs(x = "Length (mm)", y = "Weight (g)") 
                 end.rcode-->
-                <br><br>
+            <p>
+
                 OK good. Now, this is more aesthetic than anything, but we might want to change the appearance of this plot away from this ugly grey background and grid lines. This is a more personal decision regarding what exactly you want your plot to look like. However, there are lots of <code>themes</code> available in the <code>ggplot2</code> package to choose from. For example, we could use the <code>theme_classic()</code> like so: 
-                <br><br>
-                <!--begin.rcode
+            </p>
+
+                <!--begin.rcode, warning=FALSE
                 ggplot() +
                 geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
                 labs(x = "Length (mm)", y = "Weight (g)") +
                 theme_classic()
                 end.rcode-->
-                <br><br>
+                
+            <p>
                 But I <em>personally</em> prefer a different theme that comes in the <code>ggthemes</code> package, which we can install now:
-                <br><br>
-                <!--begin.rcode
+            </p>
+
+                <!--begin.rcode, warning=FALSE
                 #install.packages("ggthemes")
                 library(ggthemes)
                 end.rcode-->
-                <br><br>
+            <p>
+
                 Now, let's use the <code>theme_base()</code> option, which will give us a very classic look and feel to the plot: 
-                <br><br>
-                <!--begin.rcode
+            </p>
+
+                <!--begin.rcode, warning=FALSE
                 ggplot() +
                 geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
                 labs(x = "Length (mm)", y = "Weight (g)") +
                 # note here we use `ggthemes::` to indicate which package we're using
                 ggthemes::theme_base()
                 end.rcode-->
-                <br><br>
+            <p>
+
                 Perfect! You'll also notice the text sizes are now larger which is preferable for reading on a screen or in a report. 
             </p>
         </section>
-        <section id="colour-shape">
+        <section id="col-shape">
+            <h2>Adding Colour & Shape</h2>
             <p>
                 Let's now add a colour to our points and change the shape we're using as well. 
                 <br><br>
                 <strong>Note:</strong> Arguments like this go in the <code>aes()</code> section, but there is a difference between simply assigning a colour and using colour to group points. To start, we'll just make the colour <em>red</em>, change the shape to my personal favourite, and up the size just a smidge: 
                 <br><br>
-                <!--begin.rcode
+
+                <!--begin.rcode, warning=FALSE
+
                 ggplot() +
                 geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g),
                             # here's where we'll add our colour etc
@@ -136,14 +151,17 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                 ggthemes::theme_base()
                 end.rcode-->
                 <br><br>
+
                 So this is interesting! We see that somehow we've made our points hollow on the inside. Well, that has to do with the shape we picked. There are lots of options for shapes we <em>could</em> use, and we can see all our options in this handy graphic here: 
-
-                <img class="image-full-page" style="display:block;margin:auto"
-                        src="../img/03-img/r-symbols.png">
-
-                So notice we specified point # 21. This point has a dark outer circle and a fill colour in the middle. <strong>When using a point option with an outter boundary and an inner fill, the argument <code>colour</code> refers to the outter boundary line, and the argument <code>fill</code> refers to the colour filling inside**. Let's see how this works by changing <code>colour = "black"</code> and <code>fill = "red"</code>: 
                 <br><br>
-                <!--begin.rcode
+
+                <img src="../img/03-img/r-symbols.png">
+                <br><br>
+
+                So notice we specified point # 21. This point has a dark outer circle and a fill colour in the middle. <strong>When using a point option with an outter boundary and an inner fill, the argument <code>colour</code> refers to the outter boundary line, and the argument <code>fill</code> refers to the colour filling inside</strong>. Let's see how this works by changing <code>colour = "black"</code> and <code>fill = "red"</code>: 
+                <br><br>
+
+                <!--begin.rcode, warning=FALSE
                 ggplot() +
                 geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g),
                             # here's where we'll add our colour etc
@@ -153,9 +171,11 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                 ggthemes::theme_base()
                 end.rcode-->
                 <br><br>
+
                 Okay, so this looks like maybe more along the lines of what we were expecting! One more thing though is that some spots on the plot have a high density of points. To better identify those high density areas, let's make our points slightly transparent, with the <code>alpha</code> commmand: 
                 <br><br>
-                <!--begin.rcode
+
+                <!--begin.rcode, warning=FALSE
                 ggplot() +
                 geom_point(data = df, mapping = aes(x = length_1_mm, 
                                                     y = weight_g),
@@ -166,10 +186,214 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                 ggthemes::theme_base()
                 end.rcode-->
                 <br><br>
+
+
                 And now we can see where there really are many points. 
             </p>
         </section>
-        <section id="var">
+        <section id="group">
+            <h2>Variables by Group</h2>
+            <p>
+                One of the most useful things to be able to do is group our points by either shape, fill, colour, or even size to show some difference betwen them. For example, in these data, we can see two very clearly different trends. 
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                ggplot() +
+                geom_point(data = df, mapping = aes(x = length_1_mm, 
+                                                    y = weight_g, fill = species),
+                            # here's where we'll add our colour etc
+                            colour = "black", shape = 21, alpha = 0.2, size = 2)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base()
+                end.rcode-->
+            <p>
+
+                So we can see our two main point colours plotted out nicely here. Although, there should be four colours and we can't really see them. Let's change our <code>alpha</code> to fix that: 
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                ggplot() +
+                geom_point(data = df, mapping = aes(x = length_1_mm, 
+                                                    y = weight_g, fill = species),
+                            # here's where we'll add our colour etc
+                            colour = "black", shape = 21, alpha = 0.4, size = 2)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base()
+                end.rcode-->
+            <p>
+
+                That's better. Looking at this plot, this brings up a few common tasks we might want to do from here. First of all, it's clear from this plot that the vast majority of these points are only from two species. We can see how the samples in our dataframe fall out with the simple <code>table()</code> function: 
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                table(df$species)
+                end.rcode-->
+            <p>
+
+                So there are only 15 of the Cascade salamanders, and we know from our plot, at least a few NA's. Now the following decisions depend HIGHLY on what message one is trying to communicate with the plot, but we could imagine a scenario wherein perhaps it's actually important to have the Cascade salamander points be visible. But, it's clear from our plot, we may first want to get rid of NA's at least fo this plot. So let's do that via a <code>filter()</code> <a href="../02-data/02-02-filtering-subsetting.html">Learn more on that here</a>
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                df_filtered <- df %>% 
+                dplyr::filter(!is.na(species))
+                head(df_filtered)
+                end.rcode-->
+            <p>
+
+                Okay, let's go ahead and make our plot again: 
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                ggplot() +
+                geom_point(data = df_filtered, # using the new dataframe
+                            mapping = aes(x = length_1_mm, y = weight_g, fill = species),
+                            # here's where we'll add our colour etc
+                            colour = "black", shape = 21, alpha = 0.4, size = 2)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base()
+                end.rcode-->
+            <p>
+
+                This looks better. Now perhaps one way we could make the Cascade salamander points stand out is by making them significantly larger in size. We can do that my scaling our size manually according to the levels of our grouping variable. <strong>Note, that scaling, whether manually or otherwise, can be done for all grouping aesthetics such as fill, colour, alpha, etc. Further documentation on this topic can be found on the <a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">ggplot2 website</a></strong>
+                <br><br>
+
+                Since we see that the Cascade Torrent Salmander is first in our list of the legend, that means we will need to make the larger size first up in our <code>values</code> argument:
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                ggplot() +
+                geom_point(data = df_filtered, # using the new dataframe
+                            mapping = aes(x = length_1_mm, y = weight_g, 
+                                        fill = species, size = species),
+                            # here's where we'll add our colour etc
+                            colour = "black", shape = 21, alpha = 0.4)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base() +
+                scale_size_manual(values = c(4, 2, 2))
+                
+                end.rcode-->
+            <p>
+
+                Hmm. We can vaguely see in the bottom corner the points we want, but they're hard to see. Why is this? Well, the problem here is that <code>ggplot()</code> will automatically plot data in the order they are passed. we can see by a quick <code>head()</code> call ...
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                head(df_filtered)
+                end.rcode-->
+            <p>
+
+                That the first species in the list is Cutthroat trout, and with a quick <code>tail()</code> call (<code>tail()</code> returns the last six rows instead of the first six) ...
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                tail(df_filtered)
+                end.rcode-->
+            <p>
+
+                ...we can see that the Coastal salamander is the last. That means that the Coastal salamander will be plotted after (i.e "on top of") our focal larger points. Luckily this is an easy fix by simply rearranging the dataframe such that the focal species is the <em>last</em> one to be plotted. This can be accomplished with <code>dplyr::arrange()</code>. We'll pass first the dataframe we're working with, then the column we want to sort by. To check that this will work, let's print the calll to <code>tail()</code> from the <code>dplyr::arrange()</code> version of our dataframe. 
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                tail(dplyr::arrange(df_filtered, species))
+                end.rcode-->
+            <p>
+
+                That doesn't work! That's because <code>dplyr::arrange()</code> will automatically default to sortin alphabetically. Luckily we can convert this column into factor to change the order in a custom way. Lets do so like this (and again check with <code>tail()</code>): 
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                # wrap our pipe arrange() with tail
+                tail(
+                df_filtered %>% 
+                dplyr::arrange(factor(species, 
+                                        levels = c("Cutthroat trout", 
+                                                "Coastal giant salamander", 
+                                                "Cascade torrent salamander")))
+                )
+
+                end.rcode-->
+            <p>
+
+                And we see our friend the Cascade salamander is at the end. Now we don't necessarily want to reassign our dataframe to take this rearranged form, so we can simply wrap our call to the dataframe <code>df_filtered</code> in our <code>dplyr::arrange()</code> function and see if that works: 
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                ggplot() +
+                geom_point(data = df_filtered %>% 
+                            dplyr::arrange(factor(species, 
+                                        levels = c("Cutthroat trout", 
+                                                "Coastal giant salamander", 
+                                                "Cascade torrent salamander"))),
+                            mapping = aes(x = length_1_mm, y = weight_g, 
+                                        fill = species, size = species),
+                            # here's where we'll add our colour etc
+                            colour = "black", shape = 21, alpha = 0.4)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base() +
+                scale_size_manual(values = c(4, 2, 2))
+                end.rcode-->
+            <p>
+
+
+                We can now see our Cascade salamander data points! While we could stop here, there are a few other things we can do. We can capitalize the legend easily enough, by simply adding it as the first argument in the <code>scale_size_manual()</code> function. We put it here since the <code>size</code> parameter is what's being displayed in our plot: 
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                ggplot() +
+                geom_point(data = df_filtered %>% 
+                            dplyr::arrange(factor(species, 
+                                        levels = c("Cutthroat trout", 
+                                                "Coastal giant salamander", 
+                                                "Cascade torrent salamander"))),
+                            mapping = aes(x = length_1_mm, y = weight_g, 
+                                        fill = species, size = species),
+                            # here's where we'll add our colour etc
+                            colour = "black", shape = 21, alpha = 0.4)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base() +
+                scale_size_manual("Species", values = c(4, 2, 2))
+                end.rcode-->
+            <p>
+
+                Ahh! Now we've run into a new problem. We have two legends! This is annoying. However, we can fix this, but first, let's choose different colours, these are not my favourite. We can do that (in this case) with <code>scale_fill_manual()</code>. We use the <code>fill</code> because the colour for all the points is <em>black</em> since it refers to the outer border of the points. 
+            </p>
+
+                <strong>SIDE NOTE: Note that when making figures, when possible, choose colours that if printed in black and white are still differentiable, and that also are distinguishable for colour blind people.</strong>
+            <p>
+
+                Also, note that often the easiest way to add in specific colours (if you're only using a handful of specific ones like we are here) is to pass the RGB code for that colour. If you have never heard of RGB colours, essentially it's a code of alphanumeric characters that form a specific colour on the colourwheel. Learn more on <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB colours here</a>().
+            </p>
+
+                <!--begin.rcode, warning=FALSE
+                ggplot() +
+                geom_point(data = df_filtered %>% 
+                            dplyr::arrange(factor(species, 
+                                        levels = c("Cutthroat trout", 
+                                                "Coastal giant salamander", 
+                                                "Cascade torrent salamander"))),
+                            mapping = aes(x = length_1_mm, y = weight_g, 
+                                        fill = species, size = species),
+                            # here's where we'll add our colour etc
+                            colour = "black", shape = 21, alpha = 0.8)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base() +
+                scale_size_manual("Species", values = c(4, 2, 2)) +
+                scale_fill_manual("Species", values = c("#42d4f4", "#f032e6", "#ffe119"))
+                end.rcode-->
+            <p>
+
+                While these colours are harsh, they're easy to see. We could choose others if we want to be more aesthetic :) Also, we notice that our legend problem is gone! Why? Well, what created the problem before was having <em>technically</em> two different legends being asked for from our <code>aes()</code> arguments - size & fill. However, by manually providing values for both and then giving them the <em>same</em> legend title, we fixed up the problem. <em>On your own, try adding a different title for one of them and see what happens!</em>. 
+                <br><br>
+
+                For this plot, we are pretty much done! This looks good to go. This section has hopefully showed you how to iteratively add components to your plot to troubleshoot throughout and end up with a nice plot quickly. At this point, we can save our plot if we want to (and if it has been assigned to a variable). <a href="../02-data/02-01-reading-writing.html">See info about saving plots here</a>.
+            </p>
         </section>
 <!-- End page content -->
 <hr>

@@ -18,7 +18,7 @@ For this, we'll use our example with data on temperature in Alaska from 1988 to 
 
 ### Just the Code: 
 
-```{r}
+<!--begin.rcode, message=FALSE,warning=FALSE
 library(tidyverse)
 # add in an option to keep dplyr quiet
 options(dplyr.summarise.inform = FALSE)
@@ -70,7 +70,7 @@ ggplot() +
                         breaks = c("black", "lightblue"), # the colours
                         labels = c("Monthly Mean", "Daily Mean") # legend labels
                         )
-```
+end.rcode-->
 
 ## Box Plot
 
@@ -84,7 +84,7 @@ For this, we'll use our example with data on stream chemistry over time. See the
 
 ### Just the Code
 
-```{r}
+<!--begin.rcode
 library(tidyverse)
 library(lterdatasampler)
 library(lubridate)
@@ -117,7 +117,7 @@ ggplot() +
     scale_fill_manual("Element", 
                       values = c("#90ee90", "#F8E473"),
                       labels = c("Potassium (K)", "Sodium (Na)"))
-```
+end.rcode-->
 
 
 
