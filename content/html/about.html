@@ -9,9 +9,6 @@
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
-p {
-    font-size:18px
-}
 </style>
 </head>
 <body>
@@ -21,7 +18,7 @@ p {
 style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()"
   class="w3-bar-item w3-button">Close Menu</a>
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="./about.html" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
   <a href="#contact" onclick="w3_close()" 
   class="w3-bar-item w3-button">Contact</a>
 </nav>
@@ -37,6 +34,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   </div>
 </div>
 
+
 <main style = margin-top:100px>
   <nav class="section-nav">
     <ol>
@@ -47,98 +45,80 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
       </li>
     </ol>
   </nav>
-  <div>
+  <!-- Welcome Section -->
+  <div class="w3-container w3-padding-32 w3-center" style="padding: top 100px;">  
+    <h1>Welcome to the R Manual!</h1>
+      <p>
+        The R Manual is a centralized hub of educational content to support 
+        students in the department of Ecology & Evolutionary Biology as they 
+        progress through their program and get exposed to doing biological 
+        analysis in the programming language R. The goal is to provide a 
+        centralized resource accessible by all students that acts as a 
+        touchstone for all R-based learning in the department.
+      </p>
+      <hr>
+      <h1>How Should You Use This Manual?</h1><br>
+     <!--
+<img class="image-main" src="img/confused.jpg" alt="confusion" 
+        width="100" height="150">
 
-<div class="w3-main w3-content w3-padding" 
-style="max-width:1200px;margin-top:100px">
+     --> 
+      <p>
+        What a good question. This is <bf>not</bf> supposed to be an exhaustive 
+        treatise on all things R. This is supposed to be a launching pad, 
+        specifically designed with your course content requirements in mind,
+        to get you started learning the wonderful world of R. There are tons of
+        things we'll only touch on briefly (or not at all!) and we don't want 
+        you to think that this page is the be-all and end-all of R. However, we
+        do want you (the student) to use this resource as an initial jumping off 
+        point when starting to work in R, or when you have a question about R. 
+        Here we've tried to include pieces of content that students often need 
+        when they start their learning journey. The goal is to get you off the 
+        ground, then you can specialize your skills how you want later. 
+        <br>
+      </br>
+        That's enough for now, scroll down to find the basic components we cover
+        here in the R manual and click on a section to get started with your 
+        learning journey. <bf>As a side note, we will soon have complete search
+          functionality for this site! Stay tuned for that.
+        </bf>
+      </p>
+    </div>
+  </div>
+  <hr>
 
-  <!-- Getting Started -->
+  <!-- Pagination -->
+  <div class="w3-center w3-padding-32">
+    <div class="w3-bar">
+    </div>
+  </div>
+  
+  <hr id="about">
+
+  <!-- About Section -->
   <div class="w3-container w3-padding-32 w3-center">  
-    <h1 font-size:40px>Basic R</h3><br>
+    <h3>About the R Manual</h3><br>
+    <!--
+    <img src="img/place-holder.png" alt="about the r manual" class="w3-image" 
+    style="display:block;margin:auto" width="500" height="160">
+    -->
+    <div class="w3-padding-32">
+      <h4><b>Learn more about this project</b></h4>
       <p>
-        Now that you have R and RStudio installed on your computer, it's time to 
-        get cracking! Here we'll go over essential skills like how to use 
-        objects (and what even an object anyways??). We'll discuss things like 
-        data types and structures, and even introduce you to how to organize 
-        your workflow in R. 
+        The R Manual is a resource jointed authored by Cole Brookson, 
+        Dr. Shelby Riskin, and Dr. Jacqueline Sztepanacz. This resource is not 
+        officially affiliated with the R Programming language, but aims to 
+        help students with the steep learning curve associated with learning R 
+        for the first time. 
       </p>
     </div>
   </div>
   <hr>
-
-  <!-- First Photo Grid-->
-  <div class="w3-row-padding w3-padding-16 w3-center" id="food" 
-  border: 5px solid gray;>
-    <div class="w3-third">
-      <a href="01-basicr/01-01-coding-basics.html">
-            <img class="image-main" src="img/operators.png" alt="" 
-            width="333" height="200">
-      <h3>Coding Basics</h3>
-      <p>Assignment, operators, R as a calculator</p>
-      </a>
-    </div>
-    <div class="w3-third">
-      <a href="01-basicr/01-02-data-types.html">
-            <img class="image-main" src="img/01-img/data-types.png" alt="" 
-            width="333" height="200">
-      <h3>Data Types</h3>
-      <p>The important data types, how to identify types and change them</p>
-      </a>
-    </div>
-    <div class="w3-third">
-      <a href="01-basicr/01-03-data-structures.html">
-            <img class="image-main" src="img/01-img/data-structures.png" 
-            alt="data structures" width="333" height="200">
-
-      <h3>Data Structures</h3>
-      <p>
-      How data are structured as objects</p>
-    </a>
-    </div>
-  </div>
-
-  <!-- Second Photo Grid-->
-  <div class="w3-row-padding w3-padding-16 w3-center" id="food"
-   border: 5px solid gray;>
-    <div class="w3-third">
-      <a href="01-basicr/01-04-indexing.html">
-            <img class="image-main" src="img/01-img/indexing.png" 
-            alt="credit: YaRrrr!" 
-            width="333" height="200">
-      <h3>Indexing</h3>
-      <p>How to index parts of objects in one, two, and three dimensions</p>
-      </a>
-    </div>
-    <div class="w3-third">
-      <a href="01-basicr/01-05-packages.html">
-            <img class="image-main" src="img/01-img/hex-stickers.png" alt="" 
-            width="333" height="200">
-      <h3>Packages</h3>
-      <p>The use of packages, which ones are worthwhile, and why you should be 
-        (sometimes) wary
-      </p>
-      </a>
-    </div>
-    <div class="w3-third">
-      <a href="01-basicr/01-06-workflow.html">
-            <img class="image-main" src="img/01-img/workflow.png" 
-            alt="data structures" width="333" height="200">
-
-      <h3>Workflow</h3>
-      <p>
-      How to make things reproducible and easy to understand through workflow 
-    management</p>
-    </a>
-    </div>
-  </div>
-  <hr>
-
-
   
   <!-- Footer -->
   <footer class="w3-row-padding w3-padding-32">
     <div class="w3-third">
-      <h3>FUNDING</h3>
+      <h3>FOOTER</h3>
       <p>This project is made possible through the University of Toronto Learning & Education Advancement Fund (LEAF) program</p>
     </div>
   
@@ -175,6 +155,7 @@ style="max-width:1200px;margin-top:100px">
   </footer>
 
 <!-- End page content -->
+</section>
 </div>
 
 <script>
@@ -187,6 +168,6 @@ function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
 }
 </script>
-
+</main>
 </body>
 </html>
