@@ -41,17 +41,470 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
 <main style = margin-top:100px>
   <nav class="section-nav">
       <ol>
-        <li><a href="#reshape"></a>
+        <li><a href="#common">Common Distributions</a></li>
+        <li><a href="#psuedo">Random vs. Pseudorandom</a></li>
+        <li><a href="#rsamp">Random Sampling</a></li>
+        <li><a href="#samp-r">Sampling in R</a>
+        <ol>
+          <li><a href="#samp-r--seeds">Seeds</a></li>
+        </ol>
         </li>
+        <li><a href="#dist">Sampling Distributions</a>
+          <ol>
+            <li><a href="#dist--disc">Discrete Distributions</a></li>
+            <li><a href="#dist--cont">Continuous Distributions</a></li>
+          </ol>
+        </li>
+        <li><a href="#clt">Central Limit Theorem</a></li>
+        <li><a href="#lln">Law of Large Numbers</a></li>
+  
       </ol>
     </nav>
   <div>
-    <section id="work">
+    <section id="">
       <h2>Sampling & Sampling Distributions</h2>
-      <img class="image-full-page" style="display:block;margin:auto"
-      src="../img/01-img/construction.jpg">
-
+      <p>
+        Sampling refers to the drawing of a subset of data points from some larger set (population). How we sample can be the subject of an entire course, but it is helpful to know enough to perform sampling in R, and then to compile those samples together into a <em>sampling distribution</em>. 
+      </p>
+    </section>
+    <section id="common">
+      <h2>Common Distributions</h2>
+      <p>
+        Before we go any further, let's remind ourselves of the shapes and names of some of the common distributions that we'll want to have fresh in our minds for this section. As another reminder, we need to be conscious as to whether we're dealing with a <em>continuous</em> distribution or a <em>discrete</em> distribution. Here's a visual to remind us of this: 
+      </p>
+      <figure>
+        <img src="../img/04-img/distributions.png">
+        <figcaption>credit: Ashkay Sharma</figcaption>
+      </figure>
+    </section>
+    <section id="pseudo">
+      <h2>Random vs. Pseudorandom</h2>
+      <p>
+        We often think of computers as being able to generate for us <em>random</em> samples of numbers. However, computer-generated random samples are never <strong>truly</strong> random, they are what is called <em>pseudorandom</em>. For a computer to sample a truly random number, they would need to use a <em>true</em> random number generator (TRNG), which relies on using some external physical variable such as airwave static to generate a <em>truly</em> random sample, since subatomic particles have truly random behaviour. 
+      </p>
+      <p>
+        Computers on their own have to approximate this with an algorithm. The methods that we use to do this are not important in this context, but it is a good thing to remember that computationally derived random numbers (as we usually get from R) are not actually the same as mathematically random numbers, as the mathematical definitions used to define randomness in the purest sense are not computationally employable. 
+      </p>
+      <p>
+        So, in R, we will use <em>pseudorandom</em> number generators when we want to sample some numbers.
+      </p>
+    </section>
+    <section id="rsamp">
+      <h2>Random Sampling</h2>
+      <p>
+        So when we want to sample some set of numbers, we have to usually define what kind of distribution we want to draw from. When we ask R to randomly sample a number for us, we need to at least provide it with some guidelines about what kind of number we want. Do we want only integers? Decimals? If so, how many significant digits? What are the limits?
+      </p>
+      <p>
+        The way we would typically think about sampling in our brains is similar to the example of having a set of balls in a bag, all labeled with a unique number from 1-10. Assuming all else about the balls is equal, we could guess that there would be an equal probability we would draw any given ball from the bag. While this feels intuitive, this is actually thinking in distributions! We have actually just stated that we believe the distribution we are sampling from is <strong>uniform</strong>, that is, that all possible values have the same probability of being chosen. 
+      </p>
+      <p>
+        Contrast that with something like a Normal (Gaussian) distribution, and we will be more likely to select a value that lands closer to the center of the distribution, at the mean. 
+      </p>
+    </section>
+    <section id="samp-r">
+      <h2>Random Sampling in R</h2>
+      <p>
+        It's actually quite easy to perform random sampling in R, given that it's a statistical programming language, the basic version of R that comes installed contains the <code>stats</code> package which includes random sampling function for a variety of distributions. Let's use an example with the normal distribution. Since the normal distribution takes two parameters, 1) a mean, and 2) a standard deviation, we need to provide those two parameters to the function, along with the number of samples we'd like to draw. 
+      </p>
+      <!--begin.rcode
+      stats::rnorm(n = 10, mean = 5, sd = 1.5)
+      end.rcode-->
+      <p>
+        And we see R has selected our values for us. Often we want to be able to plot the distribution of values that we've sampled. That's most easily done as a simple histogram, using the <code>hist()</code> function which is in the <code>graphics</code> package: 
+      </p>
+      <p>
+        And we see we've approximated a normal distribution here. 
+      </p>
+      <section id="samp-r--seeds">
+        <h3>Seeds and Reproducibility</h3>
+        <p>
+          When doing random number generation in R, it stands to reason that given how R goes about it's random number generation, if I write the above code to sample 10 data points in a script, run that code, and then come back in a few days and run it again <em>I'll get a completely different set of points the next time</em>. We can see this in action here: 
+        </p>
+        <!--begin.rcode
+        rnorm(10, mean = 0, sd = 1)
+        end.rcode-->
+        <p>
+          And again: 
+        </p>
+        <!--begin.rcode
+        rnorm(10, mean = 0, sd = 1)
+        end.rcode-->
+        <p>
+          We see these are completely different sets of numbers! 
+        </p>
+        <p>
+          There are many situations where we might need to be able to re-run a set of random numbers and have them be the same values (e.g. debugging code, simulation studies, etc.). Well, if we recall that we actually are doing is using a <em>pseudorandom</em> number generator (PRNG), then we can use the concepts of <strong>seeds</strong> to help us. Whenever using a PRNG we need to "set a seed" which initializes the PRNG. The details of this aren't important here, but know that if we have a seed, we can predict what the PRNG will draw as pseudorandom numbers. Let's make an example. 
+        </p>
+        <p>
+          Say we want to draw 100 samples from a uniform (discrete) distribution. As a reminder, a uniform distribution with bounds at 0 and 10 looks like this: 
+        </p>
+        <!--begin.rcode, echo = FALSE}
+        graphics::hist(runif(10000000, min = 0, max = 10),
+            ylab = "", xlab = "",
+            main = "")
+        end.rcode-->
+        <p>
+          We'll explore the use of seeds by drawing 100 random samples from a uniform distribution with bounds at 0 and 10. We start by setting a seed and drawing our samples:
+        </p>
+        <!--begin.rcode
+        # start by setting a seed
+        set.seed(1)
+        x <- runif(n = 100, min = 0, max = 10)
+        end.rcode-->
+        <p>
+          Now let's draw a new set of values: 
+        </p>
+        <!--begin.rcode
+        y <- runif(n = 100, min = 0, max = 10)
+        end.rcode-->
+        <p>
+          We can see if these values are the same by using a boolean comparison: 
+        </p>
+        <!--begin.rcode
+        all(x == y)
+        end.rcode-->
+        <p>
+          So the values drawn are NOT the same. But what happens if we re-employ the seed that we set previously? 
+        </p>
+        <!--begin.rcode
+        set.seed(1)
+        z <- runif(n = 100, min = 0, max = 10)
+        end.rcode-->
+        <p>
+          Let's check if they're equivalent: 
+        </p>
+        <!--begin.rcode
+        all(x == z)
+        end.rcode-->
+        <p>
+          So now we get a true! This is good to know! This means we can draw random samples in a <em>reproducible</em> manner, which can be incredibly useful. 
+        </p>
       </section>
+    </section>
+    <section id="dist">
+      <h2>Sampling Distributions</h2>
+      <p>
+        A sampling distribution refers to the probability distribution of a particular statistic that we might get from a random sample. 
+      </p>
+      <section id="dist--disc">
+        <h3>Discrete Sampling Distributions</h3>
+        <p>
+          Let us think back to our example in <a href="./04-01-probability-101.html">Probability 101</a> of a discrete sampling distribution - gene frequency. Imagine we were able to "zoom in" on some random part of our own DNA, we would see something like this: 
+        </p>
+        <img src="../img/04-img/nucleotide.jpg">
+        <p>
+          We could imagine that the frequency of each gene may be equivalent, However, research has shown (i.e. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC403801/">Louie et al. (2003)</a>) that nucleotide frequency is <em>not</em> uniform across human genes. So given some particular gene, it may be the case that we see a non-uniform probability distribution, but one that looks like this: 
+        </p>
+        <!--begin.rcode
+        df <- data.frame(
+          base = c("A", "C", "G", "T"),
+          prob = c(0.1, 0.2, 0.45, 0.25)
+        )
+
+        ggplot(data = df) + 
+          geom_col(aes(x = base, y = prob, fill = base)) +
+          ggthemes::theme_base() + 
+          labs(x = "Nucleotide Base", y = "Probability") + 
+          ylim(c(0,1))
+        end.rcode-->
+        <p>
+          As a fun little game, let's build a gene. There approximately 1000 nucleotide pairs of coding sequence per gene according to google, and let's imagine that the gene we're building has a probability distribution of nucleotides that is given above, where the probabilities of each base appearing given a random sample are: 0.1, 0.2, 0.45, and 0.25 respectively for A, C, G, and T. 
+        </p>
+        <p>
+          Using R's functionality, let's sample a variable number times from our weighted set, and see if the distribution we get from our sample matches the theoretical probabilities. We'll sample 20, 100, 1000, and 10,000 times. The Law of Large Numbers indicates that the more samples we take, the closer we'll get to our theoretical probabilities. Let's try!
+        </p>
+        <p>
+          To do this, we'll use R's <code>sample()</code> function from the base package, and alter only the <code>size</code> argument which says how many times to sample.
+        </p>
+        <!--begin.rcode
+        set.seed(1234)
+        sample_20 <- sample(c("A", "C", "G", "T"), 
+                            size = 20,
+                            replace = TRUE,
+                            prob = c(0.1, 0.2, 0.45, 0.25))
+        sample_100 <- sample(c("A", "C", "G", "T"), 
+                            size = 100,
+                            replace = TRUE,
+                            prob = c(0.1, 0.2, 0.45, 0.25))
+        sample_1000 <- sample(c("A", "C", "G", "T"), 
+                            size = 1000,
+                            replace = TRUE,
+                            prob = c(0.1, 0.2, 0.45, 0.25))
+        sample_10000 <- sample(c("A", "C", "G", "T"), 
+                            size = 10000,
+                            replace = TRUE,
+                            prob = c(0.1, 0.2, 0.45, 0.25))
+        end.rcode-->
+        <p>
+          Now let's take these vectors and turn them into dataframes so we can plot them. We can use the convenient <code>table()</code> function to get counts of how many of each base there is: 
+        </p>
+        <!--begin.rcode
+        library(dplyr)
+        library(ggplot2)
+        library(ggthemes)
+
+        df_20 <- data.frame(
+          # use table()
+          table(sample_20)
+          ) %>% 
+          # rename them to be consistent
+          dplyr::rename(
+            base = sample_20,
+            prob = Freq
+          ) %>% 
+          dplyr::rowwise() %>% 
+          dplyr::mutate(
+            # add column to tell us how many samples were drawn
+            sample = "20",
+            # turn value from a count to a probability
+            prob = prob/20
+          )
+          
+        df_100 <- data.frame(
+          # use table()
+          table(sample_100)
+          ) %>% 
+          # rename them to be consistent
+          dplyr::rename(
+            base = sample_100,
+            prob = Freq
+          ) %>% 
+          dplyr::rowwise() %>% 
+          dplyr::mutate(
+            # add column to tell us how many samples were drawn
+            sample = "100",
+            # turn value from a count to a probability
+            prob = prob/100
+          )
+
+        df_1000 <- data.frame(
+          # use table()
+          table(sample_1000)
+          ) %>% 
+          # rename them to be consistent
+          dplyr::rename(
+            base = sample_1000,
+            prob = Freq
+          ) %>% 
+          dplyr::rowwise() %>% 
+          dplyr::mutate(
+            # add column to tell us how many samples were drawn
+            sample = "1000",
+            # turn value from a count to a probability
+            prob = prob/1000
+          )
+
+        df_10000 <- data.frame(
+          # use table()
+          table(sample_10000)
+          ) %>% 
+          # rename them to be consistent
+          dplyr::rename(
+            base = sample_10000,
+            prob = Freq
+          ) %>% 
+          dplyr::rowwise() %>% 
+          dplyr::mutate(
+            # add column to tell us how many samples were drawn
+            sample = "10000",
+            # turn value from a count to a probability
+            prob = prob/10000
+          )
+        end.rcode-->
+        <p>
+          Now we'll combine all these data frames into one, add a reference of the real values, and plot the result with a grouped bar chart: 
+        </p>
+        <!--begin.rcode
+
+        # join samples up 
+        df_all_samples <- rbind(
+          df_20,
+          df_100,
+          df_1000,
+          df_10000
+        ) %>% 
+          # add in a column to denote these are sampled not theoretical
+          dplyr::mutate(
+            type = "sampled"
+          )
+
+        df_real <- data.frame(
+          base = c("A", "C", "G", "T"),
+          prob = c(0.1, 0.2, 0.45, 0.25),
+          sample = "Real values",
+          type = "theoretical"
+        )
+
+        # join the dataframes again
+        df_all <- rbind(
+          df_all_samples %>% 
+            dplyr::mutate(
+              sample = as.character(sample)
+            ),
+          df_real
+        )
+
+        # plot the result 
+        ggplot() + 
+          geom_bar(data = df_all, 
+                  mapping = aes(x = base, y = prob, alpha = type,
+                                fill = sample, colour = type),
+                  position = "dodge", stat = "identity") +
+          ggthemes::theme_base() +
+          scale_fill_manual(
+            "Sample Size",
+            values = wesanderson::wes_palette("Rushmore1", n = 5)) +
+          scale_alpha_manual("Theoretical or Sampled", values = c(0.5, 1)) +
+          scale_colour_manual("Theoretical or Sampled", values = c("white", "black"))
+          
+        end.rcode-->
+        <p>
+          Here we have shown intuitively the Law of Large Numbers!!!!
+        </p>
+      </section>
+      <section id="dist--cont">
+        <h3>Continuous Sampling Distributions</h3>
+        <p>
+          Consider records for aquatic vertebrates (cutthroat trout and salamanders) in Mack Creek, Andrews Experimental Forest, Oregon (1987 - present). This dataset is present in the <code>lterdatasampler</code> package. 
+        </p>
+        <!--begin.rcode
+        library(lterdatasampler)
+        df <- lterdatasampler::and_vertebrates
+        head(df)
+        end.rcode-->
+        <p>
+          Let us look at the distribution of cutthroat trout sizes in our database:
+        </p>
+        <!--begin.rcode
+        hist(df$length_1_mm)
+        end.rcode-->
+        <p>
+          We can see that this distribution isn't quite normal, but is continuous, and right-skewed. It could be approximated by a log-normal distribution: 
+        </p>
+        <!--begin.rcode
+
+        x <- seq(0, 250)
+        y <- dlnorm(x, meanlog = 4.1, sdlog = 0.4)
+
+        # figure out how to scale the y for the plot alone 
+        scale_factor <- 5000 / 0.01780701
+        y <- y * scale_factor
+        dist_df <- data.frame(x, y)
+
+        ggplot() + 
+          geom_histogram(df, mapping = aes(x = length_1_mm),
+                        colour = "grey20", fill = "lightblue") + 
+          geom_line(dist_df, mapping = aes(x = x, y = y), 
+                    colour = "red", linetype = "dashed", size = 2) +
+          ggthemes::theme_base() +
+          labs(x = "Cutthroat Trout Length (mm)", y = "Density")
+        end.rcode-->
+      <p>
+        <bold>What will happen if we draw a number of random samples from this distribution and calculate the sample mean? What will the resulting distribution of sample means look like?</bold>
+      </p>
+      <p>
+        What we are doing here is constructing a sampling distribution. We can do this by randomly drawing samples from our population (in this example, every fish in our data set is the "population"), then calculating the mean for each random sample. 
+      </p>
+      <p>
+        As we discuss in the <a href="../07-landingpage.html">programming concepts</a> section on pseudocoding, let's think about how to accomplish this before we start blindly writing code. There are steps to our process here: 
+      </p>
+      <p>
+        <ol>
+          <li style="color:blue;font-size:20px">1. Determine how many random samples to draw (let's call this <em>n</em>)
+          <ol>
+            <li style="color:greyblue;font-size:17px">1.1 - How many observations in each sample (let's call this <em>x</em>)? </li>
+            <li style="color:greyblue;font-size:17px">1. 2. - Pre-allocate an object to hold <em>n</em> number of sample means </li>
+          </ol>
+          </li>
+          <li style="color:blue;font-size:20px">2. Draw a sample 
+          <ol>
+            <li style="color:greyblue;font-size:17px">2. 1. - Pull out <em>x</em> number of observations </li>
+            <li style="color:greyblue;font-size:17px">2. 2. - Calculate the mean </li>
+            <li style="color:greyblue;font-size:17px">2. 3. - Store that mean in the corresponding location of the pre-allocated object </li>
+          </ol>
+          </li>
+          <li style="color:blue;font-size:20px">3. Repeat step 2 <em>n</em> times</li>
+        </ol>
+      </p>
+      <p>
+        The easiest way to actually accomplish this is through a for-loop. We'll start this and do it in order: 
+      </p>
+      <!--begin.rcode
+      # first, we'll draw 100 samples 
+      n <- 100
+
+      # let's pull 10 observations in each sample
+      x <- 10
+
+      # preallocate object to hold sample means
+      sample_means <- vector(mode = "numeric", length = n)
+      end.rcode-->
+      <p>
+        So how would we perform step 2? We'd sample 10 values from <code>df$length_1_mm</code>, calculate the mean, and assign the mean value to <code>sample_means[n]</code>. Then, we simply repeat this <em>n</em> times. Here's that code:
+      </p>
+      <!--begin.rcode
+      # first, sample randomly from the vector of value
+      for(i in 1:n) {
+        sample_means[i] <- mean(sample(df$length_1_mm, size = x, replace = FALSE))
+      }
+      head(sample_means)
+      end.rcode-->
+      <p>
+        Okay, so this worked! Excellent. Now, let's plot a histogram of our results:
+      </p>
+      <!--begin.rcode
+      hist(sample_means)
+      end.rcode-->
+      <p>
+        Hmm!! A confusing distribution. This doesn't really resemble any interesting or meaningful distribution. Let's try the process again, but with a much larger value of <em>n</em>, and see if that changes the result: 
+      </p>
+      <!--begin.rcode
+      n <- 100000
+      x <- 10
+      sample_means <- vector(mode = "numeric", length = n)
+
+      for(i in 1:n) {
+        sample_means[i] <- mean(sample(df$length_1_mm, size = x, replace = FALSE))
+      }
+
+      hist(sample_means)
+
+      end.rcode-->
+      <p>
+        Wow! This distribution is remarkably normal! What's going on here????
+      </p>
+      <p>
+        We have just stumbled upon the <bold> Central Limit Theorem</bold>. 
+      </p>
+    </section>
+    </section>
+    <section id="clt">
+      <h2>Central Limit Theorem</h2>
+      <p>
+        The Central Limit Theorem is an incredibly important theorem that states the following: 
+      </p>
+      <p>
+        <em>Taking a population with some mean <math>μ</math> and a standard deviation <math>σ</math>, we can sample from the population (with replacement), and with a number of samples that is sufficiently large, the distribution of the sample means will be normally distributed.</em>
+      </p>
+      <p>
+        We have just demonstrated this above with our cutthroat trout example. This is a surprisingly important stated theorem, because it provides us a path forward to work with statistical tests that <strong>assume normal distributions</strong>. As you will learn as you move further through your statistical training, normality of data makes our lives infinitely easier.  
+      </p>
+      <p>
+        I strongly recommend that if you care to learn more about statistics, to think deeply about the central limit theorem, and try to come up your own intuitive understanding of why it is true. There are many excellent descriptions of proofs of the central limit theorem. For the advanced and interested student, there's an excellent <a href="https://www.youtube.com/watch?v=Tx7zzD4aeiA">recorded lecture by John Tsitsiklis at MIT</a> that goes into detail on this theorem and why it is central not only to inferential statistics but how it links statistics to calculus. 
+      </p>
+    </section>
+    <section id="lln">
+      <h2>Law of Large Numbers</h2>
+      <p>
+        In the example we gave on discrete sampling distributions, we have already discovered what this "law" purports. Essentially, it states that if you repeat an experiment some number, <code>n</code>, of times and average the result, as <code>n</code> gets larger, the averaged result will get closer and closer to the expected value.
+      </p>
+      <p>
+        We saw this in our example, as the sampling option with 10,000 samples was the closest one to the expected value. We could deduce a short proof for this, but that's beyond the scope of this short piece.
+      </p>
+      <p>
+        What <em>is</em> an important takeaway is that this law says something valuable to us about what we need to keep in mind when we deal with <strong>small</strong> numbers. That is, the smaller the sample size at hand, the further we are from actually getting a representative sample of the population. While this may seem intuitive, it's helpful to understand that there <em>is</em> a provable way to understand this concept (We can also think about this as it relates to statistical power.)
+      </p>
+    </section>
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">
