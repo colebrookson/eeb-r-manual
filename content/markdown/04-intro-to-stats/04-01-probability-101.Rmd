@@ -45,11 +45,11 @@ Or
 $$P(\text{B}) = \frac{1}{1000}$$
 $$P(\text{B}) = 0.001$$
 
-Now, to add more conditions, we're assuming here that when we put our hand into the bag to select a spider, there are absolutely *<em>no</em>* defining features that make one spider more or less likely to be chosen. However, there is a case where some spiders are bigger, or perhaps less afraid of the hand coming into the bag, and these traits may make some spiders more or less likely to be chosen. 
+Now, to add more conditions, we're assuming here that when we put our hand into the bag to select a spider, there are absolutely <em>no</em> defining features that make one spider more or less likely to be chosen. However, there is a case where some spiders are bigger, or perhaps less afraid of the hand coming into the bag, and these traits may make some spiders more or less likely to be chosen. 
 
 This is easy enough to replicate in R, as it's simply a division calculation: 
 
-end.rcode-->{r}
+<!--begin.rcode
 size_b = 1
 size_sample_space = 1000
 prob_b = size_b / size_sample_space
@@ -57,27 +57,27 @@ prob_b = size_b / size_sample_space
 # show the result
 prob_b
 end.rcode-->
-**SIDE BOX:** Quickly, let's define two (only two!) operations from set theory to help us out. We'll define the sample space *S* as a set, and our two events as subsets *A* and *B* of *S*. We can think of the part of *S* encapsulated by both subset *A* and subset *B* as being the *intersection* of *A* and *B*, and we can separately think about the part of the sample space *S* that is encapsulated by either *A* or *B* as the *union* of *A* and *B*. We write the intersection of *A* and *B* as $A \cap B$ and the union of *A* and *B* as $A \cup B$. Refer to this image for a visual idea of this: 
+**SIDE BOX:** Quickly, let's define two (only two!) operations from set theory to help us out. We'll define the sample space \(S\) as a set, and our two events as subsets \(A\) and \(B\) of \(S\). We can think of the part of \(S\) encapsulated by both subset \(A\) and subset \(B\) as being the *intersection* of \(A\) and \(B\), and we can separately think about the part of the sample space \(S\) that is encapsulated by either \(A\) or \(B\) as the *union* of \(A\) and \(B\). We write the intersection of \(A\) and \(B\) as $A \cap B$ and the union of \(A\) and \(B\) as $A \cup B$. Refer to this image for a visual idea of this: 
 
 ![](img/sets.png)
 
 
 ### Two Events
 
-For now, let's just consider that there are only two events we're interested in, *A* and *B*. The outcome of *A* is selecting a spider with no red dot, and the outcome of *B* is selecting a spider with a red dot. To make things more interesting, now let's assume there are 234 spiders with red dots (and therefore 766 without red dots). We can visualize this by imagining peeking inside our bag of spiders and seeing something like the following: 
+For now, let's just consider that there are only two events we're interested in, \(A\) and \(B\). The outcome of \(A\) is selecting a spider with no red dot, and the outcome of \(B\) is selecting a spider with a red dot. To make things more interesting, now let's assume there are 234 spiders with red dots (and therefore 766 without red dots). We can visualize this by imagining peeking inside our bag of spiders and seeing something like the following: 
 
 ![](img/spiders.png)
-If we imagine all the spiders present as the set *S* defining the sample space, it's possible to coarsely replicate the Venn diagram above to make an estimate of what the probabilities of both the union and the intersection might be: 
+If we imagine all the spiders present as the set \(S\) defining the sample space, it's possible to coarsely replicate the Venn diagram above to make an estimate of what the probabilities of both the union and the intersection might be: 
 
 ![spiders](img/spiders-union.png)
 
-We can now see clearly that <em>all</em> of the spiders (i.e. all of *S*) is contained within the two event subsets *A* and *B*. Further, there are actually no spiders that fall within both subsets. 
+We can now see clearly that <em>all</em> of the spiders (i.e. all of \(S\)) is contained within the two event subsets \(A\) and \(B\). Further, there are actually no spiders that fall within both subsets. 
 
-What we have defined here are two *mutually exclusive* events. With only one experiment, the outcome cannot satisfy both events. Formally, we say that the probability of both *A* and *B* is zero: 
+What we have defined here are two *mutually exclusive* events. With only one experiment, the outcome cannot satisfy both events. Formally, we say that the probability of both \(A\) and \(B\) is zero: 
 
 $$P(\text{A} \cap \text{B}) = 0$$
 
-But also, since there are are no spiders that fall outside of *A* or *B*, the probability of either one event OR the other occurring with one experiment is actually 1:
+But also, since there are are no spiders that fall outside of \(A\) or \(B\), the probability of either one event OR the other occurring with one experiment is actually 1:
  
 $$P(\text{A} \cup \text{B}) = 0$$
 
@@ -89,13 +89,13 @@ The reason to differentiate between these two definitions is one of caution. We 
 
 2. Each outcome is equally likely
 
-This clearly serves us well for our current example, and in fact from here on we will refer to the naive probability simply as *probability*, but it's useful to recognize that as soon as we care to make more interesting conditions surrounding our sample space, we must adjust our definition of probability (we won't cover that here).
+This clearly serves us well for our current example, and in fact from here on we will refer to the naive probability simply as <em>probability</em>, but it's useful to recognize that as soon as we care to make more interesting conditions surrounding our sample space, we must adjust our definition of probability (we won't cover that here).
 
 ## Probability Distributions
 
 Our above example was primarily focused on an example where two possible events covered the entire sample space. A commonly used example in the same vein would be flipping a coin - there are only two possibly outcomes: heads or tails. However, this is usually not the case. While it's possible we may only be interested in a handful of the events possible, it's rare that those encompass the entire sample space.
 
-To think about the probability of a variety of events occurring, we can differentiate between *discrete* probabilities and *continuous* probabilities. 
+To think about the probability of a variety of events occurring, we can differentiate between <strong>discrete</strong> probabilities and <strong>continuous</strong> probabilities. 
 
 ### Discrete Probability Distributions
 
@@ -105,7 +105,7 @@ For example, let's consider the basic building blocks of DNA, the nucleotide bas
 
 ![](img/nucleotide.jpg)
 
-If we zoom in on a single base, we can only "see" one of A, C, G, or T. So, our sample space *S* is made up of the four *mutually exclusive* events, which is seeing either A, C, G, or T. If we assume that bases are distributed with even frequency, we can imagine that the probability of each would be the same: 
+If we zoom in on a single base, we can only "see" one of A, C, G, or T. So, our sample space \(S\) is made up of the four <em>mutually exclusive</em> events, which is seeing either A, C, G, or T. If we assume that bases are distributed with even frequency, we can imagine that the probability of each would be the same: 
 
 $$P(\text{A}) = 0.25$$
 $$P(\text{C}) = 0.25$$
@@ -113,7 +113,7 @@ $$P(\text{G}) = 0.25$$
 $$P(\text{T}) = 0.25$$
 which would result in a probability distribution that may look like this: 
 
-end.rcode-->{r}
+<!--begin.rcode
 library(ggplot2)
 library(ggthemes)
 
@@ -141,7 +141,7 @@ The probability mass function for the Poisson distribution takes the following f
 
 And as there's only one parameter ($\lambda$), this parameter simply indicates the "shape" of the function, or how many average events happen in a given time interval. Conveniently in R, there are mass functions for most common distributions. Let's take a look at <code>?rpois</code> and we see that we can plot the probability densities with the <code>dpois</code> function. Let's choose three different parameter values and see how that changes our probability density. In addition, it's actually much easier to make plots of discrete distributions in <strong>base R</strong> so we'll do that:
 
-end.rcode-->{r}
+<!--begin.rcode
 # first make a sequence of values to construct our density across:
 x <- seq(0, 100, 1)
 plot(x, dpois(x, lambda = 1), 
@@ -154,7 +154,7 @@ end.rcode-->
 
 Now note here that we've plotted this as these vertical lines, instead of some continuous curve. Why? Well, recall this is a <strong>discrete</strong> probability distribution. There are <strong>no</strong> probabilities in the continuous space between integer values. So to plot this as a curve would actually be incorrect. That's why it's better to be explicit in this fashion and plot them as such here. Other $\lambda$ values:
 
-end.rcode-->{r}
+<!--begin.rcode
 plot(x, dpois(x, lambda = 5), 
      type = "h",
      lwd = 3,
@@ -163,7 +163,7 @@ plot(x, dpois(x, lambda = 5),
      xlab = "X")
 end.rcode-->
  
-end.rcode-->{r}
+<!--begin.rcode
 plot(x, dpois(x, lambda = 25), 
      type = "h",
      lwd = 3,
@@ -190,7 +190,7 @@ This looks a bit complicated, but in reality, there's only two parameters! The o
 
 Let's first see how changing the $\sigma$ will affect the curves. Again, base plotting actually has an advantage here:
 
-end.rcode-->{r}
+<!--begin.rcode
 x <- seq(-5, 5, 0.1)
 fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
 
@@ -202,7 +202,7 @@ end.rcode-->
 
 Now let's add some other standard deviations: 
 
-end.rcode-->{r}
+<!--begin.rcode
 # make the plot then add on the other lines
 x <- seq(-5, 5, 0.1)
 fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
@@ -229,9 +229,9 @@ legend("topleft", title = "Standard Deviations",
 
 end.rcode-->
 
-We can also hold the standard deviation constant and plot differnt mean values. Let's try that now: 
+We can also hold the standard deviation constant and plot different mean values. Let's try that now: 
 
-end.rcode-->{r}
+<!--begin.rcode
 # make the plot then add on the other lines
 x <- seq(-5, 5, 0.1)
 fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
