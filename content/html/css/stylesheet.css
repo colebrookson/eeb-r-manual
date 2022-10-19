@@ -386,7 +386,7 @@ h6 {font-size:calc(12.5px + 0.9vw); font-weight: bold;}
 /** page layout **/
 main {
   display: grid;
-  grid-template-columns: 10em 1fr;
+  grid-template-columns: 15em 1fr;
   max-width: 100em;
   width: 90%;
   margin: 0 auto;
