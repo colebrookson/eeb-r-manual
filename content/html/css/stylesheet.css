@@ -379,8 +379,9 @@ li {
 h1 {font-size:calc(20px + 2vw); font-weight: bold;}
 h2 {font-size:calc(18px + 1.5vw); font-weight: bold;}
 h3 {font-size:calc(16px + 1.3vw); font-weight: bold;}
-h4 {font-size:calc(14px + 1.1vw); font-weight: bold;
-}
+h4 {font-size:calc(14px + 1.1vw); font-weight: bold;}
+h5 {font-size:calc(13px + 1vw); font-weight: bold;}
+h6 {font-size:calc(12.5px + 0.9vw); font-weight: bold;}
 
 /** page layout **/
 main {
@@ -397,14 +398,10 @@ main_landing {
   width: 90%;
   margin: auto auto;
 }
-
-/** enlarge the sections for this demo, so that we have a long scrollable page **/
-section {
-  padding-bottom: 1em;
-}
-
-img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto\9; /* ie8 */
+code {
+  font-family: Consolas,"courier new";
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 2px;
+  font-size: 105%;
 }

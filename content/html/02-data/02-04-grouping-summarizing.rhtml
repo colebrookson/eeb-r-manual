@@ -38,13 +38,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <div>
     <section>
         <h2>Grouping &amp; Summarizing</h2>
-        <p>
+        
             <!--begin.rcode, echo=FALSE
             options(tidyverse.quiet = TRUE)
             end.rcode-->
-
+<p>
             To obtain a useful summary of a dataframe is useful when trying to get summary statistics or the like from a dataframe. Let's use an example dataframe that describes the masses of Bison. 
-            <br>
+            </p>
             <!--begin.rcode
             # load libraries
             library(lterdatasampler)
@@ -53,14 +53,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             bison <- lterdatasampler::knz_bison 
             head(bison)
             end.rcode-->
-            <br>
+            <p>
             It might be useful to understand how the weights of these animals differs by sex. Let's first check the `animal_sex` column to see what values it takes and what type of data the column is: 
-            <br>
+            </p>
             <!--begin.rcode
             str(bison$animal_sex)
             unique(bison$animal_sex)
             end.rcode-->
-            <br>
+            <p>
             So there are two values, and the column is a character type. 
         </p>
     </section>
@@ -83,8 +83,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <br>
             <br>
             So to group our dataframe and then use <code>summarize()</code> to get our mean and standard deviation for our measures of animal weight, we can pipe these commands together.  
-            <br>
-            <br>
+            </p>
             <!--begin.rcode
             mass_by_sex <- bison %>% 
             dplyr::group_by(animal_sex) %>% 
@@ -92,8 +91,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                             std_dev = sd(animal_weight, na.rm = TRUE))
             mass_by_sex
             end.rcode-->
-            <br>
-            <br>
+            <p>
             Note here that we've used <code>na.rm = TRUE</code> to ensure that when <code>mean()</code> and <code>sd()</code> calculate their values, if there are any <code>NA</code> values in the data, they are ignored. 
         </p>
     </section>
@@ -104,8 +102,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <br>
             <br>
             So we will again use <code>group_by()</code> and <code>summarize()</code> to perform this task, but now grouping by both <code>animal_sex</code> and <code>rec_month</code>:
-            <br>
-            <br>
+            </p>
             <!--begin.rcode
             month_sex_weight <- bison %>% 
             dplyr::group_by(animal_sex, rec_month) %>% 
@@ -113,8 +110,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                             std_dev = sd(animal_weight, na.rm = TRUE))
             month_sex_weight
             end.rcode-->
-            <br>
-            <br>
+            <p>
             In our little observational look here, we can see that for both sexes, the average weights dropped between October (month 10) and November (month 11). 
         </p>
     </section>

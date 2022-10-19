@@ -112,7 +112,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
         <p>
             <strong>
-                A simple rule of thumb when indexing is that most objects can be indexed using the `[ ]`, containing the appropriate number of dimensions for the object at hand.
+                A simple rule of thumb when indexing is that most objects can be indexed using the <code>[ ]</code>, containing the appropriate number of dimensions for the object at hand.
             </strong>
         </p>
         <section id="index--vecs">
@@ -123,17 +123,23 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">3</span><span class="hl std">,</span> <span class="hl num">9</span><span class="hl std">,</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl num">76</span><span class="hl std">,</span> <span class="hl num">89</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
+            <p>
             If we want to index the 9 in this vector, that's in the third position, or index 3. 
+            </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">x[</span><span class="hl num">3</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 9
 </pre></div>
 </div></div>
+            <p>
             Similarly with a character vector
+            </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;The&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;quick&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;brown&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;fox&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;jumped&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;over&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;the&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;lazy&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;dog&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
+            <p>
             If we want to access the element "fox", the fourth element, we will write: 
+            </p>
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">y[</span><span class="hl num">4</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;fox&quot;
@@ -144,41 +150,49 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="output"><pre class="knitr r">## [1] &quot;quick&quot;  &quot;brown&quot;  &quot;fox&quot;    &quot;jumped&quot; &quot;over&quot;   &quot;the&quot;    &quot;lazy&quot;   &quot;dog&quot;
 </pre></div>
 </div></div>
+            <p>
             While indexing vectors, we can also return all the elements of a vector NOT in a certain position via the `-` sign:
+            </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">y[</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;quick&quot;  &quot;brown&quot;  &quot;fox&quot;    &quot;jumped&quot; &quot;over&quot;   &quot;the&quot;    &quot;lazy&quot;   &quot;dog&quot;
 </pre></div>
 </div></div>
-            This returns all the elements of the vector *except* the first one. 
-
+            <p>
+            This returns all the elements of the vector *except* the first one. <br><br>
             We can also index based on multiple positions:
+            </p>
 <div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">y[</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">9</span><span class="hl std">)]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;The&quot; &quot;fox&quot; &quot;dog&quot;
 </pre></div>
 </div></div>
+            <p>
             This returns the first, fourth, and ninth elements. 
+            </p>
         </section>
         <section id="index--lists">
             <h3>Lists</h3>
             <p>
                 Since lists are also vectors, they're also indexed with notation, but recall that each element of a list can hold other objects of multiple dimensions, we can use one set of square brackets to index the list item, and then another to index elements within that list item. To access the element of the list, we actually use double square brackets, <code>[[]]</code>.
             </p>
-            <p>
 <div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">l</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl str">&quot;R is fun&quot;</span><span class="hl std">,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">3</span><span class="hl std">),</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
 <span class="hl std">l[[</span><span class="hl num">4</span><span class="hl std">]]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 1 2 3
 </pre></div>
 </div></div>
+                <p>
                 Here we see `l[[4]]` produces the fourth element, an atomic vector of length 3. What if we want to access the third element of that atomic vector to, say, reassign it to the value 5. We can do so like this: 
+                </p>
 <div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">l[[</span><span class="hl num">4</span><span class="hl std">]][</span><span class="hl num">3</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 3
 </pre></div>
 </div></div>
+                <p>
                 We could now reassign this value to 5. 
+                </p>
 <div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">l[[</span><span class="hl num">4</span><span class="hl std">]][</span><span class="hl num">3</span><span class="hl std">]</span> <span class="hl kwb">&lt;-</span> <span class="hl num">5</span>
 <span class="hl std">l</span>
 </pre></div>
@@ -198,7 +212,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## [1] TRUE
 </pre></div>
 </div></div>
+                <p>
                 If we recall, we can also have named lists, which can be indexed by their names. 
+                </p>
 <div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">agrawal</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;name&quot;</span> <span class="hl std">=</span> <span class="hl str">&quot;Dr. Aneil Agrawal&quot;</span><span class="hl std">,</span>
                 <span class="hl str">&quot;positions&quot;</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Distinguished Professor of Evolutionary Genetics&quot;</span><span class="hl std">,</span>
                                 <span class="hl str">&quot;Associate Chair, Graduate Studies&quot;</span><span class="hl std">),</span>
@@ -209,9 +225,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="output"><pre class="knitr r">## [1] &quot;name&quot;           &quot;positions&quot;      &quot;concentrations&quot;
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 By calling `names()` we can see the names of the different list components. We can index by any of these. 
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">agrawal[</span><span class="hl str">&quot;concentrations&quot;</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## $concentrations
@@ -219,32 +235,32 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## [2] &quot;Theoretical &amp; Computational Biology&quot;
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 Here, we have the choice to use the square bracket notation as before, or we can use a new kind, the `$` notation. 
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">agrawal</span><span class="hl opt">$</span><span class="hl std">concentrations</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;Genetics, Genomics &amp; Molecular Evolution&quot;
 ## [2] &quot;Theoretical &amp; Computational Biology&quot;
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 This provides the same output. Now let's say we wanted to access the second element in this "concentrations" element. Perhaps we want to rearrange the wording to say "Computational & Theoretical Biology" instead. We could do that with either the `[[]][]` notation we used before, or perhaps the easier to read option of combining both the `$` and `[]`:
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">agrawal</span><span class="hl opt">$</span><span class="hl std">concentrations[</span><span class="hl num">2</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;Theoretical &amp; Computational Biology&quot;
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 Now let's reassign it:
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">agrawal</span><span class="hl opt">$</span><span class="hl std">concentrations[</span><span class="hl num">2</span><span class="hl std">]</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;Computational &amp; Theoretical Biology&quot;</span>
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 To check if it worked print the `agrawal` list to our console: 
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">agrawal</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## $name
@@ -259,7 +275,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## [2] &quot;Computational &amp; Theoretical Biology&quot;
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 And we see it worked. 
             </p>
         </section>
@@ -267,7 +283,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <h3>Matrices</h3>
             <p>
                 Indexing matrices is simple as it is a 2-dimensional extension of indexing atomic vectors. 
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">m</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">,</span> <span class="hl num">200</span><span class="hl std">,</span> <span class="hl num">300</span><span class="hl std">,</span> <span class="hl num">400</span><span class="hl std">),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span>
 <span class="hl std">m</span>
 </pre></div>
@@ -276,31 +292,31 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## [2,]  200  400
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 To access the value 300, we will need to specify that we want the value in the first row, and second column. <strong>Indexing in R is always done row then column.</strong> 
-                <br>
+               </p>
 <div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">m[</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 300
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 We can get the entirety of the first row
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">m[</span><span class="hl num">1</span><span class="hl std">, ]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 100 300
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 or the first column
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">m[ ,</span><span class="hl num">1</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 100 200
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 by writing leaving the row/column argument empty, which tells R that for either condition, to include all values of that dimension. 
             </p>
         </section>
@@ -316,7 +332,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             src="../img/01-img/profs.png">
             <p>
                 However, note that differently from above, we cannot have the "positions" nor the "concentrations" categories be of different lengths as that would violate the rules of a dataframe, so instead each category will be it's own vector:
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first make a list for each professor</span>
 <span class="hl std">names</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Dr. Aneil Agrawal&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Dr. Celina Baines&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Dr. Spencer C.H. Barrett&quot;</span><span class="hl std">,</span>
         <span class="hl str">&quot;Dr. Megan Bontrager&quot;</span><span class="hl std">)</span>
@@ -335,38 +351,37 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## 4      Dr. Megan Bontrager     UBC      TRUE
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 If want to access any of the columns of this dataframe, we can do so by their <em>names</em>, the commonality with lists: 
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-22"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">prof_df</span><span class="hl opt">$</span><span class="hl std">phd</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;Indiana&quot; &quot;Toronto&quot; &quot;Reading&quot; &quot;UBC&quot;
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 We could also look at a single row: 
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-23"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">prof_df[</span><span class="hl num">3</span><span class="hl std">, ]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##                      names     phd accepting
 ## 3 Dr. Spencer C.H. Barrett Reading     FALSE
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 which tells us all about Dr. Barrett. We could also ask whether or not the fourth row professor, Dr. Bontrager, is accepting students: 
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-24"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">prof_df</span><span class="hl opt">$</span><span class="hl std">accepting[</span><span class="hl num">4</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] TRUE
 </pre></div>
 </div></div>
-            </p>
         </section>
         <section id="index--arrays">
             <h3>Arrays</h3>
             <p>
               Since these are three dimensional objects, we must include all indices to get to a specific element. Let's used the named array we had in the data structures section as our example here: 
-              <br>
+              </p>
 <div class="chunk" id="unnamed-chunk-25"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># pre-define the vectors</span>
 <span class="hl std">vec1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">3</span><span class="hl std">)</span>
 <span class="hl std">vec2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl num">6</span><span class="hl std">)</span>
@@ -397,9 +412,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## row3    3    6    9
 </pre></div>
 </div></div>
-              <br>
+              <p>
               To access each of these elements, we need to recall that the indexing will go `[row, column, matrix]`. So to see just the second row but all the columns and rows we might write: 
-              <br>
+              </p>
 <div class="chunk" id="unnamed-chunk-26"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ar_named[,,</span><span class="hl num">2</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##      col1 col2 col3
@@ -408,9 +423,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## row3    3    6    9
 </pre></div>
 </div></div>
-              <br>
+              <p>
               but to see each of the second columns in both matrices and all rows, we can write: 
-              <br>
+              </p>
 <div class="chunk" id="unnamed-chunk-27"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ar_named[,</span> <span class="hl num">2</span><span class="hl std">, ]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##      mat1 mat2
@@ -419,25 +434,24 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## row3    6    6
 </pre></div>
 </div></div>
-              <br>
+              <p>
               Further, if we want only the first row and the third column elements for all matrices, we can write: 
-              <br>
+              </p>
 <div class="chunk" id="unnamed-chunk-28"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ar_named[</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">3</span><span class="hl std">, ]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## mat1 mat2 
 ##    7    7
 </pre></div>
 </div></div>
-              <br>
+              <p>
               but the value for the third row, first column, only in matrix 2 would be found by: 
-              <br>
+              </p>
 <div class="chunk" id="unnamed-chunk-29"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ar_named[</span><span class="hl num">3</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">]</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 3
 </pre></div>
 </div></div>
-              <br>
-              <br>    
+              <p>
               A common use case is that we may want, rather than to index a position, tell our object to return to us some part of that object containing a particular value. This is called <a href="../02-data/02-02-filtering-subsetting.html">data filtering and is discussed here.</a>
             </p>
         </section>

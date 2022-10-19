@@ -96,7 +96,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         In our example here, we may hypothesize that between the species in our dataset, there may be differences in the mean bill length. Bill length in a penguin looks vaguely like this: 
       </p>
       <figure>
-        <img src="../img/04-img/culmen_depth.png">
+        <img src="../img/04-img/culmen_depth.png" width="600" height="500">
         <figcaption>Artwork by @allison_horst</figcaption>
       </figure>
       <p>
@@ -141,15 +141,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           </ol>
         </p>
         <p>
-          <!-- Sidebar (hidden by default) -->
-          <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-          style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-            <a href="javascript:void(0)" onclick="w3_close()"
-            class="w3-bar-item w3-button">Close Menu</a>
-            <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
-            <a href="#contact" onclick="w3_close()" 
-            class="w3-bar-item w3-button">Contact</a>
-          </nav>
           <h4>Normality</h4>
           <p>
             <strong>A note: while plotting our data can be helpful, it can often lead to p-hacking and HARKing. While it is technically acceptable to plot the density plots for each group, that will give us an insight, prior to performing our tests, about what the means of each group might be. Again, this in and of itself is not <em>bad</emb> but we can get the same information without the possible pitfalls by using QQ plots and significance tests, which at the end of the day are often required for publications/reports anyways. </strong> Here we'll use QQ plots and a Shapiro-Wilks test to check for normality in each of our groups:
@@ -185,7 +176,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             Two things to note here: First, <strong>ANOVAs are actually relatively robust to violations of normality assumptions</strong>. This means that given we can see the data are not <em>that</em> far off of a normal distribution (we can see this via our QQ plot), we could in theory proceed with our test here with relative confidence. Second, <strong>log-transforming our data is completely valid for an ANOVA</strong>. This is helpful for us, as while we could go ahead with the test (after checking our other assumptions), it's still true that there is an easy transformation available to us through the log transformation, that prevents us from having to <em>technically</em> violate the assumptions of our test. An additional note is that if our assumptions are not met completely, and perhaps a transformation does not help us, it is possible to use a non-parametric alternative such as the Kruskal-Wallis test which we do not cover in this section, but is similarly easy to run. 
           </p>
           <p>
-            So let's go ahead and transform our data: 
+            So let's go ahead and transform our data: code
           </p>
           <!--begin.rcode
           adelie <- adelie %>% 
@@ -257,7 +248,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             Wonderful, and we see that the p-value is well above 0.05, so our variances are equal enough to continue. 
           </p>
         </section>
-      </section>
       <section id="aov--test">
         <h3>Performing the Test</h3>
         <p>
@@ -322,6 +312,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </section>
       </section>
     </section>
+  </section>
+
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">
@@ -609,3 +601,4 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
 
 </body>
 </html>
+ 

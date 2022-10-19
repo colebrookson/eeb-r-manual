@@ -116,16 +116,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <h3>Extracting Date Components</h3>
             <p>
                 Let's use an example of a timeseries with data collected through time on precipitation and temperature in Alaska:
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
 <span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
 
 <span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">arc_weather</span>
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 We can see what we're dealiang with here: 
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 5
@@ -139,11 +139,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## 6 1988-06-06 Toolik Field Station          5.2          0               NA
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 So we already have a date column of the special data type <code>date</code>. This in fact makes our life easy, as it's always easier to extract information from a pre-formatted date column. 
                 <br><br>
                 The best tool in our toolbox for this type of task is the <code>lubridate</code> package. This package has a ton of great functions that let us work with dates more easily. Let's test it out. Say we want to make a vector that has just all the years extracted from our date column. We could do that very easily like this with the <code>lubridate::year()</code> function:
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(lubridate)</span>
 </pre></div>
 <div class="message"><pre class="knitr r">## 
@@ -161,9 +161,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="output"><pre class="knitr r">##  [1] 1988 1988 1988 1988 1988 1988 1988 1988 1988 1988
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 And we see that this worked! So the way we probably use this the most often is to make new columns in a dataframe. Let's go ahead and make a new column each for year, month, week, and day in our <code>df</code> dataframe:
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
 <span class="hl com"># since we want lubridate to work with each row individually, use rowwise()</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
@@ -192,7 +192,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## # … with 11,161 more rows, and 1 more variable: day &lt;int&gt;
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 And here we can see the new columns have been made for us! 
             </p>
         </section>
@@ -203,7 +203,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 This brings about a somewhat more challenging problem as there's a decision point that needs to be executed -- what day should we default to? This is a question that deserves careful consideration for each problem that arises and there is no one-size-fits-all solution. However, assuming you have decided that there is a simple assumption you can make (e.g. you will assume the data were collected on the first of the month), we can use this to make a new <code>date</code> column from our existing data. 
                 <br>
                 Let's generate some fake data to work with: 
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">=</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
 <span class="hl kwc">year</span> <span class="hl std">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2010</span><span class="hl opt">:</span><span class="hl num">2020</span><span class="hl std">),</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl num">200</span><span class="hl std">),</span>
 <span class="hl kwc">month</span> <span class="hl std">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">12</span><span class="hl std">),</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl num">200</span><span class="hl std">),</span>
@@ -212,9 +212,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl std">)</span>
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 The first thing to do is inpute our decided day values of the first day of each month. That's easy enough: 
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">=</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">day</span> <span class="hl std">=</span> <span class="hl num">1</span>
@@ -222,17 +222,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   year month observation day
-## 1 2019     6        13.5   1
-## 2 2019     4        14.5   1
-## 3 2013     7        15.5   1
-## 4 2019    11        15.5   1
-## 5 2016     7        13.5   1
-## 6 2013    10        15.5   1
+## 1 2013     3        14.5   1
+## 2 2018     6        15.5   1
+## 3 2014    12        14.5   1
+## 4 2016    12        16.5   1
+## 5 2016     7        16.5   1
+## 6 2010     2        16.5   1
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 Great, we have the info we need. Now, we can go ahead and make a <code>date</code> column by combining our three other variables together using thye <code>lubridate::make_date()</code> function:
-                <br>
+                </p>
 <div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">=</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
@@ -244,15 +244,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## # Rowwise: 
 ##    year month observation   day date      
 ##   &lt;int&gt; &lt;int&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;    
-## 1  2019     6        13.5     1 2019-06-01
-## 2  2019     4        14.5     1 2019-04-01
-## 3  2013     7        15.5     1 2013-07-01
-## 4  2019    11        15.5     1 2019-11-01
-## 5  2016     7        13.5     1 2016-07-01
-## 6  2013    10        15.5     1 2013-10-01
+## 1  2013     3        14.5     1 2013-03-01
+## 2  2018     6        15.5     1 2018-06-01
+## 3  2014    12        14.5     1 2014-12-01
+## 4  2016    12        16.5     1 2016-12-01
+## 5  2016     7        16.5     1 2016-07-01
+## 6  2010     2        16.5     1 2010-02-01
 </pre></div>
 </div></div>
-                <br>
+                <p>
                 Great, we can visually check this by looking across the first few rows and we see our function worked as it should.
                 <br><br>
                 Now you know how to move from dates to components and vice versa!

@@ -4,8 +4,8 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()"
   class="w3-bar-item w3-button" style="color:blue;">Close Menu</a>
   <ol>
-    <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
-    <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
+    <li><a href="../about.html" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
+    <li><a href="../contact.html" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
     <li><a href="../00-landingpage.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>

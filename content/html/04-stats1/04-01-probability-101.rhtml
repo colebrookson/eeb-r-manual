@@ -74,12 +74,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
       <h4><strong>Key Terms</strong></h4>
       <ol>
-        <li style="color:blue;font-size:20px"> 1. Random Trials/Experiments</li>
-        <li style="color:blue;font-size:20px"> 2. Events</li>
-        <li style="color:blue;font-size:20px"> 3. Outcomes</li>
-        <li style="color:blue;font-size:20px"> 4. Probability (naive)</li>
-        <li style="color:blue;font-size:20px"> 5. Sample Space</li>
-        <li style="color:blue;font-size:20px"> 6. Population</li>
+        <li style="color:blue; font-size:calc(12px + 0.7vw);"> 1. Random Trials/Experiments</li>
+        <li style="color:blue; font-size:calc(12px + 0.7vw);"> 2. Events</li>
+        <li style="color:blue; font-size:calc(12px + 0.7vw);"> 3. Outcomes</li>
+        <li style="color:blue; font-size:calc(12px + 0.7vw);"> 4. Probability (naive)</li>
+        <li style="color:blue; font-size:calc(12px + 0.7vw);"> 5. Sample Space</li>
+        <li style="color:blue; font-size:calc(12px + 0.7vw);"> 6. Population</li>
       </ol>
     </section>
     <section id="ssenp">
@@ -95,18 +95,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
       <p>
         Here, we have a naive version of a probability, wherein we can actually just define the probability of choosing the spider with the red dot as a simple proportion. To state this clearly, the probability of performing the experiment, and the B) being the outcome can be defined as: 
-      </p>
       \[P(\text{B}) = \frac{\text{number of outcomes favourable to B}}{\text{Total number of outcomes in the sample space }\textit{S}}\]
-      <p>
         which specifically means:
-      </p>
+
       \[P(\text{B}) = \frac{\text{number of spiders with red dots}}{\text{total number of spiders in }\textit{S}}\]
-      <p>
+
         Or
-      </p>
+
       \[P(\text{B}) = \frac{1}{1000}\]
       \[P(\text{B}) = 0.001\]
-      <p>
         Now, to add more conditions, we're assuming here that when we put our hand into the bag to select a spider, there are absolutely <em>no</em> defining features that make one spider more or less likely to be chosen. However, there is a case where some spiders are bigger, or perhaps less afraid of the hand coming into the bag, and these traits may make some spiders more or less likely to be chosen. 
       </p>
       <p>
@@ -140,12 +137,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
       <p>
         What we have defined here are two <strong>mutually exclusive</strong> events. With only one experiment, the outcome cannot satisfy both events. Formally, we say that the probability of both \(A\) and \(B\) is zero: 
-      </p>
+
       \[P(\text{A} \cap \text{B}) = 0\]
-      <p>
+
         But also, since there are are no spiders that fall outside of \(A\) or \(B\), the probability of either one event OR the other occurring with one experiment is actually 1:
-      </p>
+
       \[P(\text{A} \cup \text{B}) = 0\]
+      
     </section>
     <section id="ssenp--naive">
       <h3>Naive Vs. Standard Probability</h3>
@@ -153,8 +151,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         The reason to differentiate between these two definitions is one of caution. We defined above the naive probability, which has two incredibly important assumptions: 
       </p>
       <ol>
-        <li style="color:grey;font-size:20px">1. The sample space is finite</li>
-        <li style="color:grey;font-size:20px">2. Each outcome is equally likely</li>
+        <li style="color:grey; font-size:calc(12px + 0.7vw);">1. The sample space is finite</li>
+        <li style="color:grey; font-size:calc(12px + 0.7vw);">2. Each outcome is equally likely</li>
       </ol>
       <p>
         This clearly serves us well for our current example, and in fact from here on we will refer to the naive probability simply as <em>probability</em>, but it's useful to recognize that as soon as we care to make more interesting conditions surrounding our sample space, we must adjust our definition of probability (we won't cover that here).
@@ -179,12 +177,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <img src="../img/04-img/nucleotide.jpg">
       <p>
         If we zoom in on a single base, we can only "see" one of A, C, G, or T. So, our sample space \(S\) is made up of the four <em>mutually exclusive</em> events, which is seeing either A, C, G, or T. If we assume that bases are distributed with even frequency, we can imagine that the probability of each would be the same: 
-      </p>
       \[P(\text{A}) = 0.25\]
       \[P(\text{B}) = 0.25\]
       \[P(\text{C}) = 0.25\]
       \[P(\text{D}) = 0.25\]
-      <p>
         which would result in a probability distribution that may look like this: 
       </p>
       <!--begin.rcode
@@ -208,16 +204,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <section id="dist-disc--mass">
         <p>
           Discrete distributions typically are described by their probability mass functions, which give the probabilities of a discrete random variable being exactly equal to some values. These probabilites must <em>always sum to 1.0</em> and have a general form of 
-        </p>
+
         \[p_X(x) = P(X = x)\]
-        <p>
+
           It's helpful to know how to plot probability distributions, as it's visually easiest to see when different parameters result in different probability distributions when we can compare parameter values. 
         </p>
         <p>
           The probability mass function for the Poisson distribution takes the following form:
-        </p>
+
         \[p(x;\lambda) = \frac{e^{-\lambda}\lambda^x}{x!}\]
-        <p>
+
           And as there's only one parameter (\(\lambda\)), this parameter simply indicates the "shape" of the function, or how many average events happen in a given time interval. Conveniently in R, there are mass functions for most common distributions. Let's take a look at <code>?rpois</code> and we see that we can plot the probability densities with the <code>dpois</code> function. Let's choose three different parameter values and see how that changes our probability density. In addition, it's actually much easier to make plots of discrete distributions in <strong>base R</strong> so we'll do that:
         </p>
         <!--begin.rcode
@@ -268,9 +264,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
         <p>
           Let's plot the density of a few normal distributions showing how a difference in parameters gives different probability density curves. As a good reminder, to recall what forms the probability density functions for some given distribution look like, the <a href="https://www.itl.nist.gov/div898/handbook/index.html">NIST/SEMATCH e-handbook of Statistical Methods</a> has a <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda36.htm">great set of descriptions on probability distributions</a>. Let's refresh our minds about the Normal Distribution. The probability density function for the normal distribution is
-        </p>
+
         \[f(x) = \frac{e^{-(x-\mu)^2/(2\sigma^2)}}{\sigma \sqrt{2\pi}}\]
-        <p>
+
           This looks a bit complicated, but in reality, there's only two parameters! The one's we're used to for the normal distribtuion, \(\mu\) the mean, and \(\sigma\) the standard deviation. Similarly to how we did with the Poisson distribution above, let's see how changing these variables will change our probability density curves.
         </p>
         <p>

@@ -132,7 +132,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 A small point, note here that unlike other Tidyverse packages, we do not use the pipe <code>%>%</code> to link different functions, we use an addition operator <code>+</code>. 
                 <br><br>
                 By way of a quick example, we'll make a super quick and dirty scatterplot of some long-term ecological data on salamanders and trout. 
-                <br><br>
+                </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
 <span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
 
@@ -146,27 +146,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ## [16] &quot;notes&quot;
 </pre></div>
 </div></div>
-                <br><br>
+                <p>
                 The most basic version of the plot we may want to make is a scatter plot of two continuous variables, let's say length and weight: 
-                <br><br>
+                </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g))</span> <span class="hl opt">+</span>
 <span class="hl kwd">geom_point</span><span class="hl std">()</span>
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: Removed 13279 rows containing missing values (geom_point).
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
-                <br><br>
+                <p>
                 While this is completely correct, it is recommended to place the aesthetics arguments (<code>mapping = aes()</code>) in each <code>geom</code> argument individually. This will allow us to plot using multiple dataframes or variables. 
                 <br><br>
                 So a better version may look like this:
-                <br><br>
+                </p>
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
 <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g))</span>
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: Removed 13279 rows containing missing values (geom_point).
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
-                <br><br>
+                <p>
                 In the <a href="./03-02-iterative-plotting.html">Iterative Plotting</a> section we'll go over how to add components to go from an ugly plot like this to a publication-ready graphic. 
             </p>
         </section>

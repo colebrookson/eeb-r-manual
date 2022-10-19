@@ -176,7 +176,7 @@ t_test_oneside_res <- stats::t.test(
 t_test_oneside_res
 end.rcode-->
 
-So we see here we have a p-value of 1. Given that we <em>do</em> know which group is <em>actually</em> bigger this comes as no surprise. Although this is a good reminder: <strong>Just because our one-sided test with an $H_A: \mu_{south} > \mu_{north}$ resulted in us failing to reject the null, this does NOT mean that we can assume that in fact $\mu_{south} > \mu_{north$ because the null hypothesis of these tests is stated that $H_0: \mu_{south} = \mu_{north}$. 
+So we see here we have a p-value of 1. Given that we <em>do</em> know which group is <em>actually</em> bigger this comes as no surprise. Although this is a good reminder: <strong>Just because our one-sided test with an $H_A: \mu_{south} > \mu_{north}$ resulted in us failing to reject the null, this does NOT mean that we can assume that in fact $\mu_{south} > \mu_{north}$ because the null hypothesis of these tests is stated that $H_0: \mu_{south} = \mu_{north}$. 
 
 ## What To Do With Non-Normality?
 

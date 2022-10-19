@@ -50,7 +50,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <h3>Selecting Columns</h3>
         <p>
             To do this, we can select a particular set of columns. Let's use the ice dataframe example from the <code>lterdatasampler</code> package: 
-            <br>
+            </p>
             <!--begin.rcode
             # load packages 
             library(lterdatasampler)
@@ -59,21 +59,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             # load in dataframe we'll work with
             ice <- lterdatasampler::ntl_icecover
             end.rcode-->
-            <br>
+            <p>
             We can look at the columns in this dataframe: 
-            <br>
+</p>
             <!--begin.rcode
             names(ice)
             end.rcode-->
-            <br>
+            <p>
             We may want to make a smaller dataframe with only the columns <code>year</code> and <code>ice_duration</code> . We can do this with the <code>dplyr</code> function <code>select()</code> :
-            <br>
+            </p>
             <!--begin.rcode
             small_ice <- ice %>% 
             dplyr::select(year, ice_duration)
             names(small_ice)
             end.rcode-->
-            <br>
+            <p>
             And we can see this works as expected. 
         </p>
     </section>
@@ -84,27 +84,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <br>
             <br>
             We can "pipe" our operations together using the <code>dplyr</code> pipes. For example, we could select the same columns as we did already, but also filter <code>ice_duration</code> at the same time. Let's see what values that variable can take on: 
-            <br>
+            </p>
             <!--begin.rcode
             # hist() will just give us a histogram of the values
             hist(ice$ice_duration)
             end.rcode-->
-            <br>
+            <p>
             So we might want to filter our data to only values below 100. We can do that like this: 
-            <br>
+            </p>
             <!--begin.rcode
             filtered_ice <- ice %>% 
             dplyr::filter(ice_duration < 100) %>% 
             dplyr::select(year, ice_duration)
             end.rcode-->
-            <br>
+            <p>
             Now we can look at the columns we have in this new object and also what values <code>ice_duration</code> takes on to check it worked correctly: 
-            <br>
+            </p>
             <!--begin.rcode
             names(filtered_ice)
             hist(filtered_ice$ice_duration)
             end.rcode-->
-            <br>
+            <p>
             We can see this worked as expected!
         </p>
     </section>

@@ -72,7 +72,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 A small point, note here that unlike other Tidyverse packages, we do not use the pipe <code>%>%</code> to link different functions, we use an addition operator <code>+</code>. 
                 <br><br>
                 By way of a quick example, we'll make a super quick and dirty scatterplot of some long-term ecological data on salamanders and trout. 
-                <br><br>
+                </p>
                 <!--begin.rcode
                 library(tidyverse)
                 library(lterdatasampler)
@@ -81,23 +81,23 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
                 names(df)
                 end.rcode-->
-                <br><br>
+                <p>
                 The most basic version of the plot we may want to make is a scatter plot of two continuous variables, let's say length and weight: 
-                <br><br>
+                </p>
                 <!--begin.rcode
                 ggplot(data = df, mapping = aes(x = length_1_mm, y = weight_g)) + 
                 geom_point()
                 end.rcode-->
-                <br><br>
+                <p>
                 While this is completely correct, it is recommended to place the aesthetics arguments (<code>mapping = aes()</code>) in each <code>geom</code> argument individually. This will allow us to plot using multiple dataframes or variables. 
                 <br><br>
                 So a better version may look like this:
-                <br><br>
+                </p>
                 <!--begin.rcode
                 ggplot() +
                 geom_point(data = df, aes(x = length_1_mm, y = weight_g))
                 end.rcode-->
-                <br><br>
+                <p>
                 In the <a href="./03-02-iterative-plotting.html">Iterative Plotting</a> section we'll go over how to add components to go from an ugly plot like this to a publication-ready graphic. 
             </p>
         </section>

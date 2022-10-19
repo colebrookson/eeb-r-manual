@@ -56,24 +56,24 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <h3>Extracting Date Components</h3>
             <p>
                 Let's use an example of a timeseries with data collected through time on precipitation and temperature in Alaska:
-                <br>
+                </p>
                 <!--begin.rcode
                 library(tidyverse)
                 library(lterdatasampler)
 
                 df <- lterdatasampler::arc_weather
                 end.rcode-->
-                <br>
+                <p>
                 We can see what we're dealiang with here: 
-                <br>
+                </p>
                 <!--begin.rcode
                 head(df)
                 end.rcode-->
-                <br>
+                <p>
                 So we already have a date column of the special data type <code>date</code>. This in fact makes our life easy, as it's always easier to extract information from a pre-formatted date column. 
                 <br><br>
                 The best tool in our toolbox for this type of task is the <code>lubridate</code> package. This package has a ton of great functions that let us work with dates more easily. Let's test it out. Say we want to make a vector that has just all the years extracted from our date column. We could do that very easily like this with the <code>lubridate::year()</code> function:
-                <br>
+                </p>
                 <!--begin.rcode
                 library(lubridate)
                 year <- lubridate::year(df$date) 
@@ -81,9 +81,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 # print the first ten entries
                 year[1:10]
                 end.rcode-->
-                <br>
+                <p>
                 And we see that this worked! So the way we probably use this the most often is to make new columns in a dataframe. Let's go ahead and make a new column each for year, month, week, and day in our <code>df</code> dataframe:
-                <br>
+                </p>
                 <!--begin.rcode
                 df %>%
                 # since we want lubridate to work with each row individually, use rowwise()
@@ -96,7 +96,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                     day = lubridate::day(date)
                 )
                 end.rcode-->
-                <br>
+                <p>
                 And here we can see the new columns have been made for us! 
             </p>
         </section>
@@ -107,7 +107,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 This brings about a somewhat more challenging problem as there's a decision point that needs to be executed -- what day should we default to? This is a question that deserves careful consideration for each problem that arises and there is no one-size-fits-all solution. However, assuming you have decided that there is a simple assumption you can make (e.g. you will assume the data were collected on the first of the month), we can use this to make a new <code>date</code> column from our existing data. 
                 <br>
                 Let's generate some fake data to work with: 
-                <br>
+                </p>
                 <!--begin.rcode
                 df = data.frame(
                 year = sample(c(2010:2020), replace = TRUE, 200),
@@ -116,9 +116,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 observation = sample(c(12.5:16.6), replace = TRUE, 200)
                 )
                 end.rcode-->
-                <br>
+                <p>
                 The first thing to do is inpute our decided day values of the first day of each month. That's easy enough: 
-                <br>
+                </p>
                 <!--begin.rcode
                 df = df %>% 
                 dplyr::mutate(
@@ -126,9 +126,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 )
                 head(df)
                 end.rcode-->
-                <br>
+                <p>
                 Great, we have the info we need. Now, we can go ahead and make a <code>date</code> column by combining our three other variables together using thye <code>lubridate::make_date()</code> function:
-                <br>
+                </p>
                 <!--begin.rcode
                 df = df %>% 
                 dplyr::rowwise() %>% 
@@ -137,7 +137,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 )
                 head(df)
                 end.rcode-->
-                <br>
+                <p>
                 Great, we can visually check this by looking across the first few rows and we see our function worked as it should.
                 <br><br>
                 Now you know how to move from dates to components and vice versa!

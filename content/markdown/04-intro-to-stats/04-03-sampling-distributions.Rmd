@@ -399,7 +399,7 @@ We have just stumbled upon the <bold> Central Limit Theorem</bold>.
 
 The Central Limit Theorem is an incredibly important theorem that states the following: 
 
-<em>Taking a population with some mean <math>μ</math> and a standard deviation <math>σ</math>, we can sample from the population (with replacement), and with a number of samples that is sufficiently large, the distribution of the sample means will be normally distributed.</em>
+<em>Taking a population with some mean $\mu$ and a standard deviation $\sigma$, we can sample from the population (with replacement), and with a number of samples that is sufficiently large, the distribution of the sample means will be normally distributed.</em>
 
 We have just demonstrated this above with our cutthroat trout example. This is a surprisingly important stated theorem, because it provides us a path forward to work with statistical tests that <strong>assume normal distributions</strong>. As you will learn as you move further through your statistical training, normality of data makes our lives infinitely easier.  
 I strongly recommend that if you care to learn more about statistics, to think deeply about the central limit theorem, and try to come up your own intuitive understanding of why it is true. There are many excellent descriptions of proofs of the central limit theorem. For the advanced and interested student, there's an excellent <a href="https://www.youtube.com/watch?v=Tx7zzD4aeiA">recorded lecture by John Tsitsiklis at MIT</a> that goes into detail on this theorem and why it is central not only to inferential statistics but how it links statistics to calculus. 

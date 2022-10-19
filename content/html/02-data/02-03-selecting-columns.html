@@ -110,7 +110,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <h3>Selecting Columns</h3>
         <p>
             To do this, we can select a particular set of columns. Let's use the ice dataframe example from the <code>lterdatasampler</code> package: 
-            <br>
+            </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># load packages </span>
 <span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
 <span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
@@ -119,17 +119,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl std">ice</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">ntl_icecover</span>
 </pre></div>
 </div></div>
-            <br>
+            <p>
             We can look at the columns in this dataframe: 
-            <br>
+</p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">names</span><span class="hl std">(ice)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;lakeid&quot;       &quot;ice_on&quot;       &quot;ice_off&quot;      &quot;ice_duration&quot; &quot;year&quot;
 </pre></div>
 </div></div>
-            <br>
+            <p>
             We may want to make a smaller dataframe with only the columns <code>year</code> and <code>ice_duration</code> . We can do this with the <code>dplyr</code> function <code>select()</code> :
-            <br>
+            </p>
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">small_ice</span> <span class="hl kwb">&lt;-</span> <span class="hl std">ice</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">select</span><span class="hl std">(year, ice_duration)</span>
 <span class="hl kwd">names</span><span class="hl std">(small_ice)</span>
@@ -137,7 +137,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="output"><pre class="knitr r">## [1] &quot;year&quot;         &quot;ice_duration&quot;
 </pre></div>
 </div></div>
-            <br>
+            <p>
             And we can see this works as expected. 
         </p>
     </section>
@@ -148,22 +148,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <br>
             <br>
             We can "pipe" our operations together using the <code>dplyr</code> pipes. For example, we could select the same columns as we did already, but also filter <code>ice_duration</code> at the same time. Let's see what values that variable can take on: 
-            <br>
+            </p>
 <div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># hist() will just give us a histogram of the values</span>
 <span class="hl kwd">hist</span><span class="hl std">(ice</span><span class="hl opt">$</span><span class="hl std">ice_duration)</span>
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
-            <br>
+            <p>
             So we might want to filter our data to only values below 100. We can do that like this: 
-            <br>
+            </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">filtered_ice</span> <span class="hl kwb">&lt;-</span> <span class="hl std">ice</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(ice_duration</span> <span class="hl opt">&lt;</span> <span class="hl num">100</span><span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">select</span><span class="hl std">(year, ice_duration)</span>
 </pre></div>
 </div></div>
-            <br>
+            <p>
             Now we can look at the columns we have in this new object and also what values <code>ice_duration</code> takes on to check it worked correctly: 
-            <br>
+            </p>
 <div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">names</span><span class="hl std">(filtered_ice)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;year&quot;         &quot;ice_duration&quot;
@@ -171,7 +171,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(filtered_ice</span><span class="hl opt">$</span><span class="hl std">ice_duration)</span>
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
-            <br>
+            <p>
             We can see this worked as expected!
         </p>
     </section>
