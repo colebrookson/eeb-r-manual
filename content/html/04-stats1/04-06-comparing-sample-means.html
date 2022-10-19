@@ -1,6 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/stylesheet.css">
@@ -14,6 +76,9 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 </head>
 <body class="w3-round-large">
 
@@ -22,36 +87,415 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <div class="w3-navy w3-xlarge" 
   style="max-width:auto;margin:auto;border:1px w3-gray"
   border:1px>
-    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰ Menu</div>
     <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
     <div class="w3-center w3-padding-16">The R Manual</div>
   </div>
 </div>
 
-<!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-bar-item w3-button">Close Menu</a>
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
-  <a href="#contact" onclick="w3_close()" 
-  class="w3-bar-item w3-button">Contact</a>
-</nav>
-
 <main style = margin-top:100px>
   <nav class="section-nav">
       <ol>
-        <li><a href="#reshape"></a>
+        <li><a href="#ttest">Two-Sided T-tests</a>
+          <ol>
+            <li><a href="#ttest--ass">Assumptions</a>
+            <ol>
+              <li><a href="#ttest--ass--norm">Normality</a></li>
+              <li><a href="#ttest--ass--homo">Homoskedasticity</a></li>
+            </ol>
+            </li>
+            <li><a href="#ttest--test">The test</a></li>
+          </ol>
+        </li>
+        <li><a href="#oneside">One-Sided T-tests</a></li>
+        <li><a href="#nonnormal">Non-normality</a></li>
+        <li><a href="#nonpara">Nonparametric Alternatives</a>
+          <ol>
+            <li><a href="#nonpara--ass">Assumptions</a>
+            <ol>
+              <li><a href="#nonpara--ass--cont">Continuity</a></li>
+              <li><a href="#nonpara--ass--skew">Skew</a></li>
+            </ol>
+            </li>
+            <li><a href="#nonpara--test">The test</a></li>
+          </ol>
         </li>
       </ol>
     </nav>
   <div>
     <section id="work">
       <h2>Comparisons Between Sample Means</h2>
-      <img class="image-full-page" style="display:block;margin:auto"
-      src="../img/01-img/construction.jpg">
-
+      <p>
+        It's often the case that we may sample independently from a population, and develop some hypothesis that may indicate that the means for the independent samples are in fact different from one another. Taking the example we noted in the <a href="./04-04-hypothesis-testing.html">hypothesis testing</a> section, perhaps we care about the size of fiddler crabs, and if the crabs are from multiple sites, we could say that, between two sites of interest, we might believe there to be a size difference. Well, let's perform a statistical test to see if this is true.
+      </p>
+      <p>
+        It is generally best in statistics, especially when starting our our own individual journeys as statisticians, to choose the simplest test that A) will answer our question, and B) we can satisfy the assumptions of. 
+      </p>
+      <p>
+        When comparing two sample means, the standard test to perform here is the <strong>unpaired two-sample t-test</strong>. The test statistic is calculated as: \[t = \frac{(\bar{Y_1} - \bar{Y_2}) - (\mu_1 - \mu_2)_0}{SE_{Y_1 - Y_2}}\]
+      </p>
+      <p>
+        This test assumes three major things:
+      </p>
+      <p>
+        <ol>
+          <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">1) Normality </li>
+          <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">2) Homoskedasticity </li>
+          <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">3) Independence</li>
+        </ol>
+      </p>
+      <p>
+        Our question is as it stands is simply that we believe there is a size difference between crabs from different locations. Let's start by attempting to justify these assumptions, and if we can, using the simple test. 
+      </p>
       </section>
+      <section id="ttest">
+        <h2>Two-sided T-tests</h2>
+        <p>
+          We'll use data on crab sizes: 
+        </p>
+        <p>
+          Now what? Well there are other tests available to us!! A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
+        </p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
+<span class="hl std">crab_sizes</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">pie_crab</span>
+</pre></div>
+</div></div>
+        <p>
+          There are a number of sites in this dataset, so let's compare crabs from two northern sites and two southern sites. Our northern sites will be "Cape Cod" and "Narragansett Bay NERR" and our southern sites will be "Guana Tolomoto Matanzas NERR" and "Sapelo Island NERR". 
+        </p>
+        <p>
+          It's important to never forget the underlying mathematics of what we're doing, we should never simply rely on our computers exclusively and not understand what we're doing, so let's review the equations underlying the t-test. We'll be calculating the test statistic \(t\) as described above. As we are testing a hypothesis that the sizes <em>are</em> different, we can state this formally as \(H_0: \mu_1 = \mu_2\) and \(H_1: \mu_1 \neq \mu_2\). 
+        </p>
+        <p>
+          Since we stated we believe \(H_0: \mu_1 = \mu_2\), this is a two-sided test, we have not suggested that \(\mu_1 > \mu_2\) or \(\mu_1 < \mu_2\).
+        </p>
+        <section id="ttest--ass">
+          <h3>Assumptions of the Test</h3>
+          <p>
+            Before we proceed we need to take into account assumptions of our chosen test. We'll assume our samples are independent, but our two-sample t-test requires two other things: 1) normality, and 2) homoskedasticity. 
+          </p>
+          <section id="ttest--ass--norm">
+            <h4>Normality</h4>
+            <p>
+              To assess the normality of our data, let's first assess it visually and then double-check with a statistical test of normality (the Shapiro-Wilks test). A convenient package for this task is the <code>ggpubr</code> package which allows to to plot density plots and QQ plots. 
+            </p>
+            <p>
+              Let's use a density plot to check if the data follow the normal/Gaussian curve:
+            </p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggpubr)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## Loading required package: ggplot2
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'dplyr'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># first, cut our data to just the sites we want</span>
+<span class="hl std">crab_sizes_south</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(site</span> <span class="hl opt">%in%</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;GTM&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;SI&quot;</span><span class="hl std">))</span>
+<span class="hl std">crab_sizes_north</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(site</span> <span class="hl opt">%in%</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;CC&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;NB&quot;</span><span class="hl std">))</span>
+
+<span class="hl com"># plot our variable of interest (size)</span>
+<span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggdensity</span><span class="hl std">(crab_sizes_north</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Northern&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggdensity</span><span class="hl std">(crab_sizes_south</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Southern&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+            <p>
+              They both look normal. Let's look at the QQ plots:
+            </p>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(crab_sizes_north</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;North&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(crab_sizes_south</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;South&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-2.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+            <p>
+              We're looking for the points to follow the black line and for no points to be outside the grey error bars. Both of these look pretty good. Let's use a Shapiro-Wilk's test to take a look at what we see. <strong>Importantly, a Shapiro-Wilk's test is a significance test that has a null hypothesis of normality. If the test is SIGNIFICANT then there is sufficient non-normality to stop our test and re-evaluate</strong>. 
+            </p>
+            <p>
+              We can do this in R very easily. The function <code>shapiro.test()</code> comes shipped in core R with the <code>stats</code> package. First for the northern sites: 
+            </p>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(crab_sizes_north</span><span class="hl opt">$</span><span class="hl std">size)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  crab_sizes_north$size
+## W = 0.99161, p-value = 0.9644
+</pre></div>
+</div></div>
+            <p>
+              Okay, and we see that our p-value is > 0.05 so we'll fail to reject the null. For the southern sites: 
+            </p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(crab_sizes_south</span><span class="hl opt">$</span><span class="hl std">size)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  crab_sizes_south$size
+## W = 0.96787, p-value = 0.1269
+</pre></div>
+</div></div>
+            <p>
+              Here we see a large p-value, >> 0.05, so again we'll reject the null. 
+            </p>
+            <p>
+              <strong> Good, we've satisfied the condition of normality </strong>.
+            </p>
+          </section>
+          <section id="ttest--ass--homo">
+            <h4>Homoskedasticity</h4>
+            <p>
+              Our second assumption was that the variances of the two samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedasticity with the F-test </strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if p &lt; 0.05 then for our purposes we could say that the assumption of homoskedasticity is violated. 
+            </p>
+            <p>
+              To do the F-test let's use the <code>stats</code> package function <code>var.test()</code>. We will just pass the two sets of data as arguments. 
+            </p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">var.test</span><span class="hl std">(crab_sizes_north</span><span class="hl opt">$</span><span class="hl std">size, crab_sizes_south</span><span class="hl opt">$</span><span class="hl std">size)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## 	F test to compare two variances
+## 
+## data:  crab_sizes_north$size and crab_sizes_south$size
+## F = 0.97195, num df = 55, denom df = 57, p-value = 0.9169
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.5732314 1.6521757
+## sample estimates:
+## ratio of variances 
+##          0.9719504
+</pre></div>
+</div></div>
+            <p>
+              Great, p >> 0.05, so we can continue. 
+            </p>
+          </section>
+        </section>
+        <section id="ttest--test">
+          <h3>The test</h3>
+          <p>
+            So now we can actually perform the test. It's quite simple, we'll use the <code>t.test()</code> function: 
+          </p>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t_test_res</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">t.test</span><span class="hl std">(</span>
+  <span class="hl com"># sample of group 1</span>
+  <span class="hl std">crab_sizes_north</span><span class="hl opt">$</span><span class="hl std">size,</span>
+  <span class="hl com"># sample of group 2</span>
+  <span class="hl std">crab_sizes_south</span><span class="hl opt">$</span><span class="hl std">size,</span>
+  <span class="hl com"># Regulat t-test or Welch's t-test depending on the variance</span>
+  <span class="hl kwc">var.equal</span> <span class="hl std">=</span> <span class="hl num">TRUE</span>
+<span class="hl std">)</span>
+<span class="hl std">t_test_res</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## 	Two Sample t-test
+## 
+## data:  crab_sizes_north$size and crab_sizes_south$size
+## t = 14.436, df = 112, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  5.089136 6.708352
+## sample estimates:
+## mean of x mean of y 
+##  16.98357  11.08483
+</pre></div>
+</div></div>
+          <p>
+            We see our result here, and it turns out the p-value is <em>very</em> small, so we can reject the null hypothesis, there is good evidence that $\mu_1 \neq \mu_2$. <strong>NOTE</strong> that if our data were heteroskedastic, then we could specify <code>var.equal = FALSE</code> and that would perform a Welch's t-test which allows for this. 
+          </p>
+          <p>
+            If we wanted, we could plot this result as a box plot, or perhaps more usefully, a violin plot (For a full walk through of how to iteratively make this plot, see our section on plotting <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>): 
+          </p>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+<span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
+
+<span class="hl com"># first get one dataframe with the four sites we want</span>
+<span class="hl std">focal_sites</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(site</span> <span class="hl opt">%in%</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;CC&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;NB&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;GTM&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;SI&quot;</span><span class="hl std">))</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl com"># make new column to denote our two groupings</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">group</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(</span><span class="hl kwd">ifelse</span><span class="hl std">(</span>
+      <span class="hl com"># if the site is CC or NB, the value of `group` is &quot;north&quot; if not, &quot;south&quot;</span>
+      <span class="hl std">site</span> <span class="hl opt">%in%</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;CC&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;NB&quot;</span><span class="hl std">),</span> <span class="hl str">&quot;North&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;South&quot;</span>
+    <span class="hl std">))</span>
+  <span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl com"># keep only the columns we need</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">select</span><span class="hl std">(size, group)</span>
+
+<span class="hl com"># plot the data </span>
+<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= focal_sites)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_violin</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= group,</span> <span class="hl kwc">y</span> <span class="hl std">= size,</span> <span class="hl kwc">fill</span> <span class="hl std">= group))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">stat_summary</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= group,</span> <span class="hl kwc">y</span> <span class="hl std">= size),</span>
+              <span class="hl kwc">fun</span> <span class="hl std">=</span> <span class="hl str">&quot;mean&quot;</span><span class="hl std">,</span>
+              <span class="hl kwc">geom</span> <span class="hl std">=</span> <span class="hl str">&quot;crossbar&quot;</span><span class="hl std">,</span>
+              <span class="hl kwc">width</span> <span class="hl std">=</span> <span class="hl num">0.5</span><span class="hl std">,</span>
+              <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Size (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Geographic Region&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">theme</span><span class="hl std">(</span>
+    <span class="hl kwc">legend.position</span> <span class="hl std">=</span> <span class="hl str">&quot;none&quot;</span>
+  <span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">annotate</span><span class="hl std">(</span>
+    <span class="hl kwc">geom</span> <span class="hl std">=</span> <span class="hl str">&quot;text&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">2.1</span><span class="hl std">,</span>
+    <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span>
+    <span class="hl kwc">label</span> <span class="hl std">=</span> <span class="hl str">&quot;p &lt; 0.001&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">8</span>
+  <span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+        </section>
+      </section>
+      <section id="oneside">
+        <h2>One-sided T-tests</h2>
+        <p>
+          In our above example we stated our hypothesis such that we could use a two-sided test. But what if when we were formulating our hypotheses, we'd said we believe the southern crabs would be bigger? <strong>Note that we're pretending here that we HAVEN'T seen the results just above, since that would be p-hacking</strong>. But let's say we thought "Hey, warmer water, lots of sun, maybe more beaches, that could mean bigger crabs." (I stress this is not an intelligently derrived biological hypothesis).
+        </p>
+        <p>
+          But in this case, we could perform the exact test as above, but instead determine that we wanted a one-sided test. That's easy enough and uses all the same code, with one additional argument. Using the same dataset, we would simply add an argument for <code>alternative</code>. The syntax here is saying that in the function, we pass two sets of numbers, <code>x</code> and <code>y</code>. If we believe x to be <em>less</em> than y, we pass "less", and if we believe x to be <em>greater</em> than y, then we pass "greater". 
+        </p>
+        <p>
+          In our case, we are hypothesizing that the southern crabs (<code>crab_sizes_south</code>) are greater in size than the northern crabs, so let's set <code>x</code> to be the <code>crab_sizes_south</code> and the y to be <code>crab_sizes_north</code>, and then <code>alternative = "greater"</code>, so this is testing the alternate hypothesis that \(\mu_{south} > \mu_{north}\):
+        </p>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r">t_test_oneside_res &lt;- stats::<span class="hl kwd">t.test</span>(
+  crab_sizes_south$size, 
+  crab_sizes_north$size,
+  var.equal = <span class="hl kwa">TRUE</span>,
+  alternative = <span class="hl str">&quot;greater&quot;</span>
+)
+t_test_oneside_resNow what? Well there are other tests available to us!! A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good <span class="hl kwa">for</span> data with small sample sizes. Here we have only 28 observations <span class="hl kwa">in</span> each group, and non-normality so let's turn to the non-parametric tests. 
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: &lt;text&gt;:7:23: unexpected symbol
+## 6: )
+## 7: t_test_oneside_resNow what
+##                          ^
+</pre></div>
+</div></div>
+        <p>
+          So we see here we have a p-value of 1. Given that we <em>do</em> know which group is <em>actually</em> bigger this comes as no surprise. Although this is a good reminder: <strong>Just because our one-sided test with an $H_A: \mu_{south} > \mu_{north}$ resulted in us failing to reject the null, this does NOT mean that we can assume that in fact \(\mu_{south} > \mu_{north}\) because the null hypothesis of these tests is stated that \(H_0: \mu_{south} = \mu_{north}\)</strong>
+          . 
+        </p>
+      </section>
+      <section id="nonnormal">
+        <h2>What to do with non-normality?</h2>
+        <p>
+          Going back to our assumptions, let's re-start our process of this test but with a different grouping of data. 
+        </p>
+        <p>
+          What if we just took the MOST northern and southern sites alone, not groups of sites, and did a t-test on those two? say that instead of the two sites acting as our "northern" sites, we chose to use the single most northern site: "Plum Island Estuary - West Creek" (PIE), and for our southern site, we took the most southern one - "Guana Tolomoto Matanzas NERR" (GTM). If we start again by checking our assumptions, we would first have to check for normality of both our groups. 
+        </p>
+        <p>
+          Let's start by again dividing our data:
+        </p>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># southern ones stay the same</span>
+<span class="hl std">crab_sizes_s_GTM</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(site</span> <span class="hl opt">==</span> <span class="hl str">&quot;GTM&quot;</span><span class="hl std">)</span>
+
+<span class="hl com"># new sites here</span>
+<span class="hl std">crab_sizes_n_PIE</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(site</span> <span class="hl opt">==</span> <span class="hl str">&quot;PIE&quot;</span><span class="hl std">)</span>
+
+<span class="hl com"># plot our variable of interest (size)</span>
+<span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggdensity</span><span class="hl std">(crab_sizes_s_GTM</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;GTM&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggdensity</span><span class="hl std">(crab_sizes_n_PIE</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;PIE&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-2.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+      <p>
+        Okay, so these data look somewhat skewed. Let's do our Shapiro-Wilk's test: 
+      </p>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(crab_sizes_s_GTM</span><span class="hl opt">$</span><span class="hl std">size)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  crab_sizes_s_GTM$size
+## W = 0.90078, p-value = 0.01193
+</pre></div>
+</div></div>
+
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(crab_sizes_n_PIE</span><span class="hl opt">$</span><span class="hl std">size)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  crab_sizes_n_PIE$size
+## W = 0.84894, p-value = 0.0008899
+</pre></div>
+</div></div>
+      <p>
+        Okay, so our p-values for both are &lt; 0.05, so we have to reject the null - these data are non-normal. 
+      </p>
+      <p>
+        Now what? Well there are other tests available to us!! A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
+      </p>
+    </section>
+    <section id="nonpara">
+      <h2>Non-Parametric Tests</h2>
+      <p>The best alternative for our case is the <strong> Mann-Whitney U Test</strong>.</p>
+      <p>
+        There are a few things to note about this test however. <strong> This test actually does NOT compare sample means</strong>. The Mann-Whitney's stated use is to determine whether or not the groups or samples are drawn from equal populations, that is, are the shape of the data the same. It can be interpreted that this is analogous to saying the median values are the same for both groups. 
+      </p>
+      <section id="nonpara--ass">
+        <h3>Assumptions</h3>
+        <p>
+          Just because the data do not have to be normal, there are still important assumptions we need to satisfy. The data still need to be independent, but there are two additional assumptions:
+        </p>
+        <p>
+          <ol>
+            <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">1) The variable needs to be continuous </li>
+            <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">2) The data are assumed to be similar in shape </li>
+          </ol>
+        </p>
+        <p>
+          The second assumption here is important! While the data do not have to be normal, they have to exhibit a similar skew. 
+        </p>
+        <section id="nonpara--ass--cont">
+          <h4>Continuity</h4>
+          <p>
+            We know that our variable is continuous, so this assumption is met. 
+          </p>
+        </section>
+        <section id="nonpara--ass--skew">
+          <h4>Skew</h4>
+          <p>
+            Measuring a degree of skew is somewhat arbitrary and can be difficult. It is beyond the scope of this tutorial to do so, and so we will satisfy ourselves with simply stating that the density distributions are both left-skewed, and leave it at that. 
+          </p>
+        </section>
+      </section>
+      <section id="nonpara--test">
+        <h3>The test</h3>
+        <p>
+          The Mann-Whitney is sometimes referred to as the Mann-Whitney-Wilcoxon test, and so is performed using the <code>wilcox.test()</code> function, again from <code>stats</code>:
+        </p>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">wilcox.test</span><span class="hl std">(crab_sizes_s_GTM</span><span class="hl opt">$</span><span class="hl std">size,</span>
+                  <span class="hl std">crab_sizes_n_PIE</span><span class="hl opt">$</span><span class="hl std">size)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## 	Wilcoxon rank sum exact test
+## 
+## data:  crab_sizes_s_GTM$size and crab_sizes_n_PIE$size
+## W = 26, p-value = 3.068e-12
+## alternative hypothesis: true location shift is not equal to 0
+</pre></div>
+</div></div>
+        <p>
+          Here we see our p-value is &lt;&lt; 0.05, so we can reject our null hypothesis that say that these two medians are equal, and thus conclude (generally) that the northern and southern populations have different sizes. Note again that this is a two-sided test so we're not testing directionality. 
+        </p>
+      </section>
+    </section>
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">
@@ -81,5 +525,262 @@ function w3_close() {
 </script>
 </main>
 
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button" style="color:blue;">Close Menu</a>
+  <ol>
+    <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
+    <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
+    <li><a href="../00-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
+    <ol>
+        <li><a href="../00-start/00-01-downloads.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Downloads</a>
+        </li>
+        <li><a href="../00-start/00-02-navigating-rstudio.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Navigating RStudio</a>
+        </li>
+        <li><a href="../00-start/00-03-the-file-ecosystem.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            The File Ecosystem</a>
+        </li>
+    </ol>
+    </li>
+    <li><a href="../01-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
+        <ol>
+            <li><a href="../01-basicr/01-01-coding-basics.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Coding Basics</a>
+            </li>
+            <li><a href="../01-basicr/01-02-data-types.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Types</a>
+            </li>
+            <li><a href="../01-basicr/01-03-data-structures.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Structures</a>
+            </li>
+            <li><a href="../01-basicr/01-04-indexing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Indexing</a>
+            </li>
+            <li><a href="../01-basicr/01-05-packages.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Packages</a>
+            </li>
+            <li><a href="../01-basicr/01-06-workflow.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Workflow</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../02-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
+        <ol>
+            <li><a href="../02-data/02-01-reading-writing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Reading &amp; Writing Files</a>
+            </li>
+            <li><a href="../02-data/02-02-filtering-subsetting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Filtering &amp; Subsetting</a>
+            </li>
+            <li><a href="../02-data/02-03-selecting-columns.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Selecting Columns</a>
+            </li>
+            <li><a href="../02-data/02-04-grouping-summarizing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Grouping &amp; Summarizing</a>
+            </li>
+            <li><a href="../02-data/02-05-new-columns.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Ceating New Columns</a>
+            </li>
+            <li><a href="../02-data/02-06-factors.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Factor Data</a>
+            </li>
+            <li><a href="../02-data/02-07-renaming.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Renaming Columns</a>
+            </li>
+            <li><a href="../02-data/02-08-dates.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Date &amp; Time Data</a>
+            </li>
+            <li><a href="../02-data/02-09-reshaping.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Reshaping DataFrames</a>
+            </li>
+            <li><a href="../02-data/02-10-cleaning-process.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Cleaning Process</a>
+            </li>
+            <li><a href="../02-data/02-11-relational-data.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Relational DataFrames</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../03-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
+        <ol>
+            <li><a href="../03-plot/03-00-basics-of-plotting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Basics of Plotting</a>
+            </li>
+            <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Introduction to <code>ggplot2</code></a>
+            </li>
+            <li><a href="../03-plot/03-02-interative-plotting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Interative Plotting</a>
+            </li>
+            <li><a href="../03-plot/03-03-facetting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Facetting Plot Panels</a>
+            </li>
+            <li><a href="../03-plot/03-04-plotting-multiple-dataframes.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting with Multiple DataFrames</a>
+            </li>
+            <li><a href="../03-plot/03-05-distributions.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Distributions</a>
+            </li>
+            <li><a href="../03-plot/03-06-part-to-whole-comparison.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Part to Whole Comparisons</a>
+            </li>
+            <li><a href="../03-plot/03-07-relations-between-vars.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Relationships Between Variables</a>
+            </li>
+            <li><a href="../03-plot/03-08-change-time.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Change Through Time</a>
+            </li>
+            <li><a href="../03-plot/03-10-values-between-groups.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Values Between Groups</a>
+            </li>
+            <li><a href="../03-plot/03-11-mapping.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Geographic Mapping</a>
+            </li>
+            <li><a href="../03-plot/03-12-annotations.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Annotations</a>
+            </li>
+            <li><a href="../03-plot/03-13-phylogenetic-trees.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Phylogenetic Trees</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../04-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
+        <ol>
+            <li><a href="../04-stats1/04-00-introduction.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Introduction</a>
+            </li>
+            <li><a href="../04-stats1/04-01-probability-101.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Probability 101</a>
+            </li>
+            <li><a href="../04-stats1/04-02-likelihood.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Likelihood</a>
+            </li>
+            <li><a href="../04-stats1/04-03-sampling-distributions.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Sampling Distributions</a>
+            </li>
+            <li><a href="../04-stats1/04-04-hypothesis-testing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Hypothesis Testings</a>
+            </li>
+            <li><a href="../04-stats1/04-05-confidence-intervals.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Confidence Intervals</a>
+            </li>
+            <li><a href="../04-stats1/04-06-comparing-sample-means.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Comparing Sample Means (T-tests)</a>
+            </li>
+            <li><a href="../04-stats1/04-07-analysis-of-variance.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Analysis of Variance (ANOVAs)</a>
+            </li>
+            <li><a href="../04-stats1/04-08-linear-regression.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Linear Regression</a>
+            </li>
+            <li><a href="../04-stats1/04-09-logistic-regression.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Logistic Regression</a>
+            </li>
+        </ol>
+    </li>
+  </ol>
+</nav>
+
 </body>
 </html>
+ 

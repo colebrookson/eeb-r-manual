@@ -1,6 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/stylesheet.css">
@@ -14,6 +76,9 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 </head>
 <body class="w3-round-large">
 
@@ -22,36 +87,516 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <div class="w3-navy w3-xlarge" 
   style="max-width:auto;margin:auto;border:1px w3-gray"
   border:1px>
-    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰ Menu</div>
     <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
     <div class="w3-center w3-padding-16">The R Manual</div>
   </div>
 </div>
 
-<!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-bar-item w3-button">Close Menu</a>
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
-  <a href="#contact" onclick="w3_close()" 
-  class="w3-bar-item w3-button">Contact</a>
-</nav>
-
 <main style = margin-top:100px>
   <nav class="section-nav">
       <ol>
-        <li><a href="#reshape"></a>
+        <li><a href="#common">Common Distributions</a></li>
+        <li><a href="#psuedo">Random vs. Pseudorandom</a></li>
+        <li><a href="#rsamp">Random Sampling</a></li>
+        <li><a href="#samp-r">Sampling in R</a>
+        <ol>
+          <li><a href="#samp-r--seeds">Seeds</a></li>
+        </ol>
         </li>
+        <li><a href="#dist">Sampling Distributions</a>
+          <ol>
+            <li><a href="#dist--disc">Discrete Distributions</a></li>
+            <li><a href="#dist--cont">Continuous Distributions</a></li>
+          </ol>
+        </li>
+        <li><a href="#clt">Central Limit Theorem</a></li>
+        <li><a href="#lln">Law of Large Numbers</a></li>
+  
       </ol>
     </nav>
   <div>
-    <section id="work">
+    <section id="">
       <h2>Sampling & Sampling Distributions</h2>
-      <img class="image-full-page" style="display:block;margin:auto"
-      src="../img/01-img/construction.jpg">
-
+      <p>
+        Sampling refers to the drawing of a subset of data points from some larger set (population). How we sample can be the subject of an entire course, but it is helpful to know enough to perform sampling in R, and then to compile those samples together into a <em>sampling distribution</em>. 
+      </p>
+    </section>
+    <section id="common">
+      <h2>Common Distributions</h2>
+      <p>
+        Before we go any further, let's remind ourselves of the shapes and names of some of the common distributions that we'll want to have fresh in our minds for this section. As another reminder, we need to be conscious as to whether we're dealing with a <em>continuous</em> distribution or a <em>discrete</em> distribution. Here's a visual to remind us of this: 
+      </p>
+      <figure>
+        <img src="../img/04-img/distributions.png">
+        <figcaption>credit: Ashkay Sharma</figcaption>
+      </figure>
+    </section>
+    <section id="pseudo">
+      <h2>Random vs. Pseudorandom</h2>
+      <p>
+        We often think of computers as being able to generate for us <em>random</em> samples of numbers. However, computer-generated random samples are never <strong>truly</strong> random, they are what is called <em>pseudorandom</em>. For a computer to sample a truly random number, they would need to use a <em>true</em> random number generator (TRNG), which relies on using some external physical variable such as airwave static to generate a <em>truly</em> random sample, since subatomic particles have truly random behaviour. 
+      </p>
+      <p>
+        Computers on their own have to approximate this with an algorithm. The methods that we use to do this are not important in this context, but it is a good thing to remember that computationally derived random numbers (as we usually get from R) are not actually the same as mathematically random numbers, as the mathematical definitions used to define randomness in the purest sense are not computationally employable. 
+      </p>
+      <p>
+        So, in R, we will use <em>pseudorandom</em> number generators when we want to sample some numbers.
+      </p>
+    </section>
+    <section id="rsamp">
+      <h2>Random Sampling</h2>
+      <p>
+        So when we want to sample some set of numbers, we have to usually define what kind of distribution we want to draw from. When we ask R to randomly sample a number for us, we need to at least provide it with some guidelines about what kind of number we want. Do we want only integers? Decimals? If so, how many significant digits? What are the limits?
+      </p>
+      <p>
+        The way we would typically think about sampling in our brains is similar to the example of having a set of balls in a bag, all labeled with a unique number from 1-10. Assuming all else about the balls is equal, we could guess that there would be an equal probability we would draw any given ball from the bag. While this feels intuitive, this is actually thinking in distributions! We have actually just stated that we believe the distribution we are sampling from is <strong>uniform</strong>, that is, that all possible values have the same probability of being chosen. 
+      </p>
+      <p>
+        Contrast that with something like a Normal (Gaussian) distribution, and we will be more likely to select a value that lands closer to the center of the distribution, at the mean. 
+      </p>
+    </section>
+    <section id="samp-r">
+      <h2>Random Sampling in R</h2>
+      <p>
+        It's actually quite easy to perform random sampling in R, given that it's a statistical programming language, the basic version of R that comes installed contains the <code>stats</code> package which includes random sampling function for a variety of distributions. Let's use an example with the normal distribution. Since the normal distribution takes two parameters, 1) a mean, and 2) a standard deviation, we need to provide those two parameters to the function, along with the number of samples we'd like to draw. 
+      </p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1.5</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] 4.219163 4.939849 3.611124 6.712703 3.310015 3.246692 2.824932 5.045281
+##  [9] 4.974616 4.921655
+</pre></div>
+</div></div>
+      <p>
+        And we see R has selected our values for us. Often we want to be able to plot the distribution of values that we've sampled. That's most easily done as a simple histogram, using the <code>hist()</code> function which is in the <code>graphics</code> package: 
+      </p>
+      <p>
+        And we see we've approximated a normal distribution here. 
+      </p>
+      <section id="samp-r--seeds">
+        <h3>Seeds and Reproducibility</h3>
+        <p>
+          When doing random number generation in R, it stands to reason that given how R goes about it's random number generation, if I write the above code to sample 10 data points in a script, run that code, and then come back in a few days and run it again <em>I'll get a completely different set of points the next time</em>. We can see this in action here: 
+        </p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1]  0.72484696 -0.59739762  1.55148507  1.45967440  1.08767389  0.46714357
+##  [7] -0.85711346 -0.07303599  1.09177378 -0.65785075
+</pre></div>
+</div></div>
+        <p>
+          And again: 
+        </p>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] -0.0543601 -0.6566709 -0.8312304 -0.5824460  1.0383690 -0.2715849
+##  [7] -0.1604328  0.6263472  0.9644189  1.3131971
+</pre></div>
+</div></div>
+        <p>
+          We see these are completely different sets of numbers! 
+        </p>
+        <p>
+          There are many situations where we might need to be able to re-run a set of random numbers and have them be the same values (e.g. debugging code, simulation studies, etc.). Well, if we recall that we actually are doing is using a <em>pseudorandom</em> number generator (PRNG), then we can use the concepts of <strong>seeds</strong> to help us. Whenever using a PRNG we need to "set a seed" which initializes the PRNG. The details of this aren't important here, but know that if we have a seed, we can predict what the PRNG will draw as pseudorandom numbers. Let's make an example. 
+        </p>
+        <p>
+          Say we want to draw 100 samples from a uniform (discrete) distribution. As a reminder, a uniform distribution with bounds at 0 and 10 looks like this: 
+        </p>
+<div class="chunk" id="unnamed-chunk-4"><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+        <p>
+          We'll explore the use of seeds by drawing 100 random samples from a uniform distribution with bounds at 0 and 10. We start by setting a seed and drawing our samples:
+        </p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># start by setting a seed</span>
+<span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">)</span>
+<span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">,</span> <span class="hl kwc">min</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">max</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+        <p>
+          Now let's draw a new set of values: 
+        </p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">,</span> <span class="hl kwc">min</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">max</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+        <p>
+          We can see if these values are the same by using a boolean comparison: 
+        </p>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">all</span><span class="hl std">(x</span> <span class="hl opt">==</span> <span class="hl std">y)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] FALSE
+</pre></div>
+</div></div>
+        <p>
+          So the values drawn are NOT the same. But what happens if we re-employ the seed that we set previously? 
+        </p>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">)</span>
+<span class="hl std">z</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">,</span> <span class="hl kwc">min</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">max</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+        <p>
+          Let's check if they're equivalent: 
+        </p>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">all</span><span class="hl std">(x</span> <span class="hl opt">==</span> <span class="hl std">z)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] TRUE
+</pre></div>
+</div></div>
+        <p>
+          So now we get a true! This is good to know! This means we can draw random samples in a <em>reproducible</em> manner, which can be incredibly useful. 
+        </p>
       </section>
+    </section>
+    <section id="dist">
+      <h2>Sampling Distributions</h2>
+      <p>
+        A sampling distribution refers to the probability distribution of a particular statistic that we might get from a random sample. 
+      </p>
+      <section id="dist--disc">
+        <h3>Discrete Sampling Distributions</h3>
+        <p>
+          Let us think back to our example in <a href="./04-01-probability-101.html">Probability 101</a> of a discrete sampling distribution - gene frequency. Imagine we were able to "zoom in" on some random part of our own DNA, we would see something like this: 
+        </p>
+        <img src="../img/04-img/nucleotide.jpg">
+        <p>
+          We could imagine that the frequency of each gene may be equivalent, However, research has shown (i.e. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC403801/">Louie et al. (2003)</a>) that nucleotide frequency is <em>not</em> uniform across human genes. So given some particular gene, it may be the case that we see a non-uniform probability distribution, but one that looks like this: 
+        </p>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+  <span class="hl kwc">base</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
+  <span class="hl kwc">prob</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.1</span><span class="hl std">,</span> <span class="hl num">0.2</span><span class="hl std">,</span> <span class="hl num">0.45</span><span class="hl std">,</span> <span class="hl num">0.25</span><span class="hl std">)</span>
+<span class="hl std">)</span>
+
+<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_col</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= base,</span> <span class="hl kwc">y</span> <span class="hl std">= prob,</span> <span class="hl kwc">fill</span> <span class="hl std">= base))</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Nucleotide Base&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in ggplot(data = df): could not find function &quot;ggplot&quot;
+</pre></div>
+</div></div>
+        <p>
+          As a fun little game, let's build a gene. There approximately 1000 nucleotide pairs of coding sequence per gene according to google, and let's imagine that the gene we're building has a probability distribution of nucleotides that is given above, where the probabilities of each base appearing given a random sample are: 0.1, 0.2, 0.45, and 0.25 respectively for A, C, G, and T. 
+        </p>
+        <p>
+          Using R's functionality, let's sample a variable number times from our weighted set, and see if the distribution we get from our sample matches the theoretical probabilities. We'll sample 20, 100, 1000, and 10,000 times. The Law of Large Numbers indicates that the more samples we take, the closer we'll get to our theoretical probabilities. Let's try!
+        </p>
+        <p>
+          To do this, we'll use R's <code>sample()</code> function from the base package, and alter only the <code>size</code> argument which says how many times to sample.
+        </p>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1234</span><span class="hl std">)</span>
+<span class="hl std">sample_20</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
+                    <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">20</span><span class="hl std">,</span>
+                    <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span>
+                    <span class="hl kwc">prob</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.1</span><span class="hl std">,</span> <span class="hl num">0.2</span><span class="hl std">,</span> <span class="hl num">0.45</span><span class="hl std">,</span> <span class="hl num">0.25</span><span class="hl std">))</span>
+<span class="hl std">sample_100</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
+                    <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">,</span>
+                    <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span>
+                    <span class="hl kwc">prob</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.1</span><span class="hl std">,</span> <span class="hl num">0.2</span><span class="hl std">,</span> <span class="hl num">0.45</span><span class="hl std">,</span> <span class="hl num">0.25</span><span class="hl std">))</span>
+<span class="hl std">sample_1000</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
+                    <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1000</span><span class="hl std">,</span>
+                    <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span>
+                    <span class="hl kwc">prob</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.1</span><span class="hl std">,</span> <span class="hl num">0.2</span><span class="hl std">,</span> <span class="hl num">0.45</span><span class="hl std">,</span> <span class="hl num">0.25</span><span class="hl std">))</span>
+<span class="hl std">sample_10000</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
+                    <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">10000</span><span class="hl std">,</span>
+                    <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span>
+                    <span class="hl kwc">prob</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.1</span><span class="hl std">,</span> <span class="hl num">0.2</span><span class="hl std">,</span> <span class="hl num">0.45</span><span class="hl std">,</span> <span class="hl num">0.25</span><span class="hl std">))</span>
+</pre></div>
+</div></div>
+        <p>
+          Now let's take these vectors and turn them into dataframes so we can plot them. We can use the convenient <code>table()</code> function to get counts of how many of each base there is: 
+        </p>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'dplyr'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+<span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
+
+<span class="hl std">df_20</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+  <span class="hl com"># use table()</span>
+  <span class="hl kwd">table</span><span class="hl std">(sample_20)</span>
+  <span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl com"># rename them to be consistent</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rename</span><span class="hl std">(</span>
+    <span class="hl kwc">base</span> <span class="hl std">= sample_20,</span>
+    <span class="hl kwc">prob</span> <span class="hl std">= Freq</span>
+  <span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl com"># add column to tell us how many samples were drawn</span>
+    <span class="hl kwc">sample</span> <span class="hl std">=</span> <span class="hl str">&quot;20&quot;</span><span class="hl std">,</span>
+    <span class="hl com"># turn value from a count to a probability</span>
+    <span class="hl kwc">prob</span> <span class="hl std">= prob</span><span class="hl opt">/</span><span class="hl num">20</span>
+  <span class="hl std">)</span>
+
+<span class="hl std">df_100</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+  <span class="hl com"># use table()</span>
+  <span class="hl kwd">table</span><span class="hl std">(sample_100)</span>
+  <span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl com"># rename them to be consistent</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rename</span><span class="hl std">(</span>
+    <span class="hl kwc">base</span> <span class="hl std">= sample_100,</span>
+    <span class="hl kwc">prob</span> <span class="hl std">= Freq</span>
+  <span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl com"># add column to tell us how many samples were drawn</span>
+    <span class="hl kwc">sample</span> <span class="hl std">=</span> <span class="hl str">&quot;100&quot;</span><span class="hl std">,</span>
+    <span class="hl com"># turn value from a count to a probability</span>
+    <span class="hl kwc">prob</span> <span class="hl std">= prob</span><span class="hl opt">/</span><span class="hl num">100</span>
+  <span class="hl std">)</span>
+
+<span class="hl std">df_1000</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+  <span class="hl com"># use table()</span>
+  <span class="hl kwd">table</span><span class="hl std">(sample_1000)</span>
+  <span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl com"># rename them to be consistent</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rename</span><span class="hl std">(</span>
+    <span class="hl kwc">base</span> <span class="hl std">= sample_1000,</span>
+    <span class="hl kwc">prob</span> <span class="hl std">= Freq</span>
+  <span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl com"># add column to tell us how many samples were drawn</span>
+    <span class="hl kwc">sample</span> <span class="hl std">=</span> <span class="hl str">&quot;1000&quot;</span><span class="hl std">,</span>
+    <span class="hl com"># turn value from a count to a probability</span>
+    <span class="hl kwc">prob</span> <span class="hl std">= prob</span><span class="hl opt">/</span><span class="hl num">1000</span>
+  <span class="hl std">)</span>
+
+<span class="hl std">df_10000</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+  <span class="hl com"># use table()</span>
+  <span class="hl kwd">table</span><span class="hl std">(sample_10000)</span>
+  <span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl com"># rename them to be consistent</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rename</span><span class="hl std">(</span>
+    <span class="hl kwc">base</span> <span class="hl std">= sample_10000,</span>
+    <span class="hl kwc">prob</span> <span class="hl std">= Freq</span>
+  <span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl com"># add column to tell us how many samples were drawn</span>
+    <span class="hl kwc">sample</span> <span class="hl std">=</span> <span class="hl str">&quot;10000&quot;</span><span class="hl std">,</span>
+    <span class="hl com"># turn value from a count to a probability</span>
+    <span class="hl kwc">prob</span> <span class="hl std">= prob</span><span class="hl opt">/</span><span class="hl num">10000</span>
+  <span class="hl std">)</span>
+</pre></div>
+</div></div>
+        <p>
+          Now we'll combine all these data frames into one, add a reference of the real values, and plot the result with a grouped bar chart: 
+        </p>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># join samples up </span>
+<span class="hl std">df_all_samples</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rbind</span><span class="hl std">(</span>
+  <span class="hl std">df_20,</span>
+  <span class="hl std">df_100,</span>
+  <span class="hl std">df_1000,</span>
+  <span class="hl std">df_10000</span>
+<span class="hl std">)</span> <span class="hl opt">%&gt;%</span>
+  <span class="hl com"># add in a column to denote these are sampled not theoretical</span>
+  <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;sampled&quot;</span>
+  <span class="hl std">)</span>
+
+<span class="hl std">df_real</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+  <span class="hl kwc">base</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
+  <span class="hl kwc">prob</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.1</span><span class="hl std">,</span> <span class="hl num">0.2</span><span class="hl std">,</span> <span class="hl num">0.45</span><span class="hl std">,</span> <span class="hl num">0.25</span><span class="hl std">),</span>
+  <span class="hl kwc">sample</span> <span class="hl std">=</span> <span class="hl str">&quot;Real values&quot;</span><span class="hl std">,</span>
+  <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;theoretical&quot;</span>
+<span class="hl std">)</span>
+
+<span class="hl com"># join the dataframes again</span>
+<span class="hl std">df_all</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rbind</span><span class="hl std">(</span>
+  <span class="hl std">df_all_samples</span> <span class="hl opt">%&gt;%</span>
+    <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+      <span class="hl kwc">sample</span> <span class="hl std">=</span> <span class="hl kwd">as.character</span><span class="hl std">(sample)</span>
+    <span class="hl std">),</span>
+  <span class="hl std">df_real</span>
+<span class="hl std">)</span>
+
+<span class="hl com"># plot the result </span>
+<span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_bar</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_all,</span>
+          <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= base,</span> <span class="hl kwc">y</span> <span class="hl std">= prob,</span> <span class="hl kwc">alpha</span> <span class="hl std">= type,</span>
+                        <span class="hl kwc">fill</span> <span class="hl std">= sample,</span> <span class="hl kwc">colour</span> <span class="hl std">= type),</span>
+          <span class="hl kwc">position</span> <span class="hl std">=</span> <span class="hl str">&quot;dodge&quot;</span><span class="hl std">,</span> <span class="hl kwc">stat</span> <span class="hl std">=</span> <span class="hl str">&quot;identity&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span>
+    <span class="hl str">&quot;Sample Size&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">values</span> <span class="hl std">= wesanderson</span><span class="hl opt">::</span><span class="hl kwd">wes_palette</span><span class="hl std">(</span><span class="hl str">&quot;Rushmore1&quot;</span><span class="hl std">,</span> <span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">scale_alpha_manual</span><span class="hl std">(</span><span class="hl str">&quot;Theoretical or Sampled&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.5</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">scale_colour_manual</span><span class="hl std">(</span><span class="hl str">&quot;Theoretical or Sampled&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;white&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+        <p>
+          Here we have shown intuitively the Law of Large Numbers!!!!
+        </p>
+      </section>
+      <section id="dist--cont">
+        <h3>Continuous Sampling Distributions</h3>
+        <p>
+          Consider records for aquatic vertebrates (cutthroat trout and salamanders) in Mack Creek, Andrews Experimental Forest, Oregon (1987 - present). This dataset is present in the <code>lterdatasampler</code> package. 
+        </p>
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
+<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">and_vertebrates</span>
+<span class="hl kwd">head</span><span class="hl std">(df)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 6 × 16
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA
+## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA
+## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA
+## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA
+## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA
+## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA
+## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
+## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+</pre></div>
+</div></div>
+        <p>
+          Let us look at the distribution of cutthroat trout sizes in our database:
+        </p>
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">length_1_mm)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+        <p>
+          We can see that this distribution isn't quite normal, but is continuous, and right-skewed. It could be approximated by a log-normal distribution: 
+        </p>
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">250</span><span class="hl std">)</span>
+<span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">dlnorm</span><span class="hl std">(x,</span> <span class="hl kwc">meanlog</span> <span class="hl std">=</span> <span class="hl num">4.1</span><span class="hl std">,</span> <span class="hl kwc">sdlog</span> <span class="hl std">=</span> <span class="hl num">0.4</span><span class="hl std">)</span>
+
+<span class="hl com"># figure out how to scale the y for the plot alone </span>
+<span class="hl std">scale_factor</span> <span class="hl kwb">&lt;-</span> <span class="hl num">5000</span> <span class="hl opt">/</span> <span class="hl num">0.01780701</span>
+<span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl std">y</span> <span class="hl opt">*</span> <span class="hl std">scale_factor</span>
+<span class="hl std">dist_df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(x, y)</span>
+
+<span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_histogram</span><span class="hl std">(df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm),</span>
+                <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;grey20&quot;</span><span class="hl std">,</span> <span class="hl kwc">fill</span> <span class="hl std">=</span> <span class="hl str">&quot;lightblue&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_line</span><span class="hl std">(dist_df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= x,</span> <span class="hl kwc">y</span> <span class="hl std">= y),</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">linetype</span> <span class="hl std">=</span> <span class="hl str">&quot;dashed&quot;</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Cutthroat Trout Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Density&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: Removed 17 rows containing non-finite values (stat_bin).
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
+      <p>
+        <bold>What will happen if we draw a number of random samples from this distribution and calculate the sample mean? What will the resulting distribution of sample means look like?</bold>
+      </p>
+      <p>
+        What we are doing here is constructing a sampling distribution. We can do this by randomly drawing samples from our population (in this example, every fish in our data set is the "population"), then calculating the mean for each random sample. 
+      </p>
+      <p>
+        As we discuss in the <a href="../07-landingpage.html">programming concepts</a> section on pseudocoding, let's think about how to accomplish this before we start blindly writing code. There are steps to our process here: 
+      </p>
+      <p>
+        <ol>
+          <li style="color:blue;font-size:calc(12px + 0.8vw);">1. Determine how many random samples to draw (let's call this <em>n</em>)
+          <ol>
+            <li style="color:grey;font-size:calc(12px + 0.7vw);">1.1 - How many observations in each sample (let's call this <em>x</em>)? </li>
+            <li style="color:grey;font-size:calc(12px + 0.7vw);">1. 2. - Pre-allocate an object to hold <em>n</em> number of sample means </li>
+          </ol>
+          </li>
+          <li style="color:blue;font-size:calc(12px + 0.8vw);">2. Draw a sample 
+          <ol>
+            <li style="color:grey;font-size:calc(12px + 0.7vw);">2. 1. - Pull out <em>x</em> number of observations </li>
+            <li style="color:grey;font-size:calc(12px + 0.7vw);">2. 2. - Calculate the mean </li>
+            <li style="color:grey;font-size:calc(12px + 0.7vw);">2. 3. - Store that mean in the corresponding location of the pre-allocated object </li>
+          </ol>
+          </li>
+          <li style="color:blue;font-size:20px">3. Repeat step 2 <em>n</em> times</li>
+        </ol>
+      </p>
+      <p>
+        The easiest way to actually accomplish this is through a for-loop. We'll start this and do it in order: 
+      </p>
+<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first, we'll draw 100 samples </span>
+<span class="hl std">n</span> <span class="hl kwb">&lt;-</span> <span class="hl num">100</span>
+
+<span class="hl com"># let's pull 10 observations in each sample</span>
+<span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl num">10</span>
+
+<span class="hl com"># preallocate object to hold sample means</span>
+<span class="hl std">sample_means</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;numeric&quot;</span><span class="hl std">,</span> <span class="hl kwc">length</span> <span class="hl std">= n)</span>
+</pre></div>
+</div></div>
+      <p>
+        So how would we perform step 2? We'd sample 10 values from <code>df$length_1_mm</code>, calculate the mean, and assign the mean value to <code>sample_means[n]</code>. Then, we simply repeat this <em>n</em> times. Here's that code:
+      </p>
+<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first, sample randomly from the vector of value</span>
+<span class="hl kwa">for</span><span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">n) {</span>
+  <span class="hl std">sample_means[i]</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">mean</span><span class="hl std">(</span><span class="hl kwd">sample</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">length_1_mm,</span> <span class="hl kwc">size</span> <span class="hl std">= x,</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">))</span>
+<span class="hl std">}</span>
+<span class="hl kwd">head</span><span class="hl std">(sample_means)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 80.5 79.2 63.6 82.3 73.6 59.9
+</pre></div>
+</div></div>
+      <p>
+        Okay, so this worked! Excellent. Now, let's plot a histogram of our results:
+      </p>
+<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(sample_means)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" class="plot" /></div></div>
+      <p>
+        Hmm!! A confusing distribution. This doesn't really resemble any interesting or meaningful distribution. Let's try the process again, but with a much larger value of <em>n</em>, and see if that changes the result: 
+      </p>
+<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">n</span> <span class="hl kwb">&lt;-</span> <span class="hl num">100000</span>
+<span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl num">10</span>
+<span class="hl std">sample_means</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;numeric&quot;</span><span class="hl std">,</span> <span class="hl kwc">length</span> <span class="hl std">= n)</span>
+
+<span class="hl kwa">for</span><span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">n) {</span>
+  <span class="hl std">sample_means[i]</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">mean</span><span class="hl std">(</span><span class="hl kwd">sample</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">length_1_mm,</span> <span class="hl kwc">size</span> <span class="hl std">= x,</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">))</span>
+<span class="hl std">}</span>
+
+<span class="hl kwd">hist</span><span class="hl std">(sample_means)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" class="plot" /></div></div>
+      <p>
+        Wow! This distribution is remarkably normal! What's going on here????
+      </p>
+      <p>
+        We have just stumbled upon the <bold> Central Limit Theorem</bold>. 
+      </p>
+    </section>
+    </section>
+    <section id="clt">
+      <h2>Central Limit Theorem</h2>
+      <p>
+        The Central Limit Theorem is an incredibly important theorem that states the following: 
+      </p>
+      <p>
+        <em>Taking a population with some mean <math>μ</math> and a standard deviation <math>σ</math>, we can sample from the population (with replacement), and with a number of samples that is sufficiently large, the distribution of the sample means will be normally distributed.</em>
+      </p>
+      <p>
+        We have just demonstrated this above with our cutthroat trout example. This is a surprisingly important stated theorem, because it provides us a path forward to work with statistical tests that <strong>assume normal distributions</strong>. As you will learn as you move further through your statistical training, normality of data makes our lives infinitely easier.  
+      </p>
+      <p>
+        I strongly recommend that if you care to learn more about statistics, to think deeply about the central limit theorem, and try to come up your own intuitive understanding of why it is true. There are many excellent descriptions of proofs of the central limit theorem. For the advanced and interested student, there's an excellent <a href="https://www.youtube.com/watch?v=Tx7zzD4aeiA">recorded lecture by John Tsitsiklis at MIT</a> that goes into detail on this theorem and why it is central not only to inferential statistics but how it links statistics to calculus. 
+      </p>
+    </section>
+    <section id="lln">
+      <h2>Law of Large Numbers</h2>
+      <p>
+        In the example we gave on discrete sampling distributions, we have already discovered what this "law" purports. Essentially, it states that if you repeat an experiment some number, <code>n</code>, of times and average the result, as <code>n</code> gets larger, the averaged result will get closer and closer to the expected value.
+      </p>
+      <p>
+        We saw this in our example, as the sampling option with 10,000 samples was the closest one to the expected value. We could deduce a short proof for this, but that's beyond the scope of this short piece.
+      </p>
+      <p>
+        What <em>is</em> an important takeaway is that this law says something valuable to us about what we need to keep in mind when we deal with <strong>small</strong> numbers. That is, the smaller the sample size at hand, the further we are from actually getting a representative sample of the population. While this may seem intuitive, it's helpful to understand that there <em>is</em> a provable way to understand this concept (We can also think about this as it relates to statistical power.)
+      </p>
+    </section>
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">
@@ -80,6 +625,262 @@ function w3_close() {
 }
 </script>
 </main>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button" style="color:blue;">Close Menu</a>
+  <ol>
+    <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
+    <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
+    <li><a href="../00-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
+    <ol>
+        <li><a href="../00-start/00-01-downloads.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Downloads</a>
+        </li>
+        <li><a href="../00-start/00-02-navigating-rstudio.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Navigating RStudio</a>
+        </li>
+        <li><a href="../00-start/00-03-the-file-ecosystem.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            The File Ecosystem</a>
+        </li>
+    </ol>
+    </li>
+    <li><a href="../01-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
+        <ol>
+            <li><a href="../01-basicr/01-01-coding-basics.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Coding Basics</a>
+            </li>
+            <li><a href="../01-basicr/01-02-data-types.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Types</a>
+            </li>
+            <li><a href="../01-basicr/01-03-data-structures.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Structures</a>
+            </li>
+            <li><a href="../01-basicr/01-04-indexing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Indexing</a>
+            </li>
+            <li><a href="../01-basicr/01-05-packages.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Packages</a>
+            </li>
+            <li><a href="../01-basicr/01-06-workflow.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Workflow</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../02-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
+        <ol>
+            <li><a href="../02-data/02-01-reading-writing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Reading &amp; Writing Files</a>
+            </li>
+            <li><a href="../02-data/02-02-filtering-subsetting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Filtering &amp; Subsetting</a>
+            </li>
+            <li><a href="../02-data/02-03-selecting-columns.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Selecting Columns</a>
+            </li>
+            <li><a href="../02-data/02-04-grouping-summarizing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Grouping &amp; Summarizing</a>
+            </li>
+            <li><a href="../02-data/02-05-new-columns.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Ceating New Columns</a>
+            </li>
+            <li><a href="../02-data/02-06-factors.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Factor Data</a>
+            </li>
+            <li><a href="../02-data/02-07-renaming.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Renaming Columns</a>
+            </li>
+            <li><a href="../02-data/02-08-dates.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Date &amp; Time Data</a>
+            </li>
+            <li><a href="../02-data/02-09-reshaping.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Reshaping DataFrames</a>
+            </li>
+            <li><a href="../02-data/02-10-cleaning-process.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Cleaning Process</a>
+            </li>
+            <li><a href="../02-data/02-11-relational-data.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Relational DataFrames</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../03-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
+        <ol>
+            <li><a href="../03-plot/03-00-basics-of-plotting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Basics of Plotting</a>
+            </li>
+            <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Introduction to <code>ggplot2</code></a>
+            </li>
+            <li><a href="../03-plot/03-02-interative-plotting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Interative Plotting</a>
+            </li>
+            <li><a href="../03-plot/03-03-facetting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Facetting Plot Panels</a>
+            </li>
+            <li><a href="../03-plot/03-04-plotting-multiple-dataframes.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting with Multiple DataFrames</a>
+            </li>
+            <li><a href="../03-plot/03-05-distributions.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Distributions</a>
+            </li>
+            <li><a href="../03-plot/03-06-part-to-whole-comparison.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Part to Whole Comparisons</a>
+            </li>
+            <li><a href="../03-plot/03-07-relations-between-vars.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Relationships Between Variables</a>
+            </li>
+            <li><a href="../03-plot/03-08-change-time.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Change Through Time</a>
+            </li>
+            <li><a href="../03-plot/03-10-values-between-groups.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Values Between Groups</a>
+            </li>
+            <li><a href="../03-plot/03-11-mapping.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Geographic Mapping</a>
+            </li>
+            <li><a href="../03-plot/03-12-annotations.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Annotations</a>
+            </li>
+            <li><a href="../03-plot/03-13-phylogenetic-trees.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Phylogenetic Trees</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../04-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
+        <ol>
+            <li><a href="../04-stats1/04-00-introduction.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Introduction</a>
+            </li>
+            <li><a href="../04-stats1/04-01-probability-101.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Probability 101</a>
+            </li>
+            <li><a href="../04-stats1/04-02-likelihood.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Likelihood</a>
+            </li>
+            <li><a href="../04-stats1/04-03-sampling-distributions.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Sampling Distributions</a>
+            </li>
+            <li><a href="../04-stats1/04-04-hypothesis-testing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Hypothesis Testings</a>
+            </li>
+            <li><a href="../04-stats1/04-05-confidence-intervals.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Confidence Intervals</a>
+            </li>
+            <li><a href="../04-stats1/04-06-comparing-sample-means.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Comparing Sample Means (T-tests)</a>
+            </li>
+            <li><a href="../04-stats1/04-07-analysis-of-variance.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Analysis of Variance (ANOVAs)</a>
+            </li>
+            <li><a href="../04-stats1/04-08-linear-regression.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Linear Regression</a>
+            </li>
+            <li><a href="../04-stats1/04-09-logistic-regression.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Logistic Regression</a>
+            </li>
+        </ol>
+    </li>
+  </ol>
+</nav>
 
 </body>
 </html>

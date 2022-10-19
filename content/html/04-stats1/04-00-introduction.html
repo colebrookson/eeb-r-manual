@@ -1,6 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/stylesheet.css">
@@ -22,21 +84,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <div class="w3-navy w3-xlarge" 
   style="max-width:auto;margin:auto;border:1px w3-gray"
   border:1px>
-    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰ Menu</div>
     <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
     <div class="w3-center w3-padding-16">The R Manual</div>
   </div>
 </div>
-
-<!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-bar-item w3-button">Close Menu</a>
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
-  <a href="#contact" onclick="w3_close()" 
-  class="w3-bar-item w3-button">Contact</a>
-</nav>
 
 <main style = margin-top:100px>
   <nav class="section-nav">
@@ -48,8 +100,22 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   <div>
     <section id="work">
       <h2>Introduction to Statistics in this Manual</h2>
-      <img class="image-full-page" style="display:block;margin:auto"
-      src="../img/01-img/construction.jpg">
+      <p>
+        The goal of this section is to provide students with a central resource to refer to with their programming/statistics questions as far as they relate to their undergraduate courses in the EEB department at UofT. To this end, this section is meant to help students become more familiar and comfortable with simple statistical tests and also with more complex statistical models. Hopefully this set of resources acts to help students develop an <em>intuitive understanding</em> of the material, and not just simply memorize the content. 
+      </p>
+      <p>
+        We generally advise that if you are using this section as a primary learning resource (i.e. you are coming here for knowledge on a topic, not to troubleshoot), that you follow the order laid out here somewhat. 
+      </p>
+      <p>
+        It is typically better to first understand the principles of <a href="./04-01-probability-101.html">Probability</a> and <a href="./04-03-sampling-distributions.html">Sampling</a> before you move on to questions about <a href="./04-08-linear-regression.html">Regression</a>. 
+      </p>
+      <p>
+        In addition, we understand that there is no way we can do justice to the entire conversation of <a href="./04-04-hypothesis-testing.html">hypothesis testing</a> in a short article like this. However, we <strong>strongly</strong> recommend you read through that section to get an idea about significance testing for hypotheses before you actually <em>perform</em> any tests. 
+      </p>
+      <figure>
+        <img src="../img/04-img/null_hypothesis.png" alt="xkcd comic">
+        <figcaption>Credit: xkcd comics</figcaption>
+      </figure> 
 
       </section>
 <!-- End page content -->
@@ -80,6 +146,262 @@ function w3_close() {
 }
 </script>
 </main>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button" style="color:blue;">Close Menu</a>
+  <ol>
+    <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
+    <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
+    <li><a href="../00-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
+    <ol>
+        <li><a href="../00-start/00-01-downloads.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Downloads</a>
+        </li>
+        <li><a href="../00-start/00-02-navigating-rstudio.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Navigating RStudio</a>
+        </li>
+        <li><a href="../00-start/00-03-the-file-ecosystem.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            The File Ecosystem</a>
+        </li>
+    </ol>
+    </li>
+    <li><a href="../01-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
+        <ol>
+            <li><a href="../01-basicr/01-01-coding-basics.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Coding Basics</a>
+            </li>
+            <li><a href="../01-basicr/01-02-data-types.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Types</a>
+            </li>
+            <li><a href="../01-basicr/01-03-data-structures.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Structures</a>
+            </li>
+            <li><a href="../01-basicr/01-04-indexing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Indexing</a>
+            </li>
+            <li><a href="../01-basicr/01-05-packages.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Packages</a>
+            </li>
+            <li><a href="../01-basicr/01-06-workflow.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Workflow</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../02-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
+        <ol>
+            <li><a href="../02-data/02-01-reading-writing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Reading &amp; Writing Files</a>
+            </li>
+            <li><a href="../02-data/02-02-filtering-subsetting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Filtering &amp; Subsetting</a>
+            </li>
+            <li><a href="../02-data/02-03-selecting-columns.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Selecting Columns</a>
+            </li>
+            <li><a href="../02-data/02-04-grouping-summarizing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Grouping &amp; Summarizing</a>
+            </li>
+            <li><a href="../02-data/02-05-new-columns.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Ceating New Columns</a>
+            </li>
+            <li><a href="../02-data/02-06-factors.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Factor Data</a>
+            </li>
+            <li><a href="../02-data/02-07-renaming.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Renaming Columns</a>
+            </li>
+            <li><a href="../02-data/02-08-dates.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Date &amp; Time Data</a>
+            </li>
+            <li><a href="../02-data/02-09-reshaping.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Reshaping DataFrames</a>
+            </li>
+            <li><a href="../02-data/02-10-cleaning-process.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Cleaning Process</a>
+            </li>
+            <li><a href="../02-data/02-11-relational-data.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Relational DataFrames</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../03-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
+        <ol>
+            <li><a href="../03-plot/03-00-basics-of-plotting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Basics of Plotting</a>
+            </li>
+            <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Introduction to <code>ggplot2</code></a>
+            </li>
+            <li><a href="../03-plot/03-02-interative-plotting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Interative Plotting</a>
+            </li>
+            <li><a href="../03-plot/03-03-facetting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Facetting Plot Panels</a>
+            </li>
+            <li><a href="../03-plot/03-04-plotting-multiple-dataframes.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting with Multiple DataFrames</a>
+            </li>
+            <li><a href="../03-plot/03-05-distributions.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Distributions</a>
+            </li>
+            <li><a href="../03-plot/03-06-part-to-whole-comparison.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Part to Whole Comparisons</a>
+            </li>
+            <li><a href="../03-plot/03-07-relations-between-vars.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Relationships Between Variables</a>
+            </li>
+            <li><a href="../03-plot/03-08-change-time.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Change Through Time</a>
+            </li>
+            <li><a href="../03-plot/03-10-values-between-groups.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Values Between Groups</a>
+            </li>
+            <li><a href="../03-plot/03-11-mapping.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Geographic Mapping</a>
+            </li>
+            <li><a href="../03-plot/03-12-annotations.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Annotations</a>
+            </li>
+            <li><a href="../03-plot/03-13-phylogenetic-trees.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Phylogenetic Trees</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../04-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
+        <ol>
+            <li><a href="../04-stats1/04-00-introduction.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Introduction</a>
+            </li>
+            <li><a href="../04-stats1/04-01-probability-101.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Probability 101</a>
+            </li>
+            <li><a href="../04-stats1/04-02-likelihood.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Likelihood</a>
+            </li>
+            <li><a href="../04-stats1/04-03-sampling-distributions.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Sampling Distributions</a>
+            </li>
+            <li><a href="../04-stats1/04-04-hypothesis-testing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Hypothesis Testings</a>
+            </li>
+            <li><a href="../04-stats1/04-05-confidence-intervals.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Confidence Intervals</a>
+            </li>
+            <li><a href="../04-stats1/04-06-comparing-sample-means.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Comparing Sample Means (T-tests)</a>
+            </li>
+            <li><a href="../04-stats1/04-07-analysis-of-variance.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Analysis of Variance (ANOVAs)</a>
+            </li>
+            <li><a href="../04-stats1/04-08-linear-regression.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Linear Regression</a>
+            </li>
+            <li><a href="../04-stats1/04-09-logistic-regression.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Logistic Regression</a>
+            </li>
+        </ol>
+    </li>
+  </ol>
+</nav>
 
 </body>
 </html>
