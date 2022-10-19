@@ -30,7 +30,7 @@ The way that we state our hypothesis will determine what type of statistical tes
 
 Let's use an example to discuss this. Say we are interested in the size of fiddler crabs. We could formulate a hypothesis test that falls into each of these categories. For example: 
 
-1) Say we believe that the distribution of sizes is not in fact normal. We could construct a null hypothesis that says we believe our size data to be drawn from a population distribution that is in fact normally distributed, and the alternate hypothesis would say that the data were drawn from a non-normal distribution. <strong>Note here that we have not made any suggestion in our alternate hypothesis as to wha*t specifically that non-normal distribution is</strong>. <a href="./04-07-comparing-sample-means.html">See how to do this in R.</a>
+1) Say we believe that the distribution of sizes is not in fact normal. We could construct a null hypothesis that says we believe our size data to be drawn from a population distribution that is in fact normally distributed, and the alternate hypothesis would say that the data were drawn from a non-normal distribution. <strong>Note here that we have not made any suggestion in our alternate hypothesis as to what specifically that non-normal distribution is</strong>. <a href="./04-07-comparing-sample-means.html">See how to do this in R.</a>
 
 2) We could decide we think that size covaries with some other variable, say, latitude. If we wanted to test Bergmann's Rule, we could form a null hypothesis that says that size does not co-vary with latitude, and an alternate hypothesis that says not only do we think size co-varies with lattitude, but that it co-varies <em>positively</em>. 
 

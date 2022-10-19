@@ -41,17 +41,104 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
 <main style = margin-top:100px>
   <nav class="section-nav">
       <ol>
-        <li><a href="#reshape"></a>
+        <li><a href="#null">Null Nypotheses</a>
+        </li>
+        <li><a href="#sig">Significance Testing</a>
+          <ol>
+            <li><a href="#sig--stat">Statistical Signficiance</a>
+            <ol>
+              <li><a href="#sig--stat--thresh">Danger of Thresholds</a></li>
+            </ol>
+            </li>
+          </ol>
         </li>
       </ol>
     </nav>
   <div>
     <section id="work">
       <h2>Hypothesis Testing</h2>
-      <img class="image-full-page" style="display:block;margin:auto"
-      src="../img/01-img/construction.jpg">
-
+      <p>
+        Hypothesis testing is the process of testing, with statistical rigor, some suggested assumption about an observation. This process follows the the process of: 
+      </p>
+      <p>
+        <ol>
+          <li style="color:blue;font-size:calc(12px + 0.7vw);">1) Making some testable assumption</li>
+          <li style="color:blue;font-size:calc(12px + 0.7vw);">2) Collecting data to use as evidence of said assumption</li>
+          <li style="color:blue;font-size:calc(12px + 0.7vw);">3) Accepting or rejecting the assumption at hand </li>
+        </ol>
+      </p>
+      <p>
+        We will denote here the difference between a <em>biological hypothesis</em> and a <em>statistical hypothesis</em>. It's important to choose our language carefully and keep in mind the context. In the context of a statistical test, a <strong>population</strong> is not a biological population, but a population as we defined it in the <a href="./04-01-probability-101.html">probability section</a>: the set of all units a random process can pick. 
+      </p>
       </section>
+    <section id="null">
+      <h2>Null Hypothesis Testing</h2>
+      <p>
+        This is the simplest form of hypothesis testing, and it revolves around the idea of a <strong>null hypothesis</strong>, which is held the accepted truth until proven otherwise, using a <strong>alternate hypothesis</strong>. The null hypothesis states no statistical relationship and significance exists between two sets of observed data. The alternate hypothesis <strong> does </strong> suggest a statistical relationship between the sets of data, and can optionally also suggest a direction of magnitude. That is, the alternate hypothesis can suggest only a magnitude (e.g. X variable co-varies with Y) or a magnitude <strong>and</strong> a direction (e.g. X co-varies positively with Y). 
+      </p>
+      <p>
+        Once we have a stated alternate and null hypothesis, we would perform a statistical test to determine whether or not we <strong>reject</strong> the null hypothesis. <strong>Importantly, note that we can NEVER accept the alternate hypothesis. We can ONLY reject or fail to reject the null hypothesis.</strong> Typically we would use a significance value to determine whether or not we can reject the null hypothesis. 
+      </p>
+      <p>
+        The way that we state our hypothesis will determine what type of statistical test we use to determine whether or not we reject this null hypothesis. Among the types of tests we can perform, in the context of a null hypothesis test, we can ask about:
+      </p>
+      <p>
+        <ol>
+          <li style="color:blue;font-size:calc(12px + 0.7vw);">1) A single variable</li>
+          <li style="color:blue;font-size:calc(12px + 0.7vw);">2) Association/Co-variation between variables</li>
+          <li style="color:blue;font-size:calc(12px + 0.7vw);">3) Differences between group means</li>
+        </ol>
+      </p>
+      <p>
+        Let's use an example to discuss this. Say we are interested in the size of fiddler crabs. We could formulate a hypothesis test that falls into each of these categories. For example: 
+      </p>
+      <p>
+        1) Say we believe that the distribution of sizes is not in fact normal. We could construct a null hypothesis that says we believe our size data to be drawn from a population distribution that is in fact normally distributed, and the alternate hypothesis would say that the data were drawn from a non-normal distribution. <strong>Note here that we have not made any suggestion in our alternate hypothesis as to what specifically that non-normal distribution is</strong>. <a href="./04-07-comparing-sample-means.html">See how to do this in R.</a>
+      </p>
+      <p>
+        <ol>
+          <li style="font-size:calc(12px + 0.7vw);">1) Say we believe that the distribution of sizes is not in fact normal. We could construct a null hypothesis that says we believe our size data to be drawn from a population distribution that is in fact normally distributed, and the alternate hypothesis would say that the data were drawn from a non-normal distribution. <strong>Note here that we have not made any suggestion in our alternate hypothesis as to what specifically that non-normal distribution is</strong>. <a href="./04-07-comparing-sample-means.html">See how to do this in R.</a></li><br><br>
+          <li style="font-size:calc(12px + 0.7vw);">2) We could decide we think that size covaries with some other variable, say, latitude. If we wanted to test Bergmann's Rule, we could form a null hypothesis that says that size does not co-vary with latitude, and an alternate hypothesis that says not only do we think size co-varies with lattitude, but that it co-varies <em>positively</em>.</a></li><br><br>
+          <li style="font-size:calc(12px + 0.7vw);">3) If the crabs are from multiple sites, we could say that, between two sites of interest, we might believe there to be a size difference. Here, we would then state as our null hypothesis that there is no difference in the mean between the group of population at site A) and site B), but our alternate hypothesis would say that there is in fact a statistically significant difference between the group means at site A) and B).  <a href="./04-07-comparing-sample-means.html">See how to do this in R.</a></a></li>
+        </ol>
+      </p>
+    </section>
+    <section id="sig">
+      <h2>Signficance Testing</h2>
+      <p>
+        Consider our third example regarding crabs from multiple sites. If our alternate hypothesis is that there <em>is</em> a difference in size between the two sites, perhaps we sampled some crabs and discover that there is in fact a difference. To illustrate this I'll fabricate an example. Imagine that there is some site A has an average size of 25.4 and some site B has an average size of 26.1. What do we do with this information? Can we reject our null hypothesis? Well, first, we'll have to quantify how certain we are that what we're seeing is due to to chance or not.
+      </p>
+      <p>
+        <em>Typically, we want to think about this conundrum as being based around the probability that we see the data we do IF the null hypothesis is true</em>.
+      </p>
+      <p>
+        What that means for us, is we need to calculate the probability that this size difference is a fluke. Why is this important? Well, we need to keep in mind the two types of errors:
+      </p>
+      <p>
+        <ol>
+          <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">1) A false positive (type I) - rejecting the null hypothesis, when in fact the null hypothesis is true </li>
+          <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">2) A false negative (type II) - failing to reject the null hypothesis when the null hypothesis is false </li>
+        </ol>
+      </p>
+      <p>
+        A false positive error means that we are likely attributing some correlation or causation when in fact none exists, and a false negative means that there is in fact correlation or causation we could ascribe to our process of interest that we have missed. The nature of significance testing means that it's impossible to be 100% sure that we are not committing a significance error, but we can think about it as an attempt to reduce the probability that the data we have observed are due to chance if the null hypothesis is true. We refer to this probability value as the <math>p-value</math>, and it is a value that bedevils students and researchers of all experience levels. 
+      </p>
+      <section id="sig--stat">
+        <h3>Statistical Significance</h3>
+        <p>
+          So we've performed our test and we now have a value (<math>p-value</math>) for the probability that the data we have observed are due to chance if the null hypothesis is true. Now what?? Can we reject our null hypothesis? It is standard practice in statistics and biology particularly, to use a probability of 0.05 as the arbitrary threshold for deciding if a null hypothesis can be rejected. If <math>p &lt;= 0.05</math> then common practice dictates we can officially reject the null hypothesis. But wait! You might be thinking "0.05?? What's so special about that number? Does it have some magic power? Could we use another value? Say 0.01? 0.01? 0.0000001?" All excellent questions!!! These are conundrums that plague research, and that active researchers in statistics and domain sciences debate about constantly. The interested reader can pursue ideas about possible alternatives to <math>p-values</math> but they will not be discussed here. 
+        </p>
+        <section id="sig--stat--thresh">
+          <h4>A Sidenote on the Danger of Thresholds</h4>
+          <p>
+            The many discussions about what is to be done about the arbitrary <math>p-value</math> cut-off could fill libraries. Suffice it to say that there is no easy alternative or it would have been adopted. What the present author would like to stress is not that the <math>p-value</math> is evil or even unuseful. In fact it can be quite useful. The problem comes when the researcher views the threshold value (i.e. <math>0.05</math>) as a distinct line in the sand between effects being "real" or "zero". It is simply not true that a <math>p-value</math> of 0.07 indicates there is no chance that the null hypothesis may be incorrect, and to treat it as such is to misunderstand the purpose of significance testing. <strong>We are never testing if our hypotheses are "right" or "wrong" we are only trying to quantify how certain or uncertain we can be about one hypothesis or another.</strong> This is not simply a semantic difference but a very real difference of interpretation and discretion that I hope all reading this will take into their usage of p-values and statistical significance testing. 
+          </p>
+          <p>
+            We may now wonder - how do we <em>get</em> this elusive <math>p-value</math> then? Well, this brings us back to our discussion of statistical tests. The way we calculate our p-value depends on the statistical test we use. What statistical test do we use? Well, that depends on how we've formulated our hypotheses (i.e. recall the three ways we asked question about crab size above). 
+          </p>
+        </section>
+      </section>
+    </section>
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">
@@ -83,3 +170,4 @@ function w3_close() {
 
 </body>
 </html>
+Null Nypotheses
