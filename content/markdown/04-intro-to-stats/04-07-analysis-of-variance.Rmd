@@ -25,13 +25,13 @@ When performing the ANOVA, similar to all statistical tests there are some proce
 
 For our example here, let's consider the sizes of penguins bills.
 
-```{r}
+<!--begin.rcode
 library(tidyverse)
 library(palmerpenguins)
 
 df <- palmerpenguins::penguins
 names(df)
-```
+end.rcode-->
 
 In our example here, we may hypothesize that between the species in our dataset, there may be differences in the mean bill length. Bill length in a penguin looks vaguely like this: 
 
@@ -39,19 +39,19 @@ In our example here, we may hypothesize that between the species in our dataset,
 
 So first we'll look at the species on hand
 
-```{r}
+<!--begin.rcode
 unique(df$species)
-```
+end.rcode-->
 
 It's probably best to check that each species has ~roughly the same amount of samples per group before we continue. Let's use the <code>table()</code> function for this:
 
-```{r}
+<!--begin.rcode
 table(df$species)
-```
+end.rcode-->
 
 We can also plot this: 
 
-```{r}
+<!--begin.rcode
 library(ggthemes)
 
 # make grouping variable a factor
@@ -61,7 +61,7 @@ ggplot() +
   geom_bar(data = df, mapping = aes(x = species, fill = species), 
            colour = "black") +
   ggthemes::theme_base()
-```
+end.rcode-->
 
 Okay so we can see that while they're not completely equal, they're close enough for our purposes, especially with an ANOVA, as it's one of the less sensitive tests to number of samples per group. 
 
@@ -79,7 +79,7 @@ So we'll start by assuming independence and random sampling. Next, we need to ch
 
 <strong>A note: while plotting our data can be helpful, it can often lead to p-hacking and HARKing. While it is technically acceptable to plot the density plots for each group, that will give us an insight, prior to performing our tests, about what the means of each group might be. Again, this in and of itself is not <em>bad</emb> but we can get the same information without the possible pitfalls by using QQ plots and significance tests, which at the end of the day are often required for publications/reports anyways. </strong> Here we'll use QQ plots and a Shapiro-Wilks test to check for normality in each of our groups:
 
-```{r}
+<!--begin.rcode
 library(ggpubr)
 
 # first filter the data
@@ -94,15 +94,15 @@ gentoo <- df %>%
 ggpubr::ggqqplot(adelie$bill_length_mm, main = "Adelie")
 ggpubr::ggqqplot(chin$bill_length_mm, main = "Chinstrap")
 ggpubr::ggqqplot(gentoo$bill_length_mm, main = "Gentoo")
-```
+end.rcode-->
 
 Visually, all of these look reasonably acceptable, but let's compare with a Shapiro-Wilks test on each: 
 
-```{r}
+<!--begin.rcode
 stats::shapiro.test(adelie$bill_length_mm)
 stats::shapiro.test(chin$bill_length_mm)
 stats::shapiro.test(gentoo$bill_length_mm)
-```
+end.rcode-->
 
 Well, it's a good thing we checked with our tests!! Our Shapiro-Wilks test for our Gentoo species shows that actually the data are non-normal. We note that the p-value is not <em>especially</em> large, but still <0.05. 
 
@@ -110,7 +110,7 @@ Two things to note here: First, <strong>ANOVAs are actually relatively robust to
 
 So let's go ahead and transform our data: 
 
-```{r}
+<!--begin.rcode
 adelie <- adelie %>% 
   dplyr::mutate(
     log_length = log(bill_length_mm)
@@ -123,24 +123,24 @@ gentoo <- gentoo %>%
   dplyr::mutate(
     log_length = log(bill_length_mm)
   )
-```
+end.rcode-->
 
 Now we'll go ahead and re-do our QQ plots and our tests:
 
-```{r}
+<!--begin.rcode
 # plot qq-plots for each one
 ggpubr::ggqqplot(adelie$log_length, main = "Adelie")
 ggpubr::ggqqplot(chin$log_length, main = "Chinstrap")
 ggpubr::ggqqplot(gentoo$log_length, main = "Gentoo")
-```
+end.rcode-->
 
 So these all look pretty good. Time for the tests: 
 
-```{r}
+<!--begin.rcode
 stats::shapiro.test(adelie$log_length)
 stats::shapiro.test(chin$log_length)
 stats::shapiro.test(gentoo$log_length)
-```
+end.rcode-->
 
 Ok great, so we can now see that each of the three tests has a p-value > 0.05, so we can assume normality for these values. 
 
@@ -152,7 +152,7 @@ Our second assumption was that the variances of all samples be equal. If they ar
 
 To do the Barlett's test let's use the <code>stats</code> package function <code>bartlett.test()</code>. We will now actually re-format our data first so that it's in <em>long</em> form. This will make our lives easier. To do this, we want one column with the actual values, and another with the grouping variable (in this case, our species names). To get the species names, what we'll do is combine a few arguments such that we can do it all in one command. We'll use the <code>rep()</code> function which takes two arguments: a) the value to be repeated, and b) the number of times to repeat it. Because there are different numbers of observations for each species, the second argument in each call to <code>rep()</code> will simply be the length of the vector of the <code>log_length</code> for that species. Also, we want the grouping variable to be a factor. That looks like this: 
 
-```{r}
+<!--begin.rcode
 bill_data <- data.frame(
   log_length = c(adelie$log_length, chin$log_length, gentoo$log_length),
   species = as.factor(c(
@@ -165,13 +165,13 @@ bill_data <- data.frame(
 
 # let's look at the structure of the df
 str(bill_data)
-```
+end.rcode-->
 
 Great, now for our bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. Last, tell the function what the dataframe itself is called. 
 
-```{r}
+<!--begin.rcode
 stats::bartlett.test(log_length ~ species, data = bill_data)
-```
+end.rcode-->
 
 Wonderful, and we see that the p-value is well above 0.05, so our variances are equal enough to continue. 
 
@@ -179,10 +179,10 @@ Wonderful, and we see that the p-value is well above 0.05, so our variances are 
 
 Now to perform the test itself. It is, similarly to the t-test, very easy to compute in R, and looks pretty much identical to our syntax for the Bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. The function itself we use comes from the <code>stats</code> package again. We can now proceed to our test and run it all like this: 
 
-```{r}
+<!--begin.rcode
 mod <- stats::aov(log_length ~ species, data = bill_data)
 summary(mod)
-```
+end.rcode-->
 
 So we see our p-value is <em>very</em> small, which indicates we can reject the null hypothesis - there is a difference between the means of the species. 
 
@@ -194,9 +194,9 @@ There are still a few steps we might want to take. First, we still don't know <e
 
 To actually see what the pairwise comparison of the groups are, we can see which groups are actually different than one another. This is useful as it allows us to identify if it's only one group that is different, (i.e. $\mu_1 = \mu_2$ but $\mu_3 > \mu_2$) or it they're all quite a bit different. We can do this comparison through the Tukey test (Tukey Honest Signfiicant Differences) which again can be done using the <code>stats</code> package: 
 
-```{r}
+<!--begin.rcode
 stats::TukeyHSD(mod)
-```
+end.rcode-->
 
 So here we get four key outputs: <code>diff</code> which is the difference between the two groups at hand (this is read as the chinstraps are ~0.23 greater than adelies for the first row), the upper and lower bounds of the 95% confidence interval, and the p-value denoting if said difference is significant. 
 
@@ -204,7 +204,7 @@ So here we get four key outputs: <code>diff</code> which is the difference betwe
 
 Now let's plot our results. This can be done in any number of ways, but I am personally keen on plotting the density of the values, in the same way we would if we wanted to use it to check assumptions of normality as it shows all components of the data at hand and doesn't have the chance of hiding anything. I also think it's just a useful plot to have. We'll pair that with denotations of the means of each group as well as annotating the p-value onto the plot like this: 
 
-```{r}
+<!--begin.rcode
 means <- bill_data %>% 
   dplyr::group_by(species) %>% 
   dplyr::summarise(means = mean(log_length, na.rm = TRUE))
@@ -229,7 +229,7 @@ ggplot(data = bill_data) +
            x = 3.55, 
            y = 5.9,
            label = "p-value << 0.001")
-```
+end.rcode-->
 
 
 
