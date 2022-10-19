@@ -24,6 +24,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   </div>
 </div>
 
+
 <main_landing style = margin-top:100px>
   <nav class="section-nav">
     <ol>
@@ -34,137 +35,48 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </li>
     </ol>
   </nav>
-  <div>
+  <!-- Welcome Section -->
+  <div class="w3-container w3-padding-32 w3-center" style="padding: top 100px;">  
+    <h1>Contact Us!</h1>
+      <p>
+        This manual is very much a work in progress, both in terms of content, and in terms of structure and format. We welcome any and all comments or suggestions to improve this content. For comments/concerns/queries/suggestions etc. related specifically to the <strong>content</strong>, that is, what we're teaching and how we're teaching it, please email the maintainer of this manual, Cole Brookson: <a href="mailto:cole.brookson@gmail.com">cole.brookson@gmail.com</a>
+      </p>
+      <p>
+        For comments/concerns/queries/suggestions, or bug reports related to the actual website itself, the easiest way for us to see and subsequently make changes for that type of feedback is through submitting an issue on our <a href="https://github.com/colebrookson/eeb-r-manual">GitHub repository.</a> If you don't know what GitHub is, or how to submit an "issue", then please just email, that works totally fine as well, Cole Brookson: <a href="mailto:cole.brookson@gmail.com">cole.brookson@gmail.com</a> :). 
+      </p>
+      <p>
+        <strong>We really do want to improve this resource, so any and all feedback is well and truly welcomed!!</strong>
+      </p>
+  </div>
 
-<div class="w3-main w3-content w3-padding" 
-style="max-width:1200px;">
 
-  <!-- Getting Started -->
+  <!-- Pagination -->
+  <div class="w3-center w3-padding-32">
+    <div class="w3-bar">
+    </div>
+  </div>
+  
+  <hr id="about">
+
+  <!-- About Section -->
   <div class="w3-container w3-padding-32 w3-center">  
-    <h1 font-size:40px>Working With Data</h3><br>Basic R
-      <p font-size: 1.5em;>
-        Managing data (to subsequently do statistics on) is one of the strong 
-        points of R as a programming language. Now that you're more comfortable
-        with the basics of the language, it's time to become more familiar with 
-        the ways in which we tend to work with biological data. We'll go over 
-        the manipulation of these data, how to clean them, and glean general 
-        insights. 
+    <h3>About the R Manual</h3><br>
+    <!--
+    <img src="img/place-holder.png" alt="about the r manual" class="w3-image" 
+    style="display:block;margin:auto" width="500" height="160">
+    -->
+    <div class="w3-padding-32">
+      <h4><b>Learn more about this project</b></h4>
+      <p>
+        The R Manual is a resource jointed authored by Cole Brookson, 
+        Dr. Shelby Riskin, and Dr. Jacqueline Sztepanacz. This resource is not 
+        officially affiliated with the R Programming language, but aims to 
+        help students with the steep learning curve associated with learning R 
+        for the first time. 
       </p>
     </div>
   </div>
   <hr>
-
-    <!-- First Photo Grid-->
-    <div class="w3-row-padding w3-padding-16 w3-center"
-    border: 5px solid gray;>
-      <div class="w3-quarter">
-        <a href="02-data/02-01-reading-writing.html">
-              <img class="image-main" src="02-data/img/tabular-data.jpg" alt="" 
-              width="250" height="200">
-        <h3>Reading & Writing</h3>
-        <p>How to get data into R, and then how to get the product back out</p>
-        </a>
-      </div>
-      <div class="w3-quarter">
-        <a href="02-data/02-02-filtering-subsetting.html">
-              <img class="image-main" src="02-data/img/filtering.jpg" 
-              alt="Image by vectorjuice on Freepik"
-              width="250" height="200">
-        <h3>Filtering & Subsetting</h3>
-        <p>Filtering particular parts of a dataframe via logical operators
-          and other methods
-        </p>
-        </a>
-      </div>
-      <div class="w3-quarter">
-        <a href="02-data/02-03-selecting-columns.html">
-              <img class="image-main" src="02-data/img/columns.jpeg" 
-              alt="data structures" width="250" height="200">
-  
-        <h3>Selecting Columns</h3>
-        <p>
-        Column operations via different methods
-        </p>
-      </a>
-      </div>
-      <div class="w3-quarter">
-        <a href="02-data/02-04-grouping-summarizing.html">
-              <img class="image-main" src="02-data/img/summary.png" 
-              alt="data structures" width="250" height="200">
-  
-        <h3>Grouping & Summarizing</h3>
-        <p>
-        Summarizing data that belong to defineable groups</p>
-      </a>
-      </div>
-    </div>
-
-    <!-- Second Photo Grid-->
-    <div class="w3-row-padding w3-padding-16 w3-center" id="food" 
-    border: 5px solid gray;>
-      <div class="w3-quarter">
-        <a href="02-data/02-05-new-columns.html">
-              <img class="image-main" src="02-data/img/new-cols.png" alt="" 
-              width="250" height="200">
-        <h3>New Columns</h3>
-        <p>Making new columns either independently or as functions of 
-          other columns
-        </p>
-        </a>
-      </div>
-      <div class="w3-quarter">
-        <a href="02-data/02-06-factors.html">
-              <img class="image-main" src="02-data/img/factors.jpg" alt="" 
-              width="250" height="200">
-        <h3>Factors</h3>
-        <p>Working with the special data type <strong>factors</strong> 
-          and how they relate to grouping</p>
-        </a>
-      </div>
-      <div class="w3-quarter">
-        <a href="02-data/02-07-renaming.html">
-              <img class="image-main" src="02-data/img/naming.jpeg" 
-              alt="data structures" width="250" height="200">
-  
-        <h3>Renaming</h3>
-        <p>
-        Rename columns within dataframes</p>
-      </a>
-      </div>
-      <div class="w3-quarter">
-        <a href="02-data/02-08-reshaping.html">
-              <img class="image-main" src="02-data/img/reshaping.png" 
-              alt="data structures" width="250" height="200">
-  
-        <h3>Reshaping</h3>
-        <p>
-        Moving data into different formats, such as long to wide and vice versa</p>
-      </a>
-      </div>
-    </div>
-
-    <!-- Third Photo Grid-->
-    <div class="w3-row-padding w3-padding-16 w3-center" id="food" 
-    border: 5px solid gray;>
-      <div class="w3-half">
-        <a href="02-data/02-09-relational-data.html">
-              <img class="image-main" src="02-data/img/relational.png" alt="" 
-              width="250" height="200">
-        <h3>Relational Data</h3>
-        <p>Relating multiple data frames across different sources and 
-          types of data
-        </p>
-        </a>
-      </div>
-      <div class="w3-half">
-        <a href="02-data/02-10-cleaning-process.html">
-              <img class="image-main" src="02-data/img/cleaning.png" alt="" 
-              width="250" height="200">
-        <h3>Data Cleaning Processes</h3>
-        <p>What to do when your data are a mess</p>
-        </a>
-      </div>
-    </div>
   
   <!-- Footer -->
   <footer class="w3-row-padding w3-padding-32">
@@ -202,12 +114,21 @@ style="max-width:1200px;">
         <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Regression</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">RMarkdown</span>
         <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dataframes</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">HTMl</span>
       </p>
-    </div>
-  </footer>
-
+      <!-- Sidebar (hidden by default) -->
+      <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+      style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+        <a href="javascript:void(0)" onclick="w3_close()"
+        class="w3-bar-item w3-button">Close Menu</a>
+        <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+        <a href="#contact" onclick="w3_close()" 
+        class="w3-bar-item w3-button">Contact</a>
+      </nav>
 <!-- End page content -->
+</section>
 </div>
-</main>Basic R
+
+<script>
+// Script to open and close sidebar
 function w3_open() {
   document.getElementById("mySidebar").style.display = "block";
 }

@@ -116,7 +116,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                 class="w3-bar-item w3-button" 
                 style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
                 Data Cleaning Process</a>
-            </li>Make sure that PHP is installed and running correctly. This may sound silly, but you never know. An easy way to check is to run php -v from a command line and see if returns version information or any errors.
+            </li>
             <li><a href="../02-data/02-11-relational-data.html" onclick="w3_close()" 
                 class="w3-bar-item w3-button" 
                 style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
@@ -133,10 +133,9 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                 style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
                 Basics of Plotting</a>
             </li>
-            /ol>
-        </li>
-      </ol>
-    </nav>   <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" Make sure that PHP is installed and running correctly. This may sound silly, but you never know. An easy way to check is to run php -v from a command line and see if returns version information or any errors.
+            <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
                 Introduction to <code>ggplot2</code></a>
             </li>
             <li><a href="../03-plot/03-02-interative-plotting.html" onclick="w3_close()" 
