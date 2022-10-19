@@ -25,10 +25,10 @@ Our question is as it stands is simply that we believe there is a size differenc
 
 We'll use data on crab sizes: 
 
-```{r}
+<!--begin.rcode
 library(lterdatasampler)
 crab_sizes <- lterdatasampler::pie_crab
-```
+end.rcode-->
 
 There are a number of sites in this dataset, so let's compare crabs from two northern sites and two southern sites. Our northern sites will be "Cape Cod" and "Narragansett Bay NERR" and our southern sites will be "Guana Tolomoto Matanzas NERR" and "Sapelo Island NERR". 
 
@@ -46,7 +46,7 @@ To assess the normality of our data, let's first assess it visually and then dou
 
 Let's use a density plot to check if the data follow the normal/Gaussian curve: 
 
-```{r, warning=FALSE}
+<!--begin.rcode, warning=FALSE
 library(ggpubr)
 library(dplyr)
 
@@ -60,26 +60,26 @@ crab_sizes_north <- crab_sizes %>%
 ggpubr::ggdensity(crab_sizes_north$size, main = "Northern")
 ggpubr::ggdensity(crab_sizes_south$size, main = "Southern")
 
-```
+end.rcode-->
 
 They both look normal. Let's look at the QQ plots:
 
-```{r}
+<!--begin.rcode
 ggpubr::ggqqplot(crab_sizes_north$size, main = "North")
 ggpubr::ggqqplot(crab_sizes_south$size, main = "South")
-```
+end.rcode-->
 
-WWe're looking for the points to follow the black line and for no points to be outside the grey error bars. Both of these look pretty good. Let's use a Shapiro-Wilk's test to take a look at what we see. <strong>Importantly, a Shapiro-Wilk's test is a significance test that has a null hypothesis of normality. If the test is SIGNIFICANT then there is sufficient non-normality to stop our test and re-evaluate</strong>. 
+We're looking for the points to follow the black line and for no points to be outside the grey error bars. Both of these look pretty good. Let's use a Shapiro-Wilk's test to take a look at what we see. <strong>Importantly, a Shapiro-Wilk's test is a significance test that has a null hypothesis of normality. If the test is SIGNIFICANT then there is sufficient non-normality to stop our test and re-evaluate</strong>. 
 
 We can do this in R very easily. The function <code>shapiro.test()</code> comes shipped in core R with the <code>stats</code> package. First for the northern sites: 
-```{r}
+<!--begin.rcode
 stats::shapiro.test(crab_sizes_north$size)
-```
+end.rcode-->
 Okay, and we see that our p-value is > 0.05 so we'll fail to reject the null. For the southern sites: 
 
-```{r}
+<!--begin.rcode
 stats::shapiro.test(crab_sizes_south$size)
-```
+end.rcode-->
 
 Here we see a large p-value, >> 0.05, so again we'll reject the null. 
 
@@ -88,13 +88,13 @@ Here we see a large p-value, >> 0.05, so again we'll reject the null.
 
 #### Homoskedasticity
 
-Our second assumption was that the variances of the two samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedascitiy with the F-test </strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if <math>p < 0.05 </math> then for our purposes we could say that the assumption of homoskedascitiy is violated. 
+Our second assumption was that the variances of the two samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedasticity with the F-test </strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if <math>p < 0.05 </math> then for our purposes we could say that the assumption of homoskedasticity is violated. 
 
 To do the F-test let's use the <code>stats</code> package function <code>var.test()</code>. We will just pass the two sets of data as arguments. 
 
-```{r}
+<!--begin.rcode
 stats::var.test(crab_sizes_north$size, crab_sizes_south$size)
-```
+end.rcode-->
 
 Great, p >> 0.05, so we can continue. 
 
@@ -102,7 +102,7 @@ Great, p >> 0.05, so we can continue.
 
 So now we can actually perform the test. It's quite simple, we'll use the <code>t.test()</code> function: 
 
-```{r}
+<!--begin.rcode
 t_test_res <- stats::t.test(
   # sample of group 1
   crab_sizes_north$size, 
@@ -112,14 +112,14 @@ t_test_res <- stats::t.test(
   var.equal = TRUE
 )
 t_test_res
-```
+end.rcode-->
 
 We see our result here, and it turns out the p-value is <em>very</em> small, so we can reject the null hypothesis, there is good evidence that $\mu_1 \neq \mu_2$. <strong>NOTE</strong> that if our data were heteroskedastic, then we could specify <code>var.equal = FALSE</code> and that would perform a Welch's t-test which allows for this. 
 
 
 If we wanted, we could plot this result as a box plot, or perhaps more usefully, a violin plot (For a full walk through of how to iteratively make this plot, see our section on plotting <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>): 
 
-```{r}
+<!--begin.rcode
 library(ggplot2)
 library(ggthemes)
 
@@ -156,7 +156,7 @@ ggplot(data = focal_sites) +
     label = "p < 0.001",
     size = 8
   )
-```
+end.rcode-->
 
 ## T-test - one-sided
 
@@ -166,7 +166,7 @@ But in this case, we could perform the exact test as above, but instead determin
 
 In our case, we are hypothesizing that the southern crabs (<code>crab_sizes_south</code>) are greater in size than the northern crabs, so let's set <code>x</code> to be the <code>crab_sizes_south</code> and the y to be <code>crab_sizes_north</code>, and then <code>alternative = "greater"</code>, so this is testing the alternate hypothesis that $\mu_{south} > \mu_{north}$:
 
-```{r}
+<!--begin.rcode
 t_test_oneside_res <- stats::t.test(
   crab_sizes_south$size, 
   crab_sizes_north$size,
@@ -174,7 +174,7 @@ t_test_oneside_res <- stats::t.test(
   alternative = "greater"
 )
 t_test_oneside_res
-```
+end.rcode-->
 
 So we see here we have a p-value of 1. Given that we <em>do</em> know which group is <em>actually</em> bigger this comes as no surprise. Although this is a good reminder: <strong>Just because our one-sided test with an $H_A: \mu_{south} > \mu_{north}$ resulted in us failing to reject the null, this does NOT mean that we can assume that in fact $\mu_{south} > \mu_{north$ because the null hypothesis of these tests is stated that $H_0: \mu_{south} = \mu_{north}$. 
 
@@ -185,7 +185,7 @@ Going back to our assumptions, let's re-start our process of this test but with 
 What if we just took the MOST northern and southern sites alone, not groups of sites, and did a t-test on those two? say that instead of the two sites acting as our "northern" sites, we chose to use the single most northern site: "Plum Island Estuary - West Creek" (PIE), and for our southern site, we took the most southern one - "Guana Tolomoto Matanzas NERR" (GTM). If we start again by checking our assumptions, we would first have to check for normality of both our groups. 
 
 Let's start by again dividing our data:
-```{r}
+<!--begin.rcode
 # southern ones stay the same
 crab_sizes_s_GTM <- crab_sizes %>% 
   dplyr::filter(site == "GTM") 
@@ -197,22 +197,24 @@ crab_sizes_n_PIE <- crab_sizes %>%
 # plot our variable of interest (size)
 ggpubr::ggdensity(crab_sizes_s_GTM$size, main = "GTM")
 ggpubr::ggdensity(crab_sizes_n_PIE$size, main = "PIE")
-```
+end.rcode-->
 
 Okay, so these data look somewhat skewed. Let's do our Shapiro-Wilk's test: 
 
-```{r}
+<!--begin.rcode
 stats::shapiro.test(crab_sizes_s_GTM$size)
-```
+end.rcode-->
 
-```{r}
+<!--begin.rcode
 stats::shapiro.test(crab_sizes_n_PIE$size)
-```
+end.rcode-->
 
 
 Okay, so our p-values for both are < 0.05, so we have to reject the null - these data are non-normal. 
 
 Now what? Well there are other tests available to us!! A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
+
+## Non-Parametric Tests
 
 The best alternative for our case is the <strong> Mann-Whitney U Test</strong>.
 
@@ -239,9 +241,9 @@ Measuring a degree of skew is somewhat arbitrary and can be difficult. It is bey
 
 The Mann-Whitney is sometiems referred to as the Mann-Whitney-Wilcoxon test, and so is performed using the <code>wilcox.test()</code> function, again from <code>stats</code>:
 
-```{r}
+<!--begin.rcode
 stats::wilcox.test(crab_sizes_s_GTM$size,
                    crab_sizes_n_PIE$size)
-```
+end.rcode-->
 
 Here we see our p-value is << 0.05, so we can reject our null hypothesis that say that these two medians are equal, and thus conclude (generally) that the northern and southern populations have different sizes. Note again that this is a two-sided test so we're not testing directionality. 
