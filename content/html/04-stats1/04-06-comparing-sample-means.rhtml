@@ -14,6 +14,9 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 </head>
 <body class="w3-round-large">
 
@@ -48,8 +51,25 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   <div>
     <section id="work">
       <h2>Comparisons Between Sample Means</h2>
-      <img class="image-full-page" style="display:block;margin:auto"
-      src="../img/01-img/construction.jpg">
+      <p>
+        It's often the case that we may sample independently from a population, and develop some hypothesis that may indicate that the means for the independent samples are in fact different from one another. Taking the example we noted in the <a href="./04-04-hypothesis-testing.html">hypothesis testing</a> section, perhaps we care about the size of fiddler crabs, and if the crabs are from multiple sites, we could say that, between two sites of interest, we might believe there to be a size difference. Well, let's perform a statistical test to see if this is true.
+      </p>
+      <p>
+        It is generally best in statistics, especially when starting our our own individual journeys as statisticians, to choose the simplest test that A) will answer our question, and B) we can satisfy the assumptions of. 
+      </p>
+      <p>
+        When comparing two sample means, the standard test to perform here is the <strong>unpaired two-sample t-test</strong>. The test statistic is calculated as: \[t = \frac{(\bar{Y_1} - \bar{Y_2}) - (\mu_1 - \mu_2)_0}{SE_{Y_1 - Y_2}}\]
+      </p>
+      <p>
+        This test assumes three major things:
+      </p>
+      <p>
+        <ol>
+          <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">1) Normality </li>
+          <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">2) Homoskedasticity </li>
+          <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">3) Independence</li>
+        </ol>
+      </p>
 
       </section>
 <!-- End page content -->
