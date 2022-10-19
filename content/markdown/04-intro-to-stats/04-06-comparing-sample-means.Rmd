@@ -222,7 +222,7 @@ There are a few things to note about this test however. <strong> This test actua
 
 ### Assumptions
 
-Just because the data do not have to be normal, there are still important assumptions we need to satisfy. The data still need to be independent, but there are two additional assuumptions:
+Just because the data do not have to be normal, there are still important assumptions we need to satisfy. The data still need to be independent, but there are two additional assumptions:
 
 1) The variable needs to be continuous
 2) The data are assumed to be similar in shape
@@ -239,7 +239,7 @@ Measuring a degree of skew is somewhat arbitrary and can be difficult. It is bey
 
 ### The test
 
-The Mann-Whitney is sometiems referred to as the Mann-Whitney-Wilcoxon test, and so is performed using the <code>wilcox.test()</code> function, again from <code>stats</code>:
+The Mann-Whitney is sometimes referred to as the Mann-Whitney-Wilcoxon test, and so is performed using the <code>wilcox.test()</code> function, again from <code>stats</code>:
 
 <!--begin.rcode
 stats::wilcox.test(crab_sizes_s_GTM$size,
