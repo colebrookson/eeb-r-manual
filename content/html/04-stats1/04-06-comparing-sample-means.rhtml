@@ -100,7 +100,10 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
         <h2>Two-sided T-tests</h2>
         <p>
           We'll use data on crab sizes: 
-        </p>Now what? Well there are other tests available to us!! A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
+        </p>
+        <p>
+          Now what? Well there are other tests available to us!! A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
+        </p>
         <!--begin.rcode
         library(lterdatasampler)
         crab_sizes <- lterdatasampler::pie_crab
@@ -252,7 +255,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
       <section id="oneside">
         <h2>One-sided T-tests</h2>
         <p>
-          In our above example we stated our hypothesis such that we could use a two-sided test. But what if when we were formulating our hypotheses, we'd said we believe the southern crabs would be bigger? <strong>Note that we're pretending here that we HAVEN'T seen the results just above, since that would be p-hacking</code>. But let's say we thought "Hey, warmer water, lots of sun, maybe more beaches, that could mean bigger crabs." (I stress this is not an intelligently derrived biological hypothesis).
+          In our above example we stated our hypothesis such that we could use a two-sided test. But what if when we were formulating our hypotheses, we'd said we believe the southern crabs would be bigger? <strong>Note that we're pretending here that we HAVEN'T seen the results just above, since that would be p-hacking</strong>. But let's say we thought "Hey, warmer water, lots of sun, maybe more beaches, that could mean bigger crabs." (I stress this is not an intelligently derrived biological hypothesis).
         </p>
         <p>
           But in this case, we could perform the exact test as above, but instead determine that we wanted a one-sided test. That's easy enough and uses all the same code, with one additional argument. Using the same dataset, we would simply add an argument for <code>alternative</code>. The syntax here is saying that in the function, we pass two sets of numbers, <code>x</code> and <code>y</code>. If we believe x to be <em>less</em> than y, we pass "less", and if we believe x to be <em>greater</em> than y, then we pass "greater". 
@@ -270,7 +273,8 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
         t_test_oneside_resNow what? Well there are other tests available to us!! A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
         end.rcode-->
         <p>
-          So we see here we have a p-value of 1. Given that we <em>do</em> know which group is <em>actually</em> bigger this comes as no surprise. Although this is a good reminder: <strong>Just because our one-sided test with an $H_A: \mu_{south} > \mu_{north}$ resulted in us failing to reject the null, this does NOT mean that we can assume that in fact \(\mu_{south} > \mu_{north}\) because the null hypothesis of these tests is stated that \(H_0: \mu_{south} = \mu_{north}\). 
+          So we see here we have a p-value of 1. Given that we <em>do</em> know which group is <em>actually</em> bigger this comes as no surprise. Although this is a good reminder: <strong>Just because our one-sided test with an $H_A: \mu_{south} > \mu_{north}$ resulted in us failing to reject the null, this does NOT mean that we can assume that in fact \(\mu_{south} > \mu_{north}\) because the null hypothesis of these tests is stated that \(H_0: \mu_{south} = \mu_{north}\)</strong>
+          . 
         </p>
       </section>
       <section id="nonnormal">
@@ -392,4 +396,4 @@ function w3_close() {
 
 </body>
 </html>
-Now what? Well there are other tests available to us!! A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
+ 
