@@ -6,3 +6,90 @@ output:
 # Likelihood
 **Author:** Cole Brookson
 **Date:** 29 August 2022
+
+<em>Are winter temperatures increasing through time? And if they are, are these warming temperatures responsible for decreasing levels of ice coverage?</em>
+
+One of the first chapters to a book on causal inference that I have recently read is entitled "All you need is regression". I thought this was an accurate way to start this section, because that statement is true! While we cannot cover all the theory of linear regression here, it is genuinely the case that nearly all classical frequentist statistical methods are simply a version of linear regression. A t-test? Actually just linear regression. ANOVA? Yup, also linear regression. Machine learning?? Many types of it are in fact just regression!
+
+So why then, you may ask, did we learn about t-tests before we learned about linear regression in stats class? Well, it turns out that as with almost all quantitative methods discussed in this section, linear regression is frightfully easy to implement, but actually not so simple "under the hood." 
+
+However, getting an intuitive understanding of the basics is very much possible and highly encouraged. Linear regression is probably the most fundamental of all topics you may learn in statistics, and it's worth thinking about it carefully. To be clear, you will likely re-visit this topic many times, likely over the course of years, adding and refreshing pieces of information that will eventually develop into a solid understanding. here, we attempt only to provide a brief introduction to the basics. 
+
+## What is Regression?
+
+A gross simplification of the process of linear regression would be that if we have a series of points between two continuous variables, we want to find a straight line that goes through as many of those points as possible. 
+
+What does it mean to do such a thing? Well, let's start with reminding ourselves, mathematically, what a line is. A straight line is defined by the equation $$ y = mx + b$$ where $b$ is the y-intercept, $m$ is the slope of the line, and $x$ and $y$ are data values. This means that given a point on the x-axis, $x$, a slope $m$, and a y-intercept $b$, we can find the value $y$ that denotes the y-axis value that corresponds to the x-axis value $x$. 
+
+When we talk about linear regression, we'll probably want to discuss this equation in a slightly alterred form: $$y = \beta_0 + \beta_1 x_1$$. We'll discuss what these terms mean in a moment but they relate exactly to a y-intercept ($\beta_0$), a slope ($\beta_1$) and an x-value. 
+
+## Ordinary Least Squares (OLS)
+
+We mentioned above we're putting a line through some points as best we can. But how do we define this "best as we can"? Well, the version of "as best we can" that will be addressed here is the method of least squares. If we imagine a scatter of plots like this: 
+
+```{r, echo = FALSE, warning = FALSE}
+x = c(1:100)
+y = rep(NA, 100)
+for(i in 1:100) {
+  y[i] = 1.3 * x[i] + 10 + rnorm(1, mean = 0, sd = 23)
+}
+
+df = data.frame(
+  x = x, y = y
+)
+
+library(tidyverse)
+library(ggthemes)
+ggplot(df) + 
+  geom_point(aes(x = x, y = y), fill = "red", colour = "black", shape = 21, 
+             size = 3) + 
+  ggthemes::theme_base()
+```
+
+It's clear that we can't actually make our line go <em>directly</em> through very many of them, but perhaps we can figure out some way to make the line <em> as close to as many points as possible</em>. We'll do that by imagining we draw a line at random, and calculate the distance between every single point and the line itself. These are called <strong>residuals</strong>. Then we'll square each one, and take the sum of all those squares. 
+
+You might ask, why square it? The short answer to that question is that squaring it makes a large number of mathematical tools available to us. 
+
+It now follows somewhat logically that we want to find a value for the slope of our line, $\beta_1$ that <strong>minimizes</strong> this sum of the squared residuals. What we are doing here is actually a process called <em>estimation</em> wherein we choose some method that allows us to compare candidate values for $\beta_1$ with other values. Ordinary Least Squares is actually just a specific version of Maximum Likelihood Estimation, which we'll discuss below. 
+
+## Linear Model
+
+Let's now get our hands dirty with a bit of an example, a very small one. 
+
+As in our previous work, we will certainly NOT (!!!!) just jump into writing code, as that's the best way to ensure a poorly done analysis. First, we have our question. Let's frame it as a hypothesis. It seems logical here to state that we think temperature will positively vary with ice cover. So a null hypothesis may be that <em> there is no relationship between air temperature and ice cover </em>. We have decided we want to use linear regression to tackle this challenge, so consider the assumptions of the method: 
+
+1. Linearity - we assume the relationship between our two variables, $X$ and $Y$ is linear
+
+2. Homoskedacity - we assume the variance of teh residual is the same for any value of $X$
+
+3. Normality - We assume that for any fixed value of $X$, the errors of $Y$ normally distributed
+
+4. Randomness - We also assume that samples were collected at random
+
+5. Independence - All errors are independent
+
+If assumptions 1-3 are violated, then we can may be able to use some sort of transformation on our response variable to deal with the problem. 
+
+Here are the data we will start with: 
+
+```{r}
+x = c(1:100)
+y = rep(NA, 100)
+for(i in 1:100) {
+  y[i] = 1.3 * x[i] + 10 + rnorm(1, mean = 0, sd = 23)
+}
+
+df = data.frame(
+  x = x, y = y
+)
+
+head(df)
+```
+
+So here we have some data, x and y values. To test our first assumption (linearity), it will do for now to simply plot the two of them. In fact, this is the plot we have above. We can see that the data are linearly related, so we'll consider that satisfied for now. 
+
+
+
+
+
+
