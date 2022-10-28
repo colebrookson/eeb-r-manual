@@ -133,16 +133,57 @@ Third is the <strong>Spread-Location</strong>, which tests the homogeneity of va
 
 The last is the <strong>Residuals vs. Leverage</strong>. We don't need to look at this plot too carefully right now, but in brief, it's used to identify points having too strong of an influence on the outcome of the analysis. 
 
+Okay so it looks like all our assumptions are satisfied! Let's take a look at our results: 
 
-So here we have some data, x and y values. To test our first assumption (linearity), it will do for now to simply plot the two of them. In fact, this is the plot we have above. We can see that the data are linearly related, so we'll consider that satisfied for now. 
-
-Second, we'll address the homoskedasticity assumption. We can use the same visual assessment we did before, the QQ plot: 
 ```{r}
-ggpubr::ggqqplot(df, x = "y")
+summary(mod)
 ```
 
+Let's break down each of the components here: 
 
+1. <strong>Call</strong> -- this is the function we used in our model. So to recall, what we're showing here is the that we've regressed <code>y ~ x</code> which we would say as "y regressed against x" or "y regressed with x". 
 
+2. <strong>Residuals</strong> -- These are the residuals. Recall that a <em>residual</em> is the distance from a single point to the regression line at the same x-location. Here's a visual of that: 
 
+```{r}
+ggplot(data = df, mapping = aes(x = x, y = y)) + 
+  geom_smooth(method = "lm", formula = y ~ x, colour = "red", se = FALSE) +
+  ggthemes::theme_base() +
+  geom_point(data = df %>% dplyr::filter(
+    x %in% c(22, 45, 89)
+  ), size = 3, colour = "black", fill = "purple", shape = 21) +
+  geom_line(data = data.frame(x = c(22, 22), y = c(
+    predict(mod, data.frame(x = 22)), df$y[which(df$x == 22)]
+  )), aes(x = x, y = y)) + 
+  geom_line(data = data.frame(x = c(45, 45), y = c(
+    predict(mod, data.frame(x = 45)), df$y[which(df$x == 45)]
+  )), aes(x = x, y = y)) + 
+  geom_line(data = data.frame(x = c(89, 89), y = c(
+    predict(mod, data.frame(x = 89)), df$y[which(df$x == 89)]
+  )), aes(x = x, y = y)) 
+```
 
+Each of the lines here going from the points to the the regression line itself are "residuals", or "residual error", the amount of "error" the linear model produces in it's prediction for a given x-value.
+
+Ok back to our <code>summary()</code> call: 
+
+```{r}
+summary(mod)
+```
+
+the residuals here, by definition, have a mean of zero, and a "perfecty" minimized set of residuals would mean that the median value is zero, which will not really happen, but we want the median to be as close to zero as possible. We also want our minimum and maximum values to be approximately equal in magnitude. 
+
+3) <strong> Coefficients </strong> -- Possibly the part that we'll look at the most, these values are here shown as representing $\beta_0$ and $\beta_1$. So the intercept is the actual y-intecept (remember that $\beta_0$ is the y-intercept), and the $\beta_1$ is the estimate of the coefficient on $x$. We assess whether or not a particular predictor variable is significantly associated with the outcome variable via the "Pr(>|t|)" statement of the p-value. For our purposes, this will be useful, but I encourage you to interpret these p-values with caution, especially when there are multiple variables. 
+
+For our consideration, we take the <em>Estimate</em> as the actual estimated value for the $\beta$s and then the standard errors (SE), which define accuracy of beta coefficients. A larger SE indicates a less certain beta estimate. We then see the t-statistic and the associated p-value, which speak to the statistical significance of the beta coefficients.
+
+We have to recall that for our regression, we are using the $H_0$ that the estimate is zero, which denotes no effect from said coefficient. If any coefficient has a p-value < 0.05, we can infer that the estimate is significantly different from zero. However, this says nothing about the <em>strength</em> of that interaction. 
+
+If we cared to construct a confidence interval around our beta values, we could do so with $\beta +/- 1.96 * SE_{\beta}$, which would give us our 95% CI. 
+
+4) <strong>Model Accuracy</strong> -- We see a number of measures at the bottom, starting with the Residual Standard Error, which contain information about how well our model has fit. 
+
+Starting with the <strong> Residual Standard Error (RSE)</strong>, which essentially represents the average variation of the data points from the fitted regression line. It stands to reason that we want this value to be as small as possible. It comes in handy most when comparing multiple models. Say, for example, we had some other variable $z$ that we think may explain $y$, we could compare the two models $y ~ x$ and $y ~ z$ and see which model has a smaller RSE. This is not the best way to compare models, but it's a good start.
+
+We then see two measures of $R^2$, which is a measure of how well the model fits the data. Specifically, the measure gives the proportion of information (i.e. variation) in the data that can be explained by the model
 
