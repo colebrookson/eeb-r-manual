@@ -86,7 +86,17 @@ df = data.frame(
 head(df)
 ```
 
+Often it's true when doing regression modelling that it's easier to do our diagnostics of assumptions <em>after</em> we actually fit the model itself as some more simple tools will become available to us. So, let's start with fitting the model. As we mentioned before, R makes it dead simple to do a linear regression in R with the <code>stats::lm()</code> function. 
+
+
+
+
 So here we have some data, x and y values. To test our first assumption (linearity), it will do for now to simply plot the two of them. In fact, this is the plot we have above. We can see that the data are linearly related, so we'll consider that satisfied for now. 
+
+Second, we'll address the homoskedasticity assumption. We can use the same visual assessment we did before, the QQ plot: 
+```{r}
+ggpubr::ggqqplot(df, x = "y")
+```
 
 
 
