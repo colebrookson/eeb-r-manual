@@ -7,7 +7,7 @@ output:
 **Author:** Cole Brookson
 **Date:** 29 August 2022
 
-<em>Are winter temperatures increasing through time? And if they are, are these warming temperatures responsible for decreasing levels of ice coverage?</em>
+<em>In a grassland system, is the relationship between species richness and biomass affected by soil pH?</em>
 
 One of the first chapters to a book on causal inference that I have recently read is entitled "All you need is regression". I thought this was an accurate way to start this section, because that statement is true! While we cannot cover all the theory of linear regression here, it is genuinely the case that nearly all classical frequentist statistical methods are simply a version of linear regression. A t-test? Actually just linear regression. ANOVA? Yup, also linear regression. Machine learning?? Many types of it are in fact just regression!
 
@@ -86,6 +86,9 @@ Let's now get our hands dirty with a bit of an example, a very small one, that w
 Here are the data we will start with: 
 
 ```{r}
+# set seed -- see section on this in the probability section
+set.seed(1234)
+
 x = c(1:100)
 y = rep(NA, 100)
 for(i in 1:100) {
@@ -119,7 +122,7 @@ ggplot(df) +
 This looks sufficiently linear for our purposes. However, we can actually check all of our assumptions visually at once by using the diagnostic plots that are created by simply plotting our model object: 
 
 ```{r}
-par(mfrow = c(2,2,)) # this ensures all the plots show up at once
+par(mfrow = c(2,2)) # this ensures all the plots show up at once
 plot(mod)
 ```
 
@@ -173,17 +176,207 @@ summary(mod)
 
 the residuals here, by definition, have a mean of zero, and a "perfecty" minimized set of residuals would mean that the median value is zero, which will not really happen, but we want the median to be as close to zero as possible. We also want our minimum and maximum values to be approximately equal in magnitude. 
 
-3) <strong> Coefficients </strong> -- Possibly the part that we'll look at the most, these values are here shown as representing $\beta_0$ and $\beta_1$. So the intercept is the actual y-intecept (remember that $\beta_0$ is the y-intercept), and the $\beta_1$ is the estimate of the coefficient on $x$. We assess whether or not a particular predictor variable is significantly associated with the outcome variable via the "Pr(>|t|)" statement of the p-value. For our purposes, this will be useful, but I encourage you to interpret these p-values with caution, especially when there are multiple variables. 
+3. <strong> Coefficients </strong> -- Possibly the part that we'll look at the most, these values are here shown as representing $\beta_0$ and $\beta_1$. So the intercept is the actual y-intecept (remember that $\beta_0$ is the y-intercept), and the $\beta_1$ is the estimate of the coefficient on $x$. We assess whether or not a particular predictor variable is significantly associated with the outcome variable via the "Pr(>|t|)" statement of the p-value. For our purposes, this will be useful, but I encourage you to interpret these p-values with caution, especially when there are multiple variables. 
 
 For our consideration, we take the <em>Estimate</em> as the actual estimated value for the $\beta$s and then the standard errors (SE), which define accuracy of beta coefficients. A larger SE indicates a less certain beta estimate. We then see the t-statistic and the associated p-value, which speak to the statistical significance of the beta coefficients.
 
 We have to recall that for our regression, we are using the $H_0$ that the estimate is zero, which denotes no effect from said coefficient. If any coefficient has a p-value < 0.05, we can infer that the estimate is significantly different from zero. However, this says nothing about the <em>strength</em> of that interaction. 
-
+ 
 If we cared to construct a confidence interval around our beta values, we could do so with $\beta +/- 1.96 * SE_{\beta}$, which would give us our 95% CI. 
 
-4) <strong>Model Accuracy</strong> -- We see a number of measures at the bottom, starting with the Residual Standard Error, which contain information about how well our model has fit. 
+4. <strong>Model Accuracy</strong> -- We see a number of measures at the bottom, starting with the Residual Standard Error, which contain information about how well our model has fit. 
 
 Starting with the <strong> Residual Standard Error (RSE)</strong>, which essentially represents the average variation of the data points from the fitted regression line. It stands to reason that we want this value to be as small as possible. It comes in handy most when comparing multiple models. Say, for example, we had some other variable $z$ that we think may explain $y$, we could compare the two models $y ~ x$ and $y ~ z$ and see which model has a smaller RSE. This is not the best way to compare models, but it's a good start.
 
-We then see two measures of $R^2$, which is a measure of how well the model fits the data. Specifically, the measure gives the proportion of information (i.e. variation) in the data that can be explained by the model
+We then see two measures of $R^2$, which is a measure of how well the model fits the data. Specifically, the measure gives the proportion of information (i.e. variation) in the data that can be explained by the model. In general, it's preferred to use the "Adjusted R-squared" as when we add more predictors into our model, the calculation of the Adjusted R-squared will account for that. 
+
+We also see the <em>F-statsitic</em> which is a rough estimate of whether there is a relationship between our predictor and response variables or not. The simple interpretation is that the further the F-statistic is from 1, the stronger the relationship between our predictor and response variables.  
+
+<hr>
+
+Okay so we have all this output. What do we do with it?? Well, that depends on how we've formulated our hypothesis, but let's say that we've stated our hypothesis to be that we think there's a significantly non-zero relationship between x and y. Well we already have our answer in this case! If we look back at our <code>summary()</code> table, then we can see that our t-statistic and p-value are already given. We can see we have a significant result, which says we can reject the null hypothesis that there was no relationship (i.e. $\beta_x = 0$).
+
+### Moving Beyond Simple Regression
+
+So above we had a good example of the fundamentals of linear regression. That involved no transformations of data or anything of the sort. However, recall the first three assumptions of linear regression (linearity, homoskedasticity, and normality): these are very often not satisfied by the type of biological data we're likely to encounter in the "wild". To deal with this problem, we will, from here, abandon the simple linear model. 
+
+## Generalized Linear Models (GLMs)
+
+In a simple linear model, we expect the response variable varies in a linear fashion. That is, some constant amount of change in $X$ leads to a constant change in $Y$. We also need those two variables to be continuous and theoretically unbounded. But this is not always how real data behave!! For example, let's think about species richness. This is a zero-bounded integer value (not continuous!), but we are likely <strong>very</strong> interested in species richness for a variety of questions. Additionally, what about trying to model presence/absence data? Say we wanted to come up with a model for which the response variable is the presence or absence of a gene mutation in a lab rat? These two examples are not well described by a "continuous linear variable". What to do!! We shall simply abandon the linear model :)
+
+The generalized linear model is the more flexible and useful big brother of the simple linear regression. It still uses regression techniques (i.e. fitting a line to some data), and often also uses a version of least squares methods, but adds a bit more complexity to the equation (literally and figuratively!).
+
+These models always contain three things: 
+
+1) A linear predictor 
+2) A link function
+3) A error distribution
+
+This section is going to add two components - first the link function, and second, linear predictor. In the simple above example, we still had an error structure, but it corresponded to a normal distribution. Our linear predictor was also just a single value. As we move to talking about GLMs, we'll almost always consider multiple predictor variables in our models, as that's what usually makes sense biologically! 
+
+Throughout this section on GLMs, we'll use the following example, which is an excellent example used by JJ Valletta and TJ McKinley in their "Statistical Modelling in R" book: 
+
+A long-term agricultural experiment had 90 grassland plots, each 25m x 25m, differing in biomass, soil pH
+and species richness (the count of species in the whole plot). The plots were classified according to a 3-level factor as high,
+medium or low pH with 30 plots in each level.
+
+What are We interested in? Well, in many systems, species richness can be affected by biomass, usually negatively. In this grassland, what effect does biomass have on richness? Additionally, if there is a relationship between the two, does it differ across levels of soil pH? Let's set this out in some hypotheses: 
+
+<strong>$H1_0$: Biomass has no effect on species richness. </strong>
+
+<strong>$H2_0$: Differing pH has no effect on the relationship between species richness and biomass. </strong>
+
+
+Now that we can anchor our thinking with this example, let's go back to the theory for a minute. <strong>I encourage the mathematically timid reader to NOT be afraid of the equations!! We'll explain in detail and maybe you will actually find it fun!!</strong>
+
+In the most basic terms, in a regression of this nature, we have some independent variable(s) $\bf{X}$, and a single dependent variable $\bf{Y}$. For every value of $\bf{X}$, we want to figure out the expected value of $\bf{Y}$. We write that like this: $$\text{E(}\bf{Y}|\bf{X})$$ which we would say as <em>"the expected value of $\bf{Y}$, conditional on $\bf{X}$"</em>
+
+This expected value is then found as: $$\text{E}(\textbf{Y}|\textbf{X}) = \mu =g^{-1}(\textbf{X}\boldsymbol{\beta})$$
+
+The term in the middle, $\mu$, is the mean of the probability distribution. Recall from that section that if $X$ is a random variable, then some expected value $Y$ is therefore going to be the mean of that distribution for that value of $X$. How do we get this mean value? Well, here we set it equal to the value on the righ-hand side.
+
+The term on the right-hand side of the equation has two parts, $\textbf{X}\boldsymbol{\beta}$ is the <strong>linear predictor</strong> and the $g^{-1}()$ is the link function. We'll discuss the linear predictor first. 
+
+### Linear Predictor
+
+This is the value actually tells us how our response variable will change as our predictor variables change. Notice that here we're now talking about multiple predictor variables, as it's nearly always the case that a single variable will not be the only thing we're interested in. Introducing a few equations here will be useful. 
+
+First of all, notice that both terms here ($\textbf{X}\boldsymbol{\beta}$) are bolded. That's because they're both actually vectors, that could contain multiple sets of $\text{X}$ predictor variables, and their associated $\beta$ values. So, to make this more clear, we'll call the linear predictor the Greek letter <em>eta</em>, $\eta$ instead. So we can state $\eta = \textbf{X}\boldsymbol{\beta}$. The exact calculation of $\eta$ is beyond the scope of the present discussion, so just know that when we have a bunch of predictor variables, and their unknown coefficients ($\beta$s), we end up with one single value $\eta$ that is passed to the link function. 
+
+### Link Function 
+
+This is the heart of what makes a model a GLM. This component essentially allows us to relax the assumption of normality of our response variable, by allowing other distributions, and then defining some function of the response variable that in fact DOES vary linearly with the predictor variables. The math behind how this works is both incredibly interesting, and requires some knowledge of linear algebra, so we will leave the interested reader with an encouragement to take a linear algebra class if they have room in their timetable. 
+
+Suffice it to say here that a link function allows us to take some non-linear response data, and "transform" it such that it now varies linearly with the predictor variable(s). 
+
+### Error Distribution
+
+The error distribution we define will in turn define which link function we choose. Determining what error distribution we need to choose can be crudely but often satisfactorily chosen by plotting the response variable, but a more nuanced approach is possible. See <a href="https://r.qcbs.ca/workshop07/book-en/choose-an-error-distribution.html>this tutorial</a> from the Quebec Centre for Biodiversity Science for an example. 
+
+### Species Richness Example
+
+Back to our example stated earlier regarding if the relationship between biomass and species richness changes with soil pH. The data for this example can be found <a href="https://exeter-data-analytics.github.io/StatModelling/_data/species.csv">here</a>. If you want to download the data and follow along, be sure to check out the <a href="../01-basicr/01-06-workflow.html">Workflow section</a>. 
+
+Since we already have our hypothesis stated (and therefore cannot p-hack ourselves), we can proceed to plot our data: 
+
+```{r}
+library(tidyverse)
+
+
+# uncomment and edit the lines below if you need to read in the data 
+# library(here)
+# df <- readr::read_csv(here("./data/species.csv"))
+
+# quick summary of our data
+dplyr::glimpse(df)
+head(df)
+```
+
+Ok so we can see what types are data are. It's important here to not be tricked by R!! It has read in the data automatically with the <code>Species</code> column as numeric type, but it's in fact integer values. This doens't matter right now, but it will matter when we need to choose an error distribution. 
+
+#### Step 1 - Plot Data
+o
+```{r}
+library(ggthemes)
+
+ggplot(data = df) + 
+  geom_point(mapping = aes(x = Biomass, y = Species)) +
+  ggthemes::theme_base()
+```
+
+Okay, let's try colouring the points by the pH values. First let's check how many levels there are to the variable: 
+
+```{r}
+unique(df$pH)
+```
+
+Okay, let's plot: 
+
+```{r}
+ggplot(data = df) + 
+  geom_point(mapping = aes(x = Biomass, y = Species, 
+                           fill = pH), colour = "black",
+             shape = 21, size = 4) +
+  ggthemes::theme_base()
+```
+
+Okay, so we see some very very clear groupings here! In fact, it even looks like there's a linear decrease in richness as biomass increases. So why can't we just assume a normal distribution here? Well, let's take a look at it. 
+
+#### An Aside - Motivation for Link Functions
+
+If we simply assume a Normal distribution, we don't even need to specify a link function. I'm going to fit the model and plot the result, with the code behind the scenes so it's super clear this is NOT what you're supposed to do, as a demonstration. 
+
+```{r, echo=FALSE}
+# fit model using glm()
+fit = glm(Species ~ Biomass*pH,
+  data = df,
+  family = gaussian(link = "identity"))
+df$pH = as.factor(df$pH)
+newdata = expand.grid(Biomass = seq(min(df$Biomass), max(df$Biomass),
+                                    length.out = 200), pH = levels(df$pH))
+newdata_predict = cbind(newdata,
+
+Species = predict(fit, newdata, type = "response"))
+
+# now make our plot
+ggplot(data = df, aes(x = Biomass, y =Species, colour = pH)) +
+  geom_point() +
+  geom_line(data = newdata_predict) + 
+  ggthemes::theme_base()
+```
+
+Here, the lines are representing the fitted regression lines, with the predicted values of species richness for each value of biomass. What's wrong with this? 
+
+<strong>We're predicting NEGATIVE species richness</strong>. That's impossible! We can probably guess that as biomass gets higher, we'll actually probably have something more like an asymptotic decline of species richness. So how can we model this? <strong>A link function</strong>. 
+
+#### Step 2 - Error Distribution
+
+Let's use our crude by satisfactory method of choosing an error distribution, via plotting our response variable. We can do this a couple ways. As a density plot:
+
+```{r}
+ggplot(data = df, mapping = aes(x = Species)) + 
+  geom_density(fill = "goldenrod2", alpha = 0.3) +
+  ggthemes::theme_base()
+  
+```
+
+Or perhaps as a histogram: 
+
+```{r}
+ggplot(data = df, mapping = aes(x = Species)) + 
+  geom_histogram(fill = "blue2", colour = "black", alpha = 0.3) +
+  ggthemes::theme_base()
+```
+
+What to do? Well, this follows a slightly skewed distribution, but it's discrete integer-valued. For this purpose, a Poisson distribution will work well. 
+
+#### Step 3 - Selecting a Link Function 
+
+We have to come up with a function that will allow us to continue. We can see which link functions are supported for the different distributions in the <code>stats</code> package:
+
+```{r}
+?family
+```
+
+And a helpful page will pop up. The beginning of the help page has the following info: 
+
+<img src="../img/04-img/family.png">
+
+<strong>And we can see that for the Poisson distribution, we must use the log link function.</strong>
+
+Previously we were interested in $\mu$ to get our expected value of $\text{E(}\bf{Y}|\bf{X})$ but we need to come up with some way to link to $\mu$. It turns out that in this case, our $\textbf{X}\boldsymbol{\beta}$ can be restated as $\textbf{X}\boldsymbol{\beta} = \text{ln}(\mu)$, so in this case, $$\text{E(}\textbf{Y}|\textbf{X}) = \text{exp}(\textbf{X}\boldsymbol{\beta})$$, because we may recall from math class that the exponential function is the natural logarithm. 
+
+#### Step 4 - Fitting the Model 
+
+Okay, let's (Finally!) fit the model. Turns out, yet again, that it's dead simple in R. However, recall that we're interested not just in the effect of pH, but in it's 
+
+```{r}
+# first ensure our pH here is a factor
+
+mod_poi <- stats::glm()
+```
+
+
+
+
 
