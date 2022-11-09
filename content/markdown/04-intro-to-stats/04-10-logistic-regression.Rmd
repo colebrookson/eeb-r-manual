@@ -1,0 +1,20 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Linear Regression
+**Author:** Cole Brookson
+**Date:** 13 October 2022
+
+## Logistic Regression
+
+<code>Do seal pups with experienced mothers have a higher probability of survival than seal pups with inexperienced mothers?</code>
+
+This section will deal with the topic of Logistic regression, which is actually just a special type of GLM, but in this example, the distribution of our response variable is Bernoulli. To get an intuitive understanding for this, we are often interested in the probability of an event occurring. For example <em>did a seal pup survive?</em> This often means we want a prediction that is continuous (i.e. a probability between 0 and 1), but given data that are themselves only binary - after all the seal can only survive or not. We call the probability $p$, and the estimated probability $\hat{p}$.
+
+We now will often want to think about a binary output variable $Y$, and some some set of parameters $X$. Our goal would then be figure out the conditional probability $Pr(Y = 1|X = x)$ which is akin to asking <em>"If my variables take some values $x$, whats the probability that my response variable will be equal to 1?"</em> 
+
+Similar to how we discussed in the GLM section, in order to still use the tools of linear regression, we need to be able to take our response variable of 1s and 0s, and come up with some sort of transformation and link function (see GLM section for description of this) that will allow our transformed values to be continuous on a scale from $- \infty$ to $\infty$. For this we can use the <em>logit</em> function (AKA <em>log-odds</em>). 
+
+Then, when thinking back in terms of our framework for linear regression generally $\hat{Y} = \beta_0 + \beta_1x_1$ (note the bold X and $\beta$ to denote that they are possibly multiple predictor variables and therefore multiple $\beta$ values), we will now restate this as $$\hat{Y} = \beta_0 + \beta_1x_1 = \text{log}\frac{p(x)}{1 - p(x)}$$
