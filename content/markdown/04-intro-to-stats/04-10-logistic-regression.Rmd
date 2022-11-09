@@ -17,4 +17,48 @@ We now will often want to think about a binary output variable $Y$, and some som
 
 Similar to how we discussed in the GLM section, in order to still use the tools of linear regression, we need to be able to take our response variable of 1s and 0s, and come up with some sort of transformation and link function (see GLM section for description of this) that will allow our transformed values to be continuous on a scale from $- \infty$ to $\infty$. For this we can use the <em>logit</em> function (AKA <em>log-odds</em>). 
 
-Then, when thinking back in terms of our framework for linear regression generally $\hat{Y} = \beta_0 + \beta_1x_1$ (note the bold X and $\beta$ to denote that they are possibly multiple predictor variables and therefore multiple $\beta$ values), we will now restate this as $$\hat{Y} = \beta_0 + \beta_1x_1 = \text{log}\frac{p(x)}{1 - p(x)}$$
+Then, when thinking back in terms of our framework for linear regression generally $\hat{Y} = \beta_0 + \beta_1x_1$ (note the bold X and $\beta$ to denote that they are possibly multiple predictor variables and therefore multiple $\beta$ values), we will now restate this as $$\hat{Y} = \beta_0 + \beta_1x_1 = \text{log}\frac{p(x)}{1 - p(x)}$$which allows our response variables to be mapped to the real numbers. 
+
+Okay, enough math :) 
+
+### Seal Survival Example
+
+Let's think about whether or not a baby seal will survive to the 6 month mark. Let's say there's some species of seal, for which mothers have higher survival of their pups if they are not first time mothers, that is, naive mothers (those who are having their first pup) will give birth to pups with lower survival rates than experienced mothers, and that there is some sort of increasing probability of survival the more pups that the mothers have had previously due to some experience factors.
+
+Imagine we go out and collect some data on these same species of seals from a new location. We want to see if the seals in this previously un-studied population follow the same trend. The data for this exercise are available <a href="">
+
+#### Step 1 - Plot the data
+
+So before we plot any data (so we don’t p-hack ourselves!!) we state our hypothesis. <strong>Null Hypothesis: there is no significant difference in pup survival between experienced and naive mothers. </strong>
+
+```{r}
+library(tidyverse)
+# uncomment and edit the lines below to read in the data from your computer
+# library(here)
+# seals <- readr::read_csv(here("./data/species.csv"))
+
+head(seals)
+```
+
+Let's see how many past pups some of the females have had: 
+
+```{r}
+summary(seals$n_past_pups)
+```
+Okay, now let's plot pup survival 
+
+```{r, echo=FALSE}
+n_past_pups = c(rep(1, 145), rep(2, 198), rep(3, 204),
+rep(4, 162), rep(5, 109), rep(6, 92))
+pup_survival = c(sample(c(1,0), size = 145, replace = TRUE, prob = c(0.2, 0.8)),
+sample(c(1,0), size = 198, replace = TRUE, prob = c(0.25, 0.75)),
+sample(c(1,0), size = 204, replace = TRUE, prob = c(0.29, 0.71)),
+sample(c(1,0), size = 162, replace = TRUE, prob = c(0.38, 0.62)),
+sample(c(1,0), size = 109, replace = TRUE, prob = c(0.44, 0.56)),
+sample(c(1,0), size = 92, replace = TRUE, prob = c(0.57, 0.43)))
+data = data.frame(n_past_pups, pup_survival)
+
+write_csv(data, here("./content/markdown/04-intro-to-stats/data/seal-data.csv"))
+```
+
+
