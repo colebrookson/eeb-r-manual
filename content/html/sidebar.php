@@ -244,6 +244,11 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                 style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
                 Linear Regression</a>
             </li>
+            <li><a href="../04-stats1/04-10-generalized-regression.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Generalized Linear Regression</a>
+            </li>
             <li><a href="../04-stats1/04-09-logistic-regression.html" onclick="w3_close()" 
                 class="w3-bar-item w3-button" 
                 style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
