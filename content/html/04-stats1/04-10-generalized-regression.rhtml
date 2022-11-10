@@ -1,68 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-.inline {
-  background-color: #f7f7f7;
-  border:solid 1px #B0B0B0;
-}
-.error {
-	font-weight: bold;
-	color: #FF0000;
-}
-.warning {
-	font-weight: bold;
-}
-.message {
-	font-style: italic;
-}
-.source, .output, .warning, .error, .message {
-	padding: 0 1em;
-  border:solid 1px #F7F7F7;
-}
-.source {
-  background-color: #f5f5f5;
-}
-.left {
-  text-align: left;
-}
-.right {
-  text-align: right;
-}
-.center {
-  text-align: center;
-}
-.hl.num {
-  color: #AF0F91;
-}
-.hl.str {
-  color: #317ECC;
-}
-.hl.com {
-  color: #AD95AF;
-  font-style: italic;
-}
-.hl.opt {
-  color: #000000;
-}
-.hl.std {
-  color: #585858;
-}
-.hl.kwa {
-  color: #295F94;
-  font-weight: bold;
-}
-.hl.kwb {
-  color: #B05A65;
-}
-.hl.kwc {
-  color: #55aa55;
-}
-.hl.kwd {
-  color: #BC5A65;
-  font-weight: bold;
-}
-</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/stylesheet.css">
@@ -213,33 +151,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <p>
             Since we already have our hypothesis stated (and therefore cannot p-hack ourselves), we can proceed to plot our data. However, we need to read it in first. It turns out, it's actually totally easy to pull data from the web using the same <code>readr::read_csv()</code> we're already familiar with. Let's first inspect it briefly:
         </p>
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
-<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">read_csv</span><span class="hl std">(</span>
-  <span class="hl str">&quot;https://exeter-data-analytics.github.io/StatModelling/_data/species.csv&quot;</span>
-<span class="hl std">)</span>
-
-<span class="hl com"># quick summary of our data</span>
-<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">glimpse</span><span class="hl std">(df)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## Rows: 90
-## Columns: 3
-## $ pH      &lt;chr&gt; &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;…
-## $ Biomass &lt;dbl&gt; 0.46929722, 1.73087043, 2.08977848, 3.92578714, 4.36679265, 5.…
-## $ Species &lt;dbl&gt; 30, 39, 44, 35, 25, 29, 23, 18, 19, 12, 39, 35, 30, 30, 33, 20…
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(df)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## # A tibble: 6 × 3
-##   pH    Biomass Species
-##   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1 high    0.469      30
-## 2 high    1.73       39
-## 3 high    2.09       44
-## 4 high    3.93       35
-## 5 high    4.37       25
-## 6 high    5.48       29
-</pre></div>
-</div></div>
+        <!--begin.rcode, message=FALSE
+        library(tidyverse)
+        df <- readr::read_csv(
+          "https://exeter-data-analytics.github.io/StatModelling/_data/species.csv"
+        )
+        
+        # quick summary of our data
+        dplyr::glimpse(df)
+        head(df)
+        end.rcode-->
         <p>
             Ok so we can see what types are data are. It's important here to not be tricked by R!! It has read in the data automatically with the <code>Species</code> column as numeric type, but it's in fact integer values. This doens't matter right now, but it will matter when we need to choose an error distribution. 
         </p>
@@ -248,13 +169,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 Let's plot our data to see about what we're dealing with. 
             </p>
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
+            <!--begin.rcode
+            library(ggthemes)
 
-<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df)</span> <span class="hl opt">+</span>
-<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species))</span> <span class="hl opt">+</span>
-<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+            ggplot(data = df) + 
+            geom_point(mapping = aes(x = Biomass, y = Species)) +
+            ggthemes::theme_base()
+            end.rcode-->
             <p>
                 It even looks like there's a linear decrease in richness as biomass increases. So why can't we just assume a normal distribution here? Well, let's take a look at it. 
             </p>
@@ -264,22 +185,38 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 If we simply assume a Normal distribution, we don't even need to specify a link function. I'm going to fit the model and plot the result, with the code behind the scenes so it's super clear this is NOT what you're supposed to do, as a demonstration. 
             </p>
-<div class="chunk" id="unnamed-chunk-3"><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+            <!--begin.rcode, echo=FALSE
+            # fit model using glm()
+            fit = glm(Species ~ Biomass,
+            data = df,
+            family = gaussian(link = "identity"))
+            df$pH = as.factor(df$pH)
+            newdata = expand.grid(Biomass = seq(min(df$Biomass), max(df$Biomass),
+                                                length.out = 200))
+            newdata_predict = cbind(newdata,
+                                    Species = predict(fit, newdata, type = "response"))
+
+            # now make our plot
+            ggplot(data = df, aes(x = Biomass, y =Species)) +
+            geom_point() +
+            geom_line(data = newdata_predict, colour = "red") + 
+            ggthemes::theme_base()
+            end.rcode-->
             <p>
                 Here, the lines are representing the fitted regression lines, with the predicted values of species richness for each value of biomass. What's wrong with this? Well nothing yet! But often when we do this type of regression, we want to predict out of sample, or essentially figure out what will happen at levels of our predictor variable we haven't observed. Let's do that here: 
             </p>
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">newdata</span> <span class="hl kwb">=</span> <span class="hl kwd">expand.grid</span><span class="hl std">(</span><span class="hl kwc">Biomass</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl kwd">min</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">Biomass),</span> <span class="hl num">30</span><span class="hl std">,</span>
-                                    <span class="hl kwc">length.out</span> <span class="hl std">=</span> <span class="hl num">200</span><span class="hl std">))</span>
-<span class="hl std">newdata_predict</span> <span class="hl kwb">=</span> <span class="hl kwd">cbind</span><span class="hl std">(newdata,</span>
-                        <span class="hl kwc">Species</span> <span class="hl std">=</span> <span class="hl kwd">predict</span><span class="hl std">(fit, newdata,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;response&quot;</span><span class="hl std">))</span>
+            <!--begin.rcode
+            newdata = expand.grid(Biomass = seq(min(df$Biomass), 30,
+                                                length.out = 200))
+            newdata_predict = cbind(newdata,
+                                    Species = predict(fit, newdata, type = "response"))
 
-<span class="hl com"># now make our plot</span>
-<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">=Species))</span> <span class="hl opt">+</span>
-<span class="hl kwd">geom_point</span><span class="hl std">()</span> <span class="hl opt">+</span>
-<span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= newdata_predict,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+            # now make our plot
+            ggplot(data = df, aes(x = Biomass, y =Species)) +
+            geom_point() +
+            geom_line(data = newdata_predict, colour = "red") + 
+            ggthemes::theme_base()
+            end.rcode-->
             <p>
                 So we want to predict out of sample. We've done that! We can now make a guess at what values of Species Richness would be present at a Biomass value of 30. But what's wrong with <strong>this</strong> one? 
             </p>
@@ -295,20 +232,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 Let's use our crude by satisfactory method of choosing an error distribution, via plotting our response variable. We can do this a couple ways. As a density plot:
             </p>
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Species))</span> <span class="hl opt">+</span>
-<span class="hl kwd">geom_density</span><span class="hl std">(</span><span class="hl kwc">fill</span> <span class="hl std">=</span> <span class="hl str">&quot;goldenrod2&quot;</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.3</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+            <!--begin.rcode
+            ggplot(data = df, mapping = aes(x = Species)) + 
+            geom_density(fill = "goldenrod2", alpha = 0.3) +
+            ggthemes::theme_base()
+            
+            end.rcode-->
             <p>
                 Or perhaps as a histogram: 
             </p>
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Species))</span> <span class="hl opt">+</span>
-<span class="hl kwd">geom_histogram</span><span class="hl std">(</span><span class="hl kwc">fill</span> <span class="hl std">=</span> <span class="hl str">&quot;blue2&quot;</span><span class="hl std">,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.3</span><span class="hl std">,</span>
-                <span class="hl kwc">bins</span> <span class="hl std">=</span> <span class="hl num">30</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
+            <!--begin.rcode
+            ggplot(data = df, mapping = aes(x = Species)) + 
+            geom_histogram(fill = "blue2", colour = "black", alpha = 0.3,
+                            bins = 30) +
+            ggthemes::theme_base()
+            end.rcode-->
             <p>
                 What to do? Well, this follows a slightly skewed distribution, but it's discrete integer-valued. For this purpose, a Poisson distribution will work well. 
             </p>
@@ -318,9 +256,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 We have to come up with a function that will allow us to continue. We can see which link functions are supported for the different distributions in the <code>stats</code> package:
             </p>
-<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl opt">?</span><span class="hl std">family</span>
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            ?family
+            end.rcode-->
             <p>
                 And a helpful page will pop up. The beginning of the help page has the following info: 
             </p>
@@ -337,41 +275,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 Okay, let's (Finally!) fit the model. Turns out, yet again, that it's dead simple in R. 
             </p>
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod_poi</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">glm</span><span class="hl std">(Species</span> <span class="hl opt">~</span> <span class="hl std">Biomass,</span>
-                    <span class="hl kwc">data</span> <span class="hl std">= df,</span>
-                    <span class="hl kwc">family</span> <span class="hl std">=</span> <span class="hl kwd">poisson</span><span class="hl std">(</span><span class="hl kwc">link</span> <span class="hl std">= log))</span>
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            mod_poi <- stats::glm(Species ~ Biomass,
+                                data = df,
+                                family = poisson(link = log))
+            end.rcode-->
             <p>
                 And we can look at the output here: 
             </p>
-<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mod_poi)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## Call:
-## stats::glm(formula = Species ~ Biomass, family = poisson(link = log), 
-##     data = df)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -4.7703  -1.5994  -0.1025   1.2722   4.5433  
-## 
-## Coefficients:
-##              Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)  3.184094   0.039159   81.31  &lt; 2e-16 ***
-## Biomass     -0.064441   0.009838   -6.55 5.74e-11 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for poisson family taken to be 1)
-## 
-##     Null deviance: 452.35  on 89  degrees of freedom
-## Residual deviance: 407.67  on 88  degrees of freedom
-## AIC: 830.86
-## 
-## Number of Fisher Scoring iterations: 4
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            summary(mod_poi)
+            end.rcode-->
             <p>
                 The output here is very similar to that of <code>lm()</code>, but we'll walk through it en entirety in a second. First however, let's check our model is performing well enough: 
             </p>
@@ -381,10 +295,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 We need to make sure that our model is agreeing with all our assumptions, and also that it's doing a good-enough job. Model evaluation and validation is actually very involved for more complicated models, but for our simple model, let's first plot our residuals against out fitted values and a QQ plot. We can do that by simply calling <code>plot()</code> on our model object. 
             </p>
-<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">))</span> <span class="hl com"># this will put the plots in a grid</span>
-<span class="hl kwd">plot</span><span class="hl std">(mod_poi)</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+            <!--begin.rcode
+            par(mfrow = c(2,2)) # this will put the plots in a grid
+            plot(mod_poi)
+            end.rcode-->
             <p>
                 This calls 4 plots, but we will only look at the first two for now. We see the line of the residuals and fitted values is straight and mostly follows the dotted line, and the QQ plot also follows the diagonal line sufficiently well. These quick diagnostics let us know we can continue.
             </p>
@@ -397,33 +311,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 Let's re-call the output here:
             </p>
-<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mod_poi)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## Call:
-## stats::glm(formula = Species ~ Biomass, family = poisson(link = log), 
-##     data = df)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -4.7703  -1.5994  -0.1025   1.2722   4.5433  
-## 
-## Coefficients:
-##              Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)  3.184094   0.039159   81.31  &lt; 2e-16 ***
-## Biomass     -0.064441   0.009838   -6.55 5.74e-11 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for poisson family taken to be 1)
-## 
-##     Null deviance: 452.35  on 89  degrees of freedom
-## Residual deviance: 407.67  on 88  degrees of freedom
-## AIC: 830.86
-## 
-## Number of Fisher Scoring iterations: 4
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            summary(mod_poi)
+            end.rcode-->
             <p>
                 This output has a number of components
             </p>
@@ -460,66 +350,60 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 Typically the best way to do this is make our prediction and bind that to our original dataframe so we have the real observed values of our response variable alongside the predicted ones for plotting. The best way to do that is through a call to <code>mutate()</code> from <code>dplyr</code>.
             </p>
-<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df_pred</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
-<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
-    <span class="hl kwc">Species_pred</span> <span class="hl std">= stats</span><span class="hl opt">::</span><span class="hl kwd">predict</span><span class="hl std">(mod_poi,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;response&quot;</span><span class="hl std">)</span>
-<span class="hl std">)</span>
+            <!--begin.rcode
+            df_pred <- df %>% 
+            dplyr::mutate(
+                Species_pred = stats::predict(mod_poi, type = "response")
+            )
 
-<span class="hl com"># now bind this new dataframe to our old dataframe </span>
-</pre></div>
-</div></div>
+            # now bind this new dataframe to our old dataframe 
+            end.rcode-->
             <p>
                 And now we can plot from this new dataframe: 
             </p>
-<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_pred)</span> <span class="hl opt">+</span>
-<span class="hl com"># plot the observed points</span>
-<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species),</span>
-            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">fill</span> <span class="hl std">=</span> <span class="hl str">&quot;purple&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl com"># plot regression line</span>
-<span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species_pred),</span>
-            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+            <!--begin.rcode
+            ggplot(data = df_pred) + 
+            # plot the observed points
+            geom_point(aes(x = Biomass, y = Species), 
+                        colour = "black", fill = "purple", shape = 21) + 
+            # plot regression line
+            geom_line(aes(x = Biomass, y = Species_pred), 
+                        colour = "red", size = 1.2) + 
+            ggthemes::theme_base()
+            
+            end.rcode-->
             <p>
                 "But wait! That line isn't straight??" True, because we're using a link function to relate our data linearly, but accomodate for non-linearity :) 
             </p>
             <p>
                 Now, if we want to predict <em>out</em> of our sampled data, we could use the predict function again in a new way, by creating a new dataset with some extended Biomass data and the predicted species data. However, this time because we're predicting out of sample, we need to make use of the <code> newdata</code> argume in <code>predict()</code> to tell R which values to use the model to predict across. There's a few requirements. It needs to be passed a dataframe, with columns with the same names as the predictor variables in the model fit formula originally.
             </p>
-<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># make a dataframe with just the two variables</span>
-<span class="hl std">df_pred_out</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
-<span class="hl com"># make a sequence from our minimum observed amount out to 30 </span>
-<span class="hl kwc">Biomass</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl kwd">min</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">Biomass),</span> <span class="hl num">30</span><span class="hl std">,</span> <span class="hl num">0.1</span><span class="hl std">),</span>
-<span class="hl kwc">Species</span> <span class="hl std">= stats</span><span class="hl opt">::</span><span class="hl kwd">predict</span><span class="hl std">(mod_poi,</span>
-                        <span class="hl kwc">newdata</span> <span class="hl std">=</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
-                            <span class="hl kwc">Biomass</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl kwd">min</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">Biomass),</span> <span class="hl num">30</span><span class="hl std">,</span> <span class="hl num">0.1</span><span class="hl std">)</span>
-                            <span class="hl std">),</span>
-                        <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;response&quot;</span><span class="hl std">)</span>
-<span class="hl std">)</span>
+            <!--begin.rcode
+            # make a dataframe with just the two variables
+            df_pred_out <- data.frame(
+            # make a sequence from our minimum observed amount out to 30 
+            Biomass = seq(min(df$Biomass), 30, 0.1), 
+            Species = stats::predict(mod_poi, 
+                                    newdata = data.frame(
+                                        Biomass = seq(min(df$Biomass), 30, 0.1)
+                                        ),
+                                    type = "response")
+            )
 
-<span class="hl kwd">head</span><span class="hl std">(df_pred_out)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">##      Biomass  Species
-## 1 0.05017529 24.06745
-## 2 0.15017529 23.91286
-## 3 0.25017529 23.75926
-## 4 0.35017529 23.60665
-## 5 0.45017529 23.45501
-## 6 0.55017529 23.30435
-</pre></div>
-</div></div>
+            head(df_pred_out)
+            end.rcode-->
             <p>
                 And the plot: 
             </p>
-<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_pred_out)</span> <span class="hl opt">+</span>
-<span class="hl com"># plot regression line</span>
-<span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species),</span>
-            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
-<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Predicted Species Richness&quot;</span><span class="hl std">)</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+            <!--begin.rcode
+            ggplot(data = df_pred_out) + 
+            # plot regression line
+            geom_line(aes(x = Biomass, y = Species), 
+                        colour = "red", size = 1.2) + 
+            ggthemes::theme_base() + 
+            labs(y = "Predicted Species Richness")
+            
+            end.rcode-->
             <p>
                 And here we go! We've finally showed, visually, why we need a link function! We can now predict out to a higher than observed biomass without predicting unrealistic response variable values. 
             </p>
@@ -540,12 +424,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             We'll take a moment here and discuss what an interaction means mathematically. In our context we're using pH. 
 
         </p>
-<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">pH)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] high mid  low 
-## Levels: high low mid
-</pre></div>
-</div></div>
+        <!--begin.rcode
+        unique(df$pH)
+        end.rcode-->
         <p>
             This is a categorical variable with three levels. What does that mean? Well, if we think back to when we talked about categorical variables in the linear model section, we talked about indicator functions. We'll actually use the same concept here. In this case, we'll create three indicator variables, one for each. So in essence for the model with just the interaction, we're fitting this model: 
             
@@ -600,21 +481,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 First, what values does pH take?
             </p>
-<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">pH)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] high mid  low 
-## Levels: high low mid
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            unique(df$pH)
+            end.rcode-->
             <p>
                 Okay, let's colour our points by those levels: 
             </p>
-<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df)</span> <span class="hl opt">+</span>
-<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species,</span> <span class="hl kwc">fill</span> <span class="hl std">= pH),</span>
-            <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" class="plot" /></div></div>
+            <!--begin.rcode
+            ggplot(data = df) + 
+            geom_point(mapping = aes(x = Biomass, y = Species, fill = pH),
+                        shape = 21, colour = "black", size = 3) +
+            ggthemes::theme_base()
+            end.rcode-->
             <p>
                 Ok so there's a very obvious pattern here!!
             </p>
@@ -629,17 +507,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 Now, we need to fit three separate models, so we'll go from least to most complicated: 
             </p>
-<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod1</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">glm</span><span class="hl std">(Species</span> <span class="hl opt">~</span> <span class="hl std">Biomass,</span>
-                <span class="hl kwc">data</span> <span class="hl std">= df,</span>
-                <span class="hl kwc">family</span> <span class="hl std">=</span> <span class="hl kwd">poisson</span><span class="hl std">(</span><span class="hl kwc">link</span> <span class="hl std">= log))</span>
-<span class="hl std">mod2</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">glm</span><span class="hl std">(Species</span> <span class="hl opt">~</span> <span class="hl std">Biomass</span><span class="hl opt">:</span><span class="hl std">pH,</span>
-                <span class="hl kwc">data</span> <span class="hl std">= df,</span>
-                <span class="hl kwc">family</span> <span class="hl std">=</span> <span class="hl kwd">poisson</span><span class="hl std">(</span><span class="hl kwc">link</span> <span class="hl std">= log))</span>
-<span class="hl std">mod3</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">glm</span><span class="hl std">(Species</span> <span class="hl opt">~</span> <span class="hl std">Biomass</span><span class="hl opt">*</span><span class="hl std">pH,</span>
-                <span class="hl kwc">data</span> <span class="hl std">= df,</span>
-                <span class="hl kwc">family</span> <span class="hl std">=</span> <span class="hl kwd">poisson</span><span class="hl std">(</span><span class="hl kwc">link</span> <span class="hl std">= log))</span>
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            mod1 <- stats::glm(Species ~ Biomass,
+                            data = df,
+                            family = poisson(link = log))
+            mod2 <- stats::glm(Species ~ Biomass:pH,
+                            data = df,
+                            family = poisson(link = log))
+            mod3 <- stats::glm(Species ~ Biomass*pH,
+                            data = df,
+                            family = poisson(link = log))
+
+            end.rcode-->
             <p>
                 Since we are doing model comparison, we first want to figure out which model does the best job, and then only bother looking at the results for the best one. 
             </p>
@@ -652,69 +531,57 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 First we'll extract the log-likelihoods for each
             </p>
-<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod1_LL</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">logLik</span><span class="hl std">(mod1)</span>
-<span class="hl std">mod2_LL</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">logLik</span><span class="hl std">(mod2)</span>
-<span class="hl std">mod3_LL</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">logLik</span><span class="hl std">(mod3)</span>
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            mod1_LL <- stats::logLik(mod1)
+            mod2_LL <- stats::logLik(mod2)
+            mod3_LL <- stats::logLik(mod3)
+            end.rcode-->
             <p>
                 Now, since we have two comparisons to make, we'll calculate the test statistic first for models 1 and 2:
             </p>
-<div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">teststat_mod1_2</span> <span class="hl kwb">&lt;-</span> <span class="hl std">test_statistic</span> <span class="hl kwb">&lt;-</span> <span class="hl opt">-</span><span class="hl num">2</span> <span class="hl opt">*</span> <span class="hl std">(</span><span class="hl kwd">as.numeric</span><span class="hl std">(mod1_LL)</span> <span class="hl opt">-</span>
-                        <span class="hl kwd">as.numeric</span><span class="hl std">(mod2_LL))</span>
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            teststat_mod1_2 <- test_statistic <- -2 * (as.numeric(mod1_LL) - 
+                                    as.numeric(mod2_LL))
+            end.rcode-->
             <p>
                 And now we can get the p-value that adding the additional parameter improved the model. Note that we can extract the degrees of freedom, which we need for our test, can be extracted from the model itself. If a model object is called <code>mod</code> then the degrees of freedom for our purposes can be extracted with <code>summary(mod)$df[1]</code>:
             </p>
-<div class="chunk" id="unnamed-chunk-22"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">deg_f_1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">summary</span><span class="hl std">(mod1)</span><span class="hl opt">$</span><span class="hl std">df[</span><span class="hl num">1</span><span class="hl std">]</span>
-<span class="hl std">deg_f_2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">summary</span><span class="hl std">(mod2)</span><span class="hl opt">$</span><span class="hl std">df[</span><span class="hl num">1</span><span class="hl std">]</span>
-<span class="hl std">deg_f_3</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">summary</span><span class="hl std">(mod3)</span><span class="hl opt">$</span><span class="hl std">df[</span><span class="hl num">1</span><span class="hl std">]</span>
+            <!--begin.rcode
+            deg_f_1 <- summary(mod1)$df[1]
+            deg_f_2 <- summary(mod2)$df[1]
+            deg_f_3 <- summary(mod3)$df[1]
 
-<span class="hl com"># calculate p-value</span>
-<span class="hl std">p_val_mod1_2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pchisq</span><span class="hl std">(teststat_mod1_2,</span>
-                    <span class="hl kwc">df</span> <span class="hl std">= (deg_f_2</span> <span class="hl opt">-</span> <span class="hl std">deg_f_1),</span>
-                    <span class="hl kwc">lower.tail</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
-<span class="hl std">p_val_mod1_2</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] 7.198193e-57
-</pre></div>
-</div></div>
+            # calculate p-value
+            p_val_mod1_2 <- pchisq(teststat_mod1_2, 
+                                df = (deg_f_2 - deg_f_1), 
+                                lower.tail = FALSE)
+            p_val_mod1_2
+            end.rcode-->
             <p>
                 Ok, so definitely &lt;0.05, and we can move to our next comparison, between the interaction model, and the model with the variables included. We'll again get our test statistic:
             </p>
-<div class="chunk" id="unnamed-chunk-23"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">teststat_mod2_3</span> <span class="hl kwb">&lt;-</span> <span class="hl std">test_statistic</span> <span class="hl kwb">&lt;-</span> <span class="hl opt">-</span><span class="hl num">2</span> <span class="hl opt">*</span> <span class="hl std">(</span><span class="hl kwd">as.numeric</span><span class="hl std">(mod2_LL)</span> <span class="hl opt">-</span>
-                        <span class="hl kwd">as.numeric</span><span class="hl std">(mod3_LL))</span>
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            teststat_mod2_3 <- test_statistic <- -2 * (as.numeric(mod2_LL) - 
+                                    as.numeric(mod3_LL))
+            end.rcode-->
             <p>
                 And now we can get the p-value: 
             </p>
-<div class="chunk" id="unnamed-chunk-24"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># calculate p-value</span>
-<span class="hl std">p_val_mod2_3</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pchisq</span><span class="hl std">(teststat_mod2_3,</span>
-                    <span class="hl kwc">df</span> <span class="hl std">= (deg_f_3</span> <span class="hl opt">-</span> <span class="hl std">deg_f_2),</span>
-                    <span class="hl kwc">lower.tail</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
-<span class="hl std">p_val_mod2_3</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] 4.83787e-15
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            # calculate p-value
+            p_val_mod2_3 <- pchisq(teststat_mod2_3, 
+                                df = (deg_f_3 - deg_f_2), 
+                                lower.tail = FALSE)
+            p_val_mod2_3
+            end.rcode-->
             <p>
                 Again, a small p-value, so we can see that in fact this most complex model offers the best combination of variables. If we wanted to, we could also check the AIC values for each model: 
             </p>
-<div class="chunk" id="unnamed-chunk-25"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">AIC</span><span class="hl std">(mod1)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] 830.8629
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">AIC</span><span class="hl std">(mod2)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] 576.3159
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">AIC</span><span class="hl std">(mod3)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] 514.3913
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            AIC(mod1)
+            AIC(mod2)
+            AIC(mod3)
+            end.rcode-->
             <p>
                 Ok, so if we're following our rules of thumb, then we have a clear best model - the third and most complex model. So now, we can move on to interpreting!
             </p>
@@ -724,37 +591,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 So let's look at the summary of our model of choice: 
             </p>
-<div class="chunk" id="unnamed-chunk-26"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mod3)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## Call:
-## stats::glm(formula = Species ~ Biomass * pH, family = poisson(link = log), 
-##     data = df)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.4978  -0.7485  -0.0402   0.5575   3.2297  
-## 
-## Coefficients:
-##               Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)    3.76812    0.06153  61.240  &lt; 2e-16 ***
-## Biomass       -0.10713    0.01249  -8.577  &lt; 2e-16 ***
-## pHlow         -0.81557    0.10284  -7.931 2.18e-15 ***
-## pHmid         -0.33146    0.09217  -3.596 0.000323 ***
-## Biomass:pHlow -0.15503    0.04003  -3.873 0.000108 ***
-## Biomass:pHmid -0.03189    0.02308  -1.382 0.166954    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for poisson family taken to be 1)
-## 
-##     Null deviance: 452.346  on 89  degrees of freedom
-## Residual deviance:  83.201  on 84  degrees of freedom
-## AIC: 514.39
-## 
-## Number of Fisher Scoring iterations: 4
-</pre></div>
-</div></div>
+            <!--begin.rcode
+            summary(mod3)
+            end.rcode-->
             <p>
                 So we can see here the output as we're used to seeing. However, recall, to make easy direct comparisons, we need to think about these values as relating to the predicted <strong>log</strong> of the species richness. 
             </p>
@@ -780,72 +619,61 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 So we've done some of the interpretation already, but specifically with respect to our answer above of how many species we should expect under medium pH conditions and with a biomass value of 7.5, let's check if our answer agrees with R. To do this, we'll recall the <code>predict()</code> function from the <code>stats</code> package:
             </p>
-<div class="chunk" id="unnamed-chunk-27"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># make a dataframe with a single observation</span>
-<span class="hl std">new_df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">Biomass</span> <span class="hl std">=</span> <span class="hl num">7.5</span><span class="hl std">,</span> <span class="hl kwc">pH</span> <span class="hl std">=</span> <span class="hl str">&quot;mid&quot;</span><span class="hl std">)</span>
+            <!--begin.rcode
+            # make a dataframe with a single observation
+            new_df <- data.frame(Biomass = 7.5, pH = "mid")
 
-<span class="hl com"># now predict</span>
-<span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">predict</span><span class="hl std">(mod3,</span> <span class="hl kwc">newdata</span> <span class="hl std">= new_df,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;response&quot;</span><span class="hl std">)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">##        1 
-## 10.95721
-</pre></div>
-</div></div>
+            # now predict
+            stats::predict(mod3, newdata = new_df, type = "response")
+            end.rcode-->
             <p>
                 And we can see that our answers agree! But we likely want to make some <strong>biological</code> interpretations. So let's make a plot of our results overall. 
             </p>
-<div class="chunk" id="unnamed-chunk-28"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># make new data to regress against -- use expand.grid()</span>
-<span class="hl std">new_df_full</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expand.grid</span><span class="hl std">(</span><span class="hl kwc">Biomass</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl kwd">min</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">Biomass),</span> <span class="hl kwd">max</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">Biomass),</span>
-                                        <span class="hl kwc">length.out</span> <span class="hl std">=</span> <span class="hl num">200</span><span class="hl std">),</span>
-                        <span class="hl com"># note that pH has to be a factor here</span>
-                        <span class="hl kwc">pH</span> <span class="hl std">=</span> <span class="hl kwd">levels</span><span class="hl std">(</span><span class="hl kwd">as.factor</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">pH)))</span>
+            <!--begin.rcode
+            # make new data to regress against -- use expand.grid()
+            new_df_full <- expand.grid(Biomass = seq(min(df$Biomass), max(df$Biomass),
+                                                    length.out = 200),
+                                    # note that pH has to be a factor here
+                                    pH = levels(as.factor(df$pH)))
 
-<span class="hl com"># make model predictions</span>
-<span class="hl std">mod_pred</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">predict</span><span class="hl std">(mod3,</span>
-                        <span class="hl kwc">newdata</span> <span class="hl std">= new_df_full,</span>
-                        <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;response&quot;</span><span class="hl std">)</span>
+            # make model predictions
+            mod_pred <- stats::predict(mod3, 
+                                    newdata = new_df_full,
+                                    type = "response")
 
-<span class="hl com"># bind to a dataframe</span>
-<span class="hl std">predict_df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
-<span class="hl kwd">cbind</span><span class="hl std">(new_df_full,</span>
-        <span class="hl kwc">Species</span> <span class="hl std">= mod_pred)</span>
-<span class="hl std">)</span>
-<span class="hl kwd">head</span><span class="hl std">(predict_df)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">##      Biomass   pH  Species
-## 1 0.05017529 high 43.06662
-## 2 0.10008280 high 42.83698
-## 3 0.14999031 high 42.60856
-## 4 0.19989782 high 42.38136
-## 5 0.24980534 high 42.15537
-## 6 0.29971285 high 41.93058
-</pre></div>
-</div></div>
+            # bind to a dataframe
+            predict_df <- data.frame(
+            cbind(new_df_full, 
+                    Species = mod_pred)
+            )
+            head(predict_df)
+            end.rcode-->
             <p>
                 Now let's make the plot: 
             </p>
-<div class="chunk" id="unnamed-chunk-29"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
-<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species,</span> <span class="hl kwc">fill</span> <span class="hl std">= pH),</span>
-            <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= predict_df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species,</span> <span class="hl kwc">colour</span> <span class="hl std">= pH),</span>
-            <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.3</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" class="plot" /></div></div>
+            <!--begin.rcode
+            ggplot() + 
+            geom_point(data = df, aes(x = Biomass, y = Species, fill = pH),
+                        shape = 21, size = 3) + 
+            geom_line(data = predict_df, aes(x = Biomass, y = Species, colour = pH),
+                        size = 1.3) + 
+            ggthemes::theme_base()
+            end.rcode-->
             <p>
                 If we felt like it, we could change this to make it slightly more nice. First, let's put the lines behind the points. We'll also re-order the levels of the factor so the legend reads high, mid, low. 
             </p>
-<div class="chunk" id="unnamed-chunk-30"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># re-level the factors</span>
-<span class="hl std">predict_df</span><span class="hl opt">$</span><span class="hl std">pH</span> <span class="hl kwb">=</span> <span class="hl kwd">factor</span><span class="hl std">(predict_df</span><span class="hl opt">$</span><span class="hl std">pH,</span> <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;high&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;mid&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;low&quot;</span><span class="hl std">))</span>
-<span class="hl std">df</span><span class="hl opt">$</span><span class="hl std">pH</span> <span class="hl kwb">=</span> <span class="hl kwd">factor</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">pH,</span> <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;high&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;mid&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;low&quot;</span><span class="hl std">))</span>
+            <!--begin.rcode
+            # re-level the factors
+            predict_df$pH = factor(predict_df$pH, levels = c("high", "mid", "low"))
+            df$pH = factor(df$pH, levels = c("high", "mid", "low"))
 
-<span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
-    <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= predict_df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species,</span> <span class="hl kwc">colour</span> <span class="hl std">= pH),</span>
-            <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.3</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species,</span> <span class="hl kwc">fill</span> <span class="hl std">= pH),</span>
-            <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span> <span class="hl opt">+</span>
-<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
-</pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" class="plot" /></div></div>
+            ggplot() + 
+                geom_line(data = predict_df, aes(x = Biomass, y = Species, colour = pH),
+                        size = 1.3) + 
+            geom_point(data = df, aes(x = Biomass, y = Species, fill = pH),
+                        shape = 21, size = 3) + 
+            ggthemes::theme_base() 
+            end.rcode-->
             <p>
                 And we're done! 
             </p>
