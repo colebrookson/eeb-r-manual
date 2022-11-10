@@ -34,16 +34,545 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <main style = margin-top:100px>
   <nav class="section-nav">
       <ol>
-        <li><a href="#reshape"></a>
+        <li><a href="#reg">Regression</a>
         </li>
+        <li><a href="#ols">OLS</a></li>
+        <li><a href="#lin">Linear Model</a>
+        <ol>
+            <li><a href="#lin--small">Small Example</a></li>
+        </ol>
+        </li>
+        <li><a href="#cat">Categorical Variables</a>
+        <ol>
+            <li><a href="#cat--prep">Bison Example</a></li>
+            <li><a href="#cat--fit">Model Fit</a></li>
+            <li><a href="#cat--int">Interpretation</a></li>
+        </ol>
+        </li>
+        <li><a href="#mr">Multiple Regression</a>
+        <ol>
+            <li><a href="#mr--obs">Model Objects</a></li>
+        </ol>
+        </li>
+        <li><a href="#eff">Effect Estimation</a></li>
+        <li><a href="#mod-comp">Model Comparison</a>
+        <ol>
+            <li><a id="#mod-comp--lrt">Likelihood Ratio Test</a></li>
+            <li><a id="#mod-comp--aic">Akaike Information Criterion</a></li>
+        </ol>
+        </li>
+        <li><a id="#bey">Beyond Simple Linear Models</a></li>
       </ol>
     </nav>
   <div>
     <section id="work">
       <h2>Linear Regression</h2>
-      <img class="image-full-page" style="display:block;margin:auto"
-      src="../img/01-img/construction.jpg">
+      <p align="center">
+        <strong><em>What factors influence bison mass in a restored ecosystem?</em></strong>
+      </p>
+      <p>
+        One of the first chapters to a book on causal inference that I have recently read is entitled "All you need is regression". I thought this was an accurate way to start this section, because that statement is true! While we cannot cover all the theory of linear regression here, it is genuinely the case that nearly all classical frequentist statistical methods are simply a version of linear regression. A t-test? Actually just linear regression. ANOVA? Yup, also linear regression. Machine learning?? Many types of it are in fact just regression!
+      </p>
+      <p>
+        So why then, you may ask, did we learn about t-tests before we learned about linear regression in stats class? Well, it turns out that as with almost all quantitative methods discussed in this section, linear regression is frightfully easy to implement, but actually not so simple "under the hood." 
+      </p>
+      <p>
+        However, getting an intuitive understanding of the basics is very much possible and highly encouraged. Linear regression is probably the most fundamental of all topics you may learn in statistics, and it's worth thinking about it carefully. To be clear, you will likely re-visit this topic many times, likely over the course of years, adding and refreshing pieces of information that will eventually develop into a solid understanding. here, we attempt only to provide a brief introduction to the basics. 
+      </p>
+    <section id="reg">
+      <p>
+        A gross simplification of the process of linear regression would be that if we have a series of points between two continuous variables, we want to find a straight line that goes through as many of those points as possible. 
+      </p>
+      <p>
+        What does it mean to do such a thing? Well, let's start with reminding ourselves, mathematically, what a line is. A straight line is defined by the equation \[y = mx + b\] where \(b\) is the y-intercept, \(m\) is the slope of the line, and \(x\) and \(y\) are data values. This means that given a point on the x-axis, \(x\), a slope \(m\), and a y-intercept \(b\), we can find the value \(y\) that denotes the y-axis value that corresponds to the x-axis value \(x\). 
+      </p>
+      <p>
+        When we talk about linear regression, we'll probably want to discuss this equation in a slightly altered form: \[y = \beta_0 + \beta_1 x_1\] We'll discuss what these terms mean in a moment but they relate exactly to a y-intercept (\(\beta_0\)), a slope (\(\beta_1\)) and an x-value. 
+      </p>
+    </section>
+    <section id="ols">
+        <h2>Ordinary Least Squares (OLS)</h2>
+        <p>
+            We mentioned above we're putting a line through some points as best we can. But how do we define this "best as we can"? Well, the version of "as best we can" that will be addressed here is the method of least squares. If we imagine a scatter of plots like this: 
+        </p>
+        <!--begin.rcode, echo = FALSE, warning = FALSE, message=FALSE
+        x = c(1:100)
+        y = rep(NA, 100)
+        for(i in 1:100) {
+        y[i] = 1.3 * x[i] + 10 + rnorm(1, mean = 0, sd = 23)
+        }
 
+        df = data.frame(
+        x = x, y = y
+        )
+
+        library(tidyverse)
+        library(ggthemes)
+        ggplot(df) + 
+        geom_point(aes(x = x, y = y), fill = "red", colour = "black", shape = 21, 
+                    size = 3) + 
+        ggthemes::theme_base()
+        end.rcode-->
+        <p>
+            It's clear that we can't actually make our line go <em>directly</em> through very many of them, but perhaps we can figure out some way to make the line <em> as close to as many points as possible</em>. We'll do that by imagining we draw a line at random, and calculate the distance between every single point and the line itself. These are called <strong>residuals</strong>. Then we'll square each one, and take the sum of all those squares. 
+        </p>
+        <p>
+            You might ask, why square it? The short answer to that question is that squaring it makes a large number of mathematical tools available to us. 
+        </p>
+        <p>
+            It now follows somewhat logically that we want to find a value for the slope of our line, \(\beta_1\) that <strong>minimizes</strong> this sum of the squared residuals. What we are doing here is actually a process called <em>estimation</em> wherein we choose some method that allows us to compare candidate values for \(\beta_1\) with other values. Ordinary Least Squares is actually just a specific version of Maximum Likelihood Estimation, which we'll discuss below. 
+        </p>
+    </section>
+    <section id="lin">
+        <h2>The Linear Model</h2>
+        <p>
+            As in our previous work, we will certainly NOT (!!!!) just jump into writing code, as that's the best way to ensure a poorly done analysis. First, we have our question. Let's frame it as a hypothesis. It seems logical here to state that we think temperature will positively vary with ice cover. So a null hypothesis may be that <em> there is no relationship between air temperature and ice cover </em>. We have decided we want to use linear regression to tackle this challenge, so consider the assumptions of the method: 
+        </p>
+        <p>
+        <strong>1. Linearity</strong> - we assume the relationship between our two variables, \(X\) and \(Y\) is linear<br>
+        <strong>2. Homoskedacity</strong> - we assume the variance of the residual is the same for any value of \(X\)<br>
+        <strong>3. Normality</strong> - we assume that for any fixed value of \(X\), the errors of \(Y\) normally distributed<br>
+        <strong>4. Randomness</strong> - we also assume that samples were collected at random<br>
+        <strong>5. Independence</strong> - we assume all errors are independent<br><br>
+        If assumptions 1-3 are violated, then we can may be able to use some sort of transformation on our response variable to deal with the problem. 
+        </p>
+        <section id="lin--small">
+            <p>
+                Let's now get our hands dirty with a bit of an example, a very small one, that we'll go all the way through and then delve into some details in the next example. Very generally, we can think of the process of doing regression as falling into a few steps:
+            </p>
+            <p>
+                <strong>1. Inspect our data</strong><br>
+                <strong>2. Perform the regression</strong><br>
+                <strong>3. Assess our assumptions (post-hoc)</strong><br>
+                <strong>4. Inspect our results</strong><br>
+                <strong>5. Interpret & Visualize</strong><br>
+            </p>
+            <p>
+                Here are the data we will start with: 
+            </p>
+            <!--begin.rcode
+            # set seed -- see section on this in the probability section
+            set.seed(1234)
+
+            x = c(1:100)
+            y = rep(NA, 100)
+            for(i in 1:100) {
+            y[i] = 1.3 * x[i] + 10 + rnorm(1, mean = 0, sd = 23)
+            }
+
+            df = data.frame(
+            x = x, y = y
+            )
+
+            head(df)
+            end.rcode-->
+            <p>
+                Often it's true when doing regression modelling that it's easier to do our diagnostics of assumptions <em>after</em> we actually fit the model itself as some more simple tools will become available to us. So, let's start with fitting the model. As we mentioned before, R makes it dead simple to do a linear regression in R with the <code>stats::lm()</code> function. 
+            </p>
+            <!--begin.rcode
+            mod <- stats::lm(y ~ x, data = df)
+            end.rcode-->
+            <p>
+                That's it! Now let's begin seeing if what our model did was "correct". First, we assumed linearly. We can double check this with a simple scatter plot: 
+            </p>
+            <!--begin.rcode
+            library(tidyverse)
+            library(ggthemes)
+            ggplot(df) + 
+            geom_point(aes(x = x, y = y), fill = "red", colour = "black", shape = 21, 
+                        size = 3) + 
+            ggthemes::theme_base()
+            end.rcode-->
+            <p>
+                This looks sufficiently linear for our purposes. However, we can actually check all of our assumptions visually at once by using the diagnostic plots that are created by simply plotting our model object: 
+            </p>
+            <!--begin.rcode
+            par(mfrow = c(2,2)) # this ensures all the plots show up at once
+            plot(mod)
+            end.rcode-->
+            <p>
+                So we have four plots here. 
+            </p>
+            <p>
+                The first plot is the <strong>Residuals vs. Fitted</strong>. This allows us to check the linear relationship assumption. If the red line approximately follows the grey dashed line and there are no distinct patterns, then the variables are linearly related. <br><br>
+
+                Second is the <strong>Normal QQ</strong>, and we interpret this the same way we interpreted QQ plots previously. If the points follow the line and don't deviate significantly, then the residuals here are normally distributed. <br><br>
+
+                Third is the <strong>Spread-Location</strong>, which tests the homogeneity of variance in the residuals (our homoskedasticity). Again, we want to see a horizontal red line with "shotgun" (aka randomly spread) points. <br><br>
+
+                The last is the <strong>Residuals vs. Leverage</strong>. We don't need to look at this plot too carefully right now, but in brief, it's used to identify points having too strong of an influence on the outcome of the analysis. <br><br>
+
+                Okay so it looks like all our assumptions are satisfied! Let's take a look at our results: 
+            </p>
+            <!--begin.rcode
+            summary(mod)
+            end.rcode-->
+            <p>
+                Let's break down each of the components here: 
+            </p>
+            <p>
+                1. <strong>Call</strong> -- this is the function we used in our model. So to recall, what we're showing here is the that we've regressed <code>y ~ x</code> which we would say as "y regressed against x" or "y regressed with x". 
+
+            </p>
+            <p>
+                2. <strong>Residuals</strong> -- These are the residuals. Recall that a <em>residual</em> is the distance from a single point to the regression line at the same x-location. Here's a visual of that: 
+            </p>
+            <!--begin.rcode, echo=FALSE
+            ggplot(data = df, mapping = aes(x = x, y = y)) + 
+            geom_smooth(method = "lm", formula = y ~ x, colour = "red", se = FALSE) +
+            ggthemes::theme_base() +
+            geom_point(data = df %>% dplyr::filter(
+                x %in% c(22, 45, 89)
+            ), size = 3, colour = "black", fill = "purple", shape = 21) +
+            geom_line(data = data.frame(x = c(22, 22), y = c(
+                predict(mod, data.frame(x = 22)), df$y[which(df$x == 22)]
+            )), aes(x = x, y = y)) + 
+            geom_line(data = data.frame(x = c(45, 45), y = c(
+                predict(mod, data.frame(x = 45)), df$y[which(df$x == 45)]
+            )), aes(x = x, y = y)) + 
+            geom_line(data = data.frame(x = c(89, 89), y = c(
+                predict(mod, data.frame(x = 89)), df$y[which(df$x == 89)]
+            )), aes(x = x, y = y)) 
+            end.rcode-->
+            <p>
+                Each of the lines here going from the points to the the regression line itself are "residuals", or "residual error", the amount of "error" the linear model produces in it's prediction for a given x-value.
+            </p>
+            <p>
+                Ok back to our <code>summary()</code> call: 
+            </p>
+            <!--begin.rcode
+            summary(mod)
+            end.rcode-->
+            <p>
+                The residuals here, by definition, have a mean of zero, and a "perfectly" minimized set of residuals would mean that the median value is zero, which will not really happen, but we want the median to be as close to zero as possible. We also want our minimum and maximum values to be approximately equal in magnitude. 
+            </p>
+            <p>
+                3. <strong> Coefficients </strong> -- Possibly the part that we'll look at the most, these values are here shown as representing \(\beta_0\) and \(\beta_1\). So the intercept is the actual y-intecept (remember that \(\beta_0\) is the y-intercept), and the \(\beta_1\) is the estimate of the coefficient on \(x\). We assess whether or not a particular predictor variable is significantly associated with the outcome variable via the "Pr(>|t|)" statement of the p-value. For our purposes, this will be useful, but I encourage you to interpret these p-values with caution, especially when there are multiple variables. 
+            </p>
+            <p>
+                For our consideration, we take the <em>Estimate</em> as the actual estimated value for the $\beta$s and then the standard errors (SE), which define accuracy of beta coefficients. A larger SE indicates a less certain beta estimate. We then see the t-statistic and the associated p-value, which speak to the statistical significance of the beta coefficients.
+            </p>
+            <p>
+                We have to recall that for our regression, we are using the \(H_0\) that the estimate is zero, which denotes no effect from said coefficient. If any coefficient has a p-value &lt; 0.05, we can infer that the estimate is significantly different from zero. However, this says nothing about the <em>strength</em> of that interaction. 
+            </p>
+            <p>
+                If we cared to construct a confidence interval around our beta values, we could do so with \(\beta +/- 1.96 * SE_{\beta}\), which would give us our 95% CI. 
+            </p>
+            <p>
+                4. <strong>Model Accuracy</strong> -- We see a number of measures at the bottom, starting with the Residual Standard Error, which contain information about how well our model has fit. 
+            </p>
+            <p>
+                Starting with the <strong> Residual Standard Error (RSE)</strong>, which essentially represents the average variation of the data points from the fitted regression line. It stands to reason that we want this value to be as small as possible. It comes in handy most when comparing multiple models. Say, for example, we had some other variable \(z\) that we think may explain \(y\), we could compare the two models \(y ~ x\) and \(y ~ z\) and see which model has a smaller RSE. This is not the best way to compare models, but it's a good start.
+            </p>
+            <p>
+                We then see two measures of \(R^2\), which is a measure of how well the model fits the data. Specifically, the measure gives the proportion of information (i.e. variation) in the data that can be explained by the model. In general, it's preferred to use the "Adjusted R-squared" as when we add more predictors into our model, the calculation of the Adjusted R-squared will account for that.
+            </p>
+            <p>
+                We also see the <em>F-statistic</em> which is a rough estimate of whether there is a relationship between our predictor and response variables or not. The simple interpretation is that the further the F-statistic is from 1, the stronger the relationship between our predictor and response variables. 
+            </p>
+            <hr>
+            <p>
+                Okay so we have all this output. What do we do with it?? Well, that depends on how we've formulated our hypothesis, but let's say that we've stated our hypothesis to be that we think there's a significantly non-zero relationship between x and y. Well we already have our answer in this case! If we look back at our <code>summary()</code> table, then we can see that our t-statistic and p-value are already given. We can see we have a significant result, which says we can reject the null hypothesis that there was no relationship (i.e. \(\beta_x = 0\)).
+            </p>
+        </section>
+    </section>
+    <section id="cat">
+        <h2>Categorical Predictor Variables</h2>
+        <p>
+            Let's move to a real ecological example: <strong>How does adult size differ between male and female bison?</strong> 
+        </p>
+        <p>
+            This is a good question to introduce the idea of categorical variables in a linear regression. We'll use some data here on bison sizes, and we're curious to estimate how much bigger males are than females. This is a categorical variable! We're no longer regressing just one continuous variable against another. Ok first, let's do some data manipulation. 
+        </p>
+        <section id="cat--prep">
+            <h3>Data Preparation</h3>
+            <p>
+                We are dealing with data on bison from the herd at Konza Prairie Biological Station LTER (KPBS) in Kansas. We happen to just be interested in adult bison, but there's not a measure for that, so we'll make one. A quick Google search tells us bison become sexually mature at 2-3 years of age, so we'll filter our data so that we only keep animals older than 4, to make sure we're comparing grown adults who've finished adolescence. 
+            </p>
+            <!--begin.rcode
+            library(lterdatasampler)
+
+            # load in the bison data
+            bison <- lterdatasampler::knz_bison 
+
+            # make an age variable, and filter it
+            bison <- bison %>% 
+            dplyr::mutate(age = rec_year - animal_yob) %>% 
+            dplyr::filter(age > 4)
+            end.rcode-->
+            <p>
+                These both look pretty normal, and while there seems to be a wider variance in the male weights than female, it looks not too different, and we'll check that to be sure in our diagnostic plots. 
+            </p>
+        </section>
+        <section id="cat--fit">
+            <h3>Model Fitting</h3>
+            <p>
+                So now let's fit our model, and talk about the assumptions and the output.
+            </p>
+            <!--begin.rcode
+            mod <- lm(animal_weight ~ animal_sex, data = bison)
+            end.rcode-->
+            <p>
+                We'll do some diagnostics first: 
+            </p>
+            <!--begin.rcode
+            par(mfrow = c(2,2)) # this ensures all the plots show up at once
+            plot(mod)
+            end.rcode-->
+            <p>
+                Our linearity assumption is tested by our first plot, the Residuals vs. Fitted plot, and our goal is to have a straight red line, which we do. Additionally, we can check out homoskedasticity with this plot, or with the third Scale-Location plot. We want to see an equivalent vertical spread of the points between the two groups, which we roughly do, though we can see the right side is slightly more spread out than the left, but not enough to cause us trouble. The normality of residuals we can see here in our second plot, the QQ plot. We want the points to fall along the line, with few deviations. This plot looks great. Those are our three big ones taken care of, and randomness and independence we assume from the sampling procedure. 
+            </p>
+        </section>
+        <section id="cat--int">
+            <h3>Interpreting Results</h3>
+            <p>
+                Ok, so the important part. Interpretation. Before we even <em>look</em> at the output let's think about this mathematically. Our regression equation here we can think of as this: \[\widehat{weight} = \beta_0 + \beta_1 Sex\]. (Note here that we're using the hat on top of "weight" to indicate it's a predicted not measured value.) So recall that \(\beta_0\) is the intercept, so if we find that, and we estimate our \(\beta_1\) through regression, we should be able to predict the weight for any new bison that joins the herd, by taking \(\beta_0\) and adding \(\beta_1\) multiplied by the sex of the new bison. 
+            </p>
+            <p>
+                But wait. How would we multiply a value "male" or "female". Well, the thing is we can't, and we don't have to! Instead, we use the very clever trick of <strong>indicator variables</strong>, where we assign a unique number to each of the possible categories in our categorical variable. Since we only have two levels in this example, we will use a 0 and 1 scheme. So what we will do, or rather what R will do under the hood, is use a function to indicate whether or not a given animal is a female or not, like this: 
+                \[I_F = 
+                \begin{cases}
+                1 & \text{if animal is female}\\
+                0 & \text{otherwise}\\
+                \end{cases}
+                \] 
+            </p>
+            <p>
+                Where \(I_F\) just stands for Indicator, with the subscript F denoting that we're talking about females. So we actually just end up with our regression equation looking like this: \[\widehat{weight} = \beta_0 + \beta_1 I_F\] where to predict an animal's weight, we'll multiply \(\beta_1\) by the appropriate value given by the indicator function above - 0 or 1. 
+            </p>
+            <p>
+                Now that we've walked through this, let's look at the summary and discuss: 
+            </p>
+            <!--begin.rcode
+            summary(mod)
+            end.rcode-->
+            <p>
+                So knowing that the indicator function is using females as 0 and males as 1 (we can see this because the coefficient after the intercept is <code>animal_sexM</code>), what would the weight of a female bison be, given no other information?  Well, the formula would be: \[\widehat{weight}_F = \beta_0 + \beta_1 I_F\] And the indicator function if we look above will be \[I_F = 0\] so the formula simplifies to: \[\widehat{weight}_F = \beta_0 + \beta_1 * 0\] and therefore \[\widehat{weight}_F = \beta_0\], which is  1001.253.
+            </p>
+            <p>
+                What about for males? Well, the formula would be: \[\widehat{weight}_M = \beta_0 + \beta_1 I_F\] And in this case \(I_F = 1\) so, that would be after plugging in the values \[\widehat{weight}_M  = 1001.253 + 567.046\] or in R: 
+            </p>
+            <!--begin.rcode
+            1001.25 + 567.046
+            end.rcode-->
+        </section>
+    </section>
+    <section id="mr">
+        <h2>Multiple Regression</h2>
+        <p>
+            The process of adding more variables as possible predictors is a simple one technically, but requires that we think more carefully about the model output. In this case the principle of <a href="https://en.wikipedia.org/wiki/Occam%27s_razor">Occam's Razor</a> or the law of parsimony applies, wherein, it is generally true that we are looking for the most parsimonious solution. That is, we want to identify a model which provides us the most explanatory power with respect to the data, while minimizing the number of features. So, when performing modeling exercises routed in rigorous hypothesis testing, we never add extraneous variables we don't have a good reason to add. And we always attempt to only keep variables in the model which sufficiently add explanatory power. A linear regression with multiple predictor variables is often called multiple regression.
+        </p>
+        <p>
+            Let's use an example. We've already used the bison example above, so let's stick with that. Say that we hypothesized males are bigger than females (a reasonable assumption), but also that the size of individuals over all has gone down through time. While this specific herd is managed and protected, this type of hypothesis may make sense if considering a harvested population, as often hunting removes the largest individuals from a population. We fit our model above and could have determined that indeed males are larger than females in a meaningful sense. Perhaps we now wanted to understand if adding time to our model improved the "fit". That is, if more variation in the data are explained by adding this additional parameter. 
+        </p>
+        <p>
+            Let's try it! So we are now using a slightly altered equation, since we'll treat time as continuous, our model equation for a predicted weight of an individual will look like: \[\widehat{weight} = \beta_0 + \beta_1 I_F + \beta_2*\text{year}\]. We may be hypothesize that \(\beta_2\) will be significantly lower than zero, indicating that as time increases, the effect on predicted weight will be that of a decreased weight. 
+        </p>
+        <p>
+            First, let's look at the structure of the data and make sure year is numeric/integer-typed:
+        </p>
+        <!--begin.rcode
+        str(bison)
+        end.rcode-->
+        <p>
+            We want the <code>rec_year</code> variable, so that looks good. Now let's look at the spread of those data (i.e. how many years are represented):
+        </p>
+        <!--begin.rcode
+        summary(bison$rec_year)
+        end.rcode-->
+        <p>
+            Okay, so we have 15 years of data. Let's move on to the model:
+        </p>
+        <!--begin.rcode
+        mod_mr <- lm(animal_weight ~ animal_sex + rec_year,
+                data = bison)
+        end.rcode-->
+        <p>
+            And we'll do our diagnostic plotting: 
+        </p>
+        <!--begin.rcode
+        par(mfrow = c(2,2)) # this ensures all the plots show up at once
+        plot(mod_mr)
+        end.rcode-->
+        <p>
+            These look sufficiently satisfactory. Now for the output: 
+        </p>
+        <!--begin.rcode
+        summary(mod_mr)
+        end.rcode-->
+        <p>
+            Okay! So it looks as though we might have been wrong! It appears as though the size of animals may be <em>increasing</em> through time. Technically we've been given a significant p-value on the coefficient of <code>rec_year</code> but the estimate isn't high.
+        </p>
+        <section id="mr-obs">
+            <h3>Model Objects & Subsetting</h3>
+            <p>
+                This is a good opportunity to discuss the actual object we create when we fit a linear model. We know we can call <code>summary</code> on our model object, but there are many other things we can do with it too. 
+            </p>
+            <p>
+                It's good to know first what structure the model object is:
+            </p>
+            <!--begin.rcode
+            str(mod_mr)
+            end.rcode-->
+            <p>
+                This is a long set of things, and we'll not go through it all, but know first that any subset that has a <code>$</code> before it is accessible as such. For example: 
+            </p>
+            <!--begin.rcode
+            mod_mr$coefficients
+            end.rcode-->
+            <p>
+                Will get us the coefficients. This is useful. We can also ask for the standard errors: 
+            </p>
+            <!--begin.rcode
+            summary_ob <- summary(mod_mr)
+            summary_ob$coefficients[,2]
+            end.rcode-->
+            <p>
+                Other things we often want are the \(R^2\) value: 
+
+            </p>
+            <!--begin.rcode
+            summary_ob$adj.r.squared
+            end.rcode-->
+            <p>
+                We might also want the AIC (discussed below):
+            </p>
+            <!--begin.rcode
+            stats::AIC(mod_mr)
+            end.rcode-->
+            <p>
+                Or the negative log-likelihood (also discussed below): 
+            </p>
+            <!--begin.rcode
+            stats::logLik(mod_mr)
+            end.rcode-->
+            <p>
+                And there are a variety of other model components we might be interested in, the goal is to identify where they are in the fitted model object. Often other, perhaps more obscure values, are extracted easily enough, and the specific solution is easily Google-able. 
+            </p>
+        </section>
+    </section>
+    <section id="eff">
+        <h2>Effect Estimation</h2>
+        <p>
+            A few things now about model comparison and effect estimation, which are both large subject areas. A quick and dirty way of estimating if the effect of this additional parameter is of importance is getting a 95% Confidence interval around the estimate. So we see from our summary table that the estimate is 0.9749. Well, a 95% confidence interval is easy enough to construct, as it is stated simply as \(\mu \pm 1.96 * SE\) where SE is the standard error, which we see we already have in our output. So to calculate this in R, we can actually extract the coefficient value and standard error easily like so:
+        </p>
+        <!--begin.rcode
+        estimate <- mod_mr$coefficients["rec_year"]
+        std_err <- summary_ob$coefficients[,2]["rec_year"]
+
+        end.rcode-->
+        <p>
+            If we wanted to print these values (i.e. say we were working in an R Markdown document and preparing a report for a class), we could print them into the text via:
+        </p>
+        <!--begin.rcode
+        print(paste0("The coefficient estimate is: ", estimate, 
+            " and the standard error is: ", std_err))
+        end.rcode-->
+        <p>
+            But back to our 95% CI, we can take those two valuesand perform a couple of multiplications:
+        </p>
+        <!--begin.rcode
+        upper <- estimate + 1.96 * std_err
+        lower <- estimate - 1.96 * std_err
+        end.rcode-->
+        <p>
+            and then we would display our results as the estimate and then the 95% in brackets like so: 
+        </p>
+        <!--begin.rcode
+        print(paste0("The estimate of the coefficient is ", estimate, " with a 95% 
+                    confidence interval of (", lower, ",", upper, ")"))
+        end.rcode-->
+        <p>
+            Or if we don't need quite so many digits and wanted to round it to three decimal places:
+
+        </p>
+        <!--begin.rcode
+        print(paste0("The estimate of the coefficient is ", round(estimate, 3), " with a 95% confidence interval of (", round(lower, 3), ", ", round(upper, 3), ")"))
+        end.rcode-->
+        <p>
+            Now what does this tell us? Well, we're actually seeing that the 95% CI does not overlap zero, and so therefore we could interpret this as a "significant" effect. Note we haven't done a p-value based hypothesis test here, but this is a different and valid way to determine if an effect is of note. 
+        </p>
+    </section>
+    <section id="mod-comp">
+        <h2>Model Comparison</h2>
+        <p>
+            In the above section, we used a standard error from the model fit to calculate a 95% Confidence Interval around our estimate. This helped us understand if our estimate was very precise (i.e. if the magnitude on either side of the interval was large or small), but how can we tell this about our model as a whole? Back to this example with just one predictor variable:
+        </p>
+        <!--begin.rcode, echo=FALSE
+        ggplot(df) + 
+        geom_point(aes(x = x, y = y), fill = "red", colour = "black", shape = 21, 
+                    size = 3) + 
+        geom_smooth(mapping = aes(x = x, y = y),
+                    method = "lm", formula = y ~ x, colour = "black", se = FALSE) +
+        ggthemes::theme_base() 
+        end.rcode-->
+        <p>
+            The first thing we can do is look at our \(R^2\) - the square of the correlation between our \(x\) and \(y\) variables, which for our bison example, we extracted above as: 
+        </p>
+        <!--begin.rcode
+        summary(mod_mr)$adj.r.squared
+        end.rcode-->
+        <section id="mod-comp--lrt">
+            <h3>Likelihood Ratio Test (LRT)</h3>
+            <p>
+                Now let's think about comparing our models. For our bison model, we have two models. We'll re-fit them here for ease and simplicity:  
+            </p>
+            <!--begin.rcode
+            mod1 <- lm(animal_weight ~ animal_sex, data = bison)
+            mod2 <- lm(animal_weight ~ animal_sex + rec_year, data = bison)
+            end.rcode-->
+            <p>
+                Recall at the beginning of the Multiple Regression section, we noted Occam's Razor, and that we are obliged to find and use the most parimonious model. Well we have two models, which is better in this regard.
+            </p>
+            <p>
+                We now have what is called "nested" models. The second model <code>mod2</code> is more complex, and our first model <code>mod1</code> is the nested model. Which one is better? Is it actually better, in terms of our understanding of the patterns underlying <code>animal_weight</code> to add the complexity in the second model? Well, to figure this out, we use the Likelihood Ratio Test. This test essentially tells us if it's beneficial to add parameters to our model or not. This test works by computing the negative log likelihood for each model, then comparing them using the chi-squared distribution. Here, \(H_0\) is that the simpler, nested model is preferable and should be kept. Let's compute the negative log-liklihoods: 
+            </p>
+            <!--begin.rcode
+            mod1_ll <- stats::logLik(mod1)
+            mod1_ll
+
+            mod2_ll <- stats::logLik(mod2)
+            mod2_ll
+            end.rcode-->
+            <p>
+                So we see they're different, and have different degrees of freedom. But which is better? Well, we then have to calculate a test statistic \[-2 * (\text{log-likelihood}(\text{model 1}) - \text{log-likelihood}(\text{model 2}))\]
+            </p><!--begin.rcode
+                test_statistic <- -2 * (as.numeric(mod1_ll) - 
+                                          as.numeric(mod2_ll))
+                test_statistic
+                end.rcode-->}
+            <p>
+                So now we need to use the probability function for the chi-squared distribution, which takes in \(q\) and can return a probability for us. We also need to mass in the degrees of freedom, that is, the difference between the degrees of freedom for each of the models. We see that \(df = 4\) and \(df = 3\) for the complex and nested models respectively. We'll also importantly, need to specify the <code>lower.tail</code> argument. See <code>?pchisq</code>. 
+            </p><!--begin.rcode
+                p_val <- pchisq(test_statistic, df = (4-3), lower.tail = FALSE)
+                p_val
+                end.rcode-->
+            <p>
+                So we see that the p-value here is lower than 0.05, so this essentially tells us that we have shown our more complex model is actually a <em>better</em> model for our data. 
+            </p>
+        </section>
+        <section id="mod-comp--aic">
+            <h3>Akaike Information Criterion (AIC)</h3>
+            <p>
+                The AIC measure is of similar use to the LRT, but is slightly more flexible - it doesn't need two models that are nested, and is not based no a p-value. Also to note, is that the information criterion here is just one of a family of criteria that can be used for this purpose. 
+            </p>
+            <p>
+                The use of AIC is to calculate a measure for each in a set of candidate models, and then compare them. The goal is then to take the model with the lowest AIC value. We determine if two AIC values are sufficiently different by how far away the two models are in AIC. Say we take three toy models, 1, 2, and 3 each with a different subset of variables. We calculate the AIC for each, and then we actually are only interested in the \(\Delta AIC\) (said "delta AIC"), wherein now the lowest \(\Delta AIC\) value is 0, and the others are all in relation to that. Imagine the \(\Delta AIC\) values for models 1, 2, and 3 are 1.5, 0.0, and 85.2. 
+            </p>
+            <p>
+                There is a rule of thumb that if a \(\Delta AIC &lt; 2\), then there is not a clear difference between models. In this case, we would pursue some other method to discern the path forward such as model-averaging (not discussed). If \(2 &lt; \Delta AIC &lt; 10\) there is a sufficient difference between the two models, but other factors should be taken into account such as which model is more biologically realistic, or may contain a particular parameter of interest. In this case, model averaging or another comparison method may still be useful. If \(\Delta AIC > 10\) then there is a clear difference and the model with >10 \(\Delta AIC\) can be discarded. Note that these are all rules of thumb however, and not hard and fast rules. 
+            </p>
+            <p>
+                So for the example of \(\Delta AIC\) values for models 1, 2, and 3 are 1.5, 0.0, and 85.2, we would discard the third model with \(\Delta AIC = 85.2\), and likely pursue more sophistocated techniques to decide which of models 1 and 2 are to be kept. 
+            </p>
+        </section>
+    </section>
+    <section id="bey">
+        <h2>Moving Beyond Simple Regression</h2>
+        <p>
+            So above we had a good example of the fundamentals of linear regression. That involved no transformations of data or anything of the sort. However, recall the first three assumptions of linear regression (linearity, homoskedasticity, and normality): these are very often not satisfied by the type of biological data we're likely to encounter in the "wild". To deal with this problem, we will, from here, abandon the simple linear model.
+        </p>
+    </section>
       </section>
 <!-- End page content -->
 <hr>
