@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/stylesheet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet"
+      href="../highlight/styles/default.min.css">
+<script src="../highlight/highlight.js"></script>
+<script src="../functions.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+</head>
+<body class="w3-round-large">
+
+<!-- Top menu -->
+<div class="w3-top">
+  <div class="w3-navy w3-xlarge" 
+  style="max-width:auto;margin:auto;border:1px w3-gray"
+  border:1px>
+    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰ Menu</div>
+    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
+    <div class="w3-center w3-padding-16">The R Manual</div>
+  </div>
+</div>
+
+<main style = margin-top:100px>
+  <nav class="section-nav">
+      <ol>
+        <li><a href="#glm">Generalized Linear Models</a>
+            <ol>
+                <li><a href="#glm--lin">Linear Predictors</a></li>
+                <li><a href="#glm--link">Link Functions</a></li>
+                <li><a href="#glm--err">Error Distributions</a></li>
+            </ol>
+        </li>
+        <li><a href="#sp-I">Example I - Sinlge Variable</a>
+            <ol>
+               <li><a href="#sp-I--1">1. Plot Data</a></li>
+               <li><a href="#sp-I--aside">Aside - Link Function</a></li>
+               <li><a href="#sp-I--2">2. Error</a></li>
+               <li><a href="#sp-I--3">3. Link</a></li>
+               <li><a href="#sp-I--4">4. Fitting</a></li>
+               <li><a href="#sp-I--5">5. Evaluation</a></li>
+               <li><a href="#sp-I--6">6. Interpretation</a></li>
+               <li><a href="#sp-I--7">7. Prediction</a></li>
+            </ol>href
+        </li>
+        <li><a href="#sp-II">Example II - Interactions</a>
+            <ol>
+               <li><a href="#sp-II--1">1. Plot Data</a></li>
+               <li><a href="#sp-I--2">2. Error</a></li>
+               <li><a href="#sp-II--3">3. Link</a></li>
+               <li><a href="#sp-II--4">4. Fitting</a></li>
+               <li><a href="#sp-II--5">5. Evaluation</a></li>
+               <li><a href="#sp-II--6">6. Interpretation</a></li>
+               <li><a href="#sp-II--7">7. Prediction</a></li>
+            </ol>
+        </li>  
+      </ol>
+    </nav>
+  <div>
+    <section id="glm">
+      <h2>Generalized Linear Models (GLMs)</h2>
+      <p>
+        In a simple linear model, we expect the response variable varies in a linear fashion. That is, some constant amount of change in \(X\) leads to a constant change in \(Y\). We also need those two variables to be continuous and theoretically unbounded. But this is not always how real data behave!! For example, let's think about species richness. This is a zero-bounded integer value (not continuous!), but we are likely <strong>very</strong> interested in species richness for a variety of questions. Additionally, what about trying to model presence/absence data? Say we wanted to come up with a model for which the response variable is the presence or absence of a gene mutation in a lab rat? These two examples are not well described by a "continuous linear variable". What to do!! We shall simply abandon the linear model :)
+      </p>
+      <p>
+        The generalized linear model is the more flexible and useful big brother of the simple linear regression. It still uses regression techniques (i.e. fitting a line to some data), and often also uses a version of least squares methods, but adds a bit more complexity to the equation (literally and figuratively!).
+      </p>
+      <p>
+        These models always contain three things: 
+
+      </p>
+      <p>
+        1) A linear predictor <br>
+        2) A link function <br>
+        3) A error distribution <br>
+      </p>
+      <p>
+        This section is going to add two components - first the link function, and second, linear predictor. In the simple above example, we still had an error structure, but it corresponded to a normal distribution. Our linear predictor was also just a single value. As we move to talking about GLMs, we'll almost always consider multiple predictor variables in our models, as that's what usually makes sense biologically! 
+      </p>
+      <p>
+        Throughout this section on GLMs, we'll use the following example, which is an excellent example used by JJ Valletta and TJ McKinley in their <a href="https://exeter-data-analytics.github.io/StatModelling/">"Statistical Modelling in R"</a> book, and in Mick Crawley's "R Book". The data can be found <a href="https://exeter-data-analytics.github.io/StatModelling/_data/species.csv">here</a> 
+      </p>
+      <p>
+        A long-term agricultural experiment had 90 grassland plots, each 25m x 25m, differing in biomass, soil pH and species richness (the count of species in the whole plot). The plots were classified according to a 3-level factor as high, medium or low pH with 30 plots in each level.
+      </p>
+      <p>
+        What are We interested in? Well, in many systems, species richness can be affected by biomass, usually negatively. In this grassland, what effect does biomass have on richness? Additionally, if there is a relationship between the two, does it differ across levels of soil pH? Let's set this out in some hypotheses: 
+      </p>
+      <p>
+        <strong>\(H1_0\): Biomass has no effect on species richness. </strong>
+      </p>
+      <p>
+        <strong>\(H2_0\): Differing pH has no effect on the relationship between species richness and biomass. </strong>
+
+      </p>
+      <p>
+        Now that we can anchor our thinking with this example, let's go back to the theory for a minute. <strong>I encourage the mathematically timid reader to NOT be afraid of the equations!! Take your time and read through them. We'll explain in detail and maybe you will actually find it fun!!</strong>
+      </p>
+      <p>
+        In the most basic terms, in a regression of this nature, we have some independent variable(s) \(\bf{X}\), and a single dependent variable \(\bf{Y}\). For every value of \(\bf{X}\), we want to figure out the expected value of \(\bf{Y}\). We write that like this: \[\text{E(}\bf{Y}|\bf{X})\] which we would say as <em>"the expected value of \(\bf{Y}\), conditional on \(\bf{X}\)"</em>
+      </p>
+      <p>
+        This expected value is then found as: \[\text{E}(\textbf{Y}|\textbf{X}) = \mu =g^{-1}(\textbf{X}\boldsymbol{\beta})\]
+      </p>
+      <p>
+        The term in the middle, \(\mu\), is the mean of the probability distribution. Recall from that section that if \(X\) is a random variable, then some expected value \(Y\) is therefore going to be the mean of that distribution for that value of \(X\). How do we get this mean value? Well, here we set it equal to the value on the right-hand side.
+      </p>
+      <p>
+        The term on the right-hand side of the equation has two parts, \(\textbf{X}\boldsymbol{\beta}\) is the <strong>linear predictor</strong> and the \(g^{-1}()\) is the link function. We'll discuss the linear predictor first.
+      </p>
+      <section id="glm--lin">
+        <h3>Linear Predictor</h3>
+        <p>
+            This is the value actually tells us how our response variable will change as our predictor variables change. Notice that here we're now talking about multiple predictor variables, as it's nearly always the case that a single variable will not be the only thing we're interested in. Introducing a few equations here will be useful. 
+        </p>
+        <p>
+            First of all, notice that both terms here (\(\textbf{X}\boldsymbol{\beta}\) are bolded. That's because they're both actually vectors, that could contain multiple sets of \(\text{X}\) predictor variables, and their associated \(\beta\) values. So, to make this more clear, we'll call the linear predictor the Greek letter <em>eta</em>, \(\eta\) instead. So we can state \(\eta = \textbf{X}\boldsymbol{\beta}\). The exact calculation of \(\eta\) is beyond the scope of the present discussion, so just know that when we have a bunch of predictor variables, and their unknown coefficients (\(\beta\)s), we end up with one single value \(\eta\) that is passed to the link function. 
+        </p>
+      </section>
+      <section id="glm--link">
+        <h3>Link Function</h3>
+        <p>
+            This is the heart of what makes a model a GLM. This component essentially allows us to relax the assumption of normality of our response variable, by allowing other distributions, and then defining some function of the response variable that in fact DOES vary linearly with the predictor variables. The math behind how this works is both incredibly interesting, and requires some knowledge of linear algebra, so we will leave the interested reader with an encouragement to take a linear algebra class if they have room in their timetable. 
+        </p>
+        <p>
+            Suffice it to say here that a link function allows us to take some non-linear response data, and "transform" it such that it now varies linearly with the predictor variable(s). 
+        </p>
+      </section>
+      <section id="glm--err">
+        <h3>Error Distribution</h3>
+        <p>
+            The error distribution we define will in turn define which link function we choose. Determining what error distribution we need to choose can be crudely but often satisfactorily chosen by plotting the response variable, but a more nuanced approach is possible. See <a href="https://r.qcbs.ca/workshop07/book-en/choose-an-error-distribution.html">this tutorial</a> from the Quebec Centre for Biodiversity Science for an example. 
+        </p>
+      </section>
+    </section>
+    <section id="sp-I">
+        <h2>Species Richness Example - I</h2>
+        <p>
+            Back to our example stated earlier regarding if the relationship between biomass and species richness changes with soil pH. The data for this example can be found <a href="https://exeter-data-analytics.github.io/StatModelling/_data/species.csv">here</a>. If you want to download the data and follow along, be sure to check out the <a href="../01-basicr/01-06-workflow.html">Workflow section</a>. 
+        </p>
+        <p>
+            Since we already have our hypothesis stated (and therefore cannot p-hack ourselves), we can proceed to plot our data. However, we need to read it in first. It turns out, it's actually totally easy to pull data from the web using the same <code>readr::read_csv()</code> we're already familiar with. Let's first inspect it briefly:
+        </p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
+<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">read_csv</span><span class="hl std">(</span>
+  <span class="hl str">&quot;https://exeter-data-analytics.github.io/StatModelling/_data/species.csv&quot;</span>
+<span class="hl std">)</span>
+
+<span class="hl com"># quick summary of our data</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">glimpse</span><span class="hl std">(df)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## Rows: 90
+## Columns: 3
+## $ pH      &lt;chr&gt; &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;…
+## $ Biomass &lt;dbl&gt; 0.46929722, 1.73087043, 2.08977848, 3.92578714, 4.36679265, 5.…
+## $ Species &lt;dbl&gt; 30, 39, 44, 35, 25, 29, 23, 18, 19, 12, 39, 35, 30, 30, 33, 20…
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(df)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 6 × 3
+##   pH    Biomass Species
+##   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 high    0.469      30
+## 2 high    1.73       39
+## 3 high    2.09       44
+## 4 high    3.93       35
+## 5 high    4.37       25
+## 6 high    5.48       29
+</pre></div>
+</div></div>
+        <p>
+            Ok so we can see what types are data are. It's important here to not be tricked by R!! It has read in the data automatically with the <code>Species</code> column as numeric type, but it's in fact integer values. This doens't matter right now, but it will matter when we need to choose an error distribution. 
+        </p>
+        <section id="sp-I--1">
+            <h3>Step 1 - Plot Data</h3>
+            <p>
+                Let's plot our data to see about what we're dealing with. 
+            </p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
+
+<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df)</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species))</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+            <p>
+                It even looks like there's a linear decrease in richness as biomass increases. So why can't we just assume a normal distribution here? Well, let's take a look at it. 
+            </p>
+        </section>
+        <section id="sp-I--aside">
+            <h3>An Aside - Motivation for Link Functions</h3>
+            <p>
+                If we simply assume a Normal distribution, we don't even need to specify a link function. I'm going to fit the model and plot the result, with the code behind the scenes so it's super clear this is NOT what you're supposed to do, as a demonstration. 
+            </p>
+<div class="chunk" id="unnamed-chunk-3"><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+            <p>
+                Here, the lines are representing the fitted regression lines, with the predicted values of species richness for each value of biomass. What's wrong with this? Well nothing yet! But often when we do this type of regression, we want to predict out of sample, or essentially figure out what will happen at levels of our predictor variable we haven't observed. Let's do that here: 
+            </p>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">newdata</span> <span class="hl kwb">=</span> <span class="hl kwd">expand.grid</span><span class="hl std">(</span><span class="hl kwc">Biomass</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl kwd">min</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">Biomass),</span> <span class="hl num">30</span><span class="hl std">,</span>
+                                    <span class="hl kwc">length.out</span> <span class="hl std">=</span> <span class="hl num">200</span><span class="hl std">))</span>
+<span class="hl std">newdata_predict</span> <span class="hl kwb">=</span> <span class="hl kwd">cbind</span><span class="hl std">(newdata,</span>
+                        <span class="hl kwc">Species</span> <span class="hl std">=</span> <span class="hl kwd">predict</span><span class="hl std">(fit, newdata,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;response&quot;</span><span class="hl std">))</span>
+
+<span class="hl com"># now make our plot</span>
+<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">=Species))</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= newdata_predict,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+            <p>
+                So we want to predict out of sample. We've done that! We can now make a guess at what values of Species Richness would be present at a Biomass value of 30. But what's wrong with <strong>this</strong> one? 
+            </p>
+            <p>
+                <strong>We're predicting NEGATIVE species richness</strong>. That's impossible! We can probably guess that as biomass gets higher, we'll actually probably have something more like an asymptotic decline of species richness. So how can we model this? <strong>A link function</strong>. 
+            </p>
+        </section>
+        <section id="sp-I--2">
+            <h3>Step 2 - Error Distribution</h3>
+            <p>
+                Now that we know we need to use a link function to appropriately deal with our data, we will start the process of finding that function by figuring out what type of error distribution our response data have. 
+            </p>
+            <p>
+                Let's use our crude by satisfactory method of choosing an error distribution, via plotting our response variable. We can do this a couple ways. As a density plot:
+            </p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Species))</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_density</span><span class="hl std">(</span><span class="hl kwc">fill</span> <span class="hl std">=</span> <span class="hl str">&quot;goldenrod2&quot;</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.3</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+            <p>
+                Or perhaps as a histogram: 
+            </p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Species))</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_histogram</span><span class="hl std">(</span><span class="hl kwc">fill</span> <span class="hl std">=</span> <span class="hl str">&quot;blue2&quot;</span><span class="hl std">,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.3</span><span class="hl std">,</span>
+                <span class="hl kwc">bins</span> <span class="hl std">=</span> <span class="hl num">30</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
+            <p>
+                What to do? Well, this follows a slightly skewed distribution, but it's discrete integer-valued. For this purpose, a Poisson distribution will work well. 
+            </p>
+        </section>
+        <section id="sp-I--3">
+            <h3>Step 3 - Selecting a Link Function</h3>
+            <p>
+                We have to come up with a function that will allow us to continue. We can see which link functions are supported for the different distributions in the <code>stats</code> package:
+            </p>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl opt">?</span><span class="hl std">family</span>
+</pre></div>
+</div></div>
+            <p>
+                And a helpful page will pop up. The beginning of the help page has the following info: 
+            </p>
+            <img src="../img/04-img/family.png">
+            <p>
+                <strong>And we can see that for the Poisson distribution, we must use the log link function.</strong>
+            </p>
+            <p>
+                Previously we were interested in \(\mu\) to get our expected value of \(\text{E(}\bf{Y}|\bf{X})\) but we need to come up with some way to link to \(\mu\). It turns out that in this case, our \(\textbf{X}\boldsymbol{\beta}\) can be restated as \(\textbf{X}\boldsymbol{\beta} = \text{ln}(\mu)\), so in this case, \[\text{E(}\textbf{Y}|\textbf{X}) = \text{exp}(\textbf{X}\boldsymbol{\beta})\], because we may recall from math class that the exponential function is the natural logarithm. 
+            </p>
+        </section>
+        <section id="sp-I-4">
+            <h3>Step 4 - Fitting the Model</h3>
+            <p>
+                Okay, let's (Finally!) fit the model. Turns out, yet again, that it's dead simple in R. 
+            </p>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod_poi</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">glm</span><span class="hl std">(Species</span> <span class="hl opt">~</span> <span class="hl std">Biomass,</span>
+                    <span class="hl kwc">data</span> <span class="hl std">= df,</span>
+                    <span class="hl kwc">family</span> <span class="hl std">=</span> <span class="hl kwd">poisson</span><span class="hl std">(</span><span class="hl kwc">link</span> <span class="hl std">= log))</span>
+</pre></div>
+</div></div>
+            <p>
+                And we can look at the output here: 
+            </p>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mod_poi)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## Call:
+## stats::glm(formula = Species ~ Biomass, family = poisson(link = log), 
+##     data = df)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -4.7703  -1.5994  -0.1025   1.2722   4.5433  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  3.184094   0.039159   81.31  &lt; 2e-16 ***
+## Biomass     -0.064441   0.009838   -6.55 5.74e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 452.35  on 89  degrees of freedom
+## Residual deviance: 407.67  on 88  degrees of freedom
+## AIC: 830.86
+## 
+## Number of Fisher Scoring iterations: 4
+</pre></div>
+</div></div>
+            <p>
+                The output here is very similar to that of <code>lm()</code>, but we'll walk through it en entirety in a second. First however, let's check our model is performing well enough: 
+            </p>
+        </section>
+        <section id="sp-I-5">
+            <h3>Step 5 - Model Evaluation</h3>
+            <p>
+                We need to make sure that our model is agreeing with all our assumptions, and also that it's doing a good-enough job. Model evaluation and validation is actually very involved for more complicated models, but for our simple model, let's first plot our residuals against out fitted values and a QQ plot. We can do that by simply calling <code>plot()</code> on our model object. 
+            </p>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">))</span> <span class="hl com"># this will put the plots in a grid</span>
+<span class="hl kwd">plot</span><span class="hl std">(mod_poi)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+            <p>
+                This calls 4 plots, but we will only look at the first two for now. We see the line of the residuals and fitted values is straight and mostly follows the dotted line, and the QQ plot also follows the diagonal line sufficiently well. These quick diagnostics let us know we can continue.
+            </p>
+            <p>
+                For more on model evaluation, there's great texts out there, but I like Laurie Tupper's chapter on <a href="https://bookdown.org/ltupper/340f21_notes/m5-model-evaluation.html">Model Evaluation</a> as a gentle introduction.
+            </p>
+        </section>
+        <section id="sp-I-6">
+            <h3>Step 6 - Interpreting the Output</h3>
+            <p>
+                Let's re-call the output here:
+            </p>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mod_poi)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## Call:
+## stats::glm(formula = Species ~ Biomass, family = poisson(link = log), 
+##     data = df)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -4.7703  -1.5994  -0.1025   1.2722   4.5433  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  3.184094   0.039159   81.31  &lt; 2e-16 ***
+## Biomass     -0.064441   0.009838   -6.55 5.74e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 452.35  on 89  degrees of freedom
+## Residual deviance: 407.67  on 88  degrees of freedom
+## AIC: 830.86
+## 
+## Number of Fisher Scoring iterations: 4
+</pre></div>
+</div></div>
+            <p>
+                This output has a number of components
+            </p>
+            <p>
+                <strong>1. Call</strong> -- this is the function we used in our model. So to recall, what we're showing here is the that we've regressed <code>Species ~ Biomass</code> which we would say as "species richness regressed against biomass" or "species richness regressed with biomass". 
+            </p>
+            <p>
+                <strong>2. Deviance Residuals</strong> -- Previously we were talking about just plain old residuals, which is for a single value of x, the distance between the predicted value on the regression line, and the observed value of y. <strong>Deviance</strong> by itself, is a measure of goodness of fit, wherein the smaller the value, the better the fit of the model and vice versa. Describing the calculation of a Deviance Residual is beyond the current scope, but we can still interpret similarly to residuals, in that if a singular point has a high deviance residual, then it's far from our predicted value. 
+            </p>
+            <p>
+                <strong>3. Coefficients</strong> -- Possibly the part that we'll look at the most, these values are here shown as representing \(\beta_0\) and \(\beta_1\). So the intercept is the actual y-intecept (remember that \(\beta_0\) is the y-intercept), and the \(\beta_1\) is the estimate of the coefficient on \(Biomass\). It's good to think about whether or not the y-intercept makes sense to interpret. Recall that the intercept value here is the predicted value of species richness if the biomass is zero. In some cases that might be a useful interpretation, but there can't really be any species richness without them having a biomass, so it's not a super useful value in our case. 
+            </p>
+            <p>
+                In our case, the coefficient for <code>Biomass</code> is -0.064. This is the slope relating <code>Biomass</code> to the predicted <strong>log</strong> of the species richness. Why log? Well, because we've used a log link function. This is actually a really important point as it means our interpretation is not straight forward. In this example, if we have a grassland plot (Plot A) with a predicted (i.e. the value on the regression line) value \(s\), and Plot B has a predicted count of one unit higher, how many more species do we actually predict? If Plot A has predicted number of species \(s\), then it actually has a log count of \(\text{log}(s)\), and Plot B has a predicted number of species \(\text{log}(s) - 0.064\). So how many <em>actual</em> species are there in Plot B compared to Plot A? The inverse of the log we'll recall is the exponential function, so we can get the inverse of \(\text{log}(s) - 0.064\), to get \(\hat{\lambda}_B\) with: \[\hat{\lambda} = e^{\text{log}(s) - 0.064}\] which is rewritten as \[\hat{\lambda} = e^{\text{log}(s)} * e^\text{-0.064}\] which we then can see will simplify to \[s * 0.938005\]. So the amount of species in Plot B is actually ~0.94 <em>multiplied</em> by \(s\). This makes sense, as since we employed a log link function, an increase or decrease in the predictor variable has not an additive but multiplicative effect on the response variable. 
+            </p>
+            <p>
+                <strong>Hint:</strong> What if you don't want to calculate that every time?? Don't worry, we'll talk about how to do it in R easily, next. 
+            </p>
+            <p>
+                Also note here that the test statistic is actually a z-value instead of a t-value from the <code>lm()</code>. The significance is interpreted as before. 
+            </p>
+            <p>
+                <strong>4. Null vs. Residual Deviance</strong> -- The deviance of the null model is the amount of deviance in a model fitting just the intercept, \(\beta_0\). The residual deviance is the deviance of the model you're currently using. If the deviance of the null model is low, it means that just the intercept is doing a good job, so you don't likely need to or want to add a large number of predictor variables. The residual deviance being lower means that the model you're using is appropriately better than just the intercept. 
+            </p>
+            <p>
+                5. <strong> AIC </strong> -- Beyond the current scope to address in sufficient detail, just know that the AIC value is meaningless for just a single model. In fact, this value tells us next to nothing. It is in fact used to compare multiple models to see which model best explains the data. With multiple models, we would compare the AIC values, and the lowest AIC value would be considered the "best" model. 
+            </p>
+        </section>
+        <section id="sp-I-7">
+            <h3>Step 7 - Prediction &amp; Conclusions</h3>
+            <p>
+                Just this model by itself is not incredibly useful, we likely want to plot some predicted values, like the plot above, but now using the proper link function. Recall how from #3 above, we had the tedious task of doing math (heaven forbid!) to find some response values. Let's not do that, but instead ask R to do it for us. We can do this from the <code>predict()</code> function from the <code>stats</code> package. It will take in our fitted model, and some predictor data values, and predict the response value for us. Let's do that now first by just plotting the regression line in-sample (i.e. in the range of biomass values we have data for). Note that to get the "response" value, we need to pass <code>type = "response"</code> to the function. 
+            </p>
+            <p>
+                Typically the best way to do this is make our prediction and bind that to our original dataframe so we have the real observed values of our response variable alongside the predicted ones for plotting. The best way to do that is through a call to <code>mutate()</code> from <code>dplyr</code>.
+            </p>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df_pred</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">Species_pred</span> <span class="hl std">= stats</span><span class="hl opt">::</span><span class="hl kwd">predict</span><span class="hl std">(mod_poi,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;response&quot;</span><span class="hl std">)</span>
+<span class="hl std">)</span>
+
+<span class="hl com"># now bind this new dataframe to our old dataframe </span>
+</pre></div>
+</div></div>
+            <p>
+                And now we can plot from this new dataframe: 
+            </p>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_pred)</span> <span class="hl opt">+</span>
+<span class="hl com"># plot the observed points</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species),</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">fill</span> <span class="hl std">=</span> <span class="hl str">&quot;purple&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl com"># plot regression line</span>
+<span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species_pred),</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+            <p>
+                "But wait! That line isn't straight??" True, because we're using a link function to relate our data linearly, but accomodate for non-linearity :) 
+            </p>
+            <p>
+                Now, if we want to predict <em>out</em> of our sampled data, we could use the predict function again in a new way, by creating a new dataset with some extended Biomass data and the predicted species data. However, this time because we're predicting out of sample, we need to make use of the <code> newdata</code> argume in <code>predict()</code> to tell R which values to use the model to predict across. There's a few requirements. It needs to be passed a dataframe, with columns with the same names as the predictor variables in the model fit formula originally.
+            </p>
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># make a dataframe with just the two variables</span>
+<span class="hl std">df_pred_out</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+<span class="hl com"># make a sequence from our minimum observed amount out to 30 </span>
+<span class="hl kwc">Biomass</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl kwd">min</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">Biomass),</span> <span class="hl num">30</span><span class="hl std">,</span> <span class="hl num">0.1</span><span class="hl std">),</span>
+<span class="hl kwc">Species</span> <span class="hl std">= stats</span><span class="hl opt">::</span><span class="hl kwd">predict</span><span class="hl std">(mod_poi,</span>
+                        <span class="hl kwc">newdata</span> <span class="hl std">=</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+                            <span class="hl kwc">Biomass</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl kwd">min</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">Biomass),</span> <span class="hl num">30</span><span class="hl std">,</span> <span class="hl num">0.1</span><span class="hl std">)</span>
+                            <span class="hl std">),</span>
+                        <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;response&quot;</span><span class="hl std">)</span>
+<span class="hl std">)</span>
+
+<span class="hl kwd">head</span><span class="hl std">(df_pred_out)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##      Biomass  Species
+## 1 0.05017529 24.06745
+## 2 0.15017529 23.91286
+## 3 0.25017529 23.75926
+## 4 0.35017529 23.60665
+## 5 0.45017529 23.45501
+## 6 0.55017529 23.30435
+</pre></div>
+</div></div>
+            <p>
+                And the plot: 
+            </p>
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_pred_out)</span> <span class="hl opt">+</span>
+<span class="hl com"># plot regression line</span>
+<span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species),</span>
+            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Predicted Species Richness&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+            <p>
+                And here we go! We've finally showed, visually, why we need a link function! We can now predict out to a higher than observed biomass without predicting unrealistic response variable values. 
+            </p>
+            <p>
+                Whether our question required making a prediction plot out of sample or not (ours likely didn't, we probably can suffice with just the first plot of predictions), it's now time to figure out if we've answered our question. Our null hypothesis was there was no effect of biomass on species richness. We can confidently say that we reject this null hypothesis, given the output above. 
+            </p>
+        </section>
+    </section>
+    <section id="sp-II">
+        <h2>Species Richness Example - II</h2>
+        <p>
+            Recall that at the beginning of the previous section, we asked if biomass affected species richness, but <em>also</em> if that was the case, if that effect differed across levels of pH. Here our \(H_0\) will be that the relationship between Biomass and Species richness does not differ across levels of pH. 
+        </p>
+        <p>
+            So that means we're asking about the <em>interaction</em> between Biomass and pH. <strong>It's important to know that in R, there are two ways to specify an interaction between two variables, \(X_1\) and \(X_2\).</strong> The more common way is to use <code> y ~ x1*x2</code>, but what this does mathematically? It turns out in that case, we are in fact fitting a model that looks for an effect of both variables individually, as well as their interaction, which in an R implementation would be equivalent to writing <code>y ~ x1 + x2 + x1*x2</code>  which we can easily see is a more complicated model than just the interaction. To specify <em>just</em> the interaction, we would instead write <code>y ~ x1:x2</code>. Now there's nothing wrong with either of these, but it's important to know which one we're selecting, and <em>why</em> we're selecting that one. 
+        </p>
+        <p>
+            We'll take a moment here and discuss what an interaction means mathematically. In our context we're using pH. 
+
+        </p>
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">pH)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] high mid  low 
+## Levels: high low mid
+</pre></div>
+</div></div>
+        <p>
+            This is a categorical variable with three levels. What does that mean? Well, if we think back to when we talked about categorical variables in the linear model section, we talked about indicator functions. We'll actually use the same concept here. In this case, we'll create three indicator variables, one for each. So in essence for the model with just the interaction, we're fitting this model: 
+            
+            \[ 
+            \hat{Y} = \beta_0 + \beta_1\text{pH-LOW}*\text{Biomass} + \beta_2\text{pH-MED}*\text{Biomass} 
+            \]
+            \[
+            + \beta_3\text{pH-HI}*\text{Biomass}
+            \]
+            so here we're fitting an intercept and three beta values, one for the interaction of each level of the pH and the biomass. So if we have a new level of biomass and we want to know the species richness, we actually cannot answer that unless we also know the pH. 
+        </p>
+        <p>
+            For the model that estimates the effect of both variables and their interaction, we (or rather, R), will use one of the levels of our categorical variable as the intercept. In this case, let's assume it takes the "High" pH treatment. So then, we'll use two indicator variable that essentially say: 
+        </p>
+        <p>
+            \[I_{low} = 
+            \begin{cases}
+            1 & \text{if pH value is "low"}\\
+            0 & \text{otherwise}\\
+            \end{cases}
+            \]
+        </p>
+        <p>
+            and
+        </p>
+        <p>
+            \[I_{mid} = 
+            \begin{cases}
+            1 & \text{if pH value is "mid"}\\
+            0 & \text{otherwise}\\
+            \end{cases}
+            \] 
+        </p>
+        <p>
+            so our model will end up looking like: 
+        </p>
+        <p>
+            \[\hat{Y} = \beta_0 + \beta_{biomass}*Biomass + \beta_{low}*I_{low} + \beta_{med}*I_{mid} \]
+            \[+ \beta_{BL}*Biomass*I_{low} + \beta_{BM}*Biomass*I_{med}\]
+        </p>
+        <p>
+            For us, we'll use our model comparison and evaluation metrics from the Linear Regression section. The idea will be to take our variables of interest and compare three different models for species richness ( \(Y\): 1) model with just biomass, 2) model with just the interaction between biomass and pH, and 3) pH, biomass, and their interaction. We'll compare our three models, and evaluate which is best. 
+        </p>
+        <p>
+            We'll essentially walk through all the steps from section I, but fitting each of our models.
+        </p>
+        <section id="sp-II--1">
+            <h3>Step 1 - Plot Data</h3>
+            <p>
+                Let's plot our data again, but this time, since our other variable of interest is pH, we'll look at that as well. 
+            </p>
+            <p>
+                First, what values does pH take?
+            </p>
+<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">pH)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] high mid  low 
+## Levels: high low mid
+</pre></div>
+</div></div>
+            <p>
+                Okay, let's colour our points by those levels: 
+            </p>
+<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df)</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species,</span> <span class="hl kwc">fill</span> <span class="hl std">= pH),</span>
+            <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" class="plot" /></div></div>
+            <p>
+                Ok so there's a very obvious pattern here!!
+            </p>
+        </section>
+        <section id="sp-II--2">
+            <h3>Step 2 & 3</h3>
+            <p>
+                We already did this above in the first walk through section, but a poisson distribution with a log link function is sufficient for our purposes here. 
+            </p>
+        <section id="sp-II-4">
+            <h3>Step 4 - Fitting the Model</h3>
+            <p>
+                Now, we need to fit three separate models, so we'll go from least to most complicated: 
+            </p>
+<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod1</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">glm</span><span class="hl std">(Species</span> <span class="hl opt">~</span> <span class="hl std">Biomass,</span>
+                <span class="hl kwc">data</span> <span class="hl std">= df,</span>
+                <span class="hl kwc">family</span> <span class="hl std">=</span> <span class="hl kwd">poisson</span><span class="hl std">(</span><span class="hl kwc">link</span> <span class="hl std">= log))</span>
+<span class="hl std">mod2</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">glm</span><span class="hl std">(Species</span> <span class="hl opt">~</span> <span class="hl std">Biomass</span><span class="hl opt">:</span><span class="hl std">pH,</span>
+                <span class="hl kwc">data</span> <span class="hl std">= df,</span>
+                <span class="hl kwc">family</span> <span class="hl std">=</span> <span class="hl kwd">poisson</span><span class="hl std">(</span><span class="hl kwc">link</span> <span class="hl std">= log))</span>
+<span class="hl std">mod3</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">glm</span><span class="hl std">(Species</span> <span class="hl opt">~</span> <span class="hl std">Biomass</span><span class="hl opt">*</span><span class="hl std">pH,</span>
+                <span class="hl kwc">data</span> <span class="hl std">= df,</span>
+                <span class="hl kwc">family</span> <span class="hl std">=</span> <span class="hl kwd">poisson</span><span class="hl std">(</span><span class="hl kwc">link</span> <span class="hl std">= log))</span>
+</pre></div>
+</div></div>
+            <p>
+                Since we are doing model comparison, we first want to figure out which model does the best job, and then only bother looking at the results for the best one. 
+            </p>
+        </section>
+        <section id="sp-II-5">
+            <h3>Step 5 - Model Evaluation</h3>
+            <p>
+                So let's do this in a particular way. We'll calculate the negative log-likelihood for each model, since, because our models are nested, we can actually do two Likelihood Ratio Tests, which we discussed in the Linear Regression section. 
+            </p>
+            <p>
+                First we'll extract the log-likelihoods for each
+            </p>
+<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod1_LL</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">logLik</span><span class="hl std">(mod1)</span>
+<span class="hl std">mod2_LL</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">logLik</span><span class="hl std">(mod2)</span>
+<span class="hl std">mod3_LL</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">logLik</span><span class="hl std">(mod3)</span>
+</pre></div>
+</div></div>
+            <p>
+                Now, since we have two comparisons to make, we'll calculate the test statistic first for models 1 and 2:
+            </p>
+<div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">teststat_mod1_2</span> <span class="hl kwb">&lt;-</span> <span class="hl std">test_statistic</span> <span class="hl kwb">&lt;-</span> <span class="hl opt">-</span><span class="hl num">2</span> <span class="hl opt">*</span> <span class="hl std">(</span><span class="hl kwd">as.numeric</span><span class="hl std">(mod1_LL)</span> <span class="hl opt">-</span>
+                        <span class="hl kwd">as.numeric</span><span class="hl std">(mod2_LL))</span>
+</pre></div>
+</div></div>
+            <p>
+                And now we can get the p-value that adding the additional parameter improved the model. Note that we can extract the degrees of freedom, which we need for our test, can be extracted from the model itself. If a model object is called <code>mod</code> then the degrees of freedom for our purposes can be extracted with <code>summary(mod)$df[1]</code>:
+            </p>
+<div class="chunk" id="unnamed-chunk-22"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">deg_f_1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">summary</span><span class="hl std">(mod1)</span><span class="hl opt">$</span><span class="hl std">df[</span><span class="hl num">1</span><span class="hl std">]</span>
+<span class="hl std">deg_f_2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">summary</span><span class="hl std">(mod2)</span><span class="hl opt">$</span><span class="hl std">df[</span><span class="hl num">1</span><span class="hl std">]</span>
+<span class="hl std">deg_f_3</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">summary</span><span class="hl std">(mod3)</span><span class="hl opt">$</span><span class="hl std">df[</span><span class="hl num">1</span><span class="hl std">]</span>
+
+<span class="hl com"># calculate p-value</span>
+<span class="hl std">p_val_mod1_2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pchisq</span><span class="hl std">(teststat_mod1_2,</span>
+                    <span class="hl kwc">df</span> <span class="hl std">= (deg_f_2</span> <span class="hl opt">-</span> <span class="hl std">deg_f_1),</span>
+                    <span class="hl kwc">lower.tail</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
+<span class="hl std">p_val_mod1_2</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 7.198193e-57
+</pre></div>
+</div></div>
+            <p>
+                Ok, so definitely &lt;0.05, and we can move to our next comparison, between the interaction model, and the model with the variables included. We'll again get our test statistic:
+            </p>
+<div class="chunk" id="unnamed-chunk-23"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">teststat_mod2_3</span> <span class="hl kwb">&lt;-</span> <span class="hl std">test_statistic</span> <span class="hl kwb">&lt;-</span> <span class="hl opt">-</span><span class="hl num">2</span> <span class="hl opt">*</span> <span class="hl std">(</span><span class="hl kwd">as.numeric</span><span class="hl std">(mod2_LL)</span> <span class="hl opt">-</span>
+                        <span class="hl kwd">as.numeric</span><span class="hl std">(mod3_LL))</span>
+</pre></div>
+</div></div>
+            <p>
+                And now we can get the p-value: 
+            </p>
+<div class="chunk" id="unnamed-chunk-24"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># calculate p-value</span>
+<span class="hl std">p_val_mod2_3</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">pchisq</span><span class="hl std">(teststat_mod2_3,</span>
+                    <span class="hl kwc">df</span> <span class="hl std">= (deg_f_3</span> <span class="hl opt">-</span> <span class="hl std">deg_f_2),</span>
+                    <span class="hl kwc">lower.tail</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
+<span class="hl std">p_val_mod2_3</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 4.83787e-15
+</pre></div>
+</div></div>
+            <p>
+                Again, a small p-value, so we can see that in fact this most complex model offers the best combination of variables. If we wanted to, we could also check the AIC values for each model: 
+            </p>
+<div class="chunk" id="unnamed-chunk-25"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">AIC</span><span class="hl std">(mod1)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 830.8629
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">AIC</span><span class="hl std">(mod2)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 576.3159
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">AIC</span><span class="hl std">(mod3)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 514.3913
+</pre></div>
+</div></div>
+            <p>
+                Ok, so if we're following our rules of thumb, then we have a clear best model - the third and most complex model. So now, we can move on to interpreting!
+            </p>
+        </section>
+        <section id="sp-II-6">
+            <h3>Step 6 - Interpreting the Results</h3>
+            <p>
+                So let's look at the summary of our model of choice: 
+            </p>
+<div class="chunk" id="unnamed-chunk-26"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mod3)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## Call:
+## stats::glm(formula = Species ~ Biomass * pH, family = poisson(link = log), 
+##     data = df)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4978  -0.7485  -0.0402   0.5575   3.2297  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)    3.76812    0.06153  61.240  &lt; 2e-16 ***
+## Biomass       -0.10713    0.01249  -8.577  &lt; 2e-16 ***
+## pHlow         -0.81557    0.10284  -7.931 2.18e-15 ***
+## pHmid         -0.33146    0.09217  -3.596 0.000323 ***
+## Biomass:pHlow -0.15503    0.04003  -3.873 0.000108 ***
+## Biomass:pHmid -0.03189    0.02308  -1.382 0.166954    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 452.346  on 89  degrees of freedom
+## Residual deviance:  83.201  on 84  degrees of freedom
+## AIC: 514.39
+## 
+## Number of Fisher Scoring iterations: 4
+</pre></div>
+</div></div>
+            <p>
+                So we can see here the output as we're used to seeing. However, recall, to make easy direct comparisons, we need to think about these values as relating to the predicted <strong>log</strong> of the species richness. 
+            </p>
+            <p>
+                It's easiest to conceptualize as thinking about predicting a value of species richness (since that what the whole model is supposed to do), given some information. With the information above, let's re-state our full model with the \(\beta\) values plugged in: 
+            </p>
+            <p>
+                \[\hat{Y} = 3.77 - 0.11*Biomass - 0.82*I_{low} - 0.33*I_{med}  \]
+                \[- 0.16*Biomass*I_{low} - 0.03*Biomass*I_{med}\]
+            </p>
+            <p>
+                So to get the estimated number of species \(\hat{Y}\), we require at least two pieces of data: 1) the pH level, and 2) the biomass value. So let's assume the biomass is something like 7.5, and the pH level is medium. What will our equation simplify to? Well, let's plug in our values for our biomass and the indicator functions: 
+                \[\hat{Y} = 3.77 - 0.11*Biomass - 0.82*0 - 0.33*1.0 \] 
+                \[- 0.16*Biomass*0 - 0.03*Biomass*1.0\] Now obviously the terms with a zero being multiplied will go to zero, and the others can be simplified: \[\hat{Y} = 3.77 - 0.11*Biomass - 0 
+                - 0.33*1.0  - 0 - 0.03*Biomass\] And now we can simplify each term: \[\hat{Y} = 3.77 - 0.11*Biomass - 0.33  - 0.03*Biomass\] Which gives us the value of: \[\hat{Y} = 3.44 - 0.14*Biomass\] or \[\hat{Y} = 3.44 - 0.14*7.5 = 2.39\] Now recall this is on the log scale!! So how do we get it in terms of the number of species?  \[\hat{Y} = e^{2.39} \approx 10.91\]
+            </p>
+        </section>
+        <section id="sp-II-7">
+            <h3>Step 7 - Predictions and Conlusions</h3>
+            <p>
+                <strong>As a quick sanity check - when we plot this in this step, how many prediction/regression lines will there be?</strong>
+            </p>
+            <p>
+                So we've done some of the interpretation already, but specifically with respect to our answer above of how many species we should expect under medium pH conditions and with a biomass value of 7.5, let's check if our answer agrees with R. To do this, we'll recall the <code>predict()</code> function from the <code>stats</code> package:
+            </p>
+<div class="chunk" id="unnamed-chunk-27"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># make a dataframe with a single observation</span>
+<span class="hl std">new_df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">Biomass</span> <span class="hl std">=</span> <span class="hl num">7.5</span><span class="hl std">,</span> <span class="hl kwc">pH</span> <span class="hl std">=</span> <span class="hl str">&quot;mid&quot;</span><span class="hl std">)</span>
+
+<span class="hl com"># now predict</span>
+<span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">predict</span><span class="hl std">(mod3,</span> <span class="hl kwc">newdata</span> <span class="hl std">= new_df,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;response&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##        1 
+## 10.95721
+</pre></div>
+</div></div>
+            <p>
+                And we can see that our answers agree! But we likely want to make some <strong>biological</code> interpretations. So let's make a plot of our results overall. 
+            </p>
+<div class="chunk" id="unnamed-chunk-28"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># make new data to regress against -- use expand.grid()</span>
+<span class="hl std">new_df_full</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">expand.grid</span><span class="hl std">(</span><span class="hl kwc">Biomass</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl kwd">min</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">Biomass),</span> <span class="hl kwd">max</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">Biomass),</span>
+                                        <span class="hl kwc">length.out</span> <span class="hl std">=</span> <span class="hl num">200</span><span class="hl std">),</span>
+                        <span class="hl com"># note that pH has to be a factor here</span>
+                        <span class="hl kwc">pH</span> <span class="hl std">=</span> <span class="hl kwd">levels</span><span class="hl std">(</span><span class="hl kwd">as.factor</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">pH)))</span>
+
+<span class="hl com"># make model predictions</span>
+<span class="hl std">mod_pred</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">predict</span><span class="hl std">(mod3,</span>
+                        <span class="hl kwc">newdata</span> <span class="hl std">= new_df_full,</span>
+                        <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;response&quot;</span><span class="hl std">)</span>
+
+<span class="hl com"># bind to a dataframe</span>
+<span class="hl std">predict_df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+<span class="hl kwd">cbind</span><span class="hl std">(new_df_full,</span>
+        <span class="hl kwc">Species</span> <span class="hl std">= mod_pred)</span>
+<span class="hl std">)</span>
+<span class="hl kwd">head</span><span class="hl std">(predict_df)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##      Biomass   pH  Species
+## 1 0.05017529 high 43.06662
+## 2 0.10008280 high 42.83698
+## 3 0.14999031 high 42.60856
+## 4 0.19989782 high 42.38136
+## 5 0.24980534 high 42.15537
+## 6 0.29971285 high 41.93058
+</pre></div>
+</div></div>
+            <p>
+                Now let's make the plot: 
+            </p>
+<div class="chunk" id="unnamed-chunk-29"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species,</span> <span class="hl kwc">fill</span> <span class="hl std">= pH),</span>
+            <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= predict_df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species,</span> <span class="hl kwc">colour</span> <span class="hl std">= pH),</span>
+            <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.3</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" class="plot" /></div></div>
+            <p>
+                If we felt like it, we could change this to make it slightly more nice. First, let's put the lines behind the points. We'll also re-order the levels of the factor so the legend reads high, mid, low. 
+            </p>
+<div class="chunk" id="unnamed-chunk-30"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># re-level the factors</span>
+<span class="hl std">predict_df</span><span class="hl opt">$</span><span class="hl std">pH</span> <span class="hl kwb">=</span> <span class="hl kwd">factor</span><span class="hl std">(predict_df</span><span class="hl opt">$</span><span class="hl std">pH,</span> <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;high&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;mid&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;low&quot;</span><span class="hl std">))</span>
+<span class="hl std">df</span><span class="hl opt">$</span><span class="hl std">pH</span> <span class="hl kwb">=</span> <span class="hl kwd">factor</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">pH,</span> <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;high&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;mid&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;low&quot;</span><span class="hl std">))</span>
+
+<span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+    <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= predict_df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species,</span> <span class="hl kwc">colour</span> <span class="hl std">= pH),</span>
+            <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.3</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species,</span> <span class="hl kwc">fill</span> <span class="hl std">= pH),</span>
+            <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" class="plot" /></div></div>
+            <p>
+                And we're done! 
+            </p>
+        </section>
+    </section>
+<!-- End page content -->
+<hr>
+<p style="font-size:10px;color:gray;text-align:center">
+    <br>
+    <br>
+    The EEB R Manual is the work of researchers at the University of the Toronto
+     and intended as a purely educational resource. It holds no official 
+    association with the R Foundation. It should not be taken as an
+     authority on R best practices. 
+    <br>
+    When using this resource, <bold>always</bold> default to instructions and 
+    guidance provided by your instructor. 
+    <br>
+    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+</p>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+</main>
+
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button" style="color:blue;">Close Menu</a>
+  <ol>
+    <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
+    <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
+    <li><a href="../00-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
+    <ol>
+        <li><a href="../00-start/00-01-downloads.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Downloads</a>
+        </li>
+        <li><a href="../00-start/00-02-navigating-rstudio.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Navigating RStudio</a>
+        </li>
+        <li><a href="../00-start/00-03-the-file-ecosystem.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            The File Ecosystem</a>
+        </li>
+    </ol>
+    </li>
+    <li><a href="../01-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
+        <ol>
+            <li><a href="../01-basicr/01-01-coding-basics.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Coding Basics</a>
+            </li>
+            <li><a href="../01-basicr/01-02-data-types.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Types</a>
+            </li>
+            <li><a href="../01-basicr/01-03-data-structures.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Structures</a>
+            </li>
+            <li><a href="../01-basicr/01-04-indexing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Indexing</a>
+            </li>
+            <li><a href="../01-basicr/01-05-packages.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Packages</a>
+            </li>
+            <li><a href="../01-basicr/01-06-workflow.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Workflow</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../02-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
+        <ol>
+            <li><a href="../02-data/02-01-reading-writing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Reading &amp; Writing Files</a>
+            </li>
+            <li><a href="../02-data/02-02-filtering-subsetting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Filtering &amp; Subsetting</a>
+            </li>
+            <li><a href="../02-data/02-03-selecting-columns.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Selecting Columns</a>
+            </li>
+            <li><a href="../02-data/02-04-grouping-summarizing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Grouping &amp; Summarizing</a>
+            </li>
+            <li><a href="../02-data/02-05-new-columns.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Ceating New Columns</a>
+            </li>
+            <li><a href="../02-data/02-06-factors.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Factor Data</a>
+            </li>
+            <li><a href="../02-data/02-07-renaming.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Renaming Columns</a>
+            </li>
+            <li><a href="../02-data/02-08-dates.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Date &amp; Time Data</a>
+            </li>
+            <li><a href="../02-data/02-09-reshaping.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Reshaping DataFrames</a>
+            </li>
+            <li><a href="../02-data/02-10-cleaning-process.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Data Cleaning Process</a>
+            </li>
+            <li><a href="../02-data/02-11-relational-data.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Relational DataFrames</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../03-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
+        <ol>
+            <li><a href="../03-plot/03-00-basics-of-plotting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Basics of Plotting</a>
+            </li>
+            <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Introduction to <code>ggplot2</code></a>
+            </li>
+            <li><a href="../03-plot/03-02-interative-plotting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Interative Plotting</a>
+            </li>
+            <li><a href="../03-plot/03-03-facetting.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Facetting Plot Panels</a>
+            </li>
+            <li><a href="../03-plot/03-04-plotting-multiple-dataframes.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting with Multiple DataFrames</a>
+            </li>
+            <li><a href="../03-plot/03-05-distributions.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Distributions</a>
+            </li>
+            <li><a href="../03-plot/03-06-part-to-whole-comparison.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Part to Whole Comparisons</a>
+            </li>
+            <li><a href="../03-plot/03-07-relations-between-vars.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Relationships Between Variables</a>
+            </li>
+            <li><a href="../03-plot/03-08-change-time.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Plotting Change Through Time</a>
+            </li>
+            <li><a href="../03-plot/03-10-values-between-groups.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Values Between Groups</a>
+            </li>
+            <li><a href="../03-plot/03-11-mapping.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Geographic Mapping</a>
+            </li>
+            <li><a href="../03-plot/03-12-annotations.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Annotations</a>
+            </li>
+            <li><a href="../03-plot/03-13-phylogenetic-trees.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Phylogenetic Trees</a>
+            </li>
+        </ol>
+    </li>
+    <li><a href="../04-landingpage.html" onclick="w3_close()" 
+        class="w3-bar-item w3-button" 
+        style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
+        <ol>
+            <li><a href="../04-stats1/04-00-introduction.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Introduction</a>
+            </li>
+            <li><a href="../04-stats1/04-01-probability-101.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Probability 101</a>
+            </li>
+            <li><a href="../04-stats1/04-02-likelihood.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Likelihood</a>
+            </li>
+            <li><a href="../04-stats1/04-03-sampling-distributions.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Sampling Distributions</a>
+            </li>
+            <li><a href="../04-stats1/04-04-hypothesis-testing.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Hypothesis Testings</a>
+            </li>
+            <li><a href="../04-stats1/04-05-confidence-intervals.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Confidence Intervals</a>
+            </li>
+            <li><a href="../04-stats1/04-06-comparing-sample-means.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Comparing Sample Means (T-tests)</a>
+            </li>
+            <li><a href="../04-stats1/04-07-analysis-of-variance.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Analysis of Variance (ANOVAs)</a>
+            </li>
+            <li><a href="../04-stats1/04-08-linear-regression.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Linear Regression</a>
+            </li>
+            <li><a href="../04-stats1/04-09-logistic-regression.html" onclick="w3_close()" 
+                class="w3-bar-item w3-button" 
+                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+                Logistic Regression</a>
+            </li>
+        </ol>
+    </li>
+  </ol>
+</nav>
+
+</body>
+</html>
