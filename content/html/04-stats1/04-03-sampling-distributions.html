@@ -163,7 +163,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1.5</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] 4.476135 5.335225 3.845416 6.750420 7.277987 4.753633 5.847443 3.398002 4.856019 4.589032
+<div class="output"><pre class="knitr r">##  [1] 7.114379 7.554308 5.513457 2.998362 4.449341 3.132945 5.172468 4.007088
+##  [9] 5.818357 5.097879
 </pre></div>
 </div></div>
       <p>
@@ -179,8 +180,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] -0.50615451 -1.02004320 -0.97380896 -0.79269672 -0.78650430 -0.37790870 -0.98939547  0.40683211 -2.10517301
-## [10]  0.01959228
+<div class="output"><pre class="knitr r">##  [1] -0.11769942  2.04874733  1.68697984  0.57473763 -0.61909674  0.61133562
+##  [7]  1.24331433 -0.04670457 -0.24477577  0.29251753
 </pre></div>
 </div></div>
         <p>
@@ -188,8 +189,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] -0.34351892 -0.06797772 -0.15076840 -0.41931138 -1.19981033  1.27169877  1.08877265 -0.07896707 -0.14797010
-## [10]  0.95389526
+<div class="output"><pre class="knitr r">##  [1] -0.8049481  0.2916167 -0.6097318 -0.9913492  1.6179177 -0.7935105
+##  [7] -1.1066228 -0.8341770 -0.1835274  2.0698836
 </pre></div>
 </div></div>
         <p>
@@ -269,7 +270,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Nucleotide Base&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+<div class="error"><pre class="knitr r">## Error in ggplot(data = df): could not find function &quot;ggplot&quot;
+</pre></div>
+</div></div>
         <p>
           As a fun little game, let's build a gene. There approximately 1000 nucleotide pairs of coding sequence per gene according to google, and let's imagine that the gene we're building has a probability distribution of nucleotides that is given above, where the probabilities of each base appearing given a random sample are: 0.1, 0.2, 0.45, and 0.25 respectively for A, C, G, and T. 
         </p>
@@ -302,7 +305,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           Now let's take these vectors and turn them into dataframes so we can plot them. We can use the convenient <code>table()</code> function to get counts of how many of each base there is: 
         </p>
 <div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
-<span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'dplyr'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
 <span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
 
 <span class="hl std">df_20</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
@@ -433,15 +448,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unitt…¹ vert_…² pitnu…³ species lengt…⁴ lengt…⁵ weigh…⁶ clip  sampledate notes
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;
-## 1  1987 MACKCC-L CC      L         1       1 R             1      NA Cutthr…      58      NA    1.75 NONE  1987-10-07 &lt;NA&gt; 
-## 2  1987 MACKCC-L CC      L         1       1 R             2      NA Cutthr…      61      NA    1.95 NONE  1987-10-07 &lt;NA&gt; 
-## 3  1987 MACKCC-L CC      L         1       1 R             3      NA Cutthr…      89      NA    5.6  NONE  1987-10-07 &lt;NA&gt; 
-## 4  1987 MACKCC-L CC      L         1       1 R             4      NA Cutthr…      58      NA    2.15 NONE  1987-10-07 &lt;NA&gt; 
-## 5  1987 MACKCC-L CC      L         1       1 R             5      NA Cutthr…      93      NA    6.9  NONE  1987-10-07 &lt;NA&gt; 
-## 6  1987 MACKCC-L CC      L         1       1 R             6      NA Cutthr…      86      NA    5.9  NONE  1987-10-07 &lt;NA&gt; 
-## # … with abbreviated variable names ¹​unittype, ²​vert_index, ³​pitnumber, ⁴​length_1_mm, ⁵​length_2_mm, ⁶​weight_g
+##    year sitecode section reach  pass unitnum unittype vert_index pitnu…¹ species
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  
+## 1  1987 MACKCC-L CC      L         1       1 R                 1      NA Cutthr…
+## 2  1987 MACKCC-L CC      L         1       1 R                 2      NA Cutthr…
+## 3  1987 MACKCC-L CC      L         1       1 R                 3      NA Cutthr…
+## 4  1987 MACKCC-L CC      L         1       1 R                 4      NA Cutthr…
+## 5  1987 MACKCC-L CC      L         1       1 R                 5      NA Cutthr…
+## 6  1987 MACKCC-L CC      L         1       1 R                 6      NA Cutthr…
+## # … with 6 more variables: length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
+## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;, and abbreviated
+## #   variable name ¹​pitnumber
 </pre></div>
 </div></div>
         <p>
