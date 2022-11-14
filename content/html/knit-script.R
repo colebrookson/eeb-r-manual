@@ -34,4 +34,4 @@ files_04 <- list.files(here("./content/html/04-stats1/"), "\\.rhtml")
 for (f in files_04)
   knit(paste0(here("./content/html/04-stats1/"), f), 
        sub("\\.rhtml$", ".html", 
-           paste0(here("./content/html/04-stats1/"), f)), envir = new.env())
+           paste0(here("./content/html/04-stats1/"), f)))

@@ -158,7 +158,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">names</span><span class="hl std">(df)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## NULL
+<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;        &quot;unitnum&quot;     &quot;unittype&quot;    &quot;vert_index&quot; 
+##  [9] &quot;pitnumber&quot;   &quot;species&quot;     &quot;length_1_mm&quot; &quot;length_2_mm&quot; &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot;  &quot;notes&quot;
 </pre></div>
 </div></div>
       <p>
@@ -173,7 +174,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in df$species: object of type 'closure' is not subsettable
+<div class="output"><pre class="knitr r">## [1] &quot;Cutthroat trout&quot;            NA                           &quot;Coastal giant salamander&quot;   &quot;Cascade torrent salamander&quot;
 </pre></div>
 </div></div>
       <p>
@@ -181,7 +182,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in df$species: object of type 'closure' is not subsettable
+<div class="output"><pre class="knitr r">## 
+## Cascade torrent salamander   Coastal giant salamander            Cutthroat trout 
+##                         15                      11758                      20433
 </pre></div>
 </div></div>
       <p>
@@ -191,17 +194,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <span class="hl com"># make grouping variable a factor</span>
 <span class="hl std">df</span><span class="hl opt">$</span><span class="hl std">species</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">as.factor</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in df$species: object of type 'closure' is not subsettable
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
+
+<span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">geom_bar</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= species,</span> <span class="hl kwc">fill</span> <span class="hl std">= species),</span>
           <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in f(...): argument &quot;df1&quot; is missing, with no default
-</pre></div>
-</div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
       <p>
         Okay so we can see that while they're not completely equal, they're close enough for our purposes, especially with an ANOVA, as it's one of the less sensitive tests to number of samples per group. 
       </p>
@@ -227,31 +226,29 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># first filter the data</span>
 <span class="hl std">adelie</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(species</span> <span class="hl opt">==</span> <span class="hl str">&quot;Adelie&quot;</span><span class="hl std">)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in UseMethod(&quot;filter&quot;): no applicable method for 'filter' applied to an object of class &quot;function&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">chin</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">chin</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(species</span> <span class="hl opt">==</span> <span class="hl str">&quot;Chinstrap&quot;</span><span class="hl std">)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in UseMethod(&quot;filter&quot;): no applicable method for 'filter' applied to an object of class &quot;function&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">gentoo</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">gentoo</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(species</span> <span class="hl opt">==</span> <span class="hl str">&quot;Gentoo&quot;</span><span class="hl std">)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in UseMethod(&quot;filter&quot;): no applicable method for 'filter' applied to an object of class &quot;function&quot;
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># plot qq-plots for each one</span>
+
+<span class="hl com"># plot qq-plots for each one</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Adelie&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in ggpubr::ggqqplot(adelie$bill_length_mm, main = &quot;Adelie&quot;): object 'adelie' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Chinstrap&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in ggpubr::ggqqplot(chin$bill_length_mm, main = &quot;Chinstrap&quot;): object 'chin' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Gentoo&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in ggpubr::ggqqplot(gentoo$bill_length_mm, main = &quot;Gentoo&quot;): object 'gentoo' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
 </pre></div>
 </div></div>
           <p>
@@ -259,15 +256,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in stopifnot(is.numeric(x)): object 'adelie' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(adelie$bill_length_mm): is.numeric(x) is not TRUE
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in stopifnot(is.numeric(x)): object 'chin' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(chin$bill_length_mm): is.numeric(x) is not TRUE
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in stopifnot(is.numeric(x)): object 'gentoo' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(gentoo$bill_length_mm): is.numeric(x) is not TRUE
 </pre></div>
 </div></div>
           <p>
@@ -284,21 +287,30 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">log</span><span class="hl std">(bill_length_mm)</span>
   <span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in dplyr::mutate(., log_length = log(bill_length_mm)): object 'adelie' not found
+<div class="error"><pre class="knitr r">## Error in `dplyr::mutate()`:
+## ! Problem while computing `log_length = log(bill_length_mm)`.
+## Caused by error in `mask$eval_all_mutate()`:
+## ! object 'bill_length_mm' not found
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">chin</span> <span class="hl kwb">&lt;-</span> <span class="hl std">chin</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">log</span><span class="hl std">(bill_length_mm)</span>
   <span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in dplyr::mutate(., log_length = log(bill_length_mm)): object 'chin' not found
+<div class="error"><pre class="knitr r">## Error in `dplyr::mutate()`:
+## ! Problem while computing `log_length = log(bill_length_mm)`.
+## Caused by error in `mask$eval_all_mutate()`:
+## ! object 'bill_length_mm' not found
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">gentoo</span> <span class="hl kwb">&lt;-</span> <span class="hl std">gentoo</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">log</span><span class="hl std">(bill_length_mm)</span>
   <span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in dplyr::mutate(., log_length = log(bill_length_mm)): object 'gentoo' not found
+<div class="error"><pre class="knitr r">## Error in `dplyr::mutate()`:
+## ! Problem while computing `log_length = log(bill_length_mm)`.
+## Caused by error in `mask$eval_all_mutate()`:
+## ! object 'bill_length_mm' not found
 </pre></div>
 </div></div>
           <p>
@@ -307,15 +319,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># plot qq-plots for each one</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Adelie&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in ggpubr::ggqqplot(adelie$log_length, main = &quot;Adelie&quot;): object 'adelie' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Chinstrap&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in ggpubr::ggqqplot(chin$log_length, main = &quot;Chinstrap&quot;): object 'chin' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Gentoo&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in ggpubr::ggqqplot(gentoo$log_length, main = &quot;Gentoo&quot;): object 'gentoo' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
 </pre></div>
 </div></div>
           <p>
@@ -323,15 +341,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           </p>
 <div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in stopifnot(is.numeric(x)): object 'adelie' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(adelie$log_length): is.numeric(x) is not TRUE
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in stopifnot(is.numeric(x)): object 'chin' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(chin$log_length): is.numeric(x) is not TRUE
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in stopifnot(is.numeric(x)): object 'gentoo' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(gentoo$log_length): is.numeric(x) is not TRUE
 </pre></div>
 </div></div>
           <p>
@@ -359,12 +383,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl std">))</span>
 <span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in data.frame(log_length = c(adelie$log_length, chin$log_length, : object 'adelie' not found
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+## Unknown or uninitialised column: `log_length`.
+## Unknown or uninitialised column: `log_length`.
+## Unknown or uninitialised column: `log_length`.
+## Unknown or uninitialised column: `log_length`.
+## Unknown or uninitialised column: `log_length`.
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com"># let's look at the structure of the df</span>
 <span class="hl kwd">str</span><span class="hl std">(bill_data)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in str(bill_data): object 'bill_data' not found
+<div class="output"><pre class="knitr r">## 'data.frame':	0 obs. of  1 variable:
+##  $ species: Factor w/ 0 levels:
 </pre></div>
 </div></div>
           <p>
@@ -372,7 +402,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           </p>
 <div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">bartlett.test</span><span class="hl std">(log_length</span> <span class="hl opt">~</span> <span class="hl std">species,</span> <span class="hl kwc">data</span> <span class="hl std">= bill_data)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(m$data, parent.frame()): object 'bill_data' not found
+<div class="error"><pre class="knitr r">## Error in eval(predvars, data, env): object 'log_length' not found
 </pre></div>
 </div></div>
           <p>
@@ -386,11 +416,28 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
 <div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">aov</span><span class="hl std">(log_length</span> <span class="hl opt">~</span> <span class="hl std">species,</span> <span class="hl kwc">data</span> <span class="hl std">= bill_data)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in terms.formula(formula, &quot;Error&quot;, data = data): object 'bill_data' not found
+<div class="error"><pre class="knitr r">## Error in eval(predvars, data, env): object 'log_length' not found
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mod)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in summary(mod): object 'mod' not found
+<div class="output"><pre class="knitr r">## 
+## Call:
+## lm(formula = animal_weight ~ animal_sex, data = bison)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -472.30  -59.25    0.75   60.75  481.70 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 1001.253      2.080   481.5   &lt;2e-16 ***
+## animal_sexM  567.046      5.564   101.9   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 93.9 on 2368 degrees of freedom
+## Multiple R-squared:  0.8143,	Adjusted R-squared:  0.8142 
+## F-statistic: 1.038e+04 on 1 and 2368 DF,  p-value: &lt; 2.2e-16
 </pre></div>
 </div></div>
         <p>
@@ -409,7 +456,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           </p>
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">TukeyHSD</span><span class="hl std">(mod)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in stats::TukeyHSD(mod): object 'mod' not found
+<div class="error"><pre class="knitr r">## Error in UseMethod(&quot;TukeyHSD&quot;): no applicable method for 'TukeyHSD' applied to an object of class &quot;lm&quot;
 </pre></div>
 </div></div>
           <p>
@@ -425,7 +472,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">group_by</span><span class="hl std">(species)</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarise</span><span class="hl std">(</span><span class="hl kwc">means</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(log_length,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in dplyr::group_by(., species): object 'bill_data' not found
+<div class="error"><pre class="knitr r">## Error in `dplyr::summarise()`:
+## ! Problem while computing `means = mean(log_length, na.rm = TRUE)`.
+## Caused by error in `mean()`:
+## ! object 'log_length' not found
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= bill_data)</span> <span class="hl opt">+</span>
   <span class="hl kwd">geom_density</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= log_length,</span> <span class="hl kwc">fill</span> <span class="hl std">= species),</span>
@@ -448,7 +498,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl num">5.9</span><span class="hl std">,</span>
           <span class="hl kwc">label</span> <span class="hl std">=</span> <span class="hl str">&quot;p-value &lt;&lt; 0.001&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in ggplot(data = bill_data): object 'bill_data' not found
+<div class="error"><pre class="knitr r">## Error in FUN(X[[i]], ...): object 'log_length' not found
 </pre></div>
 </div></div>
         </section>
