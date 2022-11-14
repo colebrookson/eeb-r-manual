@@ -388,7 +388,7 @@ main {
   display: grid;
   grid-template-columns: 15em 1fr;
   max-width: 100em;
-  margin: auto;
+  margin: auto 5em auto auto;
 }
 main_landing {
   display: grid;
