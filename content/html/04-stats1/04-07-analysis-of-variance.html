@@ -148,7 +148,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         For our example here, let's consider the sizes of penguins bills.
       </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
-<span class="hl kwd">library</span><span class="hl std">(palmerpenguins)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## ── Attaching packages ─────────────────────────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ tibble  3.1.8     ✔ purrr   0.3.5
+## ✔ tidyr   1.2.1     ✔ stringr 1.4.1
+## ✔ readr   2.1.3     ✔ forcats 0.5.2
+## ── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(palmerpenguins)</span>
 </pre></div>
 <div class="error"><pre class="knitr r">## Error in library(palmerpenguins): there is no package called 'palmerpenguins'
 </pre></div>
@@ -158,8 +167,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">names</span><span class="hl std">(df)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;        &quot;unitnum&quot;     &quot;unittype&quot;    &quot;vert_index&quot; 
-##  [9] &quot;pitnumber&quot;   &quot;species&quot;     &quot;length_1_mm&quot; &quot;length_2_mm&quot; &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot;  &quot;notes&quot;
+<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;        &quot;unitnum&quot;    
+##  [7] &quot;unittype&quot;    &quot;vert_index&quot;  &quot;pitnumber&quot;   &quot;species&quot;     &quot;length_1_mm&quot; &quot;length_2_mm&quot;
+## [13] &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot;  &quot;notes&quot;
 </pre></div>
 </div></div>
       <p>
@@ -174,7 +184,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;Cutthroat trout&quot;            NA                           &quot;Coastal giant salamander&quot;   &quot;Cascade torrent salamander&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;Cutthroat trout&quot;            NA                           &quot;Coastal giant salamander&quot;  
+## [4] &quot;Cascade torrent salamander&quot;
 </pre></div>
 </div></div>
       <p>
@@ -420,24 +431,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mod)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 
-## Call:
-## lm(formula = animal_weight ~ animal_sex, data = bison)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -472.30  -59.25    0.75   60.75  481.70 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 1001.253      2.080   481.5   &lt;2e-16 ***
-## animal_sexM  567.046      5.564   101.9   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 93.9 on 2368 degrees of freedom
-## Multiple R-squared:  0.8143,	Adjusted R-squared:  0.8142 
-## F-statistic: 1.038e+04 on 1 and 2368 DF,  p-value: &lt; 2.2e-16
+<div class="error"><pre class="knitr r">## Error in summary(mod): object 'mod' not found
 </pre></div>
 </div></div>
         <p>
@@ -456,7 +450,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           </p>
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">TukeyHSD</span><span class="hl std">(mod)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in UseMethod(&quot;TukeyHSD&quot;): no applicable method for 'TukeyHSD' applied to an object of class &quot;lm&quot;
+<div class="error"><pre class="knitr r">## Error in stats::TukeyHSD(mod): object 'mod' not found
 </pre></div>
 </div></div>
           <p>
