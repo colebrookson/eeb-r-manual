@@ -115,10 +115,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <span class="hl kwd">names</span><span class="hl std">(df)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;       
-##  [6] &quot;unitnum&quot;     &quot;unittype&quot;    &quot;vert_index&quot;  &quot;pitnumber&quot;   &quot;species&quot;    
-## [11] &quot;length_1_mm&quot; &quot;length_2_mm&quot; &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot; 
-## [16] &quot;notes&quot;
+<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;        &quot;unitnum&quot;     &quot;unittype&quot;    &quot;vert_index&quot; 
+##  [9] &quot;pitnumber&quot;   &quot;species&quot;     &quot;length_1_mm&quot; &quot;length_2_mm&quot; &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot;  &quot;notes&quot;
 </pre></div>
 </div></div>
 
@@ -139,7 +137,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
 <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
             
             <p>
                 Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <strong>must-haves</strong> to have a legible, complete plot. First step is the axis labels. So to iteratively work up our plot, we'll add that one component on, by using the new function <code>labs()</code>:
@@ -149,7 +147,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g))</span> <span class="hl opt">+</span>
 <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
             <p>
 
                 OK good. Now, this is more aesthetic than anything, but we might want to change the appearance of this plot away from this ugly grey background and grid lines. This is a more personal decision regarding what exactly you want your plot to look like. However, there are lots of <code>themes</code> available in the <code>ggplot2</code> package to choose from. For example, we could use the <code>theme_classic()</code> like so: 
@@ -160,7 +158,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
 <span class="hl kwd">theme_classic</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
                 
             <p>
                 But I <em>personally</em> prefer a different theme that comes in the <code>ggthemes</code> package, which we can install now:
@@ -181,7 +179,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
             <p>
 
                 Perfect! You'll also notice the text sizes are now larger which is preferable for reading on a screen or in a report. 
@@ -203,7 +201,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
                 <br><br>
 
                 So this is interesting! We see that somehow we've made our points hollow on the inside. Well, that has to do with the shape we picked. There are lots of options for shapes we <em>could</em> use, and we can see all our options in this handy graphic here: 
@@ -223,7 +221,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
                 <br><br>
 
                 Okay, so this looks like maybe more along the lines of what we were expecting! One more thing though is that some spots on the plot have a high density of points. To better identify those high density areas, let's make our points slightly transparent, with the <code>alpha</code> commmand: 
@@ -238,7 +236,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
                 <br><br>
 
 
@@ -260,7 +258,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
             <p>
 
                 So we can see our two main point colours plotted out nicely here. Although, there should be four colours and we can't really see them. Let's change our <code>alpha</code> to fix that: 
@@ -275,7 +273,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
             <p>
 
                 That's better. Looking at this plot, this brings up a few common tasks we might want to do from here. First of all, it's clear from this plot that the vast majority of these points are only from two species. We can see how the samples in our dataframe fall out with the simple <code>table()</code> function: 
@@ -284,10 +282,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
-## Cascade torrent salamander   Coastal giant salamander 
-##                         15                      11758 
-##            Cutthroat trout 
-##                      20433
+## Cascade torrent salamander   Coastal giant salamander            Cutthroat trout 
+##                         15                      11758                      20433
 </pre></div>
 </div></div>
             <p>
@@ -300,16 +296,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">head</span><span class="hl std">(df_filtered)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA
-## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA
-## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA
-## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA
-## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA
-## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA
-## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
-## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unitt…¹ vert_…² pitnu…³ species lengt…⁴ lengt…⁵ weigh…⁶ clip  sampledate notes
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;
+## 1  1987 MACKCC-L CC      L         1       1 R             1      NA Cutthr…      58      NA    1.75 NONE  1987-10-07 &lt;NA&gt; 
+## 2  1987 MACKCC-L CC      L         1       1 R             2      NA Cutthr…      61      NA    1.95 NONE  1987-10-07 &lt;NA&gt; 
+## 3  1987 MACKCC-L CC      L         1       1 R             3      NA Cutthr…      89      NA    5.6  NONE  1987-10-07 &lt;NA&gt; 
+## 4  1987 MACKCC-L CC      L         1       1 R             4      NA Cutthr…      58      NA    2.15 NONE  1987-10-07 &lt;NA&gt; 
+## 5  1987 MACKCC-L CC      L         1       1 R             5      NA Cutthr…      93      NA    6.9  NONE  1987-10-07 &lt;NA&gt; 
+## 6  1987 MACKCC-L CC      L         1       1 R             6      NA Cutthr…      86      NA    5.9  NONE  1987-10-07 &lt;NA&gt; 
+## # … with abbreviated variable names ¹​unittype, ²​vert_index, ³​pitnumber, ⁴​length_1_mm, ⁵​length_2_mm, ⁶​weight_g
 </pre></div>
 </div></div>
             <p>
@@ -326,7 +321,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
             <p>
 
                 This looks better. Now perhaps one way we could make the Cascade salamander points stand out is by making them significantly larger in size. We can do that my scaling our size manually according to the levels of our grouping variable. <strong>Note, that scaling, whether manually or otherwise, can be done for all grouping aesthetics such as fill, colour, alpha, etc. Further documentation on this topic can be found on the <a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">ggplot2 website</a></strong>
@@ -346,7 +341,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
 <span class="hl kwd">scale_size_manual</span><span class="hl std">(</span><span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
             <p>
 
                 Hmm. We can vaguely see in the bottom corner the points we want, but they're hard to see. Why is this? Well, the problem here is that <code>ggplot()</code> will automatically plot data in the order they are passed. we can see by a quick <code>head()</code> call ...
@@ -355,16 +350,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(df_filtered)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA
-## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA
-## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA
-## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA
-## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA
-## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA
-## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
-## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unitt…¹ vert_…² pitnu…³ species lengt…⁴ lengt…⁵ weigh…⁶ clip  sampledate notes
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;
+## 1  1987 MACKCC-L CC      L         1       1 R             1      NA Cutthr…      58      NA    1.75 NONE  1987-10-07 &lt;NA&gt; 
+## 2  1987 MACKCC-L CC      L         1       1 R             2      NA Cutthr…      61      NA    1.95 NONE  1987-10-07 &lt;NA&gt; 
+## 3  1987 MACKCC-L CC      L         1       1 R             3      NA Cutthr…      89      NA    5.6  NONE  1987-10-07 &lt;NA&gt; 
+## 4  1987 MACKCC-L CC      L         1       1 R             4      NA Cutthr…      58      NA    2.15 NONE  1987-10-07 &lt;NA&gt; 
+## 5  1987 MACKCC-L CC      L         1       1 R             5      NA Cutthr…      93      NA    6.9  NONE  1987-10-07 &lt;NA&gt; 
+## 6  1987 MACKCC-L CC      L         1       1 R             6      NA Cutthr…      86      NA    5.9  NONE  1987-10-07 &lt;NA&gt; 
+## # … with abbreviated variable names ¹​unittype, ²​vert_index, ³​pitnumber, ⁴​length_1_mm, ⁵​length_2_mm, ⁶​weight_g
 </pre></div>
 </div></div>
             <p>
@@ -375,16 +369,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">tail</span><span class="hl std">(df_filtered)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-## 1  2019 MACKOG-U OG      U         2      16 C                21        NA
-## 2  2019 MACKOG-U OG      U         2      16 C                22        NA
-## 3  2019 MACKOG-U OG      U         2      16 C                23   1043503
-## 4  2019 MACKOG-U OG      U         2      16 C                24   1043547
-## 5  2019 MACKOG-U OG      U         2      16 C                25   1043583
-## 6  2019 MACKOG-U OG      U         2      16 C                26   1043500
-## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
-## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unitt…¹ vert_…² pitnu…³ species lengt…⁴ lengt…⁵ weigh…⁶ clip  sampledate notes
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;
+## 1  2019 MACKOG-U OG      U         2      16 C            21      NA Coasta…      58     101     6.4 NONE  2019-09-05 &lt;NA&gt; 
+## 2  2019 MACKOG-U OG      U         2      16 C            22      NA Coasta…      58     108     7.9 NONE  2019-09-05 &lt;NA&gt; 
+## 3  2019 MACKOG-U OG      U         2      16 C            23 1043503 Coasta…      65     115     8.7 NONE  2019-09-05 &lt;NA&gt; 
+## 4  2019 MACKOG-U OG      U         2      16 C            24 1043547 Coasta…      67     120     9.6 NONE  2019-09-05 &lt;NA&gt; 
+## 5  2019 MACKOG-U OG      U         2      16 C            25 1043583 Coasta…      74     131    14.3 NONE  2019-09-05 &lt;NA&gt; 
+## 6  2019 MACKOG-U OG      U         2      16 C            26 1043500 Coasta…      73     128    11.6 NONE  2019-09-05 Terr…
+## # … with abbreviated variable names ¹​unittype, ²​vert_index, ³​pitnumber, ⁴​length_1_mm, ⁵​length_2_mm, ⁶​weight_g
 </pre></div>
 </div></div>
             <p>
@@ -395,16 +388,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">tail</span><span class="hl std">(dplyr</span><span class="hl opt">::</span><span class="hl kwd">arrange</span><span class="hl std">(df_filtered, species))</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-## 1  2019 MACKOG-U OG      U         2      16 C                 1        NA
-## 2  2019 MACKOG-U OG      U         2      16 C                 2        NA
-## 3  2019 MACKOG-U OG      U         2      16 C                 3        NA
-## 4  2019 MACKOG-U OG      U         2      16 C                 4   1043522
-## 5  2019 MACKOG-U OG      U         2      16 C                 5   1043513
-## 6  2019 MACKOG-U OG      U         2      16 C                 6   1043521
-## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
-## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unitt…¹ vert_…² pitnu…³ species lengt…⁴ lengt…⁵ weigh…⁶ clip  sampledate notes
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;
+## 1  2019 MACKOG-U OG      U         2      16 C             1      NA Cutthr…      45      47     1   NONE  2019-09-05 &lt;NA&gt; 
+## 2  2019 MACKOG-U OG      U         2      16 C             2      NA Cutthr…      42      44     0.8 NONE  2019-09-05 &lt;NA&gt; 
+## 3  2019 MACKOG-U OG      U         2      16 C             3      NA Cutthr…      46      48     1.1 NONE  2019-09-05 &lt;NA&gt; 
+## 4  2019 MACKOG-U OG      U         2      16 C             4 1043522 Cutthr…     118     127    19.8 NONE  2019-09-05 &lt;NA&gt; 
+## 5  2019 MACKOG-U OG      U         2      16 C             5 1043513 Cutthr…      89      95     7.4 NONE  2019-09-05 &lt;NA&gt; 
+## 6  2019 MACKOG-U OG      U         2      16 C             6 1043521 Cutthr…      78      83     5.6 NONE  2019-09-05 &lt;NA&gt; 
+## # … with abbreviated variable names ¹​unittype, ²​vert_index, ³​pitnumber, ⁴​length_1_mm, ⁵​length_2_mm, ⁶​weight_g
 </pre></div>
 </div></div>
             <p>
@@ -422,16 +414,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl std">)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-## 1  2012 MACKOG-U OG      U         1      16 SC                2        NA
-## 2  2013 MACKCC-L CC      L         2       2 SC               12        NA
-## 3  2013 MACKOG-U OG      U         1      14 P                 1        NA
-## 4  2017 MACKCC-L CC      L         1       2 SC               29        NA
-## 5  2017 MACKOG-M OG      M         1       8 SC               20        NA
-## 6  2019 MACKOG-M OG      M         1       8 SC               17        NA
-## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
-## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unitt…¹ vert_…² pitnu…³ species lengt…⁴ lengt…⁵ weigh…⁶ clip  sampledate notes
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;
+## 1  2012 MACKOG-U OG      U         1      16 SC            2      NA Cascad…      26      47    0.5  NONE  2012-09-07 &lt;NA&gt; 
+## 2  2013 MACKCC-L CC      L         2       2 SC           12      NA Cascad…      34      59    0.8  NONE  2013-09-03 &lt;NA&gt; 
+## 3  2013 MACKOG-U OG      U         1      14 P             1      NA Cascad…      41      71   NA    NONE  2013-09-06 &lt;NA&gt; 
+## 4  2017 MACKCC-L CC      L         1       2 SC           29      NA Cascad…      39      67    1.3  NONE  2017-09-05 &lt;NA&gt; 
+## 5  2017 MACKOG-M OG      M         1       8 SC           20      NA Cascad…      30      51    0.65 NONE  2017-09-07 &lt;NA&gt; 
+## 6  2019 MACKOG-M OG      M         1       8 SC           17      NA Cascad…      28      52    0.8  NONE  2019-09-04 Torr…
+## # … with abbreviated variable names ¹​unittype, ²​vert_index, ³​pitnumber, ⁴​length_1_mm, ⁵​length_2_mm, ⁶​weight_g
 </pre></div>
 </div></div>
             <p>
@@ -454,7 +445,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
 <span class="hl kwd">scale_size_manual</span><span class="hl std">(</span><span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-21-1.png" alt="plot of chunk unnamed-chunk-21" class="plot" /></div></div>
             <p>
 
 
@@ -476,7 +467,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
 <span class="hl kwd">scale_size_manual</span><span class="hl std">(</span><span class="hl str">&quot;Species&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-22-1.png" alt="plot of chunk unnamed-chunk-22" class="plot" /></div></div>
             <p>
 
                 Ahh! Now we've run into a new problem. We have two legends! This is annoying. However, we can fix this, but first, let's choose different colours, these are not my favourite. We can do that (in this case) with <code>scale_fill_manual()</code>. We use the <code>fill</code> because the colour for all the points is <em>black</em> since it refers to the outer border of the points. 
@@ -504,7 +495,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">scale_size_manual</span><span class="hl std">(</span><span class="hl str">&quot;Species&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span> <span class="hl opt">+</span>
 <span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl str">&quot;Species&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#42d4f4&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#f032e6&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#ffe119&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-23-1.png" alt="plot of chunk unnamed-chunk-23" class="plot" /></div></div>
             <p>
 
                 While these colours are harsh, they're easy to see. We could choose others if we want to be more aesthetic :) Also, we notice that our legend problem is gone! Why? Well, what created the problem before was having <em>technically</em> two different legends being asked for from our <code>aes()</code> arguments - size & fill. However, by manually providing values for both and then giving them the <em>same</em> legend title, we fixed up the problem. <em>On your own, try adding a different title for one of them and see what happens!</em>. 

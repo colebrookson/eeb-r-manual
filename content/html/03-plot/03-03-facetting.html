@@ -113,21 +113,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl std">df</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 317 × 22
-##    sample_id sample_date gage_ht  temp   p_h  cond    cl no3_n so4_s    na     k
-##    &lt;chr&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 QS        1987-01-05     2.82    20  7.22  48.2   7.3    97  0.52  4.75  0.18
-##  2 QS        1987-01-13     2.66    20  7.34  49.8   7.5   114  0.73  4.81  0.19
-##  3 QS        1987-01-20     2.61    20  7.12  50.3   7.5   115 NA     5.19  0.2 
-##  4 QS        1987-01-27     2.58    20  7.19  50.4   7.3   117 NA     5.08  0.18
-##  5 QS        1987-02-03     2.8     20  7.36  49.6   7.3   103  0.85  4.86  0.17
-##  6 QS        1987-02-10     2.63    20  7.19  53.3   7.2   110 NA     5.11  0.18
-##  7 QS        1987-02-17     2.84    20 NA     43.7   7      94 NA     4.8   0.17
-##  8 QS        1987-02-24     2.68    19  6.93  48.4   7.3    90 NA     5.08  0.18
-##  9 QS        1987-03-03     2.76    20  7.02  48.4   7.6    86 NA     4.9   0.2 
-## 10 QS        1987-03-10     2.64    20  7.17  49.9   7.3    97 NA     4.89  0.2 
-## # … with 307 more rows, and 11 more variables: mg &lt;dbl&gt;, ca &lt;dbl&gt;, nh4_n &lt;dbl&gt;,
-## #   po4_p &lt;dbl&gt;, doc &lt;dbl&gt;, dic &lt;dbl&gt;, tdn &lt;dbl&gt;, tdp &lt;dbl&gt;, si_o2 &lt;dbl&gt;,
-## #   don &lt;dbl&gt;, tss &lt;dbl&gt;
+##    sample_id sample_date gage_ht  temp   p_h  cond    cl no3_n so4_s    na     k    mg    ca nh4_n po4_p   doc   dic   tdn
+##    &lt;chr&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 QS        1987-01-05     2.82    20  7.22  48.2   7.3    97  0.52  4.75  0.18  1.5   2.46    14    NA  0.72  3.37    NA
+##  2 QS        1987-01-13     2.66    20  7.34  49.8   7.5   114  0.73  4.81  0.19  1.58  6.53    20    NA  0.74  3.35    NA
+##  3 QS        1987-01-20     2.61    20  7.12  50.3   7.5   115 NA     5.19  0.2   1.66  2.6     25    NA  0.69  4.42    NA
+##  4 QS        1987-01-27     2.58    20  7.19  50.4   7.3   117 NA     5.08  0.18  1.64  2.67    30    NA  0.62  3.3     NA
+##  5 QS        1987-02-03     2.8     20  7.36  49.6   7.3   103  0.85  4.86  0.17  1.49  2.39    25    NA  0.75  5.03    NA
+##  6 QS        1987-02-10     2.63    20  7.19  53.3   7.2   110 NA     5.11  0.18  1.59  2.55    30    NA  0.61  4.18    NA
+##  7 QS        1987-02-17     2.84    20 NA     43.7   7      94 NA     4.8   0.17  1.44  2.33     7    NA  1.78  2.4     NA
+##  8 QS        1987-02-24     2.68    19  6.93  48.4   7.3    90 NA     5.08  0.18  1.6   2.48     6    NA  1.85  2.9     NA
+##  9 QS        1987-03-03     2.76    20  7.02  48.4   7.6    86 NA     4.9   0.2   1.64  2.55    NA    NA  1.49  2.46    NA
+## 10 QS        1987-03-10     2.64    20  7.17  49.9   7.3    97 NA     4.89  0.2   1.51  2.81    NA    NA  1.29  3.34    NA
+## # … with 307 more rows, and 4 more variables: tdp &lt;dbl&gt;, si_o2 &lt;dbl&gt;, don &lt;dbl&gt;, tss &lt;dbl&gt;
 </pre></div>
 </div></div>
         <p>
@@ -170,15 +168,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 Perfect! We will also want to pull out the month and year values as columns since it will be month we'll use to group by in our plots.
                 </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(lubridate)</span>
-</pre></div>
-<div class="message"><pre class="knitr r">## 
-## Attaching package: 'lubridate'
-</pre></div>
-<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
-## 
-##     date, intersect, setdiff, union
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">df_long</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df_long</span> <span class="hl opt">%&gt;%</span>
+
+<span class="hl std">df_long</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df_long</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">year</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">year</span><span class="hl std">(sample_date),</span>
     <span class="hl kwc">month</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">month</span><span class="hl std">(sample_date)</span>
@@ -215,7 +206,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
                 <p>
                 Well that didn't quite work out. We will need to make <code>year</code> a factor here:
                 </p>
@@ -231,7 +222,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
                 <p>
                 That looks better. <strong>Now here's why we might want to facet:</strong> right now our plot is displaying <strong>both</strong> sodium and potassium in the same <code>value</code> which doesn't makes sense since they're completely different scales of measurement. We could try to address this by separating them out by some aesthetic (e.g. colour), so let's try that: 
                 </p>
@@ -239,7 +230,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
                                              <span class="hl kwc">colour</span> <span class="hl std">= element))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
                 <p>
                 Ok so now we have grouped box plots. I suppose in theory we could leave it like this, but I am not personally a fan. Let's add in the necessary components and then think about faceting: 
                 </p>
@@ -249,7 +240,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Year&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Amount of Element (mg/L)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
                 <p>
                 Nope, still heinous! Time to facet! We'll make this on two panels by faceting using <code>facet_wrap()</code> and operating on the <code>element</code> variable. I also want the plot to display as two plots stacked <em>on top</em> of one another, so I can refer to the number of columns as 1 to force the <code>facet_wrap()</code> to do this. 
                 </p>
@@ -262,7 +253,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
              <span class="hl com"># I want this to be one column with two rows</span>
              <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
                 <p>
                 Ok, we're getting there! However, the scales for both are not helping. Let's fix it so the sodium can vary within it's max & min, and the potassium can vary within it's (different) max & min. We can do this with the <code>scales</code> argument in the facet_wrap.
                 </p>
@@ -276,7 +267,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
              <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
              <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
                 <p>
                 Okay, this is looking better! Now it feels like we can actually see the spread of the data. We can still make some aesthetic changes however. Let's change to a <code>fill</code> not a <code>colour</code> on our box plot: 
                 </p>
@@ -290,7 +281,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
              <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
              <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
                 <p>
                 Good, and now we'll change the actual colours we're using with <code>scale_fill_manual()</code>:
                 </p>
@@ -305,7 +296,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
              <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#90ee90&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#F8E473&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
                 <p>
                 I would also like to change the legend to have the full names of the elements. Recall we can <em>also</em> use the <code>scale_fill_manual()</code> to perform this:
                 </p>
@@ -323,7 +314,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                       <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Potassium (K)&quot;</span><span class="hl std">,</span>
                                  <span class="hl str">&quot;Sodium (Na)&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
                 <p>
                 Looks good! But one last thing. Somewhere along the way, there have developed some ugly labels on the top of each of the plots. We could expand them so they have the same thing as the legend. This is done via the <code>labeller</code> argument inside the call to <code>facet_grid()</code>. We pass a vector of matching values to the <code>as_labeller()</code> function and that goes as the argument to <code>labeller</code>. Yes, it's all annoyingly complicated ...
                 </p>
@@ -342,7 +333,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                       <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#90ee90&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#F8E473&quot;</span><span class="hl std">),</span>
                       <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Potassium (K)&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Sodium (Na)&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
                 <p>
                 Okay, well there we have it!! I would personally argue that you could likely leave off either the legend <em>or</em> the title as you really only need one of the two, but for the sake of practice, we can leave it as is. 
                 </p>

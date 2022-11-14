@@ -123,7 +123,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df,</span>
             <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= date,</span> <span class="hl kwc">y</span> <span class="hl std">= mean_airtemp))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
                 <p>
                 Okay! Very ugly. Perhaps we can extract some more useful information out of this. But first, let's take care of the easy part and add in the mandatory components (labels, a theme) and then work on getting it more useful. 
                 </p>
@@ -138,7 +138,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl com"># add labels +</span>
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Mean Air Temp (C)&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
                 <p>
                 So we can see there's a consistent oscilating pattern (which definitely makes sense), but it's still hard to pull out any interesting patterns. What if we plotted instead of just these raw values, the monthly mean for each month in our dataframe. This brings up some handy data manipulation tasks as well. 
                 </p>
@@ -160,18 +160,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 11,171 × 7
 ## # Rowwise: 
-##    date       station       mean_airtemp daily_precip mean_windspeed month  year
-##    &lt;date&gt;     &lt;chr&gt;                &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 1988-06-01 Toolik Field…          8.4          0             NA       6  1988
-##  2 1988-06-02 Toolik Field…          6            0             NA       6  1988
-##  3 1988-06-03 Toolik Field…          5.8          0             NA       6  1988
-##  4 1988-06-04 Toolik Field…          1.8          0             NA       6  1988
-##  5 1988-06-05 Toolik Field…          6.8          2.5           NA       6  1988
-##  6 1988-06-06 Toolik Field…          5.2          0             NA       6  1988
-##  7 1988-06-07 Toolik Field…          2.2          7.6           NA       6  1988
-##  8 1988-06-08 Toolik Field…          9.4          0             NA       6  1988
-##  9 1988-06-09 Toolik Field…         13.1          0             NA       6  1988
-## 10 1988-06-10 Toolik Field…         17.7          0              3.9     6  1988
+##    date       station              mean_airtemp daily_precip mean_windspeed month  year
+##    &lt;date&gt;     &lt;chr&gt;                       &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 1988-06-01 Toolik Field Station          8.4          0             NA       6  1988
+##  2 1988-06-02 Toolik Field Station          6            0             NA       6  1988
+##  3 1988-06-03 Toolik Field Station          5.8          0             NA       6  1988
+##  4 1988-06-04 Toolik Field Station          1.8          0             NA       6  1988
+##  5 1988-06-05 Toolik Field Station          6.8          2.5           NA       6  1988
+##  6 1988-06-06 Toolik Field Station          5.2          0             NA       6  1988
+##  7 1988-06-07 Toolik Field Station          2.2          7.6           NA       6  1988
+##  8 1988-06-08 Toolik Field Station          9.4          0             NA       6  1988
+##  9 1988-06-09 Toolik Field Station         13.1          0             NA       6  1988
+## 10 1988-06-10 Toolik Field Station         17.7          0              3.9     6  1988
 ## # … with 11,161 more rows
 </pre></div>
 </div></div>
@@ -191,8 +191,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <span class="hl kwc">month_airtemp</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(mean_airtemp,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
   <span class="hl std">)</span>
 </pre></div>
-<div class="message"><pre class="knitr r">## `summarise()` has grouped output by 'year'. You can override using the
-## `.groups` argument.
+<div class="message"><pre class="knitr r">## `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">df_monthly</span>
 </pre></div>
@@ -284,7 +283,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
                 <p>
                 Okay, let's add our second <code>geom_line()</code> call. We'll make our monthly values red and our daily values can be black:
                 </p>
@@ -297,7 +296,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
                 <p>
                 Well that's weird, we can't see anything! How come? Well, likely because the black lines of the daily temperatures are significantly more data-rich, and in our plotting, we placed our monthly <code>geom_line()</code> first, which means it will be plotted first, and then the thick black line will go on top. Let's reverse them and see if that helps: 
                 </p>
@@ -310,7 +309,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
                 <p>
                 That's better! Still not super cute though. <strong>NOTE: It is often hard to make two sets of timeseries following the same pattern look good. My recommendation here would be turn one (likely the daily measurements) into points, and keep the trend line.</strong> So let's try that, we'll make the points somewhat transparent, and keep them relatively small:
                 </p>
@@ -324,7 +323,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
                 <p>
                 That's somewhat better. The transparency might be a bit too much, so we can change that, also let's change the main line colour to black: 
                 </p>
@@ -338,7 +337,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Monthly Air Temperature (C)&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
                 <p>
                 I think that's much more legible. And there we have it! A complete timeseries plot. Something is missing though ... a legend. Why wasn't one generated for us? Well, we used two separate dataframes here, and at no point did we make any differentiation between size/colour/shape etc, within the <code>aes()</code> calls. Only if we do that (e.g. we plotted two different lines from the same df and coloured them via some grouping variable) would R know we wanted a legend. Now we could just explain what the difference between the line and the points are either verbally during presentation or in text in a figure caption, but it is always true that having a legend is the easiest way to show people reading what they are looking at. Luckily, editing or adding legends is quite easy. We are using two <code>geoms</code> here so we want two legends. <em>We can force a legend by calling our <code>colour</code> argument inside the <code>aes()</code> section:</em>
                 </p>
@@ -356,7 +355,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl kwd">guide_legend</span><span class="hl std">()</span>
   <span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
                 <p>
                 Ok, so we have a legend but it's not at all what we want colour-wise, and the labels are all wrong. Fear not!!! So first, we will have to turn to our old friend <code>scale_colour_*</code> and for this use case, we want <code>scale_colour_identity()</code> as it will force ggplot to recognize the colour names when they are inside <code>aes()</code>:
                 </p>
@@ -376,7 +375,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl com"># add in colour scale</span>
   <span class="hl kwd">scale_colour_identity</span><span class="hl std">(</span><span class="hl kwc">guide</span> <span class="hl std">=</span> <span class="hl str">&quot;legend&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
                 <p>
                 Okay, that bit is accomplished. We can now add in components to make the legend look as we want. Remember that all those legend arguments will go in the <code>scale_*</code> that we're working with <em>to make the legend:</em>
                 </p>
@@ -400,7 +399,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                         <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Monthly Mean&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Daily Mean&quot;</span><span class="hl std">)</span> <span class="hl com"># legend labels</span>
                         <span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
                 <p>
                 And now our plot is done and ready to display in a project/presentation. 
                 </p>

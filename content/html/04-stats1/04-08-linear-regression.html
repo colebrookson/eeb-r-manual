@@ -157,7 +157,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <p>
             We mentioned above we're putting a line through some points as best we can. But how do we define this "best as we can"? Well, the version of "as best we can" that will be addressed here is the method of least squares. If we imagine a scatter of plots like this: 
         </p>
-<div class="chunk" id="unnamed-chunk-1"><div class="rimage default"><img src="figure/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-1"><div class="rimage default"><img src="figure/unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1" class="plot" /></div></div>
         <p>
             It's clear that we can't actually make our line go <em>directly</em> through very many of them, but perhaps we can figure out some way to make the line <em> as close to as many points as possible</em>. We'll do that by imagining we draw a line at random, and calculate the distance between every single point and the line itself. These are called <strong>residuals</strong>. Then we'll square each one, and take the sum of all those squares. 
         </p>
@@ -235,14 +235,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span> <span class="hl opt">+</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
             <p>
                 This looks sufficiently linear for our purposes. However, we can actually check all of our assumptions visually at once by using the diagnostic plots that are created by simply plotting our model object: 
             </p>
 <div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">))</span> <span class="hl com"># this ensures all the plots show up at once</span>
 <span class="hl kwd">plot</span><span class="hl std">(mod)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
             <p>
                 So we have four plots here. 
             </p>
@@ -289,7 +289,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 2. <strong>Residuals</strong> -- These are the residuals. Recall that a <em>residual</em> is the distance from a single point to the regression line at the same x-location. Here's a visual of that: 
             </p>
-<div class="chunk" id="unnamed-chunk-7"><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-7"><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
             <p>
                 Each of the lines here going from the points to the the regression line itself are "residuals", or "residual error", the amount of "error" the linear model produces in it's prediction for a given x-value.
             </p>
@@ -393,7 +393,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">))</span> <span class="hl com"># this ensures all the plots show up at once</span>
 <span class="hl kwd">plot</span><span class="hl std">(mod)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
             <p>
                 Our linearity assumption is tested by our first plot, the Residuals vs. Fitted plot, and our goal is to have a straight red line, which we do. Additionally, we can check out homoskedasticity with this plot, or with the third Scale-Location plot. We want to see an equivalent vertical spread of the points between the two groups, which we roughly do, though we can see the right side is slightly more spread out than the left, but not enough to cause us trouble. The normality of residuals we can see here in our second plot, the QQ plot. We want the points to fall along the line, with few deviations. This plot looks great. Those are our three big ones taken care of, and randomness and independence we assume from the sampling procedure. 
             </p>
@@ -503,7 +503,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">))</span> <span class="hl com"># this ensures all the plots show up at once</span>
 <span class="hl kwd">plot</span><span class="hl std">(mod_mr)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-17-1.png" alt="plot of chunk unnamed-chunk-17" class="plot" /></div></div>
         <p>
             These look sufficiently satisfactory. Now for the output: 
         </p>
@@ -583,7 +583,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ##   .. ..- attr(*, &quot;order&quot;)= int [1:2] 1 1
 ##   .. ..- attr(*, &quot;intercept&quot;)= int 1
 ##   .. ..- attr(*, &quot;response&quot;)= int 1
-##   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
+##   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: 0x56173e0cf948&gt; 
 ##   .. ..- attr(*, &quot;predvars&quot;)= language list(animal_weight, animal_sex, rec_year)
 ##   .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:3] &quot;numeric&quot; &quot;character&quot; &quot;numeric&quot;
 ##   .. .. ..- attr(*, &quot;names&quot;)= chr [1:3] &quot;animal_weight&quot; &quot;animal_sex&quot; &quot;rec_year&quot;
@@ -601,7 +601,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 ##   .. .. ..- attr(*, &quot;order&quot;)= int [1:2] 1 1
 ##   .. .. ..- attr(*, &quot;intercept&quot;)= int 1
 ##   .. .. ..- attr(*, &quot;response&quot;)= int 1
-##   .. .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
+##   .. .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: 0x56173e0cf948&gt; 
 ##   .. .. ..- attr(*, &quot;predvars&quot;)= language list(animal_weight, animal_sex, rec_year)
 ##   .. .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:3] &quot;numeric&quot; &quot;character&quot; &quot;numeric&quot;
 ##   .. .. .. ..- attr(*, &quot;names&quot;)= chr [1:3] &quot;animal_weight&quot; &quot;animal_sex&quot; &quot;rec_year&quot;
@@ -672,7 +672,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-26"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">print</span><span class="hl std">(</span><span class="hl kwd">paste0</span><span class="hl std">(</span><span class="hl str">&quot;The coefficient estimate is: &quot;</span><span class="hl std">, estimate,</span>
     <span class="hl str">&quot; and the standard error is: &quot;</span><span class="hl std">, std_err))</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;The coefficient estimate is: 0.974853699362265 and the standard error is: 0.26176373671702&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;The coefficient estimate is: 0.974853699362308 and the standard error is: 0.261763736717017&quot;
 </pre></div>
 </div></div>
         <p>
@@ -688,7 +688,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-28"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">print</span><span class="hl std">(</span><span class="hl kwd">paste0</span><span class="hl std">(</span><span class="hl str">&quot;The estimate of the coefficient is &quot;</span><span class="hl std">, estimate,</span> <span class="hl str">&quot; with a 95% 
             confidence interval of (&quot;</span><span class="hl std">, lower,</span> <span class="hl str">&quot;,&quot;</span><span class="hl std">, upper,</span> <span class="hl str">&quot;)&quot;</span><span class="hl std">))</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;The estimate of the coefficient is 0.974853699362265 with a 95% \n            confidence interval of (0.461796775396906,1.48791062332762)&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;The estimate of the coefficient is 0.974853699362308 with a 95% \n            confidence interval of (0.461796775396954,1.48791062332766)&quot;
 </pre></div>
 </div></div>
         <p>
@@ -709,7 +709,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <p>
             In the above section, we used a standard error from the model fit to calculate a 95% Confidence Interval around our estimate. This helped us understand if our estimate was very precise (i.e. if the magnitude on either side of the interval was large or small), but how can we tell this about our model as a whole? Back to this example with just one predictor variable:
         </p>
-<div class="chunk" id="unnamed-chunk-30"><div class="rimage default"><img src="figure/unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-30"><div class="rimage default"><img src="figure/unnamed-chunk-30-1.png" alt="plot of chunk unnamed-chunk-30" class="plot" /></div></div>
         <p>
             The first thing we can do is look at our \(R^2\) - the square of the correlation between our \(x\) and \(y\) variables, which for our bison example, we extracted above as: 
         </p>

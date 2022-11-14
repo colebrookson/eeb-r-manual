@@ -163,8 +163,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1.5</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] 4.219163 4.939849 3.611124 6.712703 3.310015 3.246692 2.824932 5.045281
-##  [9] 4.974616 4.921655
+<div class="output"><pre class="knitr r">##  [1] 3.574842 5.335727 6.296382 8.508704 7.120587 4.277506 5.401708 5.921770 7.960846 2.592212
 </pre></div>
 </div></div>
       <p>
@@ -180,8 +179,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1]  0.72484696 -0.59739762  1.55148507  1.45967440  1.08767389  0.46714357
-##  [7] -0.85711346 -0.07303599  1.09177378 -0.65785075
+<div class="output"><pre class="knitr r">##  [1]  0.10133458 -0.31226962  0.73750043 -1.54834129  0.68652532 -0.68734470 -0.17054747  0.80259489 -0.36826746
+## [10] -0.02151537
 </pre></div>
 </div></div>
         <p>
@@ -189,8 +188,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] -0.0543601 -0.6566709 -0.8312304 -0.5824460  1.0383690 -0.2715849
-##  [7] -0.1604328  0.6263472  0.9644189  1.3131971
+<div class="output"><pre class="knitr r">##  [1] -1.2448203 -0.4803240 -1.7469624  1.1068897 -2.1708290 -1.4101835  0.2410137  1.1937583 -0.1494691  0.5118807
 </pre></div>
 </div></div>
         <p>
@@ -202,7 +200,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <p>
           Say we want to draw 100 samples from a uniform (discrete) distribution. As a reminder, a uniform distribution with bounds at 0 and 10 looks like this: 
         </p>
-<div class="chunk" id="unnamed-chunk-4"><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-4"><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
         <p>
           We'll explore the use of seeds by drawing 100 random samples from a uniform distribution with bounds at 0 and 10. We start by setting a seed and drawing our samples:
         </p>
@@ -270,9 +268,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Nucleotide Base&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in ggplot(data = df): could not find function &quot;ggplot&quot;
-</pre></div>
-</div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
         <p>
           As a fun little game, let's build a gene. There approximately 1000 nucleotide pairs of coding sequence per gene according to google, and let's imagine that the gene we're building has a probability distribution of nucleotides that is given above, where the probabilities of each base appearing given a random sample are: 0.1, 0.2, 0.45, and 0.25 respectively for A, C, G, and T. 
         </p>
@@ -305,19 +301,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           Now let's take these vectors and turn them into dataframes so we can plot them. We can use the convenient <code>table()</code> function to get counts of how many of each base there is: 
         </p>
 <div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
-</pre></div>
-<div class="message"><pre class="knitr r">## 
-## Attaching package: 'dplyr'
-</pre></div>
-<div class="message"><pre class="knitr r">## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-</pre></div>
-<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+<span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
 <span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
 
 <span class="hl std">df_20</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
@@ -433,7 +417,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl kwd">scale_alpha_manual</span><span class="hl std">(</span><span class="hl str">&quot;Theoretical or Sampled&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.5</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">))</span> <span class="hl opt">+</span>
   <span class="hl kwd">scale_colour_manual</span><span class="hl std">(</span><span class="hl str">&quot;Theoretical or Sampled&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;white&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+<div class="error"><pre class="knitr r">## Error in loadNamespace(x): there is no package called 'wesanderson'
+</pre></div>
+</div></div>
         <p>
           Here we have shown intuitively the Law of Large Numbers!!!!
         </p>
@@ -448,16 +434,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA
-## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA
-## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA
-## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA
-## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA
-## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA
-## # … with 7 more variables: species &lt;chr&gt;, length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;,
-## #   weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unitt…¹ vert_…² pitnu…³ species lengt…⁴ lengt…⁵ weigh…⁶ clip  sampledate notes
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;
+## 1  1987 MACKCC-L CC      L         1       1 R             1      NA Cutthr…      58      NA    1.75 NONE  1987-10-07 &lt;NA&gt; 
+## 2  1987 MACKCC-L CC      L         1       1 R             2      NA Cutthr…      61      NA    1.95 NONE  1987-10-07 &lt;NA&gt; 
+## 3  1987 MACKCC-L CC      L         1       1 R             3      NA Cutthr…      89      NA    5.6  NONE  1987-10-07 &lt;NA&gt; 
+## 4  1987 MACKCC-L CC      L         1       1 R             4      NA Cutthr…      58      NA    2.15 NONE  1987-10-07 &lt;NA&gt; 
+## 5  1987 MACKCC-L CC      L         1       1 R             5      NA Cutthr…      93      NA    6.9  NONE  1987-10-07 &lt;NA&gt; 
+## 6  1987 MACKCC-L CC      L         1       1 R             6      NA Cutthr…      86      NA    5.9  NONE  1987-10-07 &lt;NA&gt; 
+## # … with abbreviated variable names ¹​unittype, ²​vert_index, ³​pitnumber, ⁴​length_1_mm, ⁵​length_2_mm, ⁶​weight_g
 </pre></div>
 </div></div>
         <p>
@@ -465,7 +450,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
 <div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">length_1_mm)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
         <p>
           We can see that this distribution isn't quite normal, but is continuous, and right-skewed. It could be approximated by a log-normal distribution: 
         </p>
@@ -489,7 +474,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: Removed 17 rows containing non-finite values (stat_bin).
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
       <p>
         <bold>What will happen if we draw a number of random samples from this distribution and calculate the sample mean? What will the resulting distribution of sample means look like?</bold>
       </p>
@@ -547,7 +532,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(sample_means)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-19-1.png" alt="plot of chunk unnamed-chunk-19" class="plot" /></div></div>
       <p>
         Hmm!! A confusing distribution. This doesn't really resemble any interesting or meaningful distribution. Let's try the process again, but with a much larger value of <em>n</em>, and see if that changes the result: 
       </p>
@@ -561,7 +546,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <span class="hl kwd">hist</span><span class="hl std">(sample_means)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-20-1.png" alt="plot of chunk unnamed-chunk-20" class="plot" /></div></div>
       <p>
         Wow! This distribution is remarkably normal! What's going on here????
       </p>

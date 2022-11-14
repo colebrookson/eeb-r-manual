@@ -183,23 +183,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
               Let's use a density plot to check if the data follow the normal/Gaussian curve:
             </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggpubr)</span>
-</pre></div>
-<div class="message"><pre class="knitr r">## Loading required package: ggplot2
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
-</pre></div>
-<div class="message"><pre class="knitr r">## 
-## Attaching package: 'dplyr'
-</pre></div>
-<div class="message"><pre class="knitr r">## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-</pre></div>
-<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># first, cut our data to just the sites we want</span>
+<span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
+
+<span class="hl com"># first, cut our data to just the sites we want</span>
 <span class="hl std">crab_sizes_south</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(site</span> <span class="hl opt">%in%</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;GTM&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;SI&quot;</span><span class="hl std">))</span>
 <span class="hl std">crab_sizes_north</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes</span> <span class="hl opt">%&gt;%</span>
@@ -208,19 +194,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># plot our variable of interest (size)</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggdensity</span><span class="hl std">(crab_sizes_north</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Northern&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div><div class="rcode">
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggdensity</span><span class="hl std">(crab_sizes_south</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Southern&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-2-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-2.png" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
             <p>
               They both look normal. Let's look at the QQ plots:
             </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(crab_sizes_north</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;North&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div><div class="rcode">
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(crab_sizes_south</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;South&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-3-2.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-2.png" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
             <p>
               We're looking for the points to follow the black line and for no points to be outside the grey error bars. Both of these look pretty good. Let's use a Shapiro-Wilk's test to take a look at what we see. <strong>Importantly, a Shapiro-Wilk's test is a significance test that has a null hypothesis of normality. If the test is SIGNIFICANT then there is sufficient non-normality to stop our test and re-evaluate</strong>. 
             </p>
@@ -354,7 +340,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">8</span>
   <span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
         </section>
       </section>
       <section id="oneside">
@@ -409,10 +395,10 @@ t_test_oneside_resNow what? Well there are other tests available to us!! A remin
 <span class="hl com"># plot our variable of interest (size)</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggdensity</span><span class="hl std">(crab_sizes_s_GTM</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;GTM&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div><div class="rcode">
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggdensity</span><span class="hl std">(crab_sizes_n_PIE</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;PIE&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-2.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-2.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
       <p>
         Okay, so these data look somewhat skewed. Let's do our Shapiro-Wilk's test: 
       </p>
@@ -496,6 +482,7 @@ t_test_oneside_resNow what? Well there are other tests available to us!! A remin
         </p>
       </section>
     </section>
+    
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">
