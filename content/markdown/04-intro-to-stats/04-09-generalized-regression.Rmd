@@ -172,7 +172,6 @@ Here, the lines are representing the fitted regression lines, with the predicted
 Here, the lines are representing the fitted regression lines, with the predicted values of species richness for each value of biomass. What's wrong with this? Well nothing yet! But often when we do this type of regression, we want to predict out of sample, or essentially figure out what will happen at levels of our predictor variable we haven't observed. Let's do that here: 
 
 ```{r}
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
 newdata = expand.grid(Biomass = seq(min(df$Biomass), 30,
                                     length.out = 200))
 newdata_predict = cbind(newdata,
@@ -183,12 +182,7 @@ ggplot(data = df, aes(x = Biomass, y =Species)) +
   geom_point() +
   geom_line(data = newdata_predict, colour = "red") + 
   ggthemes::theme_base()
-<<<<<<< HEAD
-end.rcode-->
-=======
 ```
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
-
 So we want to predict out of sample. We've done that! We can now make a guess at what values of Species Richness would be present at a Biomass value of 30. But what's wrong with <strong>this</strong> one? 
 
 <strong>We're predicting NEGATIVE species richness</strong>. That's impossible! We can probably guess that as biomass gets higher, we'll actually probably have something more like an asymptotic decline of species richness. So how can we model this? <strong>A link function</strong>. 
