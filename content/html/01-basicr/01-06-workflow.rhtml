@@ -31,17 +31,112 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <main style = margin-top:100px>
     <nav class="section-nav">
         <ol>
-          <li><a href="#data-types">Workflow</a>
+          <li><a href="#all">Workflow for All Users</a>
+          <ol>
+          <li><a href="#all--work">Working Directories</a>
+          <ol>
+          <li><a href="#all--work--paths">Paths</a></li>
+          </ol>
+          </li>
+          </ol>
           </li>
         </ol>
       </nav>
     <div>
       <section id="work">
         <h2>Workflow</h2>
-        <img class="image-full-page" style="display:block;margin:auto"
-        src="../img/01-img/construction.jpg">
-
+        <p>
+                This section will take you through a set of best practices for optimizing your daily workflow in R. <strong>NOTE:</strong> This will progress from beginner topics to more advanced usage, so please only operationalize from this section what is relevant to you. 
+        </p>
         </section>
+        <section id="all">
+        <h2>Workflow for All Users</h2>
+        <p>
+        <em>In this section we assume that you have R and RStudio downloaded, understand what objects are in R, and have been able to open a <code>.R</code> file that you would write code in. <em>
+        </p>
+        <p>
+        Even if you are a beginner, there are some basics to keep in mind that will make your life SO much easier down the road. 
+        </p>
+        <section id="all--files">
+        <h3>Script Files</h3>
+        <p>
+        When we first start using R, the first thing we want to do is make use of the two files most appropriate for 
+        </p>
+        </section>
+        <section id="all--work">
+        <h3>Working Directories</h3>
+        <p>
+        You will likely have multiple files for the same project, whether lab report or publication. All scripts, data files, figures, and outputs, should be contained in the same place on your computer. We will call this a <strong>Working Directory</strong> and it's a fundamental concept in using R. Think of it as just a place on your computer that all the files that go along with a particular project are stored, and that you can tell R to look to for a particular file for when you need it. 
+        </p>
+        <p>
+        </p>
+        <p>
+        Imagine you work on an analysis on Tuesday, close R, shut down your computer, and want to begin working on it again on Wednesday. On Tuesday you might have created a bunch of objects in your script, that were saved in your environment, that you still want access to on Wednesday. <strong>However, it is best practice to NOT save those objects in your environment until Wednesday.</strong> By structuring your R scripts and data files properly, you can recreate your environment safely each time, without having to worry about whether or not you are keeping any intermediate objects or things by accident. To make sure you do this, change your RStudio settings to not preserve your workspace (environment) in between sessions. 
+        </p>
+        <img src="../img/01-img/rstudio-workspace.png">
+        <p>
+        This will be annoying at first, but it will encourage better habits in the long run. 
+        </p>
+        <p>
+        What you will want to do instead, is make use of your working directory to save the scripts and files you need to reproduce the parts of an anlysis that you've already done, so that you can just close R and you don't have to worry about saving those objects in your directory. 
+        </p>
+        <p>
+        Think about the "Downloads" folder on your computer. Everytime you download something from the internet, your computer automatically puts it in that file on you computer. Then you can go and find it if you want it and move it. Similarly, you can tell R to look for files in a specific place on your computer, so it can read them all in. 
+        </p>
+        <p>
+        If you're working in R right now, you can see your current direcotry with: 
+        </p>
+        <!--begin.rcode, echo=FALSE
+        getwd()
+        end.rcode-->
+        <p>
+        When you are beginning, I recommend you make a folder in your <code>Documents</code> folder or some such place named something easily memorable such as <code>r-work</code>. Then, within that location, make sub-folders for each project you may work on. For example, within your <code>r-work</code> folder, you may have a subfolder for each class you're taking that requires R (i.e. a path like: <code>/Documents/r-work/eeb225/</code>), within which you should have additional folders such as <code>data</code>, and <code>code</code>. 
+        </p>
+        <p>
+        This way when you open up a new RStudio session, you can <em>set your working directory</em> using: 
+        </p>
+        <!--begin.rcode
+        setwd("...../Documents/r-work/eeb225/")
+        end.rcode-->
+        <p>
+        <strong>Note</strong> here that the "....." in that path is going to be specific to your computer's operating system. For example, in a Windows computer, it will likely be "C:\Users\YOURNAME\Documnents"
+        </p>
+        <section id="all--work--paths">
+        <h4>Paths in Computers</h4>
+        <p>
+        Above, we talked about the "path" to a particular file or folder on our computer. But what is a "path" anyways? In computers, there's something called a file system that manages files and directories. It organizes data into files, which are organized in directories (aka "folders"), which hold files or other directories.
+        </p>
+        <p>
+        Each operating system (OS) (i.e. MacOSX, Windows, and Linux) work slightly differently in their methods of file organization, but all the concepts are the same. Perhaps most notably, to separate directories or files, Windows will use a backslash <code>\</code> but all other operating systems use a forward slash <code>/</code>. 
+        </p>
+        <p>
+        The "path", is a speciic set of directories which point to a place in a computer. That is, we would say with respect to a particular file that it has a "path" that points to it in the computer. R will use this path if we ask it to read in that file. 
+        </p>
+        </section>
+        <p>
+        So getting back to R and our workflow, once I have a working directory set, I can load in some data using something like this:
+        </p>
+        <!--begin.rcode
+        read.csv("./data/lab-1-data.csv")
+        end.rcode-->
+        <p>
+        and R would know that it should look for the relevant file in the <code>data</code> directory of <code>/eeb225</code>. 
+        </p>
+        <p>
+        <strong>So how do I make sure I don't loose my work when I'm working on a project that might not be finished if I am not using my environment??</strong> There's a relatively easy set of things you might want to do: 
+        <br>
+        <strong>1.</strong> Organize your script so that you can run it all from the beginning and re-create the objects you were working with <br>
+        <strong>2.</strong> Save any objects you can't afford to loose (i.e. model objects that take a long time to compute, things like that) as <code>.rds</code> objects. you can do that simply with <code>saveRDS(object, path)</code> where the object is the name of the object you're working with (e.g. "dataframe1"), and the path is the path to the location on your computer you want to save it to. 
+        </p>
+        <p>
+        The workflow processes we've described above
+        </p>
+        </section>
+        </section>
+        <>
+                <p>
+        For this section, we assume you're familiar with R scripts and <code>.Rmd</code> files, packages, and some basic programming, including reading in data to R. 
+        </p>
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">

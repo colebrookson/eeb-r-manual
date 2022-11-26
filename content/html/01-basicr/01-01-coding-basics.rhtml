@@ -32,6 +32,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <main style = margin-top:100px>
     <nav class="section-nav">
         <ol>
+         <li><a href="#running">Running Code</a>
+            <ul>
+              <li class=""><a href="#running--console">In the Console</a></li>
+              <li class=""><a href="#running--script">In a Script</a></li>
+              <li class=""><a href="#running--rmd">In an RMarkdown</a></li>
+            </ul>
+          </li>
           <li><a href="#calculator">R as a Calculator</a>
             <ul>
               <li class=""><a href="#calculator--modulo">Modulo Operations</a></li>
@@ -50,8 +57,50 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 Fundamentally, our goal in using R is to ask our computer to help us answer the biological domain questions we have. In order for R to be useful to us in this sense, we have to know <em>how</em> to ask our computer to do these things. It is easiest to think of R as simply a interface between us and our computers. However, we must remember that <em>computers are not intelligent, they will only do EXACTLY what we tell them to do</em>. Therefore, we need to be specific about how we ask our computer to do things in service of answering our biological questions. This section covers some important concepts that will govern how we ask R to do things for us. 
         </p>
     </section>
-        <p>
-
+<section id="running">
+<h2>Running Code</h2>
+<section id="running--console">
+<h3>In the Console</h3>
+<p>
+We can run code (i.e. ask R to perform a computation) a number of ways. First, if we use the console, we can simply type in our code, let's say we write <code>2 + 2</code> and simply press Enter/Return on our keyboards. 
+</p>
+</section>
+<section id="running--script">
+<h3>In a Script</h3>
+<p>
+If we are writing code in a <code>.R</code> file, we have a few more options. We could highlight the line we want to run, and use the "Run" button in the upper right hand corner of the scripts panel 
+</p>
+<img src="../img/01-img/run.png" style="max-width: 60%; height: auto;">
+<p>
+Alternatively, the most common way of doing it, is to put your cursor on the cunk of code you want to run, or highlight the chunk, and then use a keyboard shortcut to run the code. On Mac computers, its usually <code>Cmd+Return</code>, and on Windows computers, its usually <code>Ctrl+Enter</code>. We can check what our shortcut is and/or change that shortcut to what we want, by going to the Keyboard Shortcuts menu: 
+</p>
+<img src="../img/01-img/tools.png" style="max-width: 60%; height: auto;">
+<p>
+And then searching for the shortcut that does <em>Run Current Line or Selection</em>:
+</p>
+<img src="../img/01-img/change.png" style="max-width: 60%; height: auto;">
+<p>
+We can see that on my computer currently it's <code>Ctrl+Enter</code>. 
+</p>
+</section>
+<section id="running--rmd">
+<h3>In an RMarkdown</h3>
+<p>
+In an RMardown document we have  a few more options. To run code, first of all we have to open a code chunk, which can be done with the green "C" chunk button: 
+</p>
+<img src="../img/01-img/chunk.png" style="max-width: 60%; height: auto;">
+<p>
+Or with a keyboard shortcut. On windows this shortcut is <code>Ctrl+Alt+I</code> and on Mac it is <code>Cmd+Option+I<code> by default. Once we have the chunk of code, we have a number of ways we can run the code. First, we can just use our <code>Ctrl+Enter</code> method of before, or we can use the handy run button that RStudio provides for us: 
+</p>
+<img src="../img/01-img/chunk-run.png" style="max-width: 60%; height: auto;">
+<p>
+Which is the little green carrot on the right side. 
+</p>
+<p>
+Now that we know how to execute code, or essentially ask R to do things for us, we can continue our pathway of learning how to make R help us with our research!
+</p>
+</section>
+</section>
 <section id="calculator">
     <h2>R as a Calculator</h2>
     <p>
