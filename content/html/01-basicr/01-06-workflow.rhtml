@@ -32,13 +32,25 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <nav class="section-nav">
         <ol>
           <li><a href="#all">Workflow for All Users</a>
-          <ol>
-          <li><a href="#all--work">Working Directories</a>
-          <ol>
-          <li><a href="#all--work--paths">Paths</a></li>
-          </ol>
+            <ol>
+                <li><a href="#all--work">Working Directories</a>
+            <ol>
+                <li><a href="#all--work--paths">Paths</a></li>
+            </ol>
           </li>
           </ol>
+          </li>
+          <li><a href="#intermediate">Workflow for Intermediate Users</a>
+                <ol>
+                <li><a href="#intermediate--proj">RProjects</a></li>
+                <li><a href="#intermediate--here">The <code>here</code> Package</a></li>
+            </ol>
+          </li>
+                <li><a href="#adv">Workflow for Advanced Users</a>
+                <ol>
+                <li><a href="#adv--style">Style Guide</a></li>
+                <li><a href="#adv--eff">Efficient Coding</a></li>
+            </ol>
           </li>
         </ol>
       </nav>
@@ -182,7 +194,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
         <img src="../img/01-img/working-directory.png" style="max-width: 60%; height: auto;">
         <p>
-        Once you have your RProject set up, it's time to write some code. So within your (for example) <code>/r-work/eeb225</code>, make a new folder called, say, <code>code</code>, and save a new RMarkdown file there that might be for your first lab. That might look like this: 
+        Once you have your RProject set up, it'            <ol>
+            <li><a href="#all--work">Working Directories</a>
+            <ol>s time to write some code. So within your (for example) <code>/r-work/eeb225</code>, make a new folder called, say, <code>code</code>, and save a new RMarkdown file there that might be for your first lab. That might look like this: 
         </p>
         <img src="../img/01-img/folder.png" style="max-width: 60%; height: auto;">
         <p>
@@ -193,7 +207,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         Where we see our file. Note how it is named with numbers at the beginning. See below in the Style Guide for why this is. 
         </p>
         </section>
-        <section id="int--here">
+        <section id="intermediate--here">
         <h2><code>here</code> Package</h2>
         <p>
         Now let's assume you might get some data for this lab from your TA (i.e. a file called <code>lab-1-data.csv</code>) that you'll need to work on the assignment(s). This is where the <code>here</code> package comes in. If we have a second subfolder in our directory called <code>data</code> and within that is our file like this: 
@@ -237,7 +251,43 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
         <img src="../img/01-img/here.png" style="max-width: 60%; height: auto;">
         <p>
-        And we see it prints out the absolute path pointing to our current working directory! So when we use the <code>here()</code> function, we put in quotation marks, first "./" which signifies everything printed above that the package is taking care of for us, and then the relative path to the file we want, so in our case, "data/lab-1-data.csv"
+        And we see it prints out the absolute path pointing to our current working directory! So when we use the <code>here()</code> function, we put in quotation marks, first <em>./<em> which signifies everything printed above that the package is taking care of for us, and then the relative path to the file we want, so in our case, <code>data/lab-1-data.csv</code>
+        </p>
+        </section>
+        </section>
+        <section id="adv">
+        <h2>Workflow for Advanced Uers</h2>
+        <p>
+        Once you are comfortable working in R, you will be served well by continuing to develop strong workflow practices that will make your work more reproducible, and closer to professional-quality code. One thing to consider is beginning to regularly use style guide components. 
+        </p>
+        <section id="adv--style">
+        <h3>Style Guide</h3>
+        <p>
+        When writing code and managing files, it's always best to use consistent style. The best way to do so is to follow a style guide as closely as possible. 
+        </p>
+        <p>
+        The go-to style guide in R is the <a href="https://style.tidyverse.org/">Tidyverse Style Guide</a> and much of the style guidelines here are copied and pasted directly. <strong>There are five key components of the style guide, *Files, Syntax, Functions, Pipes, `ggplot2`</strong>, and most of them follow relatively common sense suggestions. However, in order to make your code maximally functional to future you as well as to other readers, you're encouraged to read through the style guide and implement as much of it as makes sense. 
+        </p>
+        </section>
+        <section id="adv--eff">
+        <h3>Efficient Workflow</h3>
+        <p>
+        Another thing to begin doing when you're more comfortable in R is to begin to think more critically about a project *before* you just start writing code. There are many excellent books on writing good code more generally, but <a href="https://csgillespie.github.io/efficientR/">Efficient R Programming</a> by Gillespie & Lovelace may be a good starting point. To summarize a few short important points from their work, Gillespie & Lovelace list <a href="https://www.oreilly.com/library/view/efficient-r-programming/9781491950777/ch04.html"> that are worth considering: 
+        </p>
+        <p>
+        <strong>1.</strong> Start without writing code but with a clear mind and perhaps a pen and paper. This will ensure that you keep your objectives at the forefront of your mind without getting lost in the technology.
+        </p>
+        <p>
+        <strong>2.</strong> Make a plan. The size and nature will depend on the project but timelines, resources, and chunking the work will make you more effective when you start.
+        </p>
+        <p>
+        <strong>3.</strong> Select the packages you will use for implementing the plan early. Minutes spent researching and selecting from the available options could save hours in the future.
+        </p>
+        <p>
+        <strong>4.</strong> Document your work at every stage: work can only be effective if it’s communicated clearly and code can only be efficiently understood if it’s commented.
+        </p>
+        <p>
+        <strong>5.</strong> Make your entire workflow as reproducible as possible. <code>knitr</code> can help with this in the phase of documentation.
         </p>
         </section>
         </section>
