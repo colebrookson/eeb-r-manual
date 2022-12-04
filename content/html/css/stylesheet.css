@@ -407,7 +407,7 @@ code {
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
 .topnav {
-background-color: #25355A;
+background-color: #1E3765;
 overflow: hidden;
 height: 4em;
 padding: 1em;
@@ -415,7 +415,7 @@ padding: 1em;
     left: 50%
 }
 .bottomnav {
-background-color: #25355A;
+background-color: #1E3765;
 overflow: hidden;
 }
 .topnav a {
