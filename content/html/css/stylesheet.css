@@ -153,7 +153,7 @@ h {
 .w3-border-0{border:0!important}.w3-border{border:1px solid #ccc!important}
 .w3-border-top{border-top:1px solid #ccc!important}.w3-border-bottom{border-bottom:1px solid #ccc!important}
 .w3-border-left{border-left:1px solid #ccc!important}.w3-border-right{border-right:1px solid #ccc!important}
-.w3-topbar{border-top:6px solid #ccc!important}.w3-bottombar{border-bottom:6px solid #ccc!important}
+.w3-topbar{border-top:15px solid #ccc!important}.w3-bottombar{border-bottom:6px solid #ccc!important}
 .w3-leftbar{border-left:6px solid #ccc!important}.w3-rightbar{border-right:6px solid #ccc!important}
 .w3-section,.w3-code{margin-top:16px!important;margin-bottom:16px!important}
 .w3-margin{margin:16px!important}.w3-margin-top{margin-top:16px!important}.w3-margin-bottom{margin-bottom:16px!important}
@@ -403,3 +403,96 @@ code {
   padding: 2px;
   font-size: 105%;
 }
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+.topnav {
+background-color: #1E3765;
+overflow: hidden;
+height: 4em;
+padding: 1em;
+    float: auto;
+    left: 50%
+}
+.bottomnav {
+background-color: #1E3765;
+overflow: hidden;
+}
+.topnav a {
+    text-decoration: none;
+}
+.topnav a:hover {
+    color:black;
+}
+.bottomnav a {
+    float: auto;
+    font-size: calc(12px + 0.7vw);
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.a-top {
+color: white;
+padding-right: 20px;
+font-weight: bold;
+    font-size:calc(12px + 0.7vw)
+}
+.a-mid {
+color: grey;
+padding-right: 20px;
+    margin: 0 0 0 0;
+font-weight: bold;
+    font-size:calc(8px + 0.7vw);
+}
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size:calc(10px + 0.7vw); 
+    border: none;
+    outline: none;
+    color: black;
+    font-weight: bold;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+}     
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #d3d3d3;
+    color: #005000
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #d3d3d3;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: auto;
+    font-size:calc(9px + 0.7vw); 
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+.a-first {
+    color: #8B0000;
+    font-weight:bold;
+}
+.dropdown-content a:hover {
+    background-color: #fbfbfb;
+
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}   
