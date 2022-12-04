@@ -63,35 +63,101 @@
   font-weight: bold;
 }
 </style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../css/stylesheet.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-<link rel="stylesheet"
-      href="../highlight/styles/default.min.css">
-<script src="../highlight/highlight.js"></script>
-<script src="../functions.js"></script>
-<script>hljs.highlightAll();</script>
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar-block .w3-bar-item {padding:20px}
-</style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <link rel="stylesheet" href="../highlight/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/stylesheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <script src="../highlight/highlight.js"></script>
+    <script src="../functions.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
-<body class="w3-round-large">
-
-<!-- Top menu -->
-<div class="w3-top">
-  <div class="w3-navy w3-xlarge" 
-  style="max-width:auto;margin:auto;border:1px w3-gray"
-  border:1px>
-    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰ Menu</div>
-    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
-    <div class="w3-center w3-padding-16">The R Manual</div>
-  </div>
-</div>
+<body>
+	<div class="topnav">
+		<a class="a-top w3-center" href="../index.html">The R Manual</a>
+        <a class="a-mid" href="../about.html">About</a>
+        <a class="a-mid" href="../contact.html">Contact</a>
+        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
+	</div>
+	<div class="bottomnav navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Getting Started</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
+              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
+              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
+              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
+            </div>
+        </div> 
+        <div class="dropdown">
+            <button class="dropbtn">Basic R</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
+              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
+              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
+              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
+              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
+              <a href="../01-basicr/01-05-packages.html">Packages</a>
+              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Working With Data</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
+              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
+              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
+              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
+              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
+              <a href="../02-data/02-05-new-columns.html">New Columns</a>
+              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
+              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
+              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
+              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
+              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
+              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Plotting</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
+              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
+              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
+              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
+              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
+              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
+              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
+              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
+              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
+              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
+              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
+              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
+              <a href="../03-plot/03-12-annotations.html">Annotations</a>
+              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Statistics in R</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
+              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
+              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
+              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
+              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
+              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
+              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
+              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
+              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
+              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
+              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
+            </div>
+          </div> 
+	</div>
 
 <main style = margin-top:100px>
   <nav class="section-nav">
@@ -148,28 +214,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         For our example here, let's consider the sizes of penguins bills.
       </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
+<span class="hl kwd">library</span><span class="hl std">(palmerpenguins)</span>
+
+<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">palmerpenguins</span><span class="hl opt">::</span><span class="hl std">penguins</span>
+<span class="hl kwd">names</span><span class="hl std">(df)</span>
 </pre></div>
-<div class="message"><pre class="knitr r">## ── Attaching packages ─────────────────────────────────────────────────────────── tidyverse 1.3.2 ──
-## ✔ tibble  3.1.8     ✔ purrr   0.3.5
-## ✔ tidyr   1.2.1     ✔ stringr 1.4.1
-## ✔ readr   2.1.3     ✔ forcats 0.5.2
-## ── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(palmerpenguins)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in library(palmerpenguins): there is no package called 'palmerpenguins'
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">palmerpenguins</span><span class="hl opt">::</span><span class="hl std">penguins</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in loadNamespace(x): there is no package called 'palmerpenguins'
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">names</span><span class="hl std">(df)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;        &quot;unitnum&quot;    
-##  [7] &quot;unittype&quot;    &quot;vert_index&quot;  &quot;pitnumber&quot;   &quot;species&quot;     &quot;length_1_mm&quot; &quot;length_2_mm&quot;
-## [13] &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot;  &quot;notes&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;species&quot;           &quot;island&quot;            &quot;bill_length_mm&quot;    &quot;bill_depth_mm&quot;    
+## [5] &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;       &quot;sex&quot;               &quot;year&quot;
 </pre></div>
 </div></div>
       <p>
@@ -184,8 +235,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;Cutthroat trout&quot;            NA                           &quot;Coastal giant salamander&quot;  
-## [4] &quot;Cascade torrent salamander&quot;
+<div class="output"><pre class="knitr r">## [1] Adelie    Gentoo    Chinstrap
+## Levels: Adelie Chinstrap Gentoo
 </pre></div>
 </div></div>
       <p>
@@ -194,8 +245,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
-## Cascade torrent salamander   Coastal giant salamander            Cutthroat trout 
-##                         15                      11758                      20433
+##    Adelie Chinstrap    Gentoo 
+##       152        68       124
 </pre></div>
 </div></div>
       <p>
@@ -211,7 +262,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
       <p>
         Okay so we can see that while they're not completely equal, they're close enough for our purposes, especially with an ANOVA, as it's one of the less sensitive tests to number of samples per group. 
       </p>
@@ -245,43 +296,48 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># plot qq-plots for each one</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Adelie&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
+<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq_line).
+## Removed 1 rows containing non-finite values (stat_qq_line).
 </pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Chinstrap&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
-</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-2.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Gentoo&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
+## Removed 1 rows containing non-finite values (stat_qq_line).
+## Removed 1 rows containing non-finite values (stat_qq_line).
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
-</pre></div>
-</div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-3.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
           <p>
             Visually, all of these look reasonably acceptable, but let's compare with a Shapiro-Wilks test on each: 
           </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(adelie$bill_length_mm): is.numeric(x) is not TRUE
+<div class="output"><pre class="knitr r">## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  adelie$bill_length_mm
+## W = 0.99336, p-value = 0.7166
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(chin$bill_length_mm): is.numeric(x) is not TRUE
+<div class="output"><pre class="knitr r">## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  chin$bill_length_mm
+## W = 0.97525, p-value = 0.1941
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(gentoo$bill_length_mm): is.numeric(x) is not TRUE
+<div class="output"><pre class="knitr r">## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  gentoo$bill_length_mm
+## W = 0.97272, p-value = 0.01349
 </pre></div>
 </div></div>
           <p>
@@ -297,31 +353,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">log</span><span class="hl std">(bill_length_mm)</span>
   <span class="hl std">)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in `dplyr::mutate()`:
-## ! Problem while computing `log_length = log(bill_length_mm)`.
-## Caused by error in `mask$eval_all_mutate()`:
-## ! object 'bill_length_mm' not found
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">chin</span> <span class="hl kwb">&lt;-</span> <span class="hl std">chin</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">chin</span> <span class="hl kwb">&lt;-</span> <span class="hl std">chin</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">log</span><span class="hl std">(bill_length_mm)</span>
   <span class="hl std">)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in `dplyr::mutate()`:
-## ! Problem while computing `log_length = log(bill_length_mm)`.
-## Caused by error in `mask$eval_all_mutate()`:
-## ! object 'bill_length_mm' not found
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">gentoo</span> <span class="hl kwb">&lt;-</span> <span class="hl std">gentoo</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">gentoo</span> <span class="hl kwb">&lt;-</span> <span class="hl std">gentoo</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">log</span><span class="hl std">(bill_length_mm)</span>
   <span class="hl std">)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in `dplyr::mutate()`:
-## ! Problem while computing `log_length = log(bill_length_mm)`.
-## Caused by error in `mask$eval_all_mutate()`:
-## ! object 'bill_length_mm' not found
 </pre></div>
 </div></div>
           <p>
@@ -330,43 +369,48 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># plot qq-plots for each one</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Adelie&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
+<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq_line).
+## Removed 1 rows containing non-finite values (stat_qq_line).
 </pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Chinstrap&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
-</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-2.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Gentoo&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
+## Removed 1 rows containing non-finite values (stat_qq_line).
+## Removed 1 rows containing non-finite values (stat_qq_line).
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
-</pre></div>
-</div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-3.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
           <p>
             So these all look pretty good. Time for the tests: 
           </p>
 <div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(adelie$log_length): is.numeric(x) is not TRUE
+<div class="output"><pre class="knitr r">## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  adelie$log_length
+## W = 0.99515, p-value = 0.9004
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(chin$log_length): is.numeric(x) is not TRUE
+<div class="output"><pre class="knitr r">## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  chin$log_length
+## W = 0.97137, p-value = 0.1192
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(gentoo$log_length): is.numeric(x) is not TRUE
+<div class="output"><pre class="knitr r">## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  gentoo$log_length
+## W = 0.9847, p-value = 0.1803
 </pre></div>
 </div></div>
           <p>
@@ -393,19 +437,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl str">&quot;gentoo&quot;</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length))</span>
   <span class="hl std">))</span>
 <span class="hl std">)</span>
-</pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
-## Unknown or uninitialised column: `log_length`.
-## Unknown or uninitialised column: `log_length`.
-## Unknown or uninitialised column: `log_length`.
-## Unknown or uninitialised column: `log_length`.
-## Unknown or uninitialised column: `log_length`.
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># let's look at the structure of the df</span>
+
+<span class="hl com"># let's look at the structure of the df</span>
 <span class="hl kwd">str</span><span class="hl std">(bill_data)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 'data.frame':	0 obs. of  1 variable:
-##  $ species: Factor w/ 0 levels:
+<div class="output"><pre class="knitr r">## 'data.frame':	344 obs. of  2 variables:
+##  $ log_length: num  3.67 3.68 3.7 NA 3.6 ...
+##  $ species   : Factor w/ 3 levels &quot;adelie&quot;,&quot;chin&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 </pre></div>
 </div></div>
           <p>
@@ -413,7 +451,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           </p>
 <div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">bartlett.test</span><span class="hl std">(log_length</span> <span class="hl opt">~</span> <span class="hl std">species,</span> <span class="hl kwc">data</span> <span class="hl std">= bill_data)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(predvars, data, env): object 'log_length' not found
+<div class="output"><pre class="knitr r">## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  log_length by species
+## Bartlett's K-squared = 0.80327, df = 2, p-value = 0.6692
 </pre></div>
 </div></div>
           <p>
@@ -426,12 +468,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           Now to perform the test itself. It is, similarly to the t-test, very easy to compute in R, and looks pretty much identical to our syntax for the Bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. The function itself we use comes from the <code>stats</code> package again. We can now proceed to our test and run it all like this: 
         </p>
 <div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">aov</span><span class="hl std">(log_length</span> <span class="hl opt">~</span> <span class="hl std">species,</span> <span class="hl kwc">data</span> <span class="hl std">= bill_data)</span>
+<span class="hl kwd">summary</span><span class="hl std">(mod)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in eval(predvars, data, env): object 'log_length' not found
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mod)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in summary(mod): object 'mod' not found
+<div class="output"><pre class="knitr r">##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## species       2  3.846  1.9230   427.6 &lt;2e-16 ***
+## Residuals   339  1.525  0.0045                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 2 observations deleted due to missingness
 </pre></div>
 </div></div>
         <p>
@@ -450,7 +494,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           </p>
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">TukeyHSD</span><span class="hl std">(mod)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in stats::TukeyHSD(mod): object 'mod' not found
+<div class="output"><pre class="knitr r">##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: stats::aov(formula = log_length ~ species, data = bill_data)
+## 
+## $species
+##                      diff         lwr          upr    p adj
+## chin-adelie    0.23023589  0.20718014  0.253291643 0.000000
+## gentoo-adelie  0.20292758  0.18375262  0.222102538 0.000000
+## gentoo-chin   -0.02730831 -0.05116498 -0.003451639 0.020178
 </pre></div>
 </div></div>
           <p>
@@ -465,13 +518,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">means</span> <span class="hl kwb">&lt;-</span> <span class="hl std">bill_data</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">group_by</span><span class="hl std">(species)</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarise</span><span class="hl std">(</span><span class="hl kwc">means</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(log_length,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in `dplyr::summarise()`:
-## ! Problem while computing `means = mean(log_length, na.rm = TRUE)`.
-## Caused by error in `mean()`:
-## ! object 'log_length' not found
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= bill_data)</span> <span class="hl opt">+</span>
+
+<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= bill_data)</span> <span class="hl opt">+</span>
   <span class="hl kwd">geom_density</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= log_length,</span> <span class="hl kwc">fill</span> <span class="hl std">= species),</span>
               <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.3</span><span class="hl std">,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
@@ -492,9 +540,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl num">5.9</span><span class="hl std">,</span>
           <span class="hl kwc">label</span> <span class="hl std">=</span> <span class="hl str">&quot;p-value &lt;&lt; 0.001&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in FUN(X[[i]], ...): object 'log_length' not found
+<div class="warning"><pre class="knitr r">## Warning: Removed 2 rows containing non-finite values (stat_density).
 </pre></div>
-</div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
         </section>
       </section>
     </section>
@@ -516,275 +564,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
 </p>
 </div>
-
-<script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-}
- 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-</script>
 </main>
-
-<!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-bar-item w3-button" style="color:blue;">Close Menu</a>
-  <ol>
-    <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
-    <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
-    <li><a href="../00-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
-    <ol>
-        <li><a href="../00-start/00-01-downloads.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            Downloads</a>
-        </li>
-        <li><a href="../00-start/00-02-navigating-rstudio.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            Navigating RStudio</a>
-        </li>
-        <li><a href="../00-start/00-03-the-file-ecosystem.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            The File Ecosystem</a>
-        </li>
-    </ol>
-    </li>
-    <li><a href="../01-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
-        <ol>
-            <li><a href="../01-basicr/01-01-coding-basics.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Coding Basics</a>
-            </li>
-            <li><a href="../01-basicr/01-02-data-types.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Types</a>
-            </li>
-            <li><a href="../01-basicr/01-03-data-structures.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Structures</a>
-            </li>
-            <li><a href="../01-basicr/01-04-indexing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Indexing</a>
-            </li>
-            <li><a href="../01-basicr/01-05-packages.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Packages</a>
-            </li>
-            <li><a href="../01-basicr/01-06-workflow.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Workflow</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../02-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
-        <ol>
-            <li><a href="../02-data/02-01-reading-writing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Reading &amp; Writing Files</a>
-            </li>
-            <li><a href="../02-data/02-02-filtering-subsetting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Filtering &amp; Subsetting</a>
-            </li>
-            <li><a href="../02-data/02-03-selecting-columns.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Selecting Columns</a>
-            </li>
-            <li><a href="../02-data/02-04-grouping-summarizing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Grouping &amp; Summarizing</a>
-            </li>
-            <li><a href="../02-data/02-05-new-columns.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Ceating New Columns</a>
-            </li>
-            <li><a href="../02-data/02-06-factors.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Factor Data</a>
-            </li>
-            <li><a href="../02-data/02-07-renaming.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Renaming Columns</a>
-            </li>
-            <li><a href="../02-data/02-08-dates.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Date &amp; Time Data</a>
-            </li>
-            <li><a href="../02-data/02-09-reshaping.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Reshaping DataFrames</a>
-            </li>
-            <li><a href="../02-data/02-10-cleaning-process.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Cleaning Process</a>
-            </li>
-            <li><a href="../02-data/02-11-relational-data.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Relational DataFrames</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../03-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
-        <ol>
-            <li><a href="../03-plot/03-00-basics-of-plotting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Basics of Plotting</a>
-            </li>
-            <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Introduction to <code>ggplot2</code></a>
-            </li>
-            <li><a href="../03-plot/03-02-interative-plotting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Interative Plotting</a>
-            </li>
-            <li><a href="../03-plot/03-03-facetting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Facetting Plot Panels</a>
-            </li>
-            <li><a href="../03-plot/03-04-plotting-multiple-dataframes.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting with Multiple DataFrames</a>
-            </li>
-            <li><a href="../03-plot/03-05-distributions.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Distributions</a>
-            </li>
-            <li><a href="../03-plot/03-06-part-to-whole-comparison.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Part to Whole Comparisons</a>
-            </li>
-            <li><a href="../03-plot/03-07-relations-between-vars.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Relationships Between Variables</a>
-            </li>
-            <li><a href="../03-plot/03-08-change-time.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Change Through Time</a>
-            </li>
-            <li><a href="../03-plot/03-10-values-between-groups.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Values Between Groups</a>
-            </li>
-            <li><a href="../03-plot/03-11-mapping.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Geographic Mapping</a>
-            </li>
-            <li><a href="../03-plot/03-12-annotations.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Annotations</a>
-            </li>
-            <li><a href="../03-plot/03-13-phylogenetic-trees.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Phylogenetic Trees</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../04-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
-        <ol>
-            <li><a href="../04-stats1/04-00-introduction.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Introduction</a>
-            </li>
-            <li><a href="../04-stats1/04-01-probability-101.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Probability 101</a>
-            </li>
-            <li><a href="../04-stats1/04-02-likelihood.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Likelihood</a>
-            </li>
-            <li><a href="../04-stats1/04-03-sampling-distributions.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Sampling Distributions</a>
-            </li>
-            <li><a href="../04-stats1/04-04-hypothesis-testing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Hypothesis Testings</a>
-            </li>
-            <li><a href="../04-stats1/04-05-confidence-intervals.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Confidence Intervals</a>
-            </li>
-            <li><a href="../04-stats1/04-06-comparing-sample-means.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Comparing Sample Means (T-tests)</a>
-            </li>
-            <li><a href="../04-stats1/04-07-analysis-of-variance.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Analysis of Variance (ANOVAs)</a>
-            </li>
-            <li><a href="../04-stats1/04-08-linear-regression.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Linear Regression</a>
-            </li>
-            <li><a href="../04-stats1/04-09-logistic-regression.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Logistic Regression</a>
-            </li>
-        </ol>
-    </li>
-  </ol>
-</nav>
-
 </body>
 </html>
  

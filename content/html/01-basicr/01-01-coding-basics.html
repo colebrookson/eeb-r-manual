@@ -63,64 +63,181 @@
   font-weight: bold;
 }
 </style>
-<title>The R File Ecosystem</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../css/stylesheet.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-<link rel="stylesheet"
-      href="../highlight/styles/default.min.css">
-<script src="../highlight/highlight.js"></script>
-<script src="../functions.js"></script>
-<script>hljs.highlightAll();</script>
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar-block .w3-bar-item {padding:20px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <link rel="stylesheet" href="../highlight/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/stylesheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <script src="../highlight/highlight.js"></script>
+    <script src="../functions.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
-<body class="w3-round-large">
+<body>
+	<div class="topnav">
+		<a class="a-top w3-center" href="../index.html">The R Manual</a>
+        <a class="a-mid" href="../about.html">About</a>
+        <a class="a-mid" href="../contact.html">Contact</a>
+        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
+	</div>
+	<div class="bottomnav navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Getting Started</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
+              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
+              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
+              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
+            </div>
+        </div> 
+        <div class="dropdown">
+            <button class="dropbtn">Basic R</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
+              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
+              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
+              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
+              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
+              <a href="../01-basicr/01-05-packages.html">Packages</a>
+              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Working With Data</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
+              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
+              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
+              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
+              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
+              <a href="../02-data/02-05-new-columns.html">New Columns</a>
+              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
+              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
+              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
+              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
+              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
+              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Plotting</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
+              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
+              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
+              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
+              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
+              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
+              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
+              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
+              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
+              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
+              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
+              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
+              <a href="../03-plot/03-12-annotations.html">Annotations</a>
+              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Statistics in R</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
+              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
+              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
+              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
+              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
+              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
+              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
+              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
+              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
+              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
+              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
+            </div>
+          </div> 
+	</div>
 
-<!-- Top menu -->
-<div class="w3-top">
-  <div class="w3-navy w3-xlarge" 
-  style="max-width:auto;margin:auto;border:1px w3-gray"
-  border:1px>
-    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰ Menu</div>
-    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
-    <div class="w3-center w3-padding-16">The R Manual</div>
-  </div>
-</div>
-
-<main style = margin-top:100px>
-    <nav class="section-nav">
-        <ol>
-          <li><a href="#calculator">R as a Calculator</a>
-            <ul>
-              <li class=""><a href="#calculator--modulo">Modulo Operations</a></li>
-              <li class=""><a href="#calculator--integer">Integer Division</a></li>
-            </ul>
-          </li>
-          <li><a href="#boolean">Boolean Operations</a></li>
-          <li><a href="#assign">Assignment</a></li>
-          <li><a href="#functions">Built-in Functions</a></li>
-        </ol>
-      </nav>
-    <div>
-    <section>
-    <h1>Coding Basics</h1>
-    <p>
-                Fundamentally, our goal in using R is to ask our computer to help us answer the biological domain questions we have. In order for R to be useful to us in this sense, we have to know <em>how</em> to ask our computer to do these things. It is easiest to think of R as simply a interface between us and our computers. However, we must remember that <em>computers are not intelligent, they will only do EXACTLY what we tell them to do</em>. Therefore, we need to be specific about how we ask our computer to do things in service of answering our biological questions. This section covers some important concepts that will govern how we ask R to do things for us. 
-        </p>
-    </section>
+    <main style = margin-top:100px>
+        <nav class="section-nav">
+            <ol>
+             <li><a href="#running">Running Code</a>
+                <ul>
+                  <li class=""><a href="#running--console">In the Console</a></li>
+                  <li class=""><a href="#running--script">In a Script</a></li>
+                  <li class=""><a href="#running--rmd">In an RMarkdown</a></li>
+                </ul>
+              </li>
+              <li><a href="#calculator">R as a Calculator</a>
+                <ul>
+                  <li class=""><a href="#calculator--modulo">Modulo Operations</a></li>
+                  <li class=""><a href="#calculator--integer">Integer Division</a></li>
+                </ul>
+              </li>
+              <li><a href="#boolean">Boolean Operations</a></li>
+              <li><a href="#assign">Assignment</a></li>
+              <li><a href="#functions">Built-in Functions</a></li>
+            </ol>
+          </nav>
+        <div>
+        <section>
+        <h1>Coding Basics</h1>
         <p>
-
-<section id="calculator">
-    <h2>R as a Calculator</h2>
+                    Fundamentally, our goal in using R is to ask our computer to help us answer the biological domain questions we have. In order for R to be useful to us in this sense, we have to know <em>how</em> to ask our computer to do these things. It is easiest to think of R as simply a interface between us and our computers. However, we must remember that <em>computers are not intelligent, they will only do EXACTLY what we tell them to do</em>. Therefore, we need to be specific about how we ask our computer to do things in service of answering our biological questions. This section covers some important concepts that will govern how we ask R to do things for us. 
+            </p>
+        </section>
+    <section id="running">
+    <h2>Running Code</h2>
+    <section id="running--console">
+    <h3>In the Console</h3>
     <p>
-        At the most basic level, we can use R as a (very complicated) calculator. We can perform all the most basic operations that we might be interested in. 
-    <br><br>
-    The classic operations (addition, subtraction, multiplication, division) work much as you might expect 
+    We can run code (i.e. ask R to perform a computation) a number of ways. First, if we use the console, we can simply type in our code, let's say we write <code>2 + 2</code> and simply press Enter/Return on our keyboards. 
     </p>
+    </section>
+    <section id="running--script">
+    <h3>In a Script</h3>
+    <p>
+    If we are writing code in a <code>.R</code> file, we have a few more options. We could highlight the line we want to run, and use the "Run" button in the upper right hand corner of the scripts panel 
+    </p>
+    <img src="../img/01-img/run.png" style="max-width: 60%; height: auto;">
+    <p>
+    Alternatively, the most common way of doing it, is to put your cursor on the cunk of code you want to run, or highlight the chunk, and then use a keyboard shortcut to run the code. On Mac computers, its usually <code>Cmd+Return</code>, and on Windows computers, its usually <code>Ctrl+Enter</code>. We can check what our shortcut is and/or change that shortcut to what we want, by going to the Keyboard Shortcuts menu: 
+    </p>
+    <img src="../img/01-img/tools.png" style="max-width: 60%; height: auto;">
+    <p>
+    And then searching for the shortcut that does <em>Run Current Line or Selection</em>:
+    </p>
+    <img src="../img/01-img/change.png" style="max-width: 60%; height: auto;">
+    <p>
+    We can see that on my computer currently it's <code>Ctrl+Enter</code>. 
+    </p>
+    </section>
+    <section id="running--rmd">
+    <h3>In an RMarkdown</h3>
+    <p>
+    In an RMardown document we have  a few more options. To run code, first of all we have to open a code chunk, which can be done with the green "C" chunk button: 
+    </p>
+    <img src="../img/01-img/chunk.png" style="max-width: 60%; height: auto;">
+    <p>
+    Or with a keyboard shortcut. On windows this shortcut is <code>Ctrl+Alt+I</code> and on Mac it is <code>Cmd+Option+I<code> by default. Once we have the chunk of code, we have a number of ways we can run the code. First, we can just use our <code>Ctrl+Enter</code> method of before, or we can use the handy run button that RStudio provides for us: 
+    </p>
+    <img src="../img/01-img/chunk-run.png" style="max-width: 60%; height: auto;">
+    <p>
+    Which is the little green carrot on the right side. 
+    </p>
+    <p>
+    Now that we know how to execute code, or essentially ask R to do things for us, we can continue our pathway of learning how to make R help us with our research!
+    </p>
+    </section>
+    </section>
+    <section id="calculator">
+        <h2>R as a Calculator</h2>
+        <p>
+            At the most basic level, we can use R as a (very complicated) calculator. We can perform all the most basic operations that we might be interested in. 
+        <br><br>
+        The classic operations (addition, subtraction, multiplication, division) work much as you might expect 
+        </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">+</span> <span class="hl num">2</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 4
@@ -142,40 +259,40 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="output"><pre class="knitr r">## [1] 8
 </pre></div>
 </div></div>
-    <p>
-        You can also ask R to help with more complicated operations such as:
-    </p>
-    <section id="calculator--modulo">
-        <h4>Modulo Operations</h4>
         <p>
-            Getting the remainder of division:
+            You can also ask R to help with more complicated operations such as:
         </p>
+        <section id="calculator--modulo">
+            <h4>Modulo Operations</h4>
+            <p>
+                Getting the remainder of division:
+            </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl num">5</span> <span class="hl opt">%%</span> <span class="hl num">2</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 1
 </pre></div>
 </div></div>
-    </section>
-    <section id="calculator--integer">
-        <h4>Integer Division</h4>
-        <p>
-            Only returns the integer value and not the decimal places:
-        </p>
+        </section>
+        <section id="calculator--integer">
+            <h4>Integer Division</h4>
+            <p>
+                Only returns the integer value and not the decimal places:
+            </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl num">5</span> <span class="hl opt">%/%</span> <span class="hl num">2</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 2
 </pre></div>
 </div></div>
+        </section>
     </section>
-</section>
-<section id="boolean">
-    <h2>Boolean Operations</h2>
-    <p>
-        We can ask R to make comparisons between values and give us a boolean (true or false) response for a wide variety of operations. 
-    </p>
-    <p>
-        We can ask R if two values are equal <code>==</code>, inequal <code>!=</code>, greater than <code>></code>, less than <code>&lt;</code>, greater than <em>or equal to</em> <code>>=</code>, or less than <em>or equal to</em> <code>&lt;=</code> . Some examples:
-    </p>
+    <section id="boolean">
+        <h2>Boolean Operations</h2>
+        <p>
+            We can ask R to make comparisons between values and give us a boolean (true or false) response for a wide variety of operations. 
+        </p>
+        <p>
+            We can ask R if two values are equal <code>==</code>, inequal <code>!=</code>, greater than <code>></code>, less than <code>&lt;</code>, greater than <em>or equal to</em> <code>>=</code>, or less than <em>or equal to</em> <code>&lt;=</code> . Some examples:
+        </p>
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl num">2</span> <span class="hl opt">==</span> <span class="hl num">2</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] TRUE
@@ -189,362 +306,94 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="output"><pre class="knitr r">## [1] FALSE
 </pre></div>
 </div></div>
-    <p>
-</section>
-<section id="assign">
-    <h2>Assignment</h2>
-    <p>
-        You'll notice that up to now, we have simply been using numbers, but we can also use variables in R to store the values of numbers. If we wanted a variable <code>x</code> with value <code>2</code>, we could assign this value in R using the <strong>assignment</strong> operator, <code>&lt;-</code>. Once a variable is assigned, that variable will be stored in the environment, and can be called at any later point in the session. 
-    </p>
+        <p>
+    </section>
+    <section id="assign">
+        <h2>Assignment</h2>
+        <p>
+            You'll notice that up to now, we have simply been using numbers, but we can also use variables in R to store the values of numbers. If we wanted a variable <code>x</code> with value <code>2</code>, we could assign this value in R using the <strong>assignment</strong> operator, <code>&lt;-</code>. Once a variable is assigned, that variable will be stored in the environment, and can be called at any later point in the session. 
+        </p>
 <div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl num">2</span>
     <span class="hl std">x</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 2
 </pre></div>
 </div></div>
-    <h5><strong>Two important notes with assignment:</strong></h5>
-    <ol>
-        <li>
-            1) In R, assignment can be done either through <code>&lt;-</code> or <code>=</code>. Both will work identically, but the <code>&lt;-</code> assignment operator is the more commonly used one and is technically best practice
-        </li>
-        <li>
-            2) If you make an assignment of a value to a variable, that assignment is not permanent. You can overwrite that assignment simply by using the same variable name
-        </li>
-    </ol>
-</section>
-<section id="functions">
-    <h2>Built-in Functions</h2>
-    <p>
-        Most of your initial use of R will be employing built-in functions that R has available for you to employee. For example, we might want to know the sum of a set of numbers. 
-    </p>
+        <h5><strong>Two important notes with assignment:</strong></h5>
+        <ol>
+            <li>
+                1) In R, assignment can be done either through <code>&lt;-</code> or <code>=</code>. Both will work identically, but the <code>&lt;-</code> assignment operator is the more commonly used one and is technically best practice
+            </li>
+            <li>
+                2) If you make an assignment of a value to a variable, that assignment is not permanent. You can overwrite that assignment simply by using the same variable name
+            </li>
+        </ol>
+    </section>
+    <section id="functions">
+        <h2>Built-in Functions</h2>
+        <p>
+            Most of your initial use of R will be employing built-in functions that R has available for you to employee. For example, we might want to know the sum of a set of numbers. 
+        </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl kwd">sum</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">6</span><span class="hl std">,</span> <span class="hl num">8</span><span class="hl std">)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] 15
 </pre></div>
 </div></div>
-    <p>
-        Functions are discussed in more depth later, but generally, the way they work in R is by calling the word for the function (i.e. <code>sum()</code>) followed by a set of parentheses, that take the functions <em>arguments</em>. Arguments are simply a few items that the function needs to provide the right answer to the question. 
-    </p>
-    <p>
-        One can always find what arguments are needed in the function by running `?` and then the function in question. For example, 
-    </p>
+        <p>
+            Functions are discussed in more depth later, but generally, the way they work in R is by calling the word for the function (i.e. <code>sum()</code>) followed by a set of parentheses, that take the functions <em>arguments</em>. Arguments are simply a few items that the function needs to provide the right answer to the question. 
+        </p>
+        <p>
+            One can always find what arguments are needed in the function by running `?` and then the function in question. For example, 
+        </p>
 <div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl opt">?</span><span class="hl std">sum</span>
 </pre></div>
 </div></div>
-    <p>
-        This will not return anything to the console, but in the bottom right panel of RStudio, the help window will open, with the <em>documentation</em>> on the function. For the <code>?sum</code> example, the output is: 
+        <p>
+            This will not return anything to the console, but in the bottom right panel of RStudio, the help window will open, with the <em>documentation</em>> on the function. For the <code>?sum</code> example, the output is: 
+        </p>
+        <img class="image-full-page" style="display:block;margin:auto"
+        src="../img/01-img/sum-help.png">
+        <p>
+            <strong>TIP:</strong> When in doubt about how to use a function, or really anything in R, check the documentation!
+        </p>
+    </section>
+    <section id=""Naming>
+        <h2>Naming</h2>
+        <p>
+            A lot of R is assigning values to variables, and each of those variables will need a name. Many programming languages have "style guides" that are a generally agreed-upon set of standards by the community of users that dictate how best to do common tasks in that language. 
+        </p>
+        <p>
+            There are a handful of suggested style guides in R, but the most common and the one followed in this resource is
+            <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham's style guide</a>
+            , which is based on that of Google's R style guide. 
+        </p>
+        <p>
+            With respect to naming: 
+        </p>
+        <p>
+            <em>Variable and function names should be lowercase. Use an underscore (_) to separate words within a name. Generally, variable names should be nouns and function names should be verbs. Strive for names that are concise and meaningful (this is not easy!).</em>
+    
+        </p>
+    </section>
+    
+    
+    <!-- End page content -->
+    <hr>
+    <p style="font-size:10px;color:gray;text-align:center">
+        <br>
+        <br>
+        The EEB R Manual is the work of researchers at the University of the Toronto
+         and intended as a purely educational resource. It holds no official 
+        association with the R Foundation. It should not be taken as an
+         authority on R best practices. 
+        <br>
+        When using this resource, <bold>always</bold> default to instructions and 
+        guidance provided by your instructor. 
+        <br>
+        This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
     </p>
-    <img class="image-full-page" style="display:block;margin:auto"
-    src="../img/01-img/sum-help.png">
-    <p>
-        <strong>TIP:</strong> When in doubt about how to use a function, or really anything in R, check the documentation!
-    </p>
-</section>
-<section id=""Naming>
-    <h2>Naming</h2>
-    <p>
-        A lot of R is assigning values to variables, and each of those variables will need a name. Many programming languages have "style guides" that are a generally agreed-upon set of standards by the community of users that dictate how best to do common tasks in that language. 
-    </p>
-    <p>
-        There are a handful of suggested style guides in R, but the most common and the one followed in this resource is
-        <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham's style guide</a>
-        , which is based on that of Google's R style guide. 
-    </p>
-    <p>
-        With respect to naming: 
-    </p>
-    <p>
-        <em>Variable and function names should be lowercase. Use an underscore (_) to separate words within a name. Generally, variable names should be nouns and function names should be verbs. Strive for names that are concise and meaningful (this is not easy!).</em>
-
-    </p>
-</section>
-
-
-<!-- End page content -->
-<hr>
-<p style="font-size:10px;color:gray;text-align:center">
-    <br>
-    <br>
-    The EEB R Manual is the work of researchers at the University of the Toronto
-     and intended as a purely educational resource. It holds no official 
-    association with the R Foundation. It should not be taken as an
-     authority on R best practices. 
-    <br>
-    When using this resource, <bold>always</bold> default to instructions and 
-    guidance provided by your instructor. 
-    <br>
-    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
-</p>
 </div>
-
-<script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-}
- 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-</script>
 </main>
-
-<!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-bar-item w3-button" style="color:blue;">Close Menu</a>
-  <ol>
-    <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
-    <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
-    <li><a href="../00-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
-    <ol>
-        <li><a href="../00-start/00-01-downloads.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            Downloads</a>
-        </li>
-        <li><a href="../00-start/00-02-navigating-rstudio.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            Navigating RStudio</a>
-        </li>
-        <li><a href="../00-start/00-03-the-file-ecosystem.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            The File Ecosystem</a>
-        </li>
-    </ol>
-    </li>
-    <li><a href="../01-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
-        <ol>
-            <li><a href="../01-basicr/01-01-coding-basics.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Coding Basics</a>
-            </li>
-            <li><a href="../01-basicr/01-02-data-types.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Types</a>
-            </li>
-            <li><a href="../01-basicr/01-03-data-structures.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Structures</a>
-            </li>
-            <li><a href="../01-basicr/01-04-indexing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Indexing</a>
-            </li>
-            <li><a href="../01-basicr/01-05-packages.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Packages</a>
-            </li>
-            <li><a href="../01-basicr/01-06-workflow.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Workflow</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../02-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
-        <ol>
-            <li><a href="../02-data/02-01-reading-writing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Reading &amp; Writing Files</a>
-            </li>
-            <li><a href="../02-data/02-02-filtering-subsetting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Filtering &amp; Subsetting</a>
-            </li>
-            <li><a href="../02-data/02-03-selecting-columns.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Selecting Columns</a>
-            </li>
-            <li><a href="../02-data/02-04-grouping-summarizing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Grouping &amp; Summarizing</a>
-            </li>
-            <li><a href="../02-data/02-05-new-columns.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Ceating New Columns</a>
-            </li>
-            <li><a href="../02-data/02-06-factors.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Factor Data</a>
-            </li>
-            <li><a href="../02-data/02-07-renaming.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Renaming Columns</a>
-            </li>
-            <li><a href="../02-data/02-08-dates.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Date &amp; Time Data</a>
-            </li>
-            <li><a href="../02-data/02-09-reshaping.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Reshaping DataFrames</a>
-            </li>
-            <li><a href="../02-data/02-10-cleaning-process.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Cleaning Process</a>
-            </li>
-            <li><a href="../02-data/02-11-relational-data.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Relational DataFrames</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../03-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
-        <ol>
-            <li><a href="../03-plot/03-00-basics-of-plotting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Basics of Plotting</a>
-            </li>
-            <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Introduction to <code>ggplot2</code></a>
-            </li>
-            <li><a href="../03-plot/03-02-interative-plotting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Interative Plotting</a>
-            </li>
-            <li><a href="../03-plot/03-03-facetting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Facetting Plot Panels</a>
-            </li>
-            <li><a href="../03-plot/03-04-plotting-multiple-dataframes.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting with Multiple DataFrames</a>
-            </li>
-            <li><a href="../03-plot/03-05-distributions.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Distributions</a>
-            </li>
-            <li><a href="../03-plot/03-06-part-to-whole-comparison.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Part to Whole Comparisons</a>
-            </li>
-            <li><a href="../03-plot/03-07-relations-between-vars.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Relationships Between Variables</a>
-            </li>
-            <li><a href="../03-plot/03-08-change-time.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Change Through Time</a>
-            </li>
-            <li><a href="../03-plot/03-10-values-between-groups.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Values Between Groups</a>
-            </li>
-            <li><a href="../03-plot/03-11-mapping.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Geographic Mapping</a>
-            </li>
-            <li><a href="../03-plot/03-12-annotations.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Annotations</a>
-            </li>
-            <li><a href="../03-plot/03-13-phylogenetic-trees.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Phylogenetic Trees</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../04-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
-        <ol>
-            <li><a href="../04-stats1/04-00-introduction.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Introduction</a>
-            </li>
-            <li><a href="../04-stats1/04-01-probability-101.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Probability 101</a>
-            </li>
-            <li><a href="../04-stats1/04-02-likelihood.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Likelihood</a>
-            </li>
-            <li><a href="../04-stats1/04-03-sampling-distributions.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Sampling Distributions</a>
-            </li>
-            <li><a href="../04-stats1/04-04-hypothesis-testing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Hypothesis Testings</a>
-            </li>
-            <li><a href="../04-stats1/04-05-confidence-intervals.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Confidence Intervals</a>
-            </li>
-            <li><a href="../04-stats1/04-06-comparing-sample-means.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Comparing Sample Means (T-tests)</a>
-            </li>
-            <li><a href="../04-stats1/04-07-analysis-of-variance.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Analysis of Variance (ANOVAs)</a>
-            </li>
-            <li><a href="../04-stats1/04-08-linear-regression.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Linear Regression</a>
-            </li>
-            <li><a href="../04-stats1/04-09-logistic-regression.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Logistic Regression</a>
-            </li>
-        </ol>
-    </li>
-  </ol>
-</nav>
-
 </body>
 </html>
 

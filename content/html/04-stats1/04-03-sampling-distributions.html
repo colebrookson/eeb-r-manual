@@ -63,35 +63,101 @@
   font-weight: bold;
 }
 </style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../css/stylesheet.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-<link rel="stylesheet"
-      href="../highlight/styles/default.min.css">
-<script src="../highlight/highlight.js"></script>
-<script src="../functions.js"></script>
-<script>hljs.highlightAll();</script>
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar-block .w3-bar-item {padding:20px}
-</style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <link rel="stylesheet" href="../highlight/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/stylesheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <script src="../highlight/highlight.js"></script>
+    <script src="../functions.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
-<body class="w3-round-large">
-
-<!-- Top menu -->
-<div class="w3-top">
-  <div class="w3-navy w3-xlarge" 
-  style="max-width:auto;margin:auto;border:1px w3-gray"
-  border:1px>
-    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰ Menu</div>
-    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
-    <div class="w3-center w3-padding-16">The R Manual</div>
-  </div>
-</div>
+<body>
+	<div class="topnav">
+		<a class="a-top w3-center" href="../index.html">The R Manual</a>
+        <a class="a-mid" href="../about.html">About</a>
+        <a class="a-mid" href="../contact.html">Contact</a>
+        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
+	</div>
+	<div class="bottomnav navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Getting Started</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
+              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
+              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
+              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
+            </div>
+        </div> 
+        <div class="dropdown">
+            <button class="dropbtn">Basic R</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
+              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
+              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
+              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
+              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
+              <a href="../01-basicr/01-05-packages.html">Packages</a>
+              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Working With Data</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
+              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
+              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
+              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
+              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
+              <a href="../02-data/02-05-new-columns.html">New Columns</a>
+              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
+              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
+              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
+              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
+              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
+              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Plotting</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
+              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
+              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
+              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
+              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
+              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
+              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
+              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
+              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
+              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
+              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
+              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
+              <a href="../03-plot/03-12-annotations.html">Annotations</a>
+              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Statistics in R</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
+              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
+              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
+              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
+              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
+              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
+              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
+              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
+              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
+              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
+              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
+            </div>
+          </div> 
+	</div>
 
 <main style = margin-top:100px>
   <nav class="section-nav">
@@ -163,7 +229,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1.5</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] 4.476135 5.335225 3.845416 6.750420 7.277987 4.753633 5.847443 3.398002 4.856019 4.589032
+<div class="output"><pre class="knitr r">##  [1] 4.476135 5.335225 3.845416 6.750420 7.277987 4.753633 5.847443 3.398002 4.856019
+## [10] 4.589032
 </pre></div>
 </div></div>
       <p>
@@ -179,8 +246,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] -0.50615451 -1.02004320 -0.97380896 -0.79269672 -0.78650430 -0.37790870 -0.98939547  0.40683211
-##  [9] -2.10517301  0.01959228
+<div class="output"><pre class="knitr r">##  [1] -0.50615451 -1.02004320 -0.97380896 -0.79269672 -0.78650430 -0.37790870 -0.98939547
+##  [8]  0.40683211 -2.10517301  0.01959228
 </pre></div>
 </div></div>
         <p>
@@ -188,8 +255,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] -0.34351892 -0.06797772 -0.15076840 -0.41931138 -1.19981033  1.27169877  1.08877265 -0.07896707
-##  [9] -0.14797010  0.95389526
+<div class="output"><pre class="knitr r">##  [1] -0.34351892 -0.06797772 -0.15076840 -0.41931138 -1.19981033  1.27169877  1.08877265
+##  [8] -0.07896707 -0.14797010  0.95389526
 </pre></div>
 </div></div>
         <p>
@@ -201,7 +268,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <p>
           Say we want to draw 100 samples from a uniform (discrete) distribution. As a reminder, a uniform distribution with bounds at 0 and 10 looks like this: 
         </p>
-<div class="chunk" id="unnamed-chunk-4"><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-4"><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
         <p>
           We'll explore the use of seeds by drawing 100 random samples from a uniform distribution with bounds at 0 and 10. We start by setting a seed and drawing our samples:
         </p>
@@ -270,7 +337,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Nucleotide Base&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
         <p>
           As a fun little game, let's build a gene. There approximately 1000 nucleotide pairs of coding sequence per gene according to google, and let's imagine that the gene we're building has a probability distribution of nucleotides that is given above, where the probabilities of each base appearing given a random sample are: 0.1, 0.2, 0.45, and 0.25 respectively for A, C, G, and T. 
         </p>
@@ -419,7 +486,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl kwd">scale_alpha_manual</span><span class="hl std">(</span><span class="hl str">&quot;Theoretical or Sampled&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.5</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">))</span> <span class="hl opt">+</span>
   <span class="hl kwd">scale_colour_manual</span><span class="hl std">(</span><span class="hl str">&quot;Theoretical or Sampled&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;white&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
         <p>
           Here we have shown intuitively the Law of Large Numbers!!!!
         </p>
@@ -434,16 +501,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unitt…¹ vert_…² pitnu…³ species lengt…⁴ lengt…⁵ weigh…⁶
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1  1987 MACKCC-L CC      L         1       1 R             1      NA Cutthr…      58      NA    1.75
-## 2  1987 MACKCC-L CC      L         1       1 R             2      NA Cutthr…      61      NA    1.95
-## 3  1987 MACKCC-L CC      L         1       1 R             3      NA Cutthr…      89      NA    5.6 
-## 4  1987 MACKCC-L CC      L         1       1 R             4      NA Cutthr…      58      NA    2.15
-## 5  1987 MACKCC-L CC      L         1       1 R             5      NA Cutthr…      93      NA    6.9 
-## 6  1987 MACKCC-L CC      L         1       1 R             6      NA Cutthr…      86      NA    5.9 
-## # … with 3 more variables: clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;, and abbreviated variable
-## #   names ¹​unittype, ²​vert_index, ³​pitnumber, ⁴​length_1_mm, ⁵​length_2_mm, ⁶​weight_g
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species      
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;        
+## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat tr…
+## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat tr…
+## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat tr…
+## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat tr…
+## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat tr…
+## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat tr…
+## # … with 6 more variables: length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;,
+## #   clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
 </pre></div>
 </div></div>
         <p>
@@ -451,7 +518,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </p>
 <div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">length_1_mm)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
         <p>
           We can see that this distribution isn't quite normal, but is continuous, and right-skewed. It could be approximated by a log-normal distribution: 
         </p>
@@ -475,7 +542,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: Removed 17 rows containing non-finite values (stat_bin).
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
       <p>
         <strong>What will happen if we draw a number of random samples from this distribution and calculate the sample mean? What will the resulting distribution of sample means look like?</strong>
       </p>
@@ -533,7 +600,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(sample_means)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-19-1.png" alt="plot of chunk unnamed-chunk-19" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" class="plot" /></div></div>
       <p>
         Hmm!! A confusing distribution. This doesn't really resemble any interesting or meaningful distribution. Let's try the process again, but with a much larger value of <em>n</em>, and see if that changes the result: 
       </p>
@@ -547,7 +614,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <span class="hl kwd">hist</span><span class="hl std">(sample_means)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-20-1.png" alt="plot of chunk unnamed-chunk-20" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" class="plot" /></div></div>
       <p>
         Wow! This distribution is remarkably normal! What's going on here????
       </p>
@@ -600,284 +667,5 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </p>
 </div>
 </main>
-
-<!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-button w3-block w3-left-align w3-small" style="color:blue;">Close Menu</a>
-  <ol>
-    <li><a href="../about.html" onclick="w3_close()" class="w3-button w3-block w3-left-align w3-small">About</a></li>
-    <li><a href="../contact.html" onclick="w3_close()" class="w3-button w3-block w3-left-align w3-small">Contact</a></li>
-    <li><a href="../00-landingpage.html" onclick="w3_close()" 
-        class="w3-button w3-block w3-left-align w3-small" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
-    <ol>
-        <li><a href="../00-start/00-01-downloads.html" onclick="w3_close()" 
-            class="w3-button w3-block w3-left-align w3-small" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            Downloads</a>
-        </li>
-        <li><a href="../00-start/00-02-navigating-rstudio.html" onclick="w3_close()" 
-            class="w3-button w3-block w3-left-align w3-small" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            Navigating RStudio</a>
-        </li>
-        <li><a href="../00-start/00-03-the-file-ecosystem.html" onclick="w3_close()" 
-            class="w3-button w3-block w3-left-align w3-small" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            The File Ecosystem</a>
-        </li>
-    </ol>
-    </li>
-    <li><a href="../01-landingpage.html" onclick="w3_close()" 
-        class="w3-button w3-block w3-left-align w3-small" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
-        <ol>
-            <li><a href="../01-basicr/01-01-coding-basics.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Coding Basics</a>
-            </li>
-            <li><a href="../01-basicr/01-02-data-types.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Types</a>
-            </li>
-            <li><a href="../01-basicr/01-03-data-structures.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Structures</a>
-            </li>
-            <li><a href="../01-basicr/01-04-indexing.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Indexing</a>
-            </li>
-            <li><a href="../01-basicr/01-05-packages.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Packages</a>
-            </li>
-            <li><a href="../01-basicr/01-06-workflow.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Workflow</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../02-landingpage.html" onclick="w3_close()" 
-        class="w3-button w3-block w3-left-align w3-small" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
-        <ol>
-            <li><a href="../02-data/02-01-reading-writing.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Reading &amp; Writing Files</a>
-            </li>
-            <li><a href="../02-data/02-02-filtering-subsetting.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Filtering &amp; Subsetting</a>
-            </li>
-            <li><a href="../02-data/02-03-selecting-columns.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Selecting Columns</a>
-            </li>
-            <li><a href="../02-data/02-04-grouping-summarizing.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Grouping &amp; Summarizing</a>
-            </li>
-            <li><a href="../02-data/02-05-new-columns.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Ceating New Columns</a>
-            </li>
-            <li><a href="../02-data/02-06-factors.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Factor Data</a>
-            </li>
-            <li><a href="../02-data/02-07-renaming.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Renaming Columns</a>
-            </li>
-            <li><a href="../02-data/02-08-dates.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Date &amp; Time Data</a>
-            </li>
-            <li><a href="../02-data/02-09-reshaping.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Reshaping DataFrames</a>
-            </li>
-            <li><a href="../02-data/02-10-cleaning-process.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Cleaning Process</a>
-            </li>
-            <li><a href="../02-data/02-11-relational-data.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Relational DataFrames</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../03-landingpage.html" onclick="w3_close()" 
-        class="w3-button w3-block w3-left-align w3-small" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
-        <ol>
-            <li><a href="../03-plot/03-00-basics-of-plotting.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Basics of Plotting</a>
-            </li>
-            <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Introduction to <code>ggplot2</code></a>
-            </li>
-            <li><a href="../03-plot/03-02-interative-plotting.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Interative Plotting</a>
-            </li>
-            <li><a href="../03-plot/03-03-facetting.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Facetting Plot Panels</a>
-            </li>
-            <li><a href="../03-plot/03-04-plotting-multiple-dataframes.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting with Multiple DataFrames</a>
-            </li>
-            <li><a href="../03-plot/03-05-distributions.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Distributions</a>
-            </li>
-            <li><a href="../03-plot/03-06-part-to-whole-comparison.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Part to Whole Comparisons</a>
-            </li>
-            <li><a href="../03-plot/03-07-relations-between-vars.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Relationships Between Variables</a>
-            </li>
-            <li><a href="../03-plot/03-08-change-time.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Change Through Time</a>
-            </li>
-            <li><a href="../03-plot/03-10-values-between-groups.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Values Between Groups</a>
-            </li>
-            <li><a href="../03-plot/03-11-mapping.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Geographic Mapping</a>
-            </li>
-            <li><a href="../03-plot/03-12-annotations.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Annotations</a>
-            </li>
-            <li><a href="../03-plot/03-13-phylogenetic-trees.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Phylogenetic Trees</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../04-landingpage.html" onclick="w3_close()" 
-        class="w3-button w3-block w3-left-align w3-small" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
-        <ol>
-            <li><a href="../04-stats1/04-00-introduction.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Introduction</a>
-            </li>
-            <li><a href="../04-stats1/04-01-probability-101.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Probability 101</a>
-            </li>
-            <li><a href="../04-stats1/04-02-likelihood.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Likelihood</a>
-            </li>
-            <li><a href="../04-stats1/04-03-sampling-distributions.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Sampling Distributions</a>
-            </li>
-            <li><a href="../04-stats1/04-04-hypothesis-testing.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Hypothesis Testings</a>
-            </li>
-            <li><a href="../04-stats1/04-05-confidence-intervals.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Confidence Intervals</a>
-            </li>
-            <li><a href="../04-stats1/04-06-comparing-sample-means.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Comparing Sample Means (T-tests)</a>
-            </li>
-            <li><a href="../04-stats1/04-07-analysis-of-variance.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Analysis of Variance (ANOVAs)</a>
-            </li>
-            <li><a href="../04-stats1/04-08-linear-regression.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Linear Regression</a>
-            </li>
-            <li><a href="../04-stats1/04-10-generalized-regression.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Generalized Linear Regression</a>
-            </li>
-            <li><a href="../04-stats1/04-09-logistic-regression.html" onclick="w3_close()" 
-                class="w3-button w3-block w3-left-align w3-small" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Logistic Regression</a>
-            </li>
-        </ol>
-    </li>
-  </ol>
-</nav>
-
-<script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("main").style.marginLeft = "25%";
-  document.getElementById("mySidebar").style.width = "25%";
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("openNav").style.display = 'none';
-}
-
-function w3_close() {
-  document.getElementById("main").style = "margin-top: 100px; auto";
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-} 
-</script>
-
-
 </body>
 </html>

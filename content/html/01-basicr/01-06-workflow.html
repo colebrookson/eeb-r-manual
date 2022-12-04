@@ -63,331 +63,390 @@
   font-weight: bold;
 }
 </style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../css/stylesheet.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-<link rel="stylesheet"
-      href="../highlight/styles/default.min.css">
-<script src="../highlight/highlight.js"></script>
-<script src="../functions.js"></script>
-<script>hljs.highlightAll();</script>
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar-block .w3-bar-item {padding:20px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <link rel="stylesheet" href="../highlight/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/stylesheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <script src="../highlight/highlight.js"></script>
+    <script src="../functions.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
-<body class="w3-round-large">
-
-<!-- Top menu -->
-<div class="w3-top">
-  <div class="w3-navy w3-xlarge" 
-  style="max-width:auto;margin:auto;border:1px w3-gray"
-  border:1px>
-    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰ Menu</div>
-    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
-    <div class="w3-center w3-padding-16">The R Manual</div>
-  </div>
-</div>
-
-<main style = margin-top:100px>
-    <nav class="section-nav">
-        <ol>
-          <li><a href="#data-types">Workflow</a>
-          </li>
-        </ol>
-      </nav>
-    <div>
-      <section id="work">
-        <h2>Workflow</h2>
-        <img class="image-full-page" style="display:block;margin:auto"
-        src="../img/01-img/construction.jpg">
-
-        </section>
-<!-- End page content -->
-<hr>
-<p style="font-size:10px;color:gray;text-align:center">
-    <br>
-    <br>
-    The EEB R Manual is the work of researchers at the University of the Toronto
-     and intended as a purely educational resource. It holds no official 
-    association with the R Foundation. It should not be taken as an
-     authority on R best practices. 
-    <br>
-    When using this resource, <bold>always</bold> default to instructions and 
-    guidance provided by your instructor. 
-    <br>
-    This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
-</p>
-</div>
-
-<script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-}
- 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-</script>
+<body>
+	<div class="topnav">
+		<a class="a-top w3-center" href="../index.html">The R Manual</a>
+        <a class="a-mid" href="../about.html">About</a>
+        <a class="a-mid" href="../contact.html">Contact</a>
+        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
+	</div>
+	<div class="bottomnav navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Getting Started</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
+              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
+              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
+              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
+            </div>
+        </div> 
+        <div class="dropdown">
+            <button class="dropbtn">Basic R</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
+              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
+              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
+              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
+              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
+              <a href="../01-basicr/01-05-packages.html">Packages</a>
+              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Working With Data</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
+              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
+              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
+              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
+              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
+              <a href="../02-data/02-05-new-columns.html">New Columns</a>
+              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
+              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
+              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
+              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
+              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
+              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Plotting</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
+              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
+              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
+              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
+              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
+              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
+              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
+              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
+              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
+              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
+              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
+              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
+              <a href="../03-plot/03-12-annotations.html">Annotations</a>
+              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Statistics in R</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
+              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
+              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
+              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
+              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
+              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
+              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
+              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
+              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
+              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
+              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
+            </div>
+          </div> 
+	</div>
+    <main style = margin-top:100px>
+        <nav class="section-nav">
+            <ol>
+              <li><a href="#all">Workflow for All Users</a>
+                <ol>
+                    <li><a href="#all--work">Working Directories</a>
+                <ol>
+                    <li><a href="#all--work--paths">Paths</a></li>
+                </ol>
+              </li>
+              </ol>
+              </li>
+              <li><a href="#intermediate">Workflow for Intermediate Users</a>
+                    <ol>
+                    <li><a href="#intermediate--proj">RProjects</a></li>
+                    <li><a href="#intermediate--here">The <code>here</code> Package</a></li>
+                </ol>
+              </li>
+                    <li><a href="#adv">Workflow for Advanced Users</a>
+                    <ol>
+                    <li><a href="#adv--style">Style Guide</a></li>
+                    <li><a href="#adv--eff">Efficient Coding</a></li>
+                </ol>
+              </li>
+            </ol>
+          </nav>
+        <div>
+          <section id="work">
+            <h2>Workflow</h2>
+            <p>
+                    This section will take you through a set of best practices for optimizing your daily workflow in R. <strong>NOTE:</strong> This will progress from beginner topics to more advanced usage, so please only operationalize from this section what is relevant to you. 
+            </p>
+            </section>
+            <section id="all">
+            <h2>Workflow for All Users</h2>
+            <p>
+            <em>In this section we assume that you have R and RStudio downloaded, understand what objects are in R, and have been able to open a <code>.R</code> file that you would write code in. <em>
+            </p>
+            <p>
+            Even if you are a beginner, there are some basics to keep in mind that will make your life SO much easier down the road. 
+            </p>
+            <section id="all--files">
+            <h3>Script Files</h3>
+            <p>
+            When we first start using R, the first thing we want to do is make use of the two files most appropriate for writing R code that we can reuse - R scripts and RMarkdown files. When we start a project, we'll open a new script/Rmd file, and begin writing our code. What we actually write in those files is the topic of the rest of this website. But while we're writing that code, in our workflow there's a few things we need to do: <br>
+            <strong>1.</strong> Write our code in order <br>
+            <strong>2.</strong> Document your work <br>
+            To write our code in order means that we follow a predictable series of steps that mean the objects we create in our script never depend on something that doesn't happen until <em>later</em> in the file. The typical set up of your script, whether in RMarkdown or in an R script follows the general pattern of: <strong>Set Up, Data Cleaning/Prep, Analysis, Plots, Saving Results</strong>. That might look something like this: 
+            </p>
+            <img src="../img/01-img/rstudio-workspace.png">
+            <p>
+            We'll now talk about where this file will go and how it'll talk to our computer appropriately. 
+            </p>
+            </section>
+            <section id="all--work">
+            <h3>Working Directories</h3>
+            <p>
+            You will likely have multiple files for the same project, whether lab report or publication. All scripts, data files, figures, and outputs, should be contained in the same place on your computer. We will call this a <strong>Working Directory</strong> and it's a fundamental concept in using R. Think of it as just a place on your computer that all the files that go along with a particular project are stored, and that you can tell R to look to for a particular file for when you need it. 
+            </p>
+            <p>
+            </p>
+            <p>
+            Imagine you work on an analysis on Tuesday, close R, shut down your computer, and want to begin working on it again on Wednesday. On Tuesday you might have created a bunch of objects in your script, that were saved in your environment, that you still want access to on Wednesday. <strong>However, it is best practice to NOT save those objects in your environment until Wednesday.</strong> By structuring your R scripts and data files properly, you can recreate your environment safely each time, without having to worry about whether or not you are keeping any intermediate objects or things by accident. To make sure you do this, change your RStudio settings to not preserve your workspace (environment) in between sessions. 
+            </p>
+            <img src="../img/01-img/rstudio-workspace.png">
+            <p>
+            This will be annoying at first, but it will encourage better habits in the long run. 
+            </p>
+            <p>
+            What you will want to do instead, is make use of your working directory to save the scripts and files you need to reproduce the parts of an anlysis that you've already done, so that you can just close R and you don't have to worry about saving those objects in your directory. 
+            </p>
+            <p>
+            Think about the "Downloads" folder on your computer. Everytime you download something from the internet, your computer automatically puts it in that file on you computer. Then you can go and find it if you want it and move it. Similarly, you can tell R to look for files in a specific place on your computer, so it can read them all in. 
+            </p>
+            <p>
+            If you're working in R right now, you can see your current direcotry with: 
+            </p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="output"><pre class="knitr r">## [1] &quot;/home/cole/Github/eeb-r-manual/content/html/01-basicr&quot;
+</pre></div>
+</div></div>
+            <p>
+            When you are beginning, I recommend you make a folder in your <code>Documents</code> folder or some such place named something easily memorable such as <code>r-work</code>. Then, within that location, make sub-folders for each project you may work on. For example, within your <code>r-work</code> folder, you may have a subfolder for each class you're taking that requires R (i.e. a path like: <code>/Documents/r-work/eeb225/</code>), within which you should have additional folders such as <code>data</code>, and <code>code</code>. 
+            </p>
+            <p>
+            This way when you open up a new RStudio session, you can <em>set your working directory</em> using: 
+            </p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">setwd</span><span class="hl std">(</span><span class="hl str">&quot;...../Documents/r-work/eeb225/&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in setwd(&quot;...../Documents/r-work/eeb225/&quot;): cannot change working directory
+</pre></div>
+</div></div>
+            <p>
+            <strong>Note</strong> here that the "....." in that path is going to be specific to your computer's operating system. For example, in a Windows computer, it will likely be "C:\Users\YOURNAME\Documnents"
+            </p>
+            <section id="all--work--paths">
+            <h4>Paths in Computers</h4>
+            <p>
+            Above, we talked about the "path" to a particular file or folder on our computer. But what is a "path" anyways? In computers, there's something called a file system that manages files and directories. It organizes data into files, which are organized in directories (aka "folders"), which hold files or other directories.
+            </p>
+            <p>
+            Each operating system (OS) (i.e. MacOSX, Windows, and Linux) work slightly differently in their methods of file organization, but all the concepts are the same. Perhaps most notably, to separate directories or files, Windows will use a backslash <code>\</code> but all other operating systems use a forward slash <code>/</code>. 
+            </p>
+            <p>
+            The "path", is a speciic set of directories which point to a place in a computer. That is, we would say with respect to a particular file that it has a "path" that points to it in the computer. R will use this path if we ask it to read in that file. 
+            </p>
+            </section>
+            <p>
+            So getting back to R and our workflow, once I have a working directory set, I can load in some data using something like this:
+            </p>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">read.csv</span><span class="hl std">(</span><span class="hl str">&quot;./data/lab-1-data.csv&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning in file(file, &quot;rt&quot;): cannot open file './data/lab-1-data.csv': No such file or
+## directory
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in file(file, &quot;rt&quot;): cannot open the connection
+</pre></div>
+</div></div>
+            <p>
+            and R would know that it should look for the relevant file in the <code>data</code> directory of <code>/eeb225</code>. 
+            </p>
+            <p>
+            <strong>So how do I make sure I don't loose my work when I'm working on a project that might not be finished if I am not using my environment??</strong> There's a relatively easy set of things you might want to do: 
+            <br>
+            <strong>1.</strong> Organize your script so that you can run it all from the beginning and re-create the objects you were working with <br>
+            <strong>2.</strong> Save any objects you can't afford to loose (i.e. model objects that take a long time to compute, things like that) as <code>.rds</code> objects. you can do that simply with <code>saveRDS(object, path)</code> where the object is the name of the object you're working with (e.g. "dataframe1"), and the path is the path to the location on your computer you want to save it to. 
+            </p>
+            <p>
+            The workflow processes we've described above make up a good start for managing your workflow in R. Things like how specifically to read data into R, or where to look for how to save objects can be found elsewhere on this site. 
+            </p>
+            </section>
+            </section>
+            <section id="intermediate">
+            <h2>Workflow for Intermediate Users</h2>
+            <p>
+            Once you're a bit more comfortable with writing a script and navigating directories, its time to up your skills. It's good to remember that we only add skills or complexity when it's beneficial to us. The things you learn here, while they feel like a big lift initially, will genuinely make your life easier, and will not only save you time, but make your research or coursework reproducible - important since it's almost always the case we go back to code later to either see how we did something, make changes to it, or steal some of it for a current project.
+            </p>
+             <p>
+            For this section, we assume you're familiar with R scripts and <code>.Rmd</code> files, packages, and some basic programming, including reading in data to R. 
+            </p>
+            <section id="intermediate--proj">
+            <h3>RProjects and the <code>here</code> Package</h3>
+            <p>
+            In the last section we talked about working directories and how we can use <code>setwd()</code> to tell R where to look in our computer for where all our files are for a given project. <strong>However</strong>, as soon as you are more comfortable in R, you should not use the <code>setwd()</code> function, and should instead use <code>RProjects</code> as described below. While this approach of <code>setwd()</code> may seem simple and foolproof, it is actually very easy to get confused, and is <strong>not</strong> recommended past the first few usages of R. 
+            </p>
+            <p>
+            Instead of using <code>setwd()</code>, there is a simple and even more foolproof solution to linking all your related files together. One can very simply make a new project. In RStudio, click <em>File > New Project</em> then select <em>New Directory</em> if you do not have a directory for this set of files yet. If you DO, you can select existing directory. 
+            </p>
+            <img src="../img/01-img/project-wizard.png" style="max-width: 60%; height: auto;">
+            <p>
+            Now, select "New Project"
+            </p>
+            <img src="../img/01-img/new-project.png" style="max-width: 60%; height: auto;">
+            <p>
+            And then name the project.
+            </p>
+            <img src="../img/01-img/name-project.png" style="max-width: 60%; height: auto;">
+            <p>
+            Use a simple and reasonable name. If I want to make a project for a class, it might be easiest to name it after the course code. Then, to select your subdirectory, select "Browse..." and click through to the location you want (we recommend putting a folder called <code>r-work</code> or something similar inside your <code>Documents</code> folder), like this: 
+            </p>
+            <img src="../img/01-img/directory.png" style="max-width: 60%; height: auto;">
+            <p>
+            And select the <code>r-work</code> folder (for this example). Now we can see the project is ready to create!
+            </p>
+            <img src="../img/01-img/ready-to-create.png" style="max-width: 60%; height: auto;">
+            <p>
+            Now simply select "Create Project" to complete the process. Once you do this, RStudio will re-open a new session with that project opened. We can see this in the top right hand corner by the environment: 
+            </p>
+            <img src="../img/01-img/new-project-opened.png" style="max-width: 60%; height: auto;">
+            <p>
+            And now our project is all set up and ready to go! If we want to check that it has worked, we can ask R to <code>getwd()</code>, and we see the output is exactly what we expected: 
+            </p>
+            <img src="../img/01-img/working-directory.png" style="max-width: 60%; height: auto;">
+            <p>
+            Once you have your RProject set up, it'            <ol>
+                <li><a href="#all--work">Working Directories</a>
+                <ol>s time to write some code. So within your (for example) <code>/r-work/eeb225</code>, make a new folder called, say, <code>code</code>, and save a new RMarkdown file there that might be for your first lab. That might look like this: 
+            </p>
+            <img src="../img/01-img/folder.png" style="max-width: 60%; height: auto;">
+            <p>
+            And here we see we now have our RProject (<code>.Rproj</code> file) and our folder for code, inside which is
+            </p>
+            <img src="../img/01-img/code-folder.png" style="max-width: 60%; height: auto;">
+            <p>
+            Where we see our file. Note how it is named with numbers at the beginning. See below in the Style Guide for why this is. 
+            </p>
+            </section>
+            <section id="intermediate--here">
+            <h2><code>here</code> Package</h2>
+            <p>
+            Now let's assume you might get some data for this lab from your TA (i.e. a file called <code>lab-1-data.csv</code>) that you'll need to work on the assignment(s). This is where the <code>here</code> package comes in. If we have a second subfolder in our directory called <code>data</code> and within that is our file like this: 
+            </p>
+            <img src="../img/01-img/data-dir.png" style="max-width: 60%; height: auto;">
+            <p>
+            We will want to be able to access that file reliably. In fact, at some point we might even want to send the whole directory (i.e. the whole <code>eeb225</code> folder) to someone else, maybe the TA or in the future a collaborator, so they can run it all themselves. 
+            </p>
+            <p>
+            <strong>This presents a challenge</strong>
+            </p>
+            <p>
+            Whoever you may want to send your project to may not use the same operating system as you (i.e. Mac OS vs. Windows vs. Linux), and they may keep their files in a different place than you. If we used an <em>absolute</em> path in our code to read in this data file (something like, "C:/Users/Student1/Documents/r-work/eeb225"), then no one else would be able to use this code, since no one else will have the same absolute path as we do. 
+            </p>
+            <p>
+            A good solution to this is the <code>here</code> package. This package helps us ignore absolute paths, in that the package itself will identify the relevant absolute path for your individual machine, so you only have to specify the <em>relative path</em>, that is, the path from the directory to whatever file you refer to. 
+            </p>
+            <p>
+            If we used an <em>absolute</em> path to read in this file, using the <code>tidyverse</code>, our <code>00-lab-01.Rmd</code> file may look like this: 
+            </p>
+            <img src="../img/01-img/absolute-path.png" style="max-width: 60%; height: auto;">
+            <p>
+            But this wouldn't work for another user! So, we use the <code>here</code> package. 
+            </p>
+            <p>
+            First we need to install the package: 
+            </p>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">install.packages</span><span class="hl std">(</span><span class="hl str">&quot;here&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## Error in install.packages : Updating loaded packages
+</pre></div>
+</div></div>
+            <p>
+            Now we can edit our file to read in the data using the <code>here()</code> function. This is the magic of this package! When used along with an RProject, it provides a near-perfect reproducibility across computers and operating systems! 
+            </p>
+            <p>
+            So our edited file would look something like this: 
+            </p>
+            <img src="../img/01-img/here-path.png" style="max-width: 60%; height: auto;">
+            </p>
+            <p>
+            And this works perfectly! Notice what happens if we run just the <code>here::here()</code> function: 
+            </p>
+            <img src="../img/01-img/here.png" style="max-width: 60%; height: auto;">
+            <p>
+            And we see it prints out the absolute path pointing to our current working directory! So when we use the <code>here()</code> function, we put in quotation marks, first <em>./<em> which signifies everything printed above that the package is taking care of for us, and then the relative path to the file we want, so in our case, <code>data/lab-1-data.csv</code>
+            </p>
+            </section>
+            </section>
+            <section id="adv">
+            <h2>Workflow for Advanced Uers</h2>
+            <p>
+            Once you are comfortable working in R, you will be served well by continuing to develop strong workflow practices that will make your work more reproducible, and closer to professional-quality code. One thing to consider is beginning to regularly use style guide components. 
+            </p>
+            <section id="adv--style">
+            <h3>Style Guide</h3>
+            <p>
+            When writing code and managing files, it's always best to use consistent style. The best way to do so is to follow a style guide as closely as possible. 
+            </p>
+            <p>
+            The go-to style guide in R is the <a href="https://style.tidyverse.org/">Tidyverse Style Guide</a> and much of the style guidelines here are copied and pasted directly. <strong>There are five key components of the style guide, *Files, Syntax, Functions, Pipes, `ggplot2`</strong>, and most of them follow relatively common sense suggestions. However, in order to make your code maximally functional to future you as well as to other readers, you're encouraged to read through the style guide and implement as much of it as makes sense. 
+            </p>
+            </section>
+            <section id="adv--eff">
+            <h3>Efficient Workflow</h3>
+            <p>
+            Another thing to begin doing when you're more comfortable in R is to begin to think more critically about a project *before* you just start writing code. There are many excellent books on writing good code more generally, but <a href="https://csgillespie.github.io/efficientR/">Efficient R Programming</a> by Gillespie & Lovelace may be a good starting point. To summarize a few short important points from their work, Gillespie & Lovelace list <a href="https://www.oreilly.com/library/view/efficient-r-programming/9781491950777/ch04.html"> that are worth considering: 
+            </p>
+            <p>
+            <strong>1.</strong> Start without writing code but with a clear mind and perhaps a pen and paper. This will ensure that you keep your objectives at the forefront of your mind without getting lost in the technology.
+            </p>
+            <p>
+            <strong>2.</strong> Make a plan. The size and nature will depend on the project but timelines, resources, and chunking the work will make you more effective when you start.
+            </p>
+            <p>
+            <strong>3.</strong> Select the packages you will use for implementing the plan early. Minutes spent researching and selecting from the available options could save hours in the future.
+            </p>
+            <p>
+            <strong>4.</strong> Document your work at every stage: work can only be effective if it’s communicated clearly and code can only be efficiently understood if it’s commented.
+            </p>
+            <p>
+            <strong>5.</strong> Make your entire workflow as reproducible as possible. <code>knitr</code> can help with this in the phase of documentation.
+            </p>
+            </section>
+            </section>
+                   
+    <!-- End page content -->
+    <hr>
+    <p style="font-size:10px;color:gray;text-align:center">
+        <br>
+        <br>
+        The EEB R Manual is the work of researchers at the University of the Toronto
+         and intended as a purely educational resource. It holds no official 
+        association with the R Foundation. It should not be taken as an
+         authority on R best practices. 
+        <br>
+        When using this resource, <bold>always</bold> default to instructions and 
+        guidance provided by your instructor. 
+        <br>
+        This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
+    </p>
+    </div>
 </main>
-
-<!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-bar-item w3-button" style="color:blue;">Close Menu</a>
-  <ol>
-    <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
-    <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
-    <li><a href="../00-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
-    <ol>
-        <li><a href="../00-start/00-01-downloads.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            Downloads</a>
-        </li>
-        <li><a href="../00-start/00-02-navigating-rstudio.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            Navigating RStudio</a>
-        </li>
-        <li><a href="../00-start/00-03-the-file-ecosystem.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            The File Ecosystem</a>
-        </li>
-    </ol>
-    </li>
-    <li><a href="../01-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
-        <ol>
-            <li><a href="../01-basicr/01-01-coding-basics.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Coding Basics</a>
-            </li>
-            <li><a href="../01-basicr/01-02-data-types.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Types</a>
-            </li>
-            <li><a href="../01-basicr/01-03-data-structures.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Structures</a>
-            </li>
-            <li><a href="../01-basicr/01-04-indexing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Indexing</a>
-            </li>
-            <li><a href="../01-basicr/01-05-packages.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Packages</a>
-            </li>
-            <li><a href="../01-basicr/01-06-workflow.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Workflow</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../02-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
-        <ol>
-            <li><a href="../02-data/02-01-reading-writing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Reading &amp; Writing Files</a>
-            </li>
-            <li><a href="../02-data/02-02-filtering-subsetting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Filtering &amp; Subsetting</a>
-            </li>
-            <li><a href="../02-data/02-03-selecting-columns.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Selecting Columns</a>
-            </li>
-            <li><a href="../02-data/02-04-grouping-summarizing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Grouping &amp; Summarizing</a>
-            </li>
-            <li><a href="../02-data/02-05-new-columns.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Ceating New Columns</a>
-            </li>
-            <li><a href="../02-data/02-06-factors.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Factor Data</a>
-            </li>
-            <li><a href="../02-data/02-07-renaming.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Renaming Columns</a>
-            </li>
-            <li><a href="../02-data/02-08-dates.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Date &amp; Time Data</a>
-            </li>
-            <li><a href="../02-data/02-09-reshaping.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Reshaping DataFrames</a>
-            </li>
-            <li><a href="../02-data/02-10-cleaning-process.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Cleaning Process</a>
-            </li>
-            <li><a href="../02-data/02-11-relational-data.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Relational DataFrames</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../03-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
-        <ol>
-            <li><a href="../03-plot/03-00-basics-of-plotting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Basics of Plotting</a>
-            </li>
-            <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Introduction to <code>ggplot2</code></a>
-            </li>
-            <li><a href="../03-plot/03-02-interative-plotting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Interative Plotting</a>
-            </li>
-            <li><a href="../03-plot/03-03-facetting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Facetting Plot Panels</a>
-            </li>
-            <li><a href="../03-plot/03-04-plotting-multiple-dataframes.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting with Multiple DataFrames</a>
-            </li>
-            <li><a href="../03-plot/03-05-distributions.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Distributions</a>
-            </li>
-            <li><a href="../03-plot/03-06-part-to-whole-comparison.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Part to Whole Comparisons</a>
-            </li>
-            <li><a href="../03-plot/03-07-relations-between-vars.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Relationships Between Variables</a>
-            </li>
-            <li><a href="../03-plot/03-08-change-time.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Change Through Time</a>
-            </li>
-            <li><a href="../03-plot/03-10-values-between-groups.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Values Between Groups</a>
-            </li>
-            <li><a href="../03-plot/03-11-mapping.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Geographic Mapping</a>
-            </li>
-            <li><a href="../03-plot/03-12-annotations.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Annotations</a>
-            </li>
-            <li><a href="../03-plot/03-13-phylogenetic-trees.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Phylogenetic Trees</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../04-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
-        <ol>
-            <li><a href="../04-stats1/04-00-introduction.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Introduction</a>
-            </li>
-            <li><a href="../04-stats1/04-01-probability-101.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Probability 101</a>
-            </li>
-            <li><a href="../04-stats1/04-02-likelihood.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Likelihood</a>
-            </li>
-            <li><a href="../04-stats1/04-03-sampling-distributions.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Sampling Distributions</a>
-            </li>
-            <li><a href="../04-stats1/04-04-hypothesis-testing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Hypothesis Testings</a>
-            </li>
-            <li><a href="../04-stats1/04-05-confidence-intervals.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Confidence Intervals</a>
-            </li>
-            <li><a href="../04-stats1/04-06-comparing-sample-means.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Comparing Sample Means (T-tests)</a>
-            </li>
-            <li><a href="../04-stats1/04-07-analysis-of-variance.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Analysis of Variance (ANOVAs)</a>
-            </li>
-            <li><a href="../04-stats1/04-08-linear-regression.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Linear Regression</a>
-            </li>
-            <li><a href="../04-stats1/04-09-logistic-regression.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Logistic Regression</a>
-            </li>
-        </ol>
-    </li>
-  </ol>
-</nav>
-
 </body>
 </html>
