@@ -113,7 +113,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                <li><a href="#sp-I--5">5. Evaluation</a></li>
                <li><a href="#sp-I--6">6. Interpretation</a></li>
                <li><a href="#sp-I--7">7. Prediction</a></li>
-            </ol>href
+            </ol>
         </li>
         <li><a href="#sp-II">Example II - Interactions</a>
             <ol>
@@ -223,9 +223,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </pre></div>
 <div class="output"><pre class="knitr r">## Rows: 90
 ## Columns: 3
-## $ pH      &lt;chr&gt; &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;…
-## $ Biomass &lt;dbl&gt; 0.46929722, 1.73087043, 2.08977848, 3.92578714, 4.36679265, 5.…
-## $ Species &lt;dbl&gt; 30, 39, 44, 35, 25, 29, 23, 18, 19, 12, 39, 35, 30, 30, 33, 20…
+## $ pH      &lt;chr&gt; &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;h…
+## $ Biomass &lt;dbl&gt; 0.46929722, 1.73087043, 2.08977848, 3.92578714, 4.36679265, 5.48197468, 6.68468591…
+## $ Species &lt;dbl&gt; 30, 39, 44, 35, 25, 29, 23, 18, 19, 12, 39, 35, 30, 30, 33, 20, 26, 36, 18, 7, 39,…
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
@@ -254,7 +254,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= Biomass,</span> <span class="hl kwc">y</span> <span class="hl std">= Species))</span> <span class="hl opt">+</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
             <p>
                 It even looks like there's a linear decrease in richness as biomass increases. So why can't we just assume a normal distribution here? Well, let's take a look at it. 
             </p>
@@ -264,7 +264,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <p>
                 If we simply assume a Normal distribution, we don't even need to specify a link function. I'm going to fit the model and plot the result, with the code behind the scenes so it's super clear this is NOT what you're supposed to do, as a demonstration. 
             </p>
-<div class="chunk" id="unnamed-chunk-3"><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-3"><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
             <p>
                 Here, the lines are representing the fitted regression lines, with the predicted values of species richness for each value of biomass. What's wrong with this? Well nothing yet! But often when we do this type of regression, we want to predict out of sample, or essentially figure out what will happen at levels of our predictor variable we haven't observed. Let's do that here: 
             </p>
@@ -279,7 +279,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= newdata_predict,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
             <p>
                 So we want to predict out of sample. We've done that! We can now make a guess at what values of Species Richness would be present at a Biomass value of 30. But what's wrong with <strong>this</strong> one? 
             </p>
@@ -299,7 +299,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">geom_density</span><span class="hl std">(</span><span class="hl kwc">fill</span> <span class="hl std">=</span> <span class="hl str">&quot;goldenrod2&quot;</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.3</span><span class="hl std">)</span> <span class="hl opt">+</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
             <p>
                 Or perhaps as a histogram: 
             </p>
@@ -308,7 +308,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 <span class="hl kwc">bins</span> <span class="hl std">=</span> <span class="hl num">30</span><span class="hl std">)</span> <span class="hl opt">+</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
             <p>
                 What to do? Well, this follows a slightly skewed distribution, but it's discrete integer-valued. For this purpose, a Poisson distribution will work well. 
             </p>
@@ -384,7 +384,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">))</span> <span class="hl com"># this will put the plots in a grid</span>
 <span class="hl kwd">plot</span><span class="hl std">(mod_poi)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
             <p>
                 This calls 4 plots, but we will only look at the first two for now. We see the line of the residuals and fitted values is straight and mostly follows the dotted line, and the QQ plot also follows the diagonal line sufficiently well. These quick diagnostics let us know we can continue.
             </p>
@@ -480,7 +480,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">)</span> <span class="hl opt">+</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
             <p>
                 "But wait! That line isn't straight??" True, because we're using a link function to relate our data linearly, but accomodate for non-linearity :) 
             </p>
@@ -519,7 +519,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
 <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Predicted Species Richness&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
             <p>
                 And here we go! We've finally showed, visually, why we need a link function! We can now predict out to a higher than observed biomass without predicting unrealistic response variable values. 
             </p>
@@ -614,7 +614,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span> <span class="hl opt">+</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-18-1.png" alt="plot of chunk unnamed-chunk-18" class="plot" /></div></div>
             <p>
                 Ok so there's a very obvious pattern here!!
             </p>
@@ -830,7 +830,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.3</span><span class="hl std">)</span> <span class="hl opt">+</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-29-1.png" alt="plot of chunk unnamed-chunk-29" class="plot" /></div></div>
             <p>
                 If we felt like it, we could change this to make it slightly more nice. First, let's put the lines behind the points. We'll also re-order the levels of the factor so the legend reads high, mid, low. 
             </p>
@@ -845,7 +845,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">)</span> <span class="hl opt">+</span>
 <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-30-1.png" alt="plot of chunk unnamed-chunk-30" class="plot" /></div></div>
             <p>
                 And we're done! 
             </p>

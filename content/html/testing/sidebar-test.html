@@ -77,6 +77,11 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
 </style>
+<script> 
+  $(function(){
+    $("#includedContent").load("../sidebar-temp.html"); 
+  });
+</script> 
 </head>
 <body class="w3-round-large">
 
@@ -224,6 +229,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </div>
 
 <!-- Sidebar (hidden by default) -->
+<!-- Sidebar (hidden by default) -->
 <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
 style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()"
@@ -304,6 +310,8 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
               Workflow</a>
           </li>
     </div>
+style="display:none;z-index:2;width:40%;min-width:200px" id="mySidebar">
+  <div id="includedContent"></div>
 </nav>
 
 <script>
@@ -336,5 +344,19 @@ function w3_close() {
 } 
 </script>
 
+  // Script to open and close sidebar
+  function w3_open() {
+    document.getElementById("main").style.marginLeft = "25%";
+    document.getElementById("mySidebar").style.width = "25%";
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("openNav").style.display = 'none';
+  }
+  
+  function w3_close() {
+    document.getElementById("main").style = "margin-top: 100px; auto";
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("openNav").style.display = "inline-block";
+  } 
+  </script>
 </body>
 </html>

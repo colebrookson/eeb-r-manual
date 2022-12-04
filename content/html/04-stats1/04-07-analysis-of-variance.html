@@ -149,25 +149,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
 </pre></div>
-<div class="message"><pre class="knitr r">## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-</pre></div>
-<div class="message"><pre class="knitr r">## ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
-## ✔ tibble  3.1.7     ✔ dplyr   1.0.9
-## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
-## ✔ readr   2.1.2     ✔ forcats 0.5.1
-</pre></div>
-<div class="message"><pre class="knitr r">## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+<div class="message"><pre class="knitr r">## ── Attaching packages ─────────────────────────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ tibble  3.1.8     ✔ purrr   0.3.5
+## ✔ tidyr   1.2.1     ✔ stringr 1.4.1
+## ✔ readr   2.1.3     ✔ forcats 0.5.2
+## ── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(palmerpenguins)</span>
-
-<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">palmerpenguins</span><span class="hl opt">::</span><span class="hl std">penguins</span>
-<span class="hl kwd">names</span><span class="hl std">(df)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;species&quot;           &quot;island&quot;            &quot;bill_length_mm&quot;   
-## [4] &quot;bill_depth_mm&quot;     &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;      
-## [7] &quot;sex&quot;               &quot;year&quot;
+<div class="error"><pre class="knitr r">## Error in library(palmerpenguins): there is no package called 'palmerpenguins'
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">palmerpenguins</span><span class="hl opt">::</span><span class="hl std">penguins</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in loadNamespace(x): there is no package called 'palmerpenguins'
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">names</span><span class="hl std">(df)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;        &quot;unitnum&quot;    
+##  [7] &quot;unittype&quot;    &quot;vert_index&quot;  &quot;pitnumber&quot;   &quot;species&quot;     &quot;length_1_mm&quot; &quot;length_2_mm&quot;
+## [13] &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot;  &quot;notes&quot;
 </pre></div>
 </div></div>
       <p>
@@ -182,8 +184,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] Adelie    Gentoo    Chinstrap
-## Levels: Adelie Chinstrap Gentoo
+<div class="output"><pre class="knitr r">## [1] &quot;Cutthroat trout&quot;            NA                           &quot;Coastal giant salamander&quot;  
+## [4] &quot;Cascade torrent salamander&quot;
 </pre></div>
 </div></div>
       <p>
@@ -192,8 +194,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
-##    Adelie Chinstrap    Gentoo 
-##       152        68       124
+## Cascade torrent salamander   Coastal giant salamander            Cutthroat trout 
+##                         15                      11758                      20433
 </pre></div>
 </div></div>
       <p>
@@ -209,7 +211,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
       <p>
         Okay so we can see that while they're not completely equal, they're close enough for our purposes, especially with an ANOVA, as it's one of the less sensitive tests to number of samples per group. 
       </p>
@@ -243,48 +245,43 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl com"># plot qq-plots for each one</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Adelie&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq_line).
-## Removed 1 rows containing non-finite values (stat_qq_line).
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Chinstrap&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-5-2.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
+</pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Gentoo&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
-## Removed 1 rows containing non-finite values (stat_qq_line).
-## Removed 1 rows containing non-finite values (stat_qq_line).
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-5-3.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
+</pre></div>
+</div></div>
           <p>
             Visually, all of these look reasonably acceptable, but let's compare with a Shapiro-Wilks test on each: 
           </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  adelie$bill_length_mm
-## W = 0.99336, p-value = 0.7166
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(adelie$bill_length_mm): is.numeric(x) is not TRUE
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  chin$bill_length_mm
-## W = 0.97525, p-value = 0.1941
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(chin$bill_length_mm): is.numeric(x) is not TRUE
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  gentoo$bill_length_mm
-## W = 0.97272, p-value = 0.01349
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `bill_length_mm`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(gentoo$bill_length_mm): is.numeric(x) is not TRUE
 </pre></div>
 </div></div>
           <p>
@@ -300,14 +297,31 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">log</span><span class="hl std">(bill_length_mm)</span>
   <span class="hl std">)</span>
-<span class="hl std">chin</span> <span class="hl kwb">&lt;-</span> <span class="hl std">chin</span> <span class="hl opt">%&gt;%</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in `dplyr::mutate()`:
+## ! Problem while computing `log_length = log(bill_length_mm)`.
+## Caused by error in `mask$eval_all_mutate()`:
+## ! object 'bill_length_mm' not found
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">chin</span> <span class="hl kwb">&lt;-</span> <span class="hl std">chin</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">log</span><span class="hl std">(bill_length_mm)</span>
   <span class="hl std">)</span>
-<span class="hl std">gentoo</span> <span class="hl kwb">&lt;-</span> <span class="hl std">gentoo</span> <span class="hl opt">%&gt;%</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in `dplyr::mutate()`:
+## ! Problem while computing `log_length = log(bill_length_mm)`.
+## Caused by error in `mask$eval_all_mutate()`:
+## ! object 'bill_length_mm' not found
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">gentoo</span> <span class="hl kwb">&lt;-</span> <span class="hl std">gentoo</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">log</span><span class="hl std">(bill_length_mm)</span>
   <span class="hl std">)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in `dplyr::mutate()`:
+## ! Problem while computing `log_length = log(bill_length_mm)`.
+## Caused by error in `mask$eval_all_mutate()`:
+## ! object 'bill_length_mm' not found
 </pre></div>
 </div></div>
           <p>
@@ -316,48 +330,43 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># plot qq-plots for each one</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Adelie&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq_line).
-## Removed 1 rows containing non-finite values (stat_qq_line).
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Chinstrap&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-2.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div><div class="rcode">
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
+</pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Gentoo&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
-## Removed 1 rows containing non-finite values (stat_qq_line).
-## Removed 1 rows containing non-finite values (stat_qq_line).
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-3.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+<div class="error"><pre class="knitr r">## Error in .check_data(data, x, y, combine = combine | merge != &quot;none&quot;): argument &quot;data&quot; is missing, with no default
+</pre></div>
+</div></div>
           <p>
             So these all look pretty good. Time for the tests: 
           </p>
 <div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  adelie$log_length
-## W = 0.99515, p-value = 0.9004
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(adelie$log_length): is.numeric(x) is not TRUE
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  chin$log_length
-## W = 0.97137, p-value = 0.1192
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(chin$log_length): is.numeric(x) is not TRUE
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  gentoo$log_length
-## W = 0.9847, p-value = 0.1803
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in stats::shapiro.test(gentoo$log_length): is.numeric(x) is not TRUE
 </pre></div>
 </div></div>
           <p>
@@ -384,13 +393,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl str">&quot;gentoo&quot;</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length))</span>
   <span class="hl std">))</span>
 <span class="hl std">)</span>
-
-<span class="hl com"># let's look at the structure of the df</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: Unknown or uninitialised column: `log_length`.
+## Unknown or uninitialised column: `log_length`.
+## Unknown or uninitialised column: `log_length`.
+## Unknown or uninitialised column: `log_length`.
+## Unknown or uninitialised column: `log_length`.
+## Unknown or uninitialised column: `log_length`.
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># let's look at the structure of the df</span>
 <span class="hl kwd">str</span><span class="hl std">(bill_data)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 'data.frame':	344 obs. of  2 variables:
-##  $ log_length: num  3.67 3.68 3.7 NA 3.6 ...
-##  $ species   : Factor w/ 3 levels &quot;adelie&quot;,&quot;chin&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+<div class="output"><pre class="knitr r">## 'data.frame':	0 obs. of  1 variable:
+##  $ species: Factor w/ 0 levels:
 </pre></div>
 </div></div>
           <p>
@@ -398,11 +413,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           </p>
 <div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">bartlett.test</span><span class="hl std">(log_length</span> <span class="hl opt">~</span> <span class="hl std">species,</span> <span class="hl kwc">data</span> <span class="hl std">= bill_data)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Bartlett test of homogeneity of variances
-## 
-## data:  log_length by species
-## Bartlett's K-squared = 0.80327, df = 2, p-value = 0.6692
+<div class="error"><pre class="knitr r">## Error in eval(predvars, data, env): object 'log_length' not found
 </pre></div>
 </div></div>
           <p>
@@ -415,14 +426,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           Now to perform the test itself. It is, similarly to the t-test, very easy to compute in R, and looks pretty much identical to our syntax for the Bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. The function itself we use comes from the <code>stats</code> package again. We can now proceed to our test and run it all like this: 
         </p>
 <div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">aov</span><span class="hl std">(log_length</span> <span class="hl opt">~</span> <span class="hl std">species,</span> <span class="hl kwc">data</span> <span class="hl std">= bill_data)</span>
-<span class="hl kwd">summary</span><span class="hl std">(mod)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
-## species       2  3.846  1.9230   427.6 &lt;2e-16 ***
-## Residuals   339  1.525  0.0045                   
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 2 observations deleted due to missingness
+<div class="error"><pre class="knitr r">## Error in eval(predvars, data, env): object 'log_length' not found
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mod)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in summary(mod): object 'mod' not found
 </pre></div>
 </div></div>
         <p>
@@ -441,16 +450,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           </p>
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">TukeyHSD</span><span class="hl std">(mod)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-## 
-## Fit: stats::aov(formula = log_length ~ species, data = bill_data)
-## 
-## $species
-##                      diff         lwr          upr    p adj
-## chin-adelie    0.23023589  0.20718014  0.253291643 0.000000
-## gentoo-adelie  0.20292758  0.18375262  0.222102538 0.000000
-## gentoo-chin   -0.02730831 -0.05116498 -0.003451639 0.020178
+<div class="error"><pre class="knitr r">## Error in stats::TukeyHSD(mod): object 'mod' not found
 </pre></div>
 </div></div>
           <p>
@@ -465,8 +465,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">means</span> <span class="hl kwb">&lt;-</span> <span class="hl std">bill_data</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">group_by</span><span class="hl std">(species)</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarise</span><span class="hl std">(</span><span class="hl kwc">means</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(log_length,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
-
-<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= bill_data)</span> <span class="hl opt">+</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in `dplyr::summarise()`:
+## ! Problem while computing `means = mean(log_length, na.rm = TRUE)`.
+## Caused by error in `mean()`:
+## ! object 'log_length' not found
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= bill_data)</span> <span class="hl opt">+</span>
   <span class="hl kwd">geom_density</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= log_length,</span> <span class="hl kwc">fill</span> <span class="hl std">= species),</span>
               <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.3</span><span class="hl std">,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
@@ -487,9 +492,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl num">5.9</span><span class="hl std">,</span>
           <span class="hl kwc">label</span> <span class="hl std">=</span> <span class="hl str">&quot;p-value &lt;&lt; 0.001&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 2 rows containing non-finite values (stat_density).
+<div class="error"><pre class="knitr r">## Error in FUN(X[[i]], ...): object 'log_length' not found
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
+</div></div>
         </section>
       </section>
     </section>

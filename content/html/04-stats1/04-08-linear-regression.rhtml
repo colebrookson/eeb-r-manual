@@ -57,19 +57,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <li><a href="#eff">Effect Estimation</a></li>
         <li><a href="#mod-comp">Model Comparison</a>
         <ol>
-<<<<<<< HEAD
             <li><a href="#mod-comp--lrt">Likelihood Ratio Test</a></li>
             <li><a href="#mod-comp--aic">Akaike Information Criterion</a></li>
         </ol>
         </li>
         <li><a href="#bey">Beyond Simple Linear Models</a></li>
-=======
-            <li><a id="#mod-comp--lrt">Likelihood Ratio Test</a></li>
-            <li><a id="#mod-comp--aic">Akaike Information Criterion</a></li>
-        </ol>
-        </li>
-        <li><a id="#bey">Beyond Simple Linear Models</a></li>
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
       </ol>
     </nav>
   <div>
@@ -95,11 +87,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         What does it mean to do such a thing? Well, let's start with reminding ourselves, mathematically, what a line is. A straight line is defined by the equation \[y = mx + b\] where \(b\) is the y-intercept, \(m\) is the slope of the line, and \(x\) and \(y\) are data values. This means that given a point on the x-axis, \(x\), a slope \(m\), and a y-intercept \(b\), we can find the value \(y\) that denotes the y-axis value that corresponds to the x-axis value \(x\). 
       </p>
       <p>
-<<<<<<< HEAD
         When we talk about linear regression, we'll probably want to discuss this equation in a slightly altered form: \[y = \beta_0 + \beta_1 x_1\] We'll discuss what these terms mean in a moment but they relate exactly to a y-intercept (\(\beta_0\)), a slope (\(\beta_1\)) and an x-value. 
-=======
-        When we talk about linear regression, we'll probably want to discuss this equation in a slightly altered form: \[y = \beta_0 + \beta_1 x_1\]. We'll discuss what these terms mean in a moment but they relate exactly to a y-intercept (\(\beta_0\), a slope (\(\beta_1\) and an x-value. 
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
       </p>
     </section>
     <section id="ols">
@@ -107,11 +95,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <p>
             We mentioned above we're putting a line through some points as best we can. But how do we define this "best as we can"? Well, the version of "as best we can" that will be addressed here is the method of least squares. If we imagine a scatter of plots like this: 
         </p>
-<<<<<<< HEAD
         <!--begin.rcode, echo = FALSE, warning = FALSE, message=FALSE
-=======
-        <!--begin.rcode, echo = FALSE, warning = FALSE
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
         x = c(1:100)
         y = rep(NA, 100)
         for(i in 1:100) {
@@ -145,21 +129,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             As in our previous work, we will certainly NOT (!!!!) just jump into writing code, as that's the best way to ensure a poorly done analysis. First, we have our question. Let's frame it as a hypothesis. It seems logical here to state that we think temperature will positively vary with ice cover. So a null hypothesis may be that <em> there is no relationship between air temperature and ice cover </em>. We have decided we want to use linear regression to tackle this challenge, so consider the assumptions of the method: 
         </p>
         <p>
-<<<<<<< HEAD
         <strong>1. Linearity</strong> - we assume the relationship between our two variables, \(X\) and \(Y\) is linear<br>
         <strong>2. Homoskedacity</strong> - we assume the variance of the residual is the same for any value of \(X\)<br>
         <strong>3. Normality</strong> - we assume that for any fixed value of \(X\), the errors of \(Y\) normally distributed<br>
         <strong>4. Randomness</strong> - we also assume that samples were collected at random<br>
         <strong>5. Independence</strong> - we assume all errors are independent<br><br>
-=======
-        <ol>
-            <li><strong>1. Linearity</strong> - we assume the relationship between our two variables, \(X\) and \(Y\) is linear</li>
-            <li><strong>2. Homoskedacity</strong> - we assume the variance of the residual is the same for any value of \(X\)</li>
-            <li><strong>3. Normality</strong> - we assume that for any fixed value of \(X\), the errors of \(Y\) normally distributed</li>
-            <li><strong>4. Randomness</strong> - we also assume that samples were collected at random</li>
-            <li><strong>5. Independence</strong> - we assume all errors are independent</li>
-        </ol>
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
         If assumptions 1-3 are violated, then we can may be able to use some sort of transformation on our response variable to deal with the problem. 
         </p>
         <section id="lin--small">
@@ -167,21 +141,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 Let's now get our hands dirty with a bit of an example, a very small one, that we'll go all the way through and then delve into some details in the next example. Very generally, we can think of the process of doing regression as falling into a few steps:
             </p>
             <p>
-<<<<<<< HEAD
                 <strong>1. Inspect our data</strong><br>
                 <strong>2. Perform the regression</strong><br>
                 <strong>3. Assess our assumptions (post-hoc)</strong><br>
                 <strong>4. Inspect our results</strong><br>
                 <strong>5. Interpret & Visualize</strong><br>
-=======
-                <ol>
-                    <li><strong>1. Inspect our data</strong></li>
-                    <li><strong>2. Perform the regression</strong></li>
-                    <li><strong>3. Assess our assumptions (post-hoc)</strong></li>
-                    <li><strong>4. Inspect our results</strong></li>
-                    <li><strong>5. Interpret & Visualize</strong></li>
-                </ol>
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
             </p>
             <p>
                 Here are the data we will start with: 
@@ -362,11 +326,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <section id="cat--int">
             <h3>Interpreting Results</h3>
             <p>
-<<<<<<< HEAD
                 Ok, so the important part. Interpretation. Before we even <em>look</em> at the output let's think about this mathematically. Our regression equation here we can think of as this: \[\widehat{weight} = \beta_0 + \beta_1 Sex\]. (Note here that we're using the hat on top of "weight" to indicate it's a predicted not measured value.) So recall that \(\beta_0\) is the intercept, so if we find that, and we estimate our \(\beta_1\) through regression, we should be able to predict the weight for any new bison that joins the herd, by taking \(\beta_0\) and adding \(\beta_1\) multiplied by the sex of the new bison. 
-=======
-                Ok, so the important part. Interpretation. Before we even <em>look</em> at the output let's think about this mathematically. Our regression equation here we can think of as this: \($\widehat{weight} = \beta_0 + \beta_1 Sex$$. (Note here that we're using the hat on top of "weight" to indicate it's a predicted not measured value.) So recall that \(\beta_0\) is the intercept, so if we find that, and we estimate our \(\beta_1\) through regression, we should be able to predict the weight for any new bison that joins the herd, by taking \(\beta_0\) and adding \(\beta_1\) multiplied by the sex of the new bison. 
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
             </p>
             <p>
                 But wait. How would we multiply a value "male" or "female". Well, the thing is we can't, and we don't have to! Instead, we use the very clever trick of <strong>indicator variables</strong>, where we assign a unique number to each of the possible categories in our categorical variable. Since we only have two levels in this example, we will use a 0 and 1 scheme. So what we will do, or rather what R will do under the hood, is use a function to indicate whether or not a given animal is a female or not, like this: 
@@ -580,7 +540,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                 test_statistic <- -2 * (as.numeric(mod1_ll) - 
                                           as.numeric(mod2_ll))
                 test_statistic
-                end.rcode-->}
+                end.rcode-->
             <p>
                 So now we need to use the probability function for the chi-squared distribution, which takes in \(q\) and can return a probability for us. We also need to mass in the degrees of freedom, that is, the difference between the degrees of freedom for each of the models. We see that \(df = 4\) and \(df = 3\) for the complex and nested models respectively. We'll also importantly, need to specify the <code>lower.tail</code> argument. See <code>?pchisq</code>. 
             </p><!--begin.rcode

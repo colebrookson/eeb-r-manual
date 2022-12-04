@@ -128,8 +128,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">install.packages</span><span class="hl std">(</span><span class="hl str">&quot;remotes&quot;</span><span class="hl std">)</span>
 <span class="hl com"># install package</span>
 <span class="hl std">remotes</span><span class="hl opt">::</span><span class="hl kwd">install_github</span><span class="hl std">(</span><span class="hl str">&quot;lter/lterdatasampler&quot;</span><span class="hl std">)</span>
-
-<span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##      checking for file ‘/tmp/RtmpqdgD4B/remotes14dc331bfc72d/lter-lterdatasampler-b268386/DESCRIPTION’ ...  ✔  checking for file ‘/tmp/RtmpqdgD4B/remotes14dc331bfc72d/lter-lterdatasampler-b268386/DESCRIPTION’
+##   ─  preparing ‘lterdatasampler’:
+##      checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+##   ─  checking for LF line-endings in source and make files and shell scripts
+##   ─  checking for empty or unneeded directories
+##   ─  building ‘lterdatasampler_0.1.0.tar.gz’
+##      
+## 
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
 <span class="hl kwd">library</span><span class="hl std">(tidyverse)</span>
 </pre></div>
 </div></div>
@@ -147,15 +156,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">head</span><span class="hl std">(crabs)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 9
-##   date       latitude site   size air_temp air_temp_sd water_temp water_temp_sd
-##   &lt;date&gt;        &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;
-## 1 2016-07-24       30 GTM    12.4     21.8        6.39       24.5          6.12
-## 2 2016-07-24       30 GTM    14.2     21.8        6.39       24.5          6.12
-## 3 2016-07-24       30 GTM    14.5     21.8        6.39       24.5          6.12
-## 4 2016-07-24       30 GTM    12.9     21.8        6.39       24.5          6.12
-## 5 2016-07-24       30 GTM    12.4     21.8        6.39       24.5          6.12
-## 6 2016-07-24       30 GTM    13.0     21.8        6.39       24.5          6.12
-## # … with 1 more variable: name &lt;chr&gt;
+##   date       latitude site   size air_temp air_temp_sd water_temp water_temp_sd name                        
+##   &lt;date&gt;        &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;                       
+## 1 2016-07-24       30 GTM    12.4     21.8        6.39       24.5          6.12 Guana Tolomoto Matanzas NERR
+## 2 2016-07-24       30 GTM    14.2     21.8        6.39       24.5          6.12 Guana Tolomoto Matanzas NERR
+## 3 2016-07-24       30 GTM    14.5     21.8        6.39       24.5          6.12 Guana Tolomoto Matanzas NERR
+## 4 2016-07-24       30 GTM    12.9     21.8        6.39       24.5          6.12 Guana Tolomoto Matanzas NERR
+## 5 2016-07-24       30 GTM    12.4     21.8        6.39       24.5          6.12 Guana Tolomoto Matanzas NERR
+## 6 2016-07-24       30 GTM    13.0     21.8        6.39       24.5          6.12 Guana Tolomoto Matanzas NERR
 </pre></div>
 </div></div>
             <br>
@@ -163,8 +171,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <br>
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(crabs</span><span class="hl opt">$</span><span class="hl std">site)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] &quot;GTM&quot; &quot;SI&quot;  &quot;NIB&quot; &quot;ZI&quot;  &quot;RC&quot;  &quot;VCR&quot; &quot;DB&quot;  &quot;JC&quot;  &quot;CT&quot;  &quot;NB&quot;  &quot;CC&quot;  &quot;BC&quot; 
-## [13] &quot;PIE&quot;
+<div class="output"><pre class="knitr r">##  [1] &quot;GTM&quot; &quot;SI&quot;  &quot;NIB&quot; &quot;ZI&quot;  &quot;RC&quot;  &quot;VCR&quot; &quot;DB&quot;  &quot;JC&quot;  &quot;CT&quot;  &quot;NB&quot;  &quot;CC&quot;  &quot;BC&quot;  &quot;PIE&quot;
 </pre></div>
 </div></div>
             <br>
@@ -231,7 +238,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             This filtering can be extended to use multiple columns relatively simply. There is a variable in this dataset called size. 
 <div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(crabs</span><span class="hl opt">$</span><span class="hl std">size)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
             We may want to filter crabs only in our focal sites, but also those above some size (e.g. 15).
         </p>
         <h5><strong>Core R</strong></h5>
@@ -250,7 +257,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <br>
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(site_size</span><span class="hl opt">$</span><span class="hl std">size)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div><div class="rcode">
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(site_size</span><span class="hl opt">$</span><span class="hl std">site)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;ZI&quot;  &quot;RC&quot;  &quot;VCR&quot; &quot;DB&quot;  &quot;JC&quot;

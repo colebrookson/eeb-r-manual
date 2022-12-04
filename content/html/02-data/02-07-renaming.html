@@ -113,15 +113,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl kwd">head</span><span class="hl std">(bison)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 8
-##   data_code rec_year rec_month rec_day animal_code animal_sex animal_weight
-##   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;              &lt;dbl&gt;
-## 1 CBH01         1994        11       8 813         F                    890
-## 2 CBH01         1994        11       8 834         F                   1074
-## 3 CBH01         1994        11       8 B-301       F                   1060
-## 4 CBH01         1994        11       8 B-402       F                    989
-## 5 CBH01         1994        11       8 B-403       F                   1062
-## 6 CBH01         1994        11       8 B-502       F                    978
-## # … with 1 more variable: animal_yob &lt;dbl&gt;
+##   data_code rec_year rec_month rec_day animal_code animal_sex animal_weight animal_yob
+##   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt;
+## 1 CBH01         1994        11       8 813         F                    890       1981
+## 2 CBH01         1994        11       8 834         F                   1074       1983
+## 3 CBH01         1994        11       8 B-301       F                   1060       1983
+## 4 CBH01         1994        11       8 B-402       F                    989       1984
+## 5 CBH01         1994        11       8 B-403       F                   1062       1984
+## 6 CBH01         1994        11       8 B-502       F                    978       1985
 </pre></div>
 </div></div>
             <br>
@@ -129,8 +128,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <br>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">names</span><span class="hl std">(bison)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;data_code&quot;     &quot;rec_year&quot;      &quot;rec_month&quot;     &quot;rec_day&quot;      
-## [5] &quot;animal_code&quot;   &quot;animal_sex&quot;    &quot;animal_weight&quot; &quot;animal_yob&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;data_code&quot;     &quot;rec_year&quot;      &quot;rec_month&quot;     &quot;rec_day&quot;       &quot;animal_code&quot;   &quot;animal_sex&quot;    &quot;animal_weight&quot;
+## [8] &quot;animal_yob&quot;
 </pre></div>
 </div></div>
         </p>
@@ -149,8 +148,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
             <br>
 <div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">names</span><span class="hl std">(bison)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;data_code&quot;     &quot;rec_year&quot;      &quot;rec_month&quot;     &quot;rec_day&quot;      
-## [5] &quot;code&quot;          &quot;animal_sex&quot;    &quot;animal_weight&quot; &quot;animal_yob&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;data_code&quot;     &quot;rec_year&quot;      &quot;rec_month&quot;     &quot;rec_day&quot;       &quot;code&quot;          &quot;animal_sex&quot;    &quot;animal_weight&quot;
+## [8] &quot;animal_yob&quot;
 </pre></div>
 </div></div>
             <br>
@@ -170,8 +169,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl std">)</span>
 <span class="hl kwd">names</span><span class="hl std">(bison)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;data_code&quot; &quot;rec_year&quot;  &quot;rec_month&quot; &quot;rec_day&quot;   &quot;code&quot;      &quot;sex&quot;      
-## [7] &quot;weight&quot;    &quot;yob&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;data_code&quot; &quot;rec_year&quot;  &quot;rec_month&quot; &quot;rec_day&quot;   &quot;code&quot;      &quot;sex&quot;       &quot;weight&quot;    &quot;yob&quot;
 </pre></div>
 </div></div>
         </p>
