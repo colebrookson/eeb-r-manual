@@ -63,32 +63,101 @@
   font-weight: bold;
 }
 </style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../css/stylesheet.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-<link rel="stylesheet"
-      href="../highlight/styles/default.min.css">
-<script src="../highlight/highlight.js"></script>
-<script src="../functions.js"></script>
-<script>hljs.highlightAll();</script>
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar-block .w3-bar-item {padding:20px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <link rel="stylesheet" href="../highlight/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/stylesheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <script src="../highlight/highlight.js"></script>
+    <script src="../functions.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
-<body class="w3-round-large">
-
-<!-- Top menu -->
-<div class="w3-top">
-  <div class="w3-navy w3-xlarge" 
-  style="max-width:auto;margin:auto;border:1px w3-gray"
-  border:1px>
-    <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰ Menu</div>
-    <div class="w3-right w3-padding-16" style="padding-right:10px">EEB </div>
-    <div class="w3-center w3-padding-16">The R Manual</div>
-  </div>
-</div>
+<body>
+	<div class="topnav">
+		<a class="a-top w3-center" href="../index.html">The R Manual</a>
+        <a class="a-mid" href="../about.html">About</a>
+        <a class="a-mid" href="../contact.html">Contact</a>
+        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
+	</div>
+	<div class="bottomnav navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Getting Started</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
+              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
+              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
+              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
+            </div>
+        </div> 
+        <div class="dropdown">
+            <button class="dropbtn">Basic R</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
+              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
+              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
+              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
+              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
+              <a href="../01-basicr/01-05-packages.html">Packages</a>
+              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Working With Data</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
+              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
+              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
+              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
+              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
+              <a href="../02-data/02-05-new-columns.html">New Columns</a>
+              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
+              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
+              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
+              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
+              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
+              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Plotting</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
+              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
+              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
+              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
+              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
+              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
+              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
+              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
+              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
+              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
+              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
+              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
+              <a href="../03-plot/03-12-annotations.html">Annotations</a>
+              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Statistics in R</button>
+            <div class="dropdown-content" style="float:auto">
+              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
+              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
+              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
+              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
+              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
+              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
+              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
+              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
+              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
+              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
+              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
+            </div>
+          </div> 
+	</div>
 
 <main style = margin-top:100px>
     <nav class="section-nav">
@@ -113,19 +182,20 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <span class="hl std">df</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 317 × 22
-##    sample_id sample_date gage_ht  temp   p_h  cond    cl no3_n so4_s    na     k    mg    ca nh4_n po4_p   doc   dic   tdn
-##    &lt;chr&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 QS        1987-01-05     2.82    20  7.22  48.2   7.3    97  0.52  4.75  0.18  1.5   2.46    14    NA  0.72  3.37    NA
-##  2 QS        1987-01-13     2.66    20  7.34  49.8   7.5   114  0.73  4.81  0.19  1.58  6.53    20    NA  0.74  3.35    NA
-##  3 QS        1987-01-20     2.61    20  7.12  50.3   7.5   115 NA     5.19  0.2   1.66  2.6     25    NA  0.69  4.42    NA
-##  4 QS        1987-01-27     2.58    20  7.19  50.4   7.3   117 NA     5.08  0.18  1.64  2.67    30    NA  0.62  3.3     NA
-##  5 QS        1987-02-03     2.8     20  7.36  49.6   7.3   103  0.85  4.86  0.17  1.49  2.39    25    NA  0.75  5.03    NA
-##  6 QS        1987-02-10     2.63    20  7.19  53.3   7.2   110 NA     5.11  0.18  1.59  2.55    30    NA  0.61  4.18    NA
-##  7 QS        1987-02-17     2.84    20 NA     43.7   7      94 NA     4.8   0.17  1.44  2.33     7    NA  1.78  2.4     NA
-##  8 QS        1987-02-24     2.68    19  6.93  48.4   7.3    90 NA     5.08  0.18  1.6   2.48     6    NA  1.85  2.9     NA
-##  9 QS        1987-03-03     2.76    20  7.02  48.4   7.6    86 NA     4.9   0.2   1.64  2.55    NA    NA  1.49  2.46    NA
-## 10 QS        1987-03-10     2.64    20  7.17  49.9   7.3    97 NA     4.89  0.2   1.51  2.81    NA    NA  1.29  3.34    NA
-## # … with 307 more rows, and 4 more variables: tdp &lt;dbl&gt;, si_o2 &lt;dbl&gt;, don &lt;dbl&gt;, tss &lt;dbl&gt;
+##    sample_id sample_date gage_ht  temp   p_h  cond    cl no3_n so4_s    na     k    mg
+##    &lt;chr&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 QS        1987-01-05     2.82    20  7.22  48.2   7.3    97  0.52  4.75  0.18  1.5 
+##  2 QS        1987-01-13     2.66    20  7.34  49.8   7.5   114  0.73  4.81  0.19  1.58
+##  3 QS        1987-01-20     2.61    20  7.12  50.3   7.5   115 NA     5.19  0.2   1.66
+##  4 QS        1987-01-27     2.58    20  7.19  50.4   7.3   117 NA     5.08  0.18  1.64
+##  5 QS        1987-02-03     2.8     20  7.36  49.6   7.3   103  0.85  4.86  0.17  1.49
+##  6 QS        1987-02-10     2.63    20  7.19  53.3   7.2   110 NA     5.11  0.18  1.59
+##  7 QS        1987-02-17     2.84    20 NA     43.7   7      94 NA     4.8   0.17  1.44
+##  8 QS        1987-02-24     2.68    19  6.93  48.4   7.3    90 NA     5.08  0.18  1.6 
+##  9 QS        1987-03-03     2.76    20  7.02  48.4   7.6    86 NA     4.9   0.2   1.64
+## 10 QS        1987-03-10     2.64    20  7.17  49.9   7.3    97 NA     4.89  0.2   1.51
+## # … with 307 more rows, and 10 more variables: ca &lt;dbl&gt;, nh4_n &lt;dbl&gt;, po4_p &lt;dbl&gt;,
+## #   doc &lt;dbl&gt;, dic &lt;dbl&gt;, tdn &lt;dbl&gt;, tdp &lt;dbl&gt;, si_o2 &lt;dbl&gt;, don &lt;dbl&gt;, tss &lt;dbl&gt;
 </pre></div>
 </div></div>
         <p>
@@ -206,7 +276,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
                 <p>
                 Well that didn't quite work out. We will need to make <code>year</code> a factor here:
                 </p>
@@ -222,7 +292,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
                 <p>
                 That looks better. <strong>Now here's why we might want to facet:</strong> right now our plot is displaying <strong>both</strong> sodium and potassium in the same <code>value</code> which doesn't makes sense since they're completely different scales of measurement. We could try to address this by separating them out by some aesthetic (e.g. colour), so let's try that: 
                 </p>
@@ -230,7 +300,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_long,</span> <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= year,</span> <span class="hl kwc">y</span> <span class="hl std">= value,</span>
                                              <span class="hl kwc">colour</span> <span class="hl std">= element))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
                 <p>
                 Ok so now we have grouped box plots. I suppose in theory we could leave it like this, but I am not personally a fan. Let's add in the necessary components and then think about faceting: 
                 </p>
@@ -240,7 +310,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Year&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Amount of Element (mg/L)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
                 <p>
                 Nope, still heinous! Time to facet! We'll make this on two panels by faceting using <code>facet_wrap()</code> and operating on the <code>element</code> variable. I also want the plot to display as two plots stacked <em>on top</em> of one another, so I can refer to the number of columns as 1 to force the <code>facet_wrap()</code> to do this. 
                 </p>
@@ -253,7 +323,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
              <span class="hl com"># I want this to be one column with two rows</span>
              <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
                 <p>
                 Ok, we're getting there! However, the scales for both are not helping. Let's fix it so the sodium can vary within it's max & min, and the potassium can vary within it's (different) max & min. We can do this with the <code>scales</code> argument in the facet_wrap.
                 </p>
@@ -267,7 +337,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
              <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
              <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
                 <p>
                 Okay, this is looking better! Now it feels like we can actually see the spread of the data. We can still make some aesthetic changes however. Let's change to a <code>fill</code> not a <code>colour</code> on our box plot: 
                 </p>
@@ -281,7 +351,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
              <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
              <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
                 <p>
                 Good, and now we'll change the actual colours we're using with <code>scale_fill_manual()</code>:
                 </p>
@@ -296,7 +366,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
              <span class="hl kwc">scales</span> <span class="hl std">=</span> <span class="hl str">&quot;free&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#90ee90&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#F8E473&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
                 <p>
                 I would also like to change the legend to have the full names of the elements. Recall we can <em>also</em> use the <code>scale_fill_manual()</code> to perform this:
                 </p>
@@ -314,7 +384,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                       <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Potassium (K)&quot;</span><span class="hl std">,</span>
                                  <span class="hl str">&quot;Sodium (Na)&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
                 <p>
                 Looks good! But one last thing. Somewhere along the way, there have developed some ugly labels on the top of each of the plots. We could expand them so they have the same thing as the legend. This is done via the <code>labeller</code> argument inside the call to <code>facet_grid()</code>. We pass a vector of matching values to the <code>as_labeller()</code> function and that goes as the argument to <code>labeller</code>. Yes, it's all annoyingly complicated ...
                 </p>
@@ -333,7 +403,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                       <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#90ee90&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#F8E473&quot;</span><span class="hl std">),</span>
                       <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Potassium (K)&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Sodium (Na)&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
                 <p>
                 Okay, well there we have it!! I would personally argue that you could likely leave off either the legend <em>or</em> the title as you really only need one of the two, but for the sake of practice, we can leave it as is. 
                 </p>
@@ -354,274 +424,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
 </p>
 </div>
-
-<script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-}
- 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-</script>
 </main>
-
-<!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-bar-item w3-button" style="color:blue;">Close Menu</a>
-  <ol>
-    <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
-    <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
-    <li><a href="../00-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
-    <ol>
-        <li><a href="../00-start/00-01-downloads.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            Downloads</a>
-        </li>
-        <li><a href="../00-start/00-02-navigating-rstudio.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            Navigating RStudio</a>
-        </li>
-        <li><a href="../00-start/00-03-the-file-ecosystem.html" onclick="w3_close()" 
-            class="w3-bar-item w3-button" 
-            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-            The File Ecosystem</a>
-        </li>
-    </ol>
-    </li>
-    <li><a href="../01-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
-        <ol>
-            <li><a href="../01-basicr/01-01-coding-basics.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Coding Basics</a>
-            </li>
-            <li><a href="../01-basicr/01-02-data-types.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Types</a>
-            </li>
-            <li><a href="../01-basicr/01-03-data-structures.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Structures</a>
-            </li>
-            <li><a href="../01-basicr/01-04-indexing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Indexing</a>
-            </li>
-            <li><a href="../01-basicr/01-05-packages.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Packages</a>
-            </li>
-            <li><a href="../01-basicr/01-06-workflow.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Workflow</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../02-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
-        <ol>
-            <li><a href="../02-data/02-01-reading-writing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Reading &amp; Writing Files</a>
-            </li>
-            <li><a href="../02-data/02-02-filtering-subsetting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Filtering &amp; Subsetting</a>
-            </li>
-            <li><a href="../02-data/02-03-selecting-columns.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Selecting Columns</a>
-            </li>
-            <li><a href="../02-data/02-04-grouping-summarizing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Grouping &amp; Summarizing</a>
-            </li>
-            <li><a href="../02-data/02-05-new-columns.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Ceating New Columns</a>
-            </li>
-            <li><a href="../02-data/02-06-factors.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Factor Data</a>
-            </li>
-            <li><a href="../02-data/02-07-renaming.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Renaming Columns</a>
-            </li>
-            <li><a href="../02-data/02-08-dates.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Date &amp; Time Data</a>
-            </li>
-            <li><a href="../02-data/02-09-reshaping.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Reshaping DataFrames</a>
-            </li>
-            <li><a href="../02-data/02-10-cleaning-process.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Data Cleaning Process</a>
-            </li>
-            <li><a href="../02-data/02-11-relational-data.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Relational DataFrames</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../03-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
-        <ol>
-            <li><a href="../03-plot/03-00-basics-of-plotting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Basics of Plotting</a>
-            </li>
-            <li><a href="../03-plot/03-01-intro-to-ggplot.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Introduction to <code>ggplot2</code></a>
-            </li>
-            <li><a href="../03-plot/03-02-interative-plotting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Interative Plotting</a>
-            </li>
-            <li><a href="../03-plot/03-03-facetting.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Facetting Plot Panels</a>
-            </li>
-            <li><a href="../03-plot/03-04-plotting-multiple-dataframes.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting with Multiple DataFrames</a>
-            </li>
-            <li><a href="../03-plot/03-05-distributions.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Distributions</a>
-            </li>
-            <li><a href="../03-plot/03-06-part-to-whole-comparison.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Part to Whole Comparisons</a>
-            </li>
-            <li><a href="../03-plot/03-07-relations-between-vars.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Relationships Between Variables</a>
-            </li>
-            <li><a href="../03-plot/03-08-change-time.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Plotting Change Through Time</a>
-            </li>
-            <li><a href="../03-plot/03-10-values-between-groups.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Values Between Groups</a>
-            </li>
-            <li><a href="../03-plot/03-11-mapping.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Geographic Mapping</a>
-            </li>
-            <li><a href="../03-plot/03-12-annotations.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Annotations</a>
-            </li>
-            <li><a href="../03-plot/03-13-phylogenetic-trees.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Phylogenetic Trees</a>
-            </li>
-        </ol>
-    </li>
-    <li><a href="../04-landingpage.html" onclick="w3_close()" 
-        class="w3-bar-item w3-button" 
-        style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
-        <ol>
-            <li><a href="../04-stats1/04-00-introduction.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Introduction</a>
-            </li>
-            <li><a href="../04-stats1/04-01-probability-101.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Probability 101</a>
-            </li>
-            <li><a href="../04-stats1/04-02-likelihood.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Likelihood</a>
-            </li>
-            <li><a href="../04-stats1/04-03-sampling-distributions.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Sampling Distributions</a>
-            </li>
-            <li><a href="../04-stats1/04-04-hypothesis-testing.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Hypothesis Testings</a>
-            </li>
-            <li><a href="../04-stats1/04-05-confidence-intervals.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Confidence Intervals</a>
-            </li>
-            <li><a href="../04-stats1/04-06-comparing-sample-means.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Comparing Sample Means (T-tests)</a>
-            </li>
-            <li><a href="../04-stats1/04-07-analysis-of-variance.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Analysis of Variance (ANOVAs)</a>
-            </li>
-            <li><a href="../04-stats1/04-08-linear-regression.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Linear Regression</a>
-            </li>
-            <li><a href="../04-stats1/04-09-logistic-regression.html" onclick="w3_close()" 
-                class="w3-bar-item w3-button" 
-                style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Logistic Regression</a>
-            </li>
-        </ol>
-    </li>
-  </ol>
-</nav>
-
 </body>
 </html>

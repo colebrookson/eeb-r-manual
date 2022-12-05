@@ -77,7 +77,11 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
 </style>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script> 
+  $(function(){
+    $("#includedContent").load("../sidebar-temp.html"); 
+  });
+</script> 
 </head>
 <body class="w3-round-large">
 
@@ -222,19 +226,124 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     This content is reviewed regularly for errors and to make improvements, if you see an error and want to help us make this better, see the Contact Page
 </p>
 </main>
-
-<div id="nav-placeholder">
-
 </div>
 
+<!-- Sidebar (hidden by default) -->
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
+style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button" style="color:blue;">Close Menu</a>
+  <a href="../about.html" class="w3-button w3-block w3-left-align w3-large">
+    About</a>
+  <a href="../contact.html", class ="w3-button w3-block w3-left-align w3-large">
+    Contact</a>
+  <!-- First Section "Getting Started"-->
+  <button class="w3-button w3-block w3-left-align w3-large" 
+  onclick="myAccFunc('00-start')"> Getting Started ▼</button>
+    <!-- First Section Items-->
+    <div id="00-start" class="w3-hide w3-white w3-card">
+        <li><a href="../00-landingpage.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button w3-medium" 
+            style="color:darkslategrey;
+            font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Getting Started</a>
+        </li>
+        <ol>
+          <li><a href="../00-start/00-01-downloads.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button w3-medium" 
+            style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Downloads</a>
+          </li>
+          <li><a href="../00-start/00-02-navigating-rstudio.html" onclick="w3_close()" 
+              class="w3-bar-item w3-button w3-medium" 
+              style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+              Navigating RStudio</a>
+          </li>
+          <li><a href="../00-start/00-03-the-file-ecosystem.html" onclick="w3_close()" 
+              class="w3-bar-item w3-button w3-medium" 
+              style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+              The File Ecosystem</a>
+          </li>
+        </ol>
+    </div>
+  <!-- Second Section "Basic R-->
+  <button class="w3-button w3-block w3-left-align w3-large" 
+  onclick="myAccFunc('01-basicr')"> + Basic R</button>
+    <!-- Second Section Items-->
+    <div id="01-basicr" class="w3-hide w3-white w3-card">
+        <li><a href="../01-landingpage.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button w3-medium" 
+            style="color:darkslategrey;
+            font-weight:bold;font-size:calc(14px + 0.6vw);">
+            Basic R</a>
+        </li>
+        <ol>
+          <li><a href="../01-basicr/01-01-coding-basics.html" onclick="w3_close()" 
+              class="w3-bar-item w3-button w3-medium" 
+              style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+              Coding Basics</a>
+          </li>
+          <li><a href="../01-basicr/01-02-data-types.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button w3-medium"
+              style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+              Data Types</a>
+          </li>
+          <li><a href="../01-basicr/01-03-data-structures.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button w3-medium" 
+              style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+              Data Structures</a>
+          </li>
+          <li><a href="../01-basicr/01-04-indexing.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button w3-medium" 
+              style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+              Indexing</a>
+          </li>
+          <li><a href="../01-basicr/01-05-packages.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button w3-medium" 
+              style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+              Packages</a>
+          </li>
+          <li><a href="../01-basicr/01-06-workflow.html" onclick="w3_close()" 
+            class="w3-bar-item w3-button w3-medium" 
+              style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
+              Workflow</a>
+          </li>
+    </div>
+style="display:none;z-index:2;width:40%;min-width:200px" id="mySidebar">
+  <div id="includedContent"></div>
+</nav>
+
 <script>
-$(function(){
-  $("#nav-placeholder").load("sidebar-temp.html");
-});
+  function myAccFunc() {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+      x.previousElementSibling.className += " w3-green";
+    } else { 
+      x.className = x.className.replace(" w3-show", "");
+      x.previousElementSibling.className = 
+      x.previousElementSibling.className.replace(" w3-green", "");
+    }
+  }
+
+</script>
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+
+function w3_close() {
+  document.getElementById("main").style = "margin-top: 100px; auto";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+} 
 </script>
 
-
-<script>
   // Script to open and close sidebar
   function w3_open() {
     document.getElementById("main").style.marginLeft = "25%";
