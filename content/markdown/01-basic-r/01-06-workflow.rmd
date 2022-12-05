@@ -5,9 +5,14 @@ output:
 ---
 # Workflow in R
 **Author:** Cole Brookson
-**Date:** 02 July 2022
+**Date:** 02 July 2022 
 
-This section will take you through a set of best practices for optimizing your daily workflow in R. **NOTE:** This will progress from beginner topics to more advanced usage, so please only operationalize from this section what is relevant to you. 
+```{r}
+2 + 2
+```
+
+
+This section will take you through a set of best practices for optimizing your daily workflow in R. <strong>NOTE:</strong> This will progress from beginner topics to more advanced usage, so please only operationalize from this section what is relevant to you. 
 
 For this section, we assume you're familiar with R scripts and `.Rmd` files, packages, and some basic programming, including reading in data to R. 
 
@@ -19,28 +24,27 @@ Even if you are a beginner, there are some basics to keep in mind that will make
 
 You will likely have multiple files for the same project, whether lab report or publication. All scripts, data files, figures, and outputs, should be contained in the same place on your computer. 
 
-Imagine you work on an analysis on Tuesday, close R, shut down your computer, and want to begin working on it again on Wednesday. On Tuesday you might have created a bunch of objects in your script, that were saved in your environment. **However, it is best practice to NOT save those objects in your environment until Wednesday.** By structuring your R scripts and data files properly, you can recreate your environment safely each time, without having to worry about whether or not you are keeping any intermediate objects or things by accident. To make sure you do this, change your RStudio settings to not preserve your workspace (environment) in between sessions. 
+Imagine you work on an analysis on Tuesday, close R, shut down your computer, and want to begin working on it again on Wednesday. On Tuesday you might have created a bunch of objects in your script, that were saved in your environment. <strong>However, it is best practice to NOT save those objects in your environment until Wednesday.</strong> By structuring your R scripts and data files properly, you can recreate your environment safely each time, without having to worry about whether or not you are keeping any intermediate objects or things by accident. To make sure you do this, change your RStudio settings to not preserve your workspace (environment) in between sessions. 
+
 
 ![](./img/rstudio-workspace.png)
 
 This will be annoying at first, but it will encourage better habits in the long run. 
 
-### Working Directories
-
 The idea behind a working directory is that there will be one single place where R looks for files to load or to write out to your computer. You can see your current working directory with: 
-```{r}
+<!--begin.rcode
 getwd()
-```
+end.rcode-->
 When you are beginning, I recommend you make a folder in your `Documents` folder or some such place named something easily memorable such as `r-work`. Then, within that location, make sub-folders for each project you may work on. For example, within your `r-work` folder, you may have a subfolder for each class you're taking that requires R (i.e. a path like: `/Documents/r-work/eeb225/`), within which you should have additional folders such as `data`, and `code`. 
 
 This way when you open up a new RStudio session, you can *set your working directory* using: 
-```{r}
-setwd(".../Documents/r-work/eeb225/")
-```
+<!--begin.rcode
+setwd("...../Documents/r-work/eeb225/")
+end.rcode-->
 And now if you want to load in any data, you could just write something like 
-```{r}
+<!--begin.rcode
 read.csv("./data/lab-1-data.csv")
-```
+end.rcode-->
 and R would know that it should look for the relevant file in the `/data` file of `/eeb225`. This is very useful and important to thing carefully about. 
 
 **However**, as soon as you are more comfortable in R, you should **NEVER** use the `setwd()` function, and should instead use `RProjects` as described below. While this approach may seem simple and foolproof, it is actually very easy to get confused, and is **not** recommended past the first few usages of R. 
@@ -105,9 +109,9 @@ But this wouldn't work for another user! So, we use the `here` package.
 
 ##### `here` Package
 First we need to install the package: 
-```{r}
+<!--begin.rcode
 install.packages("here")
-```
+end.rcode-->
 Now we can edit our file to read in the data using the `here()` function. To see how it works, run just `here()` in your console, and you'll notice that it prints the absolute path to the root of your directory! This is the magic of this package! When used along with an RProject, it provides a near-perfect reproducibility across computers and operating systems! 
 
 So our edited file would look something like this: 
@@ -126,27 +130,27 @@ Once you are comfortable working in R, you will be served well by continuing to 
 
 When writing code and managing files, it's always best to use consistent style. The best way to do so is to follow a style guide as closely as possible. 
 
-This style guide is based largely off the [Tidyverse Style Guide](https://style.tidyverse.org/), and much of the style guidelines here are copied and pasted directly. This assumes you are using the [R](https://www.r-project.org/) language and likely the [RStudio](https://www.rstudio.com/) IDE. It is recommended that you read through and follow the [Tidyverse Style Guide](https://style.tidyverse.org/) but **there are five key components of the style guide, *Files, Syntax, Functions, Pipes, `ggplot2`***, and key components of each are highlighted here: 
+This style guide is based largely off the [Tidyverse Style Guide](https://style.tidyverse.org/), and much of the style guidelines here are copied and pasted directly. This assumes you are using the [R](https://www.r-project.org/) language and likely the [RStudio](https://www.rstudio.com/) IDE. It is recommended that you read through and follow the [Tidyverse Style Guide](https://style.tidyverse.org/) but <strong>there are five key components of the style guide, *Files, Syntax, Functions, Pipes, `ggplot2`</strong>, and key components of each are highlighted here: 
 
 #### **Files**
   * Organization
     * File names should be meaningful and end in .R. Avoid using special characters in file names - stick with numbers, letters, -, and _.
     * If files should be run in a particular order, prefix them with numbers. If it seems likely you’ll have more than 10 files, left pad with zero:
-    ```
+    <!--begin.rcode
     00_download.R
     01_explore.R
     ...
     09_model.R
     10_visualize.R
-    ```
+    end.rcode-->
     * Pay attention to capitalization, since you, or some of your collaborators, might be using an operating system with a case-insensitive file system (e.g., Microsoft Windows or OS X) which can lead to problems with (case-sensitive) revision control systems. Prefer file names that are all lower case, and never have names that differ only in their capitalization.
   * Internal Structure
    * Use commented lines of - and = to break up your file into easily readable chunks.
-   ```
+   end.rcode-->
    # Load data ===========================
 
    # Plot data ===========================
-   ```
+   end.rcode-->
    * If your script uses add-on packages, load them all at once at the very beginning of the file. This is more transparent than sprinkling library() calls throughout your code or having hidden dependencies that are loaded in a startup file, such as .Rprofile.
 
 #### **Syntax**
@@ -157,7 +161,7 @@ This style guide is based largely off the [Tidyverse Style Guide](https://style.
   * Long Lines
     * Strive to limit your code to 80 characters per line. This fits comfortably on a printed page with a reasonably sized font. If you find yourself running out of room, this is a good indication that you should encapsulate some of the work in a separate function.
     * If a function call is too long to fit on a single line, use one line each for the function name, each argument, and the closing ). This makes the code easier to read and to change later.
-   ```
+   <!--begin.rcode
    # Good
    do_something_very_complicated(
     something = "that",
@@ -169,7 +173,7 @@ This style guide is based largely off the [Tidyverse Style Guide](https://style.
    do_something_very_complicated("that", requires, many, arguments,
                                 "some of which may be long"
                                 )
-  ```
+  end.rcode-->
   * Comments
     * Each line of a comment should begin with the comment symbol and a single space: #
     * In data analysis code, use comments to record important findings and analysis decisions. If you need comments to explain what your code is doing, consider rewriting your code to be clearer. 
@@ -177,7 +181,7 @@ This style guide is based largely off the [Tidyverse Style Guide](https://style.
 #### **Functions**
   * Naming
     * As well as following the general advice for object names, strive to use verbs for function names:
-    ```
+    end.rcode-->
     # Good
     add_row()
     permute()
@@ -185,10 +189,10 @@ This style guide is based largely off the [Tidyverse Style Guide](https://style.
     # Bad
     row_adder()
     permutation()
-    ```
+    end.rcode-->
   * Long lines
     * If a function definition runs over multiple lines, indent the second line to where the definition starts.
-    ```
+    end.rcode-->
     # Good
     long_function_name <- function(a = "a long argument",
                                    b = "another argument",
@@ -203,10 +207,10 @@ This style guide is based largely off the [Tidyverse Style Guide](https://style.
       # Here it's hard to spot where the definition ends and the
       # code begins
     }
-    ```
+    end.rcode-->
   * Comments
     * In code, use comments to explain the “why” not the “what” or “how”. Each line of a comment should begin with the comment symbol and a single space: #.
-    ```
+    end.rcode-->
     # Good
 
     # Objects like data frames are treated as leaves
@@ -216,11 +220,11 @@ This style guide is based largely off the [Tidyverse Style Guide](https://style.
     
     # Recurse only with bare lists
     x <- map_if(x, is_bare_list, recurse)
-    ``` 
+    end.rcode--> 
 #### **Pipes**
   * Long Lines 
     *  If the arguments to a function don’t all fit on one line, put each argument on its own line and indent:
-    ```
+    end.rcode-->
     iris %>%
      group_by(Species) %>%
      summarise(
@@ -228,13 +232,13 @@ This style guide is based largely off the [Tidyverse Style Guide](https://style.
        Sepal.Width = mean(Sepal.Width),
        Species = n_distinct(Species)
      )
-    ```
+    end.rcode-->
 #### **`ggplot2`**
    * Whitespace
      * `+` should always have a space before it, and should be followed by a new line. This is true even if your plot has only two layers. After the first step, each line should be indented by two spaces
    * Long lines
      * If the arguments to a ggplot2 layer don’t all fit on one line, put each argument on its own line and indent:
-     ```
+     end.rcode-->
      # Good
      ggplot(aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
        geom_point() +
@@ -248,9 +252,9 @@ This style guide is based largely off the [Tidyverse Style Guide](https://style.
      ggplot(aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
        geom_point() +
        labs(x = "Sepal width, in cm", y = "Sepal length, in cm", title = "Sepal length vs. width of irises") 
-     ```
+     end.rcode-->
      * ggplot2 allows you to do data manipulation, such as filtering or slicing, within the data argument. Avoid this, and instead do the data manipulation in a pipeline before starting plotting.
-     ```
+     end.rcode-->
      # Good
      iris %>%
        filter(Species == "setosa") %>%
@@ -260,7 +264,7 @@ This style guide is based largely off the [Tidyverse Style Guide](https://style.
      # Bad
      ggplot(filter(iris, Species == "setosa"), aes(x = Sepal.Width, y = Sepal.Length)) +
        geom_point()
-     ```
+     end.rcode-->
      
 ### Efficient Workflow
 
