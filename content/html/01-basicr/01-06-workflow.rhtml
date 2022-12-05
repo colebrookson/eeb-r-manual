@@ -132,7 +132,7 @@
             <section id="all">
             <h2>Workflow for All Users</h2>
             <p>
-            <em>In this section we assume that you have R and RStudio downloaded, understand what objects are in R, and have been able to open a <code>.R</code> file that you would write code in. <em>
+            <em>In this section we assume that you have R and RStudio downloaded, understand what objects are in R, and have been able to open a <code>.R</code> file that you would write code in.
             </p>
             <p>
             Even if you are a beginner, there are some basics to keep in mind that will make your life SO much easier down the road. 
@@ -145,7 +145,7 @@
             <strong>2.</strong> Document your work <br>
             To write our code in order means that we follow a predictable series of steps that mean the objects we create in our script never depend on something that doesn't happen until <em>later</em> in the file. The typical set up of your script, whether in RMarkdown or in an R script follows the general pattern of: <strong>Set Up, Data Cleaning/Prep, Analysis, Plots, Saving Results</strong>. That might look something like this: 
             </p>
-            <img src="../img/01-img/rstudio-workspace.png">
+            <img src="../img/01-img/rstudio-workspace.png" style="max-width: 60%; height: auto;">
             <p>
             We'll now talk about where this file will go and how it'll talk to our computer appropriately. 
             </p>
@@ -160,7 +160,7 @@
             <p>
             Imagine you work on an analysis on Tuesday, close R, shut down your computer, and want to begin working on it again on Wednesday. On Tuesday you might have created a bunch of objects in your script, that were saved in your environment, that you still want access to on Wednesday. <strong>However, it is best practice to NOT save those objects in your environment until Wednesday.</strong> By structuring your R scripts and data files properly, you can recreate your environment safely each time, without having to worry about whether or not you are keeping any intermediate objects or things by accident. To make sure you do this, change your RStudio settings to not preserve your workspace (environment) in between sessions. 
             </p>
-            <img src="../img/01-img/rstudio-workspace.png">
+            <img src="../img/01-img/rstudio-workspace.png" style="max-width: 60%; height: auto;">
             <p>
             This will be annoying at first, but it will encourage better habits in the long run. 
             </p>
@@ -184,7 +184,7 @@
             </p>
             <!--begin.rcode
             setwd("...../Documents/r-work/eeb225/")
-            end.rcode-->
+            end.rcode--> 
             <p>
             <strong>Note</strong> here that the "....." in that path is going to be specific to your computer's operating system. For example, in a Windows computer, it will likely be "C:\Users\YOURNAME\Documnents"
             </p>
