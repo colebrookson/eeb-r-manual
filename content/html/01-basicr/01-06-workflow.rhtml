@@ -108,13 +108,13 @@
               </li>
               </ol>
               </li>
-              <li><a href="#intermediate">Workflow for Intermediate Users</a>
+              <li><a href="#intermediate">Intermediate Workflow</a>
                     <ol>
                     <li><a href="#intermediate--proj">RProjects</a></li>
                     <li><a href="#intermediate--here">The <code>here</code> Package</a></li>
                 </ol>
               </li>
-                    <li><a href="#adv">Workflow for Advanced Users</a>
+                    <li><a href="#adv">Advanced Workflow</a>
                     <ol>
                     <li><a href="#adv--style">Style Guide</a></li>
                     <li><a href="#adv--eff">Efficient Coding</a></li>
@@ -132,7 +132,7 @@
             <section id="all">
             <h2>Workflow for All Users</h2>
             <p>
-            <em>In this section we assume that you have R and RStudio downloaded, understand what objects are in R, and have been able to open a <code>.R</code> file that you would write code in.
+            <em>In this section we assume that you have R and RStudio downloaded, understand what objects are in R, and have been able to open a <code>.R</code> file that you would write code in.</em>
             </p>
             <p>
             Even if you are a beginner, there are some basics to keep in mind that will make your life SO much easier down the road. 
@@ -171,9 +171,9 @@
             Think about the "Downloads" folder on your computer. Everytime you download something from the internet, your computer automatically puts it in that file on you computer. Then you can go and find it if you want it and move it. Similarly, you can tell R to look for files in a specific place on your computer, so it can read them all in. 
             </p>
             <p>
-            If you're working in R right now, you can see your current direcotry with: 
+            If you're working in R right now, you can see your current directory with: 
             </p>
-            <!--begin.rcode, echo=FALSE
+            <!--begin.rcode, eval=FALSE
             getwd()
             end.rcode-->
             <p>
@@ -182,7 +182,7 @@
             <p>
             This way when you open up a new RStudio session, you can <em>set your working directory</em> using: 
             </p>
-            <!--begin.rcode
+            <!--begin.rcode, eval=FALSE
             setwd("...../Documents/r-work/eeb225/")
             end.rcode--> 
             <p>
@@ -203,7 +203,7 @@
             <p>
             So getting back to R and our workflow, once I have a working directory set, I can load in some data using something like this:
             </p>
-            <!--begin.rcode
+            <!--begin.rcode, eval=FALSE
             read.csv("./data/lab-1-data.csv")
             end.rcode-->
             <p>
@@ -319,7 +319,7 @@
             </p>
             <img src="../img/01-img/here.png" style="max-width: 60%; height: auto;">
             <p>
-            And we see it prints out the absolute path pointing to our current working directory! So when we use the <code>here()</code> function, we put in quotation marks, first <em>./<em> which signifies everything printed above that the package is taking care of for us, and then the relative path to the file we want, so in our case, <code>data/lab-1-data.csv</code>
+            And we see it prints out the absolute path pointing to our current working directory! So when we use the <code>here()</code> function, we put in quotation marks, first <em>./</em> which signifies everything printed above that the package is taking care of for us, and then the relative path to the file we want, so in our case, <code>data/lab-1-data.csv</code>
             </p>
             </section>
             </section>
@@ -340,7 +340,7 @@
             <section id="adv--eff">
             <h3>Efficient Workflow</h3>
             <p>
-            Another thing to begin doing when you're more comfortable in R is to begin to think more critically about a project *before* you just start writing code. There are many excellent books on writing good code more generally, but <a href="https://csgillespie.github.io/efficientR/">Efficient R Programming</a> by Gillespie & Lovelace may be a good starting point. To summarize a few short important points from their work, Gillespie & Lovelace list <a href="https://www.oreilly.com/library/view/efficient-r-programming/9781491950777/ch04.html"> that are worth considering: 
+            Another thing to begin doing when you're more comfortable in R is to begin to think more critically about a project *before* you just start writing code. There are many excellent books on writing good code more generally, but <a href="https://csgillespie.github.io/efficientR/">Efficient R Programming</a> by Gillespie & Lovelace may be a good starting point. To summarize a few short important points from their work, Gillespie & Lovelace list <a href="https://www.oreilly.com/library/view/efficient-r-programming/9781491950777/ch04.html">some useful things</a> that are worth considering: 
             </p>
             <p>
             <strong>1.</strong> Start without writing code but with a clear mind and perhaps a pen and paper. This will ensure that you keep your objectives at the forefront of your mind without getting lost in the technology.
