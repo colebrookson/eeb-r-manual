@@ -387,8 +387,9 @@ h6 {font-size:calc(12.5px + 0.9vw); font-weight: bold;}
 main {
   display: grid;
   grid-template-columns: 15em 1fr;
-  max-width: 100em;
-  margin: auto 10% auto auto;
+  margin: 1em auto;
+  width: 100em;
+  max-width: calc(100% - 2em); 
 }
 main_landing {
   display: grid;
