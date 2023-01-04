@@ -1,6 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -151,23 +213,10 @@
     <section id="ssenp">
       <h2>Sample Spaces, Events, and Naive Probability</h2>
       <p>
-        Probability is based on the mathematical concept of sets, from which we'll steal some jargon.
+        Probability is based on the mathematical concept of sets, from which we'll steal some jargon. Let's imagine an example to ground this.
       </p>
       <p>
-        To think about this, we'll use a fun example. We'll consider the rather frightening (but luckily unlikely) task of reaching into a bag full of black widow spiders (<em>Latrodectus indistinctus</em>) and pulling one out. This is our "sample event". Now, black widows are famous for two things: 1) their telltale red hour-glass marking, and 2) their venomous bite. However, not <em>all</em> black widows have the red marking! Some of them don't. 
-      </p>
-
-      <!--Add in the div for the black widow sidebar-->
-      <div id="spp-high" style="float:right; width: 30%; height: 150px; margin: 10px; background-color: #98d295; border-color: black; border:solid">
-        <p style="float:auto">
-          <strong style="font-size:calc(8px + 0.7vw)">Black widows</strong> <br><em style="font-size:calc(6px + 0.7vw)">Latrodectus indistinctus</em>
-          <img src="../img/04-img/widow.jpg" style="max-width: 50%; height:auto; float:right;">
-        </p>
-      </div>
-
-
-      <p>
-        Say there are 1000 black widows in a bag. Only <em>one</em> of those spiders happens to have a red dot on their thorax. You pull a single spider out of that bag, without looking. You could have either pulled A) a spider with no red dot, or B) the spider with the red dot. What is the <em>probability</em> that you have selected the spider with the red dot? 
+        Say there are 1000 spiders in a bag. One of those spiders happens to have a red dot on their thorax. You pull a single spider out of that bag, without looking. You could have either pulled A) a spider with no red dot, or B) the spider with the red dot. What is the <em>probability</em> that you have selected the spider with the red dot? 
       </p>
       <p>
         Above we've actually used all the key terms above in description. First, we've actually defined the <em>sample space</em> (the set of all possible outcomes of an experiment/trial) as being finite - the spiders in the bag that we can think of as a mathematical set. The population (related but different to a sample space) is the set of all units that some random process can select. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and <em>all</em> the applications we'll consider here, have finite sample spaces. That is to say, we can construct a <em>set</em> containing every single <em>outcome</em> of an <em>experiment or random trial</em>. In this example, each spider represents an <em>outcome</em>, and an <em>event</em> is some set of spiders. <strong>Side note:</strong> sets can have one or even <em>no</em> items in them. The <em>events</em> are what we would mathematically consider <em>subsets</em> of the <em>sample space</em>. So here we have two <em>events</em> of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
@@ -188,14 +237,16 @@
       <p>
         This is easy enough to replicate in R, as it's simply a division calculation: 
       </p>
-      <!--begin.rcode
-      size_b = 1
-      size_sample_space = 1000
-      prob_b = size_b / size_sample_space
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">size_b</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
+<span class="hl std">size_sample_space</span> <span class="hl kwb">=</span> <span class="hl num">1000</span>
+<span class="hl std">prob_b</span> <span class="hl kwb">=</span> <span class="hl std">size_b</span> <span class="hl opt">/</span> <span class="hl std">size_sample_space</span>
 
-      # show the result
-      prob_b
-      end.rcode-->
+<span class="hl com"># show the result</span>
+<span class="hl std">prob_b</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 0.001
+</pre></div>
+</div></div>
       <p>
         <strong>Side note:</strong> Quickly, let's define two (only two!) operations from set theory to help us out. We'll define the sample space \(S\) as a set, and our two events as subsets \(A\) and \(B\) of \(S\). We can think of the part of \(S\) encapsulated by both subset \(A\) and subset *B* as being the <em>intersection</em> of \(A\) and \(B\), and we can separately think about the part of the sample space \(S\) that is encapsulated by either *A* or *B* as the *union* of\(A\) and \(B\). We write the intersection of \(A\) and \(B\) as \(A \cap B\) and the union of \(A\) and \(B\) as \(A \cup B\). Refer to this image for a visual idea of this: 
       </p>
@@ -262,21 +313,21 @@
       \[P(\text{D}) = 0.25\]
         which would result in a probability distribution that may look like this: 
       </p>
-      <!--begin.rcode
-      library(ggplot2)
-      library(ggthemes)
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+<span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
 
-      df <- data.frame(
-        base = c("A", "C", "G", "T"),
-        prob = 0.25
-      )
+<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+  <span class="hl kwc">base</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
+  <span class="hl kwc">prob</span> <span class="hl std">=</span> <span class="hl num">0.25</span>
+<span class="hl std">)</span>
 
-      ggplot(data = df) + 
-        geom_col(aes(x = base, y = prob, fill = base)) +
-        ggthemes::theme_base() + 
-        labs(x = "Nucleotide Base", y = "Probability") + 
-        ylim(c(0,1))
-      end.rcode-->
+<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_col</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= base,</span> <span class="hl kwc">y</span> <span class="hl std">= prob,</span> <span class="hl kwc">fill</span> <span class="hl std">= base))</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Nucleotide Base&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
       <p>
         This is intuitive. Any way that the distribution is partitioned, the sum of probabilities of each event <strong>must</strong> sum to 1.0 without exception. The most common discrete probability distributions are the Poisson and Bernoulli distributions. 
       </p>
@@ -295,36 +346,36 @@
 
           And as there's only one parameter (\(\lambda\)), this parameter simply indicates the "shape" of the function, or how many average events happen in a given time interval. Conveniently in R, there are mass functions for most common distributions. Let's take a look at <code>?rpois</code> and we see that we can plot the probability densities with the <code>dpois</code> function. Let's choose three different parameter values and see how that changes our probability density. In addition, it's actually much easier to make plots of discrete distributions in <strong>base R</strong> so we'll do that:
         </p>
-        <!--begin.rcode
-        # first make a sequence of values to construct our density across:
-        x <- seq(0, 100, 1)
-        plot(x, dpois(x, lambda = 1), 
-            type = "h",
-            lwd = 3,
-            main = "lambda = 1",
-            ylab = "Probability Mass", 
-            xlab = "X")
-        end.rcode-->
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first make a sequence of values to construct our density across:</span>
+<span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">100</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">)</span>
+<span class="hl kwd">plot</span><span class="hl std">(x,</span> <span class="hl kwd">dpois</span><span class="hl std">(x,</span> <span class="hl kwc">lambda</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">),</span>
+    <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;h&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">,</span>
+    <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;lambda = 1&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability Mass&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;X&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
         <p>
           Now note here that we've plotted this as these vertical lines, instead of some continuous curve. Why? Well, recall this is a <strong>discrete</strong> probability distribution. There are <strong>no</strong> probabilities in the continuous space between integer values. So to plot this as a curve would actually be incorrect. That's why it's better to be explicit in this fashion and plot them as such here. Other \(\lambda\) values:
         </p>
-        <!--begin.rcode
-        plot(x, dpois(x, lambda = 5), 
-            type = "h",
-            lwd = 3,
-            main = "lambda = 5",
-            ylab = "Probability Mass", 
-            xlab = "X")
-        end.rcode-->
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(x,</span> <span class="hl kwd">dpois</span><span class="hl std">(x,</span> <span class="hl kwc">lambda</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">),</span>
+    <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;h&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">,</span>
+    <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;lambda = 5&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability Mass&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;X&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
         
-        <!--begin.rcode
-        plot(x, dpois(x, lambda = 25), 
-            type = "h",
-            lwd = 3,
-            main = "lambda = 25",
-            ylab = "Probability Mass", 
-            xlab = "X")
-        end.rcode-->
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(x,</span> <span class="hl kwd">dpois</span><span class="hl std">(x,</span> <span class="hl kwc">lambda</span> <span class="hl std">=</span> <span class="hl num">25</span><span class="hl std">),</span>
+    <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;h&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">,</span>
+    <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;lambda = 25&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability Mass&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;X&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
         <p>
           We can see how the mass function changes given our changing values for the \(\lambda\). 
         </p>
@@ -351,72 +402,71 @@
         <p>
           Let's first see how changing the \(\sigma\) will affect the curves. Again, base plotting actually has an advantage here:
         </p>
-        <!--begin.rcode
-        x <- seq(-5, 5, 0.1)
-        fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl num">0.1</span><span class="hl std">)</span>
+<span class="hl std">fx</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">dnorm</span><span class="hl std">(x,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span> <span class="hl com"># mu = 0 and sd = 1 is the &quot;standard&quot; normal</span>
 
-        plot(x = x, y = fx, 
-            type = "l",
-            xlab = "X", 
-            ylab = "density")
-        end.rcode-->
+<span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= x,</span> <span class="hl kwc">y</span> <span class="hl std">= fx,</span>
+    <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;X&quot;</span><span class="hl std">,</span>
+    <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;density&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
       </section>
       <p>
         Now let's add some other standard deviations: 
       </p>
-      <!--begin.rcode
-      # make the plot then add on the other lines
-      x <- seq(-5, 5, 0.1)
-      fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># make the plot then add on the other lines</span>
+<span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl num">0.1</span><span class="hl std">)</span>
+<span class="hl std">fx</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">dnorm</span><span class="hl std">(x,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span> <span class="hl com"># mu = 0 and sd = 1 is the &quot;standard&quot; normal</span>
 
-      plot(
-        x, 
-        fx,
-        type = "l",
-        xlab = "X", 
-        ylab = "density",
-        ylim = c(0, 0.9)
-      )
+<span class="hl kwd">plot</span><span class="hl std">(</span>
+  <span class="hl std">x,</span>
+  <span class="hl std">fx,</span>
+  <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span><span class="hl std">,</span>
+  <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;X&quot;</span><span class="hl std">,</span>
+  <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;density&quot;</span><span class="hl std">,</span>
+  <span class="hl kwc">ylim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">0.9</span><span class="hl std">)</span>
+<span class="hl std">)</span>
 
-      # add new lines on for each of our new sd's
-      lines(x, dnorm(x, mean = 0, sd = 0.75), col="red")
-      lines(x, dnorm(x, mean = 0, sd = 0.5), col="blue")
-      lines(x, dnorm(x, mean = 0, sd = 1.2), col="green")
+<span class="hl com"># add new lines on for each of our new sd's</span>
+<span class="hl kwd">lines</span><span class="hl std">(x,</span> <span class="hl kwd">dnorm</span><span class="hl std">(x,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">0.75</span><span class="hl std">),</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">lines</span><span class="hl std">(x,</span> <span class="hl kwd">dnorm</span><span class="hl std">(x,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">0.5</span><span class="hl std">),</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;blue&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">lines</span><span class="hl std">(x,</span> <span class="hl kwd">dnorm</span><span class="hl std">(x,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">),</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;green&quot;</span><span class="hl std">)</span>
 
-      # now let's add a legend
-      legend("topleft", title = "Standard Deviations", 
-            c("sd = 1", "sd = 0.75", "sd = 0.5", "sd = 1.2"),
-            lwd = 2, lty = 1,
-            col = c("black", "red", "blue", "green"))
-
-      end.rcode-->
+<span class="hl com"># now let's add a legend</span>
+<span class="hl kwd">legend</span><span class="hl std">(</span><span class="hl str">&quot;topleft&quot;</span><span class="hl std">,</span> <span class="hl kwc">title</span> <span class="hl std">=</span> <span class="hl str">&quot;Standard Deviations&quot;</span><span class="hl std">,</span>
+      <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;sd = 1&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;sd = 0.75&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;sd = 0.5&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;sd = 1.2&quot;</span><span class="hl std">),</span>
+      <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+      <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
       <p>
         We can also hold the standard deviation constant and plot different mean values. Let's try that now: 
       </p>
-      <!--begin.rcode
-      # make the plot then add on the other lines
-      x <- seq(-5, 5, 0.1)
-      fx <- dnorm(x, mean = 0, sd = 1) # mu = 0 and sd = 1 is the "standard" normal
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># make the plot then add on the other lines</span>
+<span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">5</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl num">0.1</span><span class="hl std">)</span>
+<span class="hl std">fx</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">dnorm</span><span class="hl std">(x,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span> <span class="hl com"># mu = 0 and sd = 1 is the &quot;standard&quot; normal</span>
 
-      plot(
-        x, 
-        fx,
-        type = "l",
-        xlab = "X", 
-        ylab = "density",
-      )
+<span class="hl kwd">plot</span><span class="hl std">(</span>
+  <span class="hl std">x,</span>
+  <span class="hl std">fx,</span>
+  <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span><span class="hl std">,</span>
+  <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;X&quot;</span><span class="hl std">,</span>
+  <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;density&quot;</span><span class="hl std">,</span>
+<span class="hl std">)</span>
 
-      # add new lines on for each of our new sd's
-      lines(x, dnorm(x, mean = 2, sd = 1), col="red")
-      lines(x, dnorm(x, mean = 1, sd = 1), col="blue")
-      lines(x, dnorm(x, mean = -1, sd = 1), col="green")
+<span class="hl com"># add new lines on for each of our new sd's</span>
+<span class="hl kwd">lines</span><span class="hl std">(x,</span> <span class="hl kwd">dnorm</span><span class="hl std">(x,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">),</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">lines</span><span class="hl std">(x,</span> <span class="hl kwd">dnorm</span><span class="hl std">(x,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">),</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;blue&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">lines</span><span class="hl std">(x,</span> <span class="hl kwd">dnorm</span><span class="hl std">(x,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">),</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;green&quot;</span><span class="hl std">)</span>
 
-      # now let's add a legend
-      legend("topleft", title = "Mean Values", 
-            c("mu = 0", "mu = 2", "mu = 1", "mu = -1"),
-            lwd = 2, lty = 1,
-            col = c("black", "red", "blue", "green"))
-      end.rcode-->
+<span class="hl com"># now let's add a legend</span>
+<span class="hl kwd">legend</span><span class="hl std">(</span><span class="hl str">&quot;topleft&quot;</span><span class="hl std">,</span> <span class="hl kwc">title</span> <span class="hl std">=</span> <span class="hl str">&quot;Mean Values&quot;</span><span class="hl std">,</span>
+      <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;mu = 0&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;mu = 2&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;mu = 1&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;mu = -1&quot;</span><span class="hl std">),</span>
+      <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span>
+      <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
       <p>
         This likely looks much as we may have anticipated. We are simply shifting the plot left or right depending on the mean. 
       </p>
