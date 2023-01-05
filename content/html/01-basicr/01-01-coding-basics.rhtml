@@ -41,6 +41,7 @@
               <li><a href="#boolean">Boolean Operations</a></li>
               <li><a href="#assign">Assignment</a></li>
               <li><a href="#functions">Built-in Functions</a></li>
+              <li><a href="#Objects">Objects</a></li>
             </ol>
           </nav>
         <div>
@@ -114,7 +115,7 @@
         <section id="calculator--modulo">
             <h4>Modulo Operations</h4>
             <p>
-                Getting the remainder of division:
+                The modulo operation returns the remainder of a division, after one number is divided by another  Getting the remainder of division:
             </p>
             <!--begin.rcode 
                 5 %% 2
@@ -144,6 +145,8 @@
             2 > 4
             end.rcode-->
         <p>
+            Of note here is the difference between <code>==</code> and <code>=</code>. In R, <code>==</code> never performs any type of assignment, it only works to ask "are these two things equal to each other?", whereas the <code>=</code> will assign a value to a variable. 
+        </p>
     </section>
     <section id="assign">
         <h2>Assignment</h2>
@@ -165,7 +168,7 @@
     <section id="functions">
         <h2>Built-in Functions</h2>
         <p>
-            Most of your initial use of R will be employing built-in functions that R has available for you to employee. For example, we might want to know the sum of a set of numbers. 
+            Most of your initial use of R will be employing built-in functions that R has available for you to employ. For example, we might want to know the sum of a set of numbers. 
         </p>
         <!--begin.rcode 
             sum(1, 6, 8)
@@ -188,7 +191,7 @@
             <strong>TIP:</strong> When in doubt about how to use a function, or really anything in R, check the documentation!
         </p>
     </section>
-    <section id=""Naming>
+    <section id="Naming">
         <h2>Naming</h2>
         <p>
             A lot of R is assigning values to variables, and each of those variables will need a name. Many programming languages have "style guides" that are a generally agreed-upon set of standards by the community of users that dictate how best to do common tasks in that language. 
@@ -204,6 +207,15 @@
         <p>
             <em>Variable and function names should be lowercase. Use an underscore (_) to separate words within a name. Generally, variable names should be nouns and function names should be verbs. Strive for names that are concise and meaningful (this is not easy!).</em>
     
+        </p>
+    </section>
+    <section id="Objects">
+        <h2>Objects & OOP</h2>
+        <p>
+            To understand what’s going on in R, it’s important to understand how the things (termed "Objects") are being stored in R. Everything (yes, literally everything) is an object. Objects are the basis of what we call object-oriented programming. An object is a data structure having some attributes and a set of methods that act on those attributes.
+        </p>
+        <p>
+            Object-oriented programming languages (sometimes called ‘high-level’ lanaguages) are typically more intuitive and are often used via an IDE (integrated development environment) like RStudio or a GUI (graphical user interface).
         </p>
     </section>
     

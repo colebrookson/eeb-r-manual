@@ -39,6 +39,13 @@
               <li class=""><a href="#writing--txt"><code>.txt</code></a></li>
             </ul>
           </li>
+        <li><a href="#figures">Saving Figures</a>
+            <ul>
+              <li class=""><a href="#figures--base">Base R</a></li>
+              <li class=""><a href="#figures--tidy">Tidy R</a></li>
+            </ul>
+          </li>
+          <li><a href="#examples">Reading & Writing Examples</a></li>
         </ol>
       </nav>
     <div>
@@ -54,10 +61,10 @@
             <strong>1. Read your data into R</strong>
         </p>
         <p>
-            2. Perform some kind of analysis, creating new data objects, figures, or outputs, then 
+            2. Perform some kind of analysis, creating new data <a href="../01-basicr/01-01-coding-basics.html">objects</a>, figures, or outputs, then 
         </p>
         <p>
-            <strong>3. Write out those data objects/figures/outputs to your computer for later use</strong>
+            <strong>3. Save (aka "write") those data objects/figures/outputs to your computer for later use</strong>
         </p>
         <p>
             Steps 1 &amp; 3 will be covered here. 
@@ -69,7 +76,7 @@
         <section id="reading">
             <h2>Reading Files</h2>
             <p>
-                When reading in a new file, after manually checking it and ensuring it is formatted in a readable way, note the path in your computer where the file is present. <strong>NOTE</strong> see section on workflow and the <code>here</code> package.
+                When reading in a new file, after manually checking it and ensuring it is formatted in a readable way, note the path in your computer where the file is present. <strong>NOTE</strong> see section on <a href="../01-06-workflow.html">workflow</a> and the <code>here</code> package.
             </p>
             <section id="reading--csv">
                 <h4>Comma-Separated Value <code>.csv</code> Files</h4>
@@ -97,7 +104,7 @@
                     The best way to read in an excel sheet into R with with the <code>readxl</code> package. Almost identical to above: 
 
                     <!--begin.rcode, eval=FALSE
-                    data <- readxl::read_xls("/path/to/file/file-name.csv", sheet = "SHEETNAME")
+                    data <- readxl::read_xls("/path/to/file/file-name.xls", sheet = "SHEETNAME")
                     end.rcode-->
                 </p>
             </section>
@@ -109,7 +116,7 @@
                 <h5><strong>Base R</strong></h5>
                 <p>
                     <!--begin.rcode, eval=FALSE
-                    data <- read.delim("/path/to/file/file-name.csv")
+                    data <- read.delim("/path/to/file/file-name.txt")
                     end.rcode-->
 
                     This above option assumes that the file it tab-delimited. 
@@ -117,7 +124,7 @@
                 <h5><strong>Tidyverse</strong></h5>
                 <p>
                     <!--begin.rcode, eval=FALSE
-                    data <- readr::read_tsv("/path/to/file/file-name.csv")
+                    data <- readr::read_tsv("/path/to/file/file-name.txt")
                     end.rcode-->
                 </p>
             </section>
@@ -176,7 +183,7 @@
 
                 Using the example built-in dataset <code>airquality</code>, we can make an example plot to save. 
             </p>
-            <section id="figures-base">
+            <section id="figures--base">
                 <h4>Saving an image created in base R</h4>
                 <!--begin.rcode
                 plot(x = airquality$Day, y = airquality$Temp, col = "red")
@@ -193,7 +200,7 @@
                 dev.off()
                 end.rcode-->
             </section>
-            <section id="figures-base">
+            <section id="figures--tidy">
                 <h4>Saving a <code>ggplot2</code> object</h4>
                 <p>
                     It is best to use the let of functions from <code>ggplot2</code> to save these plots. 
@@ -207,6 +214,37 @@
                     </p>
                 </p>
             </section>
+        </section>
+        <section id="examples">
+            <h3>Reading & Writing Examples</h3>
+            <p>
+                To get some practice with reading and writing files and to ensure that you have an understanding of the process, let's use a built in dataframe that comes shipped with R, to practice reading and writing files. 
+            </p>
+            <p>
+                We'll select a built-in dataframe, write it to our computers, and then read it back in. Let's use the Iris dataset. 
+            </p>
+            <!--begin.rcode 
+            df <- iris
+            head(df)
+            end.rcode-->
+            <p>
+            Now that we have our dataframe <code>df</code>, let's write this out to a place on our computers. <strong>Here is the tricky bit.</strong>. As we mentioned in the <a href="../01-basicr/01-06-workflow.html">workflow section</a>, everyone's computer will have slightly different "paths", aka set of folders and directions that the computer uses to point to a particular file in a particular place. On <strong>my</strong> computer, I'll be using a simple location in my documents folder. For me, that location is <em font-color:red>"~/Documents/iris.csv"</em>, but it will be slightly different on each operating system (e.g. Windows vs. MacOSx). So, go ahead now and find the path that you want to save to. If you're unclear still on paths, you can check out the "Working Directories" section on the <a href="../01-basicr/01-06-workflow/paths.html">workflow page</a>
+            </p>
+            <p>
+                Let's write out our file:
+            </p>
+            <!--begin.rcode 
+            write.csv(df, "~/Documents/iris.csv")
+            end.rcode-->
+            <p>
+                This returns no message which is a good sign, so to check it worked, we can manually on our computers go to that location, but better yet, lets try reading in the file and see if it works!
+            </p>
+            <p>
+                We'll assign it a different name when we read it in for clarity. 
+            </p>
+            <!--begin.rcode 
+            iris_df <- read.csv("~/Documents/iris.csv", header = TRUE)
+            end.rcode-->
         </section>
 <!-- End page content -->
 <hr>
