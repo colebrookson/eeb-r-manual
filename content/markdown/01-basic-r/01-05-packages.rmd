@@ -76,3 +76,21 @@ If we click on the *Introduction to dplyr* page, we'll find out lots about how t
 ![](./img/dplyr-vignette.png)
 
 We'll talk more about some specific packages that will be helpful to you. 
+
+## Package Conflicts
+
+When we load a package (i.e. library(package)), we are doing what's called loading a "namespace". That is, with that package, we now have access to all sorts of functions and objects that we are literally downloading from the internet for our own use. When we start to use more and more packages, perhaps unsurprisingly, we'll come across functions from different packages that are called the same thing. For example, in <code>base R</code> there are functions called "intersect", "setdiff", "setequal", and "union", among others. In the package <code>dplyr</code> which is a very popular package in the Tidyverse for working with data, there are <em>also</em> functions called "intersect", "setdiff", "setequal", and "union". This presents a problem! Since we will always load the package <code>dplyr</code> after <code>base</code>, R will use an order of recent precedence, to assume that if we were to call <code>setdiff()</code> on an object, we would mean the <code>dplyr</code> version. However, sometimes we might want the base version, so what can we do? 
+
+Luckily, we can always specify which package we want, with the double-colon operator <code>::</code>. This works by putting the package before the two colons, and the function name after them. E.g: <code>dplyr::setdiff()</code>. Now, our computer (and more importantly, us or other humans who will likely read our code again later!) won't have to guess which package we're using. 
+
+There are some situations where this is less or more important. For example, when plotting, we often use the <code>ggplot()</code> function from the <code>ggplot2</code> package. There isn't another common package that has the function <code>ggplot()</code> in it's namespace, so we can pretty safely just write <code>ggplot()</code> when writing code. However, for functions that are more common in terms of their names, it's best to do so, and we will do this throughout this manual to avoid any and all confusion. 
+
+For an example as to how this conflict can arise, check out the output of this chunk of code: 
+
+<code>
+library(stats)
+library(dplyr)
+</code>
+
+<code>dplyr</code> has conflicts with both <code>stats</code> and <code>base</code> packages, so it's best to deal with that up front. 
+

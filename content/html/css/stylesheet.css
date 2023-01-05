@@ -514,3 +514,12 @@ font-weight: bold;
   margin: 5% 5% 5% 5%;
   font-size:calc(9px + 0.8vw);
 }
+
+.code-text-box {
+  font-family: Consolas,"courier new";
+  color: crimson;
+  background-color: #a8d6e9;
+  padding: 2px;
+  margin: 5% 5% 5% 5%;
+  font-size:calc(9px + 0.8vw);
+}
