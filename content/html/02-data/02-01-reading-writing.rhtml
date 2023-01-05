@@ -45,7 +45,7 @@
               <li class=""><a href="#figures--tidy">Tidy R</a></li>
             </ul>
           </li>
-          <li><a href="#examples">Reading & Writing Examples</a></li>
+        <li><a href="#examples">Reading & Writing Examples</a></li>
         </ol>
       </nav>
     <div>
@@ -231,10 +231,16 @@
             Now that we have our dataframe <code>df</code>, let's write this out to a place on our computers. <strong>Here is the tricky bit.</strong>. As we mentioned in the <a href="../01-basicr/01-06-workflow.html">workflow section</a>, everyone's computer will have slightly different "paths", aka set of folders and directions that the computer uses to point to a particular file in a particular place. On <strong>my</strong> computer, I'll be using a simple location in my documents folder. For me, that location is <em font-color:red>"~/Documents/iris.csv"</em>, but it will be slightly different on each operating system (e.g. Windows vs. MacOSx). So, go ahead now and find the path that you want to save to. If you're unclear still on paths, you can check out the "Working Directories" section on the <a href="../01-basicr/01-06-workflow/paths.html">workflow page</a>
             </p>
             <p>
+                We'll use the Tidyverse method with the <code>readr</code> package, so we need to load this first so we can use it. If you don't have it installed yet, use <code>install.packages("readr")</code> to install it. 
+            </p>
+            <!--begin.rcode 
+            library(readr)
+            end.rcode-->
+            <p>
                 Let's write out our file:
             </p>
             <!--begin.rcode 
-            write.csv(df, "~/Documents/iris.csv")
+            readr::write_csv(df, "~/Documents/iris.csv")
             end.rcode-->
             <p>
                 This returns no message which is a good sign, so to check it worked, we can manually on our computers go to that location, but better yet, lets try reading in the file and see if it works!
@@ -243,8 +249,23 @@
                 We'll assign it a different name when we read it in for clarity. 
             </p>
             <!--begin.rcode 
-            iris_df <- read.csv("~/Documents/iris.csv", header = TRUE)
+            iris_df <- readr::read_csv("~/Documents/iris.csv")
             end.rcode-->
+            <p>
+                And we see the file has been read into our R session. 
+            </p>
+            <p>
+                <strong>If the file hasn't been read in, DO NOT PANIC.</strong> The most likely source of the error is a misspelling. Double check that you have spelt the paths correctly in both your writing and reading steps, and manually check in your computer to see if you can find the file where you think you saved it. You might have accidentally saved it elsewhere!
+            </p>
+            <p>
+                Here's an example of a common error we might encounter during this type of task:
+            </p>
+            <!--begin.rcode 
+            iris_df <- readr::read_csv("~/Docoments/iris.csv")
+            end.rcode-->
+            <p>
+                We see that no file was read in! How come? Can you spot the error in the above code? It turns out, "Documents" is misspelt as "Docoments". This type of small and easily solved error is the nmost common when reading and writing files. 
+            </p>
         </section>
 <!-- End page content -->
 <hr>
