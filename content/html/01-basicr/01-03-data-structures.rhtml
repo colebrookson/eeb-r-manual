@@ -13,90 +13,15 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script> 
+    $(function(){
+    $("#header").load("../common/head.html"); 
+    });
+    </script> 
 </head>
 <body>
-	<div class="topnav">
-		<a class="a-top w3-center" href="../index.html">The R Manual</a>
-        <a class="a-mid" href="../about.html">About</a>
-        <a class="a-mid" href="../contact.html">Contact</a>
-        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
-	</div>
-	<div class="bottomnav navbar">
-        <div class="dropdown">
-            <button class="dropbtn">Getting Started</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
-              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
-              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
-              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
-            </div>
-        </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Basic R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
-              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
-              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
-              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
-              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
-              <a href="../01-basicr/01-05-packages.html">Packages</a>
-              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Working With Data</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
-              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
-              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
-              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
-              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
-              <a href="../02-data/02-05-new-columns.html">New Columns</a>
-              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
-              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
-              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
-              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
-              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
-              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Plotting</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
-              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
-              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
-              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
-              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
-              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
-              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
-              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
-              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
-              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
-              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
-              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
-              <a href="../03-plot/03-12-annotations.html">Annotations</a>
-              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Statistics in R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
-              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
-              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
-              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
-              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
-              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
-              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
-              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
-              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
-              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
-              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
-            </div>
-          </div> 
-	</div>
-
+  <!--Add in the header-->
+  <div id="header"></div>
 <main style = margin-top:100px>
     <nav class="section-nav">
         <ol>
@@ -169,7 +94,14 @@
             <strong>Note:</strong> One thing to understand is that previously when we assigned a variable a single data object (i.e. <!--rinline x <- 10 -->), what we were actually doing is making a vector! This is just a special case where the vector length is 1. 
           </p>
           <p>
-            We can determine what is and what is NOT an atomic vector by using the function <code>is.atomic()</code>. Recall that lists are <em>also</em> vectors, but not the kind we're working with now, so this checks if a vector is an atomic vector or not. 
+            We can determine what is and what is NOT an atomic vector by using the function <code>is.atomic()</code>. Recall that lists are <em>also</em> vectors, but not the kind we're working with now, so this checks if a vector is an atomic vector or not. This is important because the alternative option for this function is <code>is.vector()</code>, which won't differentiate between a list and an atomic vector. See here: 
+          </p>
+          <!--begin.rcode 
+          x <- list("a", "b", 1, 2)
+          is.vector(x)
+          end.rcode-->
+          <p>
+            We can see that this returns <code>TRUE</code>. Since different methods can be applied to a list versus an atomic vector, it's important to know which one we're dealing with.
           </p>
           <p>
             Vectors, especially string vectors, can change depending on how they're created. For example, here we have two vectors that spell out the same sentence, but are not equivalent:
@@ -201,7 +133,7 @@
             y
             end.rcode-->
           <p>
-            <strong>Note:</strong> We can only do this here because we created each word as it's own data point inside the vector. The above is an example of <em>indexing</em> which we discuss elsewhere, but for now, it can be interpreted as selecting an element of the vector and changing it. 
+            <strong>Note:</strong> We can only do this here because we created each word as its own data point inside the vector. The above is an example of <em>indexing</em> which we discuss elsewhere, but for now, it can be interpreted as selecting an element of the vector and changing it. 
           </p>
         </section>
         <section id="str--vec--list">
@@ -299,7 +231,7 @@
             d
             end.rcode-->
           <p>
-            It's easy to add rows or columns using row binding:
+            It's easy to add rows or columns using column binding:
           </p>
           <!--begin.rcode 
             c4 <- c("add1", "add2", "add3", "add4")
@@ -307,7 +239,7 @@
             d1
             end.rcode-->
           <p>
-            Or column binding:
+            Or row binding:
           </p>
           <!--begin.rcode 
             r5 <- list(5L, "item5", 15L, "add5") 
