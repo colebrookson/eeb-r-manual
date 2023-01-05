@@ -131,7 +131,7 @@
       <section id="data-types">
         <h2>Data Types</h2>
         <p>
-            There are six main types in R, but we will discuss only the first four. 
+            There are six main data types in R, but we will discuss only the first four. 
         </p>
         <ol type="I">
             <li><strong>Characters</strong></li>
@@ -142,7 +142,7 @@
             <li>Raw</li>
         </ol>
         <p>
-            When we assign variables, it is important to know what type we are using. We can check what the <code>type</code> of an object, and get other useful information about it, with a number of useful commands: 
+            When we assign variables, it is important to know what type we are using. We can check the <code>type</code> of an object, and get other useful information about it, with a number of useful commands: 
         </p>
         <!--begin.rcode 
           x <- "abc"
@@ -174,6 +174,10 @@
             <p>
                 A numeric type is any non-integer number.  
             </p>
+            <div class="text-box"> 
+              <h4><em>Double</em> Precision</h4> 
+              <p class="p-text-box">When referring to numbers in a computer, it's important to remember that some numbers, &pi; for example, are infinite. However, computers can't actually hold infinite decimal places of a value, so we have to decide how accurate we want our values. <code>R</code> is required to work with values conforming to a global standard, which works out to a precision of 53 bits (<a href="https://en.wikipedia.org/wiki/Bit">what is a bit?!</a>). This is called <em>"binary64"</em> format and is "double" the standard precision of "binary32", hence being called <em>double precision</em></p>
+            </div>
             <!--begin.rcode 
               z <- 3.14
               typeof(z)

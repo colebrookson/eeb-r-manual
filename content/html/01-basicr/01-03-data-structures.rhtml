@@ -117,7 +117,7 @@
       <section id="str">
         <h2>Data Structures</h2>
         <p>
-          To make use of these individual pieces of data we combine them together into data <em>structures</em>. There are 4 main data structures that we work with consistently:
+          Previously we went over data <em>types</em> which refers to a single piece of data. To make use of these individual pieces of data we combine them together into data <em>structures</em>. Note that all of these individual data types <strong>and</strong> data structures themselves are objects when assigned to a variable. When you make an assignment, and you see a new variable in your environment, that is an object! There are 4 main data structures that we work with consistently:
         </p>
         <ol type="I">
             <li><strong>Vectors</strong></li>
@@ -145,7 +145,7 @@
           x <- vector("character", length = 5)
           end.rcode-->
           <p>
-            Here, the function <code>vector()</code> takes two required arguments. the first argument asks for the data <em>type</em> we would like to use, and the second is the number of elements (the <em>length</em>) that we want the vector to be. 
+            Here, the function <code>vector()</code> takes two required arguments. The first argument asks for the data <em>type</em> we would like to use, and the second is the number of elements (the <em>length</em>) that we want the vector to be. 
           </p>
           <p>
             When we already know the content we want included, we can use a simpler <code>c()</code> function (<code>c</code> is short for <em>combine</em>). 
@@ -166,10 +166,10 @@
             x == y
             end.rcode-->
           <p>
-            <strong>Note:</strong> One thing to understand is that previously when we assigned a variable a single data object (i.e. <!--rinline x <- 10 -->), what we were actually doing is making a vector! This is just a special case vector of length 1. 
+            <strong>Note:</strong> One thing to understand is that previously when we assigned a variable a single data object (i.e. <!--rinline x <- 10 -->), what we were actually doing is making a vector! This is just a special case where the vector length is 1. 
           </p>
           <p>
-            We can determine what is and what is NOT an atomic vector with the following basic command <code>is.atomic()</code>. Recall that lists are <em>also</em> vectors, but not the kind we're working with now, so this checks if a vector is an atomic vector or not. 
+            We can determine what is and what is NOT an atomic vector by using the function <code>is.atomic()</code>. Recall that lists are <em>also</em> vectors, but not the kind we're working with now, so this checks if a vector is an atomic vector or not. 
           </p>
           <p>
             Vectors, especially string vectors, can change depending on how they're created. For example, here we have two vectors that spell out the same sentence, but are not equivalent:

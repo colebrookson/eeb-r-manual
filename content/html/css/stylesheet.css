@@ -496,4 +496,21 @@ font-weight: bold;
 
 .dropdown:hover .dropdown-content {
     display: block;
-}   
+}  
+
+/** All of the text box formatting **/
+.text-box {
+  float:right; 
+  border: 4px solid black;
+  border-radius: 12px;
+  padding: 10px;
+  width: calc(30% - 2em); 
+  height: auto; 
+  margin: 10px; 
+  background-color: #87ceeb;
+}
+
+.p-text-box {
+  margin: 5% 5% 5% 5%;
+  font-size:calc(9px + 0.8vw);
+}
