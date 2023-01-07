@@ -39,11 +39,11 @@
         options(tidyverse.quiet = TRUE)
         end.rcode-->
         <p>
-            Factors are an important but frustrating special data type in R. They can be thought of as "categorical" variables, in the sense that they can only take on a limited number of values. R uses a vector of integer values to store a factor, with a corresponding set of character values that are displayed while using the factor.
+            Factors are an important special data type in R, though they can be frustrating to work with. They can be thought of as "categorical" variables, in the sense that they can only take on a limited number of values. R uses a vector of integer values to store a factor, with a corresponding set of character values that are displayed while using the factor.
             <br><br>
-            They are most commonly used to group numerical variables, and therefore commonly come into play when working with regression-related topics that require either categorical fixed effects or a random effect. An example might be the site at which some data were collected. In a study where there are only six sites, it might be the case that we need to use a <em>random effect</em> to control for variation between sites. In that scenario, it would be helpful to treat the variable <strong>Site</strong> as a factor in R. 
+            They are most commonly used to group numerical variables, and therefore commonly come into play when working with regression-related topics that require variables to be categorical For example, n an experiment we may classify the amount of water plants in different treatments get as "low", "medium", and "high", and so we could consider the treatment as a factor. An example might be the site at which some data were collected. In a study where there are only six sites, it might be the case that we need to use a <em>random effect</em> to control for variation between sites. In that scenario, it would be helpful to treat the variable <strong>Site</strong> as a factor in R. 
             <br><br>
-            We can make factors easily from any other type of variable. Take the following example dataset with three variables, one each of numeric, logical, and character types. 
+            We can make factors easily from any other type of variable. Take the following example dataset with three variables, one each of numeric, logical, and character types. This is useful because often when we have a dataset, we may do multiple things with that dataset, not all of which might require a factor. Therefore, it's helpful to be able to move bath and forth between factors and other data types. Let's use a contrived example to illustrate this:
             </p>
             <!--begin.rcode
             df <- data.frame(
@@ -122,13 +122,13 @@
             </p>
             <!--begin.rcode
             library(forcats)
-            df$group <- forcats::fct_relevel(
-            df$group, levels = c("First", "Second", "Third", "Fourth")
+            df <- df %>% 
+            dplyr::mutate(
+                group = forcats::fct_relevel(group, c("First", "Second", "Third", "Fourth"))
             )
             # now we can use the base R function `levels()` to check if the order is what
             # we want it to be
             levels(df$group)
-
             end.rcode-->
             <p>
             And we can see that the order is what we want. So that if we were to make the same plot again...
@@ -159,7 +159,7 @@
             <p>
             We can see that for some reason here we have the "6" replaced by the written out version of the word. This will make the order not logical, and may cause problems if for some reason we wanted this variable to be numeric at some point (<strong>Remember, you can make a character value into a numeric value</strong>). 
             <br><br>
-            To repalce this value in our column, we can use the <code>recode()</code> function from <code>dplyr</code>. It is most consistent to do this within a <code>mutate()</code>. 
+            To replace this value in our column, we can use the <code>recode()</code> function from <code>dplyr</code>. It is most consistent to do this within a <code>mutate()</code>. 
             </p>
             <!--begin.rcode
             df <- df %>% 

@@ -121,6 +121,15 @@
 
                     This above option assumes that the file it tab-delimited. 
                 </p>
+                <p>
+                    We could also use the function <code>read.table()</code> which is flexible in that we could define what type of delimiter the file uses. For example, a space-delimited text file is a data file similar to a <code>.csv</code> but instead of using a comma, a tab, or some other delimiter, it simply uses spaces. We could use <code>read.table()</code> for this task like so: 
+                </p>
+                <!--begin.rcode eval=FALSE
+                data <- read.table("/path/to/file/file-name.txt", sep = " ")
+                end.rcode-->
+                <p>
+                    And we could extrapolate this to other less common types of delimiters supported by the function as well. 
+                </p>
                 <h5><strong>Tidyverse</strong></h5>
                 <p>
                     <!--begin.rcode, eval=FALSE
@@ -199,6 +208,9 @@
                 # this command saves the file and closes the connection to the file
                 dev.off()
                 end.rcode-->
+                <p>
+                    Above, essentially the first line <code>png(file="/path/to/plot/saving_plot.png")</code> opens the connection to a file (aka makes a place for it in the computer), then the plot function <code>hist(Temperature, col="darkgreen")</code> actually <em>makes</em> the plot, then the last line <code>dev.off()</code> writes the actual file and closes the connection opened by the first line of code. 
+                </p>
             </section>
             <section id="figures--tidy">
                 <h4>Saving a <code>ggplot2</code> object</h4>
