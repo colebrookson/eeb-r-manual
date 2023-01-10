@@ -41,13 +41,13 @@
             options(tidyverse.quiet = TRUE)
             end.rcode-->
 
-            One way to plot in R, is to use the <code>ggplot2</code> package in the Tidyverse. "gg" stands for the "Grammar of Graphics" and the package makes for a convenient and consistent way to make almost any plot you want. Typically it's easiest to plot data in <code>ggplot2</code> using a dataframe, which means we usually don't need to make too major of changes to our data if we decide we want to change how we're plotting something in particular. 
+            One way to plot in R, is to use the <code>ggplot2</code> package in the Tidyverse. "gg" stands for the "Grammar of Graphics" and the package makes for a convenient and consistent way to make almost any plot you want. Typically it's easiest to plot data in <code>ggplot2</code> using a dataframe, which means we usually don't need to make major changes to our data if we decide we want to change how we're plotting something in particular. 
         </p>
         </section>
         <section id="intro--components">
           <h3>Components of a Good Plot</h3>
             <p>
-                The function used to make a plot is <code>ggplot()</code>. There is a consistent template that we'll need to use to get our plots to work:
+                The function used to make a plot is <code>ggplot()</code>. This comes from the <code>ggplot2</code> package. As a reminder, first using the <code>ggplot2</code> package we have to install it (just the first time we use it!) with <code>install.packages("ggplot2")</code> and then for every time after that we want it, we don't need to re-install it, we just need to call the package at the beginning of our script with <code>library(ggplot2)</code>. <br><br> There is a consistent template that we'll need to use to get our plots to work:
                 <br><br>
                 <code>
                 ggplot(data = &lt;DATA>, <br>&emsp;
@@ -79,8 +79,9 @@
                 <p>
                 The most basic version of the plot we may want to make is a scatter plot of two continuous variables, let's say length and weight: 
                 </p>
-                <!--begin.rcode
-                ggplot(data = df, mapping = aes(x = length_1_mm, y = weight_g)) + 
+                <!--begin.rcode, warning=FALSE
+                ggplot(data = df, mapping = aes(x = length_1_mm, 
+                  y =  weight_g)) + 
                 geom_point()
                 end.rcode-->
                 <p>
@@ -88,7 +89,7 @@
                 <br><br>
                 So a better version may look like this:
                 </p>
-                <!--begin.rcode
+                <!--begin.rcode, warning=FALSE
                 ggplot() +
                 geom_point(data = df, aes(x = length_1_mm, y = weight_g))
                 end.rcode-->

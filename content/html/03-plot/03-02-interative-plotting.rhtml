@@ -39,7 +39,7 @@
             options(tidyverse.quiet = TRUE)
             end.rcode-->
 
-            When making a plot, typically the best way to go about it is to iteratively make a version of the plot, observe the outcome, and then make changes in an iterative fashion. This prevents us from making mistakes in a long set of code that we then can't diagnose the problem with, and further, helps us catch mistakes (typos, colour problems, etc) as we only have to take in a few new components each time, and not a whole pile. 
+           When making a plot, it's best to build your plot iteratively: make a version of the plot, observe the outcome, and then make changes or add an element and replot. This helps us catch mistakes as they occur (typos, colour problems, etc) and prevents small problems from creating big, difficult to diagnose problems in a long set of code.
             <br><br>
             For our example, let's use the example from the <a href="./03-01-intro-to-ggplot.html">Intro to <code>ggplot2</code></a> section, looking at salamanders and trout: 
             <br><br>
@@ -61,7 +61,7 @@
                 <br><br>
                 <ol>
                     <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">1. The call to <code>ggplot()</code></li>
-                    <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">2. The aesthetics (i.e. what variables we want on the x- and y-axis)</code></li>
+                    <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">2. The mappings (i.e. what variables we want on the x- and y-axis)</code></li>
                     <li style="color:blueviolet; font-size:calc(12px + 0.7vw);">3. The `geom_` function denoting what *type* of plot we're going for</code></li>
                 </ol>
             </p>

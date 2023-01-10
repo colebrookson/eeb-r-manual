@@ -278,6 +278,18 @@
             <p>
                 We see that no file was read in! How come? Can you spot the error in the above code? It turns out, "Documents" is misspelt as "Docoments". This type of small and easily solved error is the nmost common when reading and writing files. 
             </p>
+            <p>
+                Once we've read in our data, it's almost always important to take a quick look at our data to make sure it looks as we expect it to. There's two easy ways to do so. The first way is just to look at the first 6 rows of data using the <code>head()</code> function: 
+            </p>
+            <!--begin.rcode 
+            head(iris_df)
+            end.rcode-->
+            <p>
+                The other useful thing to do is double check the <em>structure</em> of the data we're working with, by calling the <code>str()</code> function, which will give us the structure of our data object, including of the object itself (i.e. is it a DataFrame, a matrix, a list?), as well as the sub-components. For a DataFrame, we'll see what type of data each column is. This is important since particular methods only work on columns of particular types (e.g. you can't take a numerical mean of a character column).
+            </p>
+            <!--begin.rcode 
+            str(iris_df)
+            end.rcode-->
         </section>
 <!-- End page content -->
 <hr>
