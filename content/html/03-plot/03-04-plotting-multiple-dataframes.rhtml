@@ -34,7 +34,7 @@
       <section id="">
         <h2>Plotting with Multiple DataFrames</h2>
         <p>
-            It is sometimes the case that the easiest way to achieve our goal is, rather than forcing all our data into one large, unwieldy dataframe, we can simply make multiple dataframes and use those multiple dataframes in multiple `geom_`s to make our plot look exactly like we want it. There are myriad reasons why this may be the case, but an easy example is when you have data that span an equivalent time series or range, but have different temporal resolution or coverage. To illustrate this, we'll use an example on temperature data in Alaska.
+            It is sometimes the case that the easiest way to achieve our goal is, rather than forcing all our data into one large, unwieldy dataframe, we can simply make multiple dataframes and use those multiple dataframes in multiple <code>geom_</code>'s to make our plot look exactly like we want it. There are myriad reasons why this may be the case, but an easy example is when you have data that span an equivalent time series or range, but have different temporal resolution or coverage. To illustrate this, we'll use an example on temperature data in Alaska.
             </p>
             <!--begin.rcode, warning=FALSE, message=FALSE
             library(tidyverse)
@@ -113,7 +113,7 @@
                 Great, this is exactly what we wanted. Now, to make our plotting easier, it would be best if we were asking <code>ggplot</code> to put the same data type on the x-axis, that is, two <code>date</code> values. So, what we'll do here, is inpute a day of the month, and convert our month and year columns into a date. 
                 </p>
                 <p>
-                Since we are working with monthly means, let's say for simplicity sake we actually just want each faux "day" to be the 15th since that's around the middle of each month: 
+                Since we are working with monthly means, let's say for the sake of simplicity we actually just want each faux "day" to be the 15th since that's around the middle of each month: 
                 </p>
                 <!--begin.rcode, warning=FALSE
                 df_monthly = df_monthly %>% 
