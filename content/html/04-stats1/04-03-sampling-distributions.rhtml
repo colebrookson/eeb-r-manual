@@ -26,7 +26,6 @@
   <nav class="section-nav">
       <ol>
         <li><a href="#common">Common Distributions</a></li>
-        <li><a href="#psuedo">Random vs. Pseudorandom</a></li>
         <li><a href="#rsamp">Random Sampling</a></li>
         <li><a href="#samp-r">Sampling in R</a>
         <ol>
@@ -48,7 +47,23 @@
     <section id="">
       <h2>Sampling & Sampling Distributions</h2>
       <p>
-        Sampling refers to the drawing of a subset of data points from some larger set (population). How we sample can be the subject of an entire course, but it is helpful to know enough to perform sampling in R, and then to compile those samples together into a <em>sampling distribution</em>. 
+        Generally, in biology we want to learn something about the world as we define it (eg. all pine trees in North America, Anoles in the Carribean, Drosophila in Africa), but we usually can't measure all individuals in the populations we care about in order to calculate the parameters of interest (e.g. mean weight of all the Anoles, etc). When we can't do that, we need to take a <em>sample</em> of the population, learn something about the sample, and use what we have learned to generalize outward to the population. In fact, if we could sample the entirety of a population of interest, we wouldn't need most types of statistical models (e.g. regression)! We could just calculate our parameters of interest, and be on our way. However, therein the problem lies, since we <em>want</em> usually to make some statement about the whole population, but we don't usually have data on the whole population. So, we take a sample, and try to figure out how best to extrapolate the knowledge we learned from that sample back to the rest of population. 
+      </p>
+      <p>
+        Ideally, when we take some sample of a population it's <em>unbiased</em>, that is, we can take some measurement from the sample such as a mean value, and that value is in fact the same as the population-level value. If we don't collect our sample properly, it's possible that we systematically over or underestimate our population parameter of interest, hence making our estimate <strong>biased</strong>. It's useful to think of some examples of when our sampling protocol might yeild biased samples. Say we want to know the mean size of Anoles in the Carribean. If our sampling method was to do ground observations of Anoles that we could see on a gridded sampling site, it's likely we're more likely to see, and therefore sample, Anoles that are more brightly coloured, and ones that are lower down in trees or on the ground. Is this a problem for our subsequent statistical calculations? Well, only if we know that our sample is biased and a) we don't do anyuthing to change our sampling protocol, and/or b) we don't account for it in our statistical models/tests.
+      </p>
+      <p>
+        Why is this imporant from a statistical perspective? Well, the methods we present in this section usually rely on a <strong>random sample</strong> of the population. Now in reality sometimes a random sample is impossible, and we work with data that have known limitations. An interesting example of this in an observational sample context is camera trap data. There are known biases (the interested reader can refer to <a href="https://conbio.onlinelibrary.wiley.com/doi/pdf/10.1111/csp2.239">this paper on the subject</a>) in camera trap data, but, wildlife researchers who have no choice but to use these data have come up with cleaver methods to account for these biases statistically. These techniques are outside the scope of this manual, but are interesting nonetheless. 
+      </p>
+      <figure>
+        <img src="../img/04-img/trap.jpg" alt="Tiger" style="max-width: 60%; height: auto;">
+        <figcaption>A Sumatran tiger captured in this image in Bukit Barisan Selatan National Park in southern Sumatra by wildlife ecologist Max Allen, from the Illinois Natural History Survey.</figcaption>
+      </figure> 
+      <p>
+        Since dealing with biased samples is difficult, we will constrain our discussion of sampling to <strong>random samples</strong>, the premise on which a great many common statistical tests are based. 
+      </p>
+      <p>
+        Statistically, we will think of sampling as referring to the drawing of a subset of data points from some larger set (population). How we sample can be the subject of an entire course, but it is helpful to know enough to perform sampling in R, and then to compile those samples together into a <em>sampling distribution</em>. 
       </p>
     </section>
     <section id="common">
@@ -60,18 +75,6 @@
         <img src="../img/04-img/distributions.png">
         <figcaption>credit: Ashkay Sharma</figcaption>
       </figure>
-    </section>
-       <section id="pseudo">
-      <h2>Random vs. Pseudorandom</h2>
-      <p>
-        We often think of computers as being able to generate for us <em>random</em> samples of numbers. However, computer-generated random samples are never <strong>truly</strong> random, they are what is called <em>pseudorandom</em>. For a computer to sample a truly random number, they would need to use a <em>true</em> random number generator (TRNG), which relies on using some external physical variable such as airwave static to generate a <em>truly</em> random sample, since subatomic particles have truly random behaviour. 
-      </p>
-      <p>
-        Computers on their own have to approximate this with an algorithm. The methods that we use to do this are not important in this context, but it is a good thing to remember that computationally derived random numbers (as we usually get from R) are not actually the same as mathematically random numbers, as the mathematical definitions used to define randomness in the purest sense are not computationally employable. 
-      </p>
-      <p>
-        So, in R, we will use <em>pseudorandom</em> number generators when we want to sample some numbers.
-      </p>
     </section>
     <section id="rsamp">
       <h2>Random Sampling</h2>

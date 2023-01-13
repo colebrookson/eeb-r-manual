@@ -443,7 +443,7 @@
             <p>
                 Okay, that worked, but we can now see that the numbers don't <em>quite</em> line up with the axis ticks. What should we do about this? Well, we can simply adjust them vertically (vertically with respect to the number, not the plot itself) so they scoot a bit to the left from our perspective. For whatever reason, a vertical adjustment (<code>vjust()</code>) of 0.5 seems to do the trick nearly everytime for this task.
             </p>    
-                            <!--begin.rcode, warning=FALSE
+                <!--begin.rcode, warning=FALSE
                 ggplot() +
                 geom_point(data = df_filtered %>% 
                             dplyr::arrange(factor(species, 
