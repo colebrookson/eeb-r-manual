@@ -388,8 +388,85 @@
                 Similar to citation styles, there are often discipline-specific protocols to follow when making plots. While the plot we've made here may look perfectly fine for our use in a class presentation or for an informal report, it's important to consider these additional requirements when making a figure in a more formal context. As always, usually we are not the ones who get to make the calls on what these standards should be, so default to whatever your instructor/supervisor/discipline standard/journal submission guidelines outline as what they want. 
             </p>
             <p>
-                Let's use an example to show how we might go about this. Here are the <a href=https://media.wiley.com/assets/7323/92/electronic_artwork_guidelines.pdf">journal format guidelines on figures</a> for the journal <em>Evolution</em>.
+                Let's use an example to show how we might go about this. Here are the <a href="https://www.esa.org/wp-content/uploads/2022/05/ESA-Manuscript-Preparation-Guide.pdf">journal format guidelines on figures</a> for the journal <em>Ecology</em>. They will give a general idea for what type of guidelines you may want to follow.
             </p>
+            <p>
+                Two common things that are asked are to move the legend and/or change the allignment of the x-axis. All specific changes like this that fall outside of basic changes are usually done in the <code>theme()</code> call of the plot. If you're looking for how to make small edits to a ggplot, you almost ALWAYS will need to make use of the theme. That reference is here in the <a href="https://ggplot2.tidyverse.org/reference/theme.html">ggplot2 documentation</a>. 
+            </p>
+            <p>
+                To change out legend position we'll use the theme argument <code>legend.position</code> and for the axis text we'll use the argument <code>axis.text.x</code>. So let's do that one at a time (in our theme of working iteratively!), starting with our previously existing plot, we'll add a call to theme, and then make out call to the <code>legend.position</code>. Now we want to make sure that our legend does <strong>not</strong> cover any of the actual data being plotted, so we will simply have to try and find a place to put it, and if we can't, content ourselves with it being outside of the plot box. The positioning of <code>legend.position</code> happens in two arguments, the first position being for the x-location, and the second for the y-location, with both of them representing proportions of the axis. Therefore, a value of <code>c(0.1, 0.1)</code> would put the legend in the bottom left corner. Let's try the bottom right corner. 
+            </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() +
+                geom_point(data = df_filtered %>% 
+                            dplyr::arrange(factor(species, 
+                                        levels = c("Cutthroat trout", 
+                                                "Coastal giant salamander", 
+                                                "Cascade torrent salamander"))),
+                            mapping = aes(x = length_1_mm, y = weight_g, 
+                                        fill = species, size = species),
+                            # here's where we'll add our colour etc
+                            colour = "black", shape = 21, alpha = 0.8)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base() +
+                scale_size_manual("Species", values = c(4, 2, 2)) +
+                scale_fill_manual("Species", values = c("#42d4f4", "#f032e6", "#ffe119")) + 
+                theme(
+                    legend.position = c(0.8, 0.1)
+                )
+                end.rcode-->
+            <p>
+                That will work well enough for now! Let's move on to changing the orientation of the x-axis. This is most often required if you're plotting a time-series with years on the x-axis, as they will take up quite a bit of space if all displayed, so are rotated 90 degrees so they don't overlap. We don't have that here, however, we'll still rotate ours 90 degrees here for practice. 
+            </p>
+                <!--begin.rcode, warning=FALSE
+                ggplot() +
+                geom_point(data = df_filtered %>% 
+                            dplyr::arrange(factor(species, 
+                                        levels = c("Cutthroat trout", 
+                                                "Coastal giant salamander", 
+                                                "Cascade torrent salamander"))),
+                            mapping = aes(x = length_1_mm, y = weight_g, 
+                                        fill = species, size = species),
+                            # here's where we'll add our colour etc
+                            colour = "black", shape = 21, alpha = 0.8)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base() +
+                scale_size_manual("Species", values = c(4, 2, 2)) +
+                scale_fill_manual("Species", values = c("#42d4f4", "#f032e6", "#ffe119")) + 
+                theme(
+                    legend.position = c(0.8, 0.1),
+                    axis.text.x = element_text(angle = 90)
+                )
+                end.rcode--> 
+            <p>
+                Okay, that worked, but we can now see that the numbers don't <em>quite</em> line up with the axis ticks. What should we do about this? Well, we can simply adjust them vertically (vertically with respect to the number, not the plot itself) so they scoot a bit to the left from our perspective. For whatever reason, a vertical adjustment (<code>vjust()</code>) of 0.5 seems to do the trick nearly everytime for this task.
+            </p>    
+                            <!--begin.rcode, warning=FALSE
+                ggplot() +
+                geom_point(data = df_filtered %>% 
+                            dplyr::arrange(factor(species, 
+                                        levels = c("Cutthroat trout", 
+                                                "Coastal giant salamander", 
+                                                "Cascade torrent salamander"))),
+                            mapping = aes(x = length_1_mm, y = weight_g, 
+                                        fill = species, size = species),
+                            # here's where we'll add our colour etc
+                            colour = "black", shape = 21, alpha = 0.8)+
+                labs(x = "Length (mm)", y = "Weight (g)") +
+                # note here we use `ggthemes::` to indicate which package we're using
+                ggthemes::theme_base() +
+                scale_size_manual("Species", values = c(4, 2, 2)) +
+                scale_fill_manual("Species", values = c("#42d4f4", "#f032e6", "#ffe119")) + 
+                theme(
+                    legend.position = c(0.8, 0.1),
+                    axis.text.x = element_text(angle = 90, vjust = 0.5)
+                )
+                end.rcode-->  
+            <p>
+                And voila! 
+            </p>      
             <p>
 
                 For this plot, we are pretty much done! This looks good to go. This section has hopefully showed you how to iteratively add components to your plot to troubleshoot throughout and end up with a nice plot quickly. At this point, we can save our plot if we want to (and if it has been assigned to a variable). <a href="../02-data/02-01-reading-writing.html">See info about saving plots here</a>.
