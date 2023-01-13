@@ -29,6 +29,7 @@
           <li><a href="#basic-plot">Basic Plots</a></li>
           <li><a href="#col-shape">Colour and Shape</a></li>
           <li><a href="#group">Plot Variables by Group</a></li>
+          <li><a href="#standards">Editing Our Plot for Journal Standards</a></li>
         </ol>
       </nav>
     <div>
@@ -72,7 +73,7 @@
                 end.rcode-->
             
             <p>
-                Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <strong>must-haves</strong> to have a legible, complete plot. First step is the axis labels. So to iteratively work up our plot, we'll add that one component on, by using the new function <code>labs()</code>:
+                Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <strong>must-haves</strong> to have a legible, complete plot. First step is the axis labels. <strong>Also note that units ALWAYS go on axis labels.</code> So to iteratively work up our plot, we'll add that one component on, by using the new function <code>labs()</code>:
             </p>
 
                 <!--begin.rcode, warning=FALSE
@@ -82,7 +83,7 @@
                 end.rcode-->
             <p>
 
-                OK good. Now, this is more aesthetic than anything, but we might want to change the appearance of this plot away from this ugly grey background and grid lines. This is a more personal decision regarding what exactly you want your plot to look like. However, there are lots of <code>themes</code> available in the <code>ggplot2</code> package to choose from. For example, we could use the <code>theme_classic()</code> like so: 
+                OK good. Now, this is more aesthetic than anything, but we might want to change the appearance of this plot away from this ugly grey background and grid lines. This is a more personal decision regarding what exactly you want your plot to look like, along with the fact that different fields have differnet conventions regarding how they want their plot to look. In biology, we almost always don't want a grey background, nor horizonal grid lines. There are lots of <code>themes</code> available in the <code>ggplot2</code> package to choose from that will help us make a plot that aligns with our goals. For example, we could use the <code>theme_classic()</code> like so: 
             </p>
 
                 <!--begin.rcode, warning=FALSE
@@ -259,7 +260,9 @@
                 # note here we use `ggthemes::` to indicate which package we're using
                 ggthemes::theme_base() +
                 scale_size_manual(values = c(4, 2, 2))
-                
+                            <p>
+                One last step!
+            </p>
                 end.rcode-->
             <p>
 
@@ -298,7 +301,9 @@
                                         levels = c("Cutthroat trout", 
                                                 "Coastal giant salamander", 
                                                 "Cascade torrent salamander")))
-                )
+                )            <p>
+                One last step!
+            </p>
 
                 end.rcode-->
             <p>
@@ -375,7 +380,14 @@
             <p>
 
                 While these colours are harsh, they're easy to see. We could choose others if we want to be more aesthetic :) Also, we notice that our legend problem is gone! Why? Well, what created the problem before was having <em>technically</em> two different legends being asked for from our <code>aes()</code> arguments - size & fill. However, by manually providing values for both and then giving them the <em>same</em> legend title, we fixed up the problem. <em>On your own, try adding a different title for one of them and see what happens!</em>. 
-                <br><br>
+            </p>
+        </section>
+        <section id="standards">
+            <h3>Conforming Out Plot to Discipline/Journal Standards</h3>
+            <p>
+                Similar to citation styles, there are often discipline-specific protocols to follow when making plots. While the plot we've made here may look perfectly fine for our use in a class presentation or for an informal report, it's important to consider these additional requirements when making a figure in a more formal context. As always, usually we are not the ones who get to make the calls on what these standards should be, so default to whatever your instructor/supervisor/discipline standard/journal submission guidelines outline as what they want. 
+            </p>
+            <p>
 
                 For this plot, we are pretty much done! This looks good to go. This section has hopefully showed you how to iteratively add components to your plot to troubleshoot throughout and end up with a nice plot quickly. At this point, we can save our plot if we want to (and if it has been assigned to a variable). <a href="../02-data/02-01-reading-writing.html">See info about saving plots here</a>.
             </p>

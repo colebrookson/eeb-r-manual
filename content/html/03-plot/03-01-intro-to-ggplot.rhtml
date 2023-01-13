@@ -80,19 +80,12 @@
                 The most basic version of the plot we may want to make is a scatter plot of two continuous variables, let's say length and weight: 
                 </p>
                 <!--begin.rcode, warning=FALSE
-                ggplot(data = df, mapping = aes(x = length_1_mm, 
-                  y =  weight_g)) + 
-                geom_point()
-                end.rcode-->
-                <p>
-                While this is completely correct, it is recommended to place the aesthetics arguments (<code>mapping = aes()</code>) in each <code>geom</code> argument individually. This will allow us to plot using multiple dataframes or variables. 
-                <br><br>
-                So a better version may look like this:
-                </p>
-                <!--begin.rcode, warning=FALSE
                 ggplot() +
                 geom_point(data = df, aes(x = length_1_mm, y = weight_g))
                 end.rcode-->
+                <p>
+                Here you notice we place the aesthetics arguments (<code>mapping = aes()</code>) in each <code>geom</code> argument individually. This will allow us to plot using multiple dataframes or variables. 
+                </p>
                 <p>
                 In the <a href="./03-02-interative-plotting.html">Iterative Plotting</a> section we'll go over how to add components to go from an ugly plot like this to a publication-ready graphic. 
             </p>
