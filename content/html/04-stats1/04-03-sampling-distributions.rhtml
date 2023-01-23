@@ -28,9 +28,6 @@
         <li><a href="#common">Common Distributions</a></li>
         <li><a href="#rsamp">Random Sampling</a></li>
         <li><a href="#samp-r">Sampling in R</a>
-        <ol>
-          <li><a href="#samp-r--seeds">Seeds</a></li>
-        </ol>
         </li>
         <li><a href="#dist">Sampling Distributions</a>
           <ol>
@@ -102,71 +99,6 @@
       <p>
         And we see we've approximated a normal distribution here. 
       </p>
-      <section id="samp-r--seeds">
-        <h3>Seeds and Reproducibility</h3>
-        <p>
-          When doing random number generation in R, it stands to reason that given how R goes about it's random number generation, if I write the above code to sample 10 data points in a script, run that code, and then come back in a few days and run it again <em>I'll get a completely different set of points the next time</em>. We can see this in action here: 
-        </p>
-        <!--begin.rcode
-        rnorm(10, mean = 0, sd = 1)
-        end.rcode-->
-        <p>
-          And again: 
-        </p>
-        <!--begin.rcode
-        rnorm(10, mean = 0, sd = 1)
-        end.rcode-->
-        <p>
-          We see these are completely different sets of numbers! 
-        </p>
-        <p>
-          There are many situations where we might need to be able to re-run a set of random numbers and have them be the same values (e.g. debugging code, simulation studies, etc.). Well, if we recall that we actually are doing is using a <em>pseudorandom</em> number generator (PRNG), then we can use the concepts of <strong>seeds</strong> to help us. Whenever using a PRNG we need to "set a seed" which initializes the PRNG. The details of this aren't important here, but know that if we have a seed, we can predict what the PRNG will draw as pseudorandom numbers. Let's make an example. 
-        </p>
-        <p>
-          Say we want to draw 100 samples from a uniform (discrete) distribution. As a reminder, a uniform distribution with bounds at 0 and 10 looks like this: 
-        </p>
-        <!--begin.rcode, echo = FALSE
-        graphics::hist(runif(10000000, min = 0, max = 10),
-            ylab = "", xlab = "",
-            main = "")
-        end.rcode-->
-        <p>
-          We'll explore the use of seeds by drawing 100 random samples from a uniform distribution with bounds at 0 and 10. We start by setting a seed and drawing our samples:
-        </p>
-        <!--begin.rcode
-        # start by setting a seed
-        set.seed(1)
-        x <- runif(n = 100, min = 0, max = 10)
-        end.rcode-->
-        <p>
-          Now let's draw a new set of values: 
-        </p>
-        <!--begin.rcode
-        y <- runif(n = 100, min = 0, max = 10)
-        end.rcode-->
-        <p>
-          We can see if these values are the same by using a boolean comparison: 
-        </p>
-        <!--begin.rcode
-        all(x == y)
-        end.rcode-->
-        <p>
-          So the values drawn are NOT the same. But what happens if we re-employ the seed that we set previously? 
-        </p>
-        <!--begin.rcode
-        set.seed(1)
-        z <- runif(n = 100, min = 0, max = 10)
-        end.rcode-->
-        <p>
-          Let's check if they're equivalent: 
-        </p>
-        <!--begin.rcode
-        all(x == z)
-        end.rcode-->
-        <p>
-          So now we get a true! This is good to know! This means we can draw random samples in a <em>reproducible</em> manner, which can be incredibly useful. 
-        </p>
-      </section>
     </section>
         <section id="dist">
       <h2>Sampling Distributions</h2>
