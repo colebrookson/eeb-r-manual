@@ -75,90 +75,15 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script> 
+    $(function(){
+    $("#header").load("../common/head.html"); 
+    });
+    </script> 
 </head>
 <body>
-	<div class="topnav">
-		<a class="a-top w3-center" href="../index.html">The R Manual</a>
-        <a class="a-mid" href="../about.html">About</a>
-        <a class="a-mid" href="../contact.html">Contact</a>
-        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
-	</div>
-	<div class="bottomnav navbar">
-        <div class="dropdown">
-            <button class="dropbtn">Getting Started</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
-              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
-              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
-              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
-            </div>
-        </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Basic R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
-              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
-              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
-              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
-              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
-              <a href="../01-basicr/01-05-packages.html">Packages</a>
-              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Working With Data</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
-              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
-              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
-              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
-              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
-              <a href="../02-data/02-05-new-columns.html">New Columns</a>
-              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
-              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
-              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
-              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
-              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
-              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Plotting</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
-              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
-              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
-              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
-              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
-              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
-              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
-              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
-              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
-              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
-              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
-              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
-              <a href="../03-plot/03-12-annotations.html">Annotations</a>
-              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Statistics in R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
-              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
-              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
-              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
-              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
-              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
-              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
-              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
-              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
-              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
-              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
-            </div>
-          </div> 
-	</div>
-
+  <!--Add in the header-->
+  <div id="header"></div>
 <main style = margin-top:100px>
     <nav class="section-nav">
         <ol>
@@ -174,11 +99,11 @@
         <h2>Introduction to Factors</h2>
 
         <p>
-            Factors are an important but frustrating special data type in R. They can be thought of as "categorical" variables, in the sense that they can only take on a limited number of values. R uses a vector of integer values to store a factor, with a corresponding set of character values that are displayed while using the factor.
+            Factors are an important special data type in R, though they can be frustrating to work with. They can be thought of as "categorical" variables, in the sense that they can only take on a limited number of values. R uses a vector of integer values to store a factor, with a corresponding set of character values that are displayed while using the factor.
             <br><br>
-            They are most commonly used to group numerical variables, and therefore commonly come into play when working with regression-related topics that require either categorical fixed effects or a random effect. An example might be the site at which some data were collected. In a study where there are only six sites, it might be the case that we need to use a <em>random effect</em> to control for variation between sites. In that scenario, it would be helpful to treat the variable <strong>Site</strong> as a factor in R. 
+            They are most commonly used to group numerical variables, and therefore commonly come into play when working with regression-related topics that require variables to be categorical For example, n an experiment we may classify the amount of water plants in different treatments get as "low", "medium", and "high", and so we could consider the treatment as a factor. An example might be the site at which some data were collected. In a study where there are only six sites, it might be the case that we need to use a <em>random effect</em> to control for variation between sites. In that scenario, it would be helpful to treat the variable <strong>Site</strong> as a factor in R. 
             <br><br>
-            We can make factors easily from any other type of variable. Take the following example dataset with three variables, one each of numeric, logical, and character types. 
+            We can make factors easily from any other type of variable. Take the following example dataset with three variables, one each of numeric, logical, and character types. This is useful because often when we have a dataset, we may do multiple things with that dataset, not all of which might require a factor. Therefore, it's helpful to be able to move bath and forth between factors and other data types. Let's use a contrived example to illustrate this:
             </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
 <span class="hl kwc">num_ex</span> <span class="hl std">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl num">4</span><span class="hl std">),</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl num">50</span><span class="hl std">),</span>
@@ -188,9 +113,9 @@
 <span class="hl kwd">str</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 'data.frame':	50 obs. of  3 variables:
-##  $ num_ex: num  4 2 1 2 4 3 4 4 3 2 ...
-##  $ log_ex: logi  TRUE TRUE TRUE FALSE FALSE FALSE ...
-##  $ chr_ex: chr  &quot;hehe&quot; &quot;hehe&quot; &quot;haha&quot; &quot;hehe&quot; ...
+##  $ num_ex: num  3 4 2 3 2 2 1 1 1 4 ...
+##  $ log_ex: logi  FALSE FALSE FALSE TRUE TRUE FALSE ...
+##  $ chr_ex: chr  &quot;haha&quot; &quot;haha&quot; &quot;hehe&quot; &quot;haha&quot; ...
 </pre></div>
 </div></div>
             <p>
@@ -209,9 +134,9 @@
 <span class="hl kwd">str</span><span class="hl std">(df_fac)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 'data.frame':	50 obs. of  3 variables:
-##  $ num_ex: Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 4 2 1 2 4 3 4 4 3 2 ...
-##  $ log_ex: Factor w/ 2 levels &quot;FALSE&quot;,&quot;TRUE&quot;: 2 2 2 1 1 1 2 2 1 1 ...
-##  $ chr_ex: Factor w/ 2 levels &quot;haha&quot;,&quot;hehe&quot;: 2 2 1 2 2 1 2 2 1 2 ...
+##  $ num_ex: Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 3 4 2 3 2 2 1 1 1 4 ...
+##  $ log_ex: Factor w/ 2 levels &quot;FALSE&quot;,&quot;TRUE&quot;: 1 1 1 2 2 1 1 1 2 1 ...
+##  $ chr_ex: Factor w/ 2 levels &quot;haha&quot;,&quot;hehe&quot;: 1 1 2 1 1 1 2 1 1 2 ...
 </pre></div>
 </div></div>
             <p>
@@ -226,12 +151,12 @@
 <span class="hl kwd">str</span><span class="hl std">(df_both)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 'data.frame':	50 obs. of  6 variables:
-##  $ num_ex    : num  4 2 1 2 4 3 4 4 3 2 ...
-##  $ log_ex    : logi  TRUE TRUE TRUE FALSE FALSE FALSE ...
-##  $ chr_ex    : chr  &quot;hehe&quot; &quot;hehe&quot; &quot;haha&quot; &quot;hehe&quot; ...
-##  $ num_ex_fac: Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 4 2 1 2 4 3 4 4 3 2 ...
-##  $ log_ex_fac: Factor w/ 2 levels &quot;FALSE&quot;,&quot;TRUE&quot;: 2 2 2 1 1 1 2 2 1 1 ...
-##  $ chr_ex_fac: Factor w/ 2 levels &quot;haha&quot;,&quot;hehe&quot;: 2 2 1 2 2 1 2 2 1 2 ...
+##  $ num_ex    : num  3 4 2 3 2 2 1 1 1 4 ...
+##  $ log_ex    : logi  FALSE FALSE FALSE TRUE TRUE FALSE ...
+##  $ chr_ex    : chr  &quot;haha&quot; &quot;haha&quot; &quot;hehe&quot; &quot;haha&quot; ...
+##  $ num_ex_fac: Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 3 4 2 3 2 2 1 1 1 4 ...
+##  $ log_ex_fac: Factor w/ 2 levels &quot;FALSE&quot;,&quot;TRUE&quot;: 1 1 1 2 2 1 1 1 2 1 ...
+##  $ chr_ex_fac: Factor w/ 2 levels &quot;haha&quot;,&quot;hehe&quot;: 1 1 2 1 1 1 2 1 1 2 ...
 </pre></div>
 </div></div>
             <p>
@@ -276,13 +201,11 @@
             Now this is a nice plot, but it doesn't really make sense that on the x-axis, the order doesn't correspond to a logical numeric order. This is easily remedied with the <code>forcats</code> package from the Tidyverse. We can <em>re-order</em>, or in R-speak <em>re-level</em> the factor, and then R will know what order we want when we use it for any further plotting or other activities. 
             </p>
 <div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(forcats)</span>
-<span class="hl std">df</span><span class="hl opt">$</span><span class="hl std">group</span> <span class="hl kwb">&lt;-</span> <span class="hl std">forcats</span><span class="hl opt">::</span><span class="hl kwd">fct_relevel</span><span class="hl std">(</span>
-<span class="hl std">df</span><span class="hl opt">$</span><span class="hl std">group,</span> <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;First&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Second&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Third&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Fourth&quot;</span><span class="hl std">)</span>
+<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">group</span> <span class="hl std">= forcats</span><span class="hl opt">::</span><span class="hl kwd">fct_relevel</span><span class="hl std">(group,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;First&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Second&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Third&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Fourth&quot;</span><span class="hl std">))</span>
 <span class="hl std">)</span>
-</pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Outer names are only allowed for unnamed scalar atomic inputs
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># now we can use the base R function `levels()` to check if the order is what</span>
+<span class="hl com"># now we can use the base R function `levels()` to check if the order is what</span>
 <span class="hl com"># we want it to be</span>
 <span class="hl kwd">levels</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group)</span>
 </pre></div>
@@ -320,7 +243,7 @@
             <p>
             We can see that for some reason here we have the "6" replaced by the written out version of the word. This will make the order not logical, and may cause problems if for some reason we wanted this variable to be numeric at some point (<strong>Remember, you can make a character value into a numeric value</strong>). 
             <br><br>
-            To repalce this value in our column, we can use the <code>recode()</code> function from <code>dplyr</code>. It is most consistent to do this within a <code>mutate()</code>. 
+            To replace this value in our column, we can use the <code>recode()</code> function from <code>dplyr</code>. It is most consistent to do this within a <code>mutate()</code>. 
             </p>
 <div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>

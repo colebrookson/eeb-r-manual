@@ -75,90 +75,15 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script> 
+    $(function(){
+    $("#header").load("../common/head.html"); 
+    });
+    </script> 
 </head>
 <body>
-	<div class="topnav">
-		<a class="a-top w3-center" href="../index.html">The R Manual</a>
-        <a class="a-mid" href="../about.html">About</a>
-        <a class="a-mid" href="../contact.html">Contact</a>
-        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
-	</div>
-	<div class="bottomnav navbar">
-        <div class="dropdown">
-            <button class="dropbtn">Getting Started</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
-              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
-              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
-              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
-            </div>
-        </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Basic R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
-              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
-              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
-              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
-              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
-              <a href="../01-basicr/01-05-packages.html">Packages</a>
-              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Working With Data</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
-              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
-              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
-              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
-              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
-              <a href="../02-data/02-05-new-columns.html">New Columns</a>
-              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
-              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
-              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
-              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
-              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
-              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Plotting</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
-              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
-              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
-              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
-              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
-              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
-              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
-              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
-              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
-              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
-              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
-              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
-              <a href="../03-plot/03-12-annotations.html">Annotations</a>
-              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Statistics in R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
-              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
-              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
-              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
-              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
-              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
-              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
-              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
-              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
-              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
-              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
-            </div>
-          </div> 
-	</div>
-
+  <!--Add in the header-->
+  <div id="header"></div>
 <main style = margin-top:100px>
   <nav class="section-nav">
       <ol>
@@ -192,7 +117,7 @@
     <section id="intro">
       <h2>An Introduction (And Disclaimer...)</h2>
       <p>
-        There are many excellent texts on probability and probability theory. There are numerous courses in several departments at the University of Toronto, and indeed pretty much any university, that can offer you the student a truly grounded view of what probability is and how to think about it. Indeed, probability itself can be interpreted in multiple ways, and multiple theories about foundational probability and how to interpret it exist. Most of the concepts in this section are unabashedly stolen from the <strong>excellent</strong> (and free!) text on probability by Blitzstein and Hwang which you can find <a href="http://probabilitybook.net/">here</a>. This, however, is a short website page, within which we attempt to discuss some foundational components of probability that we think are important for students in EEB to know. 
+        There are many excellent texts on probability and probability theory. There are numerous courses in several departments at the University of Toronto, and indeed pretty much any university, that can offer you the student a truly grounded view of what probability is and how to think about it. Indeed, probability itself can be interpreted in multiple ways, and multiple theories about foundational probability and how to interpret it exist. Most of the concepts in this section are unabashedly stolen from the <strong>excellent</strong> (and free!) text on probability by Blitzstein and Hwang which you can find <a href="http://probabilitybook.net/">here</a>. Here we attempt to discuss some foundational components of probability that we think are important for students in EEB to know. 
       </p>
       <p>
         There's many reasons why we should stuThis test assumes three major things:dy probability, but perhaps most simply, the biological world around us is full of randomness, and even in the processes we think we understand the best, uncertainty is abound. Without an understanding of probability, we don't have a framework with which to confront of understanding or lack thereof, and actually enable a robust discussion about <strong>how much</strong> randomness we actually understand, and how <strong>certain</strong> we are about things we think. 
@@ -219,10 +144,10 @@
         Say there are 1000 spiders in a bag. One of those spiders happens to have a red dot on their thorax. You pull a single spider out of that bag, without looking. You could have either pulled A) a spider with no red dot, or B) the spider with the red dot. What is the <em>probability</em> that you have selected the spider with the red dot? 
       </p>
       <p>
-        Above we've actually used all the key terms above in description. First, we've actually defined the <em>sample space</em> (the set of all possible outcomes of an experiment/trial) as being finite - the spiders in the bag that we can think of as a mathematical set. The population (related but different to a sample space) is the set of all units that some random process can select. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and <em>all</em> the applications we'll consider here, have finite sample spaces. That is to say, we can construct a <em>set</em> containing every single <em>outcome</em> of an <em>experiment or random trial</em>. In this example, each spider represents an <em>outcome</em>, and an <em>event</em> is some set of spiders. <strong>Side note:</strong> sets can have one or even <em>no</em> items in them. The <em>events</em> are what we would mathematically consider <em>subsets</em> of the <em>sample space</em>. So here we have two <em>events</em> of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
+        In our brief description of our question here, we've already touched on each of our key terms and concepts. First, we've actually defined the <em>sample space</em> (the set of all possible outcomes of an experiment/trial) as being finite - the spiders in the bag that we can think of as a mathematical set. The population (related but different to a sample space) is the set of all units that some random process can select. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and <em>all</em> the applications we'll consider here, have finite sample spaces. That is to say, we can construct a <em>set</em> containing every single <em>outcome</em> of an <em>experiment or random trial</em>. In this example, each spider represents an <em>outcome</em>, and an <em>event</em> is some set of spiders. <strong>Side note:</strong> sets can have one or even <em>no</em> items in them. The <em>events</em> are what we would mathematically consider <em>subsets</em> of the <em>sample space</em>. So here we have two <em>events</em> of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
       </p>
       <p>
-        Here, we have a naive version of a probability, wherein we can actually just define the probability of choosing the spider with the red dot as a simple proportion. To state this clearly, the probability of performing the experiment, and the B) being the outcome can be defined as: 
+        Here, we have a simple version of a probability, wherein we can actually just define the probability of choosing the spider with the red dot as a simple proportion. To state this clearly, the probability of performing the experiment, and the B) being the outcome can be defined as: 
       \[P(\text{B}) = \frac{\text{number of outcomes favourable to B}}{\text{Total number of outcomes in the sample space }\textit{S}}\]
         which specifically means:
 
@@ -335,16 +260,12 @@
         <p>
           Discrete distributions typically are described by their probability mass functions, which give the probabilities of a discrete random variable being exactly equal to some values. These probabilites must <em>always sum to 1.0</em> and have a general form of 
 
-        \[p_X(x) = P(X = x)\]
+        \[p_{X}(x) = P(X = x)\]
 
           It's helpful to know how to plot probability distributions, as it's visually easiest to see when different parameters result in different probability distributions when we can compare parameter values. 
         </p>
         <p>
-          The probability mass function for the Poisson distribution takes the following form:
-
-        \[p(x;\lambda) = \frac{e^{-\lambda}\lambda^x}{x!}\]
-
-          And as there's only one parameter (\(\lambda\)), this parameter simply indicates the "shape" of the function, or how many average events happen in a given time interval. Conveniently in R, there are mass functions for most common distributions. Let's take a look at <code>?rpois</code> and we see that we can plot the probability densities with the <code>dpois</code> function. Let's choose three different parameter values and see how that changes our probability density. In addition, it's actually much easier to make plots of discrete distributions in <strong>base R</strong> so we'll do that:
+          The probability mass function for the Poisson distribution is actually fairly simple, as there's only one parameter (\(\lambda\)), this parameter simply indicates the "shape" of the function, or how many average events happen in a given time interval. Conveniently in R, there are mass functions for most common distributions. Let's take a look at <code>?rpois</code> and we see that we can plot the probability densities with the <code>dpois</code> function. Let's choose three different parameter values and see how that changes our probability density. In addition, it's actually much easier to make plots of discrete distributions in <strong>base R</strong> so we'll do that:
         </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first make a sequence of values to construct our density across:</span>
 <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">100</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">)</span>
@@ -386,18 +307,18 @@
       <p>
         Again as the name implies, between two variables which are both continuous, an infinite number of other values are possible. To think about these distributions, we often think of probability <strong>densities</strong>. 
 
-        It's useful to be able to plot probability densities for a handful of common continuous distributions. We'll plot probability densities for the Gaussian, Exponential, and Gamma distributions. 
+        It's useful to be able to plot probability densities for a handful of common continuous distributions. We'll plot probability densities for the Gaussian/Normal, Exponential, and Gamma distributions. As a good reminder, to recall what forms the probability density functions for some given distribution look like, the <a href="https://www.itl.nist.gov/div898/handbook/index.html">NIST/SEMATCH e-handbook of Statistical Methods</a> has a <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda36.htm">great set of descriptions on probability distributions</a>. Let's refresh our minds about the Normal Distribution. The Normal or Gaussian distribution is the classic "bell-shaped curve" we're used to seeing when we think of any distribution at all. 
       </p>
       <section id="dist--cont--dens">
         <p>
           Conveniently in R, there are density functions for most common distributions. In fact, if we take a look at <code>?rnorm</code>, we see a helpful set of functions to do with the normal distribution. We have functions for the density <code>dnorm</code>, the distribution function <code>pnorm</code>, the quantile function <code>qnorm</code> and a random deviate sample <code>rnorm</code>. This exists for other distributions too (HINT: try <code>?rgamma</code>) 
         </p>
         <p>
-          Let's plot the density of a few normal distributions showing how a difference in parameters gives different probability density curves. As a good reminder, to recall what forms the probability density functions for some given distribution look like, the <a href="https://www.itl.nist.gov/div898/handbook/index.html">NIST/SEMATCH e-handbook of Statistical Methods</a> has a <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda36.htm">great set of descriptions on probability distributions</a>. Let's refresh our minds about the Normal Distribution. The probability density function for the normal distribution is
+          Let's plot the density of a few normal distributions showing how a difference in parameters gives different probability density curves. The probability density function for the normal distribution is
 
         \[f(x) = \frac{e^{-(x-\mu)^2/(2\sigma^2)}}{\sigma \sqrt{2\pi}}\]
 
-          This looks a bit complicated, but in reality, there's only two parameters! The one's we're used to for the normal distribtuion, \(\mu\) the mean, and \(\sigma\) the standard deviation. Similarly to how we did with the Poisson distribution above, let's see how changing these variables will change our probability density curves.
+          This looks a bit complicated, but in reality, there are only two parameters! The ones we're used to for the normal distribtuion, \(\mu\) the mean, and \(\sigma\) the standard deviation. The rest of the values you see here are actually just constants. Similarly to how we did with the Poisson distribution above, let's see how changing these variables will change our probability density curves.
         </p>
         <p>
           Let's first see how changing the \(\sigma\) will affect the curves. Again, base plotting actually has an advantage here:

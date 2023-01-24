@@ -75,100 +75,21 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script> 
+    $(function(){
+    $("#header").load("../common/head.html"); 
+    });
+    </script> 
 </head>
 <body>
-	<div class="topnav">
-		<a class="a-top w3-center" href="../index.html">The R Manual</a>
-        <a class="a-mid" href="../about.html">About</a>
-        <a class="a-mid" href="../contact.html">Contact</a>
-        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
-	</div>
-	<div class="bottomnav navbar">
-        <div class="dropdown">
-            <button class="dropbtn">Getting Started</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
-              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
-              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
-              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
-            </div>
-        </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Basic R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
-              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
-              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
-              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
-              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
-              <a href="../01-basicr/01-05-packages.html">Packages</a>
-              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Working With Data</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
-              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
-              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
-              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
-              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
-              <a href="../02-data/02-05-new-columns.html">New Columns</a>
-              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
-              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
-              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
-              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
-              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
-              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Plotting</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
-              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
-              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
-              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
-              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
-              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
-              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
-              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
-              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
-              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
-              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
-              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
-              <a href="../03-plot/03-12-annotations.html">Annotations</a>
-              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Statistics in R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
-              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
-              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
-              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
-              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
-              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
-              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
-              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
-              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
-              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
-              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
-            </div>
-          </div> 
-	</div>
-
+  <!--Add in the header-->
+  <div id="header"></div>
 <main style = margin-top:100px>
   <nav class="section-nav">
       <ol>
         <li><a href="#common">Common Distributions</a></li>
-        <li><a href="#psuedo">Random vs. Pseudorandom</a></li>
         <li><a href="#rsamp">Random Sampling</a></li>
         <li><a href="#samp-r">Sampling in R</a>
-        <ol>
-          <li><a href="#samp-r--seeds">Seeds</a></li>
-        </ol>
         </li>
         <li><a href="#dist">Sampling Distributions</a>
           <ol>
@@ -185,7 +106,23 @@
     <section id="">
       <h2>Sampling & Sampling Distributions</h2>
       <p>
-        Sampling refers to the drawing of a subset of data points from some larger set (population). How we sample can be the subject of an entire course, but it is helpful to know enough to perform sampling in R, and then to compile those samples together into a <em>sampling distribution</em>. 
+        Generally, in biology we want to learn something about the world as we define it (eg. all pine trees in North America, Anoles in the Carribean, Drosophila in Africa), but we usually can't measure all individuals in the populations we care about in order to calculate the parameters of interest (e.g. mean weight of all the Anoles, etc). When we can't do that, we need to take a <em>sample</em> of the population, learn something about the sample, and use what we have learned to generalize outward to the population. In fact, if we could sample the entirety of a population of interest, we wouldn't need most types of statistical models (e.g. regression)! We could just calculate our parameters of interest, and be on our way. However, therein the problem lies, since we <em>want</em> usually to make some statement about the whole population, but we don't usually have data on the whole population. So, we take a sample, and try to figure out how best to extrapolate the knowledge we learned from that sample back to the rest of population. 
+      </p>
+      <p>
+        Ideally, when we take some sample of a population it's <em>unbiased</em>, that is, we can take some measurement from the sample such as a mean value, and that value is in fact the same as the population-level value. If we don't collect our sample properly, it's possible that we systematically over or underestimate our population parameter of interest, hence making our estimate <strong>biased</strong>. It's useful to think of some examples of when our sampling protocol might yeild biased samples. Say we want to know the mean size of Anoles in the Carribean. If our sampling method was to do ground observations of Anoles that we could see on a gridded sampling site, it's likely we're more likely to see, and therefore sample, Anoles that are more brightly coloured, and ones that are lower down in trees or on the ground. Is this a problem for our subsequent statistical calculations? Well, only if we know that our sample is biased and a) we don't do anyuthing to change our sampling protocol, and/or b) we don't account for it in our statistical models/tests.
+      </p>
+      <p>
+        Why is this imporant from a statistical perspective? Well, the methods we present in this section usually rely on a <strong>random sample</strong> of the population. Now in reality sometimes a random sample is impossible, and we work with data that have known limitations. An interesting example of this in an observational sample context is camera trap data. There are known biases (the interested reader can refer to <a href="https://conbio.onlinelibrary.wiley.com/doi/pdf/10.1111/csp2.239">this paper on the subject</a>) in camera trap data, but, wildlife researchers who have no choice but to use these data have come up with cleaver methods to account for these biases statistically. These techniques are outside the scope of this manual, but are interesting nonetheless. 
+      </p>
+      <figure>
+        <img src="../img/04-img/trap.jpg" alt="Tiger" style="max-width: 60%; height: auto;">
+        <figcaption>A Sumatran tiger captured in this image in Bukit Barisan Selatan National Park in southern Sumatra by wildlife ecologist Max Allen, from the Illinois Natural History Survey.</figcaption>
+      </figure> 
+      <p>
+        Since dealing with biased samples is difficult, we will constrain our discussion of sampling to <strong>random samples</strong>, the premise on which a great many common statistical tests are based. 
+      </p>
+      <p>
+        Statistically, we will think of sampling as referring to the drawing of a subset of data points from some larger set (population). How we sample can be the subject of an entire course, but it is helpful to know enough to perform sampling in R, and then to compile those samples together into a <em>sampling distribution</em>. 
       </p>
     </section>
     <section id="common">
@@ -197,18 +134,6 @@
         <img src="../img/04-img/distributions.png">
         <figcaption>credit: Ashkay Sharma</figcaption>
       </figure>
-    </section>
-       <section id="pseudo">
-      <h2>Random vs. Pseudorandom</h2>
-      <p>
-        We often think of computers as being able to generate for us <em>random</em> samples of numbers. However, computer-generated random samples are never <strong>truly</strong> random, they are what is called <em>pseudorandom</em>. For a computer to sample a truly random number, they would need to use a <em>true</em> random number generator (TRNG), which relies on using some external physical variable such as airwave static to generate a <em>truly</em> random sample, since subatomic particles have truly random behaviour. 
-      </p>
-      <p>
-        Computers on their own have to approximate this with an algorithm. The methods that we use to do this are not important in this context, but it is a good thing to remember that computationally derived random numbers (as we usually get from R) are not actually the same as mathematically random numbers, as the mathematical definitions used to define randomness in the purest sense are not computationally employable. 
-      </p>
-      <p>
-        So, in R, we will use <em>pseudorandom</em> number generators when we want to sample some numbers.
-      </p>
     </section>
     <section id="rsamp">
       <h2>Random Sampling</h2>
@@ -229,8 +154,8 @@
       </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1.5</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] 4.476135 5.335225 3.845416 6.750420 7.277987 4.753633 5.847443 3.398002 4.856019
-## [10] 4.589032
+<div class="output"><pre class="knitr r">##  [1] 5.417215 7.012418 7.614117 5.730816 5.154826 3.480257 2.551279 4.379783 7.551216
+## [10] 4.727541
 </pre></div>
 </div></div>
       <p>
@@ -239,77 +164,6 @@
       <p>
         And we see we've approximated a normal distribution here. 
       </p>
-      <section id="samp-r--seeds">
-        <h3>Seeds and Reproducibility</h3>
-        <p>
-          When doing random number generation in R, it stands to reason that given how R goes about it's random number generation, if I write the above code to sample 10 data points in a script, run that code, and then come back in a few days and run it again <em>I'll get a completely different set of points the next time</em>. We can see this in action here: 
-        </p>
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">##  [1] -0.50615451 -1.02004320 -0.97380896 -0.79269672 -0.78650430 -0.37790870 -0.98939547
-##  [8]  0.40683211 -2.10517301  0.01959228
-</pre></div>
-</div></div>
-        <p>
-          And again: 
-        </p>
-<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">##  [1] -0.34351892 -0.06797772 -0.15076840 -0.41931138 -1.19981033  1.27169877  1.08877265
-##  [8] -0.07896707 -0.14797010  0.95389526
-</pre></div>
-</div></div>
-        <p>
-          We see these are completely different sets of numbers! 
-        </p>
-        <p>
-          There are many situations where we might need to be able to re-run a set of random numbers and have them be the same values (e.g. debugging code, simulation studies, etc.). Well, if we recall that we actually are doing is using a <em>pseudorandom</em> number generator (PRNG), then we can use the concepts of <strong>seeds</strong> to help us. Whenever using a PRNG we need to "set a seed" which initializes the PRNG. The details of this aren't important here, but know that if we have a seed, we can predict what the PRNG will draw as pseudorandom numbers. Let's make an example. 
-        </p>
-        <p>
-          Say we want to draw 100 samples from a uniform (discrete) distribution. As a reminder, a uniform distribution with bounds at 0 and 10 looks like this: 
-        </p>
-<div class="chunk" id="unnamed-chunk-4"><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
-        <p>
-          We'll explore the use of seeds by drawing 100 random samples from a uniform distribution with bounds at 0 and 10. We start by setting a seed and drawing our samples:
-        </p>
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># start by setting a seed</span>
-<span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">)</span>
-<span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">,</span> <span class="hl kwc">min</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">max</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">)</span>
-</pre></div>
-</div></div>
-        <p>
-          Now let's draw a new set of values: 
-        </p>
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">,</span> <span class="hl kwc">min</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">max</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">)</span>
-</pre></div>
-</div></div>
-        <p>
-          We can see if these values are the same by using a boolean comparison: 
-        </p>
-<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">all</span><span class="hl std">(x</span> <span class="hl opt">==</span> <span class="hl std">y)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] FALSE
-</pre></div>
-</div></div>
-        <p>
-          So the values drawn are NOT the same. But what happens if we re-employ the seed that we set previously? 
-        </p>
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">)</span>
-<span class="hl std">z</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">,</span> <span class="hl kwc">min</span> <span class="hl std">=</span> <span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">max</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">)</span>
-</pre></div>
-</div></div>
-        <p>
-          Let's check if they're equivalent: 
-        </p>
-<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">all</span><span class="hl std">(x</span> <span class="hl opt">==</span> <span class="hl std">z)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## [1] TRUE
-</pre></div>
-</div></div>
-        <p>
-          So now we get a true! This is good to know! This means we can draw random samples in a <em>reproducible</em> manner, which can be incredibly useful. 
-        </p>
-      </section>
     </section>
         <section id="dist">
       <h2>Sampling Distributions</h2>
@@ -325,7 +179,7 @@
         <p>
           We could imagine that the frequency of each gene may be equivalent, However, research has shown (i.e. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC403801/">Louie et al. (2003)</a>) that nucleotide frequency is <em>not</em> uniform across human genes. So given some particular gene, it may be the case that we see a non-uniform probability distribution, but one that looks like this: 
         </p>
-<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
 <span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
   <span class="hl kwc">base</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
   <span class="hl kwc">prob</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.1</span><span class="hl std">,</span> <span class="hl num">0.2</span><span class="hl std">,</span> <span class="hl num">0.45</span><span class="hl std">,</span> <span class="hl num">0.25</span><span class="hl std">)</span>
@@ -337,7 +191,7 @@
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Nucleotide Base&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
   <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
         <p>
           As a fun little game, let's build a gene. There approximately 1000 nucleotide pairs of coding sequence per gene according to google, and let's imagine that the gene we're building has a probability distribution of nucleotides that is given above, where the probabilities of each base appearing given a random sample are: 0.1, 0.2, 0.45, and 0.25 respectively for A, C, G, and T. 
         </p>
@@ -347,7 +201,7 @@
         <p>
           To do this, we'll use R's <code>sample()</code> function from the base package, and alter only the <code>size</code> argument which says how many times to sample.
         </p>
-<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1234</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1234</span><span class="hl std">)</span>
 <span class="hl std">sample_20</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
                     <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">20</span><span class="hl std">,</span>
                     <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span>
@@ -369,7 +223,7 @@
         <p>
           Now let's take these vectors and turn them into dataframes so we can plot them. We can use the convenient <code>table()</code> function to get counts of how many of each base there is: 
         </p>
-<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
 <span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
 <span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
 
@@ -445,7 +299,7 @@
         <p>
           Now we'll combine all these data frames into one, add a reference of the real values, and plot the result with a grouped bar chart: 
         </p>
-<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># join samples up </span>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># join samples up </span>
 <span class="hl std">df_all_samples</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rbind</span><span class="hl std">(</span>
   <span class="hl std">df_20,</span>
   <span class="hl std">df_100,</span>
@@ -486,7 +340,7 @@
   <span class="hl kwd">scale_alpha_manual</span><span class="hl std">(</span><span class="hl str">&quot;Theoretical or Sampled&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.5</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">))</span> <span class="hl opt">+</span>
   <span class="hl kwd">scale_colour_manual</span><span class="hl std">(</span><span class="hl str">&quot;Theoretical or Sampled&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;white&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
         <p>
           Here we have shown intuitively the Law of Large Numbers!!!!
         </p>
@@ -496,19 +350,19 @@
         <p>
           Consider records for aquatic vertebrates (cutthroat trout and salamanders) in Mack Creek, Andrews Experimental Forest, Oregon (1987 - present). This dataset is present in the <code>lterdatasampler</code> package. 
         </p>
-<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
 <span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">and_vertebrates</span>
 <span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species      
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;        
-## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat tr…
-## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat tr…
-## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat tr…
-## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat tr…
-## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat tr…
-## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat tr…
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species    
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      
+## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat …
+## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat …
+## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat …
+## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat …
+## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat …
+## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat …
 ## # … with 6 more variables: length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;,
 ## #   clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
 </pre></div>
@@ -516,13 +370,13 @@
         <p>
           Let us look at the distribution of cutthroat trout sizes in our database:
         </p>
-<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">length_1_mm)</span>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">length_1_mm)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
         <p>
           We can see that this distribution isn't quite normal, but is continuous, and right-skewed. It could be approximated by a log-normal distribution: 
         </p>
-<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">250</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">250</span><span class="hl std">)</span>
 <span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">dlnorm</span><span class="hl std">(x,</span> <span class="hl kwc">meanlog</span> <span class="hl std">=</span> <span class="hl num">4.1</span><span class="hl std">,</span> <span class="hl kwc">sdlog</span> <span class="hl std">=</span> <span class="hl num">0.4</span><span class="hl std">)</span>
 
 <span class="hl com"># figure out how to scale the y for the plot alone </span>
@@ -542,7 +396,7 @@
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: Removed 17 rows containing non-finite values (stat_bin).
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
       <p>
         <strong>What will happen if we draw a number of random samples from this distribution and calculate the sample mean? What will the resulting distribution of sample means look like?</strong>
       </p>
@@ -567,13 +421,13 @@
             <li style="color:grey;font-size:calc(12px + 0.7vw);">2. 3. - Store that mean in the corresponding location of the pre-allocated object </li>
           </ol>
           </li>
-          <li style="color:blue;font-size:20px">3. Repeat step 2 <em>n</em> times</li>
+          <li style="color:blue;font-size:calc(12px + 0.7vw);">3. Repeat step 2 <em>n</em> times</li>
         </ol>
       </p>
       <p>
         The easiest way to actually accomplish this is through a for-loop. We'll start this and do it in order: 
       </p>
-<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first, we'll draw 100 samples </span>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first, we'll draw 100 samples </span>
 <span class="hl std">n</span> <span class="hl kwb">&lt;-</span> <span class="hl num">100</span>
 
 <span class="hl com"># let's pull 10 observations in each sample</span>
@@ -586,7 +440,7 @@
       <p>
         So how would we perform step 2? We'd sample 10 values from <code>df$length_1_mm</code>, calculate the mean, and assign the mean value to <code>sample_means[n]</code>. Then, we simply repeat this <em>n</em> times. Here's that code:
       </p>
-<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first, sample randomly from the vector of value</span>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first, sample randomly from the vector of value</span>
 <span class="hl kwa">for</span><span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">n) {</span>
   <span class="hl std">sample_means[i]</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">mean</span><span class="hl std">(</span><span class="hl kwd">sample</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">length_1_mm,</span> <span class="hl kwc">size</span> <span class="hl std">= x,</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">))</span>
 <span class="hl std">}</span>
@@ -598,13 +452,13 @@
       <p>
         Okay, so this worked! Excellent. Now, let's plot a histogram of our results:
       </p>
-<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(sample_means)</span>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(sample_means)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
       <p>
         Hmm!! A confusing distribution. This doesn't really resemble any interesting or meaningful distribution. Let's try the process again, but with a much larger value of <em>n</em>, and see if that changes the result: 
       </p>
-<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">n</span> <span class="hl kwb">&lt;-</span> <span class="hl num">100000</span>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">n</span> <span class="hl kwb">&lt;-</span> <span class="hl num">100000</span>
 <span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl num">10</span>
 <span class="hl std">sample_means</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;numeric&quot;</span><span class="hl std">,</span> <span class="hl kwc">length</span> <span class="hl std">= n)</span>
 
@@ -614,7 +468,7 @@
 
 <span class="hl kwd">hist</span><span class="hl std">(sample_means)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
       <p>
         Wow! This distribution is remarkably normal! What's going on here????
       </p>

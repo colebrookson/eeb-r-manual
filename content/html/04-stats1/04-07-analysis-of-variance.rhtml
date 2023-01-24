@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <style type="text/css">
+    .source, .output, .warning, .error, .message {
+      padding: 0 1em;
+      border:solid 1px #F7F7F7;
+      width: calc(70% - 2em);
+    }
+  </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -53,10 +60,10 @@
         In our discussion of <a href="./04-07-comparing-sample-means.html">comparing sample means</a> we discussed how to use R to compare two sample means. This is usually done through a t-test of some form. However, it's not uncommon that we start asking questions wherein we want to compare the sample means across a larger number of groups. For example, say we have four groups 1-4. 
       </p>
       <p>
-        This brings us to a conundrum, as statistical theory has to re-consider what to do to be able to formulate our null and alternate hypotheses in such a way that is useful. If we want to compare the means of four groups of a single grouping variable, we will use a single-factor ANOVA to do so. Our task here is to figure out how much variance is likely present between the group means due to sampling error, and then what amount of variance <em>on top of that</em> would denote a significantly different mean. 
+        This brings us to a conundrum, as statistical theory has to re-consider what to do to be able to formulate our null and alternate hypotheses in such a way that is useful. If we want to compare the means of four groups of a single grouping variable, we will use a single-factor ANOVA to do so. Our task here is to figure out how much variation among the group means <strong>should</strong> be present if the null hypothesis is true.
       </p>
       <p>
-        To be clear, when we are discussing this one-factor ANOVA, we are stating that our null hypothesis is that there is <strong>no</strong> difference between the sample means, so \(H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4\). In our alternative hypothesis then, it does <strong>not</strong> have to be true that more than one \(\mu\) are significantly different, but only that <em>at least</em> one is. 
+        To be clear, when we are discussing this one-factor ANOVA, we are stating that our null hypothesis is that there is <strong>no</strong> difference between the sample means, so \(H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4\). In our alternative hypothesis then, is that <em>at least</em> one mean is different. 
       </p>
     </section>
     <section id="f">
@@ -97,7 +104,7 @@
       unique(df$species)
       end.rcode-->
       <p>
-        It's probably best to check that each species has ~roughly the same amount of samples per group before we continue. Let's use the <code>table()</code> function for this:
+        While this is not a strict requirement, it's probably best to check that each species has ~roughly the same amount of samples per group before we continue. Let's use the <code>table()</code> function for this:
       </p>
       <!--begin.rcode
       table(df$species)
@@ -134,7 +141,7 @@
         <p>
           <h4>Normality</h4>
           <p>
-            <strong>A note: while plotting our data can be helpful, it can often lead to p-hacking and HARKing. While it is technically acceptable to plot the density plots for each group, that will give us an insight, prior to performing our tests, about what the means of each group might be. Again, this in and of itself is not <em>bad</em> but we can get the same information without the possible pitfalls by using QQ plots and significance tests, which at the end of the day are often required for publications/reports anyways. </strong> Here we'll use QQ plots and a Shapiro-Wilks test to check for normality in each of our groups:
+            <strong>A note: while plotting our data can be helpful, it can often lead to p-hacking and HARKing (Hypothesizing After Results are Known). We often plot the our data before as part of our data exploration, but that will give us an insight, prior to performing our tests, about what the means of each group might be. Again, this in and of itself is not <em>bad</em> but it is important to recall that our process here should be to develop our hypothesis and then perform our statistical test. Here we'll use QQ plots to check for normality in each of our groups:
           </p>
           <!--begin.rcode
           library(ggpubr)
@@ -153,21 +160,18 @@
           ggpubr::ggqqplot(gentoo$bill_length_mm, main = "Gentoo")
           end.rcode-->
           <p>
-            Visually, all of these look reasonably acceptable, but let's compare with a Shapiro-Wilks test on each: 
-          </p>
-          <!--begin.rcode
-          stats::shapiro.test(adelie$bill_length_mm)
-          stats::shapiro.test(chin$bill_length_mm)
-          stats::shapiro.test(gentoo$bill_length_mm)
-          end.rcode-->
-          <p>
-            Well, it's a good thing we checked with our tests!! Our Shapiro-Wilks test for our Gentoo species shows that actually the data are non-normal. We note that the p-value is not <em>especially</em> large, but still &lt;0.05. 
+            Visually, all of these look mostly okay, but the Gentoo one specifically looks as though it might be a bit skewed. That is, some of the points on the right end of the plot come close to/go over the shaded bounds. To be abundantly conservative and cautious, we could interpret this as non-normality.
           </p>
           <p>
-            Two things to note here: First, <strong>ANOVAs are actually relatively robust to violations of normality assumptions</strong>. This means that given we can see the data are not <em>that</em> far off of a normal distribution (we can see this via our QQ plot), we could in theory proceed with our test here with relative confidence. Second, <strong>log-transforming our data is completely valid for an ANOVA</strong>. This is helpful for us, as while we could go ahead with the test (after checking our other assumptions), it's still true that there is an easy transformation available to us through the log transformation, that prevents us from having to <em>technically</em> violate the assumptions of our test. An additional note is that if our assumptions are not met completely, and perhaps a transformation does not help us, it is possible to use a non-parametric alternative such as the Kruskal-Wallis test which we do not cover in this section, but is similarly easy to run. 
+            Two things to note here: First, <strong>ANOVAs are actually relatively robust to violations of normality assumptions</strong>. This means that given we can see the data are not <em>that</em> far off of a normal distribution (we can see this via our QQ plot), we could in theory proceed with our test here with relative confidence. Second, <strong>log-transforming our data is valid for an ANOVA</strong>. This is helpful for us, as while we could go ahead with the test (after checking our other assumptions), it's still true that there is an easy transformation available to us through the log transformation, that prevents us from having to <em>technically</em> violate the assumptions of our test. 
           </p>
           <p>
-            So let's go ahead and transform our data: code
+            When we transform data, all we are really doing is changing each value in our data by the same mathematical formula, in this case, the natural logarithm, \(ln\). For us, the logarithmic function can be useful as it will help deal with skew in our data, or in other cases, the chance that the data at hand may span many orders of magnitude. However, we still need to check that our log-transformed data meet the assumptions of our test before we continue, especially since log-transformation is not guaranteed to ALWAYS fix problems of normality. 
+          </p>
+            An additional note is that if our assumptions are not met completely, and perhaps a transformation does not help us, it is possible to use a non-parametric alternative such as the Kruskal-Wallis test which we do not cover in this section, but is similarly easy to run. 
+          </p>
+          <p>
+            So let's go ahead and transform our data:
           </p>
           <!--begin.rcode
           adelie <- adelie %>% 
@@ -184,7 +188,7 @@
             )
           end.rcode-->
           <p>
-            Now we'll go ahead and re-do our QQ plots and our tests:
+            Now we'll go ahead and re-do our QQ plots:
           </p>
           <!--begin.rcode
           # plot qq-plots for each one
@@ -193,15 +197,8 @@
           ggpubr::ggqqplot(gentoo$log_length, main = "Gentoo")
           end.rcode-->
           <p>
-            So these all look pretty good. Time for the tests: 
-          </p>
-          <!--begin.rcode
-          stats::shapiro.test(adelie$log_length)
-          stats::shapiro.test(chin$log_length)
-          stats::shapiro.test(gentoo$log_length)
-          end.rcode-->
           <p>
-            Ok great, so we can now see that each of the three tests has a p-value > 0.05, so we can assume normality for these values. 
+            Ok great, so we can now see that each of the three looks good, so we can assume normality for these values. 
           </p>
         </section>
         <section id="aov--ass--homo">
@@ -210,7 +207,7 @@
             Next to check our variances. 
           </p>
           <p>
-            Our second assumption was that the variances of all samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedascitiy with the Bartlett's test</strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if p &lt; 0.05 then for our purposes we could say that the assumption of homoskedascitiy is violated. As a sidenote, if our assumptions of normality were not quite met, it would be preferable to use the Levene's test which is less sensitive to this problem. 
+            Our second assumption was that the variances of all samples be equal. While it's not necessary to always do so, some researchers will use a standardized test to check for homoskedasticity. <strong>We will test our homoskedasticity with the Bartlett's test</strong>. The null hypothesis of the F-test is that the variances <em> are </em> equal, so if p &lt; 0.05 then for our purposes we could say that the assumption of homoskedasticity is violated. As a sidenote, if our assumptions of normality were not quite met, it would be preferable to use the Levene's test which is less sensitive to this problem. 
           </p>
           <p>
             To do the Barlett's test let's use the <code>stats</code> package function <code>bartlett.test()</code>. We will now actually re-format our data first so that it's in <em>long</em> form. This will make our lives easier. To do this, we want one column with the actual values, and another with the grouping variable (in this case, our species names). To get the species names, what we'll do is combine a few arguments such that we can do it all in one command. We'll use the <code>rep()</code> function which takes two arguments: a) the value to be repeated, and b) the number of times to repeat it. Because there are different numbers of observations for each species, the second argument in each call to <code>rep()</code> will simply be the length of the vector of the <code>log_length</code> for that species. Also, we want the grouping variable to be a factor. That looks like this: 
@@ -230,7 +227,7 @@
           str(bill_data)
           end.rcode-->
           <p>
-            Great, now for our bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. Last, tell the function what the dataframe itself is called. 
+            Great, now for our Bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. Last, tell the function what the dataframe itself is called. 
           </p>
           <!--begin.rcode
           stats::bartlett.test(log_length ~ species, data = bill_data)
@@ -272,7 +269,7 @@
         <section id="aov--int--plot">
           <h4>Plotting the Results</h4>
           <p>
-            Now let's plot our results. This can be done in any number of ways, but I am personally keen on plotting the density of the values, in the same way we would if we wanted to use it to check assumptions of normality as it shows all components of the data at hand and doesn't have the chance of hiding anything. I also think it's just a useful plot to have. We'll pair that with denotations of the means of each group as well as annotating the p-value onto the plot like this: 
+            Now let's plot our results. This can be done in any number of ways, including a boxplot, but I am personally keen on plotting the density of the values, in the same way we would if we wanted to use it to check assumptions of normality as it shows all components of the data at hand and doesn't have the chance of hiding anything. I also think it's just a useful plot to have. We'll pair that with denotations of the means of each group as well as annotating the p-value onto the plot like this: 
           </p>
           <!--begin.rcode
           means <- bill_data %>% 

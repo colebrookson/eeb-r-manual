@@ -75,90 +75,15 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script> 
+    $(function(){
+    $("#header").load("../common/head.html"); 
+    });
+    </script> 
 </head>
 <body>
-	<div class="topnav">
-		<a class="a-top w3-center" href="../index.html">The R Manual</a>
-        <a class="a-mid" href="../about.html">About</a>
-        <a class="a-mid" href="../contact.html">Contact</a>
-        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
-	</div>
-	<div class="bottomnav navbar">
-        <div class="dropdown">
-            <button class="dropbtn">Getting Started</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
-              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
-              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
-              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
-            </div>
-        </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Basic R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
-              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
-              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
-              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
-              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
-              <a href="../01-basicr/01-05-packages.html">Packages</a>
-              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Working With Data</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
-              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
-              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
-              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
-              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
-              <a href="../02-data/02-05-new-columns.html">New Columns</a>
-              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
-              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
-              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
-              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
-              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
-              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Plotting</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
-              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
-              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
-              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
-              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
-              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
-              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
-              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
-              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
-              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
-              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
-              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
-              <a href="../03-plot/03-12-annotations.html">Annotations</a>
-              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Statistics in R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
-              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
-              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
-              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
-              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
-              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
-              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
-              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
-              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
-              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
-              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
-            </div>
-          </div> 
-	</div>
-
+  <!--Add in the header-->
+  <div id="header"></div>
 <main style = margin-top:100px>
     <nav class="section-nav">
         <ol>
@@ -277,7 +202,7 @@
                     <p>
                         In these data, there are two measures of leaf area: <code>leaf1area</code> and <code>leaf2area</code>. While they're both very similar, it might still be useful to have a mean estimate for each observation in the data between the two leaf area measurements. 
                         <br><br>
-                        Say we wanted to calculate for row, the mean value of the two measures of leaf area. <strong>To make this operation on a row-wise basis, we can use <code>dplyr::rowwise()</code></strong> which will ensure each calculation is done on a single row. Combining this with <code>mutate()</code> will produce our desired result. 
+                        Say we wanted to calculate the mean value of the measures of leaf area for each row. <strong>To make this operation on a row-wise basis, we can use <code>dplyr::rowwise()</code></strong> which will ensure each calculation is done on a single row. Combining this with <code>mutate()</code> will produce our desired result. 
                         </p>
 <div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>  <span class="hl com"># ensures calculation done for each row</span>
@@ -311,92 +236,71 @@
                         To go about this, we might want to get a ratio of the <code>mean_area</code> and the <code>corected_leaf_area</code> for each row. To do so, we can create an operation very similarly to above: 
                         </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
-<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>  <span class="hl com"># we still need this to get a value for each row</span>
-<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
-    <span class="hl kwc">corrected_mean_ratio</span> <span class="hl std">= mean_area</span> <span class="hl opt">/</span> <span class="hl std">corrected_leaf_area</span>
-<span class="hl std">)</span>
-<span class="hl std">df</span>
+    <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>  <span class="hl com"># we still need this to get a value for each row</span>
+    <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+        <span class="hl kwc">corrected_mean_ratio</span> <span class="hl std">= mean_area</span> <span class="hl opt">/</span> <span class="hl std">corrected_leaf_area</span>
+    <span class="hl std">)</span>
+<span class="hl kwd">summary</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">corrected_leaf_area)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## # A tibble: 359 × 9
-## # Rowwise: 
-##     year watershed elevation leaf1area leaf2area corrected_leaf_area forest mean_area
-##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;               &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
-##  1  2003 Reference Low           13.8      12.1                29.1  HBEF       13.0 
-##  2  2003 Reference Low           14.6      15.3                33.0  HBEF       14.9 
-##  3  2003 Reference Low           12.5       9.73               25.3  HBEF       11.1 
-##  4  2003 Reference Low            9.97     10.1                23.2  HBEF       10.0 
-##  5  2003 Reference Low            6.84      5.48               15.5  HBEF        6.16
-##  6  2003 Reference Low            9.66      7.64               20.4  HBEF        8.65
-##  7  2003 Reference Low            8.82      9.23               21.2  HBEF        9.03
-##  8  2003 Reference Low            5.83      6.18               15.2  HBEF        6.01
-##  9  2003 Reference Low            8.11      7.13               18.4  HBEF        7.62
-## 10  2003 Reference Low            3.02      3.44                9.60 HBEF        3.23
-## # … with 349 more rows, and 1 more variable: corrected_mean_ratio &lt;dbl&gt;
+<div class="output"><pre class="knitr r">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##   9.597  21.180  25.950  26.687  31.751  55.874     119
 </pre></div>
 </div></div>
                     <h6><code>ifelse()</code></h6>
                     <p>
-                        A handy component of <code>mutate()</code> is that we can create a new column based on a conditional statement like an <code>ifelse()</code> statement <a href="../06-landingpage.html">(see more on this here)</a>. In the <code>corrected_leaf_area</code> column, we may want to know if a particular value falls above or below the mean value for all of our observations. We could create a simple categorical variable based on this for each row with an <code>ifelse()</code> statement. 
+                        A handy component of <code>mutate()</code> is that we can create a new column based on a conditional statement like an <code>ifelse()</code> statement <a href="../06-landingpage.html">(see more on this here)</a>. Briefly, in an <code>ifelse()</code> statement, we have a boolean statement (i.e. TRUE/FALSE), and the function performs an action depending on whether or not the boolean is true. The structure is <code>ifelse(test_expression, x, y)</code>, where <code>x</code> is what will happen if the statement is TRUE, and <code>y</code> is what will happen if the statmeent is FALSE. In the <code>corrected_leaf_area</code> column, we may want to know if a particular value falls above or below the mean value for all of our observations. We could create a simple categorical variable based on this for each row with an <code>ifelse()</code> statement. 
                         </p>
 <div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># overall mean </span>
 <span class="hl std">mean_val</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">mean</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">corrected_leaf_area,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
 
 <span class="hl com"># make new column</span>
 <span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
-<span class="hl com"># still need to rowwise the calculation</span>
-<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
-<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
-    <span class="hl com"># we specify we want this as a factor </span>
-    <span class="hl kwc">corrected_above_below</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(</span><span class="hl kwd">ifelse</span><span class="hl std">(</span>
-    <span class="hl com"># this is the logical test</span>
-    <span class="hl std">corrected_leaf_area</span> <span class="hl opt">&gt;</span> <span class="hl std">mean_val,</span>
-    <span class="hl com"># value if test is TRUE</span>
-    <span class="hl str">&quot;Above&quot;</span><span class="hl std">,</span>
-    <span class="hl com"># value if test is FALSE</span>
-    <span class="hl str">&quot;Below&quot;</span>
-    <span class="hl std">))</span>
-<span class="hl std">)</span>
-<span class="hl std">df</span>
+    <span class="hl com"># still need to rowwise the calculation</span>
+    <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+    <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+        <span class="hl com"># we specify we want this as a factor </span>
+        <span class="hl kwc">corrected_above_below</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(</span><span class="hl kwd">ifelse</span><span class="hl std">(</span>
+        <span class="hl com"># this is the logical test</span>
+        <span class="hl std">corrected_leaf_area</span> <span class="hl opt">&gt;</span> <span class="hl std">mean_val,</span>
+        <span class="hl com"># value if test is TRUE</span>
+        <span class="hl str">&quot;Above&quot;</span><span class="hl std">,</span>
+        <span class="hl com"># value if test is FALSE</span>
+        <span class="hl str">&quot;Below&quot;</span>
+        <span class="hl std">))</span>
+    <span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## # A tibble: 359 × 10
-## # Rowwise: 
-##     year watershed elevation leaf1area leaf2area corrected_leaf_area forest mean_area
-##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;               &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
-##  1  2003 Reference Low           13.8      12.1                29.1  HBEF       13.0 
-##  2  2003 Reference Low           14.6      15.3                33.0  HBEF       14.9 
-##  3  2003 Reference Low           12.5       9.73               25.3  HBEF       11.1 
-##  4  2003 Reference Low            9.97     10.1                23.2  HBEF       10.0 
-##  5  2003 Reference Low            6.84      5.48               15.5  HBEF        6.16
-##  6  2003 Reference Low            9.66      7.64               20.4  HBEF        8.65
-##  7  2003 Reference Low            8.82      9.23               21.2  HBEF        9.03
-##  8  2003 Reference Low            5.83      6.18               15.2  HBEF        6.01
-##  9  2003 Reference Low            8.11      7.13               18.4  HBEF        7.62
-## 10  2003 Reference Low            3.02      3.44                9.60 HBEF        3.23
-## # … with 349 more rows, and 2 more variables: corrected_mean_ratio &lt;dbl&gt;,
-## #   corrected_above_below &lt;fct&gt;
+</div></div>
+                        <p>
+                        We look at our new column like this:
+                        </p>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">corrected_above_below)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## Above Below 
+##   111   129
 </pre></div>
 </div></div>
                 </section>
                 <section id="mut--exist--two"> 
                     <h5>Binding Columns</h5>
                     <p>
-                        While this is a less common use case, it is often handy to make a new column grouping variable that is informative and can be made for each row. For example, say we wanted to have some way to group our observations by three components: the year the data were collected (2003 vs. 2004), the watershed (reference vs. w1), and elevation (low or mid). In this toy example, we'll do this by pasting those elements together in a new row-wise column. 
+                        While this is a less common use case, it is often handy to make a new column grouping variable that is informative and can be made for each row. For example, say we wanted to have some way to group our observations by three components: the year the data were collected (2003 vs. 2004), the watershed (reference vs. w1), and elevation (low or mid). In this example, we'll do this by pasting those elements together in a new row-wise column. 
                         <br><br>
                         First, let's take a look at the summaries of each of these columns: 
                         </p>
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">year)</span>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">year)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    2003    2003    2003    2003    2004    2004
 </pre></div>
 </div></div>
-<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">watershed)</span>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">watershed)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## Reference        W1 
 ##       179       180
 </pre></div>
 </div></div>
-<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">elevation)</span>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">elevation)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##  Low  Mid NA's 
 ##  120  120  119
@@ -407,7 +311,7 @@
                         <br><br>
                         Now, let's perform our calculation: 
                         </p>
-<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl com"># we can use paste() from base R to paste the characters together</span>
@@ -439,7 +343,7 @@
                         <p>
                         Now we can see how many unique combinations of these three variables there are: 
                         </p>
-<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group)</span>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
 ## 2003_Reference_Low 2003_Reference_Mid        2003_W1_Low        2003_W1_Mid 

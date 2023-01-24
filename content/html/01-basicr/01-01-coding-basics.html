@@ -75,90 +75,15 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script> 
+    $(function(){
+    $("#header").load("../common/head.html"); 
+    });
+    </script> 
 </head>
 <body>
-	<div class="topnav">
-		<a class="a-top w3-center" href="../index.html">The R Manual</a>
-        <a class="a-mid" href="../about.html">About</a>
-        <a class="a-mid" href="../contact.html">Contact</a>
-        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
-	</div>
-	<div class="bottomnav navbar">
-        <div class="dropdown">
-            <button class="dropbtn">Getting Started</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
-              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
-              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
-              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
-            </div>
-        </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Basic R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
-              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
-              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
-              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
-              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
-              <a href="../01-basicr/01-05-packages.html">Packages</a>
-              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Working With Data</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
-              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
-              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
-              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
-              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
-              <a href="../02-data/02-05-new-columns.html">New Columns</a>
-              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
-              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
-              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
-              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
-              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
-              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Plotting</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
-              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
-              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
-              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
-              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
-              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
-              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
-              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
-              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
-              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
-              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
-              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
-              <a href="../03-plot/03-12-annotations.html">Annotations</a>
-              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Statistics in R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
-              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
-              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
-              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
-              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
-              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
-              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
-              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
-              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
-              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
-              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
-            </div>
-          </div> 
-	</div>
-
+  <!--Add in the header-->
+  <div id="header"></div>
     <main style = margin-top:100px>
         <nav class="section-nav">
             <ol>
@@ -178,13 +103,14 @@
               <li><a href="#boolean">Boolean Operations</a></li>
               <li><a href="#assign">Assignment</a></li>
               <li><a href="#functions">Built-in Functions</a></li>
+              <li><a href="#Objects">Objects</a></li>
             </ol>
           </nav>
         <div>
         <section>
         <h1>Coding Basics</h1>
         <p>
-                    Fundamentally, our goal in using R is to ask our computer to help us answer the biological domain questions we have. In order for R to be useful to us in this sense, we have to know <em>how</em> to ask our computer to do these things. It is easiest to think of R as simply a interface between us and our computers. However, we must remember that <em>computers are not intelligent, they will only do EXACTLY what we tell them to do</em>. Therefore, we need to be specific about how we ask our computer to do things in service of answering our biological questions. This section covers some important concepts that will govern how we ask R to do things for us. 
+            Fundamentally, throughout your courses and research in ecology and evolutionary biology, you will be using R to ask your computer to help you understand your data. This might be doing simple calculations, such as finding means and medians of organismal size, or it might be more sophisticated, such as looking for significant differences in growth rates or building models to predict biological responses. In order for R to be useful to us in this sense, we have to know <em>how</em> to ask our computer to do these things. It is easiest to think of R as simply a interface between us and our computers. However, we must remember that <em>computers are not intelligent, they will only do EXACTLY what we tell them to do</em>. Therefore, we need to be specific about how we ask our computer to do things in service of answering our biological questions. This section covers some important concepts that will govern how we ask R to do things for us. 
             </p>
         </section>
     <section id="running">
@@ -265,7 +191,7 @@
         <section id="calculator--modulo">
             <h4>Modulo Operations</h4>
             <p>
-                Getting the remainder of division:
+                The modulo operation returns the remainder of a division, after one number is divided by another  Getting the remainder of division:
             </p>
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl num">5</span> <span class="hl opt">%%</span> <span class="hl num">2</span>
 </pre></div>
@@ -307,6 +233,8 @@
 </pre></div>
 </div></div>
         <p>
+            Of note here is the difference between <code>==</code> and <code>=</code>. In R, <code>==</code> never performs any type of assignment, it only works to ask "are these two things equal to each other?", whereas the <code>=</code> will assign a value to a variable. 
+        </p>
     </section>
     <section id="assign">
         <h2>Assignment</h2>
@@ -321,7 +249,7 @@
 </div></div>
         <h5><strong>Two important notes with assignment:</strong></h5>
         <p>
-                1) In R, assignment can be done either through <code>&lt;-</code> or <code>=</code>. Both will work identically, but the <code>&lt;-</code> assignment operator is the more commonly used one and is technically best practice <br><br>
+                1) In R, assignment can be done either through <code>&lt;-</code> or <code>=</code>. Both will work identically, but the <code>&lt;-</code> assignment operator is the more commonly used one and is technically best practice. Ideally, we should use <code>&lt;-</code>  to assign things (like objects and functions, which we'll cover later) to variables, and then we can use <code>=</code> to pass arguments in expressions<br><br>
                 2) If you make an assignment of a value to a variable, that assignment is not permanent. You can overwrite that assignment simply by using the same variable name
             </li>
         </ol>
@@ -330,7 +258,7 @@
     <section id="functions">
         <h2>Built-in Functions</h2>
         <p>
-            Most of your initial use of R will be employing built-in functions that R has available for you to employee. For example, we might want to know the sum of a set of numbers. 
+            Most of your initial use of R will be employing built-in functions that R has available for you to employ. For example, we might want to know the sum of a set of numbers. 
         </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl kwd">sum</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">6</span><span class="hl std">,</span> <span class="hl num">8</span><span class="hl std">)</span>
 </pre></div>
@@ -355,7 +283,7 @@
             <strong>TIP:</strong> When in doubt about how to use a function, or really anything in R, check the documentation!
         </p>
     </section>
-    <section id=""Naming>
+    <section id="Naming">
         <h2>Naming</h2>
         <p>
             A lot of R is assigning values to variables, and each of those variables will need a name. Many programming languages have "style guides" that are a generally agreed-upon set of standards by the community of users that dictate how best to do common tasks in that language. 
@@ -371,6 +299,15 @@
         <p>
             <em>Variable and function names should be lowercase. Use an underscore (_) to separate words within a name. Generally, variable names should be nouns and function names should be verbs. Strive for names that are concise and meaningful (this is not easy!).</em>
     
+        </p>
+    </section>
+    <section id="Objects">
+        <h2>Objects & OOP</h2>
+        <p>
+            To understand what’s going on in R, it’s important to understand how the things (termed "Objects") are being stored in R. Everything (yes, literally everything) is an object. Objects are the basis of what we call object-oriented programming. An object is a data structure having some attributes and a set of methods that act on those attributes.
+        </p>
+        <p>
+            Object-oriented programming languages (sometimes called ‘high-level’ lanaguages) are typically more intuitive and are often used via an IDE (integrated development environment) like RStudio or a GUI (graphical user interface).
         </p>
     </section>
     

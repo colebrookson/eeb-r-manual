@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <style type="text/css">
+    .source, .output, .warning, .error, .message {
+      padding: 0 1em;
+      border:solid 1px #F7F7F7;
+      width: calc(70% - 2em);
+    }
+  </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -55,7 +62,7 @@
     <section id="intro">
       <h2>An Introduction (And Disclaimer...)</h2>
       <p>
-        There are many excellent texts on probability and probability theory. There are numerous courses in several departments at the University of Toronto, and indeed pretty much any university, that can offer you the student a truly grounded view of what probability is and how to think about it. Indeed, probability itself can be interpreted in multiple ways, and multiple theories about foundational probability and how to interpret it exist. Most of the concepts in this section are unabashedly stolen from the <strong>excellent</strong> (and free!) text on probability by Blitzstein and Hwang which you can find <a href="http://probabilitybook.net/">here</a>. This, however, is a short website page, within which we attempt to discuss some foundational components of probability that we think are important for students in EEB to know. 
+        There are many excellent texts on probability and probability theory. There are numerous courses in several departments at the University of Toronto, and indeed pretty much any university, that can offer you the student a truly grounded view of what probability is and how to think about it. Indeed, probability itself can be interpreted in multiple ways, and multiple theories about foundational probability and how to interpret it exist. Most of the concepts in this section are unabashedly stolen from the <strong>excellent</strong> (and free!) text on probability by Blitzstein and Hwang which you can find <a href="http://probabilitybook.net/">here</a>. Here we attempt to discuss some foundational components of probability that we think are important for students in EEB to know. 
       </p>
       <p>
         There's many reasons why we should stuThis test assumes three major things:dy probability, but perhaps most simply, the biological world around us is full of randomness, and even in the processes we think we understand the best, uncertainty is abound. Without an understanding of probability, we don't have a framework with which to confront of understanding or lack thereof, and actually enable a robust discussion about <strong>how much</strong> randomness we actually understand, and how <strong>certain</strong> we are about things we think. 
@@ -82,10 +89,10 @@
         Say there are 1000 spiders in a bag. One of those spiders happens to have a red dot on their thorax. You pull a single spider out of that bag, without looking. You could have either pulled A) a spider with no red dot, or B) the spider with the red dot. What is the <em>probability</em> that you have selected the spider with the red dot? 
       </p>
       <p>
-        Above we've actually used all the key terms above in description. First, we've actually defined the <em>sample space</em> (the set of all possible outcomes of an experiment/trial) as being finite - the spiders in the bag that we can think of as a mathematical set. The population (related but different to a sample space) is the set of all units that some random process can select. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and <em>all</em> the applications we'll consider here, have finite sample spaces. That is to say, we can construct a <em>set</em> containing every single <em>outcome</em> of an <em>experiment or random trial</em>. In this example, each spider represents an <em>outcome</em>, and an <em>event</em> is some set of spiders. <strong>Side note:</strong> sets can have one or even <em>no</em> items in them. The <em>events</em> are what we would mathematically consider <em>subsets</em> of the <em>sample space</em>. So here we have two <em>events</em> of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
+        In our brief description of our question here, we've already touched on each of our key terms and concepts. First, we've actually defined the <em>sample space</em> (the set of all possible outcomes of an experiment/trial) as being finite - the spiders in the bag that we can think of as a mathematical set. The population (related but different to a sample space) is the set of all units that some random process can select. Sample spaces can be finite, countably infinite, or uncountably infinite. Most biological applications, and <em>all</em> the applications we'll consider here, have finite sample spaces. That is to say, we can construct a <em>set</em> containing every single <em>outcome</em> of an <em>experiment or random trial</em>. In this example, each spider represents an <em>outcome</em>, and an <em>event</em> is some set of spiders. <strong>Side note:</strong> sets can have one or even <em>no</em> items in them. The <em>events</em> are what we would mathematically consider <em>subsets</em> of the <em>sample space</em>. So here we have two <em>events</em> of interest: The subset A) 999 spiders with no red dots, and B) 1 spider with a red dot. 
       </p>
       <p>
-        Here, we have a naive version of a probability, wherein we can actually just define the probability of choosing the spider with the red dot as a simple proportion. To state this clearly, the probability of performing the experiment, and the B) being the outcome can be defined as: 
+        Here, we have a simple version of a probability, wherein we can actually just define the probability of choosing the spider with the red dot as a simple proportion. To state this clearly, the probability of performing the experiment, and the B) being the outcome can be defined as: 
       \[P(\text{B}) = \frac{\text{number of outcomes favourable to B}}{\text{Total number of outcomes in the sample space }\textit{S}}\]
         which specifically means:
 
@@ -176,9 +183,13 @@
       </p>
       <!--begin.rcode
       library(ggplot2)
-      library(ggthemes)
-
-      df <- data.frame(
+      library(ggthemes    <style type="text/css">
+      .source, .output, .warning, .error, .message {
+        padding: 0 1em;
+        border:solid 1px #F7F7F7;
+        width: calc(70% - 2em);
+      }
+    </style>(
         base = c("A", "C", "G", "T"),
         prob = 0.25
       )
@@ -196,16 +207,12 @@
         <p>
           Discrete distributions typically are described by their probability mass functions, which give the probabilities of a discrete random variable being exactly equal to some values. These probabilites must <em>always sum to 1.0</em> and have a general form of 
 
-        \[p_X(x) = P(X = x)\]
+        \[p_{X}(x) = P(X = x)\]
 
           It's helpful to know how to plot probability distributions, as it's visually easiest to see when different parameters result in different probability distributions when we can compare parameter values. 
         </p>
         <p>
-          The probability mass function for the Poisson distribution takes the following form:
-
-        \[p(x;\lambda) = \frac{e^{-\lambda}\lambda^x}{x!}\]
-
-          And as there's only one parameter (\(\lambda\)), this parameter simply indicates the "shape" of the function, or how many average events happen in a given time interval. Conveniently in R, there are mass functions for most common distributions. Let's take a look at <code>?rpois</code> and we see that we can plot the probability densities with the <code>dpois</code> function. Let's choose three different parameter values and see how that changes our probability density. In addition, it's actually much easier to make plots of discrete distributions in <strong>base R</strong> so we'll do that:
+          The probability mass function for the Poisson distribution is actually fairly simple, as there's only one parameter (\(\lambda\)), this parameter simply indicates the "shape" of the function, or how many average events happen in a given time interval. Conveniently in R, there are mass functions for most common distributions. Let's take a look at <code>?rpois</code> and we see that we can plot the probability densities with the <code>dpois</code> function. Let's choose three different parameter values and see how that changes our probability density. In addition, it's actually much easier to make plots of discrete distributions in <strong>base R</strong> so we'll do that:
         </p>
         <!--begin.rcode
         # first make a sequence of values to construct our density across:
@@ -247,18 +254,18 @@
       <p>
         Again as the name implies, between two variables which are both continuous, an infinite number of other values are possible. To think about these distributions, we often think of probability <strong>densities</strong>. 
 
-        It's useful to be able to plot probability densities for a handful of common continuous distributions. We'll plot probability densities for the Gaussian, Exponential, and Gamma distributions. 
+        It's useful to be able to plot probability densities for a handful of common continuous distributions. We'll plot probability densities for the Gaussian/Normal, Exponential, and Gamma distributions. As a good reminder, to recall what forms the probability density functions for some given distribution look like, the <a href="https://www.itl.nist.gov/div898/handbook/index.html">NIST/SEMATCH e-handbook of Statistical Methods</a> has a <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda36.htm">great set of descriptions on probability distributions</a>. Let's refresh our minds about the Normal Distribution. The Normal or Gaussian distribution is the classic "bell-shaped curve" we're used to seeing when we think of any distribution at all. 
       </p>
       <section id="dist--cont--dens">
         <p>
           Conveniently in R, there are density functions for most common distributions. In fact, if we take a look at <code>?rnorm</code>, we see a helpful set of functions to do with the normal distribution. We have functions for the density <code>dnorm</code>, the distribution function <code>pnorm</code>, the quantile function <code>qnorm</code> and a random deviate sample <code>rnorm</code>. This exists for other distributions too (HINT: try <code>?rgamma</code>) 
         </p>
         <p>
-          Let's plot the density of a few normal distributions showing how a difference in parameters gives different probability density curves. As a good reminder, to recall what forms the probability density functions for some given distribution look like, the <a href="https://www.itl.nist.gov/div898/handbook/index.html">NIST/SEMATCH e-handbook of Statistical Methods</a> has a <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda36.htm">great set of descriptions on probability distributions</a>. Let's refresh our minds about the Normal Distribution. The probability density function for the normal distribution is
+          Let's plot the density of a few normal distributions showing how a difference in parameters gives different probability density curves. The probability density function for the normal distribution is
 
         \[f(x) = \frac{e^{-(x-\mu)^2/(2\sigma^2)}}{\sigma \sqrt{2\pi}}\]
 
-          This looks a bit complicated, but in reality, there's only two parameters! The one's we're used to for the normal distribtuion, \(\mu\) the mean, and \(\sigma\) the standard deviation. Similarly to how we did with the Poisson distribution above, let's see how changing these variables will change our probability density curves.
+          This looks a bit complicated, but in reality, there are only two parameters! The ones we're used to for the normal distribtuion, \(\mu\) the mean, and \(\sigma\) the standard deviation. The rest of the values you see here are actually just constants. Similarly to how we did with the Poisson distribution above, let's see how changing these variables will change our probability density curves.
         </p>
         <p>
           Let's first see how changing the \(\sigma\) will affect the curves. Again, base plotting actually has an advantage here:

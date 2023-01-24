@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style type="text/css">
+        .source, .output, .warning, .error, .message {
+          padding: 0 1em;
+          border:solid 1px #F7F7F7;
+          width: calc(70% - 2em);
+        }
+      </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -73,7 +80,7 @@
       </p>
     <section id="reg">
       <p>
-        A gross simplification of the process of linear regression would be that if we have a series of points between two continuous variables, we want to find a straight line that goes through as many of those points as possible. 
+        A gross simplification of the process of linear regression would be that if we want to predict the value of one continuous variable from another, we want to find a straight line that goes through as many of those points as possible. 
       </p>
       <p>
         What does it mean to do such a thing? Well, let's start with reminding ourselves, mathematically, what a line is. A straight line is defined by the equation \[y = mx + b\] where \(b\) is the y-intercept, \(m\) is the slope of the line, and \(x\) and \(y\) are data values. This means that given a point on the x-axis, \(x\), a slope \(m\), and a y-intercept \(b\), we can find the value \(y\) that denotes the y-axis value that corresponds to the x-axis value \(x\). 
@@ -109,7 +116,7 @@
             It's clear that we can't actually make our line go <em>directly</em> through very many of them, but perhaps we can figure out some way to make the line <em> as close to as many points as possible</em>. We'll do that by imagining we draw a line at random, and calculate the distance between every single point and the line itself. These are called <strong>residuals</strong>. Then we'll square each one, and take the sum of all those squares. 
         </p>
         <p>
-            You might ask, why square it? The short answer to that question is that squaring it makes a large number of mathematical tools available to us. 
+            You might ask, why square it? The short answer to that question is that squaring it makes a large number of mathematical tools available to us. It turns out we don't really care about the sign of the residual, that is if it's positive or negative in relation to the regression line, just the magnitude itself.
         </p>
         <p>
             It now follows somewhat logically that we want to find a value for the slope of our line, \(\beta_1\) that <strong>minimizes</strong> this sum of the squared residuals. What we are doing here is actually a process called <em>estimation</em> wherein we choose some method that allows us to compare candidate values for \(\beta_1\) with other values. Ordinary Least Squares is actually just a specific version of Maximum Likelihood Estimation, which we'll discuss below. 
@@ -118,7 +125,7 @@
     <section id="lin">
         <h2>The Linear Model</h2>
         <p>
-            As in our previous work, we will certainly NOT (!!!!) just jump into writing code, as that's the best way to ensure a poorly done analysis. First, we have our question. Let's frame it as a hypothesis. It seems logical here to state that we think temperature will positively vary with ice cover. So a null hypothesis may be that <em> there is no relationship between air temperature and ice cover </em>. We have decided we want to use linear regression to tackle this challenge, so consider the assumptions of the method: 
+            As in our previous work, we will certainly NOT (!!) just jump into writing code, as that's the best way to ensure a poorly done analysis. First, we have our question. Let's frame it as a hypothesis. It seems logical here to state that we think temperature will positively vary with ice cover. So a null hypothesis may be that <em> there is no relationship between air temperature and ice cover </em>. We have decided we want to use linear regression to tackle this challenge, so consider the assumptions of the method: 
         </p>
         <p>
         <strong>1. Linearity</strong> - we assume the relationship between our two variables, \(X\) and \(Y\) is linear<br>

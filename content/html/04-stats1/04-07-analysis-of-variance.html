@@ -75,90 +75,15 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script> 
+    $(function(){
+    $("#header").load("../common/head.html"); 
+    });
+    </script> 
 </head>
 <body>
-	<div class="topnav">
-		<a class="a-top w3-center" href="../index.html">The R Manual</a>
-        <a class="a-mid" href="../about.html">About</a>
-        <a class="a-mid" href="../contact.html">Contact</a>
-        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
-	</div>
-	<div class="bottomnav navbar">
-        <div class="dropdown">
-            <button class="dropbtn">Getting Started</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
-              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
-              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
-              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
-            </div>
-        </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Basic R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
-              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
-              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
-              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
-              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
-              <a href="../01-basicr/01-05-packages.html">Packages</a>
-              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Working With Data</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
-              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
-              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
-              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
-              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
-              <a href="../02-data/02-05-new-columns.html">New Columns</a>
-              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
-              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
-              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
-              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
-              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
-              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Plotting</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
-              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
-              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
-              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
-              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
-              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
-              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
-              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
-              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
-              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
-              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
-              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
-              <a href="../03-plot/03-12-annotations.html">Annotations</a>
-              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Statistics in R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
-              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
-              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
-              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
-              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
-              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
-              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
-              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
-              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
-              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
-              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
-            </div>
-          </div> 
-	</div>
-
+  <!--Add in the header-->
+  <div id="header"></div>
 <main style = margin-top:100px>
   <nav class="section-nav">
       <ol>
@@ -190,10 +115,10 @@
         In our discussion of <a href="./04-07-comparing-sample-means.html">comparing sample means</a> we discussed how to use R to compare two sample means. This is usually done through a t-test of some form. However, it's not uncommon that we start asking questions wherein we want to compare the sample means across a larger number of groups. For example, say we have four groups 1-4. 
       </p>
       <p>
-        This brings us to a conundrum, as statistical theory has to re-consider what to do to be able to formulate our null and alternate hypotheses in such a way that is useful. If we want to compare the means of four groups of a single grouping variable, we will use a single-factor ANOVA to do so. Our task here is to figure out how much variance is likely present between the group means due to sampling error, and then what amount of variance <em>on top of that</em> would denote a significantly different mean. 
+        This brings us to a conundrum, as statistical theory has to re-consider what to do to be able to formulate our null and alternate hypotheses in such a way that is useful. If we want to compare the means of four groups of a single grouping variable, we will use a single-factor ANOVA to do so. Our task here is to figure out how much variation among the group means <strong>should</strong> be present if the null hypothesis is true.
       </p>
       <p>
-        To be clear, when we are discussing this one-factor ANOVA, we are stating that our null hypothesis is that there is <strong>no</strong> difference between the sample means, so \(H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4\). In our alternative hypothesis then, it does <strong>not</strong> have to be true that more than one \(\mu\) are significantly different, but only that <em>at least</em> one is. 
+        To be clear, when we are discussing this one-factor ANOVA, we are stating that our null hypothesis is that there is <strong>no</strong> difference between the sample means, so \(H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4\). In our alternative hypothesis then, is that <em>at least</em> one mean is different. 
       </p>
     </section>
     <section id="f">
@@ -240,7 +165,7 @@
 </pre></div>
 </div></div>
       <p>
-        It's probably best to check that each species has ~roughly the same amount of samples per group before we continue. Let's use the <code>table()</code> function for this:
+        While this is not a strict requirement, it's probably best to check that each species has ~roughly the same amount of samples per group before we continue. Let's use the <code>table()</code> function for this:
       </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
 </pre></div>
@@ -281,7 +206,7 @@
         <p>
           <h4>Normality</h4>
           <p>
-            <strong>A note: while plotting our data can be helpful, it can often lead to p-hacking and HARKing. While it is technically acceptable to plot the density plots for each group, that will give us an insight, prior to performing our tests, about what the means of each group might be. Again, this in and of itself is not <em>bad</em> but we can get the same information without the possible pitfalls by using QQ plots and significance tests, which at the end of the day are often required for publications/reports anyways. </strong> Here we'll use QQ plots and a Shapiro-Wilks test to check for normality in each of our groups:
+            <strong>A note: while plotting our data can be helpful, it can often lead to p-hacking and HARKing (Hypothesizing After Results are Known). We often plot the our data before as part of our data exploration, but that will give us an insight, prior to performing our tests, about what the means of each group might be. Again, this in and of itself is not <em>bad</em> but it is important to recall that our process here should be to develop our hypothesis and then perform our statistical test. Here we'll use QQ plots to check for normality in each of our groups:
           </p>
 <div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggpubr)</span>
 
@@ -313,43 +238,20 @@
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-5-3.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
           <p>
-            Visually, all of these look reasonably acceptable, but let's compare with a Shapiro-Wilks test on each: 
-          </p>
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  adelie$bill_length_mm
-## W = 0.99336, p-value = 0.7166
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  chin$bill_length_mm
-## W = 0.97525, p-value = 0.1941
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">bill_length_mm)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  gentoo$bill_length_mm
-## W = 0.97272, p-value = 0.01349
-</pre></div>
-</div></div>
-          <p>
-            Well, it's a good thing we checked with our tests!! Our Shapiro-Wilks test for our Gentoo species shows that actually the data are non-normal. We note that the p-value is not <em>especially</em> large, but still &lt;0.05. 
+            Visually, all of these look mostly okay, but the Gentoo one specifically looks as though it might be a bit skewed. That is, some of the points on the right end of the plot come close to/go over the shaded bounds. To be abundantly conservative and cautious, we could interpret this as non-normality.
           </p>
           <p>
-            Two things to note here: First, <strong>ANOVAs are actually relatively robust to violations of normality assumptions</strong>. This means that given we can see the data are not <em>that</em> far off of a normal distribution (we can see this via our QQ plot), we could in theory proceed with our test here with relative confidence. Second, <strong>log-transforming our data is completely valid for an ANOVA</strong>. This is helpful for us, as while we could go ahead with the test (after checking our other assumptions), it's still true that there is an easy transformation available to us through the log transformation, that prevents us from having to <em>technically</em> violate the assumptions of our test. An additional note is that if our assumptions are not met completely, and perhaps a transformation does not help us, it is possible to use a non-parametric alternative such as the Kruskal-Wallis test which we do not cover in this section, but is similarly easy to run. 
+            Two things to note here: First, <strong>ANOVAs are actually relatively robust to violations of normality assumptions</strong>. This means that given we can see the data are not <em>that</em> far off of a normal distribution (we can see this via our QQ plot), we could in theory proceed with our test here with relative confidence. Second, <strong>log-transforming our data is valid for an ANOVA</strong>. This is helpful for us, as while we could go ahead with the test (after checking our other assumptions), it's still true that there is an easy transformation available to us through the log transformation, that prevents us from having to <em>technically</em> violate the assumptions of our test. 
           </p>
           <p>
-            So let's go ahead and transform our data: code
+            When we transform data, all we are really doing is changing each value in our data by the same mathematical formula, in this case, the natural logarithm, \(ln\). For us, the logarithmic function can be useful as it will help deal with skew in our data, or in other cases, the chance that the data at hand may span many orders of magnitude. However, we still need to check that our log-transformed data meet the assumptions of our test before we continue, especially since log-transformation is not guaranteed to ALWAYS fix problems of normality. 
           </p>
-<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">adelie</span> <span class="hl kwb">&lt;-</span> <span class="hl std">adelie</span> <span class="hl opt">%&gt;%</span>
+            An additional note is that if our assumptions are not met completely, and perhaps a transformation does not help us, it is possible to use a non-parametric alternative such as the Kruskal-Wallis test which we do not cover in this section, but is similarly easy to run. 
+          </p>
+          <p>
+            So let's go ahead and transform our data:
+          </p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">adelie</span> <span class="hl kwb">&lt;-</span> <span class="hl std">adelie</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
     <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">log</span><span class="hl std">(bill_length_mm)</span>
   <span class="hl std">)</span>
@@ -364,9 +266,9 @@
 </pre></div>
 </div></div>
           <p>
-            Now we'll go ahead and re-do our QQ plots and our tests:
+            Now we'll go ahead and re-do our QQ plots:
           </p>
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># plot qq-plots for each one</span>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># plot qq-plots for each one</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Adelie&quot;</span><span class="hl std">)</span>
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
@@ -374,47 +276,20 @@
 <div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq_line).
 ## Removed 1 rows containing non-finite values (stat_qq_line).
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div><div class="rcode">
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Chinstrap&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-2.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div><div class="rcode">
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-2.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Gentoo&quot;</span><span class="hl std">)</span>
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
 ## Removed 1 rows containing non-finite values (stat_qq_line).
 ## Removed 1 rows containing non-finite values (stat_qq_line).
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-3.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-3.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
           <p>
-            So these all look pretty good. Time for the tests: 
-          </p>
-<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  adelie$log_length
-## W = 0.99515, p-value = 0.9004
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  chin$log_length
-## W = 0.97137, p-value = 0.1192
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  gentoo$log_length
-## W = 0.9847, p-value = 0.1803
-</pre></div>
-</div></div>
           <p>
-            Ok great, so we can now see that each of the three tests has a p-value > 0.05, so we can assume normality for these values. 
+            Ok great, so we can now see that each of the three looks good, so we can assume normality for these values. 
           </p>
         </section>
         <section id="aov--ass--homo">
@@ -423,12 +298,12 @@
             Next to check our variances. 
           </p>
           <p>
-            Our second assumption was that the variances of all samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedascitiy with the Bartlett's test</strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if p &lt; 0.05 then for our purposes we could say that the assumption of homoskedascitiy is violated. As a sidenote, if our assumptions of normality were not quite met, it would be preferable to use the Levene's test which is less sensitive to this problem. 
+            Our second assumption was that the variances of all samples be equal. While it's not necessary to always do so, some researchers will use a standardized test to check for homoskedasticity. <strong>We will test our homoskedasticity with the Bartlett's test</strong>. The null hypothesis of the F-test is that the variances <em> are </em> equal, so if p &lt; 0.05 then for our purposes we could say that the assumption of homoskedasticity is violated. As a sidenote, if our assumptions of normality were not quite met, it would be preferable to use the Levene's test which is less sensitive to this problem. 
           </p>
           <p>
             To do the Barlett's test let's use the <code>stats</code> package function <code>bartlett.test()</code>. We will now actually re-format our data first so that it's in <em>long</em> form. This will make our lives easier. To do this, we want one column with the actual values, and another with the grouping variable (in this case, our species names). To get the species names, what we'll do is combine a few arguments such that we can do it all in one command. We'll use the <code>rep()</code> function which takes two arguments: a) the value to be repeated, and b) the number of times to repeat it. Because there are different numbers of observations for each species, the second argument in each call to <code>rep()</code> will simply be the length of the vector of the <code>log_length</code> for that species. Also, we want the grouping variable to be a factor. That looks like this: 
           </p>
-<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">bill_data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">bill_data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
   <span class="hl kwc">log_length</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">log_length, chin</span><span class="hl opt">$</span><span class="hl std">log_length, gentoo</span><span class="hl opt">$</span><span class="hl std">log_length),</span>
   <span class="hl kwc">species</span> <span class="hl std">=</span> <span class="hl kwd">as.factor</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span>
     <span class="hl com"># first for the adelie species since it's the first in the vector above</span>
@@ -447,9 +322,9 @@
 </pre></div>
 </div></div>
           <p>
-            Great, now for our bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. Last, tell the function what the dataframe itself is called. 
+            Great, now for our Bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. Last, tell the function what the dataframe itself is called. 
           </p>
-<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">bartlett.test</span><span class="hl std">(log_length</span> <span class="hl opt">~</span> <span class="hl std">species,</span> <span class="hl kwc">data</span> <span class="hl std">= bill_data)</span>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">bartlett.test</span><span class="hl std">(log_length</span> <span class="hl opt">~</span> <span class="hl std">species,</span> <span class="hl kwc">data</span> <span class="hl std">= bill_data)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
 ## 	Bartlett test of homogeneity of variances
@@ -467,7 +342,7 @@
         <p>
           Now to perform the test itself. It is, similarly to the t-test, very easy to compute in R, and looks pretty much identical to our syntax for the Bartlett's test. The first argument is the column that has the values of interest, and we use the tilde (<code>~</code>) to denote after the column of interest, the name of the grouping column. The function itself we use comes from the <code>stats</code> package again. We can now proceed to our test and run it all like this: 
         </p>
-<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">aov</span><span class="hl std">(log_length</span> <span class="hl opt">~</span> <span class="hl std">species,</span> <span class="hl kwc">data</span> <span class="hl std">= bill_data)</span>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mod</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">aov</span><span class="hl std">(log_length</span> <span class="hl opt">~</span> <span class="hl std">species,</span> <span class="hl kwc">data</span> <span class="hl std">= bill_data)</span>
 <span class="hl kwd">summary</span><span class="hl std">(mod)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
@@ -492,7 +367,7 @@
           <p>
             To actually see what the pairwise comparison of the groups are, we can see which groups are actually different than one another. This is useful as it allows us to identify if it's only one group that is different, (i.e. $\mu_1 = \mu_2$ but $\mu_3 > \mu_2$) or it they're all quite a bit different. We can do this comparison through the Tukey test (Tukey Honest Signfiicant Differences) which again can be done using the <code>stats</code> package: 
           </p>
-<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">TukeyHSD</span><span class="hl std">(mod)</span>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">TukeyHSD</span><span class="hl std">(mod)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
@@ -513,9 +388,9 @@
         <section id="aov--int--plot">
           <h4>Plotting the Results</h4>
           <p>
-            Now let's plot our results. This can be done in any number of ways, but I am personally keen on plotting the density of the values, in the same way we would if we wanted to use it to check assumptions of normality as it shows all components of the data at hand and doesn't have the chance of hiding anything. I also think it's just a useful plot to have. We'll pair that with denotations of the means of each group as well as annotating the p-value onto the plot like this: 
+            Now let's plot our results. This can be done in any number of ways, including a boxplot, but I am personally keen on plotting the density of the values, in the same way we would if we wanted to use it to check assumptions of normality as it shows all components of the data at hand and doesn't have the chance of hiding anything. I also think it's just a useful plot to have. We'll pair that with denotations of the means of each group as well as annotating the p-value onto the plot like this: 
           </p>
-<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">means</span> <span class="hl kwb">&lt;-</span> <span class="hl std">bill_data</span> <span class="hl opt">%&gt;%</span>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">means</span> <span class="hl kwb">&lt;-</span> <span class="hl std">bill_data</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">group_by</span><span class="hl std">(species)</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarise</span><span class="hl std">(</span><span class="hl kwc">means</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(log_length,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
 
@@ -542,7 +417,7 @@
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: Removed 2 rows containing non-finite values (stat_density).
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
         </section>
       </section>
     </section>

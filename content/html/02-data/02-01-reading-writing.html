@@ -75,90 +75,15 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script> 
+    $(function(){
+    $("#header").load("../common/head.html"); 
+    });
+    </script> 
 </head>
 <body>
-	<div class="topnav">
-		<a class="a-top w3-center" href="../index.html">The R Manual</a>
-        <a class="a-mid" href="../about.html">About</a>
-        <a class="a-mid" href="../contact.html">Contact</a>
-        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
-	</div>
-	<div class="bottomnav navbar">
-        <div class="dropdown">
-            <button class="dropbtn">Getting Started</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
-              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
-              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
-              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
-            </div>
-        </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Basic R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
-              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
-              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
-              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
-              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
-              <a href="../01-basicr/01-05-packages.html">Packages</a>
-              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Working With Data</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
-              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
-              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
-              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
-              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
-              <a href="../02-data/02-05-new-columns.html">New Columns</a>
-              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
-              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
-              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
-              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
-              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
-              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Plotting</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
-              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
-              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
-              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
-              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
-              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
-              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
-              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
-              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
-              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
-              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
-              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
-              <a href="../03-plot/03-12-annotations.html">Annotations</a>
-              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Statistics in R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
-              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
-              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
-              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
-              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
-              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
-              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
-              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
-              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
-              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
-              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
-            </div>
-          </div> 
-	</div>
-
+  <!--Add in the header-->
+  <div id="header"></div>
 <main style = margin-top:100px>
     <nav class="section-nav">
         <ol>
@@ -176,6 +101,13 @@
               <li class=""><a href="#writing--txt"><code>.txt</code></a></li>
             </ul>
           </li>
+        <li><a href="#figures">Saving Figures</a>
+            <ul>
+              <li class=""><a href="#figures--base">Base R</a></li>
+              <li class=""><a href="#figures--tidy">Tidy R</a></li>
+            </ul>
+          </li>
+        <li><a href="#examples">Reading & Writing Examples</a></li>
         </ol>
       </nav>
     <div>
@@ -191,10 +123,10 @@
             <strong>1. Read your data into R</strong>
         </p>
         <p>
-            2. Perform some kind of analysis, creating new data objects, figures, or outputs, then 
+            2. Perform some kind of analysis, creating new data <a href="../01-basicr/01-01-coding-basics.html">objects</a>, figures, or outputs, then 
         </p>
         <p>
-            <strong>3. Write out those data objects/figures/outputs to your computer for later use</strong>
+            <strong>3. Save (aka "write") those data objects/figures/outputs to your computer for later use</strong>
         </p>
         <p>
             Steps 1 &amp; 3 will be covered here. 
@@ -206,7 +138,7 @@
         <section id="reading">
             <h2>Reading Files</h2>
             <p>
-                When reading in a new file, after manually checking it and ensuring it is formatted in a readable way, note the path in your computer where the file is present. <strong>NOTE</strong> see section on workflow and the <code>here</code> package.
+                When reading in a new file, after manually checking it and ensuring it is formatted in a readable way, note the path in your computer where the file is present. <strong>NOTE</strong> see section on <a href="../01-06-workflow.html">workflow</a> and the <code>here</code> package.
             </p>
             <section id="reading--csv">
                 <h4>Comma-Separated Value <code>.csv</code> Files</h4>
@@ -233,7 +165,7 @@
                 <p>
                     The best way to read in an excel sheet into R with with the <code>readxl</code> package. Almost identical to above: 
 
-<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readxl</span><span class="hl opt">::</span><span class="hl kwd">read_xls</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.csv&quot;</span><span class="hl std">,</span> <span class="hl kwc">sheet</span> <span class="hl std">=</span> <span class="hl str">&quot;SHEETNAME&quot;</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readxl</span><span class="hl opt">::</span><span class="hl kwd">read_xls</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.xls&quot;</span><span class="hl std">,</span> <span class="hl kwc">sheet</span> <span class="hl std">=</span> <span class="hl str">&quot;SHEETNAME&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
                 </p>
@@ -245,15 +177,24 @@
                 </p>
                 <h5><strong>Base R</strong></h5>
                 <p>
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.delim</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.csv&quot;</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.delim</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.txt&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
 
                     This above option assumes that the file it tab-delimited. 
                 </p>
+                <p>
+                    We could also use the function <code>read.table()</code> which is flexible in that we could define what type of delimiter the file uses. For example, a space-delimited text file is a data file similar to a <code>.csv</code> but instead of using a comma, a tab, or some other delimiter, it simply uses spaces. We could use <code>read.table()</code> for this task like so: 
+                </p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.table</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.txt&quot;</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot; &quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+                <p>
+                    And we could extrapolate this to other less common types of delimiters supported by the function as well. 
+                </p>
                 <h5><strong>Tidyverse</strong></h5>
                 <p>
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">read_tsv</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.csv&quot;</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">read_tsv</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/file/file-name.txt&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
                 </p>
@@ -268,13 +209,13 @@
                 <h4>Comma-Separated Value <code>.csv</code> Files</h4>
                 <h5><strong>Base R</strong></h5>
                 <p>
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">write.csv</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.csv&quot;</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">write.csv</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.csv&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
                 </p>
                 <h5><strong>Tidyverse</strong></h5>
                 <p>
-<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">write_csv</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.csv&quot;</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">write_csv</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.csv&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
                 </p>
@@ -284,7 +225,7 @@
                 <p>
                     Writing a file to an excel sheet is slightly unusual and wouldn't be recommended (<code>.csv</code> files are always better), but if you need to, there exists a number of packages to assist, the easiest of which being <code>writexl</code>.
 
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(writexl)</span>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(writexl)</span>
 <span class="hl std">writexl</span><span class="hl opt">::</span><span class="hl kwd">write_xlsx</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.xlsx&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
@@ -294,13 +235,13 @@
                 <h4>Plain Text <code>.txt</code></h4>
                 <h5><strong>Base R</strong></h5>
                 <p>
-<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">write.table</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.txt&quot;</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">write.table</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.txt&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
                 </p>
                 <h5><strong>Tidyverse</strong></h5>
                 <p>
-<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">write_delim</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.txt&quot;</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">write_delim</span><span class="hl std">(data_object,</span> <span class="hl str">&quot;/path/to/new/file/file-name.txt&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
                 </p>
@@ -313,15 +254,15 @@
 
                 Using the example built-in dataset <code>airquality</code>, we can make an example plot to save. 
             </p>
-            <section id="figures-base">
+            <section id="figures--base">
                 <h4>Saving an image created in base R</h4>
-<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= airquality</span><span class="hl opt">$</span><span class="hl std">Day,</span> <span class="hl kwc">y</span> <span class="hl std">= airquality</span><span class="hl opt">$</span><span class="hl std">Temp,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= airquality</span><span class="hl opt">$</span><span class="hl std">Day,</span> <span class="hl kwc">y</span> <span class="hl std">= airquality</span><span class="hl opt">$</span><span class="hl std">Temp,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
                 <p>
                     If this is the plot we wish to save, we can save it as any common figure file type (e.g. <code>.png</code>, <code>.jpg</code>, <code>.tif</code>, <code>.pdf</code> etc.)
                 </p>
-<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first use the command for the file type </span>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first use the command for the file type </span>
 <span class="hl kwd">png</span><span class="hl std">(</span><span class="hl kwc">file</span><span class="hl std">=</span><span class="hl str">&quot;/path/to/plot/saving_plot.png&quot;</span><span class="hl std">)</span>
 <span class="hl com"># then we create the plot</span>
 <span class="hl kwd">hist</span><span class="hl std">(Temperature,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;darkgreen&quot;</span><span class="hl std">)</span>
@@ -329,13 +270,16 @@
 <span class="hl kwd">dev.off</span><span class="hl std">()</span>
 </pre></div>
 </div></div>
+                <p>
+                    Above, essentially the first line <code>png(file="/path/to/plot/saving_plot.png")</code> opens the connection to a file (aka makes a place for it in the computer), then the plot function <code>hist(Temperature, col="darkgreen")</code> actually <em>makes</em> the plot, then the last line <code>dev.off()</code> writes the actual file and closes the connection opened by the first line of code. 
+                </p>
             </section>
-            <section id="figures-base">
+            <section id="figures--tidy">
                 <h4>Saving a <code>ggplot2</code> object</h4>
                 <p>
                     It is best to use the let of functions from <code>ggplot2</code> to save these plots. 
                     <br>
-<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ggplot2</span><span class="hl opt">::</span><span class="hl kwd">ggsave</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/plot/saving_plot.png&quot;</span><span class="hl std">,</span>
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ggplot2</span><span class="hl opt">::</span><span class="hl kwd">ggsave</span><span class="hl std">(</span><span class="hl str">&quot;/path/to/plot/saving_plot.png&quot;</span><span class="hl std">,</span>
                 <span class="hl std">plot_object)</span>
 </pre></div>
 </div></div>
@@ -344,6 +288,115 @@
                     </p>
                 </p>
             </section>
+        </section>
+        <section id="examples">
+            <h3>Reading & Writing Examples</h3>
+            <p>
+                To get some practice with reading and writing files and to ensure that you have an understanding of the process, let's use a built in dataframe that comes shipped with R, to practice reading and writing files. 
+            </p>
+            <p>
+                We'll select a built-in dataframe, write it to our computers, and then read it back in. Let's use the Iris dataset. 
+            </p>
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">iris</span>
+<span class="hl kwd">head</span><span class="hl std">(df)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+</pre></div>
+</div></div>
+            <p>
+            Now that we have our dataframe <code>df</code>, let's write this out to a place on our computers. <strong>Here is the tricky bit.</strong>. As we mentioned in the <a href="../01-basicr/01-06-workflow.html">workflow section</a>, everyone's computer will have slightly different "paths", aka set of folders and directions that the computer uses to point to a particular file in a particular place. On <strong>my</strong> computer, I'll be using a simple location in my documents folder. For me, that location is <em font-color:red>"~/Documents/iris.csv"</em>, but it will be slightly different on each operating system (e.g. Windows vs. MacOSx). So, go ahead now and find the path that you want to save to. If you're unclear still on paths, you can check out the "Working Directories" section on the <a href="../01-basicr/01-06-workflow/paths.html">workflow page</a>
+            </p>
+            <p>
+                We'll use the Tidyverse method with the <code>readr</code> package, so we need to load this first so we can use it. If you don't have it installed yet, use <code>install.packages("readr")</code> to install it. 
+            </p>
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(readr)</span>
+</pre></div>
+</div></div>
+            <p>
+                Let's write out our file:
+            </p>
+<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">write_csv</span><span class="hl std">(df,</span> <span class="hl str">&quot;~/Documents/iris.csv&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+            <p>
+                This returns no message which is a good sign, so to check it worked, we can manually on our computers go to that location, but better yet, lets try reading in the file and see if it works!
+            </p>
+            <p>
+                We'll assign it a different name when we read it in for clarity. 
+            </p>
+<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">iris_df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">read_csv</span><span class="hl std">(</span><span class="hl str">&quot;~/Documents/iris.csv&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## Rows: 150 Columns: 5
+## ── Column specification ──────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): Species
+## dbl (4): Sepal.Length, Sepal.Width, Petal.Length, Petal.Width
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+</pre></div>
+</div></div>
+            <p>
+                And we see the file has been read into our R session. 
+            </p>
+            <p>
+                <strong>If the file hasn't been read in, DO NOT PANIC.</strong> The most likely source of the error is a misspelling. Double check that you have spelt the paths correctly in both your writing and reading steps, and manually check in your computer to see if you can find the file where you think you saved it. You might have accidentally saved it elsewhere!
+            </p>
+            <p>
+                Here's an example of a common error we might encounter during this type of task:
+            </p>
+<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">iris_df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">readr</span><span class="hl opt">::</span><span class="hl kwd">read_csv</span><span class="hl std">(</span><span class="hl str">&quot;~/Docoments/iris.csv&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: '~/Docoments/iris.csv' does not exist.
+</pre></div>
+</div></div>
+            <p>
+                We see that no file was read in! How come? Can you spot the error in the above code? It turns out, "Documents" is misspelt as "Docoments". This type of small and easily solved error is the nmost common when reading and writing files. 
+            </p>
+            <p>
+                Once we've read in our data, it's almost always important to take a quick look at our data to make sure it looks as we expect it to. There's two easy ways to do so. The first way is just to look at the first 6 rows of data using the <code>head()</code> function: 
+            </p>
+<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(iris_df)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 6 × 5
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  
+## 1          5.1         3.5          1.4         0.2 setosa 
+## 2          4.9         3            1.4         0.2 setosa 
+## 3          4.7         3.2          1.3         0.2 setosa 
+## 4          4.6         3.1          1.5         0.2 setosa 
+## 5          5           3.6          1.4         0.2 setosa 
+## 6          5.4         3.9          1.7         0.4 setosa
+</pre></div>
+</div></div>
+            <p>
+                The other useful thing to do is double check the <em>structure</em> of the data we're working with, by calling the <code>str()</code> function, which will give us the structure of our data object, including of the object itself (i.e. is it a DataFrame, a matrix, a list?), as well as the sub-components. For a DataFrame, we'll see what type of data each column is. This is important since particular methods only work on columns of particular types (e.g. you can't take a numerical mean of a character column).
+            </p>
+<div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">str</span><span class="hl std">(iris_df)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## spc_tbl_ [150 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Sepal.Length: num [1:150] 5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num [1:150] 3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num [1:150] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : chr [1:150] &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   Sepal.Length = col_double(),
+##   ..   Sepal.Width = col_double(),
+##   ..   Petal.Length = col_double(),
+##   ..   Petal.Width = col_double(),
+##   ..   Species = col_character()
+##   .. )
+##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;
+</pre></div>
+</div></div>
         </section>
 <!-- End page content -->
 <hr>

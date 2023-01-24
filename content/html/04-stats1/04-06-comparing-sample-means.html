@@ -75,90 +75,15 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script> 
+    $(function(){
+    $("#header").load("../common/head.html"); 
+    });
+    </script> 
 </head>
 <body>
-	<div class="topnav">
-		<a class="a-top w3-center" href="../index.html">The R Manual</a>
-        <a class="a-mid" href="../about.html">About</a>
-        <a class="a-mid" href="../contact.html">Contact</a>
-        <a class="a-top w3-center" style="float:right;" href="https://eeb.utoronto.ca/">EEB</a>
-	</div>
-	<div class="bottomnav navbar">
-        <div class="dropdown">
-            <button class="dropbtn">Getting Started</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../00-landingpage.html" class="a-first">Getting Started Home</a>
-              <a href="../00-start/00-01-downloads.html">Downloading R & RStudio</a>
-              <a href="../00-start/00-02-navigating-rstudio.html">Navigating R Studio</a>
-              <a href="../00-start/00-03-the-file-ecosystem.html">The File Ecosystem</a>
-            </div>
-        </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Basic R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../01-landingpage.html" class="a-first">Basic R Home</a>
-              <a href="../01-basicr/01-01-coding-basics.html">Coding Basics</a>
-              <a href="../01-basicr/01-02-data-types.html">Data Types</a>
-              <a href="../01-basicr/01-03-data-structures.html">Data Structures</a>
-              <a href="../01-basicr/01-04-indexing.html">Indexing</a>
-              <a href="../01-basicr/01-05-packages.html">Packages</a>
-              <a href="../01-basicr/01-06-workflow.html">Workflow</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Working With Data</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../02-landingpage.html" class="a-first">Working With Data Home</a>
-              <a href="../02-data/02-01-reading-writing.html">Reading &amp; Writing</a>
-              <a href="../02-data/02-02-filtering-subsetting.html">Filtering &amp; Subsetting</a>
-              <a href="../02-data/02-03-selecting-columns.html">Selecting Columns</a>
-              <a href="../02-data/02-04-grouping-summarizing.html">Grouping &amp; Summarizing</a>
-              <a href="../02-data/02-05-new-columns.html">New Columns</a>
-              <a href="../02-data/02-06-factors.html"><strong style="color:#8B0000">Special Type:</strong> Factors</a>
-              <a href="../02-data/02-07-renaming.html"><strong style="color:#8B0000">Special Type:</strong> Dates</a>
-              <a href="../02-data/02-08-dates.html">Renaming Columns</a>
-              <a href="../02-data/02-09-reshaping.html">Reshaping Data</a>
-              <a href="../02-data/02-10-cleaning-process.html">Data Cleaning Process</a>
-              <a href="../02-data/02-11-relational-data.html">Relational Data</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Plotting</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../03-landingpage.html" class="a-first">Plotting Home</a>
-              <a href="../03-plot/03-00-basics-of-plotting.html">Basics of Plotting</a>
-              <a href="../03-plot/03-01-intro-to-ggplot.html">Introduction to <code>ggplot2</code></a>
-              <a href="../03-plot/03-02-interative-plotting.html">Interative Plotting</a>
-              <a href="../03-plot/03-03-facetting.html">Facetting &amp; Grids</a>
-              <a href="../03-plot/03-04-plotting-multiple-dataframes.html">Plotting Multiple DataFrames</a>
-              <a href="../03-plot/03-05-distributions.html">Plotting Distributions</a>
-              <a href="../03-plot/03-06-part-to-whole-comparison.html">Part to Whole Comparison</a>
-              <a href="../03-plot/03-07-relations-between-vars.html">Relationships Between Variables</a>
-              <a href="../03-plot/03-08-change-time.html">Changes in Time</a>
-              <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>
-              <a href="../03-plot/03-11-mapping.html">Geographical Mapping</a>
-              <a href="../03-plot/03-12-annotations.html">Annotations</a>
-              <a href="../03-plot/03-13-phylogenetic-trees.html">Phylogenetic Trees</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Statistics in R</button>
-            <div class="dropdown-content" style="float:auto">
-              <a href="../04-landingpage.html" class="a-first">Statistics in R Home</a>
-              <a href="../04-stats1/04-00-introduction.html">An Introduction</a>
-              <a href="../04-stats1/04-01-probability-101.html">Probability 101</a>
-              <a href="../04-stats1/04-03-sampling-distributions.html">Sampling Distributions</a>
-              <a href="../04-stats1/04-04-hypothesis-testing.html">Hypothesis Testing</a>
-              <a href="../04-stats1/04-05-confidence-intervals.html">Confidence Intervals</a>
-              <a href="../04-stats1/04-06-comparing-sample-means.html">Comparing Sample Means</a>
-              <a href="../04-stats1/04-07-analysis-of-variance.html">Analysis of Variance</a>
-              <a href="../04-stats1/04-08-linear-regression.html">Linear Regression</a>
-              <a href="../04-stats1/04-09-logistic-regression.html">Logistic Regression</a>
-              <a href="../04-stats1/04-10-generalized-regression.html">Generalized Regression</a>
-            </div>
-          </div> 
-	</div>
-
+  <!--Add in the header-->
+  <div id="header"></div>
 <main style = margin-top:100px>
   <nav class="section-nav">
       <ol>
@@ -192,13 +117,13 @@
     <section id="work">
       <h2>Comparisons Between Sample Means</h2>
       <p>
-        It's often the case that we may sample independently from a population, and develop some hypothesis that may indicate that the means for the independent samples are in fact different from one another. Taking the example we noted in the <a href="./04-04-hypothesis-testing.html">hypothesis testing</a> section, perhaps we care about the size of fiddler crabs, and if the crabs are from multiple sites, we could say that, between two sites of interest, we might believe there to be a size difference. Well, let's perform a statistical test to see if this is true.
+        It's often the case that we may sample independently from a population, and develop some hypothesis that may indicate that the means for the independent samples are in fact different from one another. Taking the example we noted in the <a href="./04-04-hypothesis-testing.html">hypothesis testing</a> section, perhaps we care about the size of fiddler crabs, and if the crabs are from multiple sites, we could say that, between two sites of interest, we might believe there to be a size difference. Well, let's perform a statistical test to see if there is support for this hypothesis.
       </p>
       <p>
         It is generally best in statistics, especially when starting our our own individual journeys as statisticians, to choose the simplest test that A) will answer our question, and B) we can satisfy the assumptions of. 
       </p>
       <p>
-        When comparing two sample means, the standard test to perform here is the <strong>unpaired two-sample t-test</strong>. The test statistic is calculated as: \[t = \frac{(\bar{Y_1} - \bar{Y_2}) - (\mu_1 - \mu_2)_0}{SE_{Y_1 - Y_2}}\]
+        When comparing two sample means, the standard test to perform here is the <strong>two-sample t-test</strong>. The test statistic is calculated as: \[t = \frac{(\bar{Y_1} - \bar{Y_2}) - (\mu_1 - \mu_2)_0}{SE_{Y_1 - Y_2}}\]
       </p>
       <p>
         This test assumes three major things:
@@ -227,7 +152,7 @@
 </pre></div>
 </div></div>
         <p>
-          There are a number of sites in this dataset, so let's compare crabs from two northern sites and two southern sites. Our northern sites will be "Cape Cod" and "Narragansett Bay NERR" and our southern sites will be "Guana Tolomoto Matanzas NERR" and "Sapelo Island NERR". 
+          Let us say for the sake of example that we have some "northern" crabs and some "southern" crabs, composed of two populations each. Our northern sites will be "Cape Cod" and "Narragansett Bay NERR" and our southern sites will be "Guana Tolomoto Matanzas NERR" and "Sapelo Island NERR". 
         </p>
         <p>
           It's important to never forget the underlying mathematics of what we're doing, we should never simply rely on our computers exclusively and not understand what we're doing, so let's review the equations underlying the t-test. We'll be calculating the test statistic \(t\) as described above. As we are testing a hypothesis that the sizes <em>are</em> different, we can state this formally as \(H_0: \mu_1 = \mu_2\) and \(H_1: \mu_1 \neq \mu_2\). 
@@ -238,7 +163,7 @@
         <section id="ttest--ass">
           <h3>Assumptions of the Test</h3>
           <p>
-            Before we proceed we need to take into account assumptions of our chosen test. We'll assume our samples are independent, but our two-sample t-test requires two other things: 1) normality, and 2) homoskedasticity. 
+            Before we proceed we need to take into account assumptions of our chosen test. We'll assume our samples are independent (that is, that we've selected samples that aren't related), but our two-sample t-test requires two other things: 1) normality, and 2) homoskedasticity. 
           </p>
           <section id="ttest--ass--norm">
             <h4>Normality</h4>
@@ -274,7 +199,7 @@
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-3-2.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
             <p>
-              We're looking for the points to follow the black line and for no points to be outside the grey error bars. Both of these look pretty good. Let's use a Shapiro-Wilk's test to take a look at what we see. <strong>Importantly, a Shapiro-Wilk's test is a significance test that has a null hypothesis of normality. If the test is SIGNIFICANT then there is sufficient non-normality to stop our test and re-evaluate</strong>. 
+              We're looking for the points to follow the black line and for no points to be outside the grey error bars. Both of these look pretty good. It's worth noting that while for our purposes we can simply use plots to check for normality, it can sometimes be helpful to use a statistical test to check for normality. Since we're using a t-test, this isn't necessary as they can be robust to some degree of non-normality, but if strict normality is required, it's possible to use a Shapiro-Wilk's test. <strong>A Shapiro-Wilk's test is a significance test that has a null hypothesis of normality. If the test is SIGNIFICANT then the test has indicated there is non-normality in the data.</strong>. 
             </p>
             <p>
               We can do this in R very easily. The function <code>shapiro.test()</code> comes shipped in core R with the <code>stats</code> package. First for the northern sites: 
@@ -310,28 +235,65 @@
           <section id="ttest--ass--homo">
             <h4>Homoskedasticity</h4>
             <p>
-              Our second assumption was that the variances of the two samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedasticity with the F-test </strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if p &lt; 0.05 then for our purposes we could say that the assumption of homoskedasticity is violated. 
+              Our second assumption was that the variances of the two samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. As with normality, it is usually sufficient to check this assumption with a plot. What we want to see is that the variance (recall that variance is simply a measure of how "spread out" a set of numbers are) is approximately equal for the two groups of interest. The word "homoskedastic" roughly translates to "having the same scatter" from the Greek root words, so we can use a scatter plot or a box plot to look at this. We'll be looking for a "spread" of the data, so how they're spread out along the y-axis, that is similar in magnitude. 
             </p>
             <p>
-              To do the F-test let's use the <code>stats</code> package function <code>var.test()</code>. We will just pass the two sets of data as arguments. 
-            </p>
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">var.test</span><span class="hl std">(crab_sizes_north</span><span class="hl opt">$</span><span class="hl std">size, crab_sizes_south</span><span class="hl opt">$</span><span class="hl std">size)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## 
-## 	F test to compare two variances
-## 
-## data:  crab_sizes_north$size and crab_sizes_south$size
-## F = 0.97195, num df = 55, denom df = 57, p-value = 0.9169
-## alternative hypothesis: true ratio of variances is not equal to 1
-## 95 percent confidence interval:
-##  0.5732314 1.6521757
-## sample estimates:
-## ratio of variances 
-##          0.9719504
+              In R, let's make a new dataframe with just the information we need to make these plots. We want just two columns - the size of the crabs which is the variable of interest, and a column for our grouping variable, the "North" vs. "South" grouping. 
+            </p> 
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl com"># first subset the north group</span>
+  <span class="hl std">north_compare</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes_north</span> <span class="hl opt">%&gt;%</span>
+    <span class="hl com"># this is the only column we want</span>
+    <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">select</span><span class="hl std">(size)</span> <span class="hl opt">%&gt;%</span>
+    <span class="hl com"># we'll make this arbitrary column so we can group our plot on the x-axis</span>
+    <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span><span class="hl kwc">region</span> <span class="hl std">=</span> <span class="hl str">&quot;north&quot;</span><span class="hl std">)</span>
+
+  <span class="hl com"># repeat with the south group</span>
+  <span class="hl std">south_compare</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes_south</span> <span class="hl opt">%&gt;%</span>
+    <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">select</span><span class="hl std">(size)</span> <span class="hl opt">%&gt;%</span>
+    <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span><span class="hl kwc">region</span> <span class="hl std">=</span> <span class="hl str">&quot;south&quot;</span><span class="hl std">)</span>
+
+  <span class="hl com"># put them together by binding the rows (rbind())</span>
+  <span class="hl std">crab_compare</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rbind</span><span class="hl std">(north_compare, south_compare)</span>
 </pre></div>
 </div></div>
             <p>
-              Great, p >> 0.05, so we can continue. 
+              And now we can plot our scatterplot: 
+            </p>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl com"># again for our theme, we'll use the theme_base() which is in </span>
+  <span class="hl com"># the ggthemes package, so we need to load that along with the </span>
+  <span class="hl com"># ggplot2 package</span>
+  <span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+  <span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
+
+  <span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= crab_compare)</span> <span class="hl opt">+</span>
+    <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= region,</span> <span class="hl kwc">y</span> <span class="hl std">= size))</span> <span class="hl opt">+</span>
+    <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+            <p>
+              So notice here that what we see is not that the values of the two groups are equivalent on the y-axis, but that they have roughly an equivalent spread. That is, the <em>variance</em> is pretty equal. We can even see this quantitatively by looking at the standard deviation of the two groups. Note this isn't necessary, but just to add a number to the values we're looking at on our plots. Recall the standard deviation is simply the square root of the variance, so we expect, given what we see on our plots, that these two values are roughly equivalent:
+            </p>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># look at the south group </span>
+<span class="hl kwd">sd</span><span class="hl std">(south_compare</span><span class="hl opt">$</span><span class="hl std">size)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 2.196223
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># north group </span>
+<span class="hl kwd">sd</span><span class="hl std">(north_compare</span><span class="hl opt">$</span><span class="hl std">size)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 2.165202
+</pre></div>
+</div></div>
+            <p>
+              And we do in fact see these are very similar. Let's look at our boxplot now:
+            </p>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= crab_compare)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_boxplot</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= region,</span> <span class="hl kwc">y</span> <span class="hl std">= size))</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div></div>
+            <p>
+              Again, a similar story, a pretty similar looking "spread" of the data. So we can proceed with our test, knowing that our assumption of homoskedascity is satisfied. Like we said before though, if this assumption <em>had not been satisfied</em>, that would be okay, since there's actually an option to perform a different type of t-test where we <strong>don't assume homoskedascity</strong>. This is accounted for in the actual call to the function <code>t.test()</code> and is discussed below. An example of when this might take place is if we were performing a <strong>paired t-test</strong>. A paired t-test would be used if we had a "paired" sample, that is, where we measured each unit of sampling twice, thus ending up with "paired" observations of each sample unit. 
             </p>
           </section>
         </section>
@@ -340,12 +302,12 @@
           <p>
             So now we can actually perform the test. It's quite simple, we'll use the <code>t.test()</code> function: 
           </p>
-<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t_test_res</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">t.test</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t_test_res</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">t.test</span><span class="hl std">(</span>
   <span class="hl com"># sample of group 1</span>
   <span class="hl std">crab_sizes_north</span><span class="hl opt">$</span><span class="hl std">size,</span>
   <span class="hl com"># sample of group 2</span>
   <span class="hl std">crab_sizes_south</span><span class="hl opt">$</span><span class="hl std">size,</span>
-  <span class="hl com"># Regulat t-test or Welch's t-test depending on the variance</span>
+  <span class="hl com"># Regular t-test or Welch's t-test depending on the variance</span>
   <span class="hl kwc">var.equal</span> <span class="hl std">=</span> <span class="hl num">TRUE</span>
 <span class="hl std">)</span>
 <span class="hl std">t_test_res</span>
@@ -367,12 +329,9 @@
             We see our result here, and it turns out the p-value is <em>very</em> small, so we can reject the null hypothesis, there is good evidence that $\mu_1 \neq \mu_2$. <strong>NOTE</strong> that if our data were heteroskedastic, then we could specify <code>var.equal = FALSE</code> and that would perform a Welch's t-test which allows for this. 
           </p>
           <p>
-            If we wanted, we could plot this result as a box plot, or perhaps more usefully, a violin plot (For a full walk through of how to iteratively make this plot, see our section on plotting <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>): 
+            If we wanted, we could plot this result as a box plot or a violin plot (For a full walk through of how to iteratively make this plot, see our section on plotting <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>): 
           </p>
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
-<span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
-
-<span class="hl com"># first get one dataframe with the four sites we want</span>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># first get one dataframe with the four sites we want</span>
 <span class="hl std">focal_sites</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(site</span> <span class="hl opt">%in%</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;CC&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;NB&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;GTM&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;SI&quot;</span><span class="hl std">))</span> <span class="hl opt">%&gt;%</span>
   <span class="hl com"># make new column to denote our two groupings</span>
@@ -406,7 +365,7 @@
     <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">8</span>
   <span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
         </section>
       </section>
       <section id="oneside">
@@ -420,7 +379,7 @@
         <p>
           In our case, we are hypothesizing that the southern crabs (<code>crab_sizes_south</code>) are greater in size than the northern crabs, so let's set <code>x</code> to be the <code>crab_sizes_south</code> and the y to be <code>crab_sizes_north</code>, and then <code>alternative = "greater"</code>, so this is testing the alternate hypothesis that \(\mu_{south} > \mu_{north}\):
         </p>
-<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t_test_oneside_res</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">t.test</span><span class="hl std">(</span>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">t_test_oneside_res</span> <span class="hl kwb">&lt;-</span> <span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">t.test</span><span class="hl std">(</span>
   <span class="hl std">crab_sizes_south</span><span class="hl opt">$</span><span class="hl std">size,</span>
   <span class="hl std">crab_sizes_north</span><span class="hl opt">$</span><span class="hl std">size,</span>
   <span class="hl kwc">var.equal</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span>
@@ -452,12 +411,12 @@
           Going back to our assumptions, let's re-start our process of this test but with a different grouping of data. 
         </p>
         <p>
-          What if we just took the MOST northern and southern sites alone, not groups of sites, and did a t-test on those two? say that instead of the two sites acting as our "northern" sites, we chose to use the single most northern site: "Plum Island Estuary - West Creek" (PIE), and for our southern site, we took the most southern one - "Guana Tolomoto Matanzas NERR" (GTM). If we start again by checking our assumptions, we would first have to check for normality of both our groups. 
+          What if we just took the MOST northern and southern sites alone, not groups of sites, and did a t-test on those two? Say that instead of the two sites acting as our "northern" sites, we chose to use the single most northern site: "Plum Island Estuary - West Creek" (PIE), and for our southern site, we took the most southern one - "Guana Tolomoto Matanzas NERR" (GTM). If we start again by checking our assumptions, we would first have to check for normality of both our groups. 
         </p>
         <p>
           Let's start by again dividing our data:
         </p>
-<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># southern ones stay the same</span>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># southern ones stay the same</span>
 <span class="hl std">crab_sizes_s_GTM</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crab_sizes</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(site</span> <span class="hl opt">==</span> <span class="hl str">&quot;GTM&quot;</span><span class="hl std">)</span>
 
@@ -468,14 +427,14 @@
 <span class="hl com"># plot our variable of interest (size)</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggdensity</span><span class="hl std">(crab_sizes_s_GTM</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;GTM&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div><div class="rcode">
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggdensity</span><span class="hl std">(crab_sizes_n_PIE</span><span class="hl opt">$</span><span class="hl std">size,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;PIE&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-10-2.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-13-2.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
       <p>
         Okay, so these data look somewhat skewed. Let's do our Shapiro-Wilk's test: 
       </p>
-<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(crab_sizes_s_GTM</span><span class="hl opt">$</span><span class="hl std">size)</span>
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(crab_sizes_s_GTM</span><span class="hl opt">$</span><span class="hl std">size)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
 ## 	Shapiro-Wilk normality test
@@ -485,7 +444,7 @@
 </pre></div>
 </div></div>
 
-<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(crab_sizes_n_PIE</span><span class="hl opt">$</span><span class="hl std">size)</span>
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">shapiro.test</span><span class="hl std">(crab_sizes_n_PIE</span><span class="hl opt">$</span><span class="hl std">size)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
 ## 	Shapiro-Wilk normality test
@@ -498,7 +457,7 @@
         Okay, so our p-values for both are &lt; 0.05, so we have to reject the null - these data are non-normal. 
       </p>
       <p>
-        Now what? Well there are other tests available to us!! A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
+        Now what? Well there are other tests available to us. A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. However, as with all statistical decisions, there is no free lunch, and these tests are usually less powerful. We nearly always default to parameteric methods if we can. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
       </p>
     </section>
     <section id="nonpara">
@@ -539,7 +498,7 @@
         <p>
           The Mann-Whitney is sometimes referred to as the Mann-Whitney-Wilcoxon test, and so is performed using the <code>wilcox.test()</code> function, again from <code>stats</code>:
         </p>
-<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">wilcox.test</span><span class="hl std">(crab_sizes_s_GTM</span><span class="hl opt">$</span><span class="hl std">size,</span>
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">wilcox.test</span><span class="hl std">(crab_sizes_s_GTM</span><span class="hl opt">$</span><span class="hl std">size,</span>
                   <span class="hl std">crab_sizes_n_PIE</span><span class="hl opt">$</span><span class="hl std">size)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
@@ -575,4 +534,6 @@
 </main>
 </body>
 </html>
- 
+<ol>
+  <li><a href="#samp-r--seeds">Seeds</a></li>
+</ol>
