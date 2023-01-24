@@ -55,13 +55,13 @@
     <section id="work">
       <h2>Comparisons Between Sample Means</h2>
       <p>
-        It's often the case that we may sample independently from a population, and develop some hypothesis that may indicate that the means for the independent samples are in fact different from one another. Taking the example we noted in the <a href="./04-04-hypothesis-testing.html">hypothesis testing</a> section, perhaps we care about the size of fiddler crabs, and if the crabs are from multiple sites, we could say that, between two sites of interest, we might believe there to be a size difference. Well, let's perform a statistical test to see if this is true.
+        It's often the case that we may sample independently from a population, and develop some hypothesis that may indicate that the means for the independent samples are in fact different from one another. Taking the example we noted in the <a href="./04-04-hypothesis-testing.html">hypothesis testing</a> section, perhaps we care about the size of fiddler crabs, and if the crabs are from multiple sites, we could say that, between two sites of interest, we might believe there to be a size difference. Well, let's perform a statistical test to see if there is support for this hypothesis.
       </p>
       <p>
         It is generally best in statistics, especially when starting our our own individual journeys as statisticians, to choose the simplest test that A) will answer our question, and B) we can satisfy the assumptions of. 
       </p>
       <p>
-        When comparing two sample means, the standard test to perform here is the <strong>unpaired two-sample t-test</strong>. The test statistic is calculated as: \[t = \frac{(\bar{Y_1} - \bar{Y_2}) - (\mu_1 - \mu_2)_0}{SE_{Y_1 - Y_2}}\]
+        When comparing two sample means, the standard test to perform here is the <strong>two-sample t-test</strong>. The test statistic is calculated as: \[t = \frac{(\bar{Y_1} - \bar{Y_2}) - (\mu_1 - \mu_2)_0}{SE_{Y_1 - Y_2}}\]
       </p>
       <p>
         This test assumes three major things:
@@ -101,7 +101,7 @@
         <section id="ttest--ass">
           <h3>Assumptions of the Test</h3>
           <p>
-            Before we proceed we need to take into account assumptions of our chosen test. We'll assume our samples are independent, but our two-sample t-test requires two other things: 1) normality, and 2) homoskedasticity. 
+            Before we proceed we need to take into account assumptions of our chosen test. We'll assume our samples are independent (that is, that we've selected samples that aren't related), but our two-sample t-test requires two other things: 1) normality, and 2) homoskedasticity. 
           </p>
           <section id="ttest--ass--norm">
             <h4>Normality</h4>
@@ -134,7 +134,7 @@
             ggpubr::ggqqplot(crab_sizes_south$size, main = "South")
             end.rcode-->
             <p>
-              We're looking for the points to follow the black line and for no points to be outside the grey error bars. Both of these look pretty good. Let's use a Shapiro-Wilk's test to take a look at what we see. <strong>Importantly, a Shapiro-Wilk's test is a significance test that has a null hypothesis of normality. If the test is SIGNIFICANT then there is sufficient non-normality to stop our test and re-evaluate</strong>. 
+              We're looking for the points to follow the black line and for no points to be outside the grey error bars. Both of these look pretty good. It's worth noting that while for our purposes we can simply use plots to check for normality, it can sometimes be helpful to use a statistical test to check for normality. Since we're using a t-test, this isn't necessary as they can be robust to some degree of non-normality, but if strict normality is required, it's possible to use a Shapiro-Wilk's test. <strong>A Shapiro-Wilk's test is a significance test that has a null hypothesis of normality. If the test is SIGNIFICANT then the test has indicated there is non-normality in the data.</strong>. 
             </p>
             <p>
               We can do this in R very easily. The function <code>shapiro.test()</code> comes shipped in core R with the <code>stats</code> package. First for the northern sites: 
@@ -158,17 +158,10 @@
           <section id="ttest--ass--homo">
             <h4>Homoskedasticity</h4>
             <p>
-              Our second assumption was that the variances of the two samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. <strong>We will test our homoskedasticity with the F-test </strong>. Again, similar to the normality test, the null hypothesis of the F-test is that the variances <em> are </em> equal, so if p &lt; 0.05 then for our purposes we could say that the assumption of homoskedasticity is violated. 
-            </p>
-            <p>
-              To do the F-test let's use the <code>stats</code> package function <code>var.test()</code>. We will just pass the two sets of data as arguments. 
-            </p>
-            <!--begin.rcode
-            stats::var.test(crab_sizes_north$size, crab_sizes_south$size)
-            end.rcode-->
-            <p>
-              Great, p >> 0.05, so we can continue. 
-            </p>
+              Our second assumption was that the variances of the two samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. As with normality, it is usually sufficient to check this assumption with a plot. What we want to see is that the variance (recall that variance is simply a measure of how "spread out" a set of numbers are) is approximately equal for the two groups of interest. The word "homoskedastic" roughly translates to "having the same scatter" from the Greek root words, so we can use a scatter plot, a box plot, or a violin plot to look at this. 
+            <!--begin.rcode 
+            
+              end.rcode-->
           </section>
         </section>
         <section id="ttest--test">
@@ -182,7 +175,7 @@
             crab_sizes_north$size, 
             # sample of group 2
             crab_sizes_south$size,
-            # Regulat t-test or Welch's t-test depending on the variance
+            # Regular t-test or Welch's t-test depending on the variance
             var.equal = TRUE
           )
           t_test_res
@@ -366,4 +359,6 @@
 </main>
 </body>
 </html>
- 
+<ol>
+  <li><a href="#samp-r--seeds">Seeds</a></li>
+</ol>
