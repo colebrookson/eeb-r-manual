@@ -75,6 +75,11 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous">
+    </script>
     <script> 
     $(function(){
     $("#header").load("../common/head.html"); 
@@ -111,9 +116,9 @@
 
 <span class="hl kwd">names</span><span class="hl std">(df)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;        &quot;unitnum&quot;     &quot;unittype&quot;   
-##  [8] &quot;vert_index&quot;  &quot;pitnumber&quot;   &quot;species&quot;     &quot;length_1_mm&quot; &quot;length_2_mm&quot; &quot;weight_g&quot;    &quot;clip&quot;       
-## [15] &quot;sampledate&quot;  &quot;notes&quot;
+<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;        &quot;unitnum&quot;    
+##  [7] &quot;unittype&quot;    &quot;vert_index&quot;  &quot;pitnumber&quot;   &quot;species&quot;     &quot;length_1_mm&quot; &quot;length_2_mm&quot;
+## [13] &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot;  &quot;notes&quot;
 </pre></div>
 </div></div>
 
@@ -293,14 +298,14 @@
 <span class="hl kwd">head</span><span class="hl std">(df_filtered)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species         length_1_mm
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
-## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat trout          58
-## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat trout          61
-## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat trout          89
-## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat trout          58
-## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat trout          93
-## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat trout          86
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species        length_1_mm
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat tro…          58
+## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat tro…          61
+## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat tro…          89
+## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat tro…          58
+## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat tro…          93
+## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat tro…          86
 ## # … with 5 more variables: length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;,
 ## #   notes &lt;chr&gt;
 </pre></div>
@@ -349,14 +354,14 @@
 <div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(df_filtered)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species         length_1_mm
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
-## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat trout          58
-## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat trout          61
-## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat trout          89
-## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat trout          58
-## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat trout          93
-## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat trout          86
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species        length_1_mm
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat tro…          58
+## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat tro…          61
+## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat tro…          89
+## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat tro…          58
+## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat tro…          93
+## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat tro…          86
 ## # … with 5 more variables: length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;,
 ## #   notes &lt;chr&gt;
 </pre></div>
@@ -369,14 +374,14 @@
 <div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">tail</span><span class="hl std">(df_filtered)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species         length_1_mm
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
-## 1  2019 MACKOG-U OG      U         2      16 C                21        NA Coastal giant …          58
-## 2  2019 MACKOG-U OG      U         2      16 C                22        NA Coastal giant …          58
-## 3  2019 MACKOG-U OG      U         2      16 C                23   1043503 Coastal giant …          65
-## 4  2019 MACKOG-U OG      U         2      16 C                24   1043547 Coastal giant …          67
-## 5  2019 MACKOG-U OG      U         2      16 C                25   1043583 Coastal giant …          74
-## 6  2019 MACKOG-U OG      U         2      16 C                26   1043500 Coastal giant …          73
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species        length_1_mm
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+## 1  2019 MACKOG-U OG      U         2      16 C                21        NA Coastal giant…          58
+## 2  2019 MACKOG-U OG      U         2      16 C                22        NA Coastal giant…          58
+## 3  2019 MACKOG-U OG      U         2      16 C                23   1043503 Coastal giant…          65
+## 4  2019 MACKOG-U OG      U         2      16 C                24   1043547 Coastal giant…          67
+## 5  2019 MACKOG-U OG      U         2      16 C                25   1043583 Coastal giant…          74
+## 6  2019 MACKOG-U OG      U         2      16 C                26   1043500 Coastal giant…          73
 ## # … with 5 more variables: length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;,
 ## #   notes &lt;chr&gt;
 </pre></div>
@@ -389,14 +394,14 @@
 <div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">tail</span><span class="hl std">(dplyr</span><span class="hl opt">::</span><span class="hl kwd">arrange</span><span class="hl std">(df_filtered, species))</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species         length_1_mm
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
-## 1  2019 MACKOG-U OG      U         2      16 C                 1        NA Cutthroat trout          45
-## 2  2019 MACKOG-U OG      U         2      16 C                 2        NA Cutthroat trout          42
-## 3  2019 MACKOG-U OG      U         2      16 C                 3        NA Cutthroat trout          46
-## 4  2019 MACKOG-U OG      U         2      16 C                 4   1043522 Cutthroat trout         118
-## 5  2019 MACKOG-U OG      U         2      16 C                 5   1043513 Cutthroat trout          89
-## 6  2019 MACKOG-U OG      U         2      16 C                 6   1043521 Cutthroat trout          78
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species        length_1_mm
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+## 1  2019 MACKOG-U OG      U         2      16 C                 1        NA Cutthroat tro…          45
+## 2  2019 MACKOG-U OG      U         2      16 C                 2        NA Cutthroat tro…          42
+## 3  2019 MACKOG-U OG      U         2      16 C                 3        NA Cutthroat tro…          46
+## 4  2019 MACKOG-U OG      U         2      16 C                 4   1043522 Cutthroat tro…         118
+## 5  2019 MACKOG-U OG      U         2      16 C                 5   1043513 Cutthroat tro…          89
+## 6  2019 MACKOG-U OG      U         2      16 C                 6   1043521 Cutthroat tro…          78
 ## # … with 5 more variables: length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;,
 ## #   notes &lt;chr&gt;
 </pre></div>
@@ -416,14 +421,14 @@
 <span class="hl std">)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species         length_1_mm
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
-## 1  2012 MACKOG-U OG      U         1      16 SC                2        NA Cascade torren…          26
-## 2  2013 MACKCC-L CC      L         2       2 SC               12        NA Cascade torren…          34
-## 3  2013 MACKOG-U OG      U         1      14 P                 1        NA Cascade torren…          41
-## 4  2017 MACKCC-L CC      L         1       2 SC               29        NA Cascade torren…          39
-## 5  2017 MACKOG-M OG      M         1       8 SC               20        NA Cascade torren…          30
-## 6  2019 MACKOG-M OG      M         1       8 SC               17        NA Cascade torren…          28
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species        length_1_mm
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+## 1  2012 MACKOG-U OG      U         1      16 SC                2        NA Cascade torre…          26
+## 2  2013 MACKCC-L CC      L         2       2 SC               12        NA Cascade torre…          34
+## 3  2013 MACKOG-U OG      U         1      14 P                 1        NA Cascade torre…          41
+## 4  2017 MACKCC-L CC      L         1       2 SC               29        NA Cascade torre…          39
+## 5  2017 MACKOG-M OG      M         1       8 SC               20        NA Cascade torre…          30
+## 6  2019 MACKOG-M OG      M         1       8 SC               17        NA Cascade torre…          28
 ## # … with 5 more variables: length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;,
 ## #   notes &lt;chr&gt;
 </pre></div>

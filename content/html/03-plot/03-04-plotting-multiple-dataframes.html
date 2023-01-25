@@ -75,6 +75,11 @@
     <script src="../highlight/highlight.js"></script>
     <script src="../functions.js"></script>
     <script>hljs.highlightAll();</script>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous">
+    </script>
     <script> 
     $(function(){
     $("#header").load("../common/head.html"); 
@@ -184,7 +189,10 @@
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarize</span><span class="hl std">(</span>
     <span class="hl kwc">month_airtemp</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(mean_airtemp,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
   <span class="hl std">)</span>
-<span class="hl std">df_monthly</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">df_monthly</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 367 × 3
 ## # Groups:   year [31]

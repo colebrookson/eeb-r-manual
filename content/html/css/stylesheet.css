@@ -524,7 +524,7 @@ font-weight: bold;
   font-size:calc(9px + 0.8vw);
 }
 
-.small-source, .small-output, .small-warning, .small-error, .small-message {
+.source, .output, .warning, .error, .message {
   width: calc(70% - 2em);
   height: auto;
 }
