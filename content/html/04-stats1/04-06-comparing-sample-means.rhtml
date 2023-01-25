@@ -97,7 +97,7 @@
         crab_sizes <- lterdatasampler::pie_crab
         end.rcode-->
         <p>
-          Let us say for the sake of example that we have some "northern" crabs and some "southern" crabs, composed of two populations each. Our northern sites will be "Cape Cod" and "Narragansett Bay NERR" and our southern sites will be "Guana Tolomoto Matanzas NERR" and "Sapelo Island NERR". 
+          There are a number of sites in this dataset, so let's compare crabs from two northern sites and two southern sites. Our northern sites will be "Cape Cod" and "Narragansett Bay NERR" and our southern sites will be "Guana Tolomoto Matanzas NERR" and "Sapelo Island NERR". 
         </p>
         <p>
           It's important to never forget the underlying mathematics of what we're doing, we should never simply rely on our computers exclusively and not understand what we're doing, so let's review the equations underlying the t-test. We'll be calculating the test statistic \(t\) as described above. As we are testing a hypothesis that the sizes <em>are</em> different, we can state this formally as \(H_0: \mu_1 = \mu_2\) and \(H_1: \mu_1 \neq \mu_2\). 
@@ -165,61 +165,10 @@
           <section id="ttest--ass--homo">
             <h4>Homoskedasticity</h4>
             <p>
-              Our second assumption was that the variances of the two samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. As with normality, it is usually sufficient to check this assumption with a plot. What we want to see is that the variance (recall that variance is simply a measure of how "spread out" a set of numbers are) is approximately equal for the two groups of interest. The word "homoskedastic" roughly translates to "having the same scatter" from the Greek root words, so we can use a scatter plot or a box plot to look at this. We'll be looking for a "spread" of the data, so how they're spread out along the y-axis, that is similar in magnitude. 
-            </p>
-            <p>
-              In R, let's make a new dataframe with just the information we need to make these plots. We want just two columns - the size of the crabs which is the variable of interest, and a column for our grouping variable, the "North" vs. "South" grouping. 
-            </p> 
+              Our second assumption was that the variances of the two samples be equal. If they are not (heteroskedasticity), all is not lost and we can use a different version of the t-test. As with normality, it is usually sufficient to check this assumption with a plot. What we want to see is that the variance (recall that variance is simply a measure of how "spread out" a set of numbers are) is approximately equal for the two groups of interest. The word "homoskedastic" roughly translates to "having the same scatter" from the Greek root words, so we can use a scatter plot, a box plot, or a violin plot to look at this. 
             <!--begin.rcode 
-              # first subset the north group
-              north_compare <- crab_sizes_north %>% 
-                # this is the only column we want
-                dplyr::select(size) %>% 
-                # we'll make this arbitrary column so we can group our plot on the x-axis
-                dplyr::mutate(region = "north")
-
-              # repeat with the south group
-              south_compare <- crab_sizes_south %>% 
-                dplyr::select(size) %>% 
-                dplyr::mutate(region = "south")
-
-              # put them together by binding the rows (rbind())
-              crab_compare <- rbind(north_compare, south_compare) 
-              end.rcode-->
-            <p>
-              And now we can plot our scatterplot: 
-            </p>
-            <!--begin.rcode
-              # again for our theme, we'll use the theme_base() which is in 
-              # the ggthemes package, so we need to load that along with the 
-              # ggplot2 package
-              library(ggplot2)
-              library(ggthemes)
             
-              ggplot(data = crab_compare) + 
-                geom_point(aes(x = region, y = size)) + 
-                ggthemes::theme_base()
-            end.rcode-->
-            <p>
-              So notice here that what we see is not that the values of the two groups are equivalent on the y-axis, but that they have roughly an equivalent spread. That is, the <em>variance</em> is pretty equal. We can even see this quantitatively by looking at the standard deviation of the two groups. Note this isn't necessary, but just to add a number to the values we're looking at on our plots. Recall the standard deviation is simply the square root of the variance, so we expect, given what we see on our plots, that these two values are roughly equivalent:
-            </p>
-            <!--begin.rcode
-            # look at the south group 
-            sd(south_compare$size)
-            # north group 
-            sd(north_compare$size)  
-            end.rcode-->
-            <p>
-              And we do in fact see these are very similar. Let's look at our boxplot now:
-            </p>
-            <!--begin.rcode
-            ggplot(data = crab_compare) + 
-              geom_boxplot(aes(x = region, y = size)) + 
-              ggthemes::theme_base()
-            end.rcode-->
-            <p>
-              Again, a similar story, a pretty similar looking "spread" of the data. So we can proceed with our test, knowing that our assumption of homoskedascity is satisfied. Like we said before though, if this assumption <em>had not been satisfied</em>, that would be okay, since there's actually an option to perform a different type of t-test where we <strong>don't assume homoskedascity</strong>. This is accounted for in the actual call to the function <code>t.test()</code> and is discussed below. An example of when this might take place is if we were performing a <strong>paired t-test</strong>. A paired t-test would be used if we had a "paired" sample, that is, where we measured each unit of sampling twice, thus ending up with "paired" observations of each sample unit. 
-            </p>
+              end.rcode-->
           </section>
         </section>
         <section id="ttest--test">
@@ -242,9 +191,12 @@
             We see our result here, and it turns out the p-value is <em>very</em> small, so we can reject the null hypothesis, there is good evidence that $\mu_1 \neq \mu_2$. <strong>NOTE</strong> that if our data were heteroskedastic, then we could specify <code>var.equal = FALSE</code> and that would perform a Welch's t-test which allows for this. 
           </p>
           <p>
-            If we wanted, we could plot this result as a box plot or a violin plot (For a full walk through of how to iteratively make this plot, see our section on plotting <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>): 
+            If we wanted, we could plot this result as a box plot, or perhaps more usefully, a violin plot (For a full walk through of how to iteratively make this plot, see our section on plotting <a href="../03-plot/03-10-values-between-groups.html">Values Between Groups</a>): 
           </p>
           <!--begin.rcode
+          library(ggplot2)
+          library(ggthemes)
+
           # first get one dataframe with the four sites we want
           focal_sites <- crab_sizes %>% 
             dplyr::filter(site %in% c("CC", "NB", "GTM", "SI")) %>% 
@@ -312,7 +264,7 @@
           Going back to our assumptions, let's re-start our process of this test but with a different grouping of data. 
         </p>
         <p>
-          What if we just took the MOST northern and southern sites alone, not groups of sites, and did a t-test on those two? Say that instead of the two sites acting as our "northern" sites, we chose to use the single most northern site: "Plum Island Estuary - West Creek" (PIE), and for our southern site, we took the most southern one - "Guana Tolomoto Matanzas NERR" (GTM). If we start again by checking our assumptions, we would first have to check for normality of both our groups. 
+          What if we just took the MOST northern and southern sites alone, not groups of sites, and did a t-test on those two? say that instead of the two sites acting as our "northern" sites, we chose to use the single most northern site: "Plum Island Estuary - West Creek" (PIE), and for our southern site, we took the most southern one - "Guana Tolomoto Matanzas NERR" (GTM). If we start again by checking our assumptions, we would first have to check for normality of both our groups. 
         </p>
         <p>
           Let's start by again dividing our data:
@@ -344,7 +296,7 @@
         Okay, so our p-values for both are &lt; 0.05, so we have to reject the null - these data are non-normal. 
       </p>
       <p>
-        Now what? Well there are other tests available to us. A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. However, as with all statistical decisions, there is no free lunch, and these tests are usually less powerful. We nearly always default to parameteric methods if we can. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
+        Now what? Well there are other tests available to us!! A reminder that parametric tests like the t-test, often have a non-parametric alternative, that usually relax assumptions of normality, and are good for data with small sample sizes. Here we have only 28 observations in each group, and non-normality so let's turn to the non-parametric tests. 
       </p>
     </section>
     <section id="nonpara">
