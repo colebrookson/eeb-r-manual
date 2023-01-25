@@ -63,13 +63,6 @@
   font-weight: bold;
 }
 </style>
-    <style type="text/css">
-      .source, .output, .warning, .error, .message {
-        padding: 0 1em;
-        border:solid 1px #F7F7F7;
-        width: calc(70% - 2em);
-      }
-    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -131,10 +124,7 @@
         </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># remotes package is needed to get the most recent version of the package</span>
 <span class="hl kwd">install.packages</span><span class="hl std">(</span><span class="hl str">&quot;remotes&quot;</span><span class="hl std">)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## Error in install.packages : Updating loaded packages
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl com"># install package</span>
+<span class="hl com"># install package</span>
 <span class="hl std">remotes</span><span class="hl opt">::</span><span class="hl kwd">install_github</span><span class="hl std">(</span><span class="hl str">&quot;lter/lterdatasampler&quot;</span><span class="hl std">)</span>
 
 <span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
@@ -156,14 +146,16 @@
 <span class="hl kwd">head</span><span class="hl std">(crabs)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 9
-##   date       latitude site   size air_temp air_temp_sd water_temp water_temp_sd name  
-##   &lt;date&gt;        &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt; 
-## 1 2016-07-24       30 GTM    12.4     21.8        6.39       24.5          6.12 Guana…
-## 2 2016-07-24       30 GTM    14.2     21.8        6.39       24.5          6.12 Guana…
-## 3 2016-07-24       30 GTM    14.5     21.8        6.39       24.5          6.12 Guana…
-## 4 2016-07-24       30 GTM    12.9     21.8        6.39       24.5          6.12 Guana…
-## 5 2016-07-24       30 GTM    12.4     21.8        6.39       24.5          6.12 Guana…
-## 6 2016-07-24       30 GTM    13.0     21.8        6.39       24.5          6.12 Guana…
+##   date       latitude site   size air_temp air_temp_sd
+##   &lt;date&gt;        &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+## 1 2016-07-24       30 GTM    12.4     21.8        6.39
+## 2 2016-07-24       30 GTM    14.2     21.8        6.39
+## 3 2016-07-24       30 GTM    14.5     21.8        6.39
+## 4 2016-07-24       30 GTM    12.9     21.8        6.39
+## 5 2016-07-24       30 GTM    12.4     21.8        6.39
+## 6 2016-07-24       30 GTM    13.0     21.8        6.39
+## # … with 3 more variables: water_temp &lt;dbl&gt;,
+## #   water_temp_sd &lt;dbl&gt;, name &lt;chr&gt;
 </pre></div>
 </div></div>
             <p>
@@ -171,7 +163,8 @@
             </p>
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(crabs</span><span class="hl opt">$</span><span class="hl std">site)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] &quot;GTM&quot; &quot;SI&quot;  &quot;NIB&quot; &quot;ZI&quot;  &quot;RC&quot;  &quot;VCR&quot; &quot;DB&quot;  &quot;JC&quot;  &quot;CT&quot;  &quot;NB&quot;  &quot;CC&quot;  &quot;BC&quot;  &quot;PIE&quot;
+<div class="output"><pre class="knitr r">##  [1] &quot;GTM&quot; &quot;SI&quot;  &quot;NIB&quot; &quot;ZI&quot;  &quot;RC&quot;  &quot;VCR&quot; &quot;DB&quot;  &quot;JC&quot;  &quot;CT&quot; 
+## [10] &quot;NB&quot;  &quot;CC&quot;  &quot;BC&quot;  &quot;PIE&quot;
 </pre></div>
 </div></div>
             <p>

@@ -63,13 +63,6 @@
   font-weight: bold;
 }
 </style>
-    <style type="text/css">
-        .source, .output, .warning, .error, .message {
-          padding: 0 1em;
-          border:solid 1px #F7F7F7;
-          width: calc(70% - 2em);
-        }
-      </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -118,10 +111,10 @@
 
 <span class="hl kwd">names</span><span class="hl std">(df)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;       &quot;pass&quot;       
-##  [6] &quot;unitnum&quot;     &quot;unittype&quot;    &quot;vert_index&quot;  &quot;pitnumber&quot;   &quot;species&quot;    
-## [11] &quot;length_1_mm&quot; &quot;length_2_mm&quot; &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot; 
-## [16] &quot;notes&quot;
+<div class="output"><pre class="knitr r">##  [1] &quot;year&quot;        &quot;sitecode&quot;    &quot;section&quot;     &quot;reach&quot;      
+##  [5] &quot;pass&quot;        &quot;unitnum&quot;     &quot;unittype&quot;    &quot;vert_index&quot; 
+##  [9] &quot;pitnumber&quot;   &quot;species&quot;     &quot;length_1_mm&quot; &quot;length_2_mm&quot;
+## [13] &quot;weight_g&quot;    &quot;clip&quot;        &quot;sampledate&quot;  &quot;notes&quot;
 </pre></div>
 </div></div>
 
@@ -287,8 +280,10 @@
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">species)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
-## Cascade torrent salamander   Coastal giant salamander            Cutthroat trout 
-##                         15                      11758                      20433
+## Cascade torrent salamander   Coastal giant salamander 
+##                         15                      11758 
+##            Cutthroat trout 
+##                      20433
 </pre></div>
 </div></div>
             <p>
@@ -301,16 +296,18 @@
 <span class="hl kwd">head</span><span class="hl std">(df_filtered)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species    
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      
-## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat …
-## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat …
-## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat …
-## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat …
-## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat …
-## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat …
-## # … with 6 more variables: length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;,
-## #   clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unittype
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   
+## 1  1987 MACKCC-L CC      L         1       1 R       
+## 2  1987 MACKCC-L CC      L         1       1 R       
+## 3  1987 MACKCC-L CC      L         1       1 R       
+## 4  1987 MACKCC-L CC      L         1       1 R       
+## 5  1987 MACKCC-L CC      L         1       1 R       
+## 6  1987 MACKCC-L CC      L         1       1 R       
+## # … with 9 more variables: vert_index &lt;dbl&gt;,
+## #   pitnumber &lt;dbl&gt;, species &lt;chr&gt;, length_1_mm &lt;dbl&gt;,
+## #   length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;,
+## #   sampledate &lt;date&gt;, notes &lt;chr&gt;
 </pre></div>
 </div></div>
             <p>
@@ -364,16 +361,18 @@ One last step!
 <div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(df_filtered)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species    
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      
-## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat …
-## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat …
-## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat …
-## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat …
-## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat …
-## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat …
-## # … with 6 more variables: length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;,
-## #   clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unittype
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   
+## 1  1987 MACKCC-L CC      L         1       1 R       
+## 2  1987 MACKCC-L CC      L         1       1 R       
+## 3  1987 MACKCC-L CC      L         1       1 R       
+## 4  1987 MACKCC-L CC      L         1       1 R       
+## 5  1987 MACKCC-L CC      L         1       1 R       
+## 6  1987 MACKCC-L CC      L         1       1 R       
+## # … with 9 more variables: vert_index &lt;dbl&gt;,
+## #   pitnumber &lt;dbl&gt;, species &lt;chr&gt;, length_1_mm &lt;dbl&gt;,
+## #   length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;,
+## #   sampledate &lt;date&gt;, notes &lt;chr&gt;
 </pre></div>
 </div></div>
             <p>
@@ -384,16 +383,18 @@ One last step!
 <div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">tail</span><span class="hl std">(df_filtered)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species    
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      
-## 1  2019 MACKOG-U OG      U         2      16 C                21        NA Coastal gi…
-## 2  2019 MACKOG-U OG      U         2      16 C                22        NA Coastal gi…
-## 3  2019 MACKOG-U OG      U         2      16 C                23   1043503 Coastal gi…
-## 4  2019 MACKOG-U OG      U         2      16 C                24   1043547 Coastal gi…
-## 5  2019 MACKOG-U OG      U         2      16 C                25   1043583 Coastal gi…
-## 6  2019 MACKOG-U OG      U         2      16 C                26   1043500 Coastal gi…
-## # … with 6 more variables: length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;,
-## #   clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unittype
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   
+## 1  2019 MACKOG-U OG      U         2      16 C       
+## 2  2019 MACKOG-U OG      U         2      16 C       
+## 3  2019 MACKOG-U OG      U         2      16 C       
+## 4  2019 MACKOG-U OG      U         2      16 C       
+## 5  2019 MACKOG-U OG      U         2      16 C       
+## 6  2019 MACKOG-U OG      U         2      16 C       
+## # … with 9 more variables: vert_index &lt;dbl&gt;,
+## #   pitnumber &lt;dbl&gt;, species &lt;chr&gt;, length_1_mm &lt;dbl&gt;,
+## #   length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;,
+## #   sampledate &lt;date&gt;, notes &lt;chr&gt;
 </pre></div>
 </div></div>
             <p>
@@ -404,16 +405,18 @@ One last step!
 <div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">tail</span><span class="hl std">(dplyr</span><span class="hl opt">::</span><span class="hl kwd">arrange</span><span class="hl std">(df_filtered, species))</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species    
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      
-## 1  2019 MACKOG-U OG      U         2      16 C                 1        NA Cutthroat …
-## 2  2019 MACKOG-U OG      U         2      16 C                 2        NA Cutthroat …
-## 3  2019 MACKOG-U OG      U         2      16 C                 3        NA Cutthroat …
-## 4  2019 MACKOG-U OG      U         2      16 C                 4   1043522 Cutthroat …
-## 5  2019 MACKOG-U OG      U         2      16 C                 5   1043513 Cutthroat …
-## 6  2019 MACKOG-U OG      U         2      16 C                 6   1043521 Cutthroat …
-## # … with 6 more variables: length_1_mm &lt;dbl&gt;, length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;,
-## #   clip &lt;chr&gt;, sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unittype
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   
+## 1  2019 MACKOG-U OG      U         2      16 C       
+## 2  2019 MACKOG-U OG      U         2      16 C       
+## 3  2019 MACKOG-U OG      U         2      16 C       
+## 4  2019 MACKOG-U OG      U         2      16 C       
+## 5  2019 MACKOG-U OG      U         2      16 C       
+## 6  2019 MACKOG-U OG      U         2      16 C       
+## # … with 9 more variables: vert_index &lt;dbl&gt;,
+## #   pitnumber &lt;dbl&gt;, species &lt;chr&gt;, length_1_mm &lt;dbl&gt;,
+## #   length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;,
+## #   sampledate &lt;date&gt;, notes &lt;chr&gt;
 </pre></div>
 </div></div>
             <p>

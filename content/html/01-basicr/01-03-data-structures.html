@@ -63,13 +63,6 @@
   font-weight: bold;
 }
 </style>
-    <style type="text/css">
-        .source, .output, .warning, .error, .message {
-          padding: 0 1em;
-          border:solid 1px #F7F7F7;
-          width: calc(70% - 2em);
-        }
-    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -216,7 +209,8 @@
 <div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">y[</span><span class="hl num">9</span><span class="hl std">]</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;cat&quot;</span>
   <span class="hl std">y</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;The&quot;    &quot;quick&quot;  &quot;brown&quot;  &quot;fox&quot;    &quot;jumped&quot; &quot;over&quot;   &quot;the&quot;    &quot;lazy&quot;   &quot;cat&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;The&quot;    &quot;quick&quot;  &quot;brown&quot;  &quot;fox&quot;    &quot;jumped&quot; &quot;over&quot;  
+## [7] &quot;the&quot;    &quot;lazy&quot;   &quot;cat&quot;
 </pre></div>
 </div></div>
           <p>
@@ -310,8 +304,9 @@
           </p>
 <div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">m</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">,</span> <span class="hl num">200</span><span class="hl std">,</span> <span class="hl num">300</span><span class="hl std">,</span> <span class="hl num">400</span><span class="hl std">),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning in matrix(c(100, 200, 300, 400), nrow = 3, ncol = 2): data length [4] is not a
-## sub-multiple or multiple of the number of rows [3]
+<div class="warning"><pre class="knitr r">## Warning in matrix(c(100, 200, 300, 400), nrow = 3, ncol =
+## 2): data length [4] is not a sub-multiple or multiple of the
+## number of rows [3]
 </pre></div>
 </div></div>
           <p>
@@ -469,13 +464,20 @@
             </p>
 <div class="chunk" id="unnamed-chunk-28"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">summary</span><span class="hl std">(d2)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##        c1         c2                  c3          c4           
-##  Min.   :1   Length:5           Min.   :11   Length:5          
-##  1st Qu.:2   Class :character   1st Qu.:12   Class :character  
-##  Median :3   Mode  :character   Median :13   Mode  :character  
-##  Mean   :3                      Mean   :13                     
-##  3rd Qu.:4                      3rd Qu.:14                     
-##  Max.   :5                      Max.   :15
+<div class="output"><pre class="knitr r">##        c1         c2                  c3    
+##  Min.   :1   Length:5           Min.   :11  
+##  1st Qu.:2   Class :character   1st Qu.:12  
+##  Median :3   Mode  :character   Median :13  
+##  Mean   :3                      Mean   :13  
+##  3rd Qu.:4                      3rd Qu.:14  
+##  Max.   :5                      Max.   :15  
+##       c4           
+##  Length:5          
+##  Class :character  
+##  Mode  :character  
+##                    
+##                    
+## 
 </pre></div>
 </div></div>
             <p>

@@ -63,13 +63,6 @@
   font-weight: bold;
 }
 </style>
-    <style type="text/css">
-        .source, .output, .warning, .error, .message {
-          padding: 0 1em;
-          border:solid 1px #F7F7F7;
-          width: calc(70% - 2em);
-        }
-      </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -271,7 +264,8 @@
 ## (Intercept) -3.66618    4.53002  -0.809     0.42    
 ## x            1.49922    0.07788  19.251   &lt;2e-16 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 22.48 on 98 degrees of freedom
 ## Multiple R-squared:  0.7909,	Adjusted R-squared:  0.7887 
@@ -310,7 +304,8 @@
 ## (Intercept) -3.66618    4.53002  -0.809     0.42    
 ## x            1.49922    0.07788  19.251   &lt;2e-16 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 22.48 on 98 degrees of freedom
 ## Multiple R-squared:  0.7909,	Adjusted R-squared:  0.7887 
@@ -432,7 +427,8 @@
 ## (Intercept) 1001.253      2.080   481.5   &lt;2e-16 ***
 ## animal_sexM  567.046      5.564   101.9   &lt;2e-16 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 93.9 on 2368 degrees of freedom
 ## Multiple R-squared:  0.8143,	Adjusted R-squared:  0.8142 
@@ -522,7 +518,8 @@
 ## animal_sexM  566.5127     5.5512 102.051  &lt; 2e-16 ***
 ## rec_year       0.9749     0.2618   3.724 0.000201 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 93.65 on 2367 degrees of freedom
 ## Multiple R-squared:  0.8154,	Adjusted R-squared:  0.8152 
@@ -571,7 +568,7 @@
 ##   ..$ animal_sex: chr &quot;contr.treatment&quot;
 ##  $ xlevels      :List of 1
 ##   ..$ animal_sex: chr [1:2] &quot;F&quot; &quot;M&quot;
-##  $ call         : language lm(formula = animal_weight ~ animal_sex + rec_year, data = bison)
+##  $ call         : language lm(formula = animal_weight ~ animal_sex + rec_year,      data = bison)
 ##  $ terms        :Classes 'terms', 'formula'  language animal_weight ~ animal_sex + rec_year
 ##   .. ..- attr(*, &quot;variables&quot;)= language list(animal_weight, animal_sex, rec_year)
 ##   .. ..- attr(*, &quot;factors&quot;)= int [1:3, 1:2] 0 1 0 0 0 1

@@ -523,3 +523,9 @@ font-weight: bold;
   margin: 5% 5% 5% 5%;
   font-size:calc(9px + 0.8vw);
 }
+
+.source, .output, .warning, .error, .message {
+  padding: 0 1em;
+  border:solid 1px #F7F7F7;
+  width: calc(70% - 2em);
+}
