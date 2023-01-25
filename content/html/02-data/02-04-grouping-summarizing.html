@@ -63,6 +63,13 @@
   font-weight: bold;
 }
 </style>
+    <style type="text/css">
+        .source, .output, .warning, .error, .message {
+          padding: 0 1em;
+          border:solid 1px #F7F7F7;
+          width: calc(70% - 2em);
+        }
+      </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -182,11 +189,7 @@
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">group_by</span><span class="hl std">(animal_sex, rec_month)</span> <span class="hl opt">%&gt;%</span>
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarize</span><span class="hl std">(</span><span class="hl kwc">mean_mass</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(animal_weight,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">),</span>
                 <span class="hl kwc">std_dev</span> <span class="hl std">=</span> <span class="hl kwd">sd</span><span class="hl std">(animal_weight,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
-</pre></div>
-<div class="message"><pre class="knitr r">## `summarise()` has grouped output by 'animal_sex'. You can override using the
-## `.groups` argument.
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">month_sex_weight</span>
+<span class="hl std">month_sex_weight</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 4 × 4
 ## # Groups:   animal_sex [2]

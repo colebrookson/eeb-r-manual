@@ -63,6 +63,13 @@
   font-weight: bold;
 }
 </style>
+    <style type="text/css">
+        .source, .output, .warning, .error, .message {
+          padding: 0 1em;
+          border:solid 1px #F7F7F7;
+          width: calc(70% - 2em);
+        }
+      </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -544,27 +551,38 @@ One last step!
             <p>
                 That will work well enough for now! Let's move on to changing the orientation of the x-axis. This is most often required if you're plotting a time-series with years on the x-axis, as they will take up quite a bit of space if all displayed, so are rotated 90 degrees so they don't overlap. We don't have that here, however, we'll still rotate ours 90 degrees here for practice. 
             </p>
-<div class="chunk" id="unnamed-chunk-25"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span>
-<span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df_filtered</span> <span class="hl opt">%&gt;%</span>
-            <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">arrange</span><span class="hl std">(</span><span class="hl kwd">factor</span><span class="hl std">(species,</span>
-                        <span class="hl kwc">levels</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Cutthroat trout&quot;</span><span class="hl std">,</span>
-                                <span class="hl str">&quot;Coastal giant salamander&quot;</span><span class="hl std">,</span>
-                                <span class="hl str">&quot;Cascade torrent salamander&quot;</span><span class="hl std">))),</span>
-            <span class="hl kwc">mapping</span> <span class="hl std">=</span> <span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= length_1_mm,</span> <span class="hl kwc">y</span> <span class="hl std">= weight_g,</span>
-                        <span class="hl kwc">fill</span> <span class="hl std">= species,</span> <span class="hl kwc">size</span> <span class="hl std">= species),</span>
-            <span class="hl com"># here's where we'll add our colour etc</span>
-            <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;black&quot;</span><span class="hl std">,</span> <span class="hl kwc">shape</span> <span class="hl std">=</span> <span class="hl num">21</span><span class="hl std">,</span> <span class="hl kwc">alpha</span> <span class="hl std">=</span> <span class="hl num">0.8</span><span class="hl std">)</span><span class="hl opt">+</span>
-<span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Weight (g)&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+<div class="chunk" id="unnamed-chunk-25"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ggplot</span>() +
+<span class="hl kwd">geom_point</span>(data = df_filtered %&gt;% 
+              &lt;style type=<span class="hl str">&quot;text/css&quot;</span>&gt;
+      .source, .output, .warning, .error, .message {
+        padding: 0 1em;
+        border:solid 1px <span class="hl com">#F7F7F7;</span>
+        width: <span class="hl kwd">calc</span>(70% - 2em);
+      }
+    &lt;/style&gt;  dplyr::<span class="hl kwd">arrange</span>(<span class="hl kwd">factor</span>(species, 
+                        levels = <span class="hl kwd">c</span>(<span class="hl str">&quot;Cutthroat trout&quot;</span>, 
+                                <span class="hl str">&quot;Coastal giant salamander&quot;</span>, 
+                                <span class="hl str">&quot;Cascade torrent salamander&quot;</span>))),
+            mapping = <span class="hl kwd">aes</span>(x = length_1_mm, y = weight_g, 
+                        fill = species, size = species),
+            # here<span class="hl str">'s where we'</span>ll add our colour etc
+            colour = <span class="hl str">&quot;black&quot;</span>, shape = 21, alpha = 0.8)+
+<span class="hl kwd">labs</span>(x = <span class="hl str">&quot;<span class="hl kwd">Length</span> (mm)&quot;</span>, y = <span class="hl str">&quot;<span class="hl kwd">Weight</span> (g)&quot;</span>) +
 <span class="hl com"># note here we use `ggthemes::` to indicate which package we're using</span>
-<span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
-<span class="hl kwd">scale_size_manual</span><span class="hl std">(</span><span class="hl str">&quot;Species&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span> <span class="hl opt">+</span>
-<span class="hl kwd">scale_fill_manual</span><span class="hl std">(</span><span class="hl str">&quot;Species&quot;</span><span class="hl std">,</span> <span class="hl kwc">values</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;#42d4f4&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#f032e6&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;#ffe119&quot;</span><span class="hl std">))</span> <span class="hl opt">+</span>
-<span class="hl kwd">theme</span><span class="hl std">(</span>
-    <span class="hl kwc">legend.position</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0.8</span><span class="hl std">,</span> <span class="hl num">0.1</span><span class="hl std">),</span>
-    <span class="hl kwc">axis.text.x</span> <span class="hl std">=</span> <span class="hl kwd">element_text</span><span class="hl std">(</span><span class="hl kwc">angle</span> <span class="hl std">=</span> <span class="hl num">90</span><span class="hl std">)</span>
-<span class="hl std">)</span>
+ggthemes::<span class="hl kwd">theme_base</span>() +
+<span class="hl kwd">scale_size_manual</span>(<span class="hl str">&quot;Species&quot;</span>, values = <span class="hl kwd">c</span>(4, 2, 2)) +
+<span class="hl kwd">scale_fill_manual</span>(<span class="hl str">&quot;Species&quot;</span>, values = <span class="hl kwd">c</span>(<span class="hl str">&quot;#42d4f4&quot;</span>, <span class="hl str">&quot;#f032e6&quot;</span>, <span class="hl str">&quot;#ffe119&quot;</span>)) + 
+<span class="hl kwd">theme</span>(
+    legend.position = <span class="hl kwd">c</span>(0.8, 0.1),
+    axis.text.x = <span class="hl kwd">element_text</span>(angle = 90)
+)
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-25-1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" class="plot" /></div></div>
+<div class="error"><pre class="knitr r">## Error: &lt;text&gt;:3:15: unexpected '&lt;'
+## 2: geom_point(data = df_filtered %&gt;% 
+## 3:               &lt;
+##                  ^
+</pre></div>
+</div></div>
             <p>
                 Okay, that worked, but we can now see that the numbers don't <em>quite</em> line up with the axis ticks. What should we do about this? Well, we can simply adjust them vertically (vertically with respect to the number, not the plot itself) so they scoot a bit to the left from our perspective. For whatever reason, a vertical adjustment (<code>vjust()</code>) of 0.5 seems to do the trick nearly everytime for this task.
             </p>    

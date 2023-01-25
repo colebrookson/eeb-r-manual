@@ -63,6 +63,13 @@
   font-weight: bold;
 }
 </style>
+  <style type="text/css">
+    .source, .output, .warning, .error, .message {
+      padding: 0 1em;
+      border:solid 1px #F7F7F7;
+      width: calc(70% - 2em);
+    }
+  </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -184,11 +191,7 @@
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarize</span><span class="hl std">(</span>
     <span class="hl kwc">month_airtemp</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(mean_airtemp,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
   <span class="hl std">)</span>
-</pre></div>
-<div class="message"><pre class="knitr r">## `summarise()` has grouped output by 'year'. You can override using the `.groups`
-## argument.
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">df_monthly</span>
+<span class="hl std">df_monthly</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 367 × 3
 ## # Groups:   year [31]

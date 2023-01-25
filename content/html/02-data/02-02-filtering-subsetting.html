@@ -63,6 +63,13 @@
   font-weight: bold;
 }
 </style>
+    <style type="text/css">
+      .source, .output, .warning, .error, .message {
+        padding: 0 1em;
+        border:solid 1px #F7F7F7;
+        width: calc(70% - 2em);
+      }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -124,7 +131,10 @@
         </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># remotes package is needed to get the most recent version of the package</span>
 <span class="hl kwd">install.packages</span><span class="hl std">(</span><span class="hl str">&quot;remotes&quot;</span><span class="hl std">)</span>
-<span class="hl com"># install package</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## Error in install.packages : Updating loaded packages
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># install package</span>
 <span class="hl std">remotes</span><span class="hl opt">::</span><span class="hl kwd">install_github</span><span class="hl std">(</span><span class="hl str">&quot;lter/lterdatasampler&quot;</span><span class="hl std">)</span>
 
 <span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>

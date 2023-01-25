@@ -63,6 +63,13 @@
   font-weight: bold;
 }
 </style>
+  <style type="text/css">
+    .source, .output, .warning, .error, .message {
+      padding: 0 1em;
+      border:solid 1px #F7F7F7;
+      width: calc(70% - 2em);
+    }
+  </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -238,21 +245,30 @@
       \[P(\text{D}) = 0.25\]
         which would result in a probability distribution that may look like this: 
       </p>
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
-<span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span>(ggplot2)
+<span class="hl kwd">library</span>(ggthemes    &lt;style type=<span class="hl str">&quot;text/css&quot;</span>&gt;
+.source, .output, .warning, .error, .message {
+  padding: 0 1em;
+  border:solid 1px <span class="hl com">#F7F7F7;</span>
+  width: <span class="hl kwd">calc</span>(70% - 2em);
+}
+    &lt;/style&gt;(
+  base = <span class="hl kwd">c</span>(<span class="hl str">&quot;A&quot;</span>, <span class="hl str">&quot;C&quot;</span>, <span class="hl str">&quot;G&quot;</span>, <span class="hl str">&quot;T&quot;</span>),
+  prob = 0.25
+)
 
-<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
-  <span class="hl kwc">base</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
-  <span class="hl kwc">prob</span> <span class="hl std">=</span> <span class="hl num">0.25</span>
-<span class="hl std">)</span>
-
-<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df)</span> <span class="hl opt">+</span>
-  <span class="hl kwd">geom_col</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= base,</span> <span class="hl kwc">y</span> <span class="hl std">= prob,</span> <span class="hl kwc">fill</span> <span class="hl std">= base))</span> <span class="hl opt">+</span>
-  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
-  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Nucleotide Base&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
-  <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
+<span class="hl kwd">ggplot</span>(data = df) + 
+  <span class="hl kwd">geom_col</span>(<span class="hl kwd">aes</span>(x = base, y = prob, fill = base)) +
+  ggthemes::<span class="hl kwd">theme_base</span>() + 
+  <span class="hl kwd">labs</span>(x = <span class="hl str">&quot;Nucleotide Base&quot;</span>, y = <span class="hl str">&quot;Probability&quot;</span>) + 
+  <span class="hl kwd">ylim</span>(<span class="hl kwd">c</span>(0,1))
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+<div class="error"><pre class="knitr r">## Error: &lt;text&gt;:2:28: unexpected symbol
+## 1: library(ggplot2)
+## 2: library(ggthemes    &lt;style type
+##                               ^
+</pre></div>
+</div></div>
       <p>
         This is intuitive. Any way that the distribution is partitioned, the sum of probabilities of each event <strong>must</strong> sum to 1.0 without exception. The most common discrete probability distributions are the Poisson and Bernoulli distributions. 
       </p>
