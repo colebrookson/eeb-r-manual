@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # Linear Regression
 **Author:** Cole Brookson
@@ -101,16 +101,13 @@ library(tidyverse)
 # uncomment and edit the lines below if you need to read in the data 
 # library(here)
 # df <- readr::read_csv(here("./data/species.csv"))
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
+
 
 # quick summary of our data
 dplyr::glimpse(df)
 head(df)
-<<<<<<< HEAD
-end.rcode-->
-=======
+
 ```
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
 
 Ok so we can see what types are data are. It's important here to not be tricked by R!! It has read in the data automatically with the <code>Species</code> column as numeric type, but it's in fact integer values. This doens't matter right now, but it will matter when we need to choose an error distribution. 
 
