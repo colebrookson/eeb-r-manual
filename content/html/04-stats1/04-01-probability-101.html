@@ -120,7 +120,7 @@
         There are many excellent texts on probability and probability theory. There are numerous courses in several departments at the University of Toronto, and indeed pretty much any university, that can offer you the student a truly grounded view of what probability is and how to think about it. Indeed, probability itself can be interpreted in multiple ways, and multiple theories about foundational probability and how to interpret it exist. Most of the concepts in this section are unabashedly stolen from the <strong>excellent</strong> (and free!) text on probability by Blitzstein and Hwang which you can find <a href="http://probabilitybook.net/">here</a>. Here we attempt to discuss some foundational components of probability that we think are important for students in EEB to know. 
       </p>
       <p>
-        There's many reasons why we should stuThis test assumes three major things:dy probability, but perhaps most simply, the biological world around us is full of randomness, and even in the processes we think we understand the best, uncertainty is abound. Without an understanding of probability, we don't have a framework with which to confront of understanding or lack thereof, and actually enable a robust discussion about <strong>how much</strong> randomness we actually understand, and how <strong>certain</strong> we are about things we think. 
+        There's many reasons why we should study probability, but perhaps most simply, the biological world around us is full of randomness, and even in the processes we think we understand the best, uncertainty is abound. Without an understanding of probability, we don't have a framework with which to confront of understanding or lack thereof, and actually enable a robust discussion about <strong>how much</strong> randomness we actually understand, and how <strong>certain</strong> we are about things we think. 
       </p>
       <p>
         In this section we'll offer some definitions that will be useful to you in more formally discussing probability. 
@@ -238,30 +238,21 @@
       \[P(\text{D}) = 0.25\]
         which would result in a probability distribution that may look like this: 
       </p>
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span>(ggplot2)
-<span class="hl kwd">library</span>(ggthemes    &lt;style type=<span class="hl str">&quot;text/css&quot;</span>&gt;
-.source, .output, .warning, .error, .message {
-  padding: 0 1em;
-  border:solid 1px <span class="hl com">#F7F7F7;</span>
-  width: <span class="hl kwd">calc</span>(70% - 2em);
-}
-    &lt;/style&gt;(
-  base = <span class="hl kwd">c</span>(<span class="hl str">&quot;A&quot;</span>, <span class="hl str">&quot;C&quot;</span>, <span class="hl str">&quot;G&quot;</span>, <span class="hl str">&quot;T&quot;</span>),
-  prob = 0.25
-)
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+<span class="hl kwd">library</span><span class="hl std">(ggthemes)</span>
 
-<span class="hl kwd">ggplot</span>(data = df) + 
-  <span class="hl kwd">geom_col</span>(<span class="hl kwd">aes</span>(x = base, y = prob, fill = base)) +
-  ggthemes::<span class="hl kwd">theme_base</span>() + 
-  <span class="hl kwd">labs</span>(x = <span class="hl str">&quot;Nucleotide Base&quot;</span>, y = <span class="hl str">&quot;Probability&quot;</span>) + 
-  <span class="hl kwd">ylim</span>(<span class="hl kwd">c</span>(0,1))
+<span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span>
+  <span class="hl kwc">base</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;C&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;G&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;T&quot;</span><span class="hl std">),</span>
+  <span class="hl kwc">prob</span> <span class="hl std">=</span> <span class="hl num">0.25</span>
+<span class="hl std">)</span>
+
+<span class="hl kwd">ggplot</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= df)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">geom_col</span><span class="hl std">(</span><span class="hl kwd">aes</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= base,</span> <span class="hl kwc">y</span> <span class="hl std">= prob,</span> <span class="hl kwc">fill</span> <span class="hl std">= base))</span> <span class="hl opt">+</span>
+  <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
+  <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Nucleotide Base&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Probability&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>
+  <span class="hl kwd">ylim</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">))</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: &lt;text&gt;:2:28: unexpected symbol
-## 1: library(ggplot2)
-## 2: library(ggthemes    &lt;style type
-##                               ^
-</pre></div>
-</div></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
       <p>
         This is intuitive. Any way that the distribution is partitioned, the sum of probabilities of each event <strong>must</strong> sum to 1.0 without exception. The most common discrete probability distributions are the Poisson and Bernoulli distributions. 
       </p>
@@ -316,7 +307,7 @@
       <p>
         Again as the name implies, between two variables which are both continuous, an infinite number of other values are possible. To think about these distributions, we often think of probability <strong>densities</strong>. 
 
-        It's useful to be able to plot probability densities for a handful of common continuous distributions. We'll plot probability densities for the Gaussian/Normal, Exponential, and Gamma distributions. As a good reminder, to recall what forms the probability density functions for some given distribution look like, the <a href="https://www.itl.nist.gov/div898/handbook/index.html">NIST/SEMATCH e-handbook of Statistical Methods</a> has a <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda36.htm">great set of descriptions on probability distributions</a>. Let's refresh our minds about the Normal Distribution. The Normal or Gaussian distribution is the classic "bell-shaped curve" we're used to seeing when we think of any distribution at all. 
+        It's useful to be able to plot probability densities for a handful of common continuous distributions. We'll plot probability densities for the Gaussian/Normal, Exponential, and Gamma distributions. As a good reminder, to recall what forms the probability density functions for some given distribution look like, the <a href="https://doi.org/10.18434/M32189">NIST/SEMATCH e-handbook of Statistical Methods</a> has a <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda36.htm">great set of descriptions on probability distributions</a>. Let's refresh our minds about the Normal Distribution. The Normal or Gaussian distribution is the classic "bell-shaped curve" we're used to seeing when we think of any distribution at all. 
       </p>
       <section id="dist--cont--dens">
         <p>

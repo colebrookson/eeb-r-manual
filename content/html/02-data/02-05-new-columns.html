@@ -123,17 +123,15 @@
 <span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 11
-##    year watershed elevation transect sample stem_length
-##   &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    &lt;fct&gt;        &lt;dbl&gt;
-## 1  2003 Reference Low       R1       1             86.9
-## 2  2003 Reference Low       R1       2            114  
-## 3  2003 Reference Low       R1       3             83.5
-## 4  2003 Reference Low       R1       4             68.1
-## 5  2003 Reference Low       R1       5             72.1
-## 6  2003 Reference Low       R1       6             77.7
-## # … with 5 more variables: leaf1area &lt;dbl&gt;,
-## #   leaf2area &lt;dbl&gt;, leaf_dry_mass &lt;dbl&gt;,
-## #   stem_dry_mass &lt;dbl&gt;, corrected_leaf_area &lt;dbl&gt;
+##    year watershed elevation transect sample stem_length leaf1area leaf2area leaf_dry_mass
+##   &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    &lt;fct&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+## 1  2003 Reference Low       R1       1             86.9     13.8      12.1         0.0453
+## 2  2003 Reference Low       R1       2            114       14.6      15.3         0.0476
+## 3  2003 Reference Low       R1       3             83.5     12.5       9.73        0.0423
+## 4  2003 Reference Low       R1       4             68.1      9.97     10.1         0.0397
+## 5  2003 Reference Low       R1       5             72.1      6.84      5.48        0.0204
+## 6  2003 Reference Low       R1       6             77.7      9.66      7.64        0.0317
+## # … with 2 more variables: stem_dry_mass &lt;dbl&gt;, corrected_leaf_area &lt;dbl&gt;
 </pre></div>
 </div></div>
                     <p>
@@ -145,20 +143,19 @@
 <span class="hl std">df</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 359 × 6
-##     year watershed elevation leaf1area leaf2area
-##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-##  1  2003 Reference Low           13.8      12.1 
-##  2  2003 Reference Low           14.6      15.3 
-##  3  2003 Reference Low           12.5       9.73
-##  4  2003 Reference Low            9.97     10.1 
-##  5  2003 Reference Low            6.84      5.48
-##  6  2003 Reference Low            9.66      7.64
-##  7  2003 Reference Low            8.82      9.23
-##  8  2003 Reference Low            5.83      6.18
-##  9  2003 Reference Low            8.11      7.13
-## 10  2003 Reference Low            3.02      3.44
-## # … with 349 more rows, and 1 more variable:
-## #   corrected_leaf_area &lt;dbl&gt;
+##     year watershed elevation leaf1area leaf2area corrected_leaf_area
+##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;               &lt;dbl&gt;
+##  1  2003 Reference Low           13.8      12.1                29.1 
+##  2  2003 Reference Low           14.6      15.3                33.0 
+##  3  2003 Reference Low           12.5       9.73               25.3 
+##  4  2003 Reference Low            9.97     10.1                23.2 
+##  5  2003 Reference Low            6.84      5.48               15.5 
+##  6  2003 Reference Low            9.66      7.64               20.4 
+##  7  2003 Reference Low            8.82      9.23               21.2 
+##  8  2003 Reference Low            5.83      6.18               15.2 
+##  9  2003 Reference Low            8.11      7.13               18.4 
+## 10  2003 Reference Low            3.02      3.44                9.60
+## # … with 349 more rows
 </pre></div>
 </div></div>
                     <p>
@@ -169,20 +166,19 @@
 <span class="hl std">df</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 359 × 7
-##     year watershed elevation leaf1area leaf2area
-##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-##  1  2003 Reference Low           13.8      12.1 
-##  2  2003 Reference Low           14.6      15.3 
-##  3  2003 Reference Low           12.5       9.73
-##  4  2003 Reference Low            9.97     10.1 
-##  5  2003 Reference Low            6.84      5.48
-##  6  2003 Reference Low            9.66      7.64
-##  7  2003 Reference Low            8.82      9.23
-##  8  2003 Reference Low            5.83      6.18
-##  9  2003 Reference Low            8.11      7.13
-## 10  2003 Reference Low            3.02      3.44
-## # … with 349 more rows, and 2 more variables:
-## #   corrected_leaf_area &lt;dbl&gt;, forest &lt;chr&gt;
+##     year watershed elevation leaf1area leaf2area corrected_leaf_area forest
+##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;               &lt;dbl&gt; &lt;chr&gt; 
+##  1  2003 Reference Low           13.8      12.1                29.1  HBEF  
+##  2  2003 Reference Low           14.6      15.3                33.0  HBEF  
+##  3  2003 Reference Low           12.5       9.73               25.3  HBEF  
+##  4  2003 Reference Low            9.97     10.1                23.2  HBEF  
+##  5  2003 Reference Low            6.84      5.48               15.5  HBEF  
+##  6  2003 Reference Low            9.66      7.64               20.4  HBEF  
+##  7  2003 Reference Low            8.82      9.23               21.2  HBEF  
+##  8  2003 Reference Low            5.83      6.18               15.2  HBEF  
+##  9  2003 Reference Low            8.11      7.13               18.4  HBEF  
+## 10  2003 Reference Low            3.02      3.44                9.60 HBEF  
+## # … with 349 more rows
 </pre></div>
 </div></div>
                     <p>
@@ -216,21 +212,19 @@
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 359 × 8
 ## # Rowwise: 
-##     year watershed elevation leaf1area leaf2area
-##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-##  1  2003 Reference Low           13.8      12.1 
-##  2  2003 Reference Low           14.6      15.3 
-##  3  2003 Reference Low           12.5       9.73
-##  4  2003 Reference Low            9.97     10.1 
-##  5  2003 Reference Low            6.84      5.48
-##  6  2003 Reference Low            9.66      7.64
-##  7  2003 Reference Low            8.82      9.23
-##  8  2003 Reference Low            5.83      6.18
-##  9  2003 Reference Low            8.11      7.13
-## 10  2003 Reference Low            3.02      3.44
-## # … with 349 more rows, and 3 more variables:
-## #   corrected_leaf_area &lt;dbl&gt;, forest &lt;chr&gt;,
-## #   mean_area &lt;dbl&gt;
+##     year watershed elevation leaf1area leaf2area corrected_leaf_area forest mean_area
+##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;               &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1  2003 Reference Low           13.8      12.1                29.1  HBEF       13.0 
+##  2  2003 Reference Low           14.6      15.3                33.0  HBEF       14.9 
+##  3  2003 Reference Low           12.5       9.73               25.3  HBEF       11.1 
+##  4  2003 Reference Low            9.97     10.1                23.2  HBEF       10.0 
+##  5  2003 Reference Low            6.84      5.48               15.5  HBEF        6.16
+##  6  2003 Reference Low            9.66      7.64               20.4  HBEF        8.65
+##  7  2003 Reference Low            8.82      9.23               21.2  HBEF        9.03
+##  8  2003 Reference Low            5.83      6.18               15.2  HBEF        6.01
+##  9  2003 Reference Low            8.11      7.13               18.4  HBEF        7.62
+## 10  2003 Reference Low            3.02      3.44                9.60 HBEF        3.23
+## # … with 349 more rows
 </pre></div>
 </div></div>
                         <p>
@@ -329,22 +323,19 @@
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 359 × 11
 ## # Rowwise: 
-##     year watershed elevation leaf1area leaf2area
-##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-##  1  2003 Reference Low           13.8      12.1 
-##  2  2003 Reference Low           14.6      15.3 
-##  3  2003 Reference Low           12.5       9.73
-##  4  2003 Reference Low            9.97     10.1 
-##  5  2003 Reference Low            6.84      5.48
-##  6  2003 Reference Low            9.66      7.64
-##  7  2003 Reference Low            8.82      9.23
-##  8  2003 Reference Low            5.83      6.18
-##  9  2003 Reference Low            8.11      7.13
-## 10  2003 Reference Low            3.02      3.44
-## # … with 349 more rows, and 6 more variables:
-## #   corrected_leaf_area &lt;dbl&gt;, forest &lt;chr&gt;,
-## #   mean_area &lt;dbl&gt;, corrected_mean_ratio &lt;dbl&gt;,
-## #   corrected_above_below &lt;fct&gt;, group &lt;fct&gt;
+##     year watershed elevation leaf1area leaf2area corrected_leaf_area forest mean_area corrected_mean_…
+##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;               &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;            &lt;dbl&gt;
+##  1  2003 Reference Low           13.8      12.1                29.1  HBEF       13.0             0.446
+##  2  2003 Reference Low           14.6      15.3                33.0  HBEF       14.9             0.452
+##  3  2003 Reference Low           12.5       9.73               25.3  HBEF       11.1             0.438
+##  4  2003 Reference Low            9.97     10.1                23.2  HBEF       10.0             0.432
+##  5  2003 Reference Low            6.84      5.48               15.5  HBEF        6.16            0.399
+##  6  2003 Reference Low            9.66      7.64               20.4  HBEF        8.65            0.423
+##  7  2003 Reference Low            8.82      9.23               21.2  HBEF        9.03            0.426
+##  8  2003 Reference Low            5.83      6.18               15.2  HBEF        6.01            0.396
+##  9  2003 Reference Low            8.11      7.13               18.4  HBEF        7.62            0.415
+## 10  2003 Reference Low            3.02      3.44                9.60 HBEF        3.23            0.337
+## # … with 349 more rows, and 2 more variables: corrected_above_below &lt;fct&gt;, group &lt;fct&gt;
 </pre></div>
 </div></div>
                         <p>
@@ -353,10 +344,10 @@
 <div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">group)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
-## 2003_Reference_Low 2003_Reference_Mid        2003_W1_Low 
-##                 60                 60                 60 
-##        2003_W1_Mid  2004_Reference_NA         2004_W1_NA 
-##                 60                 59                 60
+## 2003_Reference_Low 2003_Reference_Mid        2003_W1_Low        2003_W1_Mid  2004_Reference_NA 
+##                 60                 60                 60                 60                 59 
+##         2004_W1_NA 
+##                 60
 </pre></div>
 </div></div>
                         <p>

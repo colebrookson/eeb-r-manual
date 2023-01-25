@@ -154,20 +154,19 @@
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 11,171 × 7
 ## # Rowwise: 
-##    date       station              mean_airtemp daily_precip
-##    &lt;date&gt;     &lt;chr&gt;                       &lt;dbl&gt;        &lt;dbl&gt;
-##  1 1988-06-01 Toolik Field Station          8.4          0  
-##  2 1988-06-02 Toolik Field Station          6            0  
-##  3 1988-06-03 Toolik Field Station          5.8          0  
-##  4 1988-06-04 Toolik Field Station          1.8          0  
-##  5 1988-06-05 Toolik Field Station          6.8          2.5
-##  6 1988-06-06 Toolik Field Station          5.2          0  
-##  7 1988-06-07 Toolik Field Station          2.2          7.6
-##  8 1988-06-08 Toolik Field Station          9.4          0  
-##  9 1988-06-09 Toolik Field Station         13.1          0  
-## 10 1988-06-10 Toolik Field Station         17.7          0  
-## # … with 11,161 more rows, and 3 more variables:
-## #   mean_windspeed &lt;dbl&gt;, month &lt;dbl&gt;, year &lt;dbl&gt;
+##    date       station              mean_airtemp daily_precip mean_windspeed month  year
+##    &lt;date&gt;     &lt;chr&gt;                       &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 1988-06-01 Toolik Field Station          8.4          0             NA       6  1988
+##  2 1988-06-02 Toolik Field Station          6            0             NA       6  1988
+##  3 1988-06-03 Toolik Field Station          5.8          0             NA       6  1988
+##  4 1988-06-04 Toolik Field Station          1.8          0             NA       6  1988
+##  5 1988-06-05 Toolik Field Station          6.8          2.5           NA       6  1988
+##  6 1988-06-06 Toolik Field Station          5.2          0             NA       6  1988
+##  7 1988-06-07 Toolik Field Station          2.2          7.6           NA       6  1988
+##  8 1988-06-08 Toolik Field Station          9.4          0             NA       6  1988
+##  9 1988-06-09 Toolik Field Station         13.1          0             NA       6  1988
+## 10 1988-06-10 Toolik Field Station         17.7          0              3.9     6  1988
+## # … with 11,161 more rows
 </pre></div>
 </div></div>
                 <p>
@@ -185,11 +184,7 @@
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarize</span><span class="hl std">(</span>
     <span class="hl kwc">month_airtemp</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(mean_airtemp,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
   <span class="hl std">)</span>
-</pre></div>
-<div class="message"><pre class="knitr r">## `summarise()` has grouped output by 'year'. You can
-## override using the `.groups` argument.
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">df_monthly</span>
+<span class="hl std">df_monthly</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 367 × 3
 ## # Groups:   year [31]

@@ -144,10 +144,8 @@
 <span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">palmerpenguins</span><span class="hl opt">::</span><span class="hl std">penguins</span>
 <span class="hl kwd">names</span><span class="hl std">(df)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;species&quot;           &quot;island&quot;           
-## [3] &quot;bill_length_mm&quot;    &quot;bill_depth_mm&quot;    
-## [5] &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;      
-## [7] &quot;sex&quot;               &quot;year&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;species&quot;           &quot;island&quot;            &quot;bill_length_mm&quot;    &quot;bill_depth_mm&quot;    
+## [5] &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;       &quot;sex&quot;               &quot;year&quot;
 </pre></div>
 </div></div>
       <p>
@@ -223,13 +221,10 @@
 <span class="hl com"># plot qq-plots for each one</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Adelie&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values
-## (stat_qq).
+<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values
-## (stat_qq_line).
-## Removed 1 rows containing non-finite values
-## (stat_qq_line).
+<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq_line).
+## Removed 1 rows containing non-finite values (stat_qq_line).
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Chinstrap&quot;</span><span class="hl std">)</span>
@@ -238,10 +233,8 @@
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">bill_length_mm,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Gentoo&quot;</span><span class="hl std">)</span>
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
-## Removed 1 rows containing non-finite values
-## (stat_qq_line).
-## Removed 1 rows containing non-finite values
-## (stat_qq_line).
+## Removed 1 rows containing non-finite values (stat_qq_line).
+## Removed 1 rows containing non-finite values (stat_qq_line).
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-5-3.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
           <p>
@@ -278,13 +271,10 @@
 <div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># plot qq-plots for each one</span>
 <span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(adelie</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Adelie&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values
-## (stat_qq).
+<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values
-## (stat_qq_line).
-## Removed 1 rows containing non-finite values
-## (stat_qq_line).
+<div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq_line).
+## Removed 1 rows containing non-finite values (stat_qq_line).
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div><div class="rcode">
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(chin</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Chinstrap&quot;</span><span class="hl std">)</span>
@@ -293,10 +283,8 @@
 <div class="source"><pre class="knitr r"><span class="hl std">ggpubr</span><span class="hl opt">::</span><span class="hl kwd">ggqqplot</span><span class="hl std">(gentoo</span><span class="hl opt">$</span><span class="hl std">log_length,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Gentoo&quot;</span><span class="hl std">)</span>
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: Removed 1 rows containing non-finite values (stat_qq).
-## Removed 1 rows containing non-finite values
-## (stat_qq_line).
-## Removed 1 rows containing non-finite values
-## (stat_qq_line).
+## Removed 1 rows containing non-finite values (stat_qq_line).
+## Removed 1 rows containing non-finite values (stat_qq_line).
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-7-3.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
           <p>
@@ -342,8 +330,7 @@
 ## 	Bartlett test of homogeneity of variances
 ## 
 ## data:  log_length by species
-## Bartlett's K-squared = 0.80327, df = 2, p-value =
-## 0.6692
+## Bartlett's K-squared = 0.80327, df = 2, p-value = 0.6692
 </pre></div>
 </div></div>
           <p>
@@ -362,8 +349,7 @@
 ## species       2  3.846  1.9230   427.6 &lt;2e-16 ***
 ## Residuals   339  1.525  0.0045                   
 ## ---
-## Signif. codes:  
-## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 2 observations deleted due to missingness
 </pre></div>
 </div></div>
@@ -429,8 +415,7 @@
           <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl num">5.9</span><span class="hl std">,</span>
           <span class="hl kwc">label</span> <span class="hl std">=</span> <span class="hl str">&quot;p-value &lt;&lt; 0.001&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 2 rows containing non-finite values
-## (stat_density).
+<div class="warning"><pre class="knitr r">## Warning: Removed 2 rows containing non-finite values (stat_density).
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
         </section>

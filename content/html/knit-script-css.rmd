@@ -1,11 +1,34 @@
+---
+title: "Untitled"
+author: "Cole B. Brookson"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{css, echo=FALSE}
+.small-source, .small-output, .small-warning, .small-error, .small-message {
+  width: calc(70% - 2em);
+  height: auto;
+}
+```
+
+
+```{r setup}
 library(knitr)
 library(here)
 
-# knitr::opts_chunk$set(class.source = "small-source", 
-#                       class.output = "small-output", 
-#                       class.warning = "small-warning",
-#                       class.error = "small-error",
-#                       class.message = "small-message")
+knitr::opts_chunk$set(class.source = "small-source", 
+                      class.output = "small-output", 
+                      class.warning = "small-warning",
+                      class.error = "small-error",
+                      class.message = "small-message")
+```
+
+```{r}
+library(knitr)
+library(here)
+
+
 
 # 00 section ===================================================================
 files_00 <- list.files(here("./content/html/00-start/"), "\\.rhtml")
@@ -41,3 +64,5 @@ for (f in files_04)
   knit(paste0(here("./content/html/04-stats1/"), f), 
        sub("\\.rhtml$", ".html", 
            paste0(here("./content/html/04-stats1/"), f)))
+```
+

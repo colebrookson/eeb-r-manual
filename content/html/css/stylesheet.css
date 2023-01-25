@@ -523,3 +523,8 @@ font-weight: bold;
   margin: 5% 5% 5% 5%;
   font-size:calc(9px + 0.8vw);
 }
+
+.small-source, .small-output, .small-warning, .small-error, .small-message {
+  width: calc(70% - 2em);
+  height: auto;
+}

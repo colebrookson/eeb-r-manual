@@ -73,7 +73,7 @@
                 end.rcode-->
             
             <p>
-                Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <strong>must-haves</strong> to have a legible, complete plot. First step is the axis labels. <strong>Also note that units ALWAYS go on axis labels.</code> So to iteratively work up our plot, we'll add that one component on, by using the new function <code>labs()</code>:
+                Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <strong>must-haves</strong> to have a legible, complete plot. First step is the axis labels. <strong>Also note that units ALWAYS go on axis labels.</strong> So to iteratively work up our plot, we'll add that one component on, by using the new function <code>labs()</code>:
             </p>
 
                 <!--begin.rcode, warning=FALSE
@@ -259,10 +259,8 @@
                 labs(x = "Length (mm)", y = "Weight (g)") +
                 # note here we use `ggthemes::` to indicate which package we're using
                 ggthemes::theme_base() +
+                # one last step
                 scale_size_manual(values = c(4, 2, 2))
-                            <p>
-                One last step!
-            </p>
                 end.rcode-->
             <p>
 
@@ -301,10 +299,7 @@
                                         levels = c("Cutthroat trout", 
                                                 "Coastal giant salamander", 
                                                 "Cascade torrent salamander")))
-                )            <p>
-                One last step!
-            </p>
-
+                )         
                 end.rcode-->
             <p>
 
@@ -335,11 +330,11 @@
 
                 <!--begin.rcode, warning=FALSE
                 ggplot() +
-                geom_point(data = df_filtered %>% 
+                geom_point(data = (df_filtered %>% 
                             dplyr::arrange(factor(species, 
                                         levels = c("Cutthroat trout", 
                                                 "Coastal giant salamander", 
-                                                "Cascade torrent salamander"))),
+                                                "Cascade torrent salamander")))),
                             mapping = aes(x = length_1_mm, y = weight_g, 
                                         fill = species, size = species),
                             # here's where we'll add our colour etc
@@ -353,8 +348,9 @@
 
                 Ahh! Now we've run into a new problem. We have two legends! This is annoying. However, we can fix this, but first, let's choose different colours, these are not my favourite. We can do that (in this case) with <code>scale_fill_manual()</code>. We use the <code>fill</code> because the colour for all the points is <em>black</em> since it refers to the outer border of the points. 
             </p>
-
+            <p>
                 <strong>SIDE NOTE: Note that when making figures, when possible, choose colours that if printed in black and white are still differentiable, and that also are distinguishable for colour blind people.</strong>
+            </p>
             <p>
 
                 Also, note that often the easiest way to add in specific colours (if you're only using a handful of specific ones like we are here) is to pass the RGB code for that colour. If you have never heard of RGB colours, essentially it's a code of alphanumeric characters that form a specific colour on the colourwheel. Learn more on <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB colours here</a>().
@@ -362,11 +358,11 @@
 
                 <!--begin.rcode, warning=FALSE
                 ggplot() +
-                geom_point(data = df_filtered %>% 
+                geom_point(data = (df_filtered %>% 
                             dplyr::arrange(factor(species, 
                                         levels = c("Cutthroat trout", 
                                                 "Coastal giant salamander", 
-                                                "Cascade torrent salamander"))),
+                                                "Cascade torrent salamander")))),
                             mapping = aes(x = length_1_mm, y = weight_g, 
                                         fill = species, size = species),
                             # here's where we'll add our colour etc
@@ -398,11 +394,11 @@
             </p>
                 <!--begin.rcode, warning=FALSE
                 ggplot() +
-                geom_point(data = df_filtered %>% 
+                geom_point(data = (df_filtered %>% 
                             dplyr::arrange(factor(species, 
                                         levels = c("Cutthroat trout", 
                                                 "Coastal giant salamander", 
-                                                "Cascade torrent salamander"))),
+                                                "Cascade torrent salamander")))),
                             mapping = aes(x = length_1_mm, y = weight_g, 
                                         fill = species, size = species),
                             # here's where we'll add our colour etc
@@ -421,17 +417,11 @@
             </p>
                 <!--begin.rcode, warning=FALSE
                 ggplot() +
-                geom_point(data = df_filtered %>% 
-                              <style type="text/css">
-      .source, .output, .warning, .error, .message {
-        padding: 0 1em;
-        border:solid 1px #F7F7F7;
-        width: calc(70% - 2em);
-      }
-    </style>  dplyr::arrange(factor(species, 
+                geom_point(data = (df_filtered %>% 
+                               dplyr::arrange(factor(species, 
                                         levels = c("Cutthroat trout", 
                                                 "Coastal giant salamander", 
-                                                "Cascade torrent salamander"))),
+                                                "Cascade torrent salamander")))),
                             mapping = aes(x = length_1_mm, y = weight_g, 
                                         fill = species, size = species),
                             # here's where we'll add our colour etc
@@ -451,11 +441,11 @@
             </p>    
                 <!--begin.rcode, warning=FALSE
                 ggplot() +
-                geom_point(data = df_filtered %>% 
+                geom_point(data = (df_filtered %>% 
                             dplyr::arrange(factor(species, 
                                         levels = c("Cutthroat trout", 
                                                 "Coastal giant salamander", 
-                                                "Cascade torrent salamander"))),
+                                                "Cascade torrent salamander")))),
                             mapping = aes(x = length_1_mm, y = weight_g, 
                                         fill = species, size = species),
                             # here's where we'll add our colour etc

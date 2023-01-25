@@ -154,8 +154,7 @@
       </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1.5</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] 5.406137 5.861233 4.518088 5.941602 5.591381 5.934113
-##  [7] 5.473442 3.436070 5.113442 4.473862
+<div class="output"><pre class="knitr r">##  [1] 5.621785 4.287922 5.098990 4.246283 3.761002 5.250484 3.655603 5.252278 5.532452 4.921842
 </pre></div>
 </div></div>
       <p>
@@ -355,18 +354,16 @@
 <span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   
-## 1  1987 MACKCC-L CC      L         1       1 R       
-## 2  1987 MACKCC-L CC      L         1       1 R       
-## 3  1987 MACKCC-L CC      L         1       1 R       
-## 4  1987 MACKCC-L CC      L         1       1 R       
-## 5  1987 MACKCC-L CC      L         1       1 R       
-## 6  1987 MACKCC-L CC      L         1       1 R       
-## # … with 9 more variables: vert_index &lt;dbl&gt;,
-## #   pitnumber &lt;dbl&gt;, species &lt;chr&gt;, length_1_mm &lt;dbl&gt;,
-## #   length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;,
-## #   sampledate &lt;date&gt;, notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species         length_1_mm
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
+## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat trout          58
+## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat trout          61
+## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat trout          89
+## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat trout          58
+## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat trout          93
+## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat trout          86
+## # … with 5 more variables: length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;,
+## #   notes &lt;chr&gt;
 </pre></div>
 </div></div>
         <p>
@@ -394,11 +391,9 @@
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Cutthroat Trout Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Density&quot;</span><span class="hl std">)</span>
 </pre></div>
-<div class="message"><pre class="knitr r">## `stat_bin()` using `bins = 30`. Pick better value with
-## `binwidth`.
+<div class="message"><pre class="knitr r">## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 17 rows containing non-finite values
-## (stat_bin).
+<div class="warning"><pre class="knitr r">## Warning: Removed 17 rows containing non-finite values (stat_bin).
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
       <p>

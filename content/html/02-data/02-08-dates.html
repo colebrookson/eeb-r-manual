@@ -123,15 +123,14 @@
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 5
-##   date       station              mean_airtemp daily_precip
-##   &lt;date&gt;     &lt;chr&gt;                       &lt;dbl&gt;        &lt;dbl&gt;
-## 1 1988-06-01 Toolik Field Station          8.4          0  
-## 2 1988-06-02 Toolik Field Station          6            0  
-## 3 1988-06-03 Toolik Field Station          5.8          0  
-## 4 1988-06-04 Toolik Field Station          1.8          0  
-## 5 1988-06-05 Toolik Field Station          6.8          2.5
-## 6 1988-06-06 Toolik Field Station          5.2          0  
-## # … with 1 more variable: mean_windspeed &lt;dbl&gt;
+##   date       station              mean_airtemp daily_precip mean_windspeed
+##   &lt;date&gt;     &lt;chr&gt;                       &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt;
+## 1 1988-06-01 Toolik Field Station          8.4          0               NA
+## 2 1988-06-02 Toolik Field Station          6            0               NA
+## 3 1988-06-03 Toolik Field Station          5.8          0               NA
+## 4 1988-06-04 Toolik Field Station          1.8          0               NA
+## 5 1988-06-05 Toolik Field Station          6.8          2.5             NA
+## 6 1988-06-06 Toolik Field Station          5.2          0               NA
 </pre></div>
 </div></div>
                 <p>
@@ -159,27 +158,32 @@
                 <p>
                 And we see that this worked! So the way we probably use this the most often is to make new columns in a dataframe. Let's go ahead and make a new column each for year, month, week, and day in our <code>df</code> dataframe:
                 </p>
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r">df %&gt;%
-# since we want lubridate to work with each row individually, use <span class="hl kwd">rowwise</span>()
-dplyr::<span class="hl kwd">rowwise</span>() %&gt;% 
-# we use <span class="hl kwd">mutate</span>() to make a new column
-dplyr::<span class="hl kwd">mutate</span>(
-    year = lubridate::<span class="hl kwd">year</span>(date),
-    month = lubridate::<span class="hl kwd">month</span>(date),
-    week = lubridate::<span class="hl kwd">week</span>(date), 
-    day = lubridate::<span class="hl kwd">day</span>(date)
-   &lt;style type=<span class="hl str">&quot;text/css&quot;</span>&gt;
-      .source, .output, .warning, .error, .message {
-        padding: 0 1em;
-        border:solid 1px <span class="hl com">#F7F7F7;</span>
-        width: <span class="hl kwd">calc</span>(70% - 2em);
-      }
-    &lt;/style&gt; )
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
+<span class="hl com"># since we want lubridate to work with each row individually, use rowwise()</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>
+<span class="hl com"># we use mutate() to make a new column</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">mutate</span><span class="hl std">(</span>
+    <span class="hl kwc">year</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">year</span><span class="hl std">(date),</span>
+    <span class="hl kwc">month</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">month</span><span class="hl std">(date),</span>
+    <span class="hl kwc">week</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">week</span><span class="hl std">(date),</span>
+    <span class="hl kwc">day</span> <span class="hl std">= lubridate</span><span class="hl opt">::</span><span class="hl kwd">day</span><span class="hl std">(date)</span>
+<span class="hl std">)</span>
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: &lt;text&gt;:10:11: unexpected symbol
-## 9:     day = lubridate::day(date)
-## 10:    &lt;style type
-##               ^
+<div class="output"><pre class="knitr r">## # A tibble: 11,171 × 9
+## # Rowwise: 
+##    date       station              mean_airtemp daily_precip mean_windspeed  year month  week   day
+##    &lt;date&gt;     &lt;chr&gt;                       &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+##  1 1988-06-01 Toolik Field Station          8.4          0             NA    1988     6    22     1
+##  2 1988-06-02 Toolik Field Station          6            0             NA    1988     6    22     2
+##  3 1988-06-03 Toolik Field Station          5.8          0             NA    1988     6    23     3
+##  4 1988-06-04 Toolik Field Station          1.8          0             NA    1988     6    23     4
+##  5 1988-06-05 Toolik Field Station          6.8          2.5           NA    1988     6    23     5
+##  6 1988-06-06 Toolik Field Station          5.2          0             NA    1988     6    23     6
+##  7 1988-06-07 Toolik Field Station          2.2          7.6           NA    1988     6    23     7
+##  8 1988-06-08 Toolik Field Station          9.4          0             NA    1988     6    23     8
+##  9 1988-06-09 Toolik Field Station         13.1          0             NA    1988     6    23     9
+## 10 1988-06-10 Toolik Field Station         17.7          0              3.9  1988     6    24    10
+## # … with 11,161 more rows
 </pre></div>
 </div></div>
                 <p>
@@ -212,12 +216,12 @@ dplyr::<span class="hl kwd">mutate</span>(
 <span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   year month observation day
-## 1 2011     7        13.5   1
-## 2 2018     2        12.5   1
-## 3 2010     9        15.5   1
-## 4 2019     6        12.5   1
-## 5 2013     3        14.5   1
-## 6 2012    11        13.5   1
+## 1 2020     6        15.5   1
+## 2 2018     3        16.5   1
+## 3 2020    12        16.5   1
+## 4 2015     4        15.5   1
+## 5 2014     9        12.5   1
+## 6 2011     5        14.5   1
 </pre></div>
 </div></div>
                 <p>
@@ -234,12 +238,12 @@ dplyr::<span class="hl kwd">mutate</span>(
 ## # Rowwise: 
 ##    year month observation   day date      
 ##   &lt;int&gt; &lt;int&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;    
-## 1  2011     7        13.5     1 2011-07-01
-## 2  2018     2        12.5     1 2018-02-01
-## 3  2010     9        15.5     1 2010-09-01
-## 4  2019     6        12.5     1 2019-06-01
-## 5  2013     3        14.5     1 2013-03-01
-## 6  2012    11        13.5     1 2012-11-01
+## 1  2020     6        15.5     1 2020-06-01
+## 2  2018     3        16.5     1 2018-03-01
+## 3  2020    12        16.5     1 2020-12-01
+## 4  2015     4        15.5     1 2015-04-01
+## 5  2014     9        12.5     1 2014-09-01
+## 6  2011     5        14.5     1 2011-05-01
 </pre></div>
 </div></div>
                 <p>
