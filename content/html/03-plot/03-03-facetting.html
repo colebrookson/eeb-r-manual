@@ -109,22 +109,20 @@
 <span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
 
 <span class="hl std">df</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lterdatasampler</span><span class="hl opt">::</span><span class="hl std">luq_streamchem</span>
-<span class="hl std">df</span>
+<span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## # A tibble: 317 × 22
-##    sample_id sample_date gage_ht  temp   p_h  cond    cl no3_n so4_s    na     k    mg    ca nh4_n
-##    &lt;chr&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 QS        1987-01-05     2.82    20  7.22  48.2   7.3    97  0.52  4.75  0.18  1.5   2.46    14
-##  2 QS        1987-01-13     2.66    20  7.34  49.8   7.5   114  0.73  4.81  0.19  1.58  6.53    20
-##  3 QS        1987-01-20     2.61    20  7.12  50.3   7.5   115 NA     5.19  0.2   1.66  2.6     25
-##  4 QS        1987-01-27     2.58    20  7.19  50.4   7.3   117 NA     5.08  0.18  1.64  2.67    30
-##  5 QS        1987-02-03     2.8     20  7.36  49.6   7.3   103  0.85  4.86  0.17  1.49  2.39    25
-##  6 QS        1987-02-10     2.63    20  7.19  53.3   7.2   110 NA     5.11  0.18  1.59  2.55    30
-##  7 QS        1987-02-17     2.84    20 NA     43.7   7      94 NA     4.8   0.17  1.44  2.33     7
-##  8 QS        1987-02-24     2.68    19  6.93  48.4   7.3    90 NA     5.08  0.18  1.6   2.48     6
-##  9 QS        1987-03-03     2.76    20  7.02  48.4   7.6    86 NA     4.9   0.2   1.64  2.55    NA
-## 10 QS        1987-03-10     2.64    20  7.17  49.9   7.3    97 NA     4.89  0.2   1.51  2.81    NA
-## # … with 307 more rows, and 8 more variables: po4_p &lt;dbl&gt;, doc &lt;dbl&gt;, dic &lt;dbl&gt;, tdn &lt;dbl&gt;,
+<div class="output"><pre class="knitr r">## # A tibble: 6 × 22
+##   sample_id sample_date gage_ht  temp   p_h  cond    cl
+##   &lt;chr&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 QS        1987-01-05     2.82    20  7.22  48.2   7.3
+## 2 QS        1987-01-13     2.66    20  7.34  49.8   7.5
+## 3 QS        1987-01-20     2.61    20  7.12  50.3   7.5
+## 4 QS        1987-01-27     2.58    20  7.19  50.4   7.3
+## 5 QS        1987-02-03     2.8     20  7.36  49.6   7.3
+## 6 QS        1987-02-10     2.63    20  7.19  53.3   7.2
+## # … with 15 more variables: no3_n &lt;dbl&gt;, so4_s &lt;dbl&gt;,
+## #   na &lt;dbl&gt;, k &lt;dbl&gt;, mg &lt;dbl&gt;, ca &lt;dbl&gt;, nh4_n &lt;dbl&gt;,
+## #   po4_p &lt;dbl&gt;, doc &lt;dbl&gt;, dic &lt;dbl&gt;, tdn &lt;dbl&gt;,
 ## #   tdp &lt;dbl&gt;, si_o2 &lt;dbl&gt;, don &lt;dbl&gt;, tss &lt;dbl&gt;
 </pre></div>
 </div></div>
@@ -164,6 +162,15 @@
 ## # … with 624 more rows
 </pre></div>
 </div></div>
+                <div class="text-box"> 
+                  <h4>Stream Chemicals</h4> 
+                  <img src="../img/03-img/luq_streamchem_img.jpeg" class="img-text-box"> 
+                  <p class="p-text-box">Stream chemistry is an important indicator of ecosystem health. In our example, we consider long term stream chemistry data from a stream in a protected forest, Luquillo Experimental Forest, in Puerto Rico. However, stream chemistry is of interest closer to home too!</p>
+                  <img src="../img/03-img/rachel-chelsea.png" class="img-text-box">
+                  <p class="p-text-box">
+                      PhD Candidate Rachel Giles, in <a href="https://rochmanlab.wordpress.com/people/">Dr. Chelsea Rochman's lab</a> in the EEB department, is investigating how anthropogenic contaminants including road salt impact wildlife in urban streams in Toronto, ON. Stream chemistry is a valuable and important consideration of stream health both in remote intact forests, as well as in busy metropolises. 
+                  </p>
+              </div>
                 <p>
                 Perfect! We will also want to pull out the month and year values as columns since it will be month we'll use to group by in our plots.
                 </p>

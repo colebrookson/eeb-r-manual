@@ -159,7 +159,7 @@
       </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">stats</span><span class="hl opt">::</span><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mean</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl kwc">sd</span> <span class="hl std">=</span> <span class="hl num">1.5</span><span class="hl std">)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] 5.047558 3.409641 4.265672 8.445489 4.473216 5.489914 7.203750 6.726025 4.709118 5.200728
+<div class="output"><pre class="knitr r">##  [1] 2.012703 4.735336 7.774550 1.796493 2.102768 4.735893 5.427244 4.673579 4.225146 3.122918
 </pre></div>
 </div></div>
       <p>
@@ -359,16 +359,14 @@
 <span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 16
-##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species        length_1_mm
-##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
-## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat tro…          58
-## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat tro…          61
-## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat tro…          89
-## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat tro…          58
-## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat tro…          93
-## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat tro…          86
-## # … with 5 more variables: length_2_mm &lt;dbl&gt;, weight_g &lt;dbl&gt;, clip &lt;chr&gt;, sampledate &lt;date&gt;,
-## #   notes &lt;chr&gt;
+##    year sitecode section reach  pass unitnum unittype vert_index pitnumber species         length_1_mm length_2_mm weight_g clip  sampledate notes
+##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;
+## 1  1987 MACKCC-L CC      L         1       1 R                 1        NA Cutthroat trout          58          NA     1.75 NONE  1987-10-07 &lt;NA&gt; 
+## 2  1987 MACKCC-L CC      L         1       1 R                 2        NA Cutthroat trout          61          NA     1.95 NONE  1987-10-07 &lt;NA&gt; 
+## 3  1987 MACKCC-L CC      L         1       1 R                 3        NA Cutthroat trout          89          NA     5.6  NONE  1987-10-07 &lt;NA&gt; 
+## 4  1987 MACKCC-L CC      L         1       1 R                 4        NA Cutthroat trout          58          NA     2.15 NONE  1987-10-07 &lt;NA&gt; 
+## 5  1987 MACKCC-L CC      L         1       1 R                 5        NA Cutthroat trout          93          NA     6.9  NONE  1987-10-07 &lt;NA&gt; 
+## 6  1987 MACKCC-L CC      L         1       1 R                 6        NA Cutthroat trout          86          NA     5.9  NONE  1987-10-07 &lt;NA&gt;
 </pre></div>
 </div></div>
         <p>
@@ -396,9 +394,12 @@
   <span class="hl std">ggthemes</span><span class="hl opt">::</span><span class="hl kwd">theme_base</span><span class="hl std">()</span> <span class="hl opt">+</span>
   <span class="hl kwd">labs</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl str">&quot;Cutthroat Trout Length (mm)&quot;</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl str">&quot;Density&quot;</span><span class="hl std">)</span>
 </pre></div>
+<div class="warning"><pre class="knitr r">## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+</pre></div>
 <div class="message"><pre class="knitr r">## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning: Removed 17 rows containing non-finite values (stat_bin).
+<div class="warning"><pre class="knitr r">## Warning: Removed 17 rows containing non-finite values (`stat_bin()`).
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
       <p>

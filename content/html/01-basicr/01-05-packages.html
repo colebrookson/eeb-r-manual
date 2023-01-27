@@ -137,7 +137,8 @@
           </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">library</span><span class="hl std">()</span>
 </pre></div>
-<div class="warning"><pre class="knitr r">## Warning in library(): libraries '/usr/local/lib/R/site-library', '/usr/lib/R/site-library' contain no packages
+<div class="warning"><pre class="knitr r">## Warning in library(): libraries '/usr/local/lib/R/site-library', '/
+## usr/lib/R/site-library' contain no packages
 </pre></div>
 </div></div>
           <p>
@@ -174,6 +175,17 @@
             As we discuss in the <a href="./01-06-workflow.html">workflow section</a>, it's best to call all the packages that you want to use at the top of your script. Why? Well, R works its way through a script from top to bottom. So if we try to use a function in a package before we've actually called it, we'll get an error. Let's load the <code>dplyr</code> package now:
           </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'dplyr'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
 </pre></div>
 </div></div>
           <p>
@@ -262,13 +274,6 @@
         </p>
 <div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
 </pre></div>
-<div class="message"><pre class="knitr r">## 
-## Attaching package: 'ggplot2'
-</pre></div>
-<div class="message"><pre class="knitr r">## The following object is masked from 'package:dplyr':
-## 
-##     vars
-</pre></div>
 </div></div>
         <p>
           Now that the package is loaded, let's take a look at the main function in this package: <code>ggplot()</code>
@@ -276,6 +281,13 @@
 <div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl opt">?</span><span class="hl std">ggplot</span>
 </pre></div>
 </div></div>
+        <p>
+          If you do this in RStudio, the <a href="../00-start/00-02-navigating-rstudio.html">help window on the bottom right</a> will open up a help page that looks something like this:
+        </p>
+        <img src="../img/01-img/help-ggplot.png" style="max-width: 60%; height: auto;">
+        <p>
+          And if you scroll down, you'll see examples of this function at work. It's very important to get some sense for how a package/set of functions work <strong>before</strong> you use them with your own data, else you risk introducing errors that you will be unaware of, simply through unintentional misuse of the function. 
+        </p>
         </section>
       </section>
 <!-- End page content -->

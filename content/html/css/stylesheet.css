@@ -339,7 +339,7 @@ main > nav {
   padding-left: 10px;
   padding-right: 2em;
   border-left: 1px solid #efefef;
-  font-size:calc(12px + 0.8vw);
+  font-size:calc(9px + 0.6vw);
   
 }
 
@@ -391,7 +391,7 @@ main {
   grid-template-columns: 15em 1fr;
   margin: 1em auto;
   width: 100em;
-  font-size:calc(12px + 0.8vw); 
+  max-width: calc(100% - 2em); 
 }
 main_landing {
   display: grid;
@@ -404,7 +404,7 @@ code {
   color: crimson;
   background-color: #f1f1f1;
   padding: 2px;
-  font-size:calc(12px + 0.8vw);
+  font-size:calc(12px + 0.7vw);
 }
 
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
@@ -523,13 +523,25 @@ font-weight: bold;
   background-color: #a8d6e9;
   padding: 2px;
   margin: 5% 5% 5% 5%;
-  font-size:calc(7px + 0.8vw);
+  font-size:calc(7px + 0.7vw);
 }
 
-.source, .output, .warning, .error, .message {
-  width: calc(70% - 2em);
+.img-text-box {
+  width: calc(100% - 2em); 
   height: auto;
-  font-size:calc(12px + 0.8vw);
+  border:2px solid #000;
+  display: block;
+  margin: auto;
+}
+
+.source, .output, .error, .message {
+  width: calc(70% - 2em);
+  overflow-wrap: break-word;
+}
+
+.warning {
+  font-size:calc(2px + 0.6vw);
+  width: calc(70% - 2em);
 }
 
 .text-figcaption {

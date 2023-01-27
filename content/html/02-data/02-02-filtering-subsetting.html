@@ -122,14 +122,17 @@
         <h3>Filter Based on Single Value</h3>
         <div class="text-box"> 
           <h4>The<code class="code-text-box">::</code> Operator</h4> 
-          <p class="p-text-box">Why have we written <code class="code-text-box">lterdatasampler::pie_crab</code> here? Writing the package name and the <code class="code-text-box">::</code> operation tells R which <a href="../01-basicr/01-05-packages.html">namespace</a> to look in for the object we're trying to use during our assignment statement!</p>
+          <p class="p-text-box">Why have we written <code class="code-text-box">lterdatasampler:: pie_crab</code> here? Writing the package name and the <code class="code-text-box">::</code> operation tells R which <a href="../01-basicr/01-05-packages.html">namespace</a> to look in for the object we're trying to use during our assignment statement!</p>
         </div>
         <p>
             We will use an example dataset here: 
         </p>
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># remotes package is needed to get the most recent version of the package</span>
 <span class="hl kwd">install.packages</span><span class="hl std">(</span><span class="hl str">&quot;remotes&quot;</span><span class="hl std">)</span>
-<span class="hl com"># install package</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## Error in install.packages : Updating loaded packages
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># install package</span>
 <span class="hl std">remotes</span><span class="hl opt">::</span><span class="hl kwd">install_github</span><span class="hl std">(</span><span class="hl str">&quot;lter/lterdatasampler&quot;</span><span class="hl std">)</span>
 
 <span class="hl kwd">library</span><span class="hl std">(lterdatasampler)</span>
@@ -144,21 +147,19 @@
 </pre></div>
 </div></div>
             <p>
-              
             Let's look at the columns
             </p>
-<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># this will show us the first six rows</span>
-<span class="hl kwd">head</span><span class="hl std">(crabs)</span>
+            <div class="text-box"> 
+              <h4>Fiddler Crabs</h4> 
+              <img src="../img/02-img/pie_landscape_img.jpg" class="img-text-box">
+              <p class="p-text-box">The Atlantic marsh fiddler crab (<em>Minuca pugnax</em>) can be found along the Eastern seaboard of the United States, from Florida, up into the North East. They are found in salt marshes, and have been documented as moving further north with climate change and warming habitats. The data on these particular crabs in our example dataset comes from the Plum Island Long Term Ecological Research Site in Massechusetts.</p>
+            </div>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># this will show us the names of the different columns</span>
+<span class="hl kwd">names</span><span class="hl std">(crabs)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## # A tibble: 6 × 9
-##   date       latitude site   size air_temp air_temp_sd water_temp water_temp_sd name                 
-##   &lt;date&gt;        &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;                
-## 1 2016-07-24       30 GTM    12.4     21.8        6.39       24.5          6.12 Guana Tolomoto Matan…
-## 2 2016-07-24       30 GTM    14.2     21.8        6.39       24.5          6.12 Guana Tolomoto Matan…
-## 3 2016-07-24       30 GTM    14.5     21.8        6.39       24.5          6.12 Guana Tolomoto Matan…
-## 4 2016-07-24       30 GTM    12.9     21.8        6.39       24.5          6.12 Guana Tolomoto Matan…
-## 5 2016-07-24       30 GTM    12.4     21.8        6.39       24.5          6.12 Guana Tolomoto Matan…
-## 6 2016-07-24       30 GTM    13.0     21.8        6.39       24.5          6.12 Guana Tolomoto Matan…
+<div class="output"><pre class="knitr r">## [1] &quot;date&quot;          &quot;latitude&quot;      &quot;site&quot;         
+## [4] &quot;size&quot;          &quot;air_temp&quot;      &quot;air_temp_sd&quot;  
+## [7] &quot;water_temp&quot;    &quot;water_temp_sd&quot; &quot;name&quot;
 </pre></div>
 </div></div>
             <p>
@@ -166,7 +167,8 @@
             </p>
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(crabs</span><span class="hl opt">$</span><span class="hl std">site)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  [1] &quot;GTM&quot; &quot;SI&quot;  &quot;NIB&quot; &quot;ZI&quot;  &quot;RC&quot;  &quot;VCR&quot; &quot;DB&quot;  &quot;JC&quot;  &quot;CT&quot;  &quot;NB&quot;  &quot;CC&quot;  &quot;BC&quot;  &quot;PIE&quot;
+<div class="output"><pre class="knitr r">##  [1] &quot;GTM&quot; &quot;SI&quot;  &quot;NIB&quot; &quot;ZI&quot;  &quot;RC&quot;  &quot;VCR&quot; &quot;DB&quot;  &quot;JC&quot;  &quot;CT&quot;  &quot;NB&quot; 
+## [11] &quot;CC&quot;  &quot;BC&quot;  &quot;PIE&quot;
 </pre></div>
 </div></div>
             <p>
@@ -176,19 +178,19 @@
             <h5><strong>base R</strong></h5>
             <p>
                 Filtering in base R makes use of the square bracket indexing discussed elsewhere. Recall that the index goes [<em>row, column</em>]. In the <em>row</em> position, we use the <code>which()</code> function, which simply returns where some indices are TRUE. Since we want to keep all the columns in our dataset, we leave the <code>column</code> position empty, indicating that all columns should be retained. In our example that looks like this: 
-                <br>
+            </p>
 <div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">vcr_crabs</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crabs[</span><span class="hl kwd">which</span><span class="hl std">(crabs</span><span class="hl opt">$</span><span class="hl std">site</span> <span class="hl opt">==</span> <span class="hl str">&quot;VCR&quot;</span><span class="hl std">),]</span>
 </pre></div>
 </div></div>
-                <br>
+            <p>
                 We can check it worked by calling <code>unique()</code> on the new dataframe as above:
-                <br>
+            </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(vcr_crabs</span><span class="hl opt">$</span><span class="hl std">site)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;VCR&quot;
 </pre></div>
 </div></div>
-                <br>
+            <p>
                 And we can see it worked as expected.
             </p>
         </section>
@@ -235,9 +237,11 @@
       <section id="filter--multiple">
         <p>
             This filtering can be extended to use multiple columns relatively simply. There is a variable in this dataset called size. 
+        </p>
 <div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(crabs</span><span class="hl opt">$</span><span class="hl std">size)</span>
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
+        <p>
             We may want to filter crabs only in our focal sites, but also those above some size (e.g. 15).
         </p>
         <h5><strong>base R</strong></h5>
@@ -253,15 +257,15 @@
         <p>
         We can always use multiple pipes as well to chain commands together, even if they use the same function. For example, we could expand the above example into two <code>filter()</code> commands if we wanted to: 
         </p>
-<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r">        <span class="hl std">site_size</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crabs</span> <span class="hl opt">%&gt;%</span>
-        <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(site</span> <span class="hl opt">%in%</span> <span class="hl std">focal_sites)</span> <span class="hl opt">%&gt;%</span>
-        <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(size</span> <span class="hl opt">&gt;</span> <span class="hl num">15</span><span class="hl std">)</span>
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">site_size</span> <span class="hl kwb">&lt;-</span> <span class="hl std">crabs</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(site</span> <span class="hl opt">%in%</span> <span class="hl std">focal_sites)</span> <span class="hl opt">%&gt;%</span>
+<span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">filter</span><span class="hl std">(size</span> <span class="hl opt">&gt;</span> <span class="hl num">15</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
         <hr>
         <p>
             Here we just use another logical operator, <code>&amp;</code> to link our two conditions together. We can double check:
-            <br>
+        </p>
 <div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(site_size</span><span class="hl opt">$</span><span class="hl std">size)</span>
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" class="plot" /></div><div class="rcode">
@@ -270,7 +274,7 @@
 <div class="output"><pre class="knitr r">## [1] &quot;ZI&quot;  &quot;RC&quot;  &quot;VCR&quot; &quot;DB&quot;  &quot;JC&quot;
 </pre></div>
 </div></div>
-            <br>
+        <p>
             So we can see it worked well. 
         </p>
       </section>
@@ -294,8 +298,13 @@
 </pre></div>
 </div></div>
             We can see already that there will be some values of <code>ice_duration</code> that will have values of <em>NA</em>. 
-            </p>
-            <p>
+        </p>
+        <div class="text-box"> 
+          <h4>Ice Cover</h4> 
+          <img src="../img/02-img/ice.png" class="img-text-box">
+          <p class="p-text-box">When we think of climate change, we're often treated to news media of melting glaciers or ice caps at the poles. However, reduction of ice cover is not unique to those environments, and in fact, many lake ecosystems rely on ice cover during the winter. Three lakes near Madison, WI, USA have been used for the monitoring of how climate change is possibly causing the change of ice cover duration in temperate lakes, and these data are the ones we use in this example. </p>
+        </div>
+        <p>
             If we're To filter those out of the dataset, we can use the <code>is.na()</code> function. This function can also be used along with the <code>any()</code> command to see if <em>any</em> of the values in our column of interest are NA values. This is useful for long dataframes that we can't see all the values for. Let's check out column <code>ice_duration</code> now: 
         </p>
 <div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">any</span><span class="hl std">(</span><span class="hl kwd">is.na</span><span class="hl std">(ice</span><span class="hl opt">$</span><span class="hl std">ice_duration))</span>

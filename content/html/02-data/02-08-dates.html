@@ -128,14 +128,14 @@
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 5
-##   date       station              mean_airtemp daily_precip mean_windspeed
-##   &lt;date&gt;     &lt;chr&gt;                       &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt;
-## 1 1988-06-01 Toolik Field Station          8.4          0               NA
-## 2 1988-06-02 Toolik Field Station          6            0               NA
-## 3 1988-06-03 Toolik Field Station          5.8          0               NA
-## 4 1988-06-04 Toolik Field Station          1.8          0               NA
-## 5 1988-06-05 Toolik Field Station          6.8          2.5             NA
-## 6 1988-06-06 Toolik Field Station          5.2          0               NA
+##   date       station      mean_airtemp daily_precip mean_windspeed
+##   &lt;date&gt;     &lt;chr&gt;               &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt;
+## 1 1988-06-01 Toolik Fiel…          8.4          0               NA
+## 2 1988-06-02 Toolik Fiel…          6            0               NA
+## 3 1988-06-03 Toolik Fiel…          5.8          0               NA
+## 4 1988-06-04 Toolik Fiel…          1.8          0               NA
+## 5 1988-06-05 Toolik Fiel…          6.8          2.5             NA
+## 6 1988-06-06 Toolik Fiel…          5.2          0               NA
 </pre></div>
 </div></div>
                 <p>
@@ -144,15 +144,7 @@
                 The best tool in our toolbox for this type of task is the <code>lubridate</code> package. This package has a ton of great functions that let us work with dates more easily. Let's test it out. Say we want to make a vector that has just all the years extracted from our date column. We could do that very easily like this with the <code>lubridate::year()</code> function:
                 </p>
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(lubridate)</span>
-</pre></div>
-<div class="message"><pre class="knitr r">## 
-## Attaching package: 'lubridate'
-</pre></div>
-<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
-## 
-##     date, intersect, setdiff, union
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl std">year</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lubridate</span><span class="hl opt">::</span><span class="hl kwd">year</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">date)</span>
+<span class="hl std">year</span> <span class="hl kwb">&lt;-</span> <span class="hl std">lubridate</span><span class="hl opt">::</span><span class="hl kwd">year</span><span class="hl std">(df</span><span class="hl opt">$</span><span class="hl std">date)</span>
 
 <span class="hl com"># print the first ten entries</span>
 <span class="hl std">year[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">10</span><span class="hl std">]</span>
@@ -176,19 +168,20 @@
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 11,171 × 9
 ## # Rowwise: 
-##    date       station              mean_airtemp daily_precip mean_windspeed  year month  week   day
-##    &lt;date&gt;     &lt;chr&gt;                       &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
-##  1 1988-06-01 Toolik Field Station          8.4          0             NA    1988     6    22     1
-##  2 1988-06-02 Toolik Field Station          6            0             NA    1988     6    22     2
-##  3 1988-06-03 Toolik Field Station          5.8          0             NA    1988     6    23     3
-##  4 1988-06-04 Toolik Field Station          1.8          0             NA    1988     6    23     4
-##  5 1988-06-05 Toolik Field Station          6.8          2.5           NA    1988     6    23     5
-##  6 1988-06-06 Toolik Field Station          5.2          0             NA    1988     6    23     6
-##  7 1988-06-07 Toolik Field Station          2.2          7.6           NA    1988     6    23     7
-##  8 1988-06-08 Toolik Field Station          9.4          0             NA    1988     6    23     8
-##  9 1988-06-09 Toolik Field Station         13.1          0             NA    1988     6    23     9
-## 10 1988-06-10 Toolik Field Station         17.7          0              3.9  1988     6    24    10
-## # … with 11,161 more rows
+##    date       station     mean_airtemp daily_precip mean_windspeed
+##    &lt;date&gt;     &lt;chr&gt;              &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt;
+##  1 1988-06-01 Toolik Fie…          8.4          0             NA  
+##  2 1988-06-02 Toolik Fie…          6            0             NA  
+##  3 1988-06-03 Toolik Fie…          5.8          0             NA  
+##  4 1988-06-04 Toolik Fie…          1.8          0             NA  
+##  5 1988-06-05 Toolik Fie…          6.8          2.5           NA  
+##  6 1988-06-06 Toolik Fie…          5.2          0             NA  
+##  7 1988-06-07 Toolik Fie…          2.2          7.6           NA  
+##  8 1988-06-08 Toolik Fie…          9.4          0             NA  
+##  9 1988-06-09 Toolik Fie…         13.1          0             NA  
+## 10 1988-06-10 Toolik Fie…         17.7          0              3.9
+## # … with 11,161 more rows, and 4 more variables: year &lt;dbl&gt;,
+## #   month &lt;dbl&gt;, week &lt;dbl&gt;, day &lt;int&gt;
 </pre></div>
 </div></div>
                 <p>
@@ -221,12 +214,12 @@
 <span class="hl kwd">head</span><span class="hl std">(df)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##   year month observation day
-## 1 2013     7        15.5   1
-## 2 2016     7        14.5   1
-## 3 2013     6        15.5   1
-## 4 2012     1        15.5   1
-## 5 2012    10        13.5   1
-## 6 2018     3        14.5   1
+## 1 2011    10        16.5   1
+## 2 2012     1        16.5   1
+## 3 2011     8        13.5   1
+## 4 2019     6        15.5   1
+## 5 2020     3        13.5   1
+## 6 2019     7        14.5   1
 </pre></div>
 </div></div>
                 <p>
@@ -243,12 +236,12 @@
 ## # Rowwise: 
 ##    year month observation   day date      
 ##   &lt;int&gt; &lt;int&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;    
-## 1  2013     7        15.5     1 2013-07-01
-## 2  2016     7        14.5     1 2016-07-01
-## 3  2013     6        15.5     1 2013-06-01
-## 4  2012     1        15.5     1 2012-01-01
-## 5  2012    10        13.5     1 2012-10-01
-## 6  2018     3        14.5     1 2018-03-01
+## 1  2011    10        16.5     1 2011-10-01
+## 2  2012     1        16.5     1 2012-01-01
+## 3  2011     8        13.5     1 2011-08-01
+## 4  2019     6        15.5     1 2019-06-01
+## 5  2020     3        13.5     1 2020-03-01
+## 6  2019     7        14.5     1 2019-07-01
 </pre></div>
 </div></div>
                 <p>

@@ -183,7 +183,8 @@
             Vectors, especially string vectors, can change depending on how they're created. For example, here we have two vectors that spell out the same sentence, but are not equivalent:
           </p>
 <div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">x</span>  <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;The quick brown fox jumped over the lazy dog&quot;</span><span class="hl std">)</span>
-  <span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;The&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;quick&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;brown&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;fox&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;jumped&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;over&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;the&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;lazy&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;dog&quot;</span><span class="hl std">)</span>
+  <span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;The&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;quick&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;brown&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;fox&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;jumped&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;over&quot;</span><span class="hl std">,</span>
+          <span class="hl str">&quot;the&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;lazy&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;dog&quot;</span><span class="hl std">)</span>
   <span class="hl std">x</span> <span class="hl opt">==</span> <span class="hl std">y</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -214,7 +215,8 @@
 <div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">y[</span><span class="hl num">9</span><span class="hl std">]</span> <span class="hl kwb">&lt;-</span> <span class="hl str">&quot;cat&quot;</span>
   <span class="hl std">y</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;The&quot;    &quot;quick&quot;  &quot;brown&quot;  &quot;fox&quot;    &quot;jumped&quot; &quot;over&quot;   &quot;the&quot;    &quot;lazy&quot;   &quot;cat&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;The&quot;    &quot;quick&quot;  &quot;brown&quot;  &quot;fox&quot;    &quot;jumped&quot; &quot;over&quot;   &quot;the&quot;   
+## [8] &quot;lazy&quot;   &quot;cat&quot;
 </pre></div>
 </div></div>
           <p>
@@ -252,10 +254,10 @@
             Instead of these numbers, we could name the list components. This is often handy for keeping data of variable lengths/types that can be related together. For example:
           </p>
 <div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">eeb_prof</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;name&quot;</span> <span class="hl std">=</span> <span class="hl str">&quot;Dr. Agrawal&quot;</span><span class="hl std">,</span>
-        <span class="hl str">&quot;positions&quot;</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Distinguished Professor of Evolutionary Genetics&quot;</span><span class="hl std">,</span>
-                        <span class="hl str">&quot;Associate Chair, Graduate Studies&quot;</span><span class="hl std">),</span>
-        <span class="hl str">&quot;concentrations&quot;</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Genetics, Genomics &amp; Molecular Evolution&quot;</span><span class="hl std">,</span>
-                              <span class="hl str">&quot;Theoretical &amp; Computational Biology&quot;</span><span class="hl std">))</span>
+      <span class="hl str">&quot;positions&quot;</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Distinguished Professor of Evolutionary Genetics&quot;</span><span class="hl std">,</span>
+              <span class="hl str">&quot;Associate Chair, Graduate Studies&quot;</span><span class="hl std">),</span>
+      <span class="hl str">&quot;concentrations&quot;</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Genetics, Genomics &amp; Molecular Evolution&quot;</span><span class="hl std">,</span>
+                    <span class="hl str">&quot;Theoretical &amp; Computational Biology&quot;</span><span class="hl std">))</span>
 
   <span class="hl std">eeb_prof</span>
 </pre></div>
@@ -263,10 +265,12 @@
 ## [1] &quot;Dr. Agrawal&quot;
 ## 
 ## $positions
-## [1] &quot;Distinguished Professor of Evolutionary Genetics&quot; &quot;Associate Chair, Graduate Studies&quot;               
+## [1] &quot;Distinguished Professor of Evolutionary Genetics&quot;
+## [2] &quot;Associate Chair, Graduate Studies&quot;               
 ## 
 ## $concentrations
-## [1] &quot;Genetics, Genomics &amp; Molecular Evolution&quot; &quot;Theoretical &amp; Computational Biology&quot;
+## [1] &quot;Genetics, Genomics &amp; Molecular Evolution&quot;
+## [2] &quot;Theoretical &amp; Computational Biology&quot;
 </pre></div>
 </div></div>
           <p>
@@ -302,11 +306,9 @@
 </pre></div>
 </div></div>
           <p>
-            Here we passed an atomic vector as the first argument to <code>matrix()</code>, and then the dimensions that we wanted to get for our matrix. Note that if the dimensions specified are not filled by the vector passed, an error will occur: 
+            Here we passed an atomic vector as the first argument to <code>matrix()</code>, and then the dimensions that we wanted to get for our matrix. Note that if the dimensions specified are not filled by the vector passed, an error will occur. Try running the following code in your R console and see what output you get: 
           </p>
 <div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">m</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">,</span> <span class="hl num">200</span><span class="hl std">,</span> <span class="hl num">300</span><span class="hl std">,</span> <span class="hl num">400</span><span class="hl std">),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span>
-</pre></div>
-<div class="warning"><pre class="knitr r">## Warning in matrix(c(100, 200, 300, 400), nrow = 3, ncol = 2): data length [4] is not a sub-multiple or multiple of the number of rows [3]
 </pre></div>
 </div></div>
           <p>
@@ -571,7 +573,9 @@
             </section>
             <section id="str--df--tib">
               <h5>Tibbles</h5>
-              Tibbles are useful to go over since a number of very common packages make heavy use of this data structure. A tibble is a "modern reimagining of the data.frame", they are very similar, but don't have some of the operations that data frames have. You can learn more <a href="https://tibble.tidyverse.org/">here</a> if you're interested
+              <p>
+                Tibbles are useful to go over since a number of very common packages make heavy use of this data structure. A tibble is a "modern reimagining of the data.frame", they are very similar, but don't have some of the operations that data frames have. You can learn more <a href="https://tibble.tidyverse.org/">here</a> if you're interested
+              </p>
             </section>
         </section>
         <section id="str--array">

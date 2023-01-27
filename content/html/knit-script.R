@@ -1,12 +1,13 @@
 library(knitr)
 library(here)
+library(formatR)
 
 # knitr::opts_chunk$set(class.source = "small-source", 
 #                       class.output = "small-output", 
 #                       class.warning = "small-warning",
 #                       class.error = "small-error",
 #                       class.message = "small-message")
-
+options(width = 70)
 # 00 section ===================================================================
 files_00 <- list.files(here("./content/html/00-start/"), "\\.rhtml")
 for (f in files_00)

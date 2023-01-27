@@ -112,14 +112,15 @@
 <span class="hl kwd">head</span><span class="hl std">(bison)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## # A tibble: 6 × 8
-##   data_code rec_year rec_month rec_day animal_code animal_sex animal_weight animal_yob
-##   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt;
-## 1 CBH01         1994        11       8 813         F                    890       1981
-## 2 CBH01         1994        11       8 834         F                   1074       1983
-## 3 CBH01         1994        11       8 B-301       F                   1060       1983
-## 4 CBH01         1994        11       8 B-402       F                    989       1984
-## 5 CBH01         1994        11       8 B-403       F                   1062       1984
-## 6 CBH01         1994        11       8 B-502       F                    978       1985
+##   data_code rec_year rec_month rec_day animal_code animal_sex
+##   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;     
+## 1 CBH01         1994        11       8 813         F         
+## 2 CBH01         1994        11       8 834         F         
+## 3 CBH01         1994        11       8 B-301       F         
+## 4 CBH01         1994        11       8 B-402       F         
+## 5 CBH01         1994        11       8 B-403       F         
+## 6 CBH01         1994        11       8 B-502       F         
+## # … with 2 more variables: animal_weight &lt;dbl&gt;, animal_yob &lt;dbl&gt;
 </pre></div>
 </div></div>
             <p>
@@ -127,13 +128,18 @@
             </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">str</span><span class="hl std">(bison</span><span class="hl opt">$</span><span class="hl std">animal_sex)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##  chr [1:8325] &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
+<div class="output"><pre class="knitr r">##  chr [1:8325] &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">unique</span><span class="hl std">(bison</span><span class="hl opt">$</span><span class="hl std">animal_sex)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## [1] &quot;F&quot; &quot;M&quot;
 </pre></div>
 </div></div>
+            <div class="text-box"> 
+                <h4>Plains Bison</h4> 
+                <img src="../img/02-img/knz_bison_img.jpg" class="img-text-box">
+                <p class="p-text-box">There are actually two subspecies of bison found in North America, the larger Wood bison (<em>Bison bison athabascae</em>), and the smaller Plains bison that we usually think of, (<em>Bison bison bison</em>). Males are often heavier than females, as this species engages in male-male competition for mate chioce behaviour. The data on organism size in this dataset comes from a long-term study system of a grassland ecosystem at the Konza Prairie Long-Term Ecological Research centre in northeastern Kansas.</p>
+            </div>
             <p>
             So there are two values, and the column is a character type. 
         </p>
@@ -188,7 +194,8 @@
 <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">summarize</span><span class="hl std">(</span><span class="hl kwc">mean_mass</span> <span class="hl std">=</span> <span class="hl kwd">mean</span><span class="hl std">(animal_weight,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">),</span>
                 <span class="hl kwc">std_dev</span> <span class="hl std">=</span> <span class="hl kwd">sd</span><span class="hl std">(animal_weight,</span> <span class="hl kwc">na.rm</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">))</span>
 </pre></div>
-<div class="message"><pre class="knitr r">## `summarise()` has grouped output by 'animal_sex'. You can override using the `.groups` argument.
+<div class="message"><pre class="knitr r">## `summarise()` has grouped output by 'animal_sex'. You can
+## override using the `.groups` argument.
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl std">month_sex_weight</span>
 </pre></div>

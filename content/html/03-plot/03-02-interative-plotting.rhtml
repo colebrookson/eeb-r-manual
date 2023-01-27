@@ -87,10 +87,10 @@
                 end.rcode-->
                 <div class="text-box"> 
                     <h4>Climate Change Sentinels</h4> 
-                    <img src="../img/03-img/salamander.jpg"> 
+                    <img src="../img/03-img/salamander.jpg" class="img-text-box"> 
                     <p class="p-text-box">Fish and Amphibians such as the ones in our example dataset, are often among the first taxa to be affected by distrbances to their ecosystems. While those in our example dataset are from a long-term study site in Oregon, USA, there is in fact a long-term ecological research program on amphibeans and other vertebrates in Algonquin Park, ON, run in part by EEB professor Dr. Njal Rollinson</p>
-                    <img src="../img/03-img/njal.jpg">
-                    <p>
+                    <img src="../img/03-img/njal.jpg" class="img-text-box">
+                    <p class="p-text-box">
                         The research performed in Algonquin park and at U of T, specifically tackles tough questions like the adaptive significance of ecotherm biology, and the effects anthropogenic change has on these organisms. 
                     </p>
                 </div>
@@ -405,7 +405,7 @@
             <p>
                 To change out legend position we'll use the theme argument <code>legend.position</code> and for the axis text we'll use the argument <code>axis.text.x</code>. So let's do that one at a time (in our theme of working iteratively!), starting with our previously existing plot, we'll add a call to theme, and then make out call to the <code>legend.position</code>. Now we want to make sure that our legend does <strong>not</strong> cover any of the actual data being plotted, so we will simply have to try and find a place to put it, and if we can't, content ourselves with it being outside of the plot box. The positioning of <code>legend.position</code> happens in two arguments, the first position being for the x-location, and the second for the y-location, with both of them representing proportions of the axis. Therefore, a value of <code>c(0.1, 0.1)</code> would put the legend in the bottom left corner. Let's try the bottom right corner. 
             </p>
-                <!--begin.rcode, warning=FALSE
+                <!--begin.rcode, warning=FALSE, eval=TRUE
                 ggplot() +
                 geom_point(data = (df_filtered %>% 
                             dplyr::arrange(factor(species, 
@@ -428,7 +428,7 @@
             <p>
                 That will work well enough for now! Let's move on to changing the orientation of the x-axis. This is most often required if you're plotting a time-series with years on the x-axis, as they will take up quite a bit of space if all displayed, so are rotated 90 degrees so they don't overlap. We don't have that here, however, we'll still rotate ours 90 degrees here for practice. 
             </p>
-                <!--begin.rcode, warning=FALSE
+                <!--begin.rcode, warning=FALSE, eval=TRUE
                 ggplot() +
                 geom_point(data = (df_filtered %>% 
                                dplyr::arrange(factor(species, 
@@ -452,7 +452,7 @@
             <p>
                 Okay, that worked, but we can now see that the numbers don't <em>quite</em> line up with the axis ticks. What should we do about this? Well, we can simply adjust them vertically (vertically with respect to the number, not the plot itself) so they scoot a bit to the left from our perspective. For whatever reason, a vertical adjustment (<code>vjust()</code>) of 0.5 seems to do the trick nearly everytime for this task.
             </p>    
-                <!--begin.rcode, warning=FALSE
+                <!--begin.rcode, warning=FALSE, eval=TRUE
                 ggplot() +
                 geom_point(data = (df_filtered %>% 
                             dplyr::arrange(factor(species, 

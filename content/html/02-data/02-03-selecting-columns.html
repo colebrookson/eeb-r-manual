@@ -123,9 +123,15 @@
             </p>
 <div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">names</span><span class="hl std">(ice)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## [1] &quot;lakeid&quot;       &quot;ice_on&quot;       &quot;ice_off&quot;      &quot;ice_duration&quot; &quot;year&quot;
+<div class="output"><pre class="knitr r">## [1] &quot;lakeid&quot;       &quot;ice_on&quot;       &quot;ice_off&quot;      &quot;ice_duration&quot;
+## [5] &quot;year&quot;
 </pre></div>
 </div></div>
+            <div class="text-box"> 
+                <h4>Ice Cover</h4> 
+                <img src="../img/02-img/ice.png" class="img-text-box">
+                <p class="p-text-box">When we think of climate change, we're often treated to news media of melting glaciers or ice caps at the poles. However, reduction of ice cover is not unique to those environments, and in fact, many lake ecosystems rely on ice cover during the winter. Three lakes near Madison, WI, USA have been used for the monitoring of how climate change is possibly causing the change of ice cover duration in temperate lakes, and these data are the ones we use in this example. </p>
+            </div>
             <p>
             We may want to make a smaller dataframe with only the columns <code>year</code> and <code>ice_duration</code> . We can do this with the <code>dplyr</code> function <code>select()</code> :
             </p>
