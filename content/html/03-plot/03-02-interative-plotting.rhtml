@@ -80,13 +80,21 @@
             <p>
                 Ok so we see our plot! Perfect. So the first thing to do, before we make any stylistic additions, is to deal with the components of the plot that are <strong>must-haves</strong> to have a legible, complete plot. First step is the axis labels. <strong>Also note that units ALWAYS go on axis labels.</strong> So to iteratively work up our plot, we'll add that one component on, by using the new function <code>labs()</code>:
             </p>
-
                 <!--begin.rcode, warning=FALSE
                 ggplot() +
                 geom_point(data = df, mapping = aes(x = length_1_mm, y = weight_g)) +
                 labs(x = "Length (mm)", y = "Weight (g)") 
                 end.rcode-->
-            <p>
+                <div class="text-box"> 
+                    <h4>Climate Change Sentinels</h4> 
+                    <img src="../img/03-img/salamander.jpg"> 
+                    <p class="p-text-box">Fish and Amphibians such as the ones in our example dataset, are often among the first taxa to be affected by distrbances to their ecosystems. While those in our example dataset are from a long-term study site in Oregon, USA, there is in fact a long-term ecological research program on amphibeans and other vertebrates in Algonquin Park, ON, run in part by EEB professor Dr. Njal Rollinson</p>
+                    <img src="../img/03-img/njal.jpg">
+                    <p>
+                        The research performed in Algonquin park and at U of T, specifically tackles tough questions like the adaptive significance of ecotherm biology, and the effects anthropogenic change has on these organisms. 
+                    </p>
+                </div>
+                <p>
 
                 OK good. Now, this is more aesthetic than anything, but we might want to change the appearance of this plot away from this ugly grey background and grid lines. This is a more personal decision regarding what exactly you want your plot to look like, along with the fact that different fields have differnet conventions regarding how they want their plot to look. In biology, we almost always don't want a grey background, nor horizonal grid lines. There are lots of <code>themes</code> available in the <code>ggplot2</code> package to choose from that will help us make a plot that aligns with our goals. For example, we could use the <code>theme_classic()</code> like so: 
             </p>

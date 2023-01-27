@@ -82,9 +82,13 @@
             crabs <- lterdatasampler::pie_crab
             end.rcode-->
             <p>
-              
             Let's look at the columns
             </p>
+            <div class="text-box"> 
+              <h4>Fiddler Crabs</h4> 
+              <img src="../img/02-img/pie_landscape_img.jpg">
+              <p class="p-text-box">The Atlantic marsh fiddler crab (<em>Minuca pugnax</em>) can be found along the Eastern seaboard of the United States, from Florida, up into the North East. They are found in salt marshes, and have been documented as moving further north with climate change and warming habitats. The data on these particular crabs in our example dataset comes from the Plum Island Long Term Ecological Research Site in Massechusetts.</p>
+            </div>
             <!--begin.rcode
             # this will show us the first six rows
             head(crabs)
@@ -177,7 +181,7 @@
         <p>
         We can always use multiple pipes as well to chain commands together, even if they use the same function. For example, we could expand the above example into two <code>filter()</code> commands if we wanted to: 
         </p>
-                <!--begin.rcode
+        <!--begin.rcode
         site_size <- crabs %>% 
         dplyr::filter(site %in% focal_sites) %>%
         dplyr::filter(size > 15)
@@ -204,8 +208,13 @@
             head(ice)
             end.rcode-->
             We can see already that there will be some values of <code>ice_duration</code> that will have values of <em>NA</em>. 
-            </p>
-            <p>
+        </p>
+        <div class="text-box"> 
+          <h4>Ice Cover</h4> 
+          <img src="../img/02-img/ice.jpg">
+          <p class="p-text-box">When we think of climate change, we're often treated to news media of melting glaciers or ice caps at the poles. However, reduction of ice cover is not unique to those environments, and in fact, many lake ecosystems rely on ice cover during the winter. Three lakes near Madison, WI, USA have been used for the monitoring of how climate change is possibly causing the change of ice cover duration in temperate lakes, and these data are the ones we use in this example. </p>
+        </div>
+        <p>
             If we're To filter those out of the dataset, we can use the <code>is.na()</code> function. This function can also be used along with the <code>any()</code> command to see if <em>any</em> of the values in our column of interest are NA values. This is useful for long dataframes that we can't see all the values for. Let's check out column <code>ice_duration</code> now: 
         </p>
         <!--begin.rcode

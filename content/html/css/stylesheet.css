@@ -339,6 +339,8 @@ main > nav {
   padding-left: 10px;
   padding-right: 2em;
   border-left: 1px solid #efefef;
+  font-size:calc(12px + 0.8vw);
+  
 }
 
 .section-nav a {
@@ -389,7 +391,7 @@ main {
   grid-template-columns: 15em 1fr;
   margin: 1em auto;
   width: 100em;
-  max-width: calc(100% - 2em); 
+  font-size:calc(12px + 0.8vw); 
 }
 main_landing {
   display: grid;
@@ -402,7 +404,7 @@ code {
   color: crimson;
   background-color: #f1f1f1;
   padding: 2px;
-  font-size: 105%;
+  font-size:calc(12px + 0.8vw);
 }
 
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
@@ -512,7 +514,7 @@ font-weight: bold;
 
 .p-text-box {
   margin: 5% 5% 5% 5%;
-  font-size:calc(9px + 0.8vw);
+  font-size:calc(5px + 0.8vw);
 }
 
 .code-text-box {
@@ -521,10 +523,15 @@ font-weight: bold;
   background-color: #a8d6e9;
   padding: 2px;
   margin: 5% 5% 5% 5%;
-  font-size:calc(9px + 0.8vw);
+  font-size:calc(7px + 0.8vw);
 }
 
 .source, .output, .warning, .error, .message {
   width: calc(70% - 2em);
   height: auto;
+  font-size:calc(12px + 0.8vw);
+}
+
+.text-figcaption {
+  font-size:calc(3px + 0.8vw);
 }

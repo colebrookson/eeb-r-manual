@@ -115,11 +115,8 @@ Ok so we can see what types are data are. It's important here to not be tricked 
 
 Let's plot our data to see about what we're dealing with. 
 
-<<<<<<< HEAD
 <!--begin.rcode
-=======
 ```{r}
->>>>>>> 8f042c064aa7ef55a2925dfb8679a9940bc9f232
 library(ggthemes)
 
 ggplot(data = df) + 

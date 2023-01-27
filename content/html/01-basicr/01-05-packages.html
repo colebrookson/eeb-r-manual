@@ -91,17 +91,193 @@
   <div id="header"></div><main style = margin-top:100px>
     <nav class="section-nav">
         <ol>
-          <li><a href="#data-types">Packages</a>
+          <li><a href="#packages">What Are Packages?</a>
+          <ol>
+            <li><a href="#packages--install">Installing Packages</a></li>
+            <li><a href="#packages--load">Loading Packages</a></li>
+          </ol>
+          </li>
+          <li><a href="#using">Using Packages</a></li>
+          <li><a href="#trouble">Troubleshooting Packages</a>
+          <ol>
+            <li><a href="#trouble--conflict">Package Conflicts</a></li>
+          </ol>
           </li>
         </ol>
       </nav>
     <div>
-      <section id="pkg">
+      <section id="">
         <h2>Packages</h2>
-        <img class="image-full-page" style="display:block;margin:auto"
-        src="../img/01-img/construction.jpg">
-
+        <p>
+          Packages are essential to the work we do in R. Whether you are using R for the first time, or you're a seasoned R expert, using packages makes up a great deal of your daily workload in R. It's important to be familiar with the concept of a package, how we go about using them, and what to do when they don't work how we want them to. 
+        </p>
+      </section>
+      <section id="packages">
+        <h3>What are Packages?</h3>
+        <p>
+          R packages are collections of related functions, code, and data, which can be downloaded and used by any R user, as a way of avoiding having to write all the code to do a task manually ourselves. In fact, if you've opened R and read in some data, it's likely you've already used a package! There are a set of packages that are standard (<code>base</code>) and ship with R when you install it on your computer. These packages are always automatically loaded and available for your use, so when you use a function that exists natively in R, such as the <code>mean()</code> function, that actually exists in a package that R loaded for you already.
+        </p>
+        <p>
+          All official packages are submitted and verified through CRAN (Comprehensive R Archive Network). Packages typically are sets of functions that perform related tasks (e.g. data management). For example, if in an R script or <code>.Rmd</code> file, we begin to type the function <code>subset()</code>, we get the following: 
+        </p>
+        <img src="../img/01-img/code-completion.png" style="max-width: 60%; height: auto;">
+        <p>
+          We see here that R is suggesting some options to us of functions that start with <code>sub</code>. The word in the curly braces, <code>{base}</code> indicates that that function is native to "base" R, or the base set of functions and methods that we have access to without loading in other packages. When you download R, a set of packages are imported automatically, including <code>base</code>, <code>stats</code>, and some others. Packages not downloaded automatically with R need to be explicitly loaded separately. 
+        </p>
+        <p>
+          There are many many packages, the vast majority of which we will not even talk about. In fact, as of November 2020, more than 16,000 packages were available on CRAN (and that's not including the non-CRAN packages that are available too!).
+        </p>
+        <p>
+          Note that many packages are termed <em>dependencies</em>, that is, they are not the packages we are going to use directly, but they are required on our computers, for the package we <strong>do</strong> want to use to work properly. 
+        </p>
+        <section id="packages--install">
+          <h4>Installing Packages</h4>
+          <p>
+            To see what packages we have isntalled already on our computer, we can run the <code>library()</code> command.
+          </p>
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">library</span><span class="hl std">()</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning in library(): libraries '/usr/local/lib/R/site-library', '/usr/lib/R/site-library' contain no packages
+</pre></div>
+</div></div>
+          <p>
+            It turns out on this computer, that's a pretty large number of packages, but on your computer it may return fewer packages, and that's perfectly fine. 
+          </p>
+          <p>
+            The EEB R Manual will make use frequently of packages that are part of the <strong>Tidyverse</strong>. One of the first packages we'll use is the <code>dplyr</code> package, a very common and useful data cleaning package. 
+          </p>
+          <div class="text-box"> 
+            <h4>The Tidyverse</h4> 
+            <p class="p-text-box">The Tidyverse is <em>"...an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures"</em> that is funded and developed by a company called <a href="https://posit.co/">Posit</a>, which was previously known as the RStudio Foundation. It is a good resource for those learning R, as there are a ton of <a href="https://www.tidyverse.org/">educational resources available</a></p>
+          </div>
+          <p>
+            Let's learn how to install the <code>dplyr</code> package and get started with it. <strong>Importantly, we only need to install a package once.</strong> Once that software is on our computer, we may decide to update it, but otherwise, we only need to do what's called <strong>loading</strong> the package in order to use it. 
+          </p>
+          <p>
+            Okay, let's install the package. Anytime we install a package we call <code>install.package()</code>, and put our package name inside quotations between the brackets.
+          </p>
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">install.packages</span><span class="hl std">(</span><span class="hl str">&quot;dplyr&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## Error in install.packages : Updating loaded packages
+</pre></div>
+</div></div>
+          <p>
+            We see here a long output as the package installs and tells us how the process is going. We don't need to worry too much about the specifics of this output, but the end part, where it tells us that <em>The downloaded source packages are in ...</em> tells us that the installation process worked, and the software now exists on our computer. This process is the same for any new package we want.
+          </p>
         </section>
+        <section href="packages--load">
+          <h4>Loading a Package</h4>
+          <p>
+            Now that the package has been installed, we never need to call it again. But, if we've just started an R session and we want to use the package, we'll need to <strong>load</strong> it. That is, we want to tell R that we want to use the functions inside the package. We do this via the <code>library()</code> function. <strong>We only need to call the <code>library()</code> call once in an R session. If we load the library and then close R and re-start it, we'll need to call it again.</strong>
+          </p>
+          <p>
+            As we discuss in the <a href="./01-06-workflow.html">workflow section</a>, it's best to call all the packages that you want to use at the top of your script. Why? Well, R works its way through a script from top to bottom. So if we try to use a function in a package before we've actually called it, we'll get an error. Let's load the <code>dplyr</code> package now:
+          </p>
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
+</pre></div>
+</div></div>
+          <p>
+            There is some important information here in this library load. First of all, we see that two packages, <code>package:stats</code> and <code>package::base</code>> now have "masked objects". The objects that are masked for each of these packages are listed. For <code>stats</code>, <code>filter()</code> and <code>lag()</code> are masked, and for <code>base</code>, the functions <code>intersect(), setdiff(), setequal(), and union()</code> are masked. 
+          </p>
+          <p>
+            Don't worry, you don't have to do anything about this, but just know that **this means there are functions in the <code>dplyr</code> package with the same names (i.e. <code>filter()</code> and <code>lag()</code>, and <code>intersect()</code>, <code>setdiff()</code>, <code>setequal()</code>, and <code>union()</code>) as functions that were already loaded in R. So, if you just call the function <code>filter()</code> it will default to using the function named <code>filter()</code> from the <code>dplyr</code> package, and NOT from the <code>stats</code> package.
+          </p>
+          <p>
+            It is good practice to be explicit about what package you are using for what task with the<code>package::function()</code> notation. That is, if I wanted to use the <code>filter()</code> function from <code>dplyr</code>, I would write: <code>dplyr::filter()</code>, but if I wanted to use the function from the <code>stats</code> package I would write <code>stats::filter()</code>. This way R will not get confused and perhaps default to the wrong package!
+          </p>
+        </section>
+      </section>
+      <section id="using">
+        <h3>Using Packages in Scripts</h3>
+        <p>
+          As we will discuss in the <a href="./01-06-workflow.html">workflow section</a>, any packages that we need for an analysis should always be loaded at the top of the script we're working in. For example, if I wanted to use two packages in a script, <code>here</code> and <code>dplyr</code>, I would load them both at the very top of my new R script like this: 
+        </p>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">library</span><span class="hl std">(here)</span>
+  <span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
+</pre></div>
+</div></div>
+        <p>
+          Note that I do <strong>not</strong> use the <code>install.packages()</code> function here, as once a package is downloaded once, we don't need to download it again, and it will save us time to not do so. It is usually recommended to run any installations in the console, or else to comment them out of our code like this: 
+        </p>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl com"># install.packages(&quot;here&quot;, &quot;dplyr&quot;)</span>
+  <span class="hl kwd">library</span><span class="hl std">(here)</span>
+  <span class="hl kwd">library</span><span class="hl std">(dplyr)</span>
+</pre></div>
+</div></div>
+        <section href="using--trouble">
+        <h4>Troubleshooting Packages</h4>
+        <p>
+          There are a couple common problems that we all encounter when trying to use packages. The most common one is installation issues, usually stemming from version issues (i.e. the version of R doesn't support the version of a package), and that end up giving frustrating messages like <code>Warning in install.packages : package "magittr" is not available (for R version 3.3.3)</code>. The data blogger Laura Ellis has an excellent flowchart of how to go about installing a package that is worth taking some time to consider. 
+        </p>
+        <figure>
+          <img src="../img/01-img/trouble.png" style="max-width: 60%; height: auto;">
+          <figcaption>Troubleshooting Flowchart by Laura Ellis</figcaption>
+        </figure> 
+        <p>
+          Let's walk through this process for another package we'll use a lot in this R Manual, <code>ggplot2</code>. First, let's head over to <a href="https://cran.r-project.org/">CRAN</a> and go to the list of available packages, sorted by name: 
+        </p>
+        <img src="../img/01-img/name.png" style="max-width: 60%; height: auto;">
+        <p>
+          And we can scroll to find the package <code>ggplot2</code>:
+        </p>
+        <img src="../img/01-img/ggplot2.png" style="max-width: 60%; height: auto;">
+        <p>
+          We see here that it <em>Depends:</em> on R (≥ 3.3). We can see what version we're running by putting the following command in the console: 
+        </p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl std">version</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##                _                                          
+## platform       x86_64-pc-linux-gnu                        
+## arch           x86_64                                     
+## os             linux-gnu                                  
+## system         x86_64, linux-gnu                          
+## status         Patched                                    
+## major          4                                          
+## minor          2.2                                        
+## year           2022                                       
+## month          11                                         
+## day            10                                         
+## svn rev        83330                                      
+## language       R                                          
+## version.string R version 4.2.2 Patched (2022-11-10 r83330)
+## nickname       Innocent and Trusting
+</pre></div>
+</div></div>
+        <p>
+          And we see here that (at least on this computer), we're running version 4.2.2, which is ≥ 3.3, so we know we're okay to download this package. We can do so via the method shown earlier: 
+        </p>
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">install.packages</span><span class="hl std">(</span><span class="hl str">&quot;ggplot2&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## Error in install.packages : Updating loaded packages
+</pre></div>
+</div></div>
+        <p>
+          And we see this worked! On to the next step: Celebrate :)
+        </p>
+        <p>
+          <strong>If you receive messages on your computer about specific "dependencies" that you're missing, the first thing to do is try manually installing the packages the error message is telling you you might need.</strong>
+        </p>
+        <p>
+          Once you have a package loaded in R, it's usually easy at that point to check out the package functions and find out more about them. For example, since we've installed <code>ggplot2</code>, we could load the package, and then use the <code>?</code> help function to take a look at some of the functions in the package. 
+        </p>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'ggplot2'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following object is masked from 'package:dplyr':
+## 
+##     vars
+</pre></div>
+</div></div>
+        <p>
+          Now that the package is loaded, let's take a look at the main function in this package: <code>ggplot()</code>
+        </p>
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r">  <span class="hl opt">?</span><span class="hl std">ggplot</span>
+</pre></div>
+</div></div>
+        </section>
+      </section>
 <!-- End page content -->
 <hr>
 <p style="font-size:10px;color:gray;text-align:center">
