@@ -533,7 +533,129 @@ font-weight: bold;
   display: block;
   margin: auto;
 }
+/** add in a box for checking understanding**/
 
+.check-box {
+  float:right; 
+  border: 8px solid black;
+  border-radius: 12px;
+  padding: 10px;
+  width: calc(100% - 2em); 
+  height: auto; 
+  margin: 10px; 
+  background-color: #eb8787;
+}
+
+.p-check-box {
+  margin: 5% 5% 5% 5%;
+  font-size:calc(12.5px + 0.9vw);
+}
+
+.h3-check-box {
+  font-size:calc(16px + 1.3vw); 
+  font-weight: bold;
+  text-align: center;
+}
+
+.code-check-box {
+  font-family: Consolas,"courier new";
+  color: black;
+  background-color: #e9bbbb;
+  /** padding: 2px; **/
+  /** margin: 5% 5% 5% 5%; **/
+  font-size:calc(12px + 0.7vw);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: calc(100% - 2em);
+  height: 40px;
+  padding: 0.5px;
+  border-radius: 12px;
+  box-shadow: inset 0 -1px black, inset 0 1px 1px black;
+  cursor: pointer;
+  
+  background-image: -moz-linear-gradient(top, #eeeeee, white 25px);
+  background-image: -o-linear-gradient(top, #eeeeee, white 25px);
+  background-image: linear-gradient(to bottom, #eeeeee, white 25px);
+}
+
+.switch-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.switch-label {
+  position: relative;
+  display: block;
+  height: inherit;
+  font-size: calc(16px + 1.3vw);
+  text-align: center;
+  text-transform: uppercase;
+  background: #e54f4f;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 2px #e54f4f, inset 0 0 2px #e54f4f;
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+  transition: 0.15s ease-out;
+  -webkit-transition-property: opacity background;
+  -moz-transition-property: opacity background;
+  -o-transition-property: opacity background;
+  transition-property: opacity background;
+}
+
+.switch-label:before, .switch-label:after {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  margin-top: -.5em;
+  line-height: 1;
+  -webkit-transition: inherit;
+  -moz-transition: inherit;
+  -o-transition: inherit;
+  transition: inherit;
+}
+
+.switch-label:before {
+  content: attr(data-off);
+  text-align:center;
+  color: black;
+  text-shadow: 0 1px #e54f4f;
+}
+
+.switch-label:after {
+  content: attr(data-on);
+  text-align: center;
+  color: black;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+}
+
+.switch-input:checked ~ .switch-label {
+  background: #e54f4f;
+  box-shadow: inset 0 1px 2px #e54f4f, inset 0 0 3px #e54f4f;
+}
+
+.switch-input:checked ~ .switch-label:before {
+  opacity: 0;
+}
+
+.switch-input:checked ~ .switch-label:after {
+  opacity: 1;
+}
+
+
+.switch-input:checked ~ .switch-handle {
+  left: 400px;
+  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/** control what the code blocks look like**/
 .source, .output, .error, .message {
   width: calc(70% - 2em);
   overflow-wrap: break-word;
