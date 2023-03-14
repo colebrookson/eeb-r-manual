@@ -12,5 +12,7 @@
 2. When satisfied, to test all is working properly, move the edited version of the repository over to the testing location 
 
 ```
-
+sudo cp -r ~/Github/eeb-r-manual/content/* /opt/lampp/htdocs/test/
 ```
+
+This will move the files from the first location to the second
