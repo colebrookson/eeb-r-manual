@@ -104,15 +104,14 @@
                 <p>
                     This is the recommended file type for reading data into R as it is flexible and easily transferred directly into a dataframe. <br><br>We can read in the file by assinging it directly to an object.
                 </p>
-                <h5><strong>Base R</strong></h5>
-                <p>
-                    <!--begin.rcode, eval=FALSE
+                <h5><em>Base R</em></h5>
+                <!--begin.rcode, eval=FALSE
                     data <- read.csv("/path/to/file/file-name.csv", header = TRUE)
                     end.rcode-->
-
+                <p>
                     Here the first argument in the <code>read.csv()</code> function is the path pointing to the file in your computer. The second argument specifies <code>header = TRUE</code>> which tells R that the first row of the <code>.csv</code>file will be the column names, not part of the data themselves. 
                 </p>
-                <h5><strong>Tidyverse</strong></h5>
+                <h5><em>Tidyverse</em></h5>
                 <p>
                     <!--begin.rcode, eval=FALSE
                     data <- readr::read_csv("/path/to/file/file-name.csv")
@@ -134,12 +133,13 @@
                 <p>
                     Reading a text file is similar to the approaches to a csv file: 
                 </p>
-                <h5><strong>Base R</strong></h5>
-                <p>
-                    <!--begin.rcode, eval=FALSE
+                <h5><em>Base R</em></h5>
+                <!--begin.rcode, eval=FALSE
                     data <- read.delim("/path/to/file/file-name.txt")
-                    end.rcode-->
+                end.rcode-->
 
+                    
+                <p>
                     This above option assumes that the file it tab-delimited. 
                 </p>
                 <p>
@@ -151,7 +151,7 @@
                 <p>
                     And we could extrapolate this to other less common types of delimiters supported by the function as well. 
                 </p>
-                <h5><strong>Tidyverse</strong></h5>
+                <h5><em>Tidyverse</em></h5>
                 <p>
                     <!--begin.rcode, eval=FALSE
                     data <- readr::read_tsv("/path/to/file/file-name.txt")
@@ -166,13 +166,13 @@
             </p>
             <section id="writing--csv">
                 <h4>Comma-Separated Value <code>.csv</code> Files</h4>
-                <h5><strong>Base R</strong></h5>
+                <h5><em>Base R</em></h5>
                 <p>
                     <!--begin.rcode, eval=FALSE
                     write.csv(data_object, "/path/to/new/file/file-name.csv")
                     end.rcode-->
                 </p>
-                <h5><strong>Tidyverse</strong></h5>
+                <h5><em>Tidyverse</em></h5>
                 <p>
                     <!--begin.rcode, eval=FALSE
                     readr::write_csv(data_object, "/path/to/new/file/file-name.csv")
@@ -192,13 +192,13 @@
             </section>
             <section id="writing--txt">
                 <h4>Plain Text <code>.txt</code></h4>
-                <h5><strong>Base R</strong></h5>
+                <h5><em>Base R</em></h5>
                 <p>
                     <!--begin.rcode, eval=FALSE
                     write.table(data_object, "/path/to/new/file/file-name.txt")
                     end.rcode-->
                 </p>
-                <h5><strong>Tidyverse</strong></h5>
+                <h5><em>Tidyverse</em></h5>
                 <p>
                     <!--begin.rcode, eval=FALSE
                     readr::write_delim(data_object, "/path/to/new/file/file-name.txt")

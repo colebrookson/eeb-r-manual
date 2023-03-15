@@ -336,7 +336,7 @@ main > nav {
 
 /* Sidebar Navigation */
 .section-nav {
-  padding-left: 10px;
+  padding-left: 0.5em;
   padding-right: 2em;
   border-left: 1px solid #efefef;
   font-size:calc(9px + 0.6vw);

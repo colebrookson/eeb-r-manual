@@ -48,15 +48,17 @@
         <ol>
           <li><a href="#filter">Filtering</a>
             <ul>
-              <li class=""><a href="#filter--single">One Value</a>
+              <li class=""><a href="#one-value">One Value</a>
                 <ul>
-                    <li class=""><a href="#filter--single--core">base R</a></li>
-                    <li class=""><a href="#filter--single--tidy">Tidyverse</a></li>
+                    <li class=""><a href="#base">base R</a></li>
+                    <li class=""><a href="#tidy">Tidyverse</a></li>
                 </ul>
             </li>
-            <li class=""><a href="#filter--in"><code>%in%</code> Operator</a>
+            <li class=""><a href="#in"><code>%in%</code> Operator</a>
             </li>
-            <li class=""><a href="#filter--multiple">Multiple Values</a>
+            <li class=""><a href="#multiple-values">Multiple Values</a>
+            </li>
+            <li class=""><a href="#filtering-NAs">Filtering NA's</a>
             </li>
             </ul>
           </li>
@@ -72,7 +74,7 @@
             As with all things data, we provide an option to perform the task using <strong>base R</strong> functions, as well as in the <strong>Tidyverse</strong>. 
         </p>
       </section>
-      <section id="filter--single">
+      <section id="one-value">
         <h3>Filter Based on Single Value</h3>
         <div class="text-box"> 
           <h4>The<code class="code-text-box">::</code> Operator</h4> 
@@ -118,7 +120,7 @@
             <p>
             So we might want to filter our data such that we have a new dataframe, where <code>site</code> is <strong>only</strong> equal to "VCR". 
         </p>
-        <section id="filter--single--core">
+        <section id="base">
             <h5><strong>base R</strong></h5>
             <p>
                 Filtering in base R makes use of the square bracket indexing discussed elsewhere. Recall that the index goes [<em>row, column</em>]. In the <em>row</em> position, we use the <code>which()</code> function, which simply returns where some indices are TRUE. Since we want to keep all the columns in our dataset, we leave the <code>column</code> position empty, indicating that all columns should be retained. In our example that looks like this: 
@@ -136,7 +138,7 @@
                 And we can see it worked as expected.
             </p>
         </section>
-        <section id="filter--single--tidy">
+        <section id="tidy">
             <h5><strong>Tidyverse</strong></h5>
             <p>
                 Filtering in the Tidyverse uses mostly the <code>dplyr</code> package, which is EXTREMELY useful for most data management exercises. Here we use the aptly named <code>filter()</code> function to perform the operation. 
@@ -155,7 +157,7 @@
         </section>
       </section>
         <hr>
-      <section id="filter--in">
+      <section id="in">
         <h3>Filter Based on <code>%in%</code> Operator</h3>
             <p>
                 There are many permutations of this single value option with Boolean operators. For example, using either approach, we could filter asking R to select rows where <code>site == "VCR" | site == "BC"</code> which would select rows where the site was either "VCR" or "BC". 
@@ -176,7 +178,7 @@
             dplyr::filter(site %in% focal_sites)
             end.rcode-->
       </section>
-      <section id="filter--multiple">
+      <section id="multiple-values">
         <p>
             This filtering can be extended to use multiple columns relatively simply. There is a variable in this dataset called size. 
         </p>
@@ -217,7 +219,7 @@
         </p>
       </section>
     </section>
-    <section id="na">
+    <section id="filtering-NAs">
         <h3>Filtering out <em>NA</em>s</h3>
         <p>
             For this example, we will use a different dataset.
