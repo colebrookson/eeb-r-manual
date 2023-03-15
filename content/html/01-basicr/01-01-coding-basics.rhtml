@@ -23,22 +23,6 @@
     $("#header").load("../common/head.html"); 
     });
     </script> 
-    <script>
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
-        
-        for (i = 0; i < coll.length; i++) {
-          coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.maxHeight){
-              content.style.maxHeight = null;
-            } else {
-              content.style.maxHeight = content.scrollHeight + "px";
-            } 
-          });
-        }
-    </script>
 </head>
 <body>
   <!--Add in the header-->
@@ -66,6 +50,22 @@
             </ol>
           </nav>
         <div>
+            <script>
+                var coll = document.getElementsByClassName("collapsible");
+                var i;
+                
+                for (i = 0; i < coll.length; i++) {
+                  coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.maxHeight){
+                      content.style.maxHeight = null;
+                    } else {
+                      content.style.maxHeight = content.scrollHeight + "px";
+                    } 
+                  });
+                }
+            </script>
         <section>
         <h1>Coding Basics</h1>
         <p>
@@ -196,15 +196,11 @@
                     print(x)
                 </code>
             </p>
-            <div class="container">
-                <label class="switch">
-                  <input type="checkbox" class="switch-input">
-                  <span class="switch-label" data-on="This is the answer" data-off="Check Answer"></span>
-                  <span class="switch-handle"></span>
-                </label>
-              
-              </div>
-          </div>
+            <button class="collapsible">Show Answer</button>
+            <div class="content">
+            <p>5</p>
+            </div>
+        </div>
     </section>
     <section id="functions">
         <h2>Built-in Functions</h2>

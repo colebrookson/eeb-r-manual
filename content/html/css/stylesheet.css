@@ -533,6 +533,8 @@ font-weight: bold;
   display: block;
   margin: auto;
 }
+
+
 /** add in a box for checking understanding**/
 
 
@@ -544,11 +546,11 @@ font-weight: bold;
   width: calc(100% - 2em); 
   height: auto; 
   margin: 10px; 
-  background-color: #eb8787;
+  background-color: #b2d8d8;
 }
 
 .p-check-box {
-  margin: 5% 5% 5% 5%;
+  margin: 2% 5% 5% 5%;
   font-size:calc(12.5px + 0.9vw);
 }
 
@@ -559,29 +561,29 @@ font-weight: bold;
 }
 
 .code-check-box {
-  font-family: Consolas,"courier new";
-  color: black;
-  background-color: #f0a9a9;
-  /** padding: 2px; **/
-  /** margin: 5% 5% 5% 5%; **/
-  font-size:calc(12px + 0.7vw);
+    font-family: Consolas,"courier new";
+    color: crimson;
+    background-color: #f1f1f1;
+    padding: 2px;
+    font-size:calc(12px + 0.7vw);
 }
 
 .collapsible {
-  background-color: #eb8787;
+  background-color: #b2d8d8;
   color: black;
   cursor: pointer;
   padding: 18px;
-  border: 2px solid black;
+  margin: 0% 5% 0% 5%;
+  border: 4px solid black;
   border-radius: 12px;
-  width: calc(100% - 1em);
+  width: calc(92% - 1em);
   text-align: float;
   outline: none;
   font-size:calc(16px + 1.3vw); 
 }
 
-.active, .collapsible:hover {
-  background-color: #ddbfbf;
+.collapsible:hover {
+  background-color: #6dc1c1;
 }
 
 .collapsible:after {
@@ -592,19 +594,20 @@ font-weight: bold;
   margin-left: 5px;
 }
 
-.active:after {
+.collapsible.active:after {
   content: "\2212";
 }
 
 .content {
   padding: 10px;
   max-height: 0;
-  width: calc(98% - 1em);
+  width: calc(95% - 1em);
+  margin: 0% 5% 0% 5%;
   overflow: hidden;
   text-align: float;
   transition: max-height 0.2s ease-out;
-  background-color: #eb8787;
-  border: 2px #eb8787;
+  background-color: #b2d8d8;
+  border: 2px #b2d8d8;
   border-radius: 12px;
   font-size:calc(12.5px + 0.9vw); 
 }
