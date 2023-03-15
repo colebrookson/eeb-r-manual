@@ -175,12 +175,15 @@
             focal_sites <- c("ZI", "RC", "VCR", "DB", "JC")
 
             focal_crabs <- crabs %>% 
-            dplyr::filter(site %in% focal_sites)
+              dplyr::filter(site %in% focal_sites)
+            
+            head(focal_crabs)
             end.rcode-->
       </section>
       <section id="multiple-values">
+        <h3>Filtering Multiple Columns at Once</h3>
         <p>
-            This filtering can be extended to use multiple columns relatively simply. There is a variable in this dataset called size. 
+            This filtering can be extended to use multiple columns relatively simply. There is a variable in this dataset called <code>size</code>. 
         </p>
             <!--begin.rcode
             hist(crabs$size)
@@ -196,27 +199,39 @@
         <h5><strong>Tidyverse</strong></h5>
         <!--begin.rcode
         site_size <- crabs %>% 
-        dplyr::filter(site %in% focal_sites & size > 15)
+          dplyr::filter(site %in% focal_sites & size > 15)
         end.rcode-->
         <p>
         We can always use multiple pipes as well to chain commands together, even if they use the same function. For example, we could expand the above example into two <code>filter()</code> commands if we wanted to: 
         </p>
         <!--begin.rcode
         site_size <- crabs %>% 
-        dplyr::filter(site %in% focal_sites) %>%
-        dplyr::filter(size > 15)
+          dplyr::filter(site %in% focal_sites) %>%
+          dplyr::filter(size > 15)
         end.rcode-->
         <hr>
         <p>
             Here we just use another logical operator, <code>&amp;</code> to link our two conditions together. We can double check:
         </p>
-            <!--begin.rcode
+          <!--begin.rcode
             hist(site_size$size)
             unique(site_size$site)
-            end.rcode-->
+          end.rcode-->
         <p>
             So we can see it worked well. 
         </p>
+        <div class="check-box"> 
+          <h3 class="h3-check-box">Check Your Understanding</h3> 
+          <p class="p-check-box">
+              When performing filtering, how many variables can be filtered at once?<br>
+          </p>
+          <button class="collapsible">Show Answer</button>
+          <div class="content">
+              <p>
+                As many as you want! You can filter as many variables as there are in the dataframe, and each can have their own individual conditions, or some of them can have the same conditions (e.g. multiple columns <code class="code-check-box"> >= 10</code>).
+              </p>
+          </div>
+      </div>
       </section>
     </section>
     <section id="filtering-NAs">
