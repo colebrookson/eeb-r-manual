@@ -121,7 +121,7 @@
                 l[[4]]
                 end.rcode-->
                 <p>
-                Here we see `l[[4]]` produces the fourth element, an atomic vector of length 3. What if we want to access the third element of that atomic vector to, say, reassign it to the value 5. We can do so like this: 
+                Here we see <code>l[[4]]</code> produces the fourth element, an atomic vector of length 3. What if we want to access the third element of that atomic vector to, say, reassign it to the value 5. We can do so like this: 
                 </p>
                 <!--begin.rcode
                 l[[4]][3]
@@ -145,19 +145,19 @@
                 names(agrawal)
                 end.rcode-->
                 <p>
-                By calling `names()` we can see the names of the different list components. We can index by any of these. 
+                By calling <code>names()</code> we can see the names of the different list components. We can index by any of these. 
                 </p>
                 <!--begin.rcode
                 agrawal["concentrations"]
                 end.rcode-->
                 <p>
-                Here, we have the choice to use the square bracket notation as before, or we can use a new kind, the `$` notation. 
+                Here, we have the choice to use the square bracket notation as before, or we can use a new kind, the <code>$</code> notation. 
                 </p>
                 <!--begin.rcode
                 agrawal$concentrations
                 end.rcode-->
                 <p>
-                This provides the same output. Now let's say we wanted to access the second element in this "concentrations" element. Perhaps we want to rearrange the wording to say "Computational & Theoretical Biology" instead. We could do that with either the `[[]][]` notation we used before, or perhaps the easier to read option of combining both the `$` and `[]`:
+                This provides the same output. Now let's say we wanted to access the second element in this "concentrations" element. Perhaps we want to rearrange the wording to say "Computational & Theoretical Biology" instead. We could do that with either the <code>[[]][]</code> notation we used before, or perhaps the easier to read option of combining both the <code>$</code> and <code>[]</code>:
                 </p>
                 <!--begin.rcode
                 agrawal$concentrations[2]
@@ -169,7 +169,7 @@
                 agrawal$concentrations[2] <- "Computational & Theoretical Biology"
                 end.rcode-->
                 <p>
-                To check if it worked print the `agrawal` list to our console: 
+                To check if it worked print the <code>agrawal</code> list to our console: 
                 </p>
                 <!--begin.rcode
                 agrawal
