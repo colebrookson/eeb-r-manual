@@ -130,8 +130,12 @@
             There is some important information here in this library load. First of all, we see that two packages, <code>package:stats</code> and <code>package::base</code>> now have "masked objects". The objects that are masked for each of these packages are listed. For <code>stats</code>, <code>filter()</code> and <code>lag()</code> are masked, and for <code>base</code>, the functions <code>intersect(), setdiff(), setequal(), and union()</code> are masked. 
           </p>
           <p>
-            Don't worry, you don't have to do anything about this, but just know that **this means there are functions in the <code>dplyr</code> package with the same names (i.e. <code>filter()</code> and <code>lag()</code>, and <code>intersect()</code>, <code>setdiff()</code>, <code>setequal()</code>, and <code>union()</code>) as functions that were already loaded in R. So, if you just call the function <code>filter()</code> it will default to using the function named <code>filter()</code> from the <code>dplyr</code> package, and NOT from the <code>stats</code> package.
+            Don't worry, you don't have to do anything about this, but just know that this means there are functions in the <code>dplyr</code> package with the same names (i.e. <code>filter()</code> and <code>lag()</code>, and <code>intersect()</code>, <code>setdiff()</code>, <code>setequal()</code>, and <code>union()</code>) as functions that were already loaded in R. So, if you just call the function <code>filter()</code> it will default to using the function named <code>filter()</code> from the <code>dplyr</code> package, and NOT from the <code>stats</code> package.
           </p>
+          <div class="text-box"> 
+            <h4>The<code class="code-text-box">::</code> Operator</h4> 
+            <p class="p-text-box">Why have we written <code class="code-text-box">lterdatasampler:: pie_crab</code> here? Writing the package name and the <code class="code-text-box">::</code> operation tells R which <a href="../01-basicr/01-05-packages.html">namespace</a> to look in for the object we're trying to use during our assignment statement!</p>
+          </div>
           <p>
             It is good practice to be explicit about what package you are using for what task with the<code>package::function()</code> notation. That is, if I wanted to use the <code>filter()</code> function from <code>dplyr</code>, I would write: <code>dplyr::filter()</code>, but if I wanted to use the function from the <code>stats</code> package I would write <code>stats::filter()</code>. This way R will not get confused and perhaps default to the wrong package!
           </p>
@@ -154,6 +158,16 @@
           library(here)
           library(dplyr)
         end.rcode-->
+        <div class="check-box"> 
+          <h3 class="h3-check-box">Check Your Understanding</h3> 
+          <p class="p-check-box">
+              Is it mandatory when using a function from a package to use the <code class="code-check-box">::</code> forcing command? Why or why not?
+          </p>
+          <button class="collapsible">Show Answer</button>
+          <div class="content">
+              <p>It is <strong>not</strong> mandatory, but it does create a slightly more robust set of code to do so. R will (according to it's masking order) use the function it thinks you want based on the name. We only <strong>need</strong> to use a <code class="code-check-box">::</code> if we want to use a function from a package that is currently masked by another package.</p>
+          </div>
+      </div>
         <section href="using--trouble">
         <h4>Troubleshooting Packages</h4>
         <p>
