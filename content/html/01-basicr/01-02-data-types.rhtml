@@ -122,7 +122,7 @@
             </p>
             <div class="text-box"> 
               <h4><em>Double</em> Precision</h4> 
-              <p class="p-text-box">When referring to numbers in a computer, it's important to remember that some numbers, &pi; for example, are infinite. However, computers can't actually hold infinite decimal places of a value, so we have to decide how accurate we want our values. <code>R</code> is required to work with values conforming to a global standard, which works out to a precision of 53 bits (<a href="https://en.wikipedia.org/wiki/Bit">what is a bit?!</a>). This is called <em>"binary64"</em> format and is "double" the standard precision of "binary32", hence being called <em>double precision</em></p>
+              <p class="p-text-box">When referring to numbers in a computer, it's important to remember that some numbers, &pi; for example, are infinite. However, computers can't actually hold infinite decimal places of a value, so we have to decide how accurate we want our values. <code>R</code> is required to work with values conforming to a global standard, which works out to a precision of 53 bits (<a href="https://en.wikipedia.org/wiki/Bit">what is a bit?!</a>). This is called <em>binary64</em> format and is "double" the standard precision of <em>binary32</em>, hence being called <em>double precision</em></p>
             </div>
             <!--begin.rcode 
               z <- 3.14
@@ -159,6 +159,29 @@
               typeof(x3)
               end.rcode-->
         </section>
+        <div class="check-box"> 
+          <h3 class="h3-check-box">Check Your Understanding</h3> 
+          <p class="p-check-box">
+              Some objects are created in the following code. Which are the objects (i.e. what are their names)? <br>
+              <code class="code-check-box">
+                  x <- 2 <br>
+                  y <- 3<br>
+                  df <- data.frame( <br>
+                      col1 = c(1, 2, 3), <br>
+                      col2 = c("A", "B", "C") <br>
+                  )
+              </code>
+          </p>
+          <button class="collapsible">Show Answer</button>
+          <div class="content">
+              <p>
+                  <strong>The objects created are <code class="code-check-box">x</code>, <code class="code-check-box">y</code>, and <code class="code-check-box">df</code></strong>
+              </p>
+              <p>
+                  While it might be tempting to think <code class="code-check-box">col1</code> and <code class="code-check-box">col2</code> are also objects, those are simply the column names that we specified when we made the <em>dataframe</em>, <code class="code-check-box">df</code>
+              </p>
+          </div>
+      </div>
       </section>
     </div>
 <!-- End page content -->
