@@ -39,20 +39,55 @@
     </ol>
   </nav>
   <div>
+  
+  <div class="w3-main w3-content w3-padding" 
+  style="max-width:1200px;margin-top:100px">
+  
+    <!-- Getting Started -->
+    <div class="w3-container w3-padding-32 w3-center">  
+      <h1 font-size:40px>Getting Started</h3><br>
+        <p>
+        On this page you'll find info on how to 1) download the software 
+        required to use R, 2) navigate the integrated development environment 
+        RStudio, and 3) figure out what files are for what and how they all 
+        fit together. 
+    </p>
+</div>
+</div>
+<hr>
 
-<div class="w3-main w3-content w3-padding" 
-style="max-width:1200px;margin-top:100px">
-
-  <!-- Getting Started -->
-  <div class="w3-container w3-padding-32 w3-center">  
-    <h1 font-size:40px>Programming Concepts</h3><br>
-      <img class="image-full-page" style="display:block;margin:auto"
-      src="./img/01-img/construction.jpg">
-      </p>
+  <!-- First Photo Grid-->
+  <div class="w3-row-padding w3-padding-16 w3-center" id="food" 
+  border: 5px solid gray;>
+    <div class="w3-third">
+        <a href="getting-started/00-01-downloads.html">
+            <img class="image-main" src="img/rstudio.png" alt="rstudio on the desktop" 
+            width="333" height="200">
+         </a>
+      <h3><a href="getting-started/00-01-downloads.html">Downloads</a></h3>
+      <p><a href="getting-started/00-01-downloads.html">Installing R/RStudio - where to get 
+        them, and how to make them work</a></p>
+    </div>
+    <div class="w3-third">
+        <a href="getting-started/00-02-navigating-rstudio.html">
+            <img class="image-main" src="img/00-img/four-panels.png" alt="operators" 
+            width="333" height="200">
+        </a>
+      <h3><a href="getting-started/00-02-navigating-rstudio.html">Navigating RStudio</a></h3>
+      <p><a href="getting-started/00-02-navigating-rstudio.html">Move around the panels, 
+        execute code, and inspect objects</a></p>
+    </div>
+    <div class="w3-third">
+        <a href="getting-started/00-03-the-file-ecosystem.html">
+            <img class="image-main" src="img/00-img/new-file.png" alt="data structures" 
+            width="333" height="200">
+        </a>
+      <h3><a href="getting-started/00-03-the-file-ecosystem.html">The File Ecosystem</a></h3>
+      <p><a href="getting-started/00-03-the-file-ecosystem.html">
+      What files do what, and how to make them all play nice together</a></p>
     </div>
   </div>
   <hr>
-
   <!-- Footer -->
   <footer class="w3-row-padding w3-padding-32">
     <div class="w3-third">
@@ -61,16 +96,7 @@ style="max-width:1200px;margin-top:100px">
     </div>
   
     <div class="w3-third">
-      <h3>Additional 
-        <!-- Sidebar (hidden by default) -->
-        <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-        style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-          <a href="javascript:void(0)" onclick="w3_close()"
-          class="w3-bar-item w3-button">Close Menu</a>
-          <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
-          <a href="#contact" onclick="w3_close()" 
-          class="w3-bar-item w3-button">Contact</a>
-        </nav>Resources</h3>
+      <h3>Additional Resources</h3>
       <ul class="w3-ul w3-hoverable">
         <li class="w3-padding-16">
           <a href="https://uoftcoders.github.io/studyGroup/">
@@ -124,7 +150,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   <ol>
     <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
     <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
-    <li><a href="./00-landingpage.html" onclick="w3_close()" 
+    <li><a href="./getting-started.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
     <ol>
@@ -145,7 +171,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
         </li>
     </ol>
     </li>
-    <li><a href="./01-landingpage.html" onclick="w3_close()" 
+    <li><a href="./basic-r.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
         <ol>
@@ -181,7 +207,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             </li>
         </ol>
     </li>
-    <li><a href="./02-landingpage.html" onclick="w3_close()" 
+    <li><a href="./working-with-data.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
         <ol>
@@ -195,15 +221,6 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
                 style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
                 Filtering &amp; Subsetting</a>
             </li>
-            <!-- Sidebar (hidden by default) -->
-            <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-            style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-              <a href="javascript:void(0)" onclick="w3_close()"
-              class="w3-bar-item w3-button">Close Menu</a>
-              <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
-              <a href="#contact" onclick="w3_close()" 
-              class="w3-bar-item w3-button">Contact</a>
-            </nav>
             <li><a href="./working-with-data/02-03-selecting-columns.html" onclick="w3_close()" 
                 class="w3-bar-item w3-button" 
                 style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
@@ -232,16 +249,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             <li><a href="./working-with-data/02-08-dates.html" onclick="w3_close()" 
                 class="w3-bar-item w3-button" 
                 style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
-                Date 
-                <!-- Sidebar (hidden by default) -->
-                <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-                style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-                  <a href="javascript:void(0)" onclick="w3_close()"
-                  class="w3-bar-item w3-button">Close Menu</a>
-                  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
-                  <a href="#contact" onclick="w3_close()" 
-                  class="w3-bar-item w3-button">Contact</a>
-                </nav>&amp; Time Data</a>
+                Date &amp; Time Data</a>
             </li>
             <li><a href="./working-with-data/02-09-reshaping.html" onclick="w3_close()" 
                 class="w3-bar-item w3-button" 
@@ -260,21 +268,12 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             </li>
         </ol>
     </li>
-    <li><a href="./03-landingpage.html" onclick="w3_close()" 
+    <li><a href="./plotting.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
         <ol>
             <li><a href="./plotting/03-00-basics-of-plotting.html" onclick="w3_close()" 
-                class
-                <!-- Sidebar (hidden by default) -->
-                <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" 
-                style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-                  <a href="javascript:void(0)" onclick="w3_close()"
-                  class="w3-bar-item w3-button">Close Menu</a>
-                  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
-                  <a href="#contact" onclick="w3_close()" 
-                  class="w3-bar-item w3-button">Contact</a>
-                </nav>="w3-bar-item w3-button" 
+                class="w3-bar-item w3-button" 
                 style="color:grey;font-weight:bold;font-size:calc(14px + 0.6vw);">
                 Basics of Plotting</a>
             </li>
@@ -340,7 +339,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             </li>
         </ol>
     </li>
-    <li><a href="./04-landingpage.html" onclick="w3_close()" 
+    <li><a href="./statistics.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
         <ol>

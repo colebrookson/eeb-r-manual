@@ -39,92 +39,155 @@
     </ol>
   </nav>
   <div>
-
+    
 <div class="w3-main w3-content w3-padding" 
 style="max-width:1200px;margin-top:100px">
 
   <!-- Getting Started -->
   <div class="w3-container w3-padding-32 w3-center">  
-    <h1 font-size:40px>Basic R</h3><br>
+    <h1 font-size:40px>Introduction to Statistics</h3><br>
       <p>
-        Now that you have R and RStudio installed on your computer, it's time to 
-        get cracking! Here we'll go over essential skills like how to use 
-        objects (and what even an object anyways??). We'll discuss things like 
-        data types and structures, and even introduce you to how to organize 
-        your workflow in R. 
+        Once you've wrangled your data into form, it's time to perform 
+        statistical tests or inference on these data. In this section, we'll 
+        try and give pointers on not only just the components of how to perform
+        those tests, but also a very very very VERY brief overview of some of 
+        the theory behind why we choose various approaches to statistical 
+        inference, and what sorts of assumptions we need to be concious of when
+        we set out to ask a biological question that we plan to answer by way 
+        of a statistical hypothesis test. 
       </p>
     </div>
   </div>
   <hr>
 
-  <!-- First Photo Grid-->
-  <div class="w3-row-padding w3-padding-16 w3-center" id="food" 
-  border: 5px solid gray;>
-    <div class="w3-third">
-      <a href="basic-r/01-01-coding-basics.html">
-            <img class="image-main" src="img/operators.png" alt="" 
-            width="333" height="200">
-      <h3>Coding Basics</h3>
-      <p>Assignment, operators, R as a calculator</p>
+    <!-- First Photo Grid-->
+    <div class="w3-row-padding w3-padding-16 w3-center" id="food" 
+    border: 5px solid gray;>
+      <div class="w3-quarter">
+        <a href="stats/04-00-introduction.html">
+              <img class="image-main" src="img/04-img/readme.jpeg" alt="" 
+              width="250" height="200">
+        <h3>Introduction</h3>
+        <p>A primer to this section. READ ME FIRST.
+        </p>
+        </a>
+      </div>
+      <div class="w3-quarter">
+        <a href="stats/04-01-probability-101.html">
+              <img class="image-main" src="img/04-img/probability.jpg" 
+              alt=""
+              width="250" height="200">
+        <h3>Probability 101</h3>
+        <p>What is probability? How should we think about it? When is it used?
+        </p>
+        </a>
+      </div>
+      <div class="w3-quarter">
+        <a href="stats/04-02-likelihood.html">
+              <img class="image-main" src="img/04-img/likelihood.png" 
+              alt="" width="250" height="200">
+  
+        <h3>Likelihood</h3>
+        <p>
+        How <strong>likely</strong> is something to happen? What does it mean 
+        when we estimate how likely a particular outcome is? Find out.
+        </p>
       </a>
-    </div>
-    <div class="w3-third">
-      <a href="basic-r/01-working-with-data-types.html">
-            <img class="image-main" src="img/01-img/data-types.png" alt="" 
-            width="333" height="200">
-      <h3>Data Types</h3>
-      <p>The important data types, how to identify types and change them</p>
+      </div>
+      <div class="w3-quarter">
+        <a href="stats/04-03-sampling-distributions.html">
+              <img class="image-main" src="img/04-img/sampling-dist.jpg" 
+              alt="" width="250" height="200">
+  
+        <h3>Sampling Distributions</h3>
+        <p>
+        What is a sample? How should we think about randomness? What do we do 
+        with many samples?</p>
       </a>
+      </div>
     </div>
-    <div class="w3-third">
-      <a href="basic-r/01-03-data-structures.html">
-            <img class="image-main" src="img/01-img/data-structures.png" 
-            alt="data structures" width="333" height="200">
 
-      <h3>Data Structures</h3>
-      <p>
-      How data are structured as objects</p>
-    </a>
-    </div>
-  </div>
-
-  <!-- Second Photo Grid-->
-  <div class="w3-row-padding w3-padding-16 w3-center" id="food"
-   border: 5px solid gray;>
-    <div class="w3-third">
-      <a href="basic-r/01-04-indexing.html">
-            <img class="image-main" src="img/01-img/indexing.png" 
-            alt="credit: YaRrrr!" 
-            width="333" height="200">
-      <h3>Indexing</h3>
-      <p>How to index parts of objects in one, two, and three dimensions</p>
+    <!-- Second Photo Grid-->
+    <div class="w3-row-padding w3-padding-16 w3-center" id="food" 
+    border: 5px solid gray;>
+      <div class="w3-quarter">
+        <a href="stats/04-04-hypothesis-testing.html">
+              <img class="image-main" src="img/04-img/hyp-testing.jpeg" alt="" 
+              width="250" height="200">
+        <h3>Hypothesis Testing</h3>
+        <p>What does it mean to test a hypothesis with a statistical test and 
+            how can we do so rigorously?
+        </p>
+        </a>
+      </div>
+      <div class="w3-quarter">
+        <a href="stats/04-05-confidence-intervals.html">
+              <img class="image-main" src="img/04-img/confidence.png" alt="" 
+              width="250" height="200">
+        <h3>Confidence Intervals</h3>
+        <p>Calculating a range of values between which we can understand our 
+            estimate to fall
+        </p>
+        </a>
+      </div>
+      <div class="w3-quarter">
+        <a href="stats/04-06-comparing-sample-means.html">
+              <img class="image-main" src="img/04-img/sample-means.png" 
+              alt="" width="250" height="200">
+  
+        <h3>Comparing Sample Means</h3>
+        <p>
+        Once we've got our samples, and calculated our means, is the comparison 
+        so straight forward? Maybe, but maybe not!
+        </p>
       </a>
-    </div>
-    <div class="w3-third">
-      <a href="basic-r/01-05-packages.html">
-            <img class="image-main" src="img/01-img/hex-stickers.png" alt="" 
-            width="333" height="200">
-      <h3>Packages</h3>
-      <p>The use of packages, which ones are worthwhile, and why you should be 
-        (sometimes) wary
-      </p>
+      </div>
+      <div class="w3-quarter">
+        <a href="stats/04-07-analysis-of-variance.html">
+              <img class="image-main" src="img/04-img/variance.jpeg" 
+              alt="" width="250" height="200">
+  
+        <h3>Analysis of Variance</h3>
+        <p>
+        What is variance, and how can we tell when the amount of variance 
+        between groups tells us something important?</p>
       </a>
+      </div>
     </div>
-    <div class="w3-third">
-      <a href="basic-r/01-06-workflow.html">
-            <img class="image-main" src="img/01-img/workflow.png" 
-            alt="data structures" width="333" height="200">
 
-      <h3>Workflow</h3>
-      <p>
-      How to make things reproducible and easy to understand through workflow 
-    management</p>
-    </a>
+    <!-- Third Photo Grid-->
+    <div class="w3-row-padding w3-padding-16 w3-center" id="food" 
+    border: 5px solid gray;>
+      <div class="w3-third">
+        <a href="stats/04-08-linear-regression.html">
+              <img class="image-main" src="img/04-img/linear-reg.png" alt="" 
+              width="250" height="200">
+        <h3>Linear Regression</h3>
+        <p>Fitting a line through some points and asking what even does that 
+            tell us anyways??
+        </p>
+        </a>
+      </div>
+      <div class="w3-third">
+        <a href="stats/04-10-generalized-regression.html">
+              <img class="image-main" src="img/04-img/glm.png" alt="" 
+              width="250" height="200">
+        <h3>Generalized Linear Regression</h3>
+        <p>Fitting a line through some points, but relaxing some assumptions
+        </p>
+        </a>
+      </div>
+      <div class="w3-third">
+        <a href="stats/04-09-logistic-regression.html">
+              <img class="image-main" src="img/04-img/log-reg.jpg" alt="" 
+              width="250" height="200">
+        <h3>Logistic Regression</h3>
+        <p>Still fitting a line through some points and asking what it tells us,
+            but this time, with special data!
+        </p>
+        </a>
+      </div>
     </div>
-  </div>
-  <hr>
-
-
   
   <!-- Footer -->
   <footer class="w3-row-padding w3-padding-32">
@@ -188,7 +251,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   <ol>
     <li><a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a></li>
     <li><a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a></li>
-    <li><a href="./00-landingpage.html" onclick="w3_close()" 
+    <li><a href="./getting-started.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
     <ol>
@@ -209,7 +272,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
         </li>
     </ol>
     </li>
-    <li><a href="./01-landingpage.html" onclick="w3_close()" 
+    <li><a href="./basic-r.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
         <ol>
@@ -245,7 +308,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             </li>
         </ol>
     </li>
-    <li><a href="./02-landingpage.html" onclick="w3_close()" 
+    <li><a href="./working-with-data.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
         <ol>
@@ -306,7 +369,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             </li>
         </ol>
     </li>
-    <li><a href="./03-landingpage.html" onclick="w3_close()" 
+    <li><a href="./plotting.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
         <ol>
@@ -377,7 +440,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
             </li>
         </ol>
     </li>
-    <li><a href="./04-landingpage.html" onclick="w3_close()" 
+    <li><a href="./statistics.html" onclick="w3_close()" 
         class="w3-bar-item w3-button" 
         style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
         <ol>
@@ -435,5 +498,7 @@ style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
     </li>
   </ol>
 </nav>
+
+
 </body>
 </html>

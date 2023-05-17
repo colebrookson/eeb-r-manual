@@ -8,7 +8,7 @@
   <ol>
     <li><a href="../about.html" onclick="w3_close()" class="w3-button w3-block w3-left-align w3-small">About</a></li>
     <li><a href="../contact.html" onclick="w3_close()" class="w3-button w3-block w3-left-align w3-small">Contact</a></li>
-    <li><a href="../00-landingpage.html" onclick="w3_close()" 
+    <li><a href="../getting-started.html" onclick="w3_close()" 
         class="w3-button w3-block w3-left-align w3-small" 
         style="color:black;font-size:calc(16px + 0.7vw);">Getting Started</a>
     <ol>
@@ -29,7 +29,7 @@
         </li>
     </ol>
     </li>
-    <li><a href="../01-landingpage.html" onclick="w3_close()" 
+    <li><a href="../basic-r.html" onclick="w3_close()" 
         class="w3-button w3-block w3-left-align w3-small" 
         style="color:black;font-size:calc(16px + 0.7vw);">Basic R</a>
         <ol>
@@ -65,7 +65,7 @@
             </li>
         </ol>
     </li>
-    <li><a href="../02-landingpage.html" onclick="w3_close()" 
+    <li><a href="../working-with-data.html" onclick="w3_close()" 
         class="w3-button w3-block w3-left-align w3-small" 
         style="color:black;font-size:calc(16px + 0.7vw);">Working With Data</a>
         <ol>
@@ -126,7 +126,7 @@
             </li>
         </ol>
     </li>
-    <li><a href="../03-landingpage.html" onclick="w3_close()" 
+    <li><a href="../plotting.html" onclick="w3_close()" 
         class="w3-button w3-block w3-left-align w3-small" 
         style="color:black;font-size:calc(16px + 0.7vw);">Plotting</a>
         <ol>
@@ -197,7 +197,7 @@
             </li>
         </ol>
     </li>
-    <li><a href="../04-landingpage.html" onclick="w3_close()" 
+    <li><a href="../statistics.html" onclick="w3_close()" 
         class="w3-button w3-block w3-left-align w3-small" 
         style="color:black;font-size:calc(16px + 0.7vw);">Intro to Statistics</a>
         <ol>
