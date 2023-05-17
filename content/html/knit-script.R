@@ -9,36 +9,36 @@ library(formatR)
 #                       class.message = "small-message")
 options(width = 70)
 # 00 section ===================================================================
-files_00 <- list.files(here("./content/html/00-start/"), "\\.rhtml")
+files_00 <- list.files(here("./content/html/getting-started/"), "\\.rhtml")
 for (f in files_00)
-  knit(paste0(here("./content/html/00-start/"), f), 
+  knit(paste0(here("./content/html/getting-started/"), f), 
        sub("\\.rhtml$", ".html", 
-           paste0(here("./content/html/00-start/"), f)), envir = new.env())
+           paste0(here("./content/html/getting-started/"), f)), envir = new.env())
 
 # 01 section ===================================================================
-files_01 <- list.files(here("./content/html/01-basicr/"), "\\.rhtml")
+files_01 <- list.files(here("./content/html/basic-r/"), "\\.rhtml")
 for (f in files_01)
-  knit(paste0(here("./content/html/01-basicr/"), f), 
+  knit(paste0(here("./content/html/basic-r/"), f), 
        sub("\\.rhtml$", ".html", 
-           paste0(here("./content/html/01-basicr/"), f)), envir = new.env())
+           paste0(here("./content/html/basic-r/"), f)), envir = new.env())
 
 # 02 section ===================================================================
-files_02 <- list.files(here("./content/html/02-data/"), "\\.rhtml")
+files_02 <- list.files(here("./content/html/working-with-data/"), "\\.rhtml")
 for (f in files_02)
-  knit(paste0(here("./content/html/02-data/"), f), 
+  knit(paste0(here("./content/html/working-with-data/"), f), 
        sub("\\.rhtml$", ".html", 
-           paste0(here("./content/html/02-data/"), f)), envir = new.env())
+           paste0(here("./content/html/working-with-data/"), f)), envir = new.env())
 
 # 03 section ===================================================================
-files_03 <- list.files(here("./content/html/03-plot/"), "\\.rhtml")
+files_03 <- list.files(here("./content/html/plotting/"), "\\.rhtml")
 for (f in files_03)
-  knit(paste0(here("./content/html/03-plot/"), f), 
+  knit(paste0(here("./content/html/plotting/"), f), 
        sub("\\.rhtml$", ".html", 
-           paste0(here("./content/html/03-plot/"), f)), envir = new.env())
+           paste0(here("./content/html/plotting/"), f)), envir = new.env())
 
 # 04 section ===================================================================
-files_04 <- list.files(here("./content/html/04-stats1/"), "\\.rhtml")
+files_04 <- list.files(here("./content/html/stats/"), "\\.rhtml")
 for (f in files_04)
-  knit(paste0(here("./content/html/04-stats1/"), f), 
+  knit(paste0(here("./content/html/stats/"), f), 
        sub("\\.rhtml$", ".html", 
-           paste0(here("./content/html/04-stats1/"), f)))
+           paste0(here("./content/html/stats/"), f)))

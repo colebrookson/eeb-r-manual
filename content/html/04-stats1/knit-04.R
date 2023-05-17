@@ -1,7 +1,7 @@
 library(knitr)
 library(here)
 
-setwd(here("./content/html/04-stats1"))
+setwd(here("./content/html/stats"))
 dir <- "./"
 
 # knit R markdown to markdown

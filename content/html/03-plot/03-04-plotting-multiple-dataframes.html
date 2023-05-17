@@ -147,7 +147,7 @@
                 So to do this, there are a number of approaches we could take. I will choose to perform this task by making a new, separate dataframe with the monthly mean information as this will make life much easier. 
                 </p>
                 <p>
-                The first step is to extract the month and year as separate columns (<a href="../02-data/02-08-dates.html">See info on dates here</a>):
+                The first step is to extract the month and year as separate columns (<a href="../working-with-data/02-08-dates.html">See info on dates here</a>):
                 </p>
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">df</span> <span class="hl kwb">=</span> <span class="hl std">df</span> <span class="hl opt">%&gt;%</span>
   <span class="hl std">dplyr</span><span class="hl opt">::</span><span class="hl kwd">rowwise</span><span class="hl std">()</span> <span class="hl opt">%&gt;%</span>

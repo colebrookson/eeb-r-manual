@@ -170,7 +170,7 @@ table(df$species)
 end.rcode-->
 
 
-So there are only 15 of the Cascade salamanders, and we know from our plot, at least a few NA's. Now the following decisions depend HIGHLY on what message one is trying to communicate with the plot, but we could imagine a scenario wherein perhaps it's actually important to have the Cascade salamander points be visible. But, it's clear from our plot, we may first want to get rid of NA's at least fo this plot. So let's do that via a <code>filter()</code> <a href="../02-data/02-02-filtering-subsetting.html">Remind yourself about this here.</a>
+So there are only 15 of the Cascade salamanders, and we know from our plot, at least a few NA's. Now the following decisions depend HIGHLY on what message one is trying to communicate with the plot, but we could imagine a scenario wherein perhaps it's actually important to have the Cascade salamander points be visible. But, it's clear from our plot, we may first want to get rid of NA's at least fo this plot. So let's do that via a <code>filter()</code> <a href="../working-with-data/02-02-filtering-subsetting.html">Remind yourself about this here.</a>
 
 
 <!--begin.rcode
@@ -315,4 +315,4 @@ end.rcode-->
 While these colours are harsh, they're easy to see. We could choose others if we want to be more aesthetic :) Also, we notice that our legend problem is gone! Why? Well, what created the problem before was having <em>technically</em> two different legends being asked for from our <code>aes()</code> arguments - size & fill. However, by manually providing values for both and then giving them the <em>same</em> legend title, we fixed up the problem. <em>On your own, try adding a different title for one of them and see what happens!</em>. 
 
 
-For this plot, we are pretty much done! This looks good to go. This section has hopefully showed you how to iteratively add components to your plot to troubleshoot throughout and end up with a nice plot quickly. At this point, we can save our plot if we want to (and if it has been assigned to a variable). <a href="../02-data/02-01-reading-writing.html">How to save <code>ggplot</code> objects</a>. 
+For this plot, we are pretty much done! This looks good to go. This section has hopefully showed you how to iteratively add components to your plot to troubleshoot throughout and end up with a nice plot quickly. At this point, we can save our plot if we want to (and if it has been assigned to a variable). <a href="../working-with-data/02-01-reading-writing.html">How to save <code>ggplot</code> objects</a>. 

@@ -128,7 +128,7 @@
             <strong>1. Read your data into R</strong>
         </p>
         <p>
-            2. Perform some kind of analysis, creating new data <a href="../01-basicr/01-01-coding-basics.html">objects</a>, figures, or outputs, then 
+            2. Perform some kind of analysis, creating new data <a href="../basic-r/01-01-coding-basics.html">objects</a>, figures, or outputs, then 
         </p>
         <p>
             <strong>3. Save (aka "write") those data objects/figures/outputs to your computer for later use</strong>
@@ -143,7 +143,7 @@
         <section id="reading">
             <h2>Reading Files</h2>
             <p>
-                When reading in a new file, after manually checking it and ensuring it is formatted in a readable way, note the path in your computer where the file is present. <strong>NOTE</strong> see section on <a href="../01-basicr/01-06-workflow.html">workflow</a> and the <code>here</code> package.
+                When reading in a new file, after manually checking it and ensuring it is formatted in a readable way, note the path in your computer where the file is present. <strong>NOTE</strong> see section on <a href="../basic-r/01-06-workflow.html">workflow</a> and the <code>here</code> package.
             </p>
             <section id="reading--csv">
                 <h4>Comma-Separated Value <code>.csv</code> Files</h4>
@@ -315,7 +315,7 @@
 </pre></div>
 </div></div>
             <p>
-            Now that we have our dataframe <code>df</code>, let's write this out to a place on our computers. <strong>Here is the tricky bit.</strong>. As we mentioned in the <a href="../01-basicr/01-06-workflow.html">workflow section</a>, everyone's computer will have slightly different "paths", aka set of folders and directions that the computer uses to point to a particular file in a particular place. On <strong>my</strong> computer, I'll be using a simple location in my documents folder. For me, that location is <em font-color:red>"~/Documents/iris.csv"</em>, but it will be slightly different on each operating system (e.g. Windows vs. MacOSx). So, go ahead now and find the path that you want to save to. If you're unclear still on paths, you can check out the "Working Directories" section on the <a href="../01-basicr/01-06-workflow.html">workflow page</a>
+            Now that we have our dataframe <code>df</code>, let's write this out to a place on our computers. <strong>Here is the tricky bit.</strong>. As we mentioned in the <a href="../basic-r/01-06-workflow.html">workflow section</a>, everyone's computer will have slightly different "paths", aka set of folders and directions that the computer uses to point to a particular file in a particular place. On <strong>my</strong> computer, I'll be using a simple location in my documents folder. For me, that location is <em font-color:red>"~/Documents/iris.csv"</em>, but it will be slightly different on each operating system (e.g. Windows vs. MacOSx). So, go ahead now and find the path that you want to save to. If you're unclear still on paths, you can check out the "Working Directories" section on the <a href="../basic-r/01-06-workflow.html">workflow page</a>
             </p>
             <p>
                 We'll use the Tidyverse method with the <code>readr</code> package, so we need to load this first so we can use it. If you don't have it installed yet, use <code>install.packages("readr")</code> to install it. 
